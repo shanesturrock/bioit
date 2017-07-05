@@ -1,0 +1,2 @@
+version=3
+https://github.com/vcftools/vcftools/releases .*/vcftools-(.+)\.tar\.gz

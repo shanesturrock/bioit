@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# http://vcftools.sourceforge.net/docs.html
+
+#bgzip merge-test-a.vcf
+#bgzip merge-test-b.vcf
+#bgzip merge-test-c.vcf
+#tabix -p vcf merge-test-a.vcf.gz
+#tabix -p vcf merge-test-b.vcf.gz
+#tabix -p vcf merge-test-c.vcf.gz
+# Provides *.tbi files required.
+
+set -e 
+
+vcf-stats valid-4.1.vcf
+vcf-sort  valid-4.1.vcf
+vcf-merge merge-test-*.vcf.gz > merged.vcf
+zcat annotate-test.vcf.gz | vcf-annotate -a annotate.txt.gz -d key=INFO,ID=ANN,Number=1,Type=Integer,Description='My custom annotation' -c CHROM,FROM,TO,INFO/ANN 
+rm -f merged.vcf
