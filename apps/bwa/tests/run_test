@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# From http://bio-bwa.sourceforge.net/bwa.shtml
+
+set -e
+
+bwa index -a bwtsw example.fasta
+rm -f example.fasta.*
+exit 0

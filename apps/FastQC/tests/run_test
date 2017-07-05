@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+fastqc test_data.fastq test_data.sam
+rm -rf test_data_fastqc*
+exit 0

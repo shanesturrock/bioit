@@ -1,0 +1,133 @@
+#!/bin/bash
+
+# Compares the currently installed versions of applications with those upstream,
+# reporting any that are out of date.
+#
+# Requires 'uscan' and 'rpm'.
+#
+# Carl Jones <carl@biomatters.com>
+
+application_dir="/root/bioit/apps"	# Default application directory
+uscan='/bin/uscan'
+#uscan='/root/bioit/bin/uscan'
+uscan_args='--timeout 120 --no-symlink'	# Default uscan args
+download_dir='/root/rpmbuild/SOURCES' # Where uscan will place downloads
+
+function log() {
+	[ -z "${verbose}" ] && return
+	echo "$@"
+}
+
+function usage() {
+	cat << EOF
+Usage: ${0} [-a -l -v] [-d <directory>] [-x <application>]
+	-a Check all applications
+	-d Application directory (default=${application_dir})
+	-f Fetch applications updates
+	-r Report list of applications with updates
+	-x Single application to check
+	-u Report upstream version and exit
+	-v Be verbose
+
+Each application directory needs to contain a uscan sub-directory containing a 'watch' file (see uscan docs).
+By default ${0} exit code will be the number of applications that have been updated; 0 if no updates.
+
+EOF
+}
+
+if [ $# -eq 0 ]; then
+	usage
+	exit 1
+fi
+
+while getopts ad:frvux: flag; do
+	case $flag in
+		a)
+			application_list='all'
+			;;
+		d)
+			application_dir="${OPTARG}"
+			;;
+		f)
+			uscan_args="${uscan_args} --download --destdir=${download_dir}"
+			log "Fetching packages. Downloads will be placed in ${download_dir}."
+			;;
+		r)	
+			output_updates='true'
+			;;
+		x)
+			application_list="${OPTARG}"
+			;;
+		v)
+			verbose='true'
+			output_updates='false'
+			;;
+		u)
+			uscan_args="${uscan_args} --report-status"
+			report_upstream_version='true'
+			;;
+		?)
+			usage
+			exit 1
+	esac
+done
+
+shift $((OPTIND - 1))
+
+if [ ! -d ${application_dir} ]; then
+	echo "Error: Application directory ${application_dir} does not exist."
+	exit 1
+fi
+cd ${application_dir}
+
+if [ -z "${application_list}" ] || [ "${application_list}" == "all" ]; then
+	application_list=*
+fi
+
+# Clean out local repo caches before starting
+#yum -q clean expire-cache &>/dev/null
+yum -q clean expire-cache --enablerepo=bioit &>/dev/null
+
+for application in ${application_list}; do
+	[ ! -d ${application} ] && continue
+	[ ! -e ${application}/uscan/watch ] && continue # skip applications we don't check upstream
+
+	#current_version=$(rpm -q --queryformat '%{VERSION}\n' ${application})
+	# Check testing repo first because the check can get confused with sorting if you check all
+ 	# current_version=$(yum -q list available ${application} --enablerepo=bioit --disablerepo=bioit --disablerepo=base 2>/dev/null | grep -v 'Packages' | awk '{print $2}' | sort -n | tail -n1 | cut -f1 -d-)
+	current_version=$(yum -q list available ${application} --disablerepo="*" --enablerepo="bioit" 2>/dev/null | grep -v 'Packages' | awk '{print $2}' | sort -n | tail -n1 | cut -f1 -d-)
+	repo="bioit"
+
+	# Check standard repo too if the latest version isn't in testing
+	if [ -z "${current_version}" ]; then
+ 		# current_version=$(yum -q list all ${application} | grep -v 'Packages' | awk '{print $2}' | sort -n | tail -n1 | cut -f1 -d-)
+		current_version=$(yum -q list all ${application} --disablerepo="*" --enablerepo="bioit" | grep -v 'Packages' | awk '{print $2}' | sort -n | tail -n1 | cut -f1 -d-)
+		repo="bioit"
+	fi
+
+	if [ -z "${current_version}" ]; then
+		echo "Unable to get current version for ${application}. Not installed?"
+		exit 1
+	fi
+
+	check=$(${uscan} --package ${application} --watchfile ${application}/uscan/watch --upstream-version ${current_version} ${uscan_args})
+
+	# In some cases the version on our repos may be newer
+        if grep -q "remote site does not even have current version" <<<$check;
+        then
+                log "${application} ${current_version} (${repo}): Newer than most recent on site"
+		# log "${application} ${current_version} (${repo}): Up to date"
+        else
+		if [ -n "${check}" ]; then
+			if [ -n "${report_upstream_version}" ]; then
+				echo ${check} | cut -f1 -d, | awk '{print $13}'
+				exit 0
+			fi
+			[ "${output_updates}" == "true" ] && echo -n "${application} "
+			log ${check}
+		else
+			log "${application} ${current_version} (${repo}): Up to date"
+		fi
+        fi
+done 
+exit 0

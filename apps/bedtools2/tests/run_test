@@ -1,0 +1,102 @@
+#!/bin/bash
+set -e
+
+echo " Performing general tests:"
+cd general; bash test-general.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools bed12tobed6:"
+cd bed12tobed6; bash test-bed12tobed6.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools bamtobed:"
+cd bamtobed; bash test-bamtobed.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools closest:"
+cd closest; bash test-closest.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools cluster:"
+cd cluster; bash test-cluster.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools coverage:"
+cd coverage; bash test-coverage.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools expand:"
+cd expand; bash test-expand.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools flank:"
+cd flank; bash test-flank.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools fisher:"
+cd fisher; bash test-fisher.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools genomecov:"
+cd genomecov; bash test-genomecov.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools getfasta:"
+cd getfasta; bash test-getfasta.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools intersect:"
+cd intersect; bash test-intersect.sh; bash new_test-intersect.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools jaccard:"
+cd jaccard; bash test-jaccard.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools map:"
+cd map; bash test-map.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools merge:"
+cd merge; bash test-merge.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools multicov:"
+cd multicov; bash test-multicov.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools reldist:"
+cd reldist; bash test-reldist.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools shift:"
+cd shift; bash test-shift.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools slop:"
+cd slop; bash test-slop.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools sort:"
+cd sort; bash test-sort.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools shuffle:"
+cd shuffle; bash test-shuffle.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools subtract:"
+cd subtract; bash test-subtract.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools sample:"
+cd sample; bash test-sample.sh; cd ..
+#sleep 5
+
+#echo " Testing bedtools split:"
+#cd split; bash test-split.sh; cd ..
+#sleep 5
+
+echo " Testing bedtools spacing:"
+cd spacing; bash test-spacing.sh; cd ..
+#sleep 5

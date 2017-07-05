@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ ! -d example/ ]; then
+	echo "bowtie2 tests need example/ directory from bowtie2 source package."
+	exit 1
+fi
+
+set -e
+bowtie2-build example/reference/lambda_virus.fa lambda_virus
+bowtie2 -x lambda_virus -U example/reads/reads_1.fq -S eg1.sam
+bowtie2 -x lambda_virus -1 example/reads/reads_1.fq -2 example/reads/reads_2.fq -S eg2.sam
+bowtie2 --local -x lambda_virus -U example/reads/longreads.fq -S eg3.sam
+bowtie2 -x lambda_virus -1 example/reads/reads_1.fq -2 example/reads/reads_2.fq -S eg2.sam
+samtools view -o eg2.bam -bS eg2.sam 
+samtools sort -o eg2.sorted.bam eg2.bam
+samtools mpileup -uf example/reference/lambda_virus.fa eg2.sorted.bam | /usr/bin/bcftools view -o eg2.raw.bcf
+rm -rf eg* lambda_virus.*
+exit 0

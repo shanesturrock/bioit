@@ -1,0 +1,4 @@
+version=3
+#http://sf.net/soapdenovo2/SOAPdenovo2-src-(r\d{3,4})\.(?:zip|tgz|tbz2|txz|tar\.gz|tar\.bz2|tar\.xz)
+opts=filenamemangle=s/.+\/r?(\d\S*)\.tar\.gz/SOAPdenovo2-r$1\.tar\.gz/ \
+  https://github.com/aquaskyline/SOAPdenovo2/releases (?:.*/)?r?(\d[\d\.]*)\.tar\.gz

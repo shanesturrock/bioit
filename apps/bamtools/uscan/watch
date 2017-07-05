@@ -1,0 +1,4 @@
+version=3
+#https://github.com/pezmaster31/bamtools/releases .*/v(.+)\.tar.gz
+opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/bamtools-$1\.tar\.gz/ \
+  https://github.com/pezmaster31/bamtools/tags (?:.*/)?v?(\d[\d\.]*)\.tar\.gz
