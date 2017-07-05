@@ -1,8 +1,5 @@
-# bioit
-CentOS 7 BioIT tools
-
-BioIT Repo Contents
-================
+CentOS 7 BioIT tools Repo Contents
+==================================
 ## apps
 Contains tests, watch scripts, and spec files for each tool we support
 ## bin
