@@ -1,0 +1,89 @@
+%define priority 15
+%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
+  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+fi )
+%define dist .el7.bioit
+
+Name:		samtools
+Version:	1.5
+Release:	1%{?dist}
+Summary:	Tools for nucleotide sequence alignments in the SAM format
+
+Group:		Applications/Engineering
+License:	MIT
+URL:		http://samtools.sourceforge.net/
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:	bcftools
+# Post requires alternatives to install tool alternatives.
+Requires(post):   %{_sbindir}/alternatives
+# Postun requires alternatives to uninstall tool alternatives.
+Requires(postun): %{_sbindir}/alternatives
+
+%description
+SAM (Sequence Alignment/Map) is a flexible generic format for storing
+nucleotide sequence alignment.
+SAM Tools provide various utilities for manipulating alignments in the
+SAM format, including sorting, merging, indexing and generating
+alignments in a per-position format.
+
+%pre
+%dir_exists
+
+%post
+alternatives \
+   --install %{_bindir}/samtools samtools /opt/biology/%{name}/%{version}/bin/samtools %{priority} \
+   --slave %{_bindir}/ace2sam ace2sam /opt/biology/%{name}/%{version}/bin/ace2sam \
+   --slave %{_bindir}/blast2sam.pl blast2sam.pl /opt/biology/%{name}/%{version}/bin/blast2sam.pl \
+   --slave %{_bindir}/bowtie2sam.pl bowtie2sam.pl /opt/biology/%{name}/%{version}/bin/bowtie2sam.pl \
+   --slave %{_bindir}/export2sam.pl export2sam.pl /opt/biology/%{name}/%{version}/bin/export2sam.pl \
+   --slave %{_bindir}/interpolate_sam.pl interpolate_sam.pl /opt/biology/%{name}/%{version}/bin/interpolate_sam.pl \
+   --slave %{_bindir}/maq2sam-long maq2sam-long /opt/biology/%{name}/%{version}/bin/maq2sam-long \
+   --slave %{_bindir}/maq2sam-short maq2sam-short /opt/biology/%{name}/%{version}/bin/maq2sam-short \
+   --slave %{_bindir}/md5fa md5fa /opt/biology/%{name}/%{version}/bin/md5fa \
+   --slave %{_bindir}/md5sum-lite md5sum-lite /opt/biology/%{name}/%{version}/bin/md5sum-lite \
+   --slave %{_bindir}/novo2sam.pl novo2sam.pl /opt/biology/%{name}/%{version}/bin/novo2sam.pl \
+   --slave %{_bindir}/plot-bamstats plot-bamstats /opt/biology/%{name}/%{version}/bin/plot-bamstats \
+   --slave %{_bindir}/psl2sam.pl psl2sam.pl /opt/biology/%{name}/%{version}/bin/psl2sam.pl \
+   --slave %{_bindir}/sam2vcf.pl sam2vcf.pl /opt/biology/%{name}/%{version}/bin/sam2vcf.pl \
+   --slave %{_bindir}/samtools.pl samtools.pl /opt/biology/%{name}/%{version}/bin/samtools.pl \
+   --slave %{_bindir}/seq_cache_populate.pl seq_cache_populate.pl /opt/biology/%{name}/%{version}/bin/seq_cache_populate.pl \
+   --slave %{_bindir}/soap2sam.pl soap2sam.pl /opt/biology/%{name}/%{version}/bin/soap2sam.pl \
+   --slave %{_bindir}/varfilter.py varfilter.py /opt/biology/%{name}/%{version}/bin/varfilter.py \
+   --slave %{_bindir}/wgsim wgsim /opt/biology/%{name}/%{version}/bin/wgsim \
+   --slave %{_bindir}/wgsim_eval.pl wgsim_eval.pl /opt/biology/%{name}/%{version}/bin/wgsim_eval.pl \
+   --slave %{_bindir}/zoom2sam.pl zoom2sam.pl /opt/biology/%{name}/%{version}/bin/zoom2sam.pl \
+   --slave %{_mandir}/man1/samtools.1 samtools.1 /opt/biology/%{name}/%{version}/share/man/man1/samtools.1 \
+   --slave %{_mandir}/man1/wgsim.1 wgsim.1 /opt/biology/%{name}/%{version}/share/man/man1/wgsim.1
+
+%postun
+if [ $1 -eq 0 ]
+then
+  alternatives --remove samtools /opt/biology/%{name}/%{version}/bin/samtools
+fi
+
+%files
+
+%changelog
+* Tue Jun 27 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.5-1
+- Samtools fastq now has a -i option to create a fastq file from an index tag,
+  and a -T option (similar to -t) to add user specified aux tags to the fastq
+  header line.
+- Samtools fastq can now create compressed fastq files, by giving the output
+  filenames an extention of .gq, .bgz, or .bgzf
+- Samtools sort has a -t TAG option, that allows records to be sorted by the
+  value of the specified aux tag, then by position or name. Merge gets a
+  similar option, allowing files sorted this way to be merged. (#675; thanks to
+  Patrick Marks of 10xgenomics).
+
+* Thu May 25 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.4.1-1
+- This is primarily a security bug fix update.
+- Added options to fastq to create fastq files from BC (or other) tags.
+- Samtools view has gained a -G option to exclude on all bits set. For example
+  to discard reads where neither end has been mapped use "-G 12".
+- Samtools cat has a -b option to ease concatenation of many files.
+- Added misc/samtools_tab_completion for bash auto-completion of samtools
+  sub-commands. (#560)
+- Samtools tview now has J and K keys for verticale movement by 20 lines.
+  (#257)
+- Various compilation / portability improvements.
+- Fixed issue with more than 65536 CIGAR operations and SAM/CRAM files.  (#667)
