@@ -1,0 +1,6 @@
+#%Module 1.0
+#
+#  vcftools module for use with 'environment-modules' package:
+#
+prepend-path  PATH         /opt/biology/vcftools/0.1.15/bin
+prepend-path  MANPATH      /opt/biology/vcftools/0.1.15/share/man

@@ -1,0 +1,6 @@
+[bioit]
+name=BioIT packages for CentOS-$releasever $basearch
+baseurl=file:///opt/biology/bioitrepo
+enabled=1
+gpgcheck=0
+protect=1

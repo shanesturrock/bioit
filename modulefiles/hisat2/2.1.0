@@ -1,0 +1,5 @@
+#%Module 1.0
+#
+#  hisat2 module for use with 'environment-modules' package:
+#
+prepend-path  PATH         /opt/biology/hisat2/2.1.0/bin

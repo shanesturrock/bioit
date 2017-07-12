@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE comps PUBLIC "-//Red Hat, Inc.//DTD Comps info//EN" "comps.dtd">
+<comps>
+  <group>
+   <id>bioit</id>
+   <default>false</default>
+   <uservisible>true</uservisible>
+   <display_order>1024</display_order>
+   <name>bioit</name>
+   <description></description>
+    <packagelist>
+      <packagereq type="mandatory">bamtools</packagereq>
+      <packagereq type="mandatory">bbmap</packagereq>
+      <packagereq type="mandatory">bcftools</packagereq>
+      <packagereq type="mandatory">bedtools2</packagereq>
+      <packagereq type="mandatory">ncbi-blast</packagereq>
+      <packagereq type="mandatory">bowtie</packagereq>
+      <packagereq type="mandatory">bowtie2</packagereq>
+      <packagereq type="mandatory">bwa</packagereq>
+      <packagereq type="mandatory">FastQC</packagereq>
+      <packagereq type="mandatory">hisat2</packagereq>
+      <packagereq type="mandatory">htslib</packagereq>
+      <packagereq type="mandatory">R-core</packagereq>
+      <packagereq type="mandatory">samtools</packagereq>
+      <packagereq type="mandatory">SOAPdenovo2</packagereq>
+      <packagereq type="mandatory">SolexaQA++</packagereq>
+      <packagereq type="mandatory">tophat2</packagereq>
+      <packagereq type="mandatory">vcftools</packagereq>
+    </packagelist>
+  </group>
+</comps>
