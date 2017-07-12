@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+picard_dir='/opt/biology/picard/2.10.1'
+java -jar ${picard_dir}/picard.jar $*

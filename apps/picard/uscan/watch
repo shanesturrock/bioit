@@ -1,0 +1,3 @@
+version=3
+opts=filenamemangle=s/.+\/v?(\d\S*)\.zip/picard-$1\.zip \
+  https://github.com/broadinstitute/picard/releases/ .*/(.+)\.zip

@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+function cleanup() {
+	for file in Asperg.sam new.sam; do
+		[ -e ${file} ] && rm -f ${file}
+	done
+	return 0
+}
+
+cleanup
+picard CreateSequenceDictionary OUTPUT=Asperg.sam R=Asperg.fasta
+picard SortSam INPUT=Asperg.sam OUTPUT=new.sam SORT_ORDER=unsorted
+cleanup
