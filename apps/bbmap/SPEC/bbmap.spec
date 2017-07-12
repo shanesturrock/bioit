@@ -1,11 +1,11 @@
-%define priority 3733
+%define priority 3736
 %define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
   echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.33
+Version:	37.36
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -167,6 +167,11 @@ fi
 %files
 
 %changelog
+* Thu Jul 13 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.36-1
+- Clarified TaxServer error message for incompatible settings.
+- Added deleteinput flag for Reformat and Clumpify.
+- Updated BBSketchGuide.
+
 * Tue Jul 04 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.33-1
 - Added parsing for comment.
 - Clumpify with groups>1 now works with paired fasta files, though 
