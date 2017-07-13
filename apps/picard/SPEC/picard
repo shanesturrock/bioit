@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
 
-picard_dir='/opt/biology/picard/2.10.1'
+picard_dir="$(dirname $(readlink -f $0))"
 java -jar ${picard_dir}/picard.jar $*
