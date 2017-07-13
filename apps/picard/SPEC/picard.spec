@@ -1,11 +1,11 @@
-%define priority 2101
+%define priority 2102
 %define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
   echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.10.1
+Version:	2.10.2
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -43,6 +43,12 @@ fi
 %files
 
 %changelog
+* Fri Jul 14 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.2-1
+- yet another reverse-compatibility issue in CrosscheckReadgroupFingerprints
+  (#868) 
+- fixed bug in Liftover pertaining to indels that straddle two "links…
+  (#864)
+
 * Thu Jul 13 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.1-1
 - Bug fix
   - Fix RevertSam to SANITIZE output when read group information is missing
