@@ -1,6 +1,6 @@
 %define priority 2260
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -27,50 +27,50 @@ two BED files. 2. Merge overlapping features. 3. Paired-end overlaps.
 
 %post
 alternatives \
-  --install %{_bindir}/bedtools bedtools /opt/biology/%{name}/%{version}/bin/bedtools %{priority} \
-  --slave %{_bindir}/annotateBed annotateBed /opt/biology/%{name}/%{version}/bin/annotateBed \
-  --slave %{_bindir}/bamToBed bamToBed /opt/biology/%{name}/%{version}/bin/bamToBed \
-  --slave %{_bindir}/bamToFastq bamToFastq /opt/biology/%{name}/%{version}/bin/bamToFastq \
-  --slave %{_bindir}/bed12ToBed6 bed12ToBed6 /opt/biology/%{name}/%{version}/bin/bed12ToBed6 \
-  --slave %{_bindir}/bedpeToBam bedpeToBam /opt/biology/%{name}/%{version}/bin/bedpeToBam \
-  --slave %{_bindir}/bedToBam bedToBam /opt/biology/%{name}/%{version}/bin/bedToBam \
-  --slave %{_bindir}/bedToIgv bedToIgv /opt/biology/%{name}/%{version}/bin/bedToIgv \
-  --slave %{_bindir}/closestBed closestBed /opt/biology/%{name}/%{version}/bin/closestBed \
-  --slave %{_bindir}/clusterBed clusterBed /opt/biology/%{name}/%{version}/bin/clusterBed \
-  --slave %{_bindir}/complementBed complementBed /opt/biology/%{name}/%{version}/bin/complementBed \
-  --slave %{_bindir}/coverageBed coverageBed /opt/biology/%{name}/%{version}/bin/coverageBed \
-  --slave %{_bindir}/expandCols expandCols /opt/biology/%{name}/%{version}/bin/expandCols \
-  --slave %{_bindir}/fastaFromBed fastaFromBed /opt/biology/%{name}/%{version}/bin/fastaFromBed \
-  --slave %{_bindir}/flankBed flankBed /opt/biology/%{name}/%{version}/bin/flankBed \
-  --slave %{_bindir}/genomeCoverageBed genomeCoverageBed /opt/biology/%{name}/%{version}/bin/genomeCoverageBed \
-  --slave %{_bindir}/getOverlap getOverlap /opt/biology/%{name}/%{version}/bin/getOverlap \
-  --slave %{_bindir}/groupBy groupBy /opt/biology/%{name}/%{version}/bin/groupBy \
-  --slave %{_bindir}/intersectBed intersectBed /opt/biology/%{name}/%{version}/bin/intersectBed \
-  --slave %{_bindir}/linksBed linksBed /opt/biology/%{name}/%{version}/bin/linksBed \
-  --slave %{_bindir}/mapBed mapBed /opt/biology/%{name}/%{version}/bin/mapBed \
-  --slave %{_bindir}/maskFastaFromBed maskFastaFromBed /opt/biology/%{name}/%{version}/bin/maskFastaFromBed \
-  --slave %{_bindir}/mergeBed mergeBed /opt/biology/%{name}/%{version}/bin/mergeBed \
-  --slave %{_bindir}/multiBamCov multiBamCov /opt/biology/%{name}/%{version}/bin/multiBamCov \
-  --slave %{_bindir}/multiIntersectBed multiIntersectBed /opt/biology/%{name}/%{version}/bin/multiIntersectBed \
-  --slave %{_bindir}/nucBed nucBed /opt/biology/%{name}/%{version}/bin/nucBed \
-  --slave %{_bindir}/pairToBed pairToBed /opt/biology/%{name}/%{version}/bin/pairToBed \
-  --slave %{_bindir}/pairToPair pairToPair /opt/biology/%{name}/%{version}/bin/pairToPair \
-  --slave %{_bindir}/randomBed randomBed /opt/biology/%{name}/%{version}/bin/randomBed \
-  --slave %{_bindir}/shiftBed shiftBed /opt/biology/%{name}/%{version}/bin/shiftBed \
-  --slave %{_bindir}/shuffleBed shuffleBed /opt/biology/%{name}/%{version}/bin/shuffleBed \
-  --slave %{_bindir}/slopBed slopBed /opt/biology/%{name}/%{version}/bin/slopBed \
-  --slave %{_bindir}/sortBed sortBed /opt/biology/%{name}/%{version}/bin/sortBed \
-  --slave %{_bindir}/subtractBed subtractBed /opt/biology/%{name}/%{version}/bin/subtractBed \
-  --slave %{_bindir}/tagBam tagBam /opt/biology/%{name}/%{version}/bin/tagBam \
-  --slave %{_bindir}/unionBedGraphs unionBedGraphs /opt/biology/%{name}/%{version}/bin/unionBedGraphs \
-  --slave %{_bindir}/windowBed windowBed /opt/biology/%{name}/%{version}/bin/windowBed \
-  --slave %{_bindir}/windowMaker windowMaker /opt/biology/%{name}/%{version}/bin/windowMaker
+  --install %{_bindir}/bedtools bedtools /opt/bioit/%{name}/%{version}/bin/bedtools %{priority} \
+  --slave %{_bindir}/annotateBed annotateBed /opt/bioit/%{name}/%{version}/bin/annotateBed \
+  --slave %{_bindir}/bamToBed bamToBed /opt/bioit/%{name}/%{version}/bin/bamToBed \
+  --slave %{_bindir}/bamToFastq bamToFastq /opt/bioit/%{name}/%{version}/bin/bamToFastq \
+  --slave %{_bindir}/bed12ToBed6 bed12ToBed6 /opt/bioit/%{name}/%{version}/bin/bed12ToBed6 \
+  --slave %{_bindir}/bedpeToBam bedpeToBam /opt/bioit/%{name}/%{version}/bin/bedpeToBam \
+  --slave %{_bindir}/bedToBam bedToBam /opt/bioit/%{name}/%{version}/bin/bedToBam \
+  --slave %{_bindir}/bedToIgv bedToIgv /opt/bioit/%{name}/%{version}/bin/bedToIgv \
+  --slave %{_bindir}/closestBed closestBed /opt/bioit/%{name}/%{version}/bin/closestBed \
+  --slave %{_bindir}/clusterBed clusterBed /opt/bioit/%{name}/%{version}/bin/clusterBed \
+  --slave %{_bindir}/complementBed complementBed /opt/bioit/%{name}/%{version}/bin/complementBed \
+  --slave %{_bindir}/coverageBed coverageBed /opt/bioit/%{name}/%{version}/bin/coverageBed \
+  --slave %{_bindir}/expandCols expandCols /opt/bioit/%{name}/%{version}/bin/expandCols \
+  --slave %{_bindir}/fastaFromBed fastaFromBed /opt/bioit/%{name}/%{version}/bin/fastaFromBed \
+  --slave %{_bindir}/flankBed flankBed /opt/bioit/%{name}/%{version}/bin/flankBed \
+  --slave %{_bindir}/genomeCoverageBed genomeCoverageBed /opt/bioit/%{name}/%{version}/bin/genomeCoverageBed \
+  --slave %{_bindir}/getOverlap getOverlap /opt/bioit/%{name}/%{version}/bin/getOverlap \
+  --slave %{_bindir}/groupBy groupBy /opt/bioit/%{name}/%{version}/bin/groupBy \
+  --slave %{_bindir}/intersectBed intersectBed /opt/bioit/%{name}/%{version}/bin/intersectBed \
+  --slave %{_bindir}/linksBed linksBed /opt/bioit/%{name}/%{version}/bin/linksBed \
+  --slave %{_bindir}/mapBed mapBed /opt/bioit/%{name}/%{version}/bin/mapBed \
+  --slave %{_bindir}/maskFastaFromBed maskFastaFromBed /opt/bioit/%{name}/%{version}/bin/maskFastaFromBed \
+  --slave %{_bindir}/mergeBed mergeBed /opt/bioit/%{name}/%{version}/bin/mergeBed \
+  --slave %{_bindir}/multiBamCov multiBamCov /opt/bioit/%{name}/%{version}/bin/multiBamCov \
+  --slave %{_bindir}/multiIntersectBed multiIntersectBed /opt/bioit/%{name}/%{version}/bin/multiIntersectBed \
+  --slave %{_bindir}/nucBed nucBed /opt/bioit/%{name}/%{version}/bin/nucBed \
+  --slave %{_bindir}/pairToBed pairToBed /opt/bioit/%{name}/%{version}/bin/pairToBed \
+  --slave %{_bindir}/pairToPair pairToPair /opt/bioit/%{name}/%{version}/bin/pairToPair \
+  --slave %{_bindir}/randomBed randomBed /opt/bioit/%{name}/%{version}/bin/randomBed \
+  --slave %{_bindir}/shiftBed shiftBed /opt/bioit/%{name}/%{version}/bin/shiftBed \
+  --slave %{_bindir}/shuffleBed shuffleBed /opt/bioit/%{name}/%{version}/bin/shuffleBed \
+  --slave %{_bindir}/slopBed slopBed /opt/bioit/%{name}/%{version}/bin/slopBed \
+  --slave %{_bindir}/sortBed sortBed /opt/bioit/%{name}/%{version}/bin/sortBed \
+  --slave %{_bindir}/subtractBed subtractBed /opt/bioit/%{name}/%{version}/bin/subtractBed \
+  --slave %{_bindir}/tagBam tagBam /opt/bioit/%{name}/%{version}/bin/tagBam \
+  --slave %{_bindir}/unionBedGraphs unionBedGraphs /opt/bioit/%{name}/%{version}/bin/unionBedGraphs \
+  --slave %{_bindir}/windowBed windowBed /opt/bioit/%{name}/%{version}/bin/windowBed \
+  --slave %{_bindir}/windowMaker windowMaker /opt/bioit/%{name}/%{version}/bin/windowMaker
 
 %postun
 if [ $1 -eq 0 ]
 then
   alternatives \
-   --remove bedtools /opt/biology/%{name}/%{version}/bin/bedtools
+   --remove bedtools /opt/bioit/%{name}/%{version}/bin/bedtools
 fi
 
 

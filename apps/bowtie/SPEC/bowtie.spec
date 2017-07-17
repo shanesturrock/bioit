@@ -1,6 +1,6 @@
 %define priority 1211
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -29,20 +29,20 @@ sequences to the human genome. Genome Biol 10:R25.
 
 %post
 alternatives \
-   --install %{_bindir}/bowtie bowtie /opt/biology/%{name}/%{version}/bin/bowtie %{priority} \
-   --slave %{_bindir}/bowtie-build bowtie-build /opt/biology/%{name}/%{version}/bin/bowtie-build \
-   --slave %{_bindir}/bowtie-build-l bowtie-build-l /opt/biology/%{name}/%{version}/bin/bowtie-build-l \
-   --slave %{_bindir}/bowtie-build-s bowtie-build-s /opt/biology/%{name}/%{version}/bin/bowtie-build-s \
-   --slave %{_bindir}/bowtie-align-l bowtie-align-l /opt/biology/%{name}/%{version}/bin/bowtie-align-l \
-   --slave %{_bindir}/bowtie-align-s bowtie-align-s /opt/biology/%{name}/%{version}/bin/bowtie-align-s \
-   --slave %{_bindir}/bowtie-inspect-l bowtie-inspect-l /opt/biology/%{name}/%{version}/bin/bowtie-inspect-l \
-   --slave %{_bindir}/bowtie-inspect-s bowtie-inspect-s /opt/biology/%{name}/%{version}/bin/bowtie-inspect-s \
-   --slave %{_bindir}/bowtie-inspect bowtie-inspect /opt/biology/%{name}/%{version}/bin/bowtie-inspect
+   --install %{_bindir}/bowtie bowtie /opt/bioit/%{name}/%{version}/bin/bowtie %{priority} \
+   --slave %{_bindir}/bowtie-build bowtie-build /opt/bioit/%{name}/%{version}/bin/bowtie-build \
+   --slave %{_bindir}/bowtie-build-l bowtie-build-l /opt/bioit/%{name}/%{version}/bin/bowtie-build-l \
+   --slave %{_bindir}/bowtie-build-s bowtie-build-s /opt/bioit/%{name}/%{version}/bin/bowtie-build-s \
+   --slave %{_bindir}/bowtie-align-l bowtie-align-l /opt/bioit/%{name}/%{version}/bin/bowtie-align-l \
+   --slave %{_bindir}/bowtie-align-s bowtie-align-s /opt/bioit/%{name}/%{version}/bin/bowtie-align-s \
+   --slave %{_bindir}/bowtie-inspect-l bowtie-inspect-l /opt/bioit/%{name}/%{version}/bin/bowtie-inspect-l \
+   --slave %{_bindir}/bowtie-inspect-s bowtie-inspect-s /opt/bioit/%{name}/%{version}/bin/bowtie-inspect-s \
+   --slave %{_bindir}/bowtie-inspect bowtie-inspect /opt/bioit/%{name}/%{version}/bin/bowtie-inspect
 
 %postun
 if [ $1 -eq 0 ]
 then
-  alternatives --remove bowtie /opt/biology/%{name}/%{version}/bin/bowtie
+  alternatives --remove bowtie /opt/bioit/%{name}/%{version}/bin/bowtie
 fi
 
 %files

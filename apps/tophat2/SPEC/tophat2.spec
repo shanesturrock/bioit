@@ -1,7 +1,7 @@
 %define samtools_version 0.1.18
 %define priority 211
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -36,31 +36,31 @@ Cell Biology.
 
 %post
 alternatives \
-   --install %{_bindir}/tophat2 tophat2 /opt/biology/%{name}/%{version}/bin/tophat2 %{priority} \
-   --slave %{_bindir}/bam2fastx bam2fastx /opt/biology/%{name}/%{version}/bin/bam2fastx \
-   --slave %{_bindir}/bam_merge bam_merge /opt/biology/%{name}/%{version}/bin/bam_merge \
-   --slave %{_bindir}/bed_to_juncs bed_to_juncs /opt/biology/%{name}/%{version}/bin/bed_to_juncs \
-   --slave %{_bindir}/contig_to_chr_coords contig_to_chr_coords /opt/biology/%{name}/%{version}/bin/contig_to_chr_coords \
-   --slave %{_bindir}/fix_map_ordering fix_map_ordering /opt/biology/%{name}/%{version}/bin/fix_map_ordering \
-   --slave %{_bindir}/gtf_juncs gtf_juncs /opt/biology/%{name}/%{version}/bin/gtf_juncs \
-   --slave %{_bindir}/gtf_to_fasta gtf_to_fasta /opt/biology/%{name}/%{version}/bin/gtf_to_fasta \
-   --slave %{_bindir}/juncs_db juncs_db /opt/biology/%{name}/%{version}/bin/juncs_db \
-   --slave %{_bindir}/long_spanning_reads long_spanning_reads /opt/biology/%{name}/%{version}/bin/long_spanning_reads \
-   --slave %{_bindir}/map2gtf map2gtf /opt/biology/%{name}/%{version}/bin/map2gtf \
-   --slave %{_bindir}/prep_reads prep_reads /opt/biology/%{name}/%{version}/bin/prep_reads \
-   --slave %{_bindir}/sam_juncs sam_juncs /opt/biology/%{name}/%{version}/bin/sam_juncs \
-   --slave %{_bindir}/samtools_0.1.18 samtools_0.1.18 /opt/biology/%{name}/%{version}/bin/samtools_0.1.18 \
-   --slave %{_bindir}/segment_juncs segment_juncs /opt/biology/%{name}/%{version}/bin/segment_juncs \
-   --slave %{_bindir}/sra_to_solid sra_to_solid /opt/biology/%{name}/%{version}/bin/sra_to_solid \
-   --slave %{_bindir}/tophat tophat /opt/biology/%{name}/%{version}/bin/tophat \
-   --slave %{_bindir}/tophat-fusion-post tophat-fusion-post /opt/biology/%{name}/%{version}/bin/tophat-fusion-post \
-   --slave %{_bindir}/tophat_reports tophat_reports /opt/biology/%{name}/%{version}/bin/tophat_reports
+   --install %{_bindir}/tophat2 tophat2 /opt/bioit/%{name}/%{version}/bin/tophat2 %{priority} \
+   --slave %{_bindir}/bam2fastx bam2fastx /opt/bioit/%{name}/%{version}/bin/bam2fastx \
+   --slave %{_bindir}/bam_merge bam_merge /opt/bioit/%{name}/%{version}/bin/bam_merge \
+   --slave %{_bindir}/bed_to_juncs bed_to_juncs /opt/bioit/%{name}/%{version}/bin/bed_to_juncs \
+   --slave %{_bindir}/contig_to_chr_coords contig_to_chr_coords /opt/bioit/%{name}/%{version}/bin/contig_to_chr_coords \
+   --slave %{_bindir}/fix_map_ordering fix_map_ordering /opt/bioit/%{name}/%{version}/bin/fix_map_ordering \
+   --slave %{_bindir}/gtf_juncs gtf_juncs /opt/bioit/%{name}/%{version}/bin/gtf_juncs \
+   --slave %{_bindir}/gtf_to_fasta gtf_to_fasta /opt/bioit/%{name}/%{version}/bin/gtf_to_fasta \
+   --slave %{_bindir}/juncs_db juncs_db /opt/bioit/%{name}/%{version}/bin/juncs_db \
+   --slave %{_bindir}/long_spanning_reads long_spanning_reads /opt/bioit/%{name}/%{version}/bin/long_spanning_reads \
+   --slave %{_bindir}/map2gtf map2gtf /opt/bioit/%{name}/%{version}/bin/map2gtf \
+   --slave %{_bindir}/prep_reads prep_reads /opt/bioit/%{name}/%{version}/bin/prep_reads \
+   --slave %{_bindir}/sam_juncs sam_juncs /opt/bioit/%{name}/%{version}/bin/sam_juncs \
+   --slave %{_bindir}/samtools_0.1.18 samtools_0.1.18 /opt/bioit/%{name}/%{version}/bin/samtools_0.1.18 \
+   --slave %{_bindir}/segment_juncs segment_juncs /opt/bioit/%{name}/%{version}/bin/segment_juncs \
+   --slave %{_bindir}/sra_to_solid sra_to_solid /opt/bioit/%{name}/%{version}/bin/sra_to_solid \
+   --slave %{_bindir}/tophat tophat /opt/bioit/%{name}/%{version}/bin/tophat \
+   --slave %{_bindir}/tophat-fusion-post tophat-fusion-post /opt/bioit/%{name}/%{version}/bin/tophat-fusion-post \
+   --slave %{_bindir}/tophat_reports tophat_reports /opt/bioit/%{name}/%{version}/bin/tophat_reports
 
 %postun
 if [ $1 -eq 0 ]
 then
   alternatives \
-   --remove tophat2 /opt/biology/%{name}/%{version}/bin/tophat2
+   --remove tophat2 /opt/bioit/%{name}/%{version}/bin/tophat2
 fi
 
 %files

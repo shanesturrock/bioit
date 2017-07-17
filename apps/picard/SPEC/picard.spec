@@ -1,6 +1,6 @@
 %define priority 2102
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -31,12 +31,12 @@ are supported.
 
 %post
 alternatives \
-   --install %{_bindir}/picard picard /opt/biology/%{name}/%{version}/picard %{priority}
+   --install %{_bindir}/picard picard /opt/bioit/%{name}/%{version}/picard %{priority}
 
 %postun
 if [ $1 -eq 0 ]
 then
-  alternatives --remove picard /opt/biology/%{name}/%{version}/picard
+  alternatives --remove picard /opt/bioit/%{name}/%{version}/picard
 fi
 
 

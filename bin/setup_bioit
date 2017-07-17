@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir /opt/bioit
+cd /opt/bioit
+mkdir -p bamtools/src bbmap/src bcftools/src bedtools2/src bowtie/src \
+  bowtie2/src bwa/src FastQC/src hisat2/src htslib/src ncbi-blast/src \
+  picard/src R-core/src samtools/src SOAPdenovo2/src SolexaQA++/src \
+  tophat2/src vcftools/src
+

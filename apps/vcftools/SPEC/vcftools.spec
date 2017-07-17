@@ -1,6 +1,6 @@
 %define priority 0115
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -30,37 +30,37 @@ comparing and calculate some basic population genetic statistics.
 
 %post
 alternatives \
-   --install %{_bindir}/vcftools vcftools /opt/biology/%{name}/%{version}/bin/vcftools %{priority} \
-   --slave %{_bindir}/fill-aa fill-aa /opt/biology/%{name}/%{version}/bin/fill-aa \
-   --slave %{_bindir}/fill-an-ac fill-an-ac /opt/biology/%{name}/%{version}/bin/fill-an-ac \
-   --slave %{_bindir}/fill-fs fill-fs /opt/biology/%{name}/%{version}/bin/fill-fs \
-   --slave %{_bindir}/fill-ref-md5 fill-ref-md5 /opt/biology/%{name}/%{version}/bin/fill-ref-md5 \
-   --slave %{_bindir}/vcf-annotate vcf-annotate /opt/biology/%{name}/%{version}/bin/vcf-annotate \
-   --slave %{_bindir}/vcf-compare vcf-compare /opt/biology/%{name}/%{version}/bin/vcf-compare \
-   --slave %{_bindir}/vcf-concat vcf-concat /opt/biology/%{name}/%{version}/bin/vcf-concat \
-   --slave %{_bindir}/vcf-consensus vcf-consensus /opt/biology/%{name}/%{version}/bin/vcf-consensus \
-   --slave %{_bindir}/vcf-contrast vcf-contrast /opt/biology/%{name}/%{version}/bin/vcf-contrast \
-   --slave %{_bindir}/vcf-convert vcf-convert /opt/biology/%{name}/%{version}/bin/vcf-convert \
-   --slave %{_bindir}/vcf-fix-newlines vcf-fix-newlines /opt/biology/%{name}/%{version}/bin/vcf-fix-newlines \
-   --slave %{_bindir}/vcf-fix-ploidy vcf-fix-ploidy /opt/biology/%{name}/%{version}/bin/vcf-fix-ploidy \
-   --slave %{_bindir}/vcf-indel-stats vcf-indel-stats /opt/biology/%{name}/%{version}/bin/vcf-indel-stats \
-   --slave %{_bindir}/vcf-isec vcf-isec /opt/biology/%{name}/%{version}/bin/vcf-isec \
-   --slave %{_bindir}/vcf-merge vcf-merge /opt/biology/%{name}/%{version}/bin/vcf-merge \
-   --slave %{_bindir}/vcf-phased-join vcf-phased-join /opt/biology/%{name}/%{version}/bin/vcf-phased-join \
-   --slave %{_bindir}/vcf-query vcf-query /opt/biology/%{name}/%{version}/bin/vcf-query \
-   --slave %{_bindir}/vcf-shuffle-cols vcf-shuffle-cols /opt/biology/%{name}/%{version}/bin/vcf-shuffle-cols \
-   --slave %{_bindir}/vcf-sort vcf-sort /opt/biology/%{name}/%{version}/bin/vcf-sort \
-   --slave %{_bindir}/vcf-stats vcf-stats /opt/biology/%{name}/%{version}/bin/vcf-stats \
-   --slave %{_bindir}/vcf-subset vcf-subset /opt/biology/%{name}/%{version}/bin/vcf-subset \
-   --slave %{_bindir}/vcf-to-tab vcf-to-tab /opt/biology/%{name}/%{version}/bin/vcf-to-tab \
-   --slave %{_bindir}/vcf-tstv vcf-tstv /opt/biology/%{name}/%{version}/bin/vcf-tstv \
-   --slave %{_bindir}/vcf-validator vcf-validator /opt/biology/%{name}/%{version}/bin/vcf-validator \
-   --slave %{_mandir}/man1/vcftools.1 vcftools.1 /opt/biology/%{name}/%{version}/share/man/man1/vcftools.1
+   --install %{_bindir}/vcftools vcftools /opt/bioit/%{name}/%{version}/bin/vcftools %{priority} \
+   --slave %{_bindir}/fill-aa fill-aa /opt/bioit/%{name}/%{version}/bin/fill-aa \
+   --slave %{_bindir}/fill-an-ac fill-an-ac /opt/bioit/%{name}/%{version}/bin/fill-an-ac \
+   --slave %{_bindir}/fill-fs fill-fs /opt/bioit/%{name}/%{version}/bin/fill-fs \
+   --slave %{_bindir}/fill-ref-md5 fill-ref-md5 /opt/bioit/%{name}/%{version}/bin/fill-ref-md5 \
+   --slave %{_bindir}/vcf-annotate vcf-annotate /opt/bioit/%{name}/%{version}/bin/vcf-annotate \
+   --slave %{_bindir}/vcf-compare vcf-compare /opt/bioit/%{name}/%{version}/bin/vcf-compare \
+   --slave %{_bindir}/vcf-concat vcf-concat /opt/bioit/%{name}/%{version}/bin/vcf-concat \
+   --slave %{_bindir}/vcf-consensus vcf-consensus /opt/bioit/%{name}/%{version}/bin/vcf-consensus \
+   --slave %{_bindir}/vcf-contrast vcf-contrast /opt/bioit/%{name}/%{version}/bin/vcf-contrast \
+   --slave %{_bindir}/vcf-convert vcf-convert /opt/bioit/%{name}/%{version}/bin/vcf-convert \
+   --slave %{_bindir}/vcf-fix-newlines vcf-fix-newlines /opt/bioit/%{name}/%{version}/bin/vcf-fix-newlines \
+   --slave %{_bindir}/vcf-fix-ploidy vcf-fix-ploidy /opt/bioit/%{name}/%{version}/bin/vcf-fix-ploidy \
+   --slave %{_bindir}/vcf-indel-stats vcf-indel-stats /opt/bioit/%{name}/%{version}/bin/vcf-indel-stats \
+   --slave %{_bindir}/vcf-isec vcf-isec /opt/bioit/%{name}/%{version}/bin/vcf-isec \
+   --slave %{_bindir}/vcf-merge vcf-merge /opt/bioit/%{name}/%{version}/bin/vcf-merge \
+   --slave %{_bindir}/vcf-phased-join vcf-phased-join /opt/bioit/%{name}/%{version}/bin/vcf-phased-join \
+   --slave %{_bindir}/vcf-query vcf-query /opt/bioit/%{name}/%{version}/bin/vcf-query \
+   --slave %{_bindir}/vcf-shuffle-cols vcf-shuffle-cols /opt/bioit/%{name}/%{version}/bin/vcf-shuffle-cols \
+   --slave %{_bindir}/vcf-sort vcf-sort /opt/bioit/%{name}/%{version}/bin/vcf-sort \
+   --slave %{_bindir}/vcf-stats vcf-stats /opt/bioit/%{name}/%{version}/bin/vcf-stats \
+   --slave %{_bindir}/vcf-subset vcf-subset /opt/bioit/%{name}/%{version}/bin/vcf-subset \
+   --slave %{_bindir}/vcf-to-tab vcf-to-tab /opt/bioit/%{name}/%{version}/bin/vcf-to-tab \
+   --slave %{_bindir}/vcf-tstv vcf-tstv /opt/bioit/%{name}/%{version}/bin/vcf-tstv \
+   --slave %{_bindir}/vcf-validator vcf-validator /opt/bioit/%{name}/%{version}/bin/vcf-validator \
+   --slave %{_mandir}/man1/vcftools.1 vcftools.1 /opt/bioit/%{name}/%{version}/share/man/man1/vcftools.1
 
 %postun
 if [ $1 -eq 0 ]
 then
-  alternatives --remove vcftools /opt/biology/%{name}/%{version}/bin/vcftools
+  alternatives --remove vcftools /opt/bioit/%{name}/%{version}/bin/vcftools
 fi
 
 %files

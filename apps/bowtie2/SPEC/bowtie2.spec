@@ -1,7 +1,7 @@
 %define debug_package %{nil}
 %define priority 232
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -33,20 +33,20 @@ and paired-end alignment modes.
 
 %post
 alternatives \
-   --install %{_bindir}/bowtie2 bowtie2 /opt/biology/%{name}/%{version}/bin/bowtie2 %{priority} \
-   --slave %{_bindir}/bowtie2-build bowtie2-build /opt/biology/%{name}/%{version}/bin/bowtie2-build \
-   --slave %{_bindir}/bowtie2-build-l bowtie2-build-l /opt/biology/%{name}/%{version}/bin/bowtie2-build-l \
-   --slave %{_bindir}/bowtie2-build-s bowtie2-build-s /opt/biology/%{name}/%{version}/bin/bowtie2-build-s \
-   --slave %{_bindir}/bowtie2-align-l bowtie2-align-l /opt/biology/%{name}/%{version}/bin/bowtie2-align-l \
-   --slave %{_bindir}/bowtie2-align-s bowtie2-align-s /opt/biology/%{name}/%{version}/bin/bowtie2-align-s \
-   --slave %{_bindir}/bowtie2-inspect-l bowtie2-inspect-l /opt/biology/%{name}/%{version}/bin/bowtie2-inspect-l \
-   --slave %{_bindir}/bowtie2-inspect-s bowtie2-inspect-s /opt/biology/%{name}/%{version}/bin/bowtie2-inspect-s \
-   --slave %{_bindir}/bowtie2-inspect bowtie2-inspect /opt/biology/%{name}/%{version}/bin/bowtie2-inspect
+   --install %{_bindir}/bowtie2 bowtie2 /opt/bioit/%{name}/%{version}/bin/bowtie2 %{priority} \
+   --slave %{_bindir}/bowtie2-build bowtie2-build /opt/bioit/%{name}/%{version}/bin/bowtie2-build \
+   --slave %{_bindir}/bowtie2-build-l bowtie2-build-l /opt/bioit/%{name}/%{version}/bin/bowtie2-build-l \
+   --slave %{_bindir}/bowtie2-build-s bowtie2-build-s /opt/bioit/%{name}/%{version}/bin/bowtie2-build-s \
+   --slave %{_bindir}/bowtie2-align-l bowtie2-align-l /opt/bioit/%{name}/%{version}/bin/bowtie2-align-l \
+   --slave %{_bindir}/bowtie2-align-s bowtie2-align-s /opt/bioit/%{name}/%{version}/bin/bowtie2-align-s \
+   --slave %{_bindir}/bowtie2-inspect-l bowtie2-inspect-l /opt/bioit/%{name}/%{version}/bin/bowtie2-inspect-l \
+   --slave %{_bindir}/bowtie2-inspect-s bowtie2-inspect-s /opt/bioit/%{name}/%{version}/bin/bowtie2-inspect-s \
+   --slave %{_bindir}/bowtie2-inspect bowtie2-inspect /opt/bioit/%{name}/%{version}/bin/bowtie2-inspect
 
 %postun
 if [ $1 -eq 0 ]
 then
-  alternatives --remove bowtie2 /opt/biology/%{name}/%{version}/bin/bowtie2
+  alternatives --remove bowtie2 /opt/bioit/%{name}/%{version}/bin/bowtie2
 fi
 
 %files

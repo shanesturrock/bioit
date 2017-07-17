@@ -1,6 +1,6 @@
 %define priority 0115
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -25,13 +25,13 @@ further analysis.
 
 %post
 alternatives \
-   --install %{_bindir}/fastqc FastQC /opt/biology/%{name}/%{version}/fastqc %{priority}
+   --install %{_bindir}/fastqc FastQC /opt/bioit/%{name}/%{version}/fastqc %{priority}
 
 %postun
 if [ $1 -eq 0 ]
 then
   alternatives \
-   --remove FastQC /opt/biology/%{name}/%{version}/fastqc
+   --remove FastQC /opt/bioit/%{name}/%{version}/fastqc
 fi
 
 %files

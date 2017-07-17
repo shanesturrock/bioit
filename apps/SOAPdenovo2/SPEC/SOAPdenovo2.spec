@@ -1,6 +1,6 @@
 %define priority 241
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -29,15 +29,15 @@ in a cost effective way.
 
 %post
 alternatives \
-   --install %{_bindir}/SOAPdenovo-127mer SOAPdenovo2 /opt/biology/%{name}/%{version}/SOAPdenovo-127mer %{priority} \
-   --slave %{_bindir}/SOAPdenovo-63mer SOAPdenovo-63mer /opt/biology/%{name}/%{version}/SOAPdenovo-63mer \
-   --slave %{_bindir}/SOAPdenovo-fusion SOAPdenovo-fusion /opt/biology/%{name}/%{version}/SOAPdenovo-fusion
+   --install %{_bindir}/SOAPdenovo-127mer SOAPdenovo2 /opt/bioit/%{name}/%{version}/SOAPdenovo-127mer %{priority} \
+   --slave %{_bindir}/SOAPdenovo-63mer SOAPdenovo-63mer /opt/bioit/%{name}/%{version}/SOAPdenovo-63mer \
+   --slave %{_bindir}/SOAPdenovo-fusion SOAPdenovo-fusion /opt/bioit/%{name}/%{version}/SOAPdenovo-fusion
 
 %postun
 if [ $1 -eq 0 ]
 then
   alternatives \
-   --remove SOAPdenovo2 /opt/biology/%{name}/%{version}/SOAPdenovo-127mer
+   --remove SOAPdenovo2 /opt/bioit/%{name}/%{version}/SOAPdenovo-127mer
 fi
 
 %files

@@ -1,6 +1,6 @@
 %define priority 241
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -26,13 +26,13 @@ BAM files.
 
 %post
 alternatives \
-   --install %{_bindir}/bamtools bamtools /opt/biology/%{name}/%{version}/bin/bamtools %{priority}
+   --install %{_bindir}/bamtools bamtools /opt/bioit/%{name}/%{version}/bin/bamtools %{priority}
 
 %postun
 if [ $1 -eq 0 ]
 then
   alternatives \
-   --remove bamtools /opt/biology/%{name}/%{version}/bin/bamtools
+   --remove bamtools /opt/bioit/%{name}/%{version}/bin/bamtools
 fi
 
 

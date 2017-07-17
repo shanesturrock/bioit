@@ -1,6 +1,6 @@
 %define priority 210
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -40,34 +40,34 @@ information.
 
 %post
 alternatives \
-   --install %{_bindir}/hisat2 hisat2 /opt/biology/%{name}/%{version}/bin/hisat2 %{priority} \
-   --slave %{_bindir}/extract_exons.py extract_exons.py /opt/biology/%{name}/%{version}/bin/extract_exons.py \
-   --slave %{_bindir}/extract_splice_sites.py extract_splice_sites.py /opt/biology/%{name}/%{version}/bin/extract_splice_sites.py \
-   --slave %{_bindir}/hisat2-align-l hisat2-align-l /opt/biology/%{name}/%{version}/bin/hisat2-align-l \
-   --slave %{_bindir}/hisat2-align-s hisat2-align-s /opt/biology/%{name}/%{version}/bin/hisat2-align-s \
-   --slave %{_bindir}/hisat2-build hisat2-build /opt/biology/%{name}/%{version}/bin/hisat2-build \
-   --slave %{_bindir}/hisat2-build-l hisat2-build-l /opt/biology/%{name}/%{version}/bin/hisat2-build-l \
-   --slave %{_bindir}/hisat2-build-s hisat2-build-s /opt/biology/%{name}/%{version}/bin/hisat2-build-s \
-   --slave %{_bindir}/hisat2_extract_exons.py hisat2_extract_exons.py /opt/biology/%{name}/%{version}/bin/hisat2_extract_exons.py \
-   --slave %{_bindir}/hisat2_extract_snps_haplotypes_UCSC.py hisat2_extract_snps_haplotypes_UCSC.py /opt/biology/%{name}/%{version}/bin/hisat2_extract_snps_haplotypes_UCSC.py \
-   --slave %{_bindir}/hisat2_extract_snps_haplotypes_VCF.py hisat2_extract_snps_haplotypes_VCF.py /opt/biology/%{name}/%{version}/bin/hisat2_extract_snps_haplotypes_VCF.py \
-   --slave %{_bindir}/hisat2_extract_splice_sites.py hisat2_extract_splice_sites.py /opt/biology/%{name}/%{version}/bin/hisat2_extract_splice_sites.py \
-   --slave %{_bindir}/hisat2-inspect hisat2-inspect /opt/biology/%{name}/%{version}/bin/hisat2-inspect \
-   --slave %{_bindir}/hisat2-inspect-l hisat2-inspect-l /opt/biology/%{name}/%{version}/bin/hisat2-inspect-l \
-   --slave %{_bindir}/hisat2-inspect-s hisat2-inspect-s /opt/biology/%{name}/%{version}/bin/hisat2-inspect-s \
-   --slave %{_bindir}/hisat2_simulate_reads.py hisat2_simulate_reads.py /opt/biology/%{name}/%{version}/bin/hisat2_simulate_reads.py \
-   --slave %{_bindir}/hisatgenotype_build_genome.py hisatgenotype_build_genome.py /opt/biology/%{name}/%{version}/bin/hisatgenotype_build_genome.py \
-   --slave %{_bindir}/hisatgenotype_extract_reads.py hisatgenotype_extract_reads.py /opt/biology/%{name}/%{version}/bin/hisatgenotype_extract_reads.py \
-   --slave %{_bindir}/hisatgenotype_extract_vars.py hisatgenotype_extract_vars.py /opt/biology/%{name}/%{version}/bin/hisatgenotype_extract_vars.py \
-   --slave %{_bindir}/hisatgenotype_hla_cyp.py hisatgenotype_hla_cyp.py /opt/biology/%{name}/%{version}/bin/hisatgenotype_hla_cyp.py \
-   --slave %{_bindir}/hisatgenotype_locus.py hisatgenotype_locus.py /opt/biology/%{name}/%{version}/bin/hisatgenotype_locus.py \
-   --slave %{_bindir}/hisatgenotype.py hisatgenotype.py /opt/biology/%{name}/%{version}/bin/hisatgenotype.py
+   --install %{_bindir}/hisat2 hisat2 /opt/bioit/%{name}/%{version}/bin/hisat2 %{priority} \
+   --slave %{_bindir}/extract_exons.py extract_exons.py /opt/bioit/%{name}/%{version}/bin/extract_exons.py \
+   --slave %{_bindir}/extract_splice_sites.py extract_splice_sites.py /opt/bioit/%{name}/%{version}/bin/extract_splice_sites.py \
+   --slave %{_bindir}/hisat2-align-l hisat2-align-l /opt/bioit/%{name}/%{version}/bin/hisat2-align-l \
+   --slave %{_bindir}/hisat2-align-s hisat2-align-s /opt/bioit/%{name}/%{version}/bin/hisat2-align-s \
+   --slave %{_bindir}/hisat2-build hisat2-build /opt/bioit/%{name}/%{version}/bin/hisat2-build \
+   --slave %{_bindir}/hisat2-build-l hisat2-build-l /opt/bioit/%{name}/%{version}/bin/hisat2-build-l \
+   --slave %{_bindir}/hisat2-build-s hisat2-build-s /opt/bioit/%{name}/%{version}/bin/hisat2-build-s \
+   --slave %{_bindir}/hisat2_extract_exons.py hisat2_extract_exons.py /opt/bioit/%{name}/%{version}/bin/hisat2_extract_exons.py \
+   --slave %{_bindir}/hisat2_extract_snps_haplotypes_UCSC.py hisat2_extract_snps_haplotypes_UCSC.py /opt/bioit/%{name}/%{version}/bin/hisat2_extract_snps_haplotypes_UCSC.py \
+   --slave %{_bindir}/hisat2_extract_snps_haplotypes_VCF.py hisat2_extract_snps_haplotypes_VCF.py /opt/bioit/%{name}/%{version}/bin/hisat2_extract_snps_haplotypes_VCF.py \
+   --slave %{_bindir}/hisat2_extract_splice_sites.py hisat2_extract_splice_sites.py /opt/bioit/%{name}/%{version}/bin/hisat2_extract_splice_sites.py \
+   --slave %{_bindir}/hisat2-inspect hisat2-inspect /opt/bioit/%{name}/%{version}/bin/hisat2-inspect \
+   --slave %{_bindir}/hisat2-inspect-l hisat2-inspect-l /opt/bioit/%{name}/%{version}/bin/hisat2-inspect-l \
+   --slave %{_bindir}/hisat2-inspect-s hisat2-inspect-s /opt/bioit/%{name}/%{version}/bin/hisat2-inspect-s \
+   --slave %{_bindir}/hisat2_simulate_reads.py hisat2_simulate_reads.py /opt/bioit/%{name}/%{version}/bin/hisat2_simulate_reads.py \
+   --slave %{_bindir}/hisatgenotype_build_genome.py hisatgenotype_build_genome.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_build_genome.py \
+   --slave %{_bindir}/hisatgenotype_extract_reads.py hisatgenotype_extract_reads.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_extract_reads.py \
+   --slave %{_bindir}/hisatgenotype_extract_vars.py hisatgenotype_extract_vars.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_extract_vars.py \
+   --slave %{_bindir}/hisatgenotype_hla_cyp.py hisatgenotype_hla_cyp.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_hla_cyp.py \
+   --slave %{_bindir}/hisatgenotype_locus.py hisatgenotype_locus.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_locus.py \
+   --slave %{_bindir}/hisatgenotype.py hisatgenotype.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype.py
 
 %postun
 if [ $1 -eq 0 ]
 then
   alternatives \
-   --remove hisat2 /opt/biology/%{name}/%{version}/bin/hisat2
+   --remove hisat2 /opt/bioit/%{name}/%{version}/bin/hisat2
 fi
 
 %files

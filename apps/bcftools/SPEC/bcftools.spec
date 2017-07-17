@@ -1,6 +1,6 @@
 %define priority 15
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -29,15 +29,15 @@ to replace the Perl-based tools from vcftools.
 
 %post
 alternatives \
-   --install %{_bindir}/bcftools bcftools /opt/biology/%{name}/%{version}/bin/bcftools %{priority} \
-   --slave %{_bindir}/plot-vcfstats plot-vcfstats /opt/biology/%{name}/%{version}/bin/plot-vcfstats \
-   --slave %{_bindir}/vcfutils.pl vcfutils.pl /opt/biology/%{name}/%{version}/bin/vcfutils.pl \
-   --slave %{_mandir}/man1/bcftools.1 bcftools.1 /opt/biology/%{name}/%{version}/share/man/man1/bcftools.1
+   --install %{_bindir}/bcftools bcftools /opt/bioit/%{name}/%{version}/bin/bcftools %{priority} \
+   --slave %{_bindir}/plot-vcfstats plot-vcfstats /opt/bioit/%{name}/%{version}/bin/plot-vcfstats \
+   --slave %{_bindir}/vcfutils.pl vcfutils.pl /opt/bioit/%{name}/%{version}/bin/vcfutils.pl \
+   --slave %{_mandir}/man1/bcftools.1 bcftools.1 /opt/bioit/%{name}/%{version}/share/man/man1/bcftools.1
 
 %postun
 if [ $1 -eq 0 ]
 then
-  alternatives --remove bcftools /opt/biology/%{name}/%{version}/bin/bcftools
+  alternatives --remove bcftools /opt/bioit/%{name}/%{version}/bin/bcftools
 fi
 
 %files

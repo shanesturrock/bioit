@@ -1,7 +1,7 @@
 %global pkgbase R
 %define priority 341
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -30,13 +30,13 @@ compiles and runs on a wide variety of UNIX platforms, Windows and MacOS.
 
 %post
 alternatives \
-  --install %{_bindir}/R R /opt/biology/%{name}/%{version}/bin/R %{priority} \
-  --slave %{_bindir}/Rscript Rscript /opt/biology/%{name}/%{version}/bin/Rscript
+  --install %{_bindir}/R R /opt/bioit/%{name}/%{version}/bin/R %{priority} \
+  --slave %{_bindir}/Rscript Rscript /opt/bioit/%{name}/%{version}/bin/Rscript
 
 %postun
 if [ $1 -eq 0 ]
 then
-  alternatives --remove R /opt/biology/%{name}/%{version}/bin/R
+  alternatives --remove R /opt/bioit/%{name}/%{version}/bin/R
 fi
 
 %files

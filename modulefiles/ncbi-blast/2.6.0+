@@ -2,4 +2,4 @@
 #
 #  ncbi-blast module for use with 'environment-modules' package:
 #
-prepend-path  PATH         /opt/biology/ncbi-blast/2.6.0+/bin
+prepend-path  PATH         /opt/bioit/ncbi-blast/2.6.0+/bin

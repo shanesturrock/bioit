@@ -1,6 +1,6 @@
 %define priority 15
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -31,34 +31,34 @@ alignments in a per-position format.
 
 %post
 alternatives \
-   --install %{_bindir}/samtools samtools /opt/biology/%{name}/%{version}/bin/samtools %{priority} \
-   --slave %{_bindir}/ace2sam ace2sam /opt/biology/%{name}/%{version}/bin/ace2sam \
-   --slave %{_bindir}/blast2sam.pl blast2sam.pl /opt/biology/%{name}/%{version}/bin/blast2sam.pl \
-   --slave %{_bindir}/bowtie2sam.pl bowtie2sam.pl /opt/biology/%{name}/%{version}/bin/bowtie2sam.pl \
-   --slave %{_bindir}/export2sam.pl export2sam.pl /opt/biology/%{name}/%{version}/bin/export2sam.pl \
-   --slave %{_bindir}/interpolate_sam.pl interpolate_sam.pl /opt/biology/%{name}/%{version}/bin/interpolate_sam.pl \
-   --slave %{_bindir}/maq2sam-long maq2sam-long /opt/biology/%{name}/%{version}/bin/maq2sam-long \
-   --slave %{_bindir}/maq2sam-short maq2sam-short /opt/biology/%{name}/%{version}/bin/maq2sam-short \
-   --slave %{_bindir}/md5fa md5fa /opt/biology/%{name}/%{version}/bin/md5fa \
-   --slave %{_bindir}/md5sum-lite md5sum-lite /opt/biology/%{name}/%{version}/bin/md5sum-lite \
-   --slave %{_bindir}/novo2sam.pl novo2sam.pl /opt/biology/%{name}/%{version}/bin/novo2sam.pl \
-   --slave %{_bindir}/plot-bamstats plot-bamstats /opt/biology/%{name}/%{version}/bin/plot-bamstats \
-   --slave %{_bindir}/psl2sam.pl psl2sam.pl /opt/biology/%{name}/%{version}/bin/psl2sam.pl \
-   --slave %{_bindir}/sam2vcf.pl sam2vcf.pl /opt/biology/%{name}/%{version}/bin/sam2vcf.pl \
-   --slave %{_bindir}/samtools.pl samtools.pl /opt/biology/%{name}/%{version}/bin/samtools.pl \
-   --slave %{_bindir}/seq_cache_populate.pl seq_cache_populate.pl /opt/biology/%{name}/%{version}/bin/seq_cache_populate.pl \
-   --slave %{_bindir}/soap2sam.pl soap2sam.pl /opt/biology/%{name}/%{version}/bin/soap2sam.pl \
-   --slave %{_bindir}/varfilter.py varfilter.py /opt/biology/%{name}/%{version}/bin/varfilter.py \
-   --slave %{_bindir}/wgsim wgsim /opt/biology/%{name}/%{version}/bin/wgsim \
-   --slave %{_bindir}/wgsim_eval.pl wgsim_eval.pl /opt/biology/%{name}/%{version}/bin/wgsim_eval.pl \
-   --slave %{_bindir}/zoom2sam.pl zoom2sam.pl /opt/biology/%{name}/%{version}/bin/zoom2sam.pl \
-   --slave %{_mandir}/man1/samtools.1 samtools.1 /opt/biology/%{name}/%{version}/share/man/man1/samtools.1 \
-   --slave %{_mandir}/man1/wgsim.1 wgsim.1 /opt/biology/%{name}/%{version}/share/man/man1/wgsim.1
+   --install %{_bindir}/samtools samtools /opt/bioit/%{name}/%{version}/bin/samtools %{priority} \
+   --slave %{_bindir}/ace2sam ace2sam /opt/bioit/%{name}/%{version}/bin/ace2sam \
+   --slave %{_bindir}/blast2sam.pl blast2sam.pl /opt/bioit/%{name}/%{version}/bin/blast2sam.pl \
+   --slave %{_bindir}/bowtie2sam.pl bowtie2sam.pl /opt/bioit/%{name}/%{version}/bin/bowtie2sam.pl \
+   --slave %{_bindir}/export2sam.pl export2sam.pl /opt/bioit/%{name}/%{version}/bin/export2sam.pl \
+   --slave %{_bindir}/interpolate_sam.pl interpolate_sam.pl /opt/bioit/%{name}/%{version}/bin/interpolate_sam.pl \
+   --slave %{_bindir}/maq2sam-long maq2sam-long /opt/bioit/%{name}/%{version}/bin/maq2sam-long \
+   --slave %{_bindir}/maq2sam-short maq2sam-short /opt/bioit/%{name}/%{version}/bin/maq2sam-short \
+   --slave %{_bindir}/md5fa md5fa /opt/bioit/%{name}/%{version}/bin/md5fa \
+   --slave %{_bindir}/md5sum-lite md5sum-lite /opt/bioit/%{name}/%{version}/bin/md5sum-lite \
+   --slave %{_bindir}/novo2sam.pl novo2sam.pl /opt/bioit/%{name}/%{version}/bin/novo2sam.pl \
+   --slave %{_bindir}/plot-bamstats plot-bamstats /opt/bioit/%{name}/%{version}/bin/plot-bamstats \
+   --slave %{_bindir}/psl2sam.pl psl2sam.pl /opt/bioit/%{name}/%{version}/bin/psl2sam.pl \
+   --slave %{_bindir}/sam2vcf.pl sam2vcf.pl /opt/bioit/%{name}/%{version}/bin/sam2vcf.pl \
+   --slave %{_bindir}/samtools.pl samtools.pl /opt/bioit/%{name}/%{version}/bin/samtools.pl \
+   --slave %{_bindir}/seq_cache_populate.pl seq_cache_populate.pl /opt/bioit/%{name}/%{version}/bin/seq_cache_populate.pl \
+   --slave %{_bindir}/soap2sam.pl soap2sam.pl /opt/bioit/%{name}/%{version}/bin/soap2sam.pl \
+   --slave %{_bindir}/varfilter.py varfilter.py /opt/bioit/%{name}/%{version}/bin/varfilter.py \
+   --slave %{_bindir}/wgsim wgsim /opt/bioit/%{name}/%{version}/bin/wgsim \
+   --slave %{_bindir}/wgsim_eval.pl wgsim_eval.pl /opt/bioit/%{name}/%{version}/bin/wgsim_eval.pl \
+   --slave %{_bindir}/zoom2sam.pl zoom2sam.pl /opt/bioit/%{name}/%{version}/bin/zoom2sam.pl \
+   --slave %{_mandir}/man1/samtools.1 samtools.1 /opt/bioit/%{name}/%{version}/share/man/man1/samtools.1 \
+   --slave %{_mandir}/man1/wgsim.1 wgsim.1 /opt/bioit/%{name}/%{version}/share/man/man1/wgsim.1
 
 %postun
 if [ $1 -eq 0 ]
 then
-  alternatives --remove samtools /opt/biology/%{name}/%{version}/bin/samtools
+  alternatives --remove samtools /opt/bioit/%{name}/%{version}/bin/samtools
 fi
 
 %files

@@ -1,6 +1,6 @@
 %define priority 3171
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -27,13 +27,13 @@ by Illumina second-generation sequencing technology (“Solexa”).
 
 %post
 alternatives \
-   --install %{_bindir}/SolexaQA++ SolexaQA++ /opt/biology/%{name}/%{version}/SolexaQA++ %{priority}
+   --install %{_bindir}/SolexaQA++ SolexaQA++ /opt/bioit/%{name}/%{version}/SolexaQA++ %{priority}
 
 %postun
 if [ $1 -eq 0 ]
 then
   alternatives \
-   --remove SolexaQA++ /opt/biology/%{name}/%{version}/SolexaQA++
+   --remove SolexaQA++ /opt/bioit/%{name}/%{version}/SolexaQA++
 fi
 
 %files

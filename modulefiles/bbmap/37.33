@@ -2,4 +2,4 @@
 #
 #  bbmap module for use with 'environment-modules' package:
 #
-prepend-path  PATH         /opt/biology/bbmap/37.33
+prepend-path  PATH         /opt/bioit/bbmap/37.33

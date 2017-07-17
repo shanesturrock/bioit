@@ -2,5 +2,5 @@
 #
 #  bwa module for use with 'environment-modules' package:
 #
-prepend-path  PATH         /opt/biology/bwa/0.7.15/bin
-prepend-path  MANPATH      /opt/biology/bwa/0.7.15/man
+prepend-path  PATH         /opt/bioit/bwa/0.7.15/bin
+prepend-path  MANPATH      /opt/bioit/bwa/0.7.15/man

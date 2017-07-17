@@ -1,6 +1,6 @@
 %define priority 15
-%define dir_exists() (if [ ! -d /opt/biology/%{name}/%{version} ]; then \
-  echo "/opt/biology/%{name}/%{version} not found!"; exit 1 \
+%define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
+  echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
@@ -37,19 +37,19 @@ and .csi formats, and the bgzip compression utility.
 
 %post
 alternatives \
-   --install %{_bindir}/htsfile htslib /opt/biology/%{name}/%{version}/bin/htsfile %{priority} \
-   --slave %{_bindir}/tabix tabix /opt/biology/%{name}/%{version}/bin/tabix \
-   --slave %{_bindir}/bgzip bgzip /opt/biology/%{name}/%{version}/bin/bgzip \
-   --slave %{_mandir}/man1/htsfile.1 htsfile.1 /opt/biology/%{name}/%{version}/share/man/man1/htsfile.1 \
-   --slave %{_mandir}/man1/tabix.1 tabix.1 /opt/biology/%{name}/%{version}/share/man/man1/tabix.1 \
-   --slave %{_mandir}/man5/faidx.5 faidx.5 /opt/biology/%{name}/%{version}/share/man/man5/faidx.5 \
-   --slave %{_mandir}/man5/sam.5 sam.5 /opt/biology/%{name}/%{version}/share/man/man5/sam.5 \
-   --slave %{_mandir}/man5/vcf.5 vcf.5 /opt/biology/%{name}/%{version}/share/man/man5/vcf.5
+   --install %{_bindir}/htsfile htslib /opt/bioit/%{name}/%{version}/bin/htsfile %{priority} \
+   --slave %{_bindir}/tabix tabix /opt/bioit/%{name}/%{version}/bin/tabix \
+   --slave %{_bindir}/bgzip bgzip /opt/bioit/%{name}/%{version}/bin/bgzip \
+   --slave %{_mandir}/man1/htsfile.1 htsfile.1 /opt/bioit/%{name}/%{version}/share/man/man1/htsfile.1 \
+   --slave %{_mandir}/man1/tabix.1 tabix.1 /opt/bioit/%{name}/%{version}/share/man/man1/tabix.1 \
+   --slave %{_mandir}/man5/faidx.5 faidx.5 /opt/bioit/%{name}/%{version}/share/man/man5/faidx.5 \
+   --slave %{_mandir}/man5/sam.5 sam.5 /opt/bioit/%{name}/%{version}/share/man/man5/sam.5 \
+   --slave %{_mandir}/man5/vcf.5 vcf.5 /opt/bioit/%{name}/%{version}/share/man/man5/vcf.5
 
 %postun
 if [ $1 -eq 0 ]
 then
-  alternatives --remove htslib /opt/biology/%{name}/%{version}/bin/htsfile
+  alternatives --remove htslib /opt/bioit/%{name}/%{version}/bin/htsfile
 fi
 
 %files
