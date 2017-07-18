@@ -12,6 +12,9 @@ rpmbuild -bb $script_dir/../apps/bwa/SPEC/bwa.spec
 rpmbuild -bb $script_dir/../apps/FastQC/SPEC/FastQC.spec
 rpmbuild -bb $script_dir/../apps/hisat2/SPEC/hisat2.spec
 rpmbuild -bb $script_dir/../apps/htslib/SPEC/htslib.spec
+cp $script_dir/../apps/igv/SPEC/* ${HOME}/rpmbuild/SOURCES
+rpmbuild -bb $script_dir/../apps/igv/SPEC/igv.spec
+rm -f ${HOME}/rpmbuild/SOURCES/*
 rpmbuild -bb $script_dir/../apps/ncbi-blast/SPEC/ncbi-blast.spec
 rpmbuild -bb $script_dir/../apps/picard/SPEC/picard.spec
 rpmbuild -bb $script_dir/../apps/R-core/SPEC/R-core.spec
