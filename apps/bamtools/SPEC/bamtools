@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+bamtools_dir="$(dirname $(readlink -f $0))"
+export LD_LIBRARY_PATH=${bamtools_dir}/lib/bamtools
+exec ${bamtools_dir}/bin/bamtools "$@"

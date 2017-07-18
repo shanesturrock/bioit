@@ -26,13 +26,13 @@ BAM files.
 
 %post
 alternatives \
-   --install %{_bindir}/bamtools bamtools /opt/bioit/%{name}/%{version}/bin/bamtools %{priority}
+   --install %{_bindir}/bamtools bamtools /opt/bioit/%{name}/%{version}/bamtools %{priority}
 
 %postun
 if [ $1 -eq 0 ]
 then
   alternatives \
-   --remove bamtools /opt/bioit/%{name}/%{version}/bin/bamtools
+   --remove bamtools /opt/bioit/%{name}/%{version}/bamtools
 fi
 
 

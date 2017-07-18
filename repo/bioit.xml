@@ -24,7 +24,7 @@
       <packagereq type="mandatory">samtools</packagereq>
       <packagereq type="mandatory">SOAPdenovo2</packagereq>
       <packagereq type="mandatory">SolexaQA++</packagereq>
-      <packagereq type="mandatory">tophat2</packagereq>
+      <packagereq type="mandatory">tophat</packagereq>
       <packagereq type="mandatory">vcftools</packagereq>
     </packagelist>
   </group>

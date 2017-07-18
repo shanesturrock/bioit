@@ -13,5 +13,5 @@ rpmbuild -bb /opt/bioit/R-core/SPEC/R-core.spec
 rpmbuild -bb /opt/bioit/samtools/SPEC/samtools.spec
 rpmbuild -bb /opt/bioit/SOAPdenovo2/SPEC/SOAPdenovo2.spec
 rpmbuild -bb /opt/bioit/SolexaQA++/SPEC/SolexaQA++.spec
-rpmbuild -bb /opt/bioit/tophat2/SPEC/tophat2.spec
+rpmbuild -bb /opt/bioit/tophat/SPEC/tophat.spec
 rpmbuild -bb /opt/bioit/vcftools/SPEC/vcftools.spec
