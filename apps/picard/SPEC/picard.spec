@@ -1,11 +1,11 @@
-%define priority 2102
+%define priority 2103
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.10.2
+Version:	2.10.3
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -43,6 +43,9 @@ fi
 %files
 
 %changelog
+* Wed Jul 19 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.3-1
+- Add warning to CheckIlluminaDir if we detect cycles without data. (#874)
+
 * Fri Jul 14 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.2-1
 - yet another reverse-compatibility issue in CrosscheckReadgroupFingerprints
   (#868) 
