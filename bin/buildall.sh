@@ -1,17 +1,21 @@
-rpmbuild -bb /opt/bioit/bamtools/SPEC/bamtools.spec
-rpmbuild -bb /opt/bioit/bbmap/SPEC/bbmap.spec
-rpmbuild -bb /opt/bioit/bcftools/SPEC/bcftools.spec
-rpmbuild -bb /opt/bioit/bedtools2/SPEC/bedtools2.spec
-rpmbuild -bb /opt/bioit/bowtie2/SPEC/bowtie2.spec
-rpmbuild -bb /opt/bioit/bowtie/SPEC/bowtie.spec
-rpmbuild -bb /opt/bioit/bwa/SPEC/bwa.spec
-rpmbuild -bb /opt/bioit/FastQC/SPEC/FastQC.spec
-rpmbuild -bb /opt/bioit/hisat2/SPEC/hisat2.spec
-rpmbuild -bb /opt/bioit/htslib/SPEC/htslib.spec
-rpmbuild -bb /opt/bioit/ncbi-blast/SPEC/ncbi-blast.spec
-rpmbuild -bb /opt/bioit/R-core/SPEC/R-core.spec
-rpmbuild -bb /opt/bioit/samtools/SPEC/samtools.spec
-rpmbuild -bb /opt/bioit/SOAPdenovo2/SPEC/SOAPdenovo2.spec
-rpmbuild -bb /opt/bioit/SolexaQA++/SPEC/SolexaQA++.spec
-rpmbuild -bb /opt/bioit/tophat/SPEC/tophat.spec
-rpmbuild -bb /opt/bioit/vcftools/SPEC/vcftools.spec
+#!/bin/bash
+
+script_dir="$(dirname $(readlink -f $0))"
+
+rpmbuild -bb $script_dir/apps/bamtools/SPEC/bamtools.spec
+rpmbuild -bb $script_dir/apps/bbmap/SPEC/bbmap.spec
+rpmbuild -bb $script_dir/apps/bcftools/SPEC/bcftools.spec
+rpmbuild -bb $script_dir/apps/bedtools2/SPEC/bedtools2.spec
+rpmbuild -bb $script_dir/apps/bowtie2/SPEC/bowtie2.spec
+rpmbuild -bb $script_dir/apps/bowtie/SPEC/bowtie.spec
+rpmbuild -bb $script_dir/apps/bwa/SPEC/bwa.spec
+rpmbuild -bb $script_dir/apps/FastQC/SPEC/FastQC.spec
+rpmbuild -bb $script_dir/apps/hisat2/SPEC/hisat2.spec
+rpmbuild -bb $script_dir/apps/htslib/SPEC/htslib.spec
+rpmbuild -bb $script_dir/apps/ncbi-blast/SPEC/ncbi-blast.spec
+rpmbuild -bb $script_dir/apps/R-core/SPEC/R-core.spec
+rpmbuild -bb $script_dir/apps/samtools/SPEC/samtools.spec
+rpmbuild -bb $script_dir/apps/SOAPdenovo2/SPEC/SOAPdenovo2.spec
+rpmbuild -bb $script_dir/apps/SolexaQA++/SPEC/SolexaQA++.spec
+rpmbuild -bb $script_dir/apps/tophat/SPEC/tophat.spec
+rpmbuild -bb $script_dir/apps/vcftools/SPEC/vcftools.spec
