@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Integrative Genomics Viewer
+Comment=Visualization tool for interactive exploration of large, integrated genomic datasets
+Terminal=false
+Exec=/usr/bin/igv
+Icon=igv
+Type=Application
+MimeType=application/x-executable;
+Categories=Science;Bioinformatics;

@@ -1,0 +1,16 @@
+--- src/resources/about.properties.old	2015-09-22 08:14:08.000000000 +1200
++++ src/resources/about.properties	2015-09-25 13:57:25.960118587 +1200
+@@ -23,8 +23,8 @@
+ # THE SOFTWARE.
+ #
+ 
+-version=@VERSION
+-build=@BUILD
+-timestamp=@TIMESTAMP
++version=2.3.97
++build=86
++timestamp=19/07/2017 09:00 AM
+ master-resource-url=@DEFAULT_MASTER_RESOURCE_URL
+-development=@DEVELOPMENT
+\ No newline at end of file
++development=false

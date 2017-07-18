@@ -1,0 +1,3 @@
+version=3
+opts=filenamemangle=s/.+\/v?(\d\S*)\.zip/igv-$1\.zip/ \
+  https://github.com/igvteam/igv/tags (?:.*/)?v?(\d[\d\.]*)\.zip
