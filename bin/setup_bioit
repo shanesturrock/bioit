@@ -4,7 +4,8 @@
 mkdir /opt/bioit
 # Copy module files and repository files
 cp -Rpa ../modulefiles /opt/bioit
-cp -Rpa ../repo /opt/bioit
+mkdir -p /opt/bioit/repo/RPMS
+cp -Rpa ../repo/build.xml /opt/bioit/repo/
 # Create all directories for packages
 cd /opt/bioit
 mkdir -p bamtools/src bbmap/src bcftools/src bedtools2/src bowtie/src \
