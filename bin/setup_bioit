@@ -3,9 +3,9 @@
 # Create install location
 mkdir /opt/bioit
 # Copy module files and repository files
-cp -Rpa ../modulefiles /opt/bioit
+cp -Rpa ~/bioit/modulefiles /opt/bioit
 mkdir -p /opt/bioit/repo/RPMS
-cp -Rpa ../repo/build.xml /opt/bioit/repo/
+ln -s ~/bioit/repo/bioit.xml /opt/bioit/repo/bioit.xml
 # Create all directories for packages
 cd /opt/bioit
 mkdir -p bamtools/src bbmap/src bcftools/src bedtools2/src bowtie/src \
