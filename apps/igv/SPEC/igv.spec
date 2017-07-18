@@ -11,8 +11,10 @@ Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
 License:	LGPL
 URL:		http://www.broadinstitute.org/igv/home
-Source0:	igv.desktop
-Source1:	igv-icons.tar.gz
+Source0:	bioinformatics.menu
+Source1:	bioinformatics.directory
+Source2:	igv.desktop
+Source3:	igv-icons.tar.gz
 Patch0:		about.properties.patch
 Requires:	java-1.8.0 dejavu-sans-fonts dejavu-sans-mono-fonts dejavu-serif-fonts
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -28,12 +30,17 @@ sequence data, and genomic annotations.
 
 %install
 rm -rf %{buildroot}
+# Menu
+mkdir -p %{buildroot}/%{_sysconfdir}/xdg/menus/applications-merged/
+install -m 644 %{SOURCE0} %{buildroot}/%{_sysconfdir}/xdg/menus/applications-merged/
+mkdir -p %{buildroot}%{_datadir}/desktop-directories/
+install -m 644 %{SOURCE1} %{buildroot}%{_datadir}/desktop-directories/
 # .desktop
 mkdir -p %{buildroot}%{_datadir}/applications/
-install -m 644 %{SOURCE0} %{buildroot}%{_datadir}/applications/
+install -m 644 %{SOURCE2} %{buildroot}%{_datadir}/applications/
 # Icons
 mkdir -p %{buildroot}%{_datadir}/icons/hicolor/
-tar xf %{SOURCE1} -C %{buildroot}%{_datadir}/icons/hicolor/
+tar xf %{SOURCE3} -C %{buildroot}%{_datadir}/icons/hicolor/
 
 %clean
 rm -rf %{buildroot}
@@ -55,6 +62,8 @@ fi
 %defattr(-,root,root,-)
 /usr/share/icons/hicolor/*
 /usr/share/applications/igv.desktop
+/usr/share/desktop-directories/bioinformatics.directory
+/etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
 * Wed Jul 19 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.97-1
