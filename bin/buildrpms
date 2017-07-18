@@ -13,6 +13,7 @@ rpmbuild -bb $script_dir/../apps/FastQC/SPEC/FastQC.spec
 rpmbuild -bb $script_dir/../apps/hisat2/SPEC/hisat2.spec
 rpmbuild -bb $script_dir/../apps/htslib/SPEC/htslib.spec
 rpmbuild -bb $script_dir/../apps/ncbi-blast/SPEC/ncbi-blast.spec
+rpmbuild -bb $script_dir/../apps/picard/SPEC/picard.spec
 rpmbuild -bb $script_dir/../apps/R-core/SPEC/R-core.spec
 rpmbuild -bb $script_dir/../apps/samtools/SPEC/samtools.spec
 rpmbuild -bb $script_dir/../apps/SOAPdenovo2/SPEC/SOAPdenovo2.spec
