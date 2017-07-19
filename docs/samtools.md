@@ -1,4 +1,4 @@
-## Homepage
+# Samtools
 
 [http://www.htslib.org/](http://www.htslib.org/)
 

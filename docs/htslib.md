@@ -1,4 +1,4 @@
-## Homepage
+# Htslib
 
 [http://www.htslib.org/](http://www.htslib.org/)
 

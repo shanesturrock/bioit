@@ -1,4 +1,4 @@
-## Homepage
+# Vcftools
 
 [https://vcftools.github.io](https://vcftools.github.io)
 

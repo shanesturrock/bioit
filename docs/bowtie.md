@@ -1,4 +1,4 @@
-## Homepage
+# Bowtie
 
 [https://github.com/BenLangmead/bowtie](https://github.com/BenLangmead/bowtie)
 

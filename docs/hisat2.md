@@ -1,4 +1,4 @@
-## Homepage
+# HiSat2
 
 [https://ccb.jhu.edu/software/hisat2/index.shtml](https://ccb.jhu.edu/software/hisat2/index.shtml)
 

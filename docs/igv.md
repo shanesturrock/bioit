@@ -1,4 +1,4 @@
-## Homepage
+# IGV
 
 [https://github.com/igvteam/igv](https://github.com/igvteam/igv)
 

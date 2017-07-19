@@ -1,4 +1,4 @@
-## Homepage
+# Bcftools
 
 [http://www.htslib.org/](http://www.htslib.org/)
 

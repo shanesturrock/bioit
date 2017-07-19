@@ -1,4 +1,4 @@
-## Homepage
+# R-core
 
 [http://www.r-project.org/](http://www.r-project.org/)
 

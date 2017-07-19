@@ -1,4 +1,4 @@
-## Homepage
+# SOAPdenovo2
 
 [http://soap.genomics.org.cn/soapdenovo.html](http://soap.genomics.org.cn/soapdenovo.html)
 

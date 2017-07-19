@@ -1,4 +1,4 @@
-## Homepage
+# BBMap
 
 [https://sourceforge.net/projects/bbmap/](https://sourceforge.net/projects/bbmap/)
 

@@ -1,4 +1,4 @@
-## Homepage
+# SolexaQA++
 
 [http://solexaqa.sourceforge.net](http://solexaqa.sourceforge.net)
 
