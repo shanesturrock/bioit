@@ -1,6 +1,6 @@
 ## Homepage
 
-https://ccb.jhu.edu/software/tophat/index.shtml
+[https://ccb.jhu.edu/software/tophat/index.shtml](https://ccb.jhu.edu/software/tophat/index.shtml)
 
 ## Build
 

@@ -1,6 +1,6 @@
 ## Homepage
 
-https://github.com/lh3/bw://github.com/broadinstitute/picard
+[https://github.com/lh3/bw://github.com/broadinstitute/picard](https://github.com/lh3/bw://github.com/broadinstitute/picard)
 
 ## Build
 

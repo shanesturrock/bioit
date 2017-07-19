@@ -1,6 +1,6 @@
 ## Homepage
 
-https://sourceforge.net/projects/bbmap/
+[https://sourceforge.net/projects/bbmap/](https://sourceforge.net/projects/bbmap/)
 
 ## Build
 

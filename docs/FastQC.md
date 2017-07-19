@@ -1,6 +1,6 @@
 ## Homepage
 
-http://www.bioinformatics.babraham.ac.uk/projects/fastqc/
+[http://www.bioinformatics.babraham.ac.uk/projects/fastqc/](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
 ## Build
 

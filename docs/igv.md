@@ -1,6 +1,6 @@
 ## Homepage
 
-https://github.com/igvteam/igv
+[https://github.com/igvteam/igv](https://github.com/igvteam/igv)
 
 ## Build
 

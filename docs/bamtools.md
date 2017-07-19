@@ -1,6 +1,6 @@
 ## Homepage
 
-https://github.com/pezmaster31/bamtools
+[https://github.com/pezmaster31/bamtools](https://github.com/pezmaster31/bamtools)
 
 ## Build
 

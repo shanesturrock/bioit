@@ -1,6 +1,6 @@
 ## Homepage
 
-https://github.com/lh3/bwa
+[https://github.com/lh3/bwa](https://github.com/lh3/bwa)
 
 ## Build
 

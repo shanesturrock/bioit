@@ -1,6 +1,6 @@
 ## Homepage
 
-https://github.com/arq5x/bedtools2
+[https://github.com/arq5x/bedtools2](https://github.com/arq5x/bedtools2)
 
 ## Build
 

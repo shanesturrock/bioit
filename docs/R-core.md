@@ -1,6 +1,6 @@
 ## Homepage
 
-http://www.r-project.org/
+[http://www.r-project.org/](http://www.r-project.org/)
 
 ## Before installation
 

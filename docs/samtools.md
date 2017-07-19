@@ -1,6 +1,6 @@
 ## Homepage
 
-http://www.htslib.org/
+[http://www.htslib.org/](http://www.htslib.org/)
 
 ## Build
 

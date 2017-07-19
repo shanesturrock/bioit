@@ -1,6 +1,6 @@
 ## Homepage
 
-http://solexaqa.sourceforge.net
+[http://solexaqa.sourceforge.net](http://solexaqa.sourceforge.net)
 
 ## Build
 

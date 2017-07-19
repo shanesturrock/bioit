@@ -1,6 +1,6 @@
 ## Homepage
 
-http://soap.genomics.org.cn/soapdenovo.html
+[http://soap.genomics.org.cn/soapdenovo.html](http://soap.genomics.org.cn/soapdenovo.html)
 
 ## Build
 

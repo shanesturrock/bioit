@@ -1,6 +1,6 @@
 ## Homepage
 
-https://github.com/BenLangmead/bowtie2
+[https://github.com/BenLangmead/bowtie2](https://github.com/BenLangmead/bowtie2)
 
 ## Build
 
