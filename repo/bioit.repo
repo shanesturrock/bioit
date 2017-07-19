@@ -2,5 +2,5 @@
 name=BioIT packages for CentOS-$releasever $basearch
 baseurl=file:///opt/bioit/repo
 enabled=1
-gpgcheck=0
+gpgcheck=1
 protect=1
