@@ -30,7 +30,7 @@ Add a module file in `/opt/bioit/modulefiles/igv/` for this version by copying p
 
     #%Module 1.0
     #
-    #  picard module for use with 'environment-modules' package:
+    #  igv module for use with 'environment-modules' package:
     #
     prepend-path  PATH         /opt/bioit/igv/2.3.97/
 
