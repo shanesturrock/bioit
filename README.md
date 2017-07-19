@@ -8,3 +8,5 @@ Executable scripts for updates and tests
 Files for setting up a local bioit repository
 ## modulefiles
 Environment modules files for all packages
+## docs
+Contains the markdown version for the github pages which can be found [here](https://shanesturrock.github.io/bioit/)
