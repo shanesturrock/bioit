@@ -30,7 +30,7 @@ Note that there are module files in `/opt/bioit/modulefiles` which will set up t
 
 Now all users will be able to see the modules and can select specific versions.
 
-Defaults tools and changelogs are provided by the meta-RPMS that are built to set alternatives with symlinks into `/usr/bin ` so they'll see them as usual. To set this up go to the [BioIT repository](https://github.com/shanesturrock/bioit/wiki/BioIT-repository) page.
+Defaults tools and changelogs are provided by the meta-RPMS that are built to set alternatives with symlinks into `/usr/bin ` so they'll see them as usual. To set this up go to the [BioIT repository](BioIT-repository.md) page, but not just yet.
 
 ## Secure ssh but retain admin access
 
@@ -81,4 +81,6 @@ Enable and start the service
 
 This should now allow you to install the latest x2go client for your platform and connect to the server via the GUI with the choice of XFCE or MATE Desktop environments.
 
-Now go to the [Storage-Setup](https://shanesturrock.github.io/bioit/Storage-Setup) page.
+## Next Step
+
+Go to the [Storage-Setup](Storage-Setup.md) page.

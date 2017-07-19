@@ -216,4 +216,6 @@ You also need to clear the quota to get rid of it entirely:
 
 Don't forget to delete the test project from the `/etc/projects` and `/etc/projid` to make sure it is entirely gone.
 
-Now go to the [BioIT-repository](https://shanesturrock.github.io/bioit/BioIT-repository) page.
+## Next Step
+
+Go to the [BioIT-repository](BioIT-repository.md) page.

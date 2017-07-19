@@ -43,4 +43,6 @@ Finally, `mkdir` the mount point and then mount the file system
 
 That should be it.
 
-Now go to the [XFS-User-and-Project-Quotas](https://shanesturrock.github.io/bioit/XFS-User-and-Project-Quotas) page.
+## Next Step
+
+Go to the [XFS-User-and-Project-Quotas](XFS-User-and-Project-Quotas.md) page.
