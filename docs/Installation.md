@@ -80,3 +80,5 @@ Enable and start the service
     yum -y groupinstall "MATE Desktop"
 
 This should now allow you to install the latest x2go client for your platform and connect to the server via the GUI with the choice of XFCE or MATE Desktop environments.
+
+Now go to the [Storage-Setup](https://shanesturrock.github.io/bioit/Storage-Setup) page.

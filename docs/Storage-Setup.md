@@ -42,3 +42,5 @@ Finally, `mkdir` the mount point and then mount the file system
     mount /raid
 
 That should be it.
+
+Now go to the [XFS-User-and-Project-Quotas](https://shanesturrock.github.io/bioit/XFS-User-and-Project-Quotas) page.
