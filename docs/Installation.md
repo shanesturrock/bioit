@@ -1,3 +1,5 @@
+# Installation
+
 ## Install a standard CentOS 7 environment
 
 Once installed and all updates applied, EPEL needs to be installed by running the following:

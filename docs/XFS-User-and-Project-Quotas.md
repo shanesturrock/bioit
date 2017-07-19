@@ -1,3 +1,5 @@
+# XFS User and Project Quotas
+
 Quotas are baked into the XFS file system so setting them is trivial and should be easy to script up. For now, here's how to set up quotas, add and remove them.
 
 ## Enable quotas

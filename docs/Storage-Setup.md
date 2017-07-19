@@ -1,3 +1,5 @@
+# Storage Setup
+
 The storage array needs to be configured for CentOS 7.
 
 Install the `sg3_utils` and `multipath` packages:
