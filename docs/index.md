@@ -4,4 +4,4 @@ This Wiki covers the post install setup for a BioIT server based on CentOS 7. In
 
 To avoid using root, a build user will be created and the github repository and wiki should be checked out into that user. The `/opt/bioit` location will also be owned by build. 
 
-Start at the [Installation](Installation) page.
+Start at the [Installation](https://shanesturrock.github.io/bioit/Installation) page.
