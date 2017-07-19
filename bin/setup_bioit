@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# Create install location
-mkdir /opt/bioit
+# Create install location (requires sudo)
+sudo mkdir /opt/bioit
+sudo chown build:build /opt/bioit
 # Copy module files and repository files
-cp -Rpa ~/bioit/modulefiles /opt/bioit
+ln -s ~/bioit/modulefiles /opt/bioit
 mkdir -p /opt/bioit/repo/RPMS
 ln -s ~/bioit/repo/bioit.xml /opt/bioit/repo/bioit.xml
 # Create all directories for packages
