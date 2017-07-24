@@ -7,11 +7,11 @@
 #
 # Carl Jones <carl@biomatters.com>
 
-application_dir="/root/bioit/apps"	# Default application directory
+application_dir="/home/build/bioit/apps"	# Default application directory
 uscan='/bin/uscan'
 #uscan='/root/bioit/bin/uscan'
 uscan_args='--timeout 120 --no-symlink'	# Default uscan args
-download_dir='/root/rpmbuild/SOURCES' # Where uscan will place downloads
+download_dir='/home/build/rpmbuild/SOURCES' # Where uscan will place downloads
 
 function log() {
 	[ -z "${verbose}" ] && return
