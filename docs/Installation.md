@@ -46,6 +46,15 @@ Since this user will be used for the BioIT repo, change the permissions on the h
 
     chmod 755 /home/build
 
+Also, add the following to the build user's `.bashrc` file to make building tools nicer:
+
+    alias buildrepo="cd /opt/bioit/repo ; createrepo . -g bioit.xml --database"
+    alias cleanbuild="rm -rf /home/build/rpmbuild/SPECS/* /home/build/rpmbuild/SRPMS/* \
+      /home/build/rpmbuild/SOURCES/* /home/build/rpmbuild/RPMS/*"
+    export PATH=/home/build/bioit/bin:$PATH
+
+The `buildrepo` alias will be used to add new packages and updates. The `cleanbuild` alias is for emptying out the rpmbuild directory, and the e`$PATH` variable has the bioit gitrepo bin directory added so you can use the various tools that are in there.
+
 This user can now use sudo allowing us to disable root ssh logins but make sure you can ssh into this account before you do so. This means creating the `.ssh` directory and inside that the authorized_keys file which you'll paste the public key for the machine you're logging in from (make sure it is all on a single line) and `chmod 600 authorized_keys` otherwise ssh won't use it. Also `chmod 700 ~/.ssh` for the same reason.
 
 Once that user can log in and also sudo works for it, go ahead and make the following changes to the sshd_config:
