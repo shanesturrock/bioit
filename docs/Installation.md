@@ -49,8 +49,9 @@ Since this user will be used for the BioIT repo, change the permissions on the h
 Also, add the following to the build user's `.bashrc` file to make building tools nicer:
 
     alias buildrepo="cd /opt/bioit/repo ; createrepo . -g bioit.xml --database"
-    alias cleanbuild="rm -rf /home/build/rpmbuild/SPECS/* /home/build/rpmbuild/SRPMS/* \
-      /home/build/rpmbuild/SOURCES/* /home/build/rpmbuild/RPMS/*"
+    alias cleanbuild="rm -rf /home/build/rpmbuild/SPECS/* \
+      /home/build/rpmbuild/SRPMS/* /home/build/rpmbuild/SOURCES/* \
+      /home/build/rpmbuild/RPMS/*"
     export PATH=/home/build/bioit/bin:$PATH
 
 The `buildrepo` alias will be used to add new packages and updates. The `cleanbuild` alias is for emptying out the rpmbuild directory, and the e`$PATH` variable has the bioit gitrepo bin directory added so you can use the various tools that are in there.
