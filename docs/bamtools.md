@@ -57,6 +57,7 @@ There's a SPEC file for this package in `${HOME}/bioit/apps/bamtools/SPEC` so mo
 This will create an RPM file which you can find in `${HOME}/rpmbuild/RPMS/x86_64`. It checks that the installation directory exists and will fail if it isn't there.
 
 Before you install this, you need to sign it using:
+
     rpm --addsign \
     ${HOME}/rpmbuild/RPMS/x86_64/bamtools-2.4.1-1.el7.bioit.x86_64.rpm
 
@@ -76,6 +77,6 @@ When this finish, as root you can do the following:
 
 That should install the new RPM. If that has worked you can now run the following without loading the module:
 
-   bamtools --version
+    bamtools --version
 
 and it should report the correct version. You're done.
