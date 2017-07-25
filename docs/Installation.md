@@ -54,7 +54,7 @@ Also, add the following to the build user's `.bashrc` file to make building tool
       /home/build/rpmbuild/RPMS/*"
     export PATH=/home/build/bioit/bin:$PATH
 
-The `buildrepo` alias will be used to add new packages and updates. The `cleanbuild` alias is for emptying out the rpmbuild directory, and the e`$PATH` variable has the bioit gitrepo bin directory added so you can use the various tools that are in there.
+The `buildrepo` alias will be used to add new packages and updates. The `cleanbuild` alias is for emptying out the rpmbuild directory, and the `$PATH` variable has the bioit gitrepo `bin` directory added so you can use the various tools that are in there.
 
 This user can now use sudo allowing us to disable root ssh logins but make sure you can ssh into this account before you do so. This means creating the `.ssh` directory and inside that the authorized_keys file which you'll paste the public key for the machine you're logging in from (make sure it is all on a single line) and `chmod 600 authorized_keys` otherwise ssh won't use it. Also `chmod 700 ~/.ssh` for the same reason.
 
