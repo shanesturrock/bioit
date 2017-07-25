@@ -39,7 +39,7 @@ Add a module file in `/opt/bioit/modulefiles/igv/` for this version by copying p
 There's a SPEC file for this package in `~/bioit/apps/igv/SPEC` so modify that with the new version details. Once changed, build it with the following commands:
 
     cp ~/bioit/apps/igv/SPEC/igv.desktop ~/rpmbuild/SOURCES
-    cp ~/bioit/apps/igv/SPEC/igv.icons.tar.gz ~/rpmbuild/SOURCES
+    cp ~/bioit/apps/igv/SPEC/igv-icons.tar.gz ~/rpmbuild/SOURCES
     cp ~/bioit/apps/igv/SPEC/bioinformatics* ~/rpmbuild/SOURCES
     rpmbuild -bb igv.spec
 
