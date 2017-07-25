@@ -6,7 +6,7 @@
 
 Get the zip file and unzip it in the src directory. Before building this will need to be patched to make the version number show up for users.
 
-Edit the `~/bioit/apps/igv/SPEC/about.propeties.patch` file and change the version number and date to suit, then do the following:
+Edit the `~/bioit/apps/igv/SPEC/about.properties.patch` file and change the version number and date to suit, then do the following:
 
     cd igv-2.3.98
     patch -p0 < ~/bioit/apps/igv/SPEC/about.properties.patch 
