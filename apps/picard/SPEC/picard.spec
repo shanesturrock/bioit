@@ -1,11 +1,11 @@
-%define priority 2103
+%define priority 2104
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.10.3
+Version:	2.10.4
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -43,6 +43,24 @@ fi
 %files
 
 %changelog
+* Wed Jul 26 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.4-1
+- This Picard version contains MAJOR CHANGES TO DEFAULT SETTINGS that impact
+  throughput of pipelines.
+- New features
+  - MAJOR CHANGE: The default compression level is now 1 instead of 5 for
+    faster reading (#843). The tradeoff in increased size is paid for by the
+    ~3x faster reading.
+  - MAJOR CHANGE: Picard now uses the Intel Deflator and Inflator instead of
+    JDK for writing and reading compressed data (#843, DSDEGP-454). The Intel
+    library is faster in tests than the older JDK library. To disable the Intel
+    library and revert to using the JDK library, specify USE_JDK_DEFLATER and
+    USE_JDK_INFLATER Boolean arguments.
+- Bug fixes
+  - Htsjdk versioning is now fixed and cannot be transitive (#843). Previously,
+    a dependency could pull in a different version of htsjdk and overwrite the
+    build's htsjdk version. Now, the version shown in the build.gradle file is 
+    the htsjdk version used by all tools. Currently, Picard uses htsjdk v2.10.1.
+
 * Wed Jul 19 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.3-1
 - Add warning to CheckIlluminaDir if we detect cycles without data. (#874)
 

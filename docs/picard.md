@@ -1,6 +1,6 @@
 # Picard
 
-[https://github.com/lh3/bw://github.com/broadinstitute/picard](https://github.com/lh3/bw://github.com/broadinstitute/picard)
+[https://github.com/broadinstitute/picard](https://github.com/broadinstitute/picard)
 
 ## Build
 
@@ -14,9 +14,10 @@ Build the `picard.jar` file by running the following:
     cd picard-2.10.4
     ./gradlew shadowJar
 
-Now make a directory for this jar to go into and move it into there:
+Now make a directory for the jar to go into and move it into there:
 
     mkdir /opt/bioit/picard/2.10.4
+    mv build/libs/picard.jar /opt/bioit/picard/2.10.4
 
 Finally, copy the picard wrapper from inside the SPEC directory of the git repository:
 
