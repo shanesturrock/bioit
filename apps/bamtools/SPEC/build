@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Script to auto build and install bamtools. Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+VERSION=$1
+echo "Builing bamtools ${VERSION}"
+cd /opt/bioit/bamtools/src
+tar xvf v${VERSION}.tar.gz
+cd bamtools-${VERSION}
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/bamtools/2.4.1 ..
+make all
+make install
+echo "Copy bamtools script"
+cd /opt/bioit/bamtools/${VERSION}
+cp ${HOME}/bioit/apps/bamtools/SPEC/bamtools /opt/bioit/bamtools/2.4.1/
+echo "Writing modulefile"
+echo "#%Module 1.0
+#
+#  bamtools module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/bamtools/${VERSION}" > /opt/bioit/modulefiles/bamtools/${VERSION}
