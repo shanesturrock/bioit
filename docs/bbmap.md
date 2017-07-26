@@ -8,7 +8,7 @@ The `version_check` script will show there's a new version available but it can'
 
 Download the version to be built into `/opt/bioit/bedtools2/src`
 
-Inside `bioit/apps/bbmap/SPEC` there is a script called `build`. This just re
+Inside `${HOME}/bioit/apps/bbmap/SPEC` there is a script called `build`. This just re
 quires the version number and will do the compile, install and create the module
 file for you. Execute it as follows:
 

@@ -6,7 +6,7 @@
 
 Download the `v2.4.1.tar.gz` file to be built into `/opt/bioit/bamtools/src`.
 
-Inside `bioit/apps/bamtools/SPEC` there is a script called `build`. This just requires the version number and will do the compile, install and create the modulefile for you. Execute it as follows:
+Inside `${HOME}/bioit/apps/bamtools/SPEC` there is a script called `build`. This just requires the version number and will do the compile, install and create the modulefile for you. Execute it as follows:
 
     ${HOME}/bioit/apps/bamtools/SPEC/build 2.4.1
 
@@ -34,7 +34,7 @@ Inside the resulting directory run the following:
     make all
     make install
 
-Go into the installation directory (`/opt/bioit/bamtools/2.4.1`) and copy the launcher from `~/bioit/apps/bamtools/SPEC/bamtools` into it (not into the `bin` directory. This will sort out the location and execute bamtools with the usual options.
+Go into the installation directory (`/opt/bioit/bamtools/2.4.1`) and copy the launcher from `${HOME}/bioit/apps/bamtools/SPEC/bamtools` into it (not into the `bin` directory. This will sort out the location and execute bamtools with the usual options.
 
     cp ${HOME}/bioit/apps/bamtools/SPEC/bamtools /opt/bioit/bamtools/2.4.1/
 
