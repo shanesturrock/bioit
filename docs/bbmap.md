@@ -71,11 +71,11 @@ Now you can move it to /opt/bioit/repo/RPMS
     mv ${HOME}/rpmbuild/RPMS/x86_64/bbmap-37.36-1.el7.bioit.x86_64.rpm \
     /opt/bioit/repo/RPMS
 
-lastly, run the buildrepo command:
+Lastly, run the `buildrepo` command:
 
     buildrepo
 
-When this finish, as root you can do the following:
+When this finishes, as root you can do the following:
 
     yum clean all
     yum update bbmap
