@@ -6,7 +6,7 @@
 
 The `version_check` script will show there's a new version available but it can't download it so you'll need to go to the homepage and get it directly.
 
-Download the version to be built into `/opt/bioit/bedtools2/src`
+Download the version to be built into `/opt/bioit/bbmap/src`
 
 Inside `${HOME}/bioit/apps/bbmap/SPEC` there is a script called `build`. This just re
 quires the version number and will do the compile, install and create the module
@@ -30,7 +30,7 @@ If all is good, you can move to the RPM building step.
 
 The `version_check` script will show there's a new version available but it can't download it so you'll need to go to the homepage and get it directly.
 
-Download the version to be built into `/opt/bioit/bedtools2/src` and untar
+Download the version to be built into `/opt/bioit/bbmap/src` and untar
 
 There's nothing to actually build so just run the following to move the files and correct the permissions:
 
