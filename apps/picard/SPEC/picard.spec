@@ -1,11 +1,11 @@
-%define priority 2104
+%define priority 2105
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.10.4
+Version:	2.10.5
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -43,6 +43,9 @@ fi
 %files
 
 %changelog
+* Thu Jul 27 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.5-1
+- Revert default compression level to 5.
+
 * Wed Jul 26 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.4-1
 - This Picard version contains MAJOR CHANGES TO DEFAULT SETTINGS that impact
   throughput of pipelines.
