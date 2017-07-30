@@ -25,7 +25,7 @@ Finally, copy the picard wrapper from inside the SPEC directory of the git repos
 
 This wrapper figures out what directory it is in and sets `picard_dir` to that so there's no need to edit it.
 
-Now users will just be able to run `picard` from the command line without all that messing around with calling java -jar.
+Now users will just be able to run `picard` from the command line without all that messing around with calling java -jar. It also disables the use of the Intel deflate and inflate libraries because they're not working on our system.
 
 ## Module setup
 
