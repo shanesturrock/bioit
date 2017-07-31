@@ -6,22 +6,22 @@
 
 You can't build from the downloaded zip unfortuantely. You have to clone the git repo into `/opt/bioit/picard/src` using the following:
 
-    git clone -b 2.10.5 https://github.com/broadinstitute/picard.git
-    mv picard picard-2.10.5
+    git clone -b 2.10.6 https://github.com/broadinstitute/picard.git
+    mv picard picard-2.10.6
 
 Build the `picard.jar` file by running the following:
 
-    cd picard-2.10.5
+    cd picard-2.10.6
     ./gradlew shadowJar
 
 Now make a directory for the jar to go into and move it into there:
 
-    mkdir /opt/bioit/picard/2.10.5
-    mv build/libs/picard.jar /opt/bioit/picard/2.10.5
+    mkdir /opt/bioit/picard/2.10.6
+    mv build/libs/picard.jar /opt/bioit/picard/2.10.6
 
 Finally, copy the picard wrapper from inside the SPEC directory of the git repository:
 
-    cp ~/bioit/apps/picard/SPEC/picard /opt/bioit/picard/2.10.5
+    cp ~/bioit/apps/picard/SPEC/picard /opt/bioit/picard/2.10.6
 
 This wrapper figures out what directory it is in and sets `picard_dir` to that so there's no need to edit it.
 
@@ -35,7 +35,7 @@ Add a module file in `/opt/bioit/modulefiles/picard/` for this version by copyin
     #
     #  picard module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/picard/2.10.5/
+    prepend-path  PATH         /opt/bioit/picard/2.10.6/
 
 ## RPM
 
