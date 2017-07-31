@@ -1,11 +1,11 @@
-%define priority 2105
+%define priority 2106
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.10.5
+Version:	2.10.6
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -43,6 +43,14 @@ fi
 %files
 
 %changelog
+* Tue Aug 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.6-1
+- Add a doc note to change VALIDATION_STRINGENCY if validation error
+- Add comment per code review suggestion.
+- Allow RG tag fields to be unpopulated.
+- Made METRICS_FILE optional, which was fairly clearly the original intent.
+  (#884)
+- Sort availableTiles consistently in all ctors (#878)
+
 * Thu Jul 27 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.5-1
 - Revert default compression level to 5.
 
