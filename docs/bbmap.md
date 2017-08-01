@@ -8,9 +8,7 @@ The `version_check` script will show there's a new version available but it can'
 
 Download the version to be built into `/opt/bioit/bbmap/src`
 
-Inside `${HOME}/bioit/apps/bbmap/SPEC` there is a script called `build`. This just re
-quires the version number and will do the compile, install and create the module
-file for you. Execute it as follows:
+Inside `${HOME}/bioit/apps/bbmap/SPEC` there is a script called `build`. This just requires the version number and will do the compile, install and create the module file for you. Execute it as follows:
 
     ${HOME}/bioit/apps/bbmap/SPEC/build 37.36
 
