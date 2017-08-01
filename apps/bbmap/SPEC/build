@@ -20,6 +20,7 @@ fi
 VERSION=$1
 echo "Building bbmap ${VERSION}"
 cd /opt/bioit/bbmap/src
+wget https://downloads.sourceforge.net/project/bbmap/BBMap_${VERSION}.tar.gz
 tar xvf BBMap_${VERSION}.tar.gz
 mv bbmap ../${VERSION}
 chmod 755 ../${VERSION}

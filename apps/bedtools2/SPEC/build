@@ -20,6 +20,7 @@ fi
 VERSION=$1
 echo "Building bedtools2 ${VERSION}"
 cd /opt/bioit/bedtools2/src
+wget https://github.com/arq5x/bedtools2/releases/download/v${VERSION}/bedtools-${VERSION}.tar.gz
 tar xvf bedtools-${VERSION}.tar.gz
 mv bedtools2 bedtools-${VERSION}
 cd bedtools-${VERSION}

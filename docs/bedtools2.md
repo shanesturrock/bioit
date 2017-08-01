@@ -4,9 +4,7 @@
 
 ## Automatic Build
 
-Download the `bedtools-2.26.0.tar.gz` file to be built into `/opt/bioit/bedtools2/src`.
-
-Inside `${HOME}/bioit/apps/bedtools2/SPEC` there is a script called `build`. This just requires the version number and will do the compile, install and create the modulefile for you. Execute it as follows:
+Inside `${HOME}/bioit/apps/bedtools2/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
     ${HOME}/bioit/apps/bedtools2/SPEC/build 2.26.0
 
