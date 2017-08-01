@@ -1,11 +1,11 @@
-%define priority 0715
+%define priority 0716
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           bwa
-Version:        0.7.15
+Version:        0.7.16a
 Release:        1%{?dist}
 Summary:        Burrows-Wheeler Alignment tool
 Group:          Applications/Engineering
@@ -42,6 +42,15 @@ fi
 %files
 
 %changelog
+* Tue Aug 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 0.7.16a-1
+- This release added a couple of minor features and incorporated multiple pull
+  requests, including:
+  - Added option -5, which is useful to some Hi-C pipelines.
+  - Fixed an error with samtools sorting (#129). Updated download link for
+    GRCh38 (#123). Fixed README MarkDown formatting (#70). Addressed multiple
+    issues via a collected pull request #139 by @jmarshall. Avoid malformatted
+    SAM header when -R is used with TAB (#84). Output mate CIGAR (#138).
+
 * Wed Jun 28 2017 Shane Sturrock <shane.sturrock@gmail.com> - 0.7.15-1
 - Fixed a long existing bug which potentially leads underestimated insert size
   upper bound. This bug should have little effect in practice.
