@@ -20,6 +20,7 @@ fi
 VERSION=$1
 echo "Building bamtools ${VERSION}"
 cd /opt/bioit/bamtools/src
+wget https://github.com/pezmaster31/bamtools/archive/v${VERSION}.tar.gz
 tar xvf v${VERSION}.tar.gz
 cd bamtools-${VERSION}
 mkdir build

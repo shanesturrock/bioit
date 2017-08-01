@@ -4,9 +4,7 @@
 
 ## Automatic Build
 
-Download the `v2.4.1.tar.gz` file to be built into `/opt/bioit/bamtools/src`.
-
-Inside `${HOME}/bioit/apps/bamtools/SPEC` there is a script called `build`. This just requires the version number and will do the compile, install and create the modulefile for you. Execute it as follows:
+Inside `${HOME}/bioit/apps/bamtools/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
     ${HOME}/bioit/apps/bamtools/SPEC/build 2.4.1
 
