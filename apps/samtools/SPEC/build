@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Script to auto build and install bamtools. Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+VERSION=$1
+echo "Building samtools ${VERSION}"
+cd /opt/bioit/samtools/src
+wget https://github.com/samtools/samtools/releases/download/${VERSION}/samtools-${VERSION}.tar.bz2
+tar xvf samtools-${VERSION}.tar.bz2
+cd samtools-${VERSION}
+./configure --prefix=/opt/bioit/samtools/${VERSION}
+make
+make install
+echo "Writing modulefile"
+echo "#%Module 1.0
+#
+#  samtools module for use with 'environment-modules' package:
+#
+module load bcftools/1.5
+prepend-path  PATH              /opt/bioit/samtools/${VERSION}/bin
+prepend-path  MANPATH           /opt/bioit/samtools/${VERSION}/share/man" > /opt/bioit/modulefiles/samtools/${VERSION}
