@@ -19,7 +19,7 @@ If that shows as being there you can test it works with:
     module load FastQC/0.11.5
     which FastQC
 
-## Build
+## Manual Build
 
 Download the Linux zip version to be built into `/opt/bioit/FastQC/src` and unzip.
 

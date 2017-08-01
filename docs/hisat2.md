@@ -2,7 +2,23 @@
 
 [https://ccb.jhu.edu/software/hisat2/index.shtml](https://ccb.jhu.edu/software/hisat2/index.shtml)
 
-## Build
+## Automatic Build
+
+Inside `${HOME}/bioit/apps/hisat2/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
+
+    ${HOME}/bioit/apps/hisat2/SPEC/build 2.1.0
+
+When that completes check that the new version is available using:
+
+    module avail hisat2
+
+If that shows as being there you can test it works with:
+
+    module load hisat2/2.1.0
+    which hisat2
+    hisat2 --version
+
+## Manual Build
 
 Download the version to be built into `/opt/bioit/hisat2/src` and unzip. Here we'll use version 2.1.0.
 
@@ -45,8 +61,8 @@ Add a module file in `/opt/bioit/modulefiles/hisat2/` for this version by copyin
 
 ## RPM
 
-There's a SPEC file for this package in `~/bioit/apps/hisat2/SPEC` so modify that with the new version details. Once changed, build it with the following command:
+There's a SPEC file for this package in `${HOME}/bioit/apps/hisat2/SPEC` so modify that with the new version details. Once changed, build it with the following command:
 
     rpmbuild -bb hisat2.spec
 
-This will create an installable RPM file which you can find in `~/rpmbuild/RPMS/x86_64` and just install that. It checks that the installation directory exists and will fail if it isn't there.
+This will create an installable RPM file which you can find in `${HOME}/rpmbuild/RPMS/x86_64` and just install that. It checks that the installation directory exists and will fail if it isn't there.

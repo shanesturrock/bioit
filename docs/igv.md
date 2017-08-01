@@ -2,7 +2,24 @@
 
 [https://github.com/igvteam/igv](https://github.com/igvteam/igv)
 
-## Build
+## Automatic Build
+
+Inside `${HOME}/bioit/apps/igv/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
+
+    ${HOME}/bioit/apps/igv/SPEC/build 2.3.98
+
+When that completes check that the new version is available using:
+
+    module avail igv
+
+If that shows as being there you can test it works with:
+
+    module load igv/2.3.98
+    which igv
+
+If all is good, you can move to the RPM building step.
+
+## Manual Build
 
 Get the zip file and unzip it in the src directory. Before building this will need to be patched to make the version number show up for users.
 
@@ -36,11 +53,11 @@ Add a module file in `/opt/bioit/modulefiles/igv/` for this version by copying p
 
 ## RPM
 
-There's a SPEC file for this package in `~/bioit/apps/igv/SPEC` so modify that with the new version details. Once changed, build it with the following commands:
+There's a SPEC file for this package in `${HOME}/bioit/apps/igv/SPEC` so modify that with the new version details. Once changed, build it with the following commands:
 
-    cp ~/bioit/apps/igv/SPEC/igv.desktop ~/rpmbuild/SOURCES
-    cp ~/bioit/apps/igv/SPEC/igv-icons.tar.gz ~/rpmbuild/SOURCES
-    cp ~/bioit/apps/igv/SPEC/bioinformatics* ~/rpmbuild/SOURCES
+    cp ${HOME}/bioit/apps/igv/SPEC/igv.desktop ${HOME}/rpmbuild/SOURCES
+    cp ${HOME}/bioit/apps/igv/SPEC/igv-icons.tar.gz ${HOME}/rpmbuild/SOURCES
+    cp ${HOME}/bioit/apps/igv/SPEC/bioinformatics* ${HOME}/rpmbuild/SOURCES
     rpmbuild -bb igv.spec
 
-This will create an installable RPM file which you can find in `~/rpmbuild/RPMS/x86_64` and just install that. It checks that the installation directory exists and will fail if it isn't there.
+This will create an installable RPM file which you can find in `${HOME}/rpmbuild/RPMS/x86_64` and just install that. It checks that the installation directory exists and will fail if it isn't there.
