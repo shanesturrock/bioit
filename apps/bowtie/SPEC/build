@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Script to auto build and install bamtools. Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+VERSION=$1
+echo "Building bowtie ${VERSION}"
+cd /opt/bioit/bowtie/src
+wget https://github.com/BenLangmead/bowtie/releases/download/v${VERSION}/bowtie-${VERSION}-src.zip
+unzip bowtie-${VERSION}-src.zip
+cd bowtie-${VERSION}
+sed "s+prefix = /usr/local+prefix = /opt/bioit/bowtie/${VERSION}+" --in-place Makefile
+make NO_TBB=1
+make install
+echo "Writing modulefile"
+echo "#%Module 1.0
+#
+#  bowtie module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/bowtie/${VERSION}/bin" > /opt/bioit/modulefiles/bowtie/${VERSION}
