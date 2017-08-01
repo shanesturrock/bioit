@@ -18,7 +18,8 @@ if [ $# -lt 1 ]; then
 fi
 
 VERSION=$1
-echo "Building picard ${VERSION}"
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building picard ${VERSION} on ${DATE}"
 cd /opt/bioit/picard/src
 git clone -b ${VERSION} https://github.com/broadinstitute/picard.git
 mv picard picard-${VERSION}

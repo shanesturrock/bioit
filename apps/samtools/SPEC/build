@@ -18,7 +18,8 @@ if [ $# -lt 1 ]; then
 fi
 
 VERSION=$1
-echo "Building samtools ${VERSION}"
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building samtools ${VERSION} on ${DATE}"
 cd /opt/bioit/samtools/src
 wget https://github.com/samtools/samtools/releases/download/${VERSION}/samtools-${VERSION}.tar.bz2
 tar xvf samtools-${VERSION}.tar.bz2

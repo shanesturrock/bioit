@@ -18,7 +18,8 @@ if [ $# -lt 1 ]; then
 fi
 
 VERSION=$1
-echo "Building bedtools2 ${VERSION}"
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building bedtools2 ${VERSION} on ${DATE}"
 cd /opt/bioit/bedtools2/src
 wget https://github.com/arq5x/bedtools2/releases/download/v${VERSION}/bedtools-${VERSION}.tar.gz
 tar xvf bedtools-${VERSION}.tar.gz

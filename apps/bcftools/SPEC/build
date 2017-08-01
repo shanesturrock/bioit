@@ -18,7 +18,8 @@ if [ $# -lt 1 ]; then
 fi
 
 VERSION=$1
-echo "Building bcftools ${VERSION}"
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building bcftools ${VERSION} on ${DATE}"
 cd /opt/bioit/bcftools/src
 wget https://github.com/samtools/bcftools/releases/download/${VERSION}/bcftools-${VERSION}.tar.bz2
 tar xvf bcftools-${VERSION}.tar.bz2

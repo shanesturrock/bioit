@@ -18,7 +18,8 @@ if [ $# -lt 1 ]; then
 fi
 
 VERSION=$1
-echo "Building bbmap ${VERSION}"
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building bbmap ${VERSION} on ${DATE}"
 cd /opt/bioit/bbmap/src
 wget https://downloads.sourceforge.net/project/bbmap/BBMap_${VERSION}.tar.gz
 tar xvf BBMap_${VERSION}.tar.gz

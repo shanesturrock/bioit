@@ -18,7 +18,8 @@ if [ $# -lt 1 ]; then
 fi
 
 VERSION=$1
-echo "Building bamtools ${VERSION}"
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building bamtools ${VERSION} on ${DATE}"
 cd /opt/bioit/bamtools/src
 wget https://github.com/pezmaster31/bamtools/archive/v${VERSION}.tar.gz
 tar xvf v${VERSION}.tar.gz

@@ -18,7 +18,8 @@ if [ $# -lt 1 ]; then
 fi
 
 VERSION=$1
-echo "Building bowtie2 ${VERSION}"
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building bowtie2 ${VERSION} on ${DATE}"
 cd /opt/bioit/bowtie2/src
 wget https://github.com/BenLangmead/bowtie2/archive/v${VERSION}.zip
 mv v${VERSION}.zip bowtie2-${VERSION}.zip

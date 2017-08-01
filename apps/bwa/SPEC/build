@@ -19,7 +19,8 @@ fi
 
 VERSION=$1
 NUMBERS=${VERSION%%[A-Za-z]*}
-echo "Building bwa ${VERSION}"
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building bwa ${VERSION} on ${DATE}"
 cd /opt/bioit/bwa/src
 wget https://github.com/lh3/bwa/releases/download/v${NUMBERS}/bwa-${VERSION}.tar.bz2
 tar xvf bwa-${VERSION}.tar.bz2
