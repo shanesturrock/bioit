@@ -22,6 +22,6 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [R-core](R-core.md)
 * [samtools](samtools.md)
 * [SOAPdenovo2](SOAPdenovo2.md)
-* [SolexaQA++](SolexaQA++.md)
+* [SolexaQA++](SolexaQA.md)
 * [tophat](tophat.md)
 * [vcftools](vcftools.md)
