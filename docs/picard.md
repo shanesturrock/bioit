@@ -2,7 +2,25 @@
 
 [https://github.com/broadinstitute/picard](https://github.com/broadinstitute/picard)
 
-## Build
+## Automatic Build
+
+Inside `${HOME}/bioit/apps/picard/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
+
+    ${HOME}/bioit/apps/picard/SPEC/build 2.10.6
+
+When that completes check that the new version is available using:
+
+    module avail picard
+
+If that shows as being there you can test it works with:
+
+    module load picard/2.10.6
+    which picard
+    picard SortVcf --version
+
+If all is good, you can move to the RPM building step.
+
+## Manual Build
 
 You can't build from the downloaded zip unfortuantely. You have to clone the git repo into `/opt/bioit/picard/src` using the following:
 
@@ -39,8 +57,8 @@ Add a module file in `/opt/bioit/modulefiles/picard/` for this version by copyin
 
 ## RPM
 
-There's a SPEC file for this package in `~/bioit/apps/picard/SPEC` so modify that with the new version details. Once changed, build it with the following command:
+There's a SPEC file for this package in `${HOME}/bioit/apps/picard/SPEC` so modify that with the new version details. Once changed, build it with the following command:
 
     rpmbuild -bb picard.spec
 
-This will create an installable RPM file which you can find in `~/rpmbuild/RPMS/x86_64` and just install that. It checks that the installation directory exists and will fail if it isn't there.
+This will create an installable RPM file which you can find in `${HOME}/rpmbuild/RPMS/x86_64` and just install that. It checks that the installation directory exists and will fail if it isn't there.
