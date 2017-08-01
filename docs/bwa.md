@@ -10,11 +10,11 @@ The `Makefile` is pretty basic so just type `make`
 
 When that completes you need to do the following:
 
-    mkdir -p ../../0.7.15/bin
-    mkdir -p ../../0.7.15/man/man1
-    mv bwa ../../0.7.15/bin/
-    mv *.pl ../../0.7.15/bin
-    mv bwa.1 ../../0.7.15/man/man1/
+    mkdir -p ../../0.7.16a/bin
+    mkdir -p ../../0.7.16a/man/man1
+    mv bwa ../../0.7.16a/bin/
+    mv *.pl ../../0.7.16a/bin
+    mv bwa.1 ../../0.7.16a/man/man1/
 
 ## Module setup
 
@@ -24,8 +24,8 @@ Add a module file in `/opt/bioit/modulefiles/bwa/` for this version by copying p
     #
     #  bwa module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/bwa/0.7.15/bin
-    prepend-path  MANPATH      /opt/bioit/bwa/0.7.15/man
+    prepend-path  PATH         /opt/bioit/bwa/0.7.16a/bin
+    prepend-path  MANPATH      /opt/bioit/bwa/0.7.16a/man
 
 ## RPM
 
