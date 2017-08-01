@@ -27,6 +27,6 @@ Start at the [Installation](Installation.md) page.
 * [R-core](R-core.md)
 * [samtools](samtools.md)
 * [SOAPdenovo2](SOAPdenovo2.md)
-* [SolexaQA++](SolexaQA++.md)
+* [SolexaQA++](SolexaQA.md)
 * [tophat](tophat.md)
 * [vcftools](vcftools.md)
