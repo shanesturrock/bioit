@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Script to auto build and install bamtools. Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+VERSION=$1
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building SolexaQA++ ${VERSION} on ${DATE}"
+cd /opt/bioit/SolexaQA++/src
+wget https://downloads.sourceforge.net/project/solexaqa/src/SolexaQA%2B%2B_v${VERSION}.zip
+unzip SolexaQA++_v${VERSION}.zip
+mkdir /opt/bioit/SolexaQA++/${VERSION}/
+mv Linux_x64/SolexaQA++ /opt/bioit/SolexaQA++/${VERSION}/
+cd /opt/bioit/SolexaQA++/${VERSION}/
+chmod 755 SolexaQA++
+echo "Writing modulefile"
+echo "#%Module 1.0
+#
+#  picard module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/SolexaQA++/${VERSION}" > /opt/bioit/modulefiles/SolexaQA++/${VERSION}
