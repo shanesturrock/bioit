@@ -1,10 +1,15 @@
 #!/bin/bash
 
+script_dir="$(dirname $(readlink -f $0))"
+
 # Create install location (requires sudo)
 sudo mkdir /opt/bioit
 sudo chown build:build /opt/bioit
 # Copy module files and repository files
-ln -s ~/bioit/modulefiles /opt/bioit
+#ln -s ~/bioit/modulefiles /opt/bioit
+mkdir /opt/bioit/modulefiles
+cd /opt/bioit/modulefiles
+mkdir bamtools bbmap bcftools bedtools2 bowtie bowtie2 bwa FastQC hisat2 htslib igv ncbi-blast picard R samtools SOAPdenovo2 SolexaQA++ tophat vcftools
 mkdir -p /opt/bioit/repo/RPMS
 ln -s ~/bioit/repo/bioit.xml /opt/bioit/repo/bioit.xml
 # Create all directories for packages
@@ -13,4 +18,6 @@ mkdir -p bamtools/src bbmap/src bcftools/src bedtools2/src bowtie/src \
   bowtie2/src bwa/src FastQC/src hisat2/src htslib/src igv/src \
   ncbi-blast/src picard/src R-core/src samtools/src SOAPdenovo2/src \
   SolexaQA++/src tophat2/src vcftools/src
-
+# Build all packages from source
+sh ${script_dir}/buildall
+sh ${script_dir}/buildrpms
