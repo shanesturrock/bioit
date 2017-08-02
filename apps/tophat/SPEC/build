@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Script to auto build and install bamtools. Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+VERSION=$1
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building tophat ${VERSION} on ${DATE}"
+cd /opt/bioit/tophat/src
+wget https://ccb.jhu.edu/software/tophat/downloads/tophat-${VERSION}.tar.gz
+tar xvf tophat-${VERSION}.tar.gz
+cd tophat-${VERSION}
+./configure --prefix=/opt/bioit/tophat/${VERSION}
+make
+make install
+echo "Writing modulefile"
+echo "#%Module 1.0
+#
+#  tophat module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/tophat/${VERSION}/bin" > /opt/bioit/modulefiles/tophat/${VERSION}
