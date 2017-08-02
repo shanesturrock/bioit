@@ -2,23 +2,24 @@
 
 [http://www.r-project.org/](http://www.r-project.org/)
 
-## Before installation
+## Automatic Build
 
-You should not install EPEL `R-core` on this system so do the following to remove it if it is already installed:
+Inside `${HOME}/bioit/apps/R-core/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows: 
 
-    yum remove R-core
+    ${HOME}/bioit/apps/R-core/SPEC/build 3.4.1
 
-To prevent `R-core` being installed from EPEL edit `/etc/yum.repos.d/epel.repo` and add the following line after the `gpgcheck=1` for the `[epel]` section:
+This will take a long time because it also installs the BioConductor packages into the new R installation. When that completes check that the new version is available using:
 
-    exclude=R-core
+    module avail R-core
 
-If you try the following you should now get an error that there's no package available:
+If that shows as being there you can test it works with:
 
-    yum install R-core
+    module load R/3.4.1
+    which R
 
-This will mean the `R-core` package from the BioIT repo will be installed once that is added.
+If all is good, you can move to the RPM building step.
 
-## Build
+## Manual Build
 
 Download the version to be built into `/opt/bioit/R-core/src` and untar
 
@@ -43,7 +44,7 @@ Once R starts type the following:
 
     source("/root/bioit/apps/R-core/SPEC/bioC_install.R") 
 
-It will then ask for a mirror and then should automatically go through and install all the packages the team requires.
+It will automatically go through and install all the packages the team requires.
 
 Lastly, run `biocValid()` and it will probably complain about a bunch of newer packages and how to downgrade them to the current stable versions. Do that. When it completes just type `q()` to quit and don't save the workspace image.
 
@@ -59,11 +60,11 @@ Add a module file in `/opt/bioit/modulefiles/R/` for this version by copying pre
 
 ## RPM
 
-There's a SPEC file for this package in `~/bioit/apps/R-core/SPEC` so modify that with the new version details. Once changed, build it with the following command:
+There's a SPEC file for this package in `${HOME}/bioit/apps/R-core/SPEC` so modify that with the new version details. Once changed, build it with the following command:
 
     rpmbuild -bb R-core.spec
 
-This will create an installable RPM file which you can find in `~/rpmbuild/RPMS/x86_64` and just install that. It checks that the installation directory exists and will fail if it isn't there.
+This will create an installable RPM file which you can find in `${HOME}/rpmbuild/RPMS/x86_64` and just install that. It checks that the installation directory exists and will fail if it isn't there.
 
 ## Rstudio
 
