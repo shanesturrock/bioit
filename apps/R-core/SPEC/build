@@ -34,4 +34,4 @@ echo "#%Module 1.0
 #
 prepend-path  PATH              /opt/bioit/R-core/${VERSION}/bin" > /opt/bioit/modulefiles/R/${VERSION}
 echo "Install required packages"
-/opt/bioit/R-core/${VERSION}/bin/Rscipt ${HOME}/bioit/apps/R-core/SPEC/bioC_install.R
+/opt/bioit/R-core/${VERSION}/bin/Rscript ${HOME}/bioit/apps/R-core/SPEC/bioC_install.R
