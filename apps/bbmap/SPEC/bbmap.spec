@@ -1,11 +1,11 @@
-%define priority 3736
+%define priority 3738
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.36
+Version:	37.38
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -167,6 +167,58 @@ fi
 %files
 
 %changelog
+* Fri Aug 04 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.38-1
+- Fixed a read orientation bug in CalcTrueQuality when using a VCF file.
+- Simplified some calls to short and long match string conversion.
+- Added a variant-calling script to /pipelines.
+- Fixed a null pointer exception in Sketch when using sam files.
+- Investigated recalibration of R2.  Turns out the graph just looks odd because
+  of low-quality unmapped reads.
+- BBDuk can now accept ref=phix or adapters or artifacts, and automatically
+  locates the file in /resources.
+- Read identity calculation was crashing with fixvariants (from a VCF file).
+- Removed bbduk2.sh as deprecated; only BBDuk is maintained.
+- Adjusted Sketch hash function; cycleMask is now a constant.
+- Made Sketch hashing variables private.
+- Made Sketch hashCycles variable; speeds up shorter kmer lengths and makes k2
+  codes compatible with k codes of same length.
+- SortByName now uses compression level 2 for temp files.
+- RenameImg now also reports the number of files, sequences, bases, and TaxIDs
+  used.
+- IMG naming is now in the old NCBI style, e.g. tid|1234|img|56789
+- IMG header parsing methods and lookup table moved from TaxServer and
+  ImgRecord2 to TaxTree.
+- IMG header parsing is now automatic.
+- Updated some descriptions in commonMicrobes filter directory.
+- RQCFilter now by default queries nt, RefSeq, and Silva when Sketching.
+- Wrote TestFilesystem and testfilesystem.sh to monitor filesystem performance.
+- SendSketch now automatically sets k and k2 for nt, silva, and refseq.
+- Changed RefSeq and nt sketch servers and scripts to k=31,24 (needs restart).
+- Modified KmerCount7MTA increment routine slightly; it can now store hashed
+  kmers .
+- gi2taxid now runs in silva mode without requiring a gi or accession file.
+- Altered BlacklistMaker to fix an issue of redundant hash codes.
+- Fixed DisplayParams clone method.
+- Fixed order of parsing imghq and setting the default img file.
+- Fixed a bug in taxa coloring using parent instead of current node.
+- Added dark purple to Colors.
+- Taxa coloring now underlines records with the same color but different taxa
+  compared to above.
+- Updated SketchGuide to explain underlining.
+- Added a second genome repeat content estimation method.
+- Genome repeat content now considers one copy of a repeat to be non-repeat.
+  For example, a genome with 1% duplicated would be considered 1% repeat
+  instead of 2%.
+- Added pipelines/assemblyPipeline.sh.
+- Increased maximum samtools compression threads to 64.
+- Clarified descriptions of outm and BBDuk kmer-matching modes.
+- Revised Reformat trimrname handling to include all whitespace, and clarified
+  description to include bam files.
+- Restarted RefSeq and nt servers with k=31,24.
+- CallVariants and FilterVCF can now enable/disable SNPs, insertions,
+  deletions.
+- ReadStats histogram lengths can now be adjusted with the maxhistlen flag.
+
 * Thu Jul 13 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.36-1
 - Clarified TaxServer error message for incompatible settings.
 - Added deleteinput flag for Reformat and Clumpify.
