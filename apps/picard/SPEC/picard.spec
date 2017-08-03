@@ -1,11 +1,11 @@
-%define priority 2106
+%define priority 2107
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.10.6
+Version:	2.10.7
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -43,6 +43,12 @@ fi
 %files
 
 %changelog
+* Fri Aug 04 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.7-1
+- added config file to supress error message
+- Bump GKL version to avoid hanging in AVX support check. (#888)
+- Updated the documentation for the reference argument in ScatterIntervalsByNs.
+  Also, we now expilictly check for an index and a dict for the reference file.
+
 * Tue Aug 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.6-1
 - Add a doc note to change VALIDATION_STRINGENCY if validation error
 - Add comment per code review suggestion.

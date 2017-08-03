@@ -2,4 +2,4 @@
 set -e
 
 picard_dir="$(dirname $(readlink -f $0))"
-java -jar ${picard_dir}/picard.jar $* USE_JDK_DEFLATER=true USE_JDK_INFLATER=true
+java -jar ${picard_dir}/picard.jar $*
