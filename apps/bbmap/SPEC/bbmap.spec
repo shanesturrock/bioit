@@ -1,11 +1,11 @@
-%define priority 3738
+%define priority 3741
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.38
+Version:	37.41
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -167,6 +167,28 @@ fi
 %files
 
 %changelog
+* Tue Aug 08 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.41-1
+- CompareSketch now allows first parameter to be a file name without in=.
+- Wrote LongHashMap and LongHeapMap.
+- Refactored SketchHeap to support LongHashMap when minkeycount>1.
+- SketchHeap can now be temporarily longer than the desired sketch length when
+  min keycount>1.
+- Added usage query tracking to TaxServer.
+- Added correct sketch blacklists to public distribution.
+- Fixed incorrect insert size with renamebyinsert flag in RandomReads when
+  reads are longer than insert size.
+- RQCFilter now resets Sketch statics prior to subsequent SendSketch runs.
+- SketchObject minkKeyCount moved to DisplayParams.
+- SketchObject minCount field replaced.
+- DisplayParams.minCount renamed minHits.
+- BlacklistMaker.minCount renamed to MinTaxCount.
+- RQCFilter now uses minkeycount=t for Silva.
+- Changed SketchObject.size to targetSketchSize.
+- TaxServer now makes a new SketchTool as needed when minKeyCount is different
+  in local mode.
+- Made some improvements to assemblyPipeline.sh.
+- Fixed a tiny bug in parsing Sketch single kmer lengths of under 31.
+
 * Fri Aug 04 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.38-1
 - Fixed a read orientation bug in CalcTrueQuality when using a VCF file.
 - Simplified some calls to short and long match string conversion.
