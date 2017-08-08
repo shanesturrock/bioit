@@ -58,9 +58,10 @@ Now build augustus
     make
     make install
 
-Lastly, the permissions on the install need to be fixed otherwise users will get a permission denied error:
+Lastly, the permissions on the install need to be fixed otherwise users will get a permission denied error when trying to use it:
 
 find /opt/bioit/augustus/3.3 -type d -exec chmod a+rx {} +
+find /opt/bioit/augustus/3.3 -type f -exec chmod a+r {} +
 
 ## Module setup
 
