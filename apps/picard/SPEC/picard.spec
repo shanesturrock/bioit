@@ -1,11 +1,11 @@
-%define priority 2107
+%define priority 2109
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.10.7
+Version:	2.10.9
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -43,6 +43,13 @@ fi
 %files
 
 %changelog
+* Wed Aug 09 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.9-1
+- Change log4j logging to send all logging to stderr. Added test to assert
+  empty stdout.
+- Adding the ability to set a maximum size of duplicate sets for checking
+  optical dups
+- Add regression test for #883. (#894)
+
 * Fri Aug 04 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.7-1
 - added config file to supress error message
 - Bump GKL version to avoid hanging in AVX support check. (#888)
