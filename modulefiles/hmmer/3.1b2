@@ -1,0 +1,5 @@
+#%Module 1.0
+#
+#  hmmer module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/hmmer/3.1b2

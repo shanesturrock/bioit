@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to auto build and install bamtools. Just provide the version
+# Script to auto build and install vcftools. Just provide the version
 
 function usage() {
  cat << EOF

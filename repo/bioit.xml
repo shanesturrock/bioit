@@ -20,6 +20,7 @@
       <packagereq type="mandatory">FastQC</packagereq>
       <packagereq type="mandatory">hisat2</packagereq>
       <packagereq type="mandatory">htslib</packagereq>
+      <packagereq type="mandatory">hmmer</packagereq>
       <packagereq type="mandatory">igv</packagereq>
       <packagereq type="mandatory">picard</packagereq>
       <packagereq type="mandatory">R-core</packagereq>
