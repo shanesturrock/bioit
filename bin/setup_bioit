@@ -9,13 +9,13 @@ sudo chown build:build /opt/bioit
 #ln -s ~/bioit/modulefiles /opt/bioit
 mkdir /opt/bioit/modulefiles
 cd /opt/bioit/modulefiles
-mkdir bamtools bbmap bcftools bedtools2 bowtie bowtie2 bwa FastQC hisat2 htslib hmmer igv ncbi-blast picard R samtools SOAPdenovo2 SolexaQA++ tophat vcftools
+mkdir augustus bamtools bbmap bcftools bedtools2 bowtie bowtie2 bwa FastQC hisat2 hmmer htslib igv ncbi-blast picard R samtools SOAPdenovo2 SolexaQA++ tophat vcftools
 mkdir -p /opt/bioit/repo/RPMS
 ln -s ~/bioit/repo/bioit.xml /opt/bioit/repo/bioit.xml
 # Create all directories for packages
 cd /opt/bioit
-mkdir -p bamtools/src bbmap/src bcftools/src bedtools2/src bowtie/src \
-  bowtie2/src bwa/src FastQC/src hisat2/src htslib/src hmmer/src igv/src \
+mkdir -p augustus/src bamtools/src bbmap/src bcftools/src bedtools2/src bowtie/src \
+  bowtie2/src bwa/src FastQC/src hisat2/src hmmer/src htslib/src igv/src \
   ncbi-blast/src picard/src R-core/src samtools/src SOAPdenovo2/src \
   SolexaQA++/src tophat2/src vcftools/src
 # Build all packages from source

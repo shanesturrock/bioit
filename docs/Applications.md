@@ -6,6 +6,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 
 ## List of applications and instructions on building them
 
+* [augustus](augustus.md)
 * [bamtools](bamtools.md)
 * [bbmap](bbmap.md)
 * [bcftools](bcftools.md)
@@ -15,6 +16,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [bwa](bwa.md)
 * [FastQC](FastQC.md)
 * [hisat2](hisat2.md)
+* [hmmer](hmmer.md)
 * [htslib](htslib.md)
 * [igv](igv.md)
 * [ncbi-blast](ncbi-blast.md)

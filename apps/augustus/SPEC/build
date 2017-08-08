@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Script to auto build and install augustus Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+VERSION=$1
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building augustus ${VERSION} on ${DATE}"
+cd /opt/bioit/augustus/src
+wget http://bioinf.uni-greifswald.de/augustus/binaries/augustus-${VERSION}.tar.gz
+tar xvf augustus-${VERSION}.tar.gz
+mv augustus augustus-${VERSION}
+cd augustus-${VERSION}
+make clean
+# Grab bamtools dependency
+echo "Getting and installing bamtools dependency"
+wget https://github.com/pezmaster31/bamtools/archive/v2.4.1.tar.gz
+tar xvf v2.4.1.tar.gz
+cd bamtools-2.4.1
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/augustus/src/augustus-${VERSION}/bamtools ..
+make all
+make install
+cd /opt/bioit/augustus/src/augustus-${VERSION}
+# patch bam2hints Makefile
+sed "s+INCLUDES = /usr/include/bamtools+INCLUDES = /opt/bioit/augustus/src/augustus-${VERSION}/bamtools/include/bamtools+" --in-place auxprogs/bam2hints/Makefile
+sed "s+LIBS = -lbamtools -lz+LIBS = /opt/bioit/augustus/src/augustus-${VERSION}/bamtools/lib/bamtools/libbamtools.a -lz+" --in-place auxprogs/bam2hints/Makefile
+# patch filterBam Makefile
+sed "s+BAMTOOLS = /usr/include/bamtools+BAMTOOLS = /opt/bioit/augustus/src/augustus-${VERSION}/bamtools+" --in-place auxprogs/filterBam/src/Makefile
+sed "s+INCLUDES = -I\$(BAMTOOLS) -Iheaders -I./bamtools+INCLUDES = -I\$(BAMTOOLS)/include/bamtools -Iheaders -I./bamtools+" --in-place auxprogs/filterBam/src/Makefile
+sed "s+LIBS = -lbamtools -lz+LIBS = \$(BAMTOOLS)/lib/bamtools/libbamtools.a -lz+" --in-place auxprogs/filterBam/src/Makefile
+# patch Makefile to set install directory
+sed "s+INSTALLDIR = /opt/augustus-\$(AUGVERSION)+INSTALLDIR = /opt/bioit/augustus/${VERSION}+" --in-place Makefile
+# Remove symlinks lines to avoid permission denied error
+sed '/ln /d' --in-place Makefile
+
+# Now build augustus
+make
+make install
+echo "Writing modulefile"
+echo "#%Module 1.0
+#
+#  augustus module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/augustus/${VERSION}/bin" > /opt/bioit/modulefiles/augustus/${VERSION}

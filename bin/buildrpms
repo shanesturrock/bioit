@@ -2,6 +2,7 @@
 
 script_dir="$(dirname $(readlink -f $0))"
 
+rpmbuild -bb $script_dir/../apps/augustus/SPEC/augustus.spec
 rpmbuild -bb $script_dir/../apps/bamtools/SPEC/bamtools.spec
 rpmbuild -bb $script_dir/../apps/bbmap/SPEC/bbmap.spec
 rpmbuild -bb $script_dir/../apps/bcftools/SPEC/bcftools.spec
@@ -11,8 +12,8 @@ rpmbuild -bb $script_dir/../apps/bowtie/SPEC/bowtie.spec
 rpmbuild -bb $script_dir/../apps/bwa/SPEC/bwa.spec
 rpmbuild -bb $script_dir/../apps/FastQC/SPEC/FastQC.spec
 rpmbuild -bb $script_dir/../apps/hisat2/SPEC/hisat2.spec
-rpmbuild -bb $script_dir/../apps/htslib/SPEC/htslib.spec
 rpmbuild -bb $script_dir/../apps/hmmer/SPEC/hmmer.spec
+rpmbuild -bb $script_dir/../apps/htslib/SPEC/htslib.spec
 cp $script_dir/../apps/igv/SPEC/* ${HOME}/rpmbuild/SOURCES
 rpmbuild -bb $script_dir/../apps/igv/SPEC/igv.spec
 rm -f ${HOME}/rpmbuild/SOURCES/*
