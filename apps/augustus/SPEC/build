@@ -52,6 +52,8 @@ sed '/ln /d' --in-place Makefile
 # Now build augustus
 make
 make install
+# Fix directory permissions after install
+find /opt/bioit/augustus/${VERSION} -type d -exec chmod a+rx {} +
 echo "Writing modulefile"
 echo "#%Module 1.0
 #

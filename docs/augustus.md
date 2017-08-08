@@ -1,4 +1,4 @@
-# Hmmer
+# Augustus
 
 [http://bioinf.uni-greifswald.de/augustus/](http://bioinf.uni-greifswald.de/augustus/)
 
@@ -57,6 +57,10 @@ Now build augustus
 
     make
     make install
+
+Lastly, the permissions on the install need to be fixed otherwise users will get a permission denied error:
+
+find /opt/bioit/augustus/3.3 -type d -exec chmod a+rx {} +
 
 ## Module setup
 
