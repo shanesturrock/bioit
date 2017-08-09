@@ -1,0 +1,5 @@
+#%Module 1.0
+#
+#  ea-utils module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/ea-utils/1.04.807/bin

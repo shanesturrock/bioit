@@ -33,7 +33,7 @@ Untar the `bioit.tgz` file in `/opt` using the following:
 
 The `/opt/bioit` directory has a number of tools built from source. Run the following command to install the required packages to compile these tools and use them:
 
-    yum -y install ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build git screen htop root root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel
+    yum -y install ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build git screen htop root root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base
 
 Note that there are module files in `/opt/bioit/modulefiles` which will set up the environment for users when they need to choose a specific version. To enable this create `/etc/profile.d/bioit.sh` with the following line:
 

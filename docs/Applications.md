@@ -14,6 +14,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [bowtie](bowtie.md)
 * [bowtie2](bowtie2.md)
 * [bwa](bwa.md)
+* [ea-utils](ea-utils.md)
 * [FastQC](FastQC.md)
 * [hisat2](hisat2.md)
 * [hmmer](hmmer.md)

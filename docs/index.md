@@ -19,6 +19,7 @@ Start at the [Installation](Installation.md) page.
 * [bowtie](bowtie.md)
 * [bowtie2](bowtie2.md)
 * [bwa](bwa.md)
+* [ea-utils](ea-utils.md)
 * [FastQC](FastQC.md)
 * [hisat2](hisat2.md)
 * [hmmer](hmmer.md)
