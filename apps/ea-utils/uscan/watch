@@ -1,0 +1,2 @@
+version=3
+https://github.com/ExpressionAnalysis/ea-utils/releases/ .*/(.+)\.tar\.gz
