@@ -11,6 +11,7 @@ ${HOME}/bioit/apps/bedtools2/SPEC/build 2.26.0
 ${HOME}/bioit/apps/bowtie/SPEC/build 1.2.1.1
 ${HOME}/bioit/apps/bowtie2/SPEC/build 2.3.2
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.16a
+${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
 ${HOME}/bioit/apps/FastQC/SPEC/build 0.11.5
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.1.0
 ${HOME}/bioit/apps/hmmer/SPEC/build 3.1b2

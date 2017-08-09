@@ -18,6 +18,7 @@
       <packagereq type="mandatory">bowtie</packagereq>
       <packagereq type="mandatory">bowtie2</packagereq>
       <packagereq type="mandatory">bwa</packagereq>
+      <packagereq type="mandatory">ea-utils</packagereq>
       <packagereq type="mandatory">FastQC</packagereq>
       <packagereq type="mandatory">hisat2</packagereq>
       <packagereq type="mandatory">hmmer</packagereq>
