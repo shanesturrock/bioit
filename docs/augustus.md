@@ -40,6 +40,7 @@ The binaries supplied with this won't run so you need to recompile from source. 
     make install
 
 To use this internal version of bamtools a few files need to be patched as follows:
+
     cd /opt/bioit/augustus/src/augustus-3.3
     # patch bam2hints Makefile
     sed "s+INCLUDES = /usr/include/bamtools+INCLUDES = /opt/bioit/augustus/src/augustus-3.3/bamtools/include/bamtools+" --in-place auxprogs/bam2hints/Makefile
