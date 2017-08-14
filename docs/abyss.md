@@ -38,10 +38,10 @@ Now configure and build:
     make
     make install
 
-There is also an issue using multi-processor support if the ABYSS-P executable is missing but this can be fixed with a simple symlink:
+There is also an issue using multi-processor support if the `ABYSS-P` executable is missing but this can be fixed with a simple symlink:
 
-   cd /opt/bioit/abyss/2.0.2/bin
-   ln -sf ABYSS ABYSS-P
+    cd /opt/bioit/abyss/2.0.2/bin
+    ln -sf ABYSS ABYSS-P
 
 That should be it.
 
