@@ -31,7 +31,7 @@ You will need to download a specific version of boost using the following:
     wget http://sourceforge.net/projects/boost/files/boost/1.56.0/boost_1_56_0.tar.bz2
     tar xvf boost_1_56_0.tar.bz2
 
-No configure and build:
+Now configure and build:
 
     ./configure --prefix=/opt/bioit/abyss/2.0.2
     make clean
