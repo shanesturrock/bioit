@@ -32,7 +32,6 @@ alternatives \
    --slave %{_bindir}/addadapters.sh addadapters.sh /opt/bioit/%{name}/%{version}/addadapters.sh \
    --slave %{_bindir}/a_sample_mt.sh a_sample_mt.sh /opt/bioit/%{name}/%{version}/a_sample_mt.sh \
    --slave %{_bindir}/bbcountunique.sh bbcountunique.sh /opt/bioit/%{name}/%{version}/bbcountunique.sh \
-   --slave %{_bindir}/bbduk2.sh bbduk2.sh /opt/bioit/%{name}/%{version}/bbduk2.sh \
    --slave %{_bindir}/bbduk.sh bbduk.sh /opt/bioit/%{name}/%{version}/bbduk.sh \
    --slave %{_bindir}/bbest.sh bbest.sh /opt/bioit/%{name}/%{version}/bbest.sh \
    --slave %{_bindir}/bbfakereads.sh bbfakereads.sh /opt/bioit/%{name}/%{version}/bbfakereads.sh \

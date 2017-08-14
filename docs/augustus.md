@@ -22,7 +22,7 @@ If all is good, you can move to the RPM building step.
 
 ## Manual Build
 
-Download the binary tarball from [here](ihttp://bioinf.uni-greifswald.de/augustus/binaries/augustus-3.3.tar.gz) into `/opt/bioit/augustus/src`, untar it and cd into the resulting directory then run the following:
+Download the binary tarball from [here](http://bioinf.uni-greifswald.de/augustus/binaries/augustus-3.3.tar.gz) into `/opt/bioit/augustus/src`, untar it and cd into the resulting directory then run the following:
 
     mv augustus augustus-3.3
     cd augustus-3.3

@@ -11,6 +11,7 @@ Start at the [Installation](Installation.md) page.
 ### [XFS User and Project Quotas](XFS-User-and-Project-Quotas.md)
 ### [BioIT Repository](BioIT-repository.md)
 ### [Applications](Applications.md)
+* [abyss](abyss.md)
 * [augustus](augustus.md)
 * [bamtools](bamtools.md)
 * [bbmap](bbmap.md)

@@ -2,6 +2,7 @@
 
 script_dir="$(dirname $(readlink -f $0))"
 
+rpmbuild -bb $script_dir/../apps/abyss/SPEC/abyss.spec
 rpmbuild -bb $script_dir/../apps/augustus/SPEC/augustus.spec
 rpmbuild -bb $script_dir/../apps/bamtools/SPEC/bamtools.spec
 rpmbuild -bb $script_dir/../apps/bbmap/SPEC/bbmap.spec

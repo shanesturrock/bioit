@@ -6,6 +6,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 
 ## List of applications and instructions on building them
 
+* [abyss](abyss.md)
 * [augustus](augustus.md)
 * [bamtools](bamtools.md)
 * [bbmap](bbmap.md)

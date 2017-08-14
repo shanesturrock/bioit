@@ -9,6 +9,7 @@
    <name>bioit</name>
    <description></description>
     <packagelist>
+      <packagereq type="mandatory">abyss</packagereq>
       <packagereq type="mandatory">augustus</packagereq>
       <packagereq type="mandatory">bamtools</packagereq>
       <packagereq type="mandatory">bbmap</packagereq>

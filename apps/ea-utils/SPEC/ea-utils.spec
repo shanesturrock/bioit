@@ -28,22 +28,22 @@ based pipeline - but should work with any FASTQs.
 
 %post
 alternatives \
-   --install %{_bindir}/alc ea-utils /opt/bioit/%{name}/%{version}/alc %{priority} \
-   --slave %{_bindir}/determine-phred determine-phred /opt/bioit/%{name}/%{version}/determine-phred \
-   --slave %{_bindir}/fastq-clipper fastq-clipper /opt/bioit/%{name}/%{version}/fastq-clipper \
-   --slave %{_bindir}/fastq-join fastq-join /opt/bioit/%{name}/%{version}/fastq-join \
-   --slave %{_bindir}/fastq-mcf fastq-mcf /opt/bioit/%{name}/%{version}/fastq-mcf \
-   --slave %{_bindir}/fastq-multx fastq-multx /opt/bioit/%{name}/%{version}/fastq-multx \
-   --slave %{_bindir}/fastq-stats fastq-stats /opt/bioit/%{name}/%{version}/fastq-stats \
-   --slave %{_bindir}/fastx-graph fastx-graph /opt/bioit/%{name}/%{version}/fastx-graph \
-   --slave %{_bindir}/randomFQ randomFQ /opt/bioit/%{name}/%{version}/randomFQ \
-   --slave %{_bindir}/sam-stats sam-stats /opt/bioit/%{name}/%{version}/sam-stats \
-   --slave %{_bindir}/varcall varcall /opt/bioit/%{name}/%{version}/varcall
+   --install %{_bindir}/alc ea-utils /opt/bioit/%{name}/%{version}/bin/alc %{priority} \
+   --slave %{_bindir}/determine-phred determine-phred /opt/bioit/%{name}/%{version}/bin/determine-phred \
+   --slave %{_bindir}/fastq-clipper fastq-clipper /opt/bioit/%{name}/%{version}/bin/fastq-clipper \
+   --slave %{_bindir}/fastq-join fastq-join /opt/bioit/%{name}/%{version}/bin/fastq-join \
+   --slave %{_bindir}/fastq-mcf fastq-mcf /opt/bioit/%{name}/%{version}/bin/fastq-mcf \
+   --slave %{_bindir}/fastq-multx fastq-multx /opt/bioit/%{name}/%{version}/bin/fastq-multx \
+   --slave %{_bindir}/fastq-stats fastq-stats /opt/bioit/%{name}/%{version}/bin/fastq-stats \
+   --slave %{_bindir}/fastx-graph fastx-graph /opt/bioit/%{name}/%{version}/bin/fastx-graph \
+   --slave %{_bindir}/randomFQ randomFQ /opt/bioit/%{name}/%{version}/bin/randomFQ \
+   --slave %{_bindir}/sam-stats sam-stats /opt/bioit/%{name}/%{version}/bin/sam-stats \
+   --slave %{_bindir}/varcall varcall /opt/bioit/%{name}/%{version}/bin/varcall
 
 %postun
 if [ $1 -eq 0 ]
 then
-  alternatives --remove ea-utils /opt/bioit/%{name}/%{version}/alc
+  alternatives --remove ea-utils /opt/bioit/%{name}/%{version}/bin/alc
 fi
 
 
