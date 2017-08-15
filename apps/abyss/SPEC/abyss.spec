@@ -37,7 +37,7 @@ alternatives \
    --slave %{_bindir}/abyss-bowtie2 abyss-bowtie2 /opt/bioit/%{name}/%{version}/bin/abyss-bowtie2 \
    --slave %{_bindir}/abyss-bwa abyss-bwa /opt/bioit/%{name}/%{version}/bin/abyss-bwa \
    --slave %{_bindir}/abyss-bwamem abyss-bwamem /opt/bioit/%{name}/%{version}/bin/abyss-bwamem \
-   --slave %{_bindir}/abyss-bwasw abyss-bwasw /opt/bioit/%{name}/%{version}/abyss-bwasw \
+   --slave %{_bindir}/abyss-bwasw abyss-bwasw /opt/bioit/%{name}/%{version}/bin/abyss-bwasw \
    --slave %{_bindir}/abyss-db-txt abyss-db-txt /opt/bioit/%{name}/%{version}/bin/abyss-db-txt \
    --slave %{_bindir}/abyss-dida abyss-dida /opt/bioit/%{name}/%{version}/bin/abyss-dida \
    --slave %{_bindir}/abyss-fac abyss-fac /opt/bioit/%{name}/%{version}/bin/abyss-fac \
