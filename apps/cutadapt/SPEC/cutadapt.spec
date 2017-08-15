@@ -9,7 +9,7 @@ Version:	1.14
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
-License:	GPL
+License:	MIT
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # Post requires alternatives to install tool alternatives.
 Requires(post):   %{_sbindir}/alternatives
