@@ -8,6 +8,7 @@ rpmbuild -bb $script_dir/../apps/bamtools/SPEC/bamtools.spec
 rpmbuild -bb $script_dir/../apps/bbmap/SPEC/bbmap.spec
 rpmbuild -bb $script_dir/../apps/bcftools/SPEC/bcftools.spec
 rpmbuild -bb $script_dir/../apps/bedtools2/SPEC/bedtools2.spec
+rpmbuild -bb $script_dir/../apps/bismark/SPEC/bismark.spec
 rpmbuild -bb $script_dir/../apps/bowtie2/SPEC/bowtie2.spec
 rpmbuild -bb $script_dir/../apps/bowtie/SPEC/bowtie.spec
 rpmbuild -bb $script_dir/../apps/bwa/SPEC/bwa.spec

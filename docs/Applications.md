@@ -12,6 +12,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [bbmap](bbmap.md)
 * [bcftools](bcftools.md)
 * [bedtools2](bedtools2.md)
+* [bismark](bismark.md)
 * [bowtie](bowtie.md)
 * [bowtie2](bowtie2.md)
 * [bwa](bwa.md)

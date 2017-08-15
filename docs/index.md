@@ -17,6 +17,7 @@ Start at the [Installation](Installation.md) page.
 * [bbmap](bbmap.md)
 * [bcftools](bcftools.md)
 * [bedtools2](bedtools2.md)
+* [bismark](bismark.md)
 * [bowtie](bowtie.md)
 * [bowtie2](bowtie2.md)
 * [bwa](bwa.md)

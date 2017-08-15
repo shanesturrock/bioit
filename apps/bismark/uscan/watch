@@ -1,0 +1,3 @@
+version=3
+#http://www.bioinformatics.babraham.ac.uk/projects/download.html bismark/bismark_v([0-9].[0-9].[0-9]).tar.gz
+http://www.bioinformatics.babraham.ac.uk/projects/download.html bismark/bismark_v([0-9].[0-9]{1,2}.[0-9]{1,2}).tar.gz

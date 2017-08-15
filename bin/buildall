@@ -9,6 +9,7 @@ ${HOME}/bioit/apps/bamtools/SPEC/build 2.4.1
 ${HOME}/bioit/apps/bbmap/SPEC/build 37.38
 ${HOME}/bioit/apps/bcftools/SPEC/build 1.5
 ${HOME}/bioit/apps/bedtools2/SPEC/build 2.26.0
+${HOME}/bioit/apps/bismark/SPEC/build 0.18.2
 ${HOME}/bioit/apps/bowtie/SPEC/build 1.2.1.1
 ${HOME}/bioit/apps/bowtie2/SPEC/build 2.3.2
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.16a
