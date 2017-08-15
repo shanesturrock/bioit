@@ -11,6 +11,7 @@ rpmbuild -bb $script_dir/../apps/bedtools2/SPEC/bedtools2.spec
 rpmbuild -bb $script_dir/../apps/bowtie2/SPEC/bowtie2.spec
 rpmbuild -bb $script_dir/../apps/bowtie/SPEC/bowtie.spec
 rpmbuild -bb $script_dir/../apps/bwa/SPEC/bwa.spec
+rpmbuild -bb $script_dir/../apps/cutadapt/SPEC/cutadapt.spec
 rpmbuild -bb $script_dir/../apps/ea-utils/SPEC/ea-utils.spec
 rpmbuild -bb $script_dir/../apps/FastQC/SPEC/FastQC.spec
 rpmbuild -bb $script_dir/../apps/hisat2/SPEC/hisat2.spec

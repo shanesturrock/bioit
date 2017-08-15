@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Script to auto build and install cutadapt. Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+VERSION=$1
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building cutadapt ${VERSION} on ${DATE}"
+cd /opt/bioit/cutadapt/src
+wget https://github.com/marcelm/cutadapt/archive/v${VERSION}.tar.gz
+mv v${VERSION}.tar.gz cutadapt-${VERSION}.tar.gz
+tar xvf cutadapt-${VERSION}.tar.gz
+cd cutadapt-${VERSION}
+# Requires cython
+wget https://github.com/cython/cython/archive/0.26.tar.gz
+tar xvf 0.26.tar.gz
+export PYTHONPATH=/opt/bioit/cutadapt/src/cutadapt-${VERSION}/cython-0.26
+export PATH=/opt/bioit/cutadapt/src/cutadapt-${VERSION}/cython-0.26/bin:$PATH
+python setup.py build_ext -i
+python setup.py build
+mkdir -p /opt/bioit/cutadapt/${VERSION}/lib64/python2.7/site-packages/
+export PYTHONPATH=/opt/bioit/cutadapt/${VERSION}/lib64/python2.7/site-packages/:$PYTHONPATH
+python setup.py install --prefix=/opt/bioit/cutadapt/${VERSION}
+# Copy script that sets PYTHONPATH and then runs cutadapt
+cp ${HOME}/bioit/apps/cutadapt/SPEC/cutadapt /opt/bioit/cutadapt/${VERSION}/cutadapt
+echo "Writing modulefile"
+echo "#%Module 1.0
+#
+#  cutadapt module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/cutadapt/${VERSION}" > /opt/bioit/modulefiles/cutadapt/${VERSION}

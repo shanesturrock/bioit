@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+# Test script written by carl@biomatters.com
+
+from tests import *
+
+test_example()
+test_small()
+test_empty()
+test_newlines()
+test_lowercase()
+test_rest()
+test_restfront()
+test_discard()
+test_plus()
+test_extensiontxtgz()
+test_format()
+test_qualtrim()
+test_qualbase()
+test_twoadapters()
+test_polya()
+test_suffix()
+
+os.remove('tests.pyc')
+os.remove('utils.pyc')

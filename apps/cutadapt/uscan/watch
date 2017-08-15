@@ -1,0 +1,2 @@
+version=3
+https://github.com/marcelm/cutadapt/releases .*/v(.+).tar.gz
