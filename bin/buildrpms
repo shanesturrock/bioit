@@ -29,3 +29,4 @@ rpmbuild -bb $script_dir/../apps/SOAPdenovo2/SPEC/SOAPdenovo2.spec
 rpmbuild -bb $script_dir/../apps/SolexaQA++/SPEC/SolexaQA++.spec
 rpmbuild -bb $script_dir/../apps/tophat/SPEC/tophat.spec
 rpmbuild -bb $script_dir/../apps/vcftools/SPEC/vcftools.spec
+rpmbuild -bb $script_dir/../apps/velvet/SPEC/velvet.spec

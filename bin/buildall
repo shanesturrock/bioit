@@ -28,3 +28,4 @@ ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 241
 ${HOME}/bioit/apps/SolexaQA++/SPEC/build 3.1.7.1
 ${HOME}/bioit/apps/tophat/SPEC/build 2.1.1
 ${HOME}/bioit/apps/vcftools/SPEC/build 0.1.15
+${HOME}/bioit/apps/velvet/SPEC/build 1.2.10

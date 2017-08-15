@@ -36,3 +36,4 @@ Start at the [Installation](Installation.md) page.
 * [SolexaQA++](SolexaQA.md)
 * [tophat](tophat.md)
 * [vcftools](vcftools.md)
+* [velvet](velvet.md)

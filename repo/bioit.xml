@@ -34,6 +34,7 @@
       <packagereq type="mandatory">SolexaQA++</packagereq>
       <packagereq type="mandatory">tophat</packagereq>
       <packagereq type="mandatory">vcftools</packagereq>
+      <packagereq type="mandatory">velvet</packagereq>
     </packagelist>
   </group>
 </comps>
