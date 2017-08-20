@@ -1,11 +1,11 @@
-%define priority 3741
+%define priority 3748
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.41
+Version:	37.48
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -166,6 +166,49 @@ fi
 %files
 
 %changelog
+* Mon Aug 21 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.48-1
+- Updated BBSketch guide.
+- Changed default IMG path to the k=31,24 version.
+- Renamed minID to minWKID.
+- MutateGenome can now output a smaller genome fraction of the original genome.
+- Fixed a missing newline in Sketch server help info.
+- BBSketch now supports non-multiples-of-4 for k2.
+- Revised assemblyPipeline.sh.
+- Added assembleMito to /pipelines.
+- Increased hashing speed by 4-8% by switching from 2D to 1D matrix.
+- Increased Sketch max kmer length to 32.
+- Enabled pn0 (printseqname) flag for query.
+- Fixed CompareSketch ignoring read limit when loading input files; this was
+  caused by parse order.
+- Reworded code description of maq to indicate it happens after trimming.
+- Added mbq to BBDuk.
+- Added Sketch ANI bisection, enabled by exactani flag.  But it made the
+  results l
+- ess accurate at low ANI than linear interpolation.
+- Fixed a bug in which old 2D matrix was sometimes used instead of 1D matrix.
+- Discovered current K=31,24 server sketches were generated with a bug;
+  regenerating.
+- Updated alapy compression support; speed flags are now enabled.
+- Updated TaxonomyGuide.txt.
+- Added testPlatformQuality.sh.
+- Updated callInsertions.sh.
+- Updated assemblyPipeline.sh.
+- Made a MapPacBio assertion error more explicit, for debugging.
+- TaxServer no longer logs usage queries.
+- Clumpify spanx was controlling both spanx and spany due to a parse error;
+  fixed.
+- Added full range of delimiters to demuxbyname and clarified shellscript help.
+- Added demuxbyname column mode (e.g. column=2 to demux by the 2nd column).
+- Demuxbyname default compression level changed to 1 to cope with slow
+  compression speed.
+- Improved CompareSketch parsing of flags shared by Parser and DisplayParams.
+- Added 3-column Sketch results.
+- Restarted servers with new format support.
+- Fixed a null pointer exception in Sketch format 3.
+- Sketch now supports minANI flag.
+- Added Sketch spid field and allowed spid and imgID to be set from SketchMaker
+  command line.
+
 * Tue Aug 08 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.41-1
 - CompareSketch now allows first parameter to be a file name without in=.
 - Wrote LongHashMap and LongHeapMap.

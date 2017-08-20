@@ -1,11 +1,11 @@
-%define priority 2109
+%define priority 2110
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.10.9
+Version:	2.10.10
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -43,6 +43,12 @@ fi
 %files
 
 %changelog
+* Mon Aug 21 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.10-1
+- Add documentation creation and update (pushed to gh-pages) (#909)
+- Fixed docker build for gradle (#908)
+- Remove class (CommandLineProgramGroup) replaced by Barclay parser.
+- Add set UQ only option to SetNmMdAndUqTags (#887)
+
 * Wed Aug 09 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.9-1
 - Change log4j logging to send all logging to stderr. Added test to assert
   empty stdout.
