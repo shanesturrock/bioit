@@ -60,7 +60,7 @@ Before you install this, you need to sign it using:
     rpm --addsign \
     ${HOME}/rpmbuild/RPMS/x86_64/bbmap-37.48-1.el7.bioit.x86_64.rpm
 
-Now you can move it to /opt/bioit/repo/RPMS
+Now you can move it to `/opt/bioit/repo/RPMS`
 
     mv ${HOME}/rpmbuild/RPMS/x86_64/bbmap-37.48-1.el7.bioit.x86_64.rpm \
     /opt/bioit/repo/RPMS
