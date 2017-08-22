@@ -21,7 +21,7 @@ VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Building ncbi-blast ${VERSION} on ${DATE}"
 cd /opt/bioit/ncbi-blast/src
-wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/ncbi-blast-${VERSION}-x64-linux.tar.gz
+wget ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/${VERSION//+}/ncbi-blast-${VERSION}-x64-linux.tar.gz
 tar xvf ncbi-blast-${VERSION}-x64-linux.tar.gz
 mv ncbi-blast-${VERSION} /opt/bioit/ncbi-blast/${VERSION}
 echo "Writing modulefile"
