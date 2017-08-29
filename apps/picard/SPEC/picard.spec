@@ -1,11 +1,11 @@
-%define priority 2110
+%define priority 21100
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.10.10
+Version:	2.11.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -18,7 +18,7 @@ Requires:	java >= 1:1.8.0
 Requires(post):   %{_sbindir}/alternatives
 # Postun requires alternatives to uninstall tool alternatives.
 Requires(postun): %{_sbindir}/alternatives
-
+Obsoletes:	picard-2.10.10
 %description
 
 Picard comprises Java-based command-line utilities that manipulate SAM
@@ -39,10 +39,17 @@ then
   alternatives --remove picard /opt/bioit/%{name}/%{version}/picard
 fi
 
-
 %files
 
 %changelog
+* Wed Aug 30 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.0-1
+- Extract CommandLineProgram finding/processing code for reuse. (#899)
+- This makes CollectSequencingArtifactMetrics faster by reducing the number of
+  HashMap.get() functions we call at every base of the traversal. (#912)
+- Adding the option to not write out PG tags for MarkDuplicates and
+  MergeBamAlignment. Default behavior is kept the same as it was before but you
+  can get speed increases if you set them appropriately. (#907)
+
 * Mon Aug 21 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.10-1
 - Add documentation creation and update (pushed to gh-pages) (#909)
 - Fixed docker build for gradle (#908)

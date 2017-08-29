@@ -1,11 +1,11 @@
-%define priority 3748
+%define priority 3750
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.48
+Version:	37.50
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -166,6 +166,9 @@ fi
 %files
 
 %changelog
+* Wed Aug 30 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.50-1
+- No details of update in changelog
+
 * Mon Aug 21 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.48-1
 - Updated BBSketch guide.
 - Changed default IMG path to the k=31,24 version.
