@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 232
+%define priority 233
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.3.2
+Version:	2.3.3
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,20 @@ fi
 %files
 
 %changelog
+* Tue Sep 12 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.3-1
+- bowtie2-build now supports gzip-compressed FASTA inputs
+- New --xeq parameter for bowtie2 disambiguates the 'M' CIGAR flag. When
+  specified, matches are indicated with the = operation and mismatches with X
+- Fixed a possible infinite loop during parallel index building due to the
+  compiler optimizing away a loop condition
+- Added --soft-clipped-unmapped-tlen parameter for bowtie2 that ignores
+  soft-clipped bases when calculating template length (TLEN)
+- Added support for multi-line sequences in FASTA read inputs
+- Expanded explanation of MD:Z field in manual
+- Fixed a crashing bug when output is redirected to a pipe
+- Fixed ambiguity in the SEED alignment policy that sometimes caused -N
+  parameter to be ignored
+
 * Wed Jun 28 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.2-1
 - Added support for interleaved paired-end FASTQ inputs (--interleaved)
 - Now reports MREVERSE SAM flag for unaligned end when only one end of a pair
