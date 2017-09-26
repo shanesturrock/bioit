@@ -14,6 +14,23 @@ To use multipath copy the `multipath.conf` file into `/etc`:
 
     cp /usr/share/doc/device-mapper-multipath-0.4.9/multipath.conf .
 
+Add the following changes:
+
+    devices {
+            device {
+                    vendor COMPELNT
+                    product "Compellent Vol"
+                    path_checker tur
+                    prio alua
+                    path_selector "service-time 0"
+                    path_grouping_policy group_by_prio
+                    no_path_retry 24
+                    hardware_handler "1 alua"
+                    failback immediate
+                    rr_weight priorities
+            }
+    }
+
 Enable multipath at boot and start it:
 
     systemctl enable multipathd
