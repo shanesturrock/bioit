@@ -23,16 +23,17 @@ Now run the following to check the Compellant is visible:
 
     multipath -ll
     mpatha (36000d31003828e000000000000000005) dm-3 COMPELNT,Compellent Vol
-    size=250T features='1 queue_if_no_path' hwhandler='0' wp=rw
-    `-+- policy='service-time 0' prio=1 status=active
-      |- 8:0:2:1 sdb 8:16 active ready running
-      |- 8:0:3:1 sde 8:64 active ready running
-      |- 1:0:6:1 sdc 8:32 active ready running
-      `- 1:0:7:1 sdd 8:48 active ready running
+    size=250T features='1 queue_if_no_path' hwhandler='1 alua' wp=rw
+    |-+- policy='service-time 0' prio=50 status=active
+    | |- 8:0:1:1 sde 8:64 active ready running
+    | `- 1:0:1:1 sdc 8:32 active ready running
+    `-+- policy='service-time 0' prio=1 status=enabled
+      |- 8:0:0:1 sdd 8:48 active ready running
+      `- 1:0:0:1 sdb 8:16 active ready running
 
-In our case, the file system showed up as `/dev/mapper/mpatha1` (possibly because I had previously created a file system on it) so we should add a label to that with the following:
+In our case, the file system showed up as `/dev/mapper/mpatha` so we should create an xfs file system and add a label to that with the following:
 
-    xfs_admin -L RAID /dev/mapper/mpatha1
+    mkfs.xfs -L RAID -f /dev/mapper/mpatha
 
 Now we can edit the /etc/fstab and add the following line:
 
