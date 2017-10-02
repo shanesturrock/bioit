@@ -1,11 +1,11 @@
-%define priority 15
+%define priority 16
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		samtools
-Version:	1.5
+Version:	1.6
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -64,6 +64,24 @@ fi
 %files
 
 %changelog
+* Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.6-1
+- Added new markdup sub-command and -m option for fixmate. Used together,they
+  allow duplicates to be marked and optionally removed. This fixes a number of
+  problems with the old rmdup sub-command, for example issue #497. rmdup is kept
+  for backwards compatibility but markdup should be used in preference.
+- Sort is now much better at keeping within the requested memory limit. It
+  should also be slightly faster and need fewer temporary files when the file
+  to be sorted does not fit in memory. (#593; thanks to Nathan Weeks.)
+- Sort no longer rewrites the header when merging from files. It can also now
+  merge from memory, so fewer temporary files need to be written and it is
+  better at sorting in parallel when everything fits in memory.
+- Both sort and merge now resolve ties when merging based on the position in
+  the input file(s). This makes them fully stable for all ordering options.
+  (Previously position sort was stable, but name and by tag sorts were not).
+- New --output-qname option for mpileup.
+- Support for building on Windows using msys2/mingw64 or cygwin has been
+  improved.
+
 * Tue Jun 27 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.5-1
 - Samtools fastq now has a -i option to create a fastq file from an index tag,
   and a -T option (similar to -t) to add user specified aux tags to the fastq

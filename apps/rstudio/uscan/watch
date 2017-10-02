@@ -1,0 +1,2 @@
+version=3
+https://www.rstudio.com/products/rstudio/download .*/rstudio-(.+)-x86_64\.rpm

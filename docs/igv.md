@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/igv/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/igv/SPEC/build 2.3.98
+    ${HOME}/bioit/apps/igv/SPEC/build 2.4.1
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load igv/2.3.98
+    module load igv/2.4.1
     which igv
 
 If all is good, you can move to the RPM building step.
@@ -25,8 +25,14 @@ Get the zip file and unzip it in the src directory. Before building this will ne
 
 Edit the `~/bioit/apps/igv/SPEC/about.properties.patch` file and change the version number and date to suit, then do the following:
 
-    cd igv-2.3.98
+    cd igv-2.4.1
     patch -p0 < ~/bioit/apps/igv/SPEC/about.properties.patch 
+
+Set the JAVA variables so the build will use the OracleJDK instead of OpenJDK:
+
+    export JAVA_HOME=/usr/java/latest
+    export JRE_HOME=/usr/java/latest/jre
+    export PATH=$JAVA_HOME/bin:$PATH
 
 Now you can build the package:
 
@@ -34,10 +40,10 @@ Now you can build the package:
 
 Make an install directory for it and move the built files and libraries in, as well as the launcher script users will execute:
 
-    mkdir /opt/bioit/igv/2.3.98
-    mv igv.jar /opt/bioit/igv/2.3.98
-    mv lib /opt/bioit/igv/2.3.98
-    cp ~/bioit/apps/igv/SPEC/igv /opt/bioit/igv/2.3.98
+    mkdir /opt/bioit/igv/2.4.1
+    mv igv.jar /opt/bioit/igv/2.4.1
+    mv lib /opt/bioit/igv/2.4.1
+    cp ~/bioit/apps/igv/SPEC/igv /opt/bioit/igv/2.4.1
 
 That should be enough for users to launch this version.
 
@@ -49,7 +55,7 @@ Add a module file in `/opt/bioit/modulefiles/igv/` for this version by copying p
     #
     #  igv module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/igv/2.3.98/
+    prepend-path  PATH         /opt/bioit/igv/2.4.1/
 
 ## RPM
 

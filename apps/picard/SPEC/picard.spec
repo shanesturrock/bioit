@@ -1,11 +1,11 @@
-%define priority 21201
+%define priority 21301
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.12.1
+Version:	2.13.1
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -18,7 +18,7 @@ Requires:	java >= 1:1.8.0
 Requires(post):   %{_sbindir}/alternatives
 # Postun requires alternatives to uninstall tool alternatives.
 Requires(postun): %{_sbindir}/alternatives
-Obsoletes:	picard-2.10.10
+Obsoletes:	picard-2.12.1
 %description
 
 Picard comprises Java-based command-line utilities that manipulate SAM
@@ -42,6 +42,10 @@ fi
 %files
 
 %changelog
+* Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.1-1
+- Updated htsjdk version to integrate updates to Snappy
+- Add support for KS and FO in AddOrReplaceReadGroups (#925)
+
 * Tue Sep 12 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.12.1-1
 - Replaced hard-coded uses of .vcf, .bcf, and .vcf.gz with static variables.
   (Didn't touch the tests or comments though)

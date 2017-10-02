@@ -1,11 +1,11 @@
-%define priority 15
+%define priority 16
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		htslib
-Version:	1.5
+Version:	1.6
 Release:	1%{?dist}
 Summary:	C library for high-throughput sequencing data formats
 
@@ -55,6 +55,28 @@ fi
 %files
 
 %changelog
+* Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.6-1
+- Fixed bug where iterators on CRAM files did not propagate error return values
+  to the caller correctly. Thanks go to Chris Saunders.
+- Overhauled Windows builds. Building with msys2/mingw64 now works correctly
+  and passes all tests.
+- More improvements to logging output (thanks again to Anders Kaplan).
+- Return codes from sam_read1() when reading cram have been made consistent
+  with those returned when reading sam/bam. Thanks to Chris Saunders (#575).
+- BGZF CRC32 checksums are now always verified.
+- It's now possible to set nthreads = 1 for cram files.
+- hfile_libcurl has been modified to make it thread-safe. It's also better at
+  handling web servers that do not honour byte range requests when attempting
+  to seek - it now sets errno to ESPIPE and keeps the existing connection open 
+  so callers can revert to streaming mode it they want to.
+- hfile_s3 now recalculates access tokens if they have become stale. This fixes
+  a reported problem where authentication failed after a file had been in use
+  for more than 15 minutes.
+- Fixed bug where remote index fetches would fail to notice errors when writing
+  files.
+- bam_read1() now checks that the query sequence length derived from the CIGAR
+  alignment matches the sequence length in the BAM record.
+
 * Wed Jul 05 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.5-1
 - Added a new logging API: hts_log(), along with hts_log_error(),
   hts_log_warn() etc. convenience macros. Thanks go to Anders Kaplan for the

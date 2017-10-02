@@ -17,6 +17,9 @@ if [ $# -lt 1 ]; then
  exit 1
 fi
 
+export JAVA_HOME=/usr/java/latest
+export JRE_HOME=/usr/java/latest/jre
+export PATH=$JAVA_HOME/bin:$PATH
 VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Building IGV ${VERSION} on ${DATE}"

@@ -1,11 +1,11 @@
-%define priority 2398
+%define priority 2401
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.3.98
+Version:	2.4.1
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,16 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.1-1
+- Add 2.4 switches
+- Fixes #451
+- Present all server genomes for download, including genomes already downloaded.
+- Restore default "color by" alignment setting
+- Synchonize queries to htsjdk SAMReader -- its not thread safe
+- Fixes #452 Sashimi Plot
+- Remove "retrieve network" button
+- Fixes #463
+
 * Wed Jul 26 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.98-1
 - Manifest change for Java 8 1.4.1 bug (affects java webstart)
 

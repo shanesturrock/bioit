@@ -1,11 +1,11 @@
-%define priority 15
+%define priority 16
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bcftools
-Version:	1.5
+Version:	1.6
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -43,6 +43,26 @@ fi
 %files
 
 %changelog
+* Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.6-1
+- New sort command.
+- New options added to the consensus command. Note that the -i, --iupac option
+  has been renamed to -I, --iupac, in favor of the standard -i, --include.
+- Filtering expressions (-i/-e): support for GT=<type> expressions and for
+  lists and ranges (#639) - see the man page for details.
+- csq: relax some GFF3 parsing restrictions to enable using Ensembl GFF3 files
+  for plants (#667)
+- stats: add further documentation to output stats files (#316) and include
+  haploid counts in per-sample output (#671).
+- plot-vcfstats: further fixes for Python3 (@nsoranzo, #645, #666).
+- query bugfix (#632)
+- +setGT plugin: new option to set genotypes based on a two-tailed binomial
+  distribution test. Also, allow combining -i/-e with -t q.
+- mpileup: fix typo (#636)
+- convert --gvcf2vcf bugfix (#641)
+- +mendelian: recognize some mendelian inconsistencies that were being missed
+  (@oronnavon, #660), also add support for multiallelic sites and sex
+  chromosomes.
+
 * Tue Jun 27 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.5-1
 - Added autoconf support to bcftools. See INSTALL for more details.
 - norm: Make norm case insensitive (#601). Trim the reference allele (#602).

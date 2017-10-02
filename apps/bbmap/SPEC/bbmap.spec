@@ -1,11 +1,11 @@
-%define priority 3750
+%define priority 3756
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.50
+Version:	37.56
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -41,7 +41,9 @@ alternatives \
    --slave %{_bindir}/bbmergegapped.sh bbmergegapped.sh /opt/bioit/%{name}/%{version}/bbmergegapped.sh \
    --slave %{_bindir}/bbmerge.sh bbmerge.sh /opt/bioit/%{name}/%{version}/bbmerge.sh \
    --slave %{_bindir}/bbnorm.sh bbnorm.sh /opt/bioit/%{name}/%{version}/bbnorm.sh \
+   --slave %{_bindir}/bbqc.sh bbqc.sh /opt/bioit/%{name}/%{version}/bbqc.sh \
    --slave %{_bindir}/bbrealign.sh bbrealign.sh /opt/bioit/%{name}/%{version}/bbrealign.sh \
+   --slave %{_bindir}/bbrename.sh bbrename.sh /opt/bioit/%{name}/%{version}/bbrename.sh \
    --slave %{_bindir}/bbsketch.sh bbsketch.sh /opt/bioit/%{name}/%{version}/bbsketch.sh \
    --slave %{_bindir}/bbsplitpairs.sh bbsplitpairs.sh /opt/bioit/%{name}/%{version}/bbsplitpairs.sh \
    --slave %{_bindir}/bbsplit.sh bbsplit.sh /opt/bioit/%{name}/%{version}/bbsplit.sh \
@@ -80,6 +82,7 @@ alternatives \
    --slave %{_bindir}/filterlines.sh filterlines.sh /opt/bioit/%{name}/%{version}/filterlines.sh \
    --slave %{_bindir}/filtersubs.sh filtersubs.sh /opt/bioit/%{name}/%{version}/filtersubs.sh \
    --slave %{_bindir}/filtervcf.sh filtervcf.sh /opt/bioit/%{name}/%{version}/filtervcf.sh \
+   --slave %{_bindir}/fungalrelease.sh fungalrelease.sh /opt/bioit/%{name}/%{version}/fungalrelease.sh \
    --slave %{_bindir}/fuse.sh fuse.sh /opt/bioit/%{name}/%{version}/fuse.sh \
    --slave %{_bindir}/getreads.sh getreads.sh /opt/bioit/%{name}/%{version}/getreads.sh \
    --slave %{_bindir}/gi2ancestors.sh gi2ancestors.sh /opt/bioit/%{name}/%{version}/gi2ancestors.sh \
@@ -97,6 +100,7 @@ alternatives \
    --slave %{_bindir}/loadreads.sh loadreads.sh /opt/bioit/%{name}/%{version}/loadreads.sh \
    --slave %{_bindir}/loglog.sh loglog.sh /opt/bioit/%{name}/%{version}/loglog.sh \
    --slave %{_bindir}/makechimeras.sh makechimeras.sh /opt/bioit/%{name}/%{version}/makechimeras.sh \
+   --slave %{_bindir}/makecontaminatedgenomes.sh makecontaminatedgenomes.sh /opt/bioit/%{name}/%{version}/makecontaminatedgenomes.sh \
    --slave %{_bindir}/mapPacBio.sh mapPacBio.sh /opt/bioit/%{name}/%{version}/mapPacBio.sh \
    --slave %{_bindir}/matrixtocolumns.sh matrixtocolumns.sh /opt/bioit/%{name}/%{version}/matrixtocolumns.sh \
    --slave %{_bindir}/mergebarcodes.sh mergebarcodes.sh /opt/bioit/%{name}/%{version}/mergebarcodes.sh \
@@ -105,6 +109,7 @@ alternatives \
    --slave %{_bindir}/msa.sh msa.sh /opt/bioit/%{name}/%{version}/msa.sh \
    --slave %{_bindir}/mutate.sh mutate.sh /opt/bioit/%{name}/%{version}/mutate.sh \
    --slave %{_bindir}/muxbyname.sh muxbyname.sh /opt/bioit/%{name}/%{version}/muxbyname.sh \
+   --slave %{_bindir}/normandcorrectwrapper.sh normandcorrectwrapper.sh /opt/bioit/%{name}/%{version}/normandcorrectwrapper.sh \
    --slave %{_bindir}/partition.sh partition.sh /opt/bioit/%{name}/%{version}/partition.sh \
    --slave %{_bindir}/phylip2fasta.sh phylip2fasta.sh /opt/bioit/%{name}/%{version}/phylip2fasta.sh \
    --slave %{_bindir}/pileup.sh pileup.sh /opt/bioit/%{name}/%{version}/pileup.sh \
@@ -118,6 +123,9 @@ alternatives \
    --slave %{_bindir}/reducesilva.sh reducesilva.sh /opt/bioit/%{name}/%{version}/reducesilva.sh \
    --slave %{_bindir}/reformat.sh reformat.sh /opt/bioit/%{name}/%{version}/reformat.sh \
    --slave %{_bindir}/removebadbarcodes.sh removebadbarcodes.sh /opt/bioit/%{name}/%{version}/removebadbarcodes.sh \
+   --slave %{_bindir}/removecatdogmousehuman.sh removecatdogmousehuman.sh /opt/bioit/%{name}/%{version}/removecatdogmousehuman.sh \
+   --slave %{_bindir}/removehuman2.sh removehuman2.sh /opt/bioit/%{name}/%{version}/removehuman2.sh \
+   --slave %{_bindir}/removehuman.sh removehuman.sh /opt/bioit/%{name}/%{version}/removehuman.sh \
    --slave %{_bindir}/removesmartbell.sh removesmartbell.sh /opt/bioit/%{name}/%{version}/removesmartbell.sh \
    --slave %{_bindir}/renameimg.sh renameimg.sh /opt/bioit/%{name}/%{version}/renameimg.sh \
    --slave %{_bindir}/rename.sh rename.sh /opt/bioit/%{name}/%{version}/rename.sh \
@@ -136,6 +144,7 @@ alternatives \
    --slave %{_bindir}/sortbyname.sh sortbyname.sh /opt/bioit/%{name}/%{version}/sortbyname.sh \
    --slave %{_bindir}/splitbytaxa.sh splitbytaxa.sh /opt/bioit/%{name}/%{version}/splitbytaxa.sh \
    --slave %{_bindir}/splitnextera.sh splitnextera.sh /opt/bioit/%{name}/%{version}/splitnextera.sh \
+   --slave %{_bindir}/splitsam4way.sh splitsam4way.sh /opt/bioit/%{name}/%{version}/splitsam4way.sh \
    --slave %{_bindir}/splitsam6way.sh splitsam6way.sh /opt/bioit/%{name}/%{version}/splitsam6way.sh \
    --slave %{_bindir}/splitsam.sh splitsam.sh /opt/bioit/%{name}/%{version}/splitsam.sh \
    --slave %{_bindir}/stats.sh stats.sh /opt/bioit/%{name}/%{version}/stats.sh \
@@ -155,7 +164,8 @@ alternatives \
    --slave %{_bindir}/taxtree.sh taxtree.sh /opt/bioit/%{name}/%{version}/taxtree.sh \
    --slave %{_bindir}/testformat.sh testformat.sh /opt/bioit/%{name}/%{version}/testformat.sh \
    --slave %{_bindir}/textfile.sh textfile.sh /opt/bioit/%{name}/%{version}/textfile.sh \
-   --slave %{_bindir}/translate6frames.sh translate6frames.sh /opt/bioit/%{name}/%{version}/translate6frames.sh
+   --slave %{_bindir}/translate6frames.sh translate6frames.sh /opt/bioit/%{name}/%{version}/translate6frames.sh \
+   --slave %{_bindir}/webcheck.sh webcheck.sh /opt/bioit/%{name}/%{version}/webcheck.sh
 
 %postun
 if [ $1 -eq 0 ]
@@ -166,8 +176,120 @@ fi
 %files
 
 %changelog
+* Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.56-1
+- 37.51
+  - Sketch ref= flag can now accept # wildcard.
+  - BBDuk Poly-A trimming now occurs before entropy-masking.
+  - Documented BBDuk internal order of operations in BBDukGuide.
+  - Wrote MakeContaminatedGenomes and makecontaminatedgenomes.sh.
+  - Removed a couple references to nonexistent changelogs in shellscripts.
+  - Fixed a bug in ConcurrentReadInputStream.getReads (failure to call start).
+  - ImgID sketch results header now is padded by spaces.
+  - MDWalker can now handle cigar N symbol.
+- 37.52
+  - Fixed CompareSketch replacing original header filenames with sketch
+    filenames.
+  - Fixed a bug in FilterByTile by forcing IntList initial size to at least 1.
+  - Added eoom (ExitOnOutOfMemoryException) shellscript support.
+  - Added shellscript parsing for degenerate terms like xmx= and ea.
+  - Added DisplayParams taxFilter field, and SketchResults autoremoval of
+    nonpassing results.
+  - Added TaxTree.parseLevel and called it in many parsing routines.
+  - Made shellscript formating slightly more standardized.
+  - Added some error checking to SendSketch; it now uses a nonzero exit code
+    when the connection fails.
+  - Updates shell scripts with references to guides.
+  - Sketch now supports taxonomic filtering.
+  - Delete an obsolete redundant guide.
+- 37.53
+  - Sketches now scale heap size with sizemult, and default heap size is
+    doubled.
+  - Fixed Refseq server; it was using a whitelist.
+  - KillSwitch kill and print methods are now synchronized.
+  - Moved parse location of Sketch db names to Searcher.
+  - Searcher.refFiles is now a LinkedHashSet.
+  - Added Tools.isDigitOrSign and toString(Throwable).
+  - TaxServer now returns error messages from doubleheader parsing.
+  - TaxFilter now always adds specified nodes regardless of tax level, and
+    stops promoting as soon as the target level is reached.
+  - Fixed some taxonomy server issues with tax filtering.
+  - Added IntHashSetList for creating concise sets.
+  - Added blacklists to Silva and RefSeq server invocations; they were missing.
+  - All shellscripts now load oracle-jdk/1.8_144_64bit on Genepool.
+  - Sketches now have a count array.
+  - Sketch reading and writing now supports the count array.
+  - Sketch spid parsing fixed.
+  - No more spurious warnings about missing blacklists when they are not being
+    used.
+  - Accelerated Sketch writing by around 20% by debranching.
+  - Changed TaxServer back to prior Java version because 8u144 is not installed
+    on gpwebs.
+  - Changed default startSilvaServer.sh to old style since the silva keyword is
+    conflated.
+  - Added Sketch minQual and minProb processing.
+  - RefSeq is now the default sketch server, since bigger references are more
+    accurate.
+  - Added support for NCBI merged.dmp file in TaxTree (now mandatory).  This
+    necessitates a coordinated push since the fo
+  - rmat changed.
+  - TaxServer no longer crashes when there are missing TaxNodes.
+  - taxpath now works better with printtaxonomy.sh.
+  - Sketch unique and nohit counts are now calculated correctly when
+    printcontam is disabled.
+  - BBDuk now correctly removes reads that fail maxlen even when no trimming is
+    performed.
+  - TaxServer now correctly tracks external query counts through a proxy (at
+    NERSC).
+- 37.55
+  - TaxServer now reports average and most recent query time.
+  - Making a Sketch from a Heap moved from SketchTool to SketchHeap.
+  - Sketch construction now adds counts when available.
+  - SketchMaker now parses display params.
+  - Fixed an array out of bounds in LongHeapMap.
+  - PrintDepth is now working!
+  - Swapped minProb and minQual in SketchObject; parsing was bugged.
+  - Added #-symbol support for dual fastq files in Sketch.
+  - Added contains(key) to LongHeapSet and LongHeapMap.
+  - SendSketch now loads fastq files multithreaded.  This is up to 6x as fast
+    though slightly less efficient.
+  - Reformat now can upsample via samplereadstarget/samplebasestarget.
+- 37.56
+  - SendSketch now does read validation in-thread and achieves up to 9x the
+    speed of the singlethreaded version and bette
+  - r efficiency.
+  - CompareSketch had bufferlen cap removed when processing fastq.
+  - SketchMaker has a new fast path for onesketch of a single fastq file, and
+    default bufferlen changed from 1 to 2 to better deal with short sequences.
+    For fastq, speed was quadrupled.
+  - SketchMaker no longer prints an error message if there were no output
+    sketches; instead, there is a warning.
+  - Sketch now allows internal merging of paired reads.
+  - RQCFilter defaults to merging reads and using minprob=0.75.
+  - Added Sketch arbitrary metadata tags.
+  - Added Sketch depth2 (repeat-compensated depth).
+  - Regenerated nt and RefSeq reference sketches with coverage information and
+    restarted the servers.
+  - Added Sketch volume column.
+  - Added IntHashSetList.toPackedArray.
+  - SketchIndex now returns SketchResults with taxHits instead of a raw
+    ArrayList.
+  - contam2 now appears to work.
+  - SketchMaker now obeys read limit.
+  - Sketch results are now sortable by depth and volume.
+  - RQCFilter now uses some additional sketch flags like volume.
+
 * Wed Aug 30 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.50-1
-- No details of update in changelog
+- Documented autosizefactor in sketch shellscripts.
+- Updated BBSketchGuide.txt with information about sketch sizing.
+- Wrote fetchSilva.sh.
+- Improved commenting of many /pipelines/ scripts.
+- Modified RenameIMG to handle dual IMG files.
+- Fixed img name parsing when no taxID is present.
+- Fixed a failure to increment in TaxTree.parseDelimitedNumber.
+- Sketch Amino mode now autosets k2, and a message is suppressed.
+- Fixed a bug with Sketch amino mode parsing (it is parsed in 3 places).
+- Really deleted ecc.sh from public BBTools distribution.
+- Started MakeContaminatedGenomes.
 
 * Mon Aug 21 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.48-1
 - Updated BBSketch guide.
