@@ -47,9 +47,7 @@ Lastly, the Oracle JDK is required to build IGV (as of 2.4.1) due to it needing 
 
     wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.rpm
 
-If that doesn't work, go to this site and download it manually after accepting the license:
-
-    http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+If that doesn't work, go to [this site](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and download it manually after accepting the license.
 
 Install the downloaded RPM:
 
