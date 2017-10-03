@@ -41,7 +41,7 @@ Note that there are module files in `/opt/bioit/modulefiles` which will set up t
 
 Now all users will be able to see the modules and can select specific versions.
 
-Defaults tools and changelogs are provided by the meta-RPMS that are built to set alternatives with symlinks into `/usr/bin ` so they'll see them as usual. To set this up go to the [BioIT repository](BioIT-repository.md) page, but not just yet.
+Defaults tools and changelogs are provided by the meta-RPMS that are built to set alternatives with symlinks into `/usr/bin` so they'll see them as usual. To set this up go to the [BioIT repository](BioIT-repository.md) page, but not just yet.
 
 Lastly, the Oracle JDK is required to build IGV (as of 2.4.1) due to it needing JavaFX. Once built it will run with the standard OpenJDK. To install it download the current release using the following command:
 
@@ -53,7 +53,7 @@ Install the downloaded RPM:
 
     yum install jdk-8u144-linux-x64.rpm
 
-It won't be the default after this but the IGV build script will manually set the `JAVA_HOME` and `JAVA_PATH` variables it needs to build IGV using this. The `version_check` script includes a check that the Oracle JDK is the latest version. Update by downloading the newest version when this warns that it is out of date.
+It won't be the default after this but the IGV build script will manually set the `$JAVA_HOME` and `$JAVA_PATH` variables it needs to build IGV using this. The `version_check` script includes a check that the Oracle JDK is the latest version. Update by downloading the newest version when this warns that it is out of date.
 
 ## Secure ssh but retain admin access
 
