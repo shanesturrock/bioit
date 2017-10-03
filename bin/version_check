@@ -35,6 +35,16 @@ By default ${0} exit code will be the number of applications that have been upda
 EOF
 }
 
+function JavaisUpToDate() {
+    URL=http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+    NEW=$(/usr/bin/wget -qO - $URL |grep ^downloads |head -1 |grep -Eo 'jdk-....')
+    NEWVER=`echo $NEW |grep -Eo [0-9].* |grep -Eo '[0-9]*'`
+    read -a NEWARR <<< $NEWVER
+    OLD=$(javac -version 2>&1 |grep -Eo [0-9].*)
+    read -a OLDARR <<< `echo $OLD |grep -Eo '[0-9]{1,2}'`
+    return $([ ${NEWARR[0]} -eq ${OLDARR[1]} -a ${NEWARR[1]} -eq ${OLDARR[3]} ])
+}
+
 if [ $# -eq 0 ]; then
 	usage
 	exit 1
@@ -130,4 +140,13 @@ for application in ${application_list}; do
 		fi
         fi
 done 
+
+# Now check if Java is up to date
+if JavaisUpToDate
+then
+    echo "Java is up to date"
+else
+    echo "Java needs to be updated"
+fi
+
 exit 0
