@@ -80,16 +80,22 @@ The uscan watch scripts need the following installed:
 
 You can run a version check for all installed packages by running:
 
-    ~/bioit/bin/version_check -avf
+    ~/bioit/bin/version_check -av
 
-This will download any updated source and you can then build the package and RPM as described on the specific tool page under applications.
+This will identify any updated source and you can then build the package and RPM as described on the specific tool page under applications.
 
-Once built, put the new RPM into the repo directory and run the `createrepo` command.
+Once built, put the new RPM into the repo directory and run the `createrepo` command. 
 
     cd /opt/bioit/repo
     createrepo -g bioit.xml /opt/bioit/repo
     sudo yum clean all
     sudo yum groupupdate bioit
+
+A `buildrepo` alias can be setup to do updates by adding the following to your `.bash_profile`:
+
+    alias buildrepo='cd /opt/bioit/repo ; createrepo . -g bioit.xml --database'
+
+Now when you add new RPMs you can just run the `buildrepo` alias and they will be added to the repository.
 
 ## Testing
 
@@ -108,9 +114,13 @@ The script has help (`-h`) and in addition to running individual tests, it can r
     bowtie: Passed
     bowtie2: Passed
     bwa: Passed
-    tophat: Passed
     vcftools: Passed
     picard: Passed
+    tophat: Passed
+    abyss: Passed
+    cutadapt: Passed
+    bismark: Passed
+    velvet: Passed
 
 ## Adding new packages
 
