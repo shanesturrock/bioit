@@ -24,6 +24,14 @@ If you try the following you should now get an error that there's no package ava
 
 This will mean the `R-core` package from the BioIT repo will be installed once that is added.
 
+## Prevent kernel updates
+
+The machine will need a reboot any time a kernel update is applied. To avoid this add the following line to each section of the `CentOS-Base.repo` file in `/etc/yum.repos.d`:
+
+    exclude=kernel*
+
+If there's a bad kernel issue comment this line out, update the kernel and reboot the machine to apply the update but otherwise this should be fine and will allow the machine to stay up for extended periods.
+
 ## Tools required for application support
 
 Untar the `bioit.tgz` file in `/opt` using the following:

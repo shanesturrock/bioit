@@ -63,6 +63,10 @@ Finally, `mkdir` the mount point and then mount the file system
 
 That should be it.
 
+## Issues after a reboot
+
+After a reboot it may be that the storage just mounts as a normal SCSI device. To fix this, unmount it, rerun the `rescan-scsi-bus.sh` command and restart the multipathd. Once that is done, remount the raid and it should show as `/dev/mapper/mpatha` again and `multipath -ll` will return the correct output.
+
 ## Next Step
 
 Go to the [XFS-User-and-Project-Quotas](XFS-User-and-Project-Quotas.md) page.
