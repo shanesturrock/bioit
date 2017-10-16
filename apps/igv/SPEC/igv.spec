@@ -1,11 +1,11 @@
-%define priority 2401
+%define priority 2402
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.4.1
+Version:	2.4.2
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,14 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Tue Oct 17 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.2-1
+- Fixed a problem with loading genomes on Windows. The genome identifier
+  appeared in the dropdown menu, but none of the genome data was actually
+  loaded.
+- Fixed a problem with coloring/sorting/grouping alignments by tag. The popup
+  window to enter the tag never appeared.
+- Updated the BED file parser to allow a period (.) in the score column.
+
 * Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.1-1
 - Add 2.4 switches
 - Fixes #451

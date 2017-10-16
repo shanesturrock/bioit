@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 233
+%define priority 2331
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.3.3
+Version:	2.3.3.1
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,12 @@ fi
 %files
 
 %changelog
+* Tue Oct 17 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.3.1-1
+- Fixed an issue causing input files to be skipped when running multi-threaded
+  alignment
+- Fixed an issue causing the first character of a read name to be dropped while
+  parsing reads spl
+
 * Tue Sep 12 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.3-1
 - bowtie2-build now supports gzip-compressed FASTA inputs
 - New --xeq parameter for bowtie2 disambiguates the 'M' CIGAR flag. When

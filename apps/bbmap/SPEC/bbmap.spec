@@ -1,11 +1,11 @@
-%define priority 3756
+%define priority 3758
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.56
+Version:	37.58
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -176,6 +176,32 @@ fi
 %files
 
 %changelog
+* Tue Oct 17 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.58-1
+- 37.57
+  - Changed default printOptions content.
+  - Wrote MakePolymers.
+  - Added period flag to MutateGenome.
+  - Tested: Homopolymer blacklisting up to k=9 does not obviously improve
+    sketch depth accuracy.
+  - calcmem.sh now supports RQCMEM override flag (in megabytes).
+  - BBSketch now supports intersection and printing sketch intersections.
+  - Wrote Sketch.invertKey.  Note that this requires the reference.
+  - Fixed an issue of not including ref= with # flag in SketchSearcher loading.
+  - Fixed a bug stemming from a null return in SketchIndex when there are no
+    matches.
+  - Fixed an infinite loop in Sketch comparebydepth and volume.
+  - Sketch score moved to a field to make sorting faster.
+  - Deleted BBMask_noSam.java
+- 37.58
+  - Added exception handlers for AssertionErrors in cris.
+  - Added nucleotide support to sketch files.
+  - Added Var.noPassDotGenotype.
+  - Wrote EntropyTracker.
+  - Modified BBDuk to use EntropyTracker.
+  - Modified BBMask to use EntropyTracker.
+  - Note that entropy calculation was slightly off prior to EntropyTracker.
+  - BBSketch now supports entropy filtering.
+  - BBMap now supports sambamba for bam input.
 * Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.56-1
 - 37.51
   - Sketch ref= flag can now accept # wildcard.

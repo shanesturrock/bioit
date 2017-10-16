@@ -1,0 +1,5 @@
+#%Module 1.0
+#
+#  ncbi-blast module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/ncbi-blast/2.7.0+/bin
