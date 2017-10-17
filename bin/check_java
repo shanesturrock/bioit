@@ -1,4 +1,8 @@
 #!/bin/bash
+export JAVA_HOME=/usr/java/latest
+export JRE_HOME=/usr/java/latest/jre
+export PATH=$JAVA_HOME/bin:$PATH
+
 isUpToDate() {
     URL=http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
     NEW=$(/usr/bin/wget -qO - $URL |grep ^downloads |head -1 |grep -Eo 'jdk-....')
@@ -10,7 +14,7 @@ isUpToDate() {
 }
 if isUpToDate
 then
-    echo "Java is up to date"
+    echo "Java ${OLD}: Up to date"
 else
-    echo "Java needs to be updated"
+    echo "Java update ${NEW} available"
 fi
