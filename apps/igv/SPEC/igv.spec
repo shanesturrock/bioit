@@ -1,11 +1,11 @@
-%define priority 2402
+%define priority 2403
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.4.2
+Version:	2.4.3
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Tue Oct 31 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.3-1
+- Fix NPE error when restoring session
+
 * Tue Oct 17 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.2-1
 - Fixed a problem with loading genomes on Windows. The genome identifier
   appeared in the dropdown menu, but none of the genome data was actually

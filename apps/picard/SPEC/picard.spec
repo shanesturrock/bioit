@@ -1,11 +1,11 @@
-%define priority 21302
+%define priority 21400
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.13.2
+Version:	2.14.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -42,6 +42,19 @@ fi
 %files
 
 %changelog
+* Tue Oct 31 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.0-1
+- Add unit test for FIRST_TILE and TILE_LIMIT features. (#914)
+- ExtractIlluminaBarcodes throws a NullPointerException in the case of an empty
+  lane directory (#948)
+- Adds usage statement to UmiAwareMarkDuplicatesWithMateCigar that it shouldn't
+  be used with RNAseq or other technologies with long gaps. (#959)
+- Converted the tests of @dataproviders to using....a @dataProvider! (#941)
+- Make column names in ExtractIlluminaBarcodes public, and use them in the help
+  description (#957)
+- Fixed H4 tags in README (#954)
+- Extending CrossCheckFingerprint to do a serial check. (#949)
+- Backport VcfToIntervalList INCLUDE_FILTERED argument from GATK. (#875)
+
 * Wed Oct 04 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.2-1
 - Prk samtofastq compressed (#942)
 - Fixed tests that were removed from CrosscheckReadgroupFingerprints (#870)

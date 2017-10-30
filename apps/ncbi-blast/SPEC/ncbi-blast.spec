@@ -1,11 +1,11 @@
-%define priority 270
+%define priority 271
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		ncbi-blast
-Version:	2.7.0+
+Version:	2.7.1+
 Release:	1%{?dist}
 Summary:	BLAST+ is a suite of command-line tools to run BLAST
 Group:		Applications/Engineering
@@ -60,6 +60,19 @@ fi
 %files
 
 %changelog
+* Tue Oct 31 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.7.1+-1
+- Improvements
+  - Provided an upper limit on the number of threads for BLAST+ search
+    applications.
+  - Improved performance of taxonomic name lookups.
+  - Fixed Mac installers so they are interoperable with other NCBI applications.
+  - Reduced the amount of locking in BLASTDB reading library (CSeqDB).
+- Bug fixes
+  - Fixed race condition when using gilist parameter.
+  - Fixed culling_limit bug with HSPs from different strands
+  - Fixed dustmasker bug with long region of Ns
+  - Fixed bl2seq problem with HTML output
+
 * Tue Oct 17 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.7.0+-1
 - Improvements
   - Provided an upper limit on the number of threads for BLAST+ search

@@ -1,11 +1,11 @@
-%define priority 3758
+%define priority 3764
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.58
+Version:	37.64
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -165,6 +165,7 @@ alternatives \
    --slave %{_bindir}/testformat.sh testformat.sh /opt/bioit/%{name}/%{version}/testformat.sh \
    --slave %{_bindir}/textfile.sh textfile.sh /opt/bioit/%{name}/%{version}/textfile.sh \
    --slave %{_bindir}/translate6frames.sh translate6frames.sh /opt/bioit/%{name}/%{version}/translate6frames.sh \
+   --slave %{_bindir}/unicode2ascii.sh unicode2ascii.sh /opt/bioit/%{name}/%{version}/unicode2ascii.sh \
    --slave %{_bindir}/webcheck.sh webcheck.sh /opt/bioit/%{name}/%{version}/webcheck.sh
 
 %postun
@@ -176,6 +177,74 @@ fi
 %files
 
 %changelog
+* Tue Oct 31 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.64-1
+- 37.59
+  - Increased memory for RefSeq sketches by 1g.
+  - Set default Sketch entropy filter to 0.66.
+  - Set default Sketch minprob to 0.0001, which is sufficient for 31bp at 74%
+    (Q5.9).
+  - Added EntropyTracker fast, slow, and superslow modes.
+  - Added command-line flags for EntropyTracker speed, verify, and Sketch
+    entropyK.
+  - out=/dev/null no longer prompts you to delete it in most cases.
+  - RQCFilter sketchminprob flag added, and default changed to 0.2 (95%; Q12.9).
+  - Fixed a bug in EntropyTracker ns calculation and added it to verify().
+  - RQCFilter now suppresses error messages when SendSketch fails due to
+    connectivity issues.
+  - Fully commented EntropyTracker.
+  - Suppressed a race-condition-induced error message from closing the input
+    stream early in Reformat and BBDuk.
+- 37.60
+  - Brought back UnicodeToAscii and changed it slightly.  Still does not work
+    as intended, but may work in most cases.
+- 37.61
+  - Made some slight changes to EntropyTracker.
+  - Added ribomap flag to RQCFilter.
+  - Added default adapter sequences to RandomReads.
+  - Suppressed printing some unnecessary verbose stuff from CoveragePileup.
+  - Added kmersIn tracking to kmer counters.
+  - KmerCountExact now prints average depth.
+  - Added Tools.observedToActualCoverage().  This allows conversion of observed
+    kmer counts to average kmer depth.
+  - BBMap now has printstats and printsettings flags to suppress verbose
+    output.
+  - Revised observedToActualCoverage with a more precise estimate with a
+    reverse curve-fit.
+  - Added observedToActualCoverage to BBNorm.
+  - Updated BBSketchGuide.txt with entropy, depth, and merging.
+- 37.62
+  - Average kmer quality is now tracked in Sketch and stored in the header.
+  - Fixed a place in SketchTool where genomeSequences was not being reset to 0
+    (should have no effect).
+  - Added synonyms for onesketch and so forth so that the prefix mode= is no
+    longer required.
+  - CompareSketch can now use # notation for paired reads.
+  - Added unique2 and unique3 flags.
+  - Comparesketch now automatically generates an index if required by some
+    columns.
+  - Wrote TaxFilter.reviseByBestEffort(file) to allow closest available
+    ancestors as output.
+  - Added FilterByTaxa besteffort flag.
+  - Improved FilterByTaxa output formatting.
+  - TaxTree constructor became private.
+  - TaxTree gained a static sharedTree which is used by default.
+  - RQCFilter ribomap, chloromap, and mitomap automatically widen filter
+    thresholds when nothing is found.
+  - RQCFilter disables chloromap when the organism is not a plant
+    (Viridiplantae), unless no taxa is given.
+- 37.63
+  - Fixed a bug when using Sketch constructor to pass average kmer quality and
+    restarted servers.
+  - Added anifromwkid flag to alternate between calculating ani from kid.
+  - Added minbases to filter results, ignoring small reference sequences.
+  - Added minsizeratio to filter results.  Intended mainly for all-to-all
+    comparisons.
+  - Added Strain and Substrain to TaxTree.
+  - Added RepresentativeSet and representative.sh for condensing sets of
+    genomes by all-to-all ANI.
+- 37.64
+  - Fixed a bug in determining which levels to print in PrintTaxonomy.
+
 * Tue Oct 17 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.58-1
 - 37.57
   - Changed default printOptions content.
