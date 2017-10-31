@@ -29,6 +29,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [samtools](samtools.md)
 * [SOAPdenovo2](SOAPdenovo2.md)
 * [SolexaQA++](SolexaQA.md)
+* [stringtie](stringtie.md)
 * [tophat](tophat.md)
 * [vcftools](vcftools.md)
 * [velvet](velvet.md)

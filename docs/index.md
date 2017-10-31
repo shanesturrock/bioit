@@ -34,6 +34,7 @@ Start at the [Installation](Installation.md) page.
 * [samtools](samtools.md)
 * [SOAPdenovo2](SOAPdenovo2.md)
 * [SolexaQA++](SolexaQA.md)
+* [stringtie](stringtie.md)
 * [tophat](tophat.md)
 * [vcftools](vcftools.md)
 * [velvet](velvet.md)
