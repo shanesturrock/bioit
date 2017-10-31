@@ -37,6 +37,7 @@ Cell Biology.
 %post
 alternatives \
    --install %{_bindir}/tophat tophat /opt/bioit/%{name}/%{version}/bin/tophat %{priority} \
+   --slave %{_bindir}/tophat2 tophat2 /opt/bioit/%{name}/%{version}/bin/tophat2 \
    --slave %{_bindir}/bam2fastx bam2fastx /opt/bioit/%{name}/%{version}/bin/bam2fastx \
    --slave %{_bindir}/bam_merge bam_merge /opt/bioit/%{name}/%{version}/bin/bam_merge \
    --slave %{_bindir}/bed_to_juncs bed_to_juncs /opt/bioit/%{name}/%{version}/bin/bed_to_juncs \
