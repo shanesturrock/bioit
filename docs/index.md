@@ -38,3 +38,4 @@ Start at the [Installation](Installation.md) page.
 * [tophat](tophat.md)
 * [vcftools](vcftools.md)
 * [velvet](velvet.md)
+* [vsearch](vsearch.md)

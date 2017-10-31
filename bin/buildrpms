@@ -31,3 +31,4 @@ rpmbuild -bb $script_dir/../apps/stringtie/SPEC/stringtie.spec
 rpmbuild -bb $script_dir/../apps/tophat/SPEC/tophat.spec
 rpmbuild -bb $script_dir/../apps/vcftools/SPEC/vcftools.spec
 rpmbuild -bb $script_dir/../apps/velvet/SPEC/velvet.spec
+rpmbuild -bb $script_dir/../apps/vsearch/SPEC/velvet.spec

@@ -36,6 +36,7 @@
       <packagereq type="mandatory">tophat</packagereq>
       <packagereq type="mandatory">vcftools</packagereq>
       <packagereq type="mandatory">velvet</packagereq>
+      <packagereq type="mandatory">vsearch</packagereq>
     </packagelist>
   </group>
 </comps>

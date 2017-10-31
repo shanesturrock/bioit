@@ -33,3 +33,4 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [tophat](tophat.md)
 * [vcftools](vcftools.md)
 * [velvet](velvet.md)
+* [vsearch](vsearch.md)
