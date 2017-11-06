@@ -1,11 +1,11 @@
-%define priority 21400
+%define priority 21401
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.14.0
+Version:	2.14.1
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -18,7 +18,7 @@ Requires:	java >= 1:1.8.0
 Requires(post):   %{_sbindir}/alternatives
 # Postun requires alternatives to uninstall tool alternatives.
 Requires(postun): %{_sbindir}/alternatives
-Obsoletes:	picard-2.13.1
+Obsoletes:	picard-2.14.0
 %description
 
 Picard comprises Java-based command-line utilities that manipulate SAM
@@ -42,6 +42,14 @@ fi
 %files
 
 %changelog
+* Tue Nov 07 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.1-1
+- LiftoverVcf performance improvements (#947)
+- Misc MarkDuplicates refactoring (#965)
+- Allele subsetting code was broken when PL was missing. Got bad NPE. (#963)
+- Bugfix for UmiAwareMDWMC
+- fixes #935 so that RANDOM_SEED=null is a working option.
+- Make Transition enum public (#958)
+
 * Tue Oct 31 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.0-1
 - Add unit test for FIRST_TILE and TILE_LIMIT features. (#914)
 - ExtractIlluminaBarcodes throws a NullPointerException in the case of an empty

@@ -1,11 +1,11 @@
-%define priority 3764
+%define priority 3766
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.64
+Version:	37.66
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -177,6 +177,28 @@ fi
 %files
 
 %changelog
+* Tue Nov 07 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.66-1
+- 37.65
+  - TaxServer now caps sketch load threads at 2 for local files.
+  - Added numChildren, minParentLevelExtended, and maxChildLevelExtended fields
+    to TaxNode.
+  - Added printChildren and printRange to taxonomy server URL parsing.
+- 37.66
+  - Changed tax server error response codes from 200 to 400.
+  - Rewrote tax server URL parsing to be more flexible; /tax/ is no longer
+    needed (though /sketch/ is).
+  - Broke down server timing reports by local, remote, and usage.
+  - Added TaxTree.getChildren() using a hashtable.
+  - Depth and merge flags now work in sketch server local mode.
+  - TaxServer has now enabled multithreaded local fastq sketch loading and
+    capped the threads at 4 instead of 2 by default.
+  - TaxServer handlers are now multithreaded, fixing poor response time when
+    loading data in local mode.
+  - RQCFilter now adds the original filename and organism name (if known) to
+    sketch 
+  - query headers.
+  - RQCFilter now reports which microbes were used in filtering.
+
 * Tue Oct 31 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.64-1
 - 37.59
   - Increased memory for RefSeq sketches by 1g.

@@ -26,12 +26,12 @@ tar xvf v${VERSION}.tar.gz
 cd bamtools-${VERSION}
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/bamtools/2.4.1 ..
+cmake3 -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/bamtools/${VERSION} ..
 make all
 make install
 echo "Copy bamtools script"
 cd /opt/bioit/bamtools/${VERSION}
-cp ${HOME}/bioit/apps/bamtools/SPEC/bamtools /opt/bioit/bamtools/2.4.1/
+cp ${HOME}/bioit/apps/bamtools/SPEC/bamtools /opt/bioit/bamtools/${VERSION}/
 echo "Writing modulefile"
 echo "#%Module 1.0
 #
