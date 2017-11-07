@@ -8,7 +8,7 @@ Inside `${HOME}/bioit/apps/bwa/SPEC` there is a script called `build`. This j
 ust requires the version number and will download, compile, install and create t
 he modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/bwa/SPEC/build 0.7.16a
+    ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
 
 When that completes check that the new version is available using:
 
@@ -16,7 +16,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load bwa/0.7.16a
+    module load bwa/0.7.17
     which bwa
     bwa
 
@@ -28,11 +28,11 @@ The `Makefile` is pretty basic so just type `make`
 
 When that completes you need to do the following:
 
-    mkdir -p ../../0.7.16a/bin
-    mkdir -p ../../0.7.16a/man/man1
-    mv bwa ../../0.7.16a/bin/
-    mv *.pl ../../0.7.16a/bin
-    mv bwa.1 ../../0.7.16a/man/man1/
+    mkdir -p ../../0.7.17/bin
+    mkdir -p ../../0.7.17/man/man1
+    mv bwa ../../0.7.17/bin/
+    mv *.pl ../../0.7.17/bin
+    mv bwa.1 ../../0.7.17/man/man1/
 
 ## Module setup
 
@@ -42,8 +42,8 @@ Add a module file in `/opt/bioit/modulefiles/bwa/` for this version by copying p
     #
     #  bwa module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/bwa/0.7.16a/bin
-    prepend-path  MANPATH      /opt/bioit/bwa/0.7.16a/man
+    prepend-path  PATH         /opt/bioit/bwa/0.7.17/bin
+    prepend-path  MANPATH      /opt/bioit/bwa/0.7.17/man
 
 ## RPM
 

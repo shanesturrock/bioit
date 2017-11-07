@@ -1,11 +1,11 @@
-%define priority 0716
+%define priority 0717
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           bwa
-Version:        0.7.16a
+Version:        0.7.17
 Release:        1%{?dist}
 Summary:        Burrows-Wheeler Alignment tool
 Group:          Applications/Engineering
@@ -42,6 +42,12 @@ fi
 %files
 
 %changelog
+* Wed Nov 08 2017 Shane Sturrock <shane.sturrock@gmail.com> - 0.7.17-1
+- This release adds option -q to preserve the mapping quality of split
+  alignment with a lower alignment score than the primary alignment. Option -5
+  automatically applies -q as well. BWA outputs identical alignments to the
+  previous version unless option -5 is used.
+
 * Tue Aug 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 0.7.16a-1
 - This release added a couple of minor features and incorporated multiple pull
   requests, including:
