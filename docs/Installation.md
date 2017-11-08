@@ -2,6 +2,11 @@
 
 ## Install a standard CentOS 7 environment
 
+After a minimal install you should install the MATE Desktop since that will be needed for users.
+
+    yum -y groupinstall "Mate Desktop"
+    yum -y install firefox libreoffice
+
 Once installed and all updates applied, EPEL needs to be installed by running the following:
 
     yum -y install epel-release
@@ -41,7 +46,7 @@ Untar the `bioit.tgz` file in `/opt` using the following:
 
 The `/opt/bioit` directory has a number of tools built from source. Run the following command to install the required packages to compile these tools and use them:
 
-    yum -y install ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build git screen htop root root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel python-devel python-nose perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env perl-Statistics-Descriptive cmake3 emacs perl-Perl4-CoreLibs
+    yum -y install ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build git screen htop root root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel python-devel python-nose perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env perl-Statistics-Descriptive cmake3 emacs perl-Perl4-CoreLibs lapack-devel mpich-devel java-1.6.0-openjdk-devel zeromq-devel ghc
 
 Note that there are module files in `/opt/bioit/modulefiles` which will set up the environment for users when they need to choose a specific version. To enable this create `/etc/profile.d/bioit.sh` with the following line:
 
@@ -116,9 +121,6 @@ Enable and start the service
 ## Install remote desktop
 
     yum -y install x2goserver-xsession
-    yum -y groupinstall "Xfce"
-    yum -y install firefox libreoffice
-    yum -y groupinstall "MATE Desktop"
 
 This should now allow you to install the latest x2go client for your platform and connect to the server via the GUI with the choice of XFCE or MATE Desktop environments.
 
