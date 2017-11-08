@@ -3,6 +3,7 @@
 script_dir="$(dirname $(readlink -f $0))"
 
 # Create install location (requires sudo)
+echo "export MODULEPATH=/opt/bioit/modulefiles:/usr/share/Modules/modulefiles:/etc/modulefiles" > /etc/profile.d/bioit.sh
 sudo mkdir /opt/bioit
 sudo chown build:build /opt/bioit
 # Copy module files and repository files
