@@ -2,6 +2,12 @@
 
 ## Introduction
 
+The BioIT packages can be installed by cloning the bioit GitHub repository as follows:
+
+    git clone https://github.com/shanesturrock/bioit.git
+
+Once that is done, you should be able to run ~/bioit/bin/setup_bioit and it will do all the work.
+
 All the packages are compiled as versions in `/opt/bioit` but by default they're not in the user's path unless they choose them with module load. RPMs have been created that set alternatives up to allow them to be run without calling module load and also allows the system to maintain updates and provide changelogs. To set this up, first make sure that `/opt/bioit` is installed on the machine and the modules are setup as per the Installation page. Once that is done, follow the instructions here to create the repository and then install all packages.
 
 ## Set up the repository on a new machine

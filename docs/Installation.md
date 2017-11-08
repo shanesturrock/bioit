@@ -1,15 +1,19 @@
 # Installation
 
-## Install a standard CentOS 7 environment
+## Install a minimal CentOS 7 environment
 
-After a minimal install you should install the MATE Desktop since that will be needed for users.
-
-    yum -y groupinstall "Mate Desktop"
-    yum -y install libreoffice
-
-Once installed and all updates applied, EPEL needs to be installed by running the following:
+After a minimal install you should install EPEL, compilers and a GUI since they will be needed for users.
 
     yum -y install epel-release
+    yum -y groupinstall "Development Tools"
+    yum -y groupinstall "X Window System"
+    yum -y groupinstall "Mate Desktop"
+    yum -y install libreoffice
+    systemctl set-default graphical.target
+    yum -y update
+    reboot
+
+The machine should now come back up with a full GUI running.
 
 Install `wget` as this makes it much easier to download packages:
 
@@ -39,20 +43,9 @@ If there's a bad kernel issue comment this line out, update the kernel and reboo
 
 ## Tools required for application support
 
-Untar the `bioit.tgz` file in `/opt` using the following:
-
-    cd /opt
-    tar xvf bioit.tgz
-
-The `/opt/bioit` directory has a number of tools built from source. Run the following command to install the required packages to compile these tools and use them:
+The following packages are required for building the suite of applications on a fresh BioIT server:
 
     yum -y install ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build git screen htop root root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel python-devel python-nose perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env perl-Statistics-Descriptive cmake3 emacs perl-Perl4-CoreLibs lapack-devel mpich-devel java-1.6.0-openjdk-devel zeromq-devel ghc
-
-Note that there are module files in `/opt/bioit/modulefiles` which will set up the environment for users when they need to choose a specific version. To enable this create `/etc/profile.d/bioit.sh` with the following line:
-
-    export MODULEPATH=/opt/bioit/modulefiles:/usr/share/Modules/modulefiles:/etc/modulefiles
-
-Now all users will be able to see the modules and can select specific versions.
 
 Defaults tools and changelogs are provided by the meta-RPMS that are built to set alternatives with symlinks into `/usr/bin` so they'll see them as usual. To set this up go to the [BioIT repository](BioIT-repository.md) page, but not just yet.
 
@@ -122,7 +115,7 @@ Enable and start the service
 
     yum -y install x2goserver-xsession
 
-This should now allow you to install the latest x2go client for your platform and connect to the server via the GUI with the choice of XFCE or MATE Desktop environments.
+This should now allow you to install the latest x2go client for your platform and connect to the server via the GUI MATE Desktop environment.
 
 ## Next Step
 
