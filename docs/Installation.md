@@ -5,7 +5,7 @@
 After a minimal install you should install the MATE Desktop since that will be needed for users.
 
     yum -y groupinstall "Mate Desktop"
-    yum -y install firefox libreoffice
+    yum -y install libreoffice
 
 Once installed and all updates applied, EPEL needs to be installed by running the following:
 
