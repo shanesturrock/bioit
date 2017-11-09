@@ -18,7 +18,7 @@ cd /opt/bioit
 mkdir -p abyss/src augustus/src bamtools/src bbmap/src bcftools/src bedtools2/src bismark/src bowtie/src \
   bowtie2/src bwa/src cutadapt/src ea-utils/src FastQC/src hisat2/src hmmer/src htslib/src igv/src \
   ncbi-blast/src picard/src R-core/src samtools/src SOAPdenovo2/src \
-  SolexaQA++/src stringtie/src tophat2/src vcftools/src velvet/src vsearch/src
+  SolexaQA++/src stringtie/src tophat/src vcftools/src velvet/src vsearch/src
 # Build all packages from source
 sh ${script_dir}/buildall
 sh ${script_dir}/buildrpms
