@@ -1,11 +1,11 @@
-%define priority 21401
+%define priority 21500
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.14.1
+Version:	2.15.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -42,6 +42,9 @@ fi
 %files
 
 %changelog
+* Tue Nov 14 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.0-1
+- Adds option to validator to skip mate validation (#973)
+
 * Tue Nov 07 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.1-1
 - LiftoverVcf performance improvements (#947)
 - Misc MarkDuplicates refactoring (#965)

@@ -1,11 +1,11 @@
-%define priority 252
+%define priority 260
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.5.2
+Version:	2.6.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,13 @@ fi
 %files
 
 %changelog
+* Tue Nov 14 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.6.0-1
+- Rewritten paired-end reads merger with improved accuracy. 
+- Decreased default value for fastq_minovlen option from 16 to 10. 
+- The default value for the fastq_maxdiffs option is increased from 5 to 10. 
+- There are now other more important restrictions that will avoid merging reads
+  that cannot be reliably aligned.
+
 * Tue Oct 31 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.5.2-1
 - Fix bug with '-' not treated as stdin when used as argument to fastq_eestats2
   option.

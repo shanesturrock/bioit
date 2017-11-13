@@ -1,11 +1,11 @@
-%define priority 2403
+%define priority 2404
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.4.3
+Version:	2.4.4
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Tue Nov 14 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.4-1
+- null check for sequence tile
+
 * Tue Oct 31 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.3-1
 - Fix NPE error when restoring session
 
