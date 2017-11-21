@@ -1,11 +1,11 @@
-%define priority 3766
+%define priority 3767
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.66
+Version:	37.67
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -177,6 +177,45 @@ fi
 %files
 
 %changelog
+* Wed Nov 22 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.67-1
+- Fixed a extended/normal level bug when widening TaxFilter.
+- Updated CoveragePilup (pileup.sh) to give a more detailed summary, and import
+  scaffold names from the reference sequences (default true) or reads (default
+  false).
+- Fixed crash when SamTools version string contains letters.
+- RQCFilter now gathers chloro, ribo, mito references for mapping at the
+  species level by default, rather than order.  This dramatically speeds up
+  mapping, by 20x in some cases.
+- Pileup now calculates kmer coverage.
+- BBMap can now output coverage statistics with the cov flag even if there are
+  no coverage files specified.
+- Reformat can now calculate kmer statistics via the k flag.
+- Reformat now ties loglog k to counting k.
+- Setting loglogk now atomatically enables loglog.
+- Fixed order of the conditional last column (name0) in Sketch output.
+- Sketch format 3 now prints qsize and rsize instead of size ratio.
+- RepresentativeSet now expects potentially 5 columns, with qsize and rsize.
+- Clarified an assertion error in Seal.
+- Added taxonomic filtering to RepresentativeSet.
+- RepresentativeSet now prints the size of genomes retained and discarded.
+- Strain can now be assigned to children of subspecies.
+- TaxServer now prints children for life node.
+- JsonObject now ignores attempts to add null values, preventing TaxServer from
+  crashing.
+- Comparison.taxID() and imgID() now return -1 rather than 0 if the number is
+  undefined.
+- Tweaked RepresentativeSet sorting to favor larger genomes; yields a slightly
+  smaller output.
+- Added pJET and lambda to BBMap resources.
+- remote_files now additionally lists cat, dog, mouse, and microbial
+  references.
+- Sketch format 3 now prints out query size in bases, to avoid including
+  massive sets of E.coli all listed under the same taxID.
+- Added DedupeProtein, via the amino flag in dedupe.sh.
+- Fixed a bug in Dedupe in which sequences could subsume each other if both
+  contained the other.  This mainly happened when they were the same length but
+  differed by substitutions.
+
 * Tue Nov 07 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.66-1
 - 37.65
   - TaxServer now caps sketch load threads at 2 for local files.

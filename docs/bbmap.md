@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/bbmap/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the module file for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/bbmap/SPEC/build 37.66
+    ${HOME}/bioit/apps/bbmap/SPEC/build 37.67
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load bbmap/37.66
+    module load bbmap/37.67
     which bbduk.sh
     bbduk.sh --version
 
@@ -28,9 +28,9 @@ Download the version to be built into `/opt/bioit/bbmap/src` and untar
 
 There's nothing to actually build so just run the following to move the files and correct the permissions:
 
-    mv bbmap ../37.66
-    chmod 755 ../37.66
-    cd ../37.66
+    mv bbmap ../37.67
+    chmod 755 ../37.67
+    cd ../37.67
     chmod -R 755 *
 
 ## Module setup
@@ -41,28 +41,28 @@ Add a module file in `/opt/bioit/modulefiles/bbmap/` for this version by copying
     #
     #  bbmap module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/bbmap/37.66
+    prepend-path  PATH         /opt/bioit/bbmap/37.67
 
 ## RPM
 
-There's a SPEC file for this package in `${HOME}/bioit/apps/bbmap/SPEC` so modify that with the new version details. The `/opt/bioit/bbmap/37.66/doc/changelog.txt` will give you the details for the `%changelog` section of the SPEC file.
+There's a SPEC file for this package in `${HOME}/bioit/apps/bbmap/SPEC` so modify that with the new version details. The `/opt/bioit/bbmap/37.67/doc/changelog.txt` will give you the details for the `%changelog` section of the SPEC file.
 
 Once changed, build it with the following command:
 
     rpmbuild -bb bbmap.spec
 
-This will create an RPM file which you can find in `${HOME}/rpmbuild/RPMS/x86_66
+This will create an RPM file which you can find in `${HOME}/rpmbuild/RPMS/x86_64
 `. It checks that the installation directory exists and will fail if it isn't th
 ere.
 
 Before you install this, you need to sign it using:
 
     rpm --addsign \
-    ${HOME}/rpmbuild/RPMS/x86_64/bbmap-37.66-1.el7.bioit.x86_64.rpm
+    ${HOME}/rpmbuild/RPMS/x86_64/bbmap-37.67-1.el7.bioit.x86_64.rpm
 
 Now you can move it to `/opt/bioit/repo/RPMS`
 
-    mv ${HOME}/rpmbuild/RPMS/x86_64/bbmap-37.66-1.el7.bioit.x86_64.rpm \
+    mv ${HOME}/rpmbuild/RPMS/x86_64/bbmap-37.67-1.el7.bioit.x86_64.rpm \
     /opt/bioit/repo/RPMS
 
 Lastly, run the `buildrepo` command:

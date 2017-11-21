@@ -134,4 +134,4 @@ To add a new package you can reference one of the earlier ones that may be very 
 
 ## Next Step
 
-Go to the [Applications](applications.md) page.
+Go to the [Applications](Applications.md) page.
