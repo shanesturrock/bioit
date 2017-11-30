@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 342
+%define priority 343
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        3.4.2
+Version:        3.4.3
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -42,6 +42,31 @@ fi
 %files
 
 %changelog
+* Fri Dec 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 3.4.3-1
+- INSTALLATION on a UNIX-ALIKE:
+  - A workaround has been added for the changes in location of time-zone files
+    in macOS 10.13 'High Sierra' and again in 10.13.1, so the default time zone
+    is deduced correctly from the system setting when R is configured with
+    --with-internal-tzcode (the default on macOS).
+  - R CMD javareconf has been updated to recognize the use of a Java 9 SDK on
+    macOS.
+- BUG FIXES:
+  - raw(0) & raw(0) and raw(0) | raw(0) again return raw(0) (rather than
+    logical(0)).
+  - intToUtf8() converts integers corresponding to surrogate code points to NA
+    rather than invalid UTF-8, as well as values larger than the current
+    Unicode maximum of 0x10FFFF.  (This aligns with the current RFC3629.)
+  - Fix calling of methods on S4 generics that dispatch on ... when the call
+    contains ....
+  - Following Unicode 'Corrigendum 9', the UTF-8 representations of U+FFFE and
+    U+FFFF are now regarded as valid by utf8ToInt().  range(c(TRUE, NA), finite
+    = TRUE) and similar no longer return NA. (Reported by Lukas Stadler.)
+  - The self starting function attr(SSlogis, "initial") now also works when the
+    y values have exact minimum zero and is slightly changed in general,
+    behaving symmetrically in the y range.
+  - The printing of named raw vectors is now formatted nicely as for
+    other such atomic vectors, thanks to Lukas Stadler.
+
 * Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 3.4.2-1
 - NEW FEATURES
   - Setting the LC_ALL category in Sys.setlocale() invalidates any cached
