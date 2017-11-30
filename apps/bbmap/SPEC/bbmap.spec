@@ -1,11 +1,11 @@
-%define priority 3767
+%define priority 3768
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.67
+Version:	37.68
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -177,6 +177,12 @@ fi
 %files
 
 %changelog
+* Fri Dec 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.68-1
+- Added Clumpify allowNs flag.
+- Clumpify can now process containments and affixes.
+- clumpify.sh no longer prints out the java version.
+- Clumpify now supports a dupesubrate flag.
+
 * Wed Nov 22 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.67-1
 - Fixed a extended/normal level bug when widening TaxFilter.
 - Updated CoveragePilup (pileup.sh) to give a more detailed summary, and import

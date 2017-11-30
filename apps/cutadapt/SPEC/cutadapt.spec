@@ -1,11 +1,11 @@
-%define priority 114
+%define priority 115
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	1.14
+Version:	1.15
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,9 @@ fi
 %files
 
 %changelog
+* Fri Dec 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.15-1
+- Require the most recent xopen
+
 * Tue Aug 15 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.14-1
 - Fix: Statistics for 3' part of a linked adapter were reported incorrectly
 - Fix `issue #244 <https://github.com/marcelm/cutadapt/issues/244>`_: Quality

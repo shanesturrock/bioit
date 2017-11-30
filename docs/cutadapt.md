@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/cutadapt/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/cutadapt/SPEC/cutadapt 1.14
+    ${HOME}/bioit/apps/cutadapt/SPEC/cutadapt 1.15
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load cutadapt/1.14
+    module load cutadapt/1.15
     which cutadapt
     cutadapt --version
 
@@ -22,9 +22,9 @@ If all is good, you can move to the RPM building step.
 
 ## Manual Build
 
-Download the source tarball from [here](https://github.com/marcelm/cutadapt/archive/v1.14.tar.gz) into `/opt/bioit/cutadapt/src`, untar it and cd into the resulting directory then run the following:
+Download the source tarball from [here](https://github.com/marcelm/cutadapt/archive/v1.15.tar.gz) into `/opt/bioit/cutadapt/src`, untar it and cd into the resulting directory then run the following:
 
-    cd cutadapt-1.14
+    cd cutadapt-1.15
 
 You will need to download cython to do the build:
 
@@ -33,22 +33,22 @@ You will need to download cython to do the build:
 
 To use cython you need to modify the PYTHONPATH and PATH variables:
 
-    export PYTHONPATH=/opt/bioit/cutadapt/src/cutadapt-1.14/cython-0.26
-    export PATH=/opt/bioit/cutadapt/src/cutadapt-1.14/cython-0.26/bin:$PATH
+    export PYTHONPATH=/opt/bioit/cutadapt/src/cutadapt-1.15/cython-0.26
+    export PATH=/opt/bioit/cutadapt/src/cutadapt-1.15/cython-0.26/bin:$PATH
 
 Now build it:
 
     python setup.py build_ext -i
     python setup.py build
     # This next bit is needed to allow for a check that it exists
-    mkdir -p /opt/bioit/cutadapt/1.14/lib64/python2.7/site-packages/
-    export PYTHONPATH=/opt/bioit/cutadapt/1.14/lib64/python2.7/site-packages/:
+    mkdir -p /opt/bioit/cutadapt/1.15/lib64/python2.7/site-packages/
+    export PYTHONPATH=/opt/bioit/cutadapt/1.15/lib64/python2.7/site-packages/:
     $PYTHONPATH
-    python setup.py install --prefix=/opt/bioit/cutadapt/1.14
+    python setup.py install --prefix=/opt/bioit/cutadapt/1.15
 
 Copy script that sets PYTHONPATH for users and then runs cutadapt:
 
-    cp ${HOME}/bioit/apps/cutadapt/SPEC/cutadapt /opt/bioit/cutadapt/1.14/cutadapt
+    cp ${HOME}/bioit/apps/cutadapt/SPEC/cutadapt /opt/bioit/cutadapt/1.15/cutadapt
 
 That should be it.
 
@@ -60,7 +60,7 @@ Add a module file in `/opt/bioit/modulefiles/cutadapt/` for this version by copy
     #
     #  cutadapt module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/cutadapt/1.14
+    prepend-path  PATH         /opt/bioit/cutadapt/1.15
 
 ## RPM
 
