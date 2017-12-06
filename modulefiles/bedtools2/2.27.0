@@ -1,0 +1,5 @@
+#%Module 1.0
+#
+#  bedtools2 module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/bedtools2/2.27.0/bin

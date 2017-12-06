@@ -1,11 +1,11 @@
-%define priority 21500
+%define priority 21600
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.15.0
+Version:	2.16.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -42,6 +42,12 @@ fi
 %files
 
 %changelog
+* Thu Dec 07 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.16.0-1
+- Tool to split unmapped SAM/BAM (#964)
+- Enable LiftOverVcf to emit a variant when the reference base has changed
+  (#971)
+- tag for documentation (6) and beta and experimental categorization (3)
+
 * Tue Nov 14 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.0-1
 - Adds option to validator to skip mate validation (#973)
 

@@ -1,0 +1,5 @@
+#%Module 1.0
+#
+#  bamtools module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/bamtools/2.5.0

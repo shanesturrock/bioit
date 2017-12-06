@@ -1,11 +1,11 @@
-%define priority 3768
+%define priority 3772
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.68
+Version:	37.72
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -177,6 +177,45 @@ fi
 %files
 
 %changelog
+* Thu Dec 07 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.72-1
+- 37.69
+  - Renamed kapatags.L40.fasta to kapatags.L40.fa and pJET1.2.fasta to
+    pJET1.2.fa.
+  - Added kapa support to RQCFilter.
+  - Added pjet, lambda, mtst, and kapa keywords to BBDuk.
+  - Added pjet, lambda, mtst, kapa, adapters, artifacts, and phix keywords to
+    Seal to mirror BBDuk.
+  - Moved breakReads from Reformat to Tools.
+  - Wrote PreParser to allow output stream redirection.
+  - Converted most classes to using PreParser.
+  - Removed MakeCoverageHistogram.
+  - Deprecated NormAndCorrectWrapper.
+  - Generally got rid of printOptions(); help is in shellscripts, not code.
+    This is handled in PreParser now.
+- 37.70
+  - Tightened project error and warning levels for compilation; modified a
+    large amount of code to comply.
+  - Deleted a redundant copy of KillSwitch.
+  - Deleted redudant copies of safe array allocators.
+- 37.71
+  - Eliminated hyphen-stripping, java flag parsing, and null flag replacement
+    from PreParser classes.
+  - outstreams are now always closed in main, except in rare cases like
+    TaxServer.
+  - Added outstream to a few classes like BBMerge.
+- 37.72
+  - Moved some TaxServer parsing to ServerTools.
+  - TaxServer no longer allows external file access by default.
+  - TaxServer logs ip addresses of malformed queries.
+  - Rewrote ServerTools.sendAndRecieve to be more robust.
+  - Changed URLConnection to HttpURLConnection to allow error stream access.
+  - Fixed a bug not displaying help in RemoveHuman.
+  - calcmem.sh now supports SLURM_MEM_PER_NODE.  However this is only set when
+    the --mem= flag is specified for job submission.
+  - Sketch metadata is now set in SketchMaker for per-taxa and per-sequence
+    modes.
+  - Sketch results can now be filtered by optional metadata fields.
+
 * Fri Dec 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.68-1
 - Added Clumpify allowNs flag.
 - Clumpify can now process containments and affixes.

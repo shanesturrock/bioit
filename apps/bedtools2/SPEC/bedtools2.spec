@@ -1,11 +1,11 @@
-%define priority 2260
+%define priority 2270
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bedtools2
-Version:	2.26.0
+Version:	2.27.0
 Release:	1%{?dist}
 Summary:	Tools for handing BED files
 Group:		Applications/Engineering
@@ -77,6 +77,28 @@ fi
 %files
 
 %changelog
+* Thu Dec 07 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.27.0-1
+- Fixed a big memory leak and algorithmic flaw in the split option. Thanks to
+  Neil Kindlon!
+- Resolved compilation errors on OSX High Sierra. Many thanks to @jonchang!
+- Fixed a bug in the shift tool that caused some intervals to exceed the end of
+  the chromosome. Thanks to @wlholtz
+- Fixed major bug in groupby that prevented proper functionality.
+- Speed improvements to the shuffle tool.
+- Bug fixes to the p-value calculation in the fisher tool. Thanks to Brent
+  Pedersen.
+- Allow BED headers to start with chrom or chr
+- Fixes to the "k-closest" functionality in the closest tool. Thanks to Neil
+  Kindlon.
+- Fixes to the output of the freqasc, freqdesc, distinct_sort_num and
+  distinct_sort, and num_desc operations in the groupby tool. Thanks to @ghuls.
+- Many minor bug fixes and compilation improvements from Luke Goodsell.
+- Added the -fullHeader option to the maskfasta tool. Thanks to @ghuls.
+- Many bug fixes and performance improvements from John Marshall.
+- Fixed bug in the -N/-f behavior in subtract.
+- Full support for .fai files as genome (-g) files.
+- Many other minor bug fixes and functionality improvements.
+
 * Tue Jun 27 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.0-1
 - Fixed a major memory leak when using -sorted. Thanks to Emily Tsang and
   Stephen Montgomery.

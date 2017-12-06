@@ -1,11 +1,11 @@
-%define priority 242
+%define priority 250
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bamtools
-Version:	2.4.2
+Version:	2.5.0
 Release:	1%{?dist}
 Summary:	Tools for handing BAM files
 Group:		Applications/Engineering
@@ -39,6 +39,9 @@ fi
 %files
 
 %changelog
+* Thu Dec 07 2017 Shane Sturrock <shane.sturrock@gmail.com> 2.5.0-1
+- Added support for long CIGARs (>64K operations).
+
 * Tue Nov 07 2017 Shane Sturrock <shane.sturrock@gmail.com> 2.4.2-1
 - Make codebase C++98/11/14 agnostic. Due to some C++98-era coding niggles,
   BamTools would not build when compiled in C++11 or C++14 mode. This has been
