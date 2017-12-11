@@ -1,11 +1,11 @@
-%define priority 3772
+%define priority 3775
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.72
+Version:	37.75
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -177,6 +177,28 @@ fi
 %files
 
 %changelog
+* Tue Dec 12 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.75-1
+- 37.73
+  - Re-added libbbtoolsjni.so, which had somehow been removed.
+  - Wrote DiskBench.java and diskbench.sh for comparing multithreaded I/O on
+    local and networked disks.
+  - Added RQCFilter flags for Clumpify groups and tmpdir.
+- 37.74
+  - Sketch servers now log the first 3 lines of the body of malformed queries
+    to help diagnose the problem.
+  - mouseCatDogHumanPath added to RQCFilter.
+  - Changed parse order of silva flag in TaxServer.
+  - Added RQCFilter dryrun flag.
+  - Split RQCFilter aggressive flag into aggressivehuman and aggressivemicrobe.
+  - Sketch servers no longer return error messages when query sketches are size
+    0.
+  - Fixed a parse bug allowing minkeycount to be 0 for sketch processing.
+  - Sketch k2 can now only be set via k.
+  - Sketch k2 can no longer be set to k.
+  - Enabled verbose output from SketchTool (for debugging).
+- 37.75
+  - Fixed AssemblyStats default outstream and printing Executing... message.
+
 * Thu Dec 07 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.72-1
 - 37.69
   - Renamed kapatags.L40.fasta to kapatags.L40.fa and pJET1.2.fasta to

@@ -21,8 +21,10 @@ VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Building vsearch ${VERSION} on ${DATE}"
 cd /opt/bioit/vsearch/src
-wget https://github.com/torognes/vsearch/archive/v${VERSION}.tar.gz
-mv v${VERSION}.tar.gz vsearch-${VERSION}.tar.gz
+wget https://github.com/torognes/vsearch/archive/${VERSION}.tar.gz
+#wget https://github.com/torognes/vsearch/archive/v${VERSION}.tar.gz
+mv ${VERSION}.tar.gz vsearch-${VERSION}.tar.gz
+#mv v${VERSION}.tar.gz vsearch-${VERSION}.tar.gz
 tar xvf vsearch-${VERSION}.tar.gz
 cd vsearch-${VERSION}
 ./autogen.sh
