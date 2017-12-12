@@ -1,11 +1,11 @@
-%define priority 3775
+%define priority 3776
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.75
+Version:	37.76
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -177,6 +177,18 @@ fi
 %files
 
 %changelog
+* Wed Dec 13 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.76-1
+- Added Shared.threadLocalRandom() to produce a ThreadLocalRandom when
+  supported, and otherwise a Random.
+- Converted some programs to use Shared.threadLocalRandom(), but not BBNorm
+  since it uses .nextLong(long).
+- DiskBench is now much faster in generating random text.
+- TestFilesystem now supports multiple sequential files and is probably
+  generating correct data.
+- ReadWrite can now getRawOutputStream for /dev/null/* and will remove the *
+  portion. This is much faster than writing to /dev/shm/*
+- Removed an invalid assertion from RepresentativeSet.
+
 * Tue Dec 12 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.75-1
 - 37.73
   - Re-added libbbtoolsjni.so, which had somehow been removed.
