@@ -1,11 +1,11 @@
-%define priority 2270
+%define priority 2271
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bedtools2
-Version:	2.27.0
+Version:	2.27.1
 Release:	1%{?dist}
 Summary:	Tools for handing BED files
 Group:		Applications/Engineering
@@ -77,6 +77,9 @@ fi
 %files
 
 %changelog
+* Mon Dec 18 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.27.1-1
+- Fixed a bug in the Makefile that caused a substantial penalty in performance.
+
 * Thu Dec 07 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.27.0-1
 - Fixed a big memory leak and algorithmic flaw in the split option. Thanks to
   Neil Kindlon!
