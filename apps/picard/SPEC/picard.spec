@@ -1,11 +1,11 @@
-%define priority 21600
+%define priority 21702
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.16.0
+Version:	2.17.2
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -42,6 +42,47 @@ fi
 %files
 
 %changelog
+* Tue Jan 09 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.2-1
+- 2.17.0
+  - Adding mode and 95th percentile to InsertSizeMetrics. (#1001)
+  - Bug fix: CollectWgsMetricsWithNonZeroCoverage fails to produce a plot
+    (#1031)
+  - Changes: (#1006)
+  - Add additional LiftoverVcf tests (#1011)
+  - Enable FilterVcf to filter "sites only" VCFs (#962)
+  - Add KEEP_FIRST_DUPLICATE option to RevertSam. (#1029)
+  - Update ExtractIlluminaBarcodes.java (#977)
+  - incorporate htsjdk 2.13.1 (#1007)
+  - Fix up adapter clipping tags after an adapter is selected (#1020)
+- 2.17.1
+  - Fixes for LiftoverVcf (#1039)
+- 2.17.2
+  - Yf documentation update 2 (#1028)
+  - Remove extra newline in IntervalListTools summary line. (#1054)
+  - Upgrade to Barclay 2.0.0. (#1053)
+  - Documentation update for several command-line tools (#1021)
+  - Yf documentation update 3 (#1045)
+  - Enhances MergeVcfs documentation (#1012)
+  - New program group definitions and tool assignments. (#1043)
+  - Only check expected output cycles (#1049)
+  - MOAR tests for LiftOverVcf (#1050)
+  - Documentation Updates (#1051)
+  - responding to comments, adding ViewSam
+  - Make TargetMetrics public (#1048)
+  - Pull out some of the metrics being fixed in HsMetricsCollector into a
+    separate method (#1046)
+  - Updating documentation on ValidateSamFile
+  - Improving SamToFastq documentation
+  - Updating UmiAwareMarkDuplicates
+  - Adding comments for UmiAwareMarkDuplicates
+  - Adds FastqToSam javadoc documentation
+  - Adds javadoc documentation to GatherBamFiles
+  - Added Javadoc to BamToBfq, updating Picards's command line help to have the
+    same content.
+  - Documentation fixes for MergeSamFiles
+  - Adds documentation for CollectRawWgsMetrics and CollectTargetedPcrMetrics
+  - Adding javadoc to CollectHsMetrics
+
 * Thu Dec 07 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.16.0-1
 - Tool to split unmapped SAM/BAM (#964)
 - Enable LiftOverVcf to emit a variant when the reference base has changed

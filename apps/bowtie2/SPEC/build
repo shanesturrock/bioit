@@ -25,7 +25,7 @@ wget https://github.com/BenLangmead/bowtie2/archive/v${VERSION}.zip
 mv v${VERSION}.zip bowtie2-${VERSION}.zip
 unzip bowtie2-${VERSION}.zip
 cd bowtie2-${VERSION}
-sed "s+prefix = /usr/local+prefix = /opt/bioit/bowtie2/${VERSION}+" --in-place Makefile
+sed "s+prefix := /usr/local+prefix := /opt/bioit/bowtie2/${VERSION}+" --in-place Makefile
 sed "s+SSE_FLAG=-msse2+SSE_FLAG=-march=native+" --in-place Makefile
 make NO_TBB=1
 make install

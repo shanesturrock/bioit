@@ -1,11 +1,11 @@
-%define priority 3776
+%define priority 3778
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.76
+Version:	37.78
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -72,6 +72,7 @@ alternatives \
    --slave %{_bindir}/demuxbyname.sh demuxbyname.sh /opt/bioit/%{name}/%{version}/demuxbyname.sh \
    --slave %{_bindir}/ecc.sh ecc.sh /opt/bioit/%{name}/%{version}/ecc.sh \
    --slave %{_bindir}/estherfilter.sh estherfilter.sh /opt/bioit/%{name}/%{version}/estherfilter.sh \
+   --slave %{_bindir}/explodetree.sh explodetree.sh /opt/bioit/%{name}/%{version}/explodetree.sh \
    --slave %{_bindir}/filterassemblysummary.sh filterassemblysummary.sh /opt/bioit/%{name}/%{version}/filterassemblysummary.sh \
    --slave %{_bindir}/filterbarcodes.sh filterbarcodes.sh /opt/bioit/%{name}/%{version}/filterbarcodes.sh \
    --slave %{_bindir}/filterbycoverage.sh filterbycoverage.sh /opt/bioit/%{name}/%{version}/filterbycoverage.sh \
@@ -177,6 +178,42 @@ fi
 %files
 
 %changelog
+* Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.78-1
+- 37.77
+  - Wrote ExplodeTree and explodetree.sh, to create a directory structure
+    mirroring the tax tree.
+  - Rearranged parse order in A_SampleByteFile and A_SampleD.
+  - Added some convenience methods to TaxTree and TaxNode.
+  - Wrote LongLongHashMap.
+  - Added sequence path lookup to TaxServer.
+  - LongHashMap and LongLongHashMap no longer include invalid entries in
+    toArray().
+  - Wrote IntLongHashMap.
+  - Wrote TaxSize and taxsize.sh to generate the size of tax nodes.
+  - Added Silva header parsing to TaxServer.
+  - Added size lookup to TaxServer and created a RefSeq size file.
+  - ByteStreamWriter.print methods now return this, to allow chaining.
+  - Rewrote Read.validate() to be faster, simpler, and more modular.
+  - Read MIN_ and MAX_CALLED_QUALITY are now private, and generally replaced by
+    a remapping array.
+  - Read validation no longer turns . - X to N by default.
+  - Fixed toSemicolon method in TaxTree.
+  - Increased TaxServer default memory to 52G in response to frequent GC during
+    high query volume.
+  - ByteFile1 mode is no longer forced on Denovo or Cori.
+  - Added Parser.validateStdio() to ensure interleaving and file formats are
+    specified when piping.  Currently only enabled for BBDuk, BBMap, and
+    Reformat.
+  - Added header and more columns to RepresentativeSet.
+- 37.78
+  - Updated citation guidlines.
+  - Added validatebranchless flag and code path.
+  - Improved validatebranchless to use binary instead of boolean or.
+  - Removed invalid sequence cre_lox_lib_yadapt1 from reference collections.
+  - Changed JsonObject handling of null values to be compliant.
+  - Added JsonObject handling for floating-point types.
+  - Added Json output for Sketch results.
+
 * Wed Dec 13 2017 Shane Sturrock <shane.sturrock@gmail.com> - 37.76-1
 - Added Shared.threadLocalRandom() to produce a ThreadLocalRandom when
   supported, and otherwise a Random.

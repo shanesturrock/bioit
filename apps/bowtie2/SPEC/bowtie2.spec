@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2331
+%define priority 2340
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.3.3.1
+Version:	2.3.4
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,19 @@ fi
 %files
 
 %changelog
+* Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.4-1
+- Fixed major issue causing corrupt SAM output when using many threads
+  (-p/--threads) on certain systems.
+- Fixed an issue whereby bowtie2 processes could overwrite each others' named
+  pipes on HPC systems.
+- Fixed an issue causing bowtie2-build and bowtie2-inspect to return
+  prematurely on Windows.
+- Fixed issues raised by compiler "sanitizers" that could potentially have
+  caused memory corruption or undefined behavior.
+- Added the "continuous FASTA" input format (-F) for aligning all the k-mers in
+  the sequences of a FASTA file. Useful for determining mapability of regions
+  of the genome, and similar tasks.
+
 * Tue Oct 17 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.3.1-1
 - Fixed an issue causing input files to be skipped when running multi-threaded
   alignment

@@ -1,11 +1,11 @@
-%define priority 250
+%define priority 251
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bamtools
-Version:	2.5.0
+Version:	2.5.1
 Release:	1%{?dist}
 Summary:	Tools for handing BAM files
 Group:		Applications/Engineering
@@ -39,6 +39,9 @@ fi
 %files
 
 %changelog
+* Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> 2.5.1-1
+- Fixed the provided pkg-config file to contain correct static dependencies.
+
 * Thu Dec 07 2017 Shane Sturrock <shane.sturrock@gmail.com> 2.5.0-1
 - Added support for long CIGARs (>64K operations).
 

@@ -1,11 +1,11 @@
-%define priority 261
+%define priority 262
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.6.1
+Version:	2.6.2
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,9 @@ fi
 %files
 
 %changelog
+* Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.6.2-1
+- Fix for partially inactive xsize option.
+
 * Tue Dec 12 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.6.1-1
 - Improved parallelisation of paired end reads merging
 

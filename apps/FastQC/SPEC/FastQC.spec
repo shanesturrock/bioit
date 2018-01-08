@@ -1,11 +1,11 @@
-%define priority 0115
+%define priority 0116
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		FastQC
-Version:	0.11.5
+Version:	0.11.6
 Release:	1%{?dist}
 Summary:	A quality control application for high throughput sequence data
 Group:		Applications/Engineering
@@ -37,6 +37,15 @@ fi
 %files
 
 %changelog
+* Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.11.6-1
+- Disabled the Kmer plot by default
+- Fixed a bug when long custom adapters were being used
+- Changed the tile number cutoff to accommodate the novaseq
+- Fixed various format changes in nanopore data from ONT
+- Added new Clontech sequences to the contaminant list
+- Added a --min-length option to remove short sequences
+- Added an option to specify the output name of data streamed into the program
+
 * Wed Jun 28 2017 Shane Sturrock <shane.sturrock@gmail.com> - 0.11.5-1
 - Fixed the smallRNA adapter sequence so that abundance isn't under-represented
   in the adapter content plot

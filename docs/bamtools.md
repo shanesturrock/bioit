@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/bamtools/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.0
+    ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.1
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load bamtools/2.5.0
+    module load bamtools/2.5.1
     which bamtools
     bamtools --version
 
@@ -28,13 +28,13 @@ Inside the resulting directory run the following:
 
     mkdir build
     cd build
-    cmake3 -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/bamtools/2.5.0 ..
+    cmake3 -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/bamtools/2.5.1 ..
     make all
     make install
 
-Go into the installation directory (`/opt/bioit/bamtools/2.5.0`) and copy the launcher from `${HOME}/bioit/apps/bamtools/SPEC/bamtools` into it (not into the `bin` directory. This will sort out the location and execute bamtools with the usual options.
+Go into the installation directory (`/opt/bioit/bamtools/2.5.1`) and copy the launcher from `${HOME}/bioit/apps/bamtools/SPEC/bamtools` into it (not into the `bin` directory. This will sort out the location and execute bamtools with the usual options.
 
-    cp ${HOME}/bioit/apps/bamtools/SPEC/bamtools /opt/bioit/bamtools/2.5.0/
+    cp ${HOME}/bioit/apps/bamtools/SPEC/bamtools /opt/bioit/bamtools/2.5.1/
 
 ## Module setup
 
@@ -44,7 +44,7 @@ Add a module file in `/opt/bioit/modulefiles/bamtools/` for this version by copy
     #
     #  bamtools module for use with 'environment-modules' package:
     #
-    prepend-path  PATH              /opt/bioit/bamtools/2.5.0
+    prepend-path  PATH              /opt/bioit/bamtools/2.5.1
 
 ## RPM
 
@@ -57,11 +57,11 @@ This will create an RPM file which you can find in `${HOME}/rpmbuild/RPMS/x86_64
 Before you install this, you need to sign it using:
 
     rpm --addsign \
-    ${HOME}/rpmbuild/RPMS/x86_64/bamtools-2.5.0-1.el7.bioit.x86_64.rpm
+    ${HOME}/rpmbuild/RPMS/x86_64/bamtools-2.5.1-1.el7.bioit.x86_64.rpm
 
 Now you can move it to /opt/bioit/repo/RPMS
 
-    mv ${HOME}/rpmbuild/RPMS/x86_64/bamtools-2.5.0-1.el7.bioit.x86_64.rpm \
+    mv ${HOME}/rpmbuild/RPMS/x86_64/bamtools-2.5.1-1.el7.bioit.x86_64.rpm \
     /opt/bioit/repo/RPMS
 
 Lastly, run the `buildrepo` command:

@@ -8,7 +8,7 @@ Inside `${HOME}/bioit/apps/FastQC/SPEC` there is a script called `build`. This j
 ust requires the version number and will download, compile, install and create t
 he modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/FastQC/SPEC/build 0.11.5
+    ${HOME}/bioit/apps/FastQC/SPEC/build 0.11.6
 
 When that completes check that the new version is available using:
 
@@ -16,7 +16,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load FastQC/0.11.5
+    module load FastQC/0.11.6
     which FastQC
 
 ## Manual Build
@@ -25,8 +25,8 @@ Download the Linux zip version to be built into `/opt/bioit/FastQC/src` and unzi
 
 The resulting FastQC directory should be moved to a versioned directory and the `fastqc` command made executable:
 
-    mv FastQC ../0.11.5
-    cd ../0.11.5
+    mv FastQC ../0.11.6
+    cd ../0.11.6
     chmod 755 fastqc
 
 ## Module setup
@@ -37,7 +37,7 @@ Add a module file in `/opt/bioit/modulefiles/FastQC/` for this version by copyin
     #
     #  FastQC module for use with 'environment-modules' package:
     #
-    prepend-path  PATH              /opt/bioit/FastQC/0.11.5
+    prepend-path  PATH              /opt/bioit/FastQC/0.11.6
 
 ## RPM
 
