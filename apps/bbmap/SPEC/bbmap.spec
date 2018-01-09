@@ -1,11 +1,11 @@
-%define priority 3780
+%define priority 3781
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.80
+Version:	37.81
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -178,6 +178,13 @@ fi
 %files
 
 %changelog
+* Wed Jan 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.81-1
+- Fixed a Json display error for duplicate names.
+- Added Json parsing and printing support for escape characters and exponent
+  numbers.
+- Added Json parsing and printing support for arrays.
+- Fixed a bug in ReadWrite failing to strip path correctly.
+
 * Wed Jan 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.80-1
 - 37.79
   - RenameGiToNcbi now accepts multiple input files.
