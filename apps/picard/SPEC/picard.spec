@@ -1,11 +1,11 @@
-%define priority 21702
+%define priority 21703
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.17.2
+Version:	2.17.3
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -42,6 +42,10 @@ fi
 %files
 
 %changelog
+* Wed Jan 10 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.3-1
+- update htsjdk version to 2.14.0
+- Added missing validation for SECOND_INPUT that was causing errors.
+
 * Tue Jan 09 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.2-1
 - 2.17.0
   - Adding mode and 95th percentile to InsertSizeMetrics. (#1001)

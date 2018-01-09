@@ -1,11 +1,11 @@
-%define priority 3778
+%define priority 3780
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.78
+Version:	37.80
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -178,6 +178,20 @@ fi
 %files
 
 %changelog
+* Wed Jan 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.80-1
+- 37.79
+  - RenameGiToNcbi now accepts multiple input files.
+  - TaxServer now handles favicon.ico requests.
+  - Modified SortByName to better handle large numbers of temp files with long
+    sequences, by reducing buffers and adding a mem mult.
+  - Redid JsonObject to remove name field.
+  - Wrote JsonParser.
+  - Added stopcov option to Pileup.
+  - Fixed a bug with reporting invalid bases in Read.
+  - Regenerated RefSeq and nt sketches from the latest versions.
+- 37.80
+  - Fixed hidden compile errors.
+
 * Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.78-1
 - 37.77
   - Wrote ExplodeTree and explodetree.sh, to create a directory structure
