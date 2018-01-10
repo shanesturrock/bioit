@@ -1,11 +1,11 @@
-%define priority 0116
+%define priority 0117
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		FastQC
-Version:	0.11.6
+Version:	0.11.7
 Release:	1%{?dist}
 Summary:	A quality control application for high throughput sequence data
 Group:		Applications/Engineering
@@ -37,6 +37,9 @@ fi
 %files
 
 %changelog
+* Thu Jan 11 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.11.7-1
+- Fixed a crash if the first sequence in a file was shorter than 12bp
+
 * Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.11.6-1
 - Disabled the Kmer plot by default
 - Fixed a bug when long custom adapters were being used

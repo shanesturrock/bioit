@@ -1,11 +1,11 @@
-%define priority 2405
+%define priority 2406
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.4.5
+Version:	2.4.6
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Thu Jan 11 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.6-1
+- Fix NPE exception with Sashimi plot
+
 * Mon Dec 18 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.5-1
 - Keep only alignments in view (don't cache).
 - Keep alignments for alignment track even if hidden.
