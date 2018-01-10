@@ -29,6 +29,7 @@
       <packagereq type="mandatory">ncbi-blast</packagereq>
       <packagereq type="mandatory">picard</packagereq>
       <packagereq type="mandatory">R-core</packagereq>
+      <packagereq type="mandatory">rtg-tools</packagereq>
       <packagereq type="mandatory">samtools</packagereq>
       <packagereq type="mandatory">SOAPdenovo2</packagereq>
       <packagereq type="mandatory">SolexaQA++</packagereq>

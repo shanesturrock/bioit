@@ -31,6 +31,7 @@ Start at the [Installation](Installation.md) page.
 * [ncbi-blast](ncbi-blast.md)
 * [picard](picard.md)
 * [R-core](R-core.md)
+* [rtg-tools](rtg-tools.md)
 * [samtools](samtools.md)
 * [SOAPdenovo2](SOAPdenovo2.md)
 * [SolexaQA++](SolexaQA.md)

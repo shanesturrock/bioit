@@ -10,14 +10,14 @@ sudo chown build:build /opt/bioit
 #ln -s ~/bioit/modulefiles /opt/bioit
 mkdir /opt/bioit/modulefiles
 cd /opt/bioit/modulefiles
-mkdir abyss augustus bamtools bbmap bcftools bedtools2 bismark bowtie bowtie2 bwa cutadapt ea-utils FastQC hisat2 hmmer htslib igv ncbi-blast picard R samtools SOAPdenovo2 SolexaQA++ stringtie tophat vcftools velvet vsearch
+mkdir abyss augustus bamtools bbmap bcftools bedtools2 bismark bowtie bowtie2 bwa cutadapt ea-utils FastQC hisat2 hmmer htslib igv ncbi-blast picard R rtg-tools samtools SOAPdenovo2 SolexaQA++ stringtie tophat vcftools velvet vsearch
 mkdir -p /opt/bioit/repo/RPMS
 ln -s ~/bioit/repo/bioit.xml /opt/bioit/repo/bioit.xml
 # Create all directories for packages
 cd /opt/bioit
 mkdir -p abyss/src augustus/src bamtools/src bbmap/src bcftools/src bedtools2/src bismark/src bowtie/src \
   bowtie2/src bwa/src cutadapt/src ea-utils/src FastQC/src hisat2/src hmmer/src htslib/src igv/src \
-  ncbi-blast/src picard/src R-core/src samtools/src SOAPdenovo2/src \
+  ncbi-blast/src picard/src R-core/src rtg-tools/src samtools/src SOAPdenovo2/src \
   SolexaQA++/src stringtie/src tophat/src vcftools/src velvet/src vsearch/src
 # Build all packages from source
 sh ${script_dir}/buildall

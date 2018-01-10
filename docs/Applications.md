@@ -26,6 +26,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [ncbi-blast](ncbi-blast.md)
 * [picard](picard.md)
 * [R-core](R-core.md)
+* [rtg-tools](rtg-tools.md)
 * [samtools](samtools.md)
 * [SOAPdenovo2](SOAPdenovo2.md)
 * [SolexaQA++](SolexaQA.md)
