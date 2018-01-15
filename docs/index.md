@@ -2,7 +2,7 @@
 
 This site covers the post install setup for a BioIT server based on CentOS 7. Install the initial CentOS 7 server with just the base packages and then follow the instructions on these pages to install a remote desktop and bioinformatics tools, as well as maintain up to date versions and add new tools to the platform.
 
-To avoid using root, a build user will be created and the [bioit](https://github.com/shanesturrock/bioit) github repository should be checked out into that user. The `/opt/bioit` location will also be owned by build. 
+To avoid using root, a build user will be created and the [bioit](https://github.com/realtimegenomics/bioit) github repository should be checked out into that user. The `/opt/bioit` location will also be owned by build. 
 
 Start at the [Installation](Installation.md) page.
 
