@@ -4,7 +4,7 @@
 
 The BioIT packages can be installed by cloning the bioit GitHub repository as follows:
 
-    git clone https://github.com/shanesturrock/bioit.git
+    git clone https://github.com/realtimegenomics/bioit.git
 
 Once that is done, you should be able to run `~/bioit/bin/setup_bioit` and it will do all the work.
 
