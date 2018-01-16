@@ -28,7 +28,7 @@ Move the unpackaged directory as follows:
 
     mv rtg-tools-3.8.4 /opt/bioit/rtg-tools/3.8.4
 
-Make sure you run /opt/bioit/rtg-tools/3.8.4/rtg once as build to set up the initial configuration file.
+Make sure you run `/opt/bioit/rtg-tools/3.8.4/rtg` once as build to set up the initial configuration file.
 
 That should do it.
 
@@ -44,7 +44,7 @@ Add a module file in `/opt/bioit/modulefiles/rtg-tools/` for this version by cop
 
 ## RPM
 
-There's a SPEC file for this package in `${HOME}/bioit/apps/rtg-tools/SPEC` so modify that with the new version details found in the ReleaseNotes.txt file inside the install directory.
+There's a SPEC file for this package in `${HOME}/bioit/apps/rtg-tools/SPEC` so modify that with the new version details found in the `ReleaseNotes.txt` file inside the install directory.
 
     rpmbuild -bb rtg-tools.spec
 
