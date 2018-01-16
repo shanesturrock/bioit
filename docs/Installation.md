@@ -51,7 +51,7 @@ Defaults tools and changelogs are provided by the meta-RPMS that are built to se
 
 Lastly, the Oracle JDK is required to build IGV (as of 2.4.1) due to it needing JavaFX. Once built it will run with the standard OpenJDK. To install it download the current release using the following command:
 
-    wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u152-b16/aa0333dd3019491ca4f6ddbe78cdb6d0/jdk-8u152-linux-x64.rpm
+    wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.rpm
 
 If that doesn't work, go to [this site](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and download it manually after accepting the license.
 
