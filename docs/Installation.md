@@ -57,7 +57,7 @@ If that doesn't work, go to [this site](http://www.oracle.com/technetwork/java/j
 
 Install the downloaded RPM:
 
-    yum install jdk-8u152-linux-x64.rpm
+    yum install jdk-8u162-linux-x64.rpm
 
 It won't be the default after this but the IGV build script will manually set the `$JAVA_HOME` and `$JAVA_PATH` variables it needs to build IGV using this. The `version_check` script includes a check that the Oracle JDK is the latest version. Update by downloading the newest version when this warns that it is out of date.
 
