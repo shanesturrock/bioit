@@ -1,11 +1,11 @@
-%define priority 3781
+%define priority 3782
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.81
+Version:	37.82
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -178,6 +178,12 @@ fi
 %files
 
 %changelog
+* Tue Jan 16 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.82-1
+- Fixed BBMap producing X8 (insert size) tag for improper pairs (on different
+  contigs).
+- Added an early test for BBMap invalid input files.
+- Added a triple switch to shellscripts for genepool/cori/denovo.
+
 * Wed Jan 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.81-1
 - Fixed a Json display error for duplicate names.
 - Added Json parsing and printing support for escape characters and exponent
