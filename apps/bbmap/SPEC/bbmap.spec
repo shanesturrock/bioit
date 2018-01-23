@@ -1,11 +1,11 @@
-%define priority 3782
+%define priority 3786
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.82
+Version:	37.86
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -178,6 +178,23 @@ fi
 %files
 
 %changelog
+* Tue Jan 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.86-1
+- 37.83
+  - Merged a branch.
+- 37.84
+  - Bump.
+- 37.85
+  - Removed an obsolete module name from shellscripts.
+  - Fixed BBMap bug in which files with uppercase letters were erroneously not
+    found.
+  - Modified TetramerFrequencies to comply with stricter compilation rules.
+- 37.86
+  - Modified TetramerFrequencies to make k a variable.
+  - Changed TetramerFrequencies printing to use ByteBuilder.
+  - Wrote TestFormat and testformat2.sh.
+  - Undefined amino acids are now assigned X instead of .
+  - Fixed a race condition in ByteFile2 via a defensive copy.
+
 * Tue Jan 16 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.82-1
 - Fixed BBMap producing X8 (insert size) tag for improper pairs (on different
   contigs).

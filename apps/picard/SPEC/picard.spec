@@ -1,11 +1,11 @@
-%define priority 21703
+%define priority 21704
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.17.3
+Version:	2.17.4
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -18,7 +18,7 @@ Requires:	java >= 1:1.8.0
 Requires(post):   %{_sbindir}/alternatives
 # Postun requires alternatives to uninstall tool alternatives.
 Requires(postun): %{_sbindir}/alternatives
-Obsoletes:	picard-2.14.0
+Obsoletes:	picard-2.17.3
 %description
 
 Picard comprises Java-based command-line utilities that manipulate SAM
@@ -42,11 +42,23 @@ fi
 %files
 
 %changelog
-* Wed Jan 10 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.3-1
+* Tue Jan 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.4-1
+- Update GKL to 0.8.2 (#1077)
+- Better error message when dictionaries differ in GatherVcfs. (#862)
+- DSDEGP-1936 Fix the DataProvider for HiSeqX so that we no longer have to
+  create symlinks for the .locs file. (#1066)
+- added a more informative error when having problem reading a file from
+  IntervalListTools (#1078)
+- Add reject output to liftover intervals (#1068)
+- Allow command line option to suppress LiftOver logging of every failed
+  interval (#1067)
+- FilterSamReads has a bug and can't filter read by read name. (#1055)
+
+* Wed Jan 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.3-1
 - update htsjdk version to 2.14.0
 - Added missing validation for SECOND_INPUT that was causing errors.
 
-* Tue Jan 09 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.2-1
+* Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.2-1
 - 2.17.0
   - Adding mode and 95th percentile to InsertSizeMetrics. (#1001)
   - Bug fix: CollectWgsMetricsWithNonZeroCoverage fails to produce a plot
