@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/htslib/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/htslib/SPEC/build 1.6
+    ${HOME}/bioit/apps/htslib/SPEC/build 1.7
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load htslib/1.6
+    module load htslib/1.7
     which tabix
     tabix --version
 
@@ -24,9 +24,9 @@ If all is good, you can move to the RPM building step.
 
 Download the version to be built into `/opt/bioit/htslib/src` and untar
 
-Inside the source run the following where 1.6 is the current one being built:
+Inside the source run the following where 1.7 is the current one being built:
 
-    ./configure --prefix=/opt/bioit/htslib/1.6
+    ./configure --prefix=/opt/bioit/htslib/1.7
     make
     make install
 
@@ -38,8 +38,8 @@ Add a module file in `/opt/bioit/modulefiles/htslib/` for this version by copyin
     #
     #  htslib module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/htslib/1.6/bin
-    prepend-path  MANPATH      /opt/bioit/htslib/1.6/share/man
+    prepend-path  PATH         /opt/bioit/htslib/1.7/bin
+    prepend-path  MANPATH      /opt/bioit/htslib/1.7/share/man
 
 ## RPM
 

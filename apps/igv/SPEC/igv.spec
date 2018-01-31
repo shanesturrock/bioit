@@ -1,11 +1,11 @@
-%define priority 2406
+%define priority 2407
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.4.6
+Version:	2.4.7
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Thu Feb 01 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.7-1
+- Set clip for arc tracks. Fixes #511
+
 * Thu Jan 11 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.6-1
 - Fix NPE exception with Sashimi plot
 

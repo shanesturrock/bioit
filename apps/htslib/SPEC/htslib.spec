@@ -1,11 +1,11 @@
-%define priority 16
+%define priority 17
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		htslib
-Version:	1.6
+Version:	1.7
 Release:	1%{?dist}
 Summary:	C library for high-throughput sequencing data formats
 
@@ -55,6 +55,39 @@ fi
 %files
 
 %changelog
+* Thu Feb 01 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.7-1
+- BAM: HTSlib now supports BAMs which include CIGARs with more than 65535
+  operations as per HTS-Specs 18th November (dab57f4 and 2f915a8).
+- BCF/VCF:
+  - Removed the need for long double in pileup calculations.
+  - Sped up the synced reader in some situations.
+  - Bug fixing: removed memory leak in bcf_copy.
+- CRAM:
+  - Added support for HTS_IDX_START in cram iterators.
+  - Easier to build when lzma header files are absent.
+  - Bug fixing: a region query with REQUIRED_FIELDS option to disable sequence
+    retrieval now gives correct results.
+  - Bug fixing: stop queries to regions starting after the last read on a
+    chromosome from incorrectly reporting errors (#651, #653; reported by Imran
+    Haque and @egafni via pysam).
+- Multi-region iterator: The new structure takes a list of regions and iterates
+  over all, deduplicating reads in the process, and producing a full list of
+  file offset intervals. This is usually much faster than repeatedly using the
+  old single-region iterator on a series of regions.
+- Curl improvements:
+  - Add Bearer token support via HTS_AUTH_LOCATION env (#600).
+  - Use CURL_CA_BUNDLE environment variable to override the CA (#622; thanks to
+    Garret Kelly & David Alexander).
+  - Speed up (removal of excessive waiting) for both http(s) and ftp.
+  - Avoid repeatedly reconnecting by removal of unnecessary seeks.
+  - Bug fixing: double free when libcurl_open fails.
+- BGZF block caching, if enabled, now performs far better (#629; reported by
+  Ram Yalamanchili).
+- Added an hFILE layer for in-memory I/O buffers (#590; thanks to Thomas
+  Hickman).
+- Tidied up the drand48 support (intended for systems that do not provide this
+  function).
+
 * Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.6-1
 - Fixed bug where iterators on CRAM files did not propagate error return values
   to the caller correctly. Thanks go to Chris Saunders.

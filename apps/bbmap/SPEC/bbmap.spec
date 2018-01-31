@@ -1,11 +1,11 @@
-%define priority 3786
+%define priority 3788
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.86
+Version:	37.88
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -178,6 +178,28 @@ fi
 %files
 
 %changelog
+* Thu Feb 01 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.88-1
+- 37.87
+  - Fixed a ByteBuilder overflow bug in append(long).
+  - Changed TetramerFrequencies to use ByteBuilder.
+  - Fixed missing else in CalcTrueQuality parser.
+  - Added a new switch case to shellscripts to handle Shifter environment
+    variables on Cori/Denovo.
+  - Wrote multithreaded version of TestFormat.
+  - Added merge and trim to TestFormat.
+  - Better error message for ByteStreamWriter to read-only file.
+  - TestFormat no longer crashes when trying to write to a read-only directory.
+- 37.88
+  - SummarizeSketch now supports colors.
+  - Wrote CallVariants.findUniqueSubs to help locate bad NovaSeq reads.
+  - Added variant-based read filtering to BBDuk.
+  - Read.countSubs now supports shortmatch.
+  - Fixed Read.countMatchSymbols().
+  - Fixed clearfilters flag not clearing SamFilter, only VarFilter.
+  - Var now parses depth, minusdepth, r1p, r2p, r1m, and r2m from VCF.
+  - Added AD field to primary fields of VCF output for ease of parsing.
+  - Wrote VcfLoader, a multithreaded VCF or var-format loader.
+
 * Tue Jan 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.86-1
 - 37.83
   - Merged a branch.
