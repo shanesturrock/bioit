@@ -1,0 +1,26 @@
+# These users will be created into all servers
+# All users with state: present will be created and state absent will be deleted
+bioit_admin_list:
+  - name: "Len Trigg"
+    username: "len"
+    keys:
+      active:
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAzEUUwX9BDsF92s/6tCjyVtx3SP4CuOWjQ4JhPrIAIp7uEdnCqOy4bn3zgyYpBAJDmKd/ZOlH693VlrwGQBpRrGyDC+YD31zldWJZVEDbsgli4PAiVkmn0p/Mjjom/Zj63WIRpfBFfK0mUonHXbokdn4S7FZrBE5zlP7tEqTOmIeNuB+sho0jBUrjqK8IgWOSVo2hjMPqVuv31zrz4mZrC+b+h2/U9pweNCNre0B01aXw3TSZmhAtZ4FHOiAUDVidwy3n7/GgetWMGeRANZX6IIxR6i8+orpck8irpeR8LYBjqYsHL6rb2TQZXJM+8tN+hI3yYLUraNKxIfFGUnLnLagYnOliSbnj4GRTL+O2GfYR95+5e27MhhPY71nAMY/Zx2wW/aGXgKx45XOLuPxQr7V6gMGF2Oa58PfkmL+nBPKM9eHPoAtGbtge5ps0rEcEKlpGa++H5xxQO4hj+KTJrHkac2+KwQkMBZIXdKUF2nj0u70K0oFh3sKwxCSOcG6QZFQu8UjjoeEIK72cAYoACvDEaRWEYCMXjx2BkkkHM0KulXr4wSqBzZsJJCYEr5i9aUw9L9G0xBai9xkxjW31j0sLd5153/6dyQujzcGFixQwop6eeU1taVnXcreagBIYkWnYiKdSbS96s27Ps1M4qSpwSqX0BZv2CUANKL0aF2c= len@noir"
+    shell: "/bin/bash"
+    state: present
+  - name: "Shane Sturrock"
+    username: "shane"
+    keys:
+      active:
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDKbVAnxDbWPVgTLEeXEsA7+hCLn8Yz49mfm6YPjOMkekZjZ6PNFsf6yPJQMLDp0EcJf3PsbJ3KBDPdBn9gf54ZGupI6lHxgWU1LOUC+3jIKxfadnGoxc5FPby4FqdIfr/iAQ/FgFFP9f1rozLZk2nLpQEtB4P6dWgbCucjOFYdkYbFJ55wCqSrtc9zeuJdPtWWwzSePhaDxRRGltDR98J6sY3rw2sBvCcCsSfnkO9JT3I9u4LBoTY5qxF+HI9xIZoF28zI34cv0ccR6mJN2pjLbQS50nJgUj1USGDS4b8+5toRGOB3EevfoVYw9L2gdHx1Yb1xMxaQ3d1txi4vgurX sss@Shanes-MacBook-Air.local"
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC34jhmDu4DO2iGthqK9kEoJvt3Rzolmu8HeCJtcvPlkjwSFyqXk1lGLQTWMZbAbVl3AufgF3+hTwxwJSmdrY8X8WJrp9Y+i1z/GFKkXYeAmmxJrl+/JL9c3DUGiPJHKLCt2cvB/JZb4ZDsXnq5gvJKyGHJ1nkEOPoKw5GsipZT9Th6jBI7jomtjdxFPCmfdeDxnZaUCQyEE2grPxzfE/GS0x/14tN/rrRFfkTr1tIaWRdXYMnsaVmxqta0MC30CDt6SdFqO+43MRlChkP+LhTwK2t5KbZuh6iMHlvpyxorGfILH1nwGPFBcVH+lzl7C9lK8SBEVX9MFU/vK050TLRR sss@Shanes-MBP"
+      disabled:
+        - "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAzEUUwX9BDsF92s/6tCjyVtx3SP4CuOWjQ4JhPrIAIp7uEdnCqOy4bn3zgyYpBAJDmKd/ZOlH693VlrwGQBpRrGyDC+YD31zldWJZVEDbsgli4PAiVkmn0p/Mjjom/Zj63WIRpfBFfK0mUonHXbokdn4S7FZrBE5zlP7tEqTOmIeNuB+sho0jBUrjqK8IgWOSVo2hjMPqVuv31zrz4mZrC+b+h2/U9pweNCNre0B01aXw3TSZmhAtZ4FHOiAUDVidwy3n7/GgetWMGeRANZX6IIxR6i8+orpck8irpeR8LYBjqYsHL6rb2TQZXJM+8tN+hI3yYLUraNKxIfFGUnLnLagYnOliSbnj4GRTL+O2GfYR95+5e27MhhPY71nAMY/Zx2wW/aGXgKx45XOLuPxQr7V6gMGF2Oa58PfkmL+nBPKM9eHPoAtGbtge5ps0rEcEKlpGa++H5xxQO4hj+KTJrHkac2+KwQkMBZIXdKUF2nj0u70K0oFh3sKwxCSOcG6QZFQu8UjjoeEIK72cAYoACvDEaRWEYCMXjx2BkkkHM0KulXr4wSqBzZsJJCYEr5i9aUw9L9G0xBai9xkxjW31j0sLd5153/6dyQujzcGFixQwop6eeU1taVnXcreagBIYkWnYiKdSbS96s27Ps1M4qSpwSqX0BZv2CUANKL0aF2c= len@noir"
+    shell: "/bin/bash"
+    state: present
+  - name: "Example Person"
+    username: "example-quitted-person"
+    state: absent
+
+# This is the admin group where we will add users with sudo access
+admin_group: bioit_admin
