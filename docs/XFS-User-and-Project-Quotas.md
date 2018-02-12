@@ -220,4 +220,4 @@ Don't forget to delete the test project from the `/etc/projects` and `/etc/proji
 
 ## Next Step
 
-Go to the [NFS-User-and-Group-Quotas](NFS-User-and-Group-Quotas.md) page.
+Go to the [NFS User and Group Quotas](NFS-User-and-Group-Quotas.md) page.
