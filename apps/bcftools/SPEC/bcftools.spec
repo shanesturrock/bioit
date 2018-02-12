@@ -1,11 +1,11 @@
-%define priority 16
+%define priority 17
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bcftools
-Version:	1.6
+Version:	1.7
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -43,6 +43,33 @@ fi
 %files
 
 %changelog
+* Tue Feb 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.7-1
+- -i, -e filtering: Major revamp, improved filtering by FORMAT fields and
+  missing values. New GT=ref,alt,mis etc keywords, check the documentation for
+  details.
+- query: Only matching expression are printed when both the -f and -i/-e
+  expressions contain genotype fields. Note that this changes the original
+  behaviour. Previously all samples were output when one matching sample was
+  found. This functionality can be achieved by pre-filtering with view and then
+  streaming to query. Compare 
+     bcftools query -f'[%CHROM:%POS %SAMPLE %GT\n]' -i'GT="alt"' file.bcf 
+  and 
+    bcftools view -i'GT="alt"' file.bcf -Ou | \
+    bcftools query -f'[%CHROM:%POS %SAMPLE %GT\n]'
+- annotate: New -k, --keep-sites option
+- consensus: Fix --iupac-codes output
+- csq: Homs always considered phased and other fixes
+- norm: Make -c none work and remove query -c
+- roh: Fix errors in the RG output
+- stats: Allow IUPAC ambiguity codes in the reference file; report the number
+  of missing genotypes
+- +fill-tags: Add ExcHet annotation
+- +setGt: Fix bug in binom.test calculation, previously it worked only for
+  nAlt<nRef!
+- +split: New plugin to split a multi-sample file into single-sample files in
+  one go
+- Improve python3 compatibility in plotting scripts
+
 * Tue Oct 03 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.6-1
 - New sort command.
 - New options added to the consensus command. Note that the -i, --iupac option

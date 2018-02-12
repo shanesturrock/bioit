@@ -1,11 +1,11 @@
-%define priority 3788
+%define priority 3790
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.88
+Version:	37.90
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -178,6 +178,30 @@ fi
 %files
 
 %changelog
+* Tue Feb 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.90-1
+- 37.89
+  - Wrote ByteBuilder.appendFast(double, int).
+  - Changed Var to perform calculations with doubles instead of floats.
+  - Fixed nondeterminisim in RevisedAlleleFraction calculation.  This was not
+    due to the use of floats vs doubles so the doubles can be changed back.
+  - VCF/Var files are now written much faster, at around 55 MB/s up from 10
+    MB/s.
+  - ByteStreamWriter now supports multithreaded input.
+  - FileFormat now detects VCF and Var files.
+  - Added some information to Var header.
+  - Wrote VcfWriter class to write VCF/Var files multithreaded, at up to 630
+    MB/s.
+  - Wrote Tools.isDigit, isLetter, toUpperCase, etc.  Character.isDigit is
+    slow.
+  - ByteBuilder now implements CharSequence, allowing it to be used with
+    TextStreamWriter.
+  - Changed several instances of StringBuilder and String.Format to
+    ByteBuilder.
+- 37.90
+  - Multithreaded TetramerFrequencies.
+  - Fixed some printing errors.
+  - Multithreaded var2.MergeSamples.
+
 * Thu Feb 01 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.88-1
 - 37.87
   - Fixed a ByteBuilder overflow bug in append(long).

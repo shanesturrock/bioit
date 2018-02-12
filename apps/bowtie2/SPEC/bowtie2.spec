@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2340
+%define priority 2341
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.3.4
+Version:	2.3.4.1
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,10 @@ fi
 %files
 
 %changelog
+* Tue Feb 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.4.1-1
+- Fixed an issue with `--reorder` that caused bowtie2 to crash while reordering
+  SAM output
+
 * Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.4-1
 - Fixed major issue causing corrupt SAM output when using many threads
   (-p/--threads) on certain systems.

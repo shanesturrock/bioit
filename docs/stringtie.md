@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/stringtie/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/stringtie/SPEC/build 1.3.3b
+    ${HOME}/bioit/apps/stringtie/SPEC/build 1.3.4b
 
 When that completes check that the new version is available using:
 
@@ -14,18 +14,18 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load stringtie/1.3.3b
+    module load stringtie/1.3.4b
     which stringtie
     stringtie --version
 
 ## Manual Build
 
-Download the `stringtie-1.3.3b.tar.gz` file into `/opt/bioit/stringtie/src` and untar it. Then run the following:
+Download the `stringtie-1.3.4b.tar.gz` file into `/opt/bioit/stringtie/src` and untar it. Then run the following:
 
-    cd stringtie-1.3.3b
+    cd stringtie-1.3.4b
     make release
-    mkdir /opt/bioit/stringtie/1.3.3b
-    mv stringtie /opt/bioit/stringtie/1.3.3b
+    mkdir /opt/bioit/stringtie/1.3.4b
+    mv stringtie /opt/bioit/stringtie/1.3.4b
 
 ## Module setup
 
@@ -35,7 +35,7 @@ Add a module file in `/opt/bioit/modulefiles/stringtie/` for this version by cop
     #
     #  stringtie module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/stringtie/1.3.3b
+    prepend-path  PATH         /opt/bioit/stringtie/1.3.4b
 
 ## RPM
 

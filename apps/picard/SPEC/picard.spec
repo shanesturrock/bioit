@@ -1,11 +1,11 @@
-%define priority 21704
+%define priority 21709
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.17.4
+Version:	2.17.9
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -42,6 +42,26 @@ fi
 %files
 
 %changelog
+* Tue Feb 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.9-1
+- 2.17.5
+  - Jc base dir fix (#1095)
+  - LiftoverVcf was failing on variants that have swapped alleles when the…
+    (#1080)
+- 2.17.6
+  - Fix tile checking to ensure we are checking against a tile based format.
+    (#1097)
+- 2.17.7
+  - Add filter by tag option/functionality to FilterSamReads (#1079)
+  - minor formatting requests
+  - PR comments!
+  - add tests to debug argument change
+  - Simple tracking/logging of liftover success by contig
+  - set debugging value of FilterSamReads to false so its not on by default
+- 2.17.8
+  - Update htsjdk version to 2.14.2
+- 2.17.9
+  - Increase test coverage (#972)
+
 * Tue Jan 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.4-1
 - Update GKL to 0.8.2 (#1077)
 - Better error message when dictionaries differ in GatherVcfs. (#862)
