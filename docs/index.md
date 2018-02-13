@@ -8,6 +8,7 @@ Start at the [Installation](Installation.md) page.
 
 ### [Installation](Installation.md)
 ### [Storage Setup](Storage-Setup.md)
+### [Slurm Cluster Setup](Slurm-Setup.md)
 ### [XFS User and Project Quotas](XFS-User-and-Project-Quotas.md)
 ### [NFS User and Group Quotas](NFS-User-and-Group-Quotas.md)
 ### [BioIT Repository](BioIT-repository.md)

@@ -1,2 +1,14 @@
-[servers]
-bioit-len-test
+[slurm-controllers]
+bioit+control
+
+[slurm-compute-nodes]
+bioit+com1
+bioit+com2
+bioit+com3
+
+[slurm-submit-hosts]
+bioit+rtgwork
+#bioit+workspace
+
+[other-servers]
+bioit-build

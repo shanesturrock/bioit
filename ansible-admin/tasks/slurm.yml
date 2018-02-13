@@ -1,0 +1,41 @@
+# Script a little of the munge/slurm configuration setup.
+- name: Install munge
+  yum: name=munge state=present
+  tags:
+    - munge
+
+- name: Copy munge key
+  copy: src=files/slurm/munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0400
+  tags:
+    - munge
+
+- name: munge service
+  action: service name=munge state=started enabled=yes
+  tags:
+    - munge
+
+- name: Ensure slurm group
+  group:
+    name: slurm
+    gid: 982
+    state: present
+  tags:
+    - slurm
+
+- name: Ensure slurm user
+  user:
+    name: slurm
+    uid: 982
+    group: slurm
+    shell: /sbin/nologin
+    state: present
+  tags:
+    - slurm
+
+- name: Ensure slurm etc dir
+  file: path=/etc/slurm state=directory owner=root group=root mode=0755
+
+- name: Copy slurm config
+  copy: src=files/slurm/slurm.conf dest=/etc/slurm/slurm.conf owner=root group=root mode=0644
+  tags:
+    - slurm

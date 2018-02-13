@@ -10,6 +10,11 @@
     - name: Install python for ansible
       raw: sudo yum install python
       tags: ['centos']
+    - name: Verify Ansible meets this playbook minimum version requirements.
+      assert:
+        that: "ansible_version.full | version_compare('2.4', '>=')"
+        msg: >
+          "You must update Ansible to at least 2.4 to use this playbook."
 
 - name: Setup users
   hosts: all
