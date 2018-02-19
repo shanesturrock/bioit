@@ -15,6 +15,10 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
 
 The machine should now come back up with a full GUI running.
 
+If the machine will mount NFS storage you need to install the following:
+
+    yum -u install nfs-utils
+
 Install `wget` as this makes it much easier to download packages:
 
     yum -y install wget

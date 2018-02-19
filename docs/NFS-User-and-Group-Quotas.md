@@ -6,9 +6,9 @@ For machines that share storage via NFS, quotas should be enabled on the NFS ser
 
 For XFS, follow the instructions on XFS quotas. This section covers EXT4.
 
-Before doing anything, ensure that the quota package installed:
+Before doing anything, ensure that the quota and nfs-utils packages are installed:
 
-    yum install quota
+    yum -y install nfs-utils quota
 
 Once the quota package is installed you can set up the quotas.
 
@@ -16,7 +16,7 @@ Example setting user quotas on home (note with EXT4 you can't have project quota
 
 Edit entry in `/etc/fstab`:
 
-    /dev/mapper/cl-home     /home                   xfs     defaults,usrquota,grpquota        1 2
+    /dev/mapper/cl-home     /home                   nfs     defaults,usrquota,grpquota        1 2
 
 Now execute the following command:
 
