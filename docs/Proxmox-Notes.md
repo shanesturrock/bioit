@@ -72,6 +72,12 @@ EOF
 mount -a
 ````
 
+Also, when home is mounted via NFS, we need to let SELinux know about that:
+
+````
+setsebook -P use_nfs_home_dirs 1
+````
+
 
 ### Example resizing a disk in VM
 
