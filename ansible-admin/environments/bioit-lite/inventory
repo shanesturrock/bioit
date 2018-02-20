@@ -12,3 +12,6 @@ bioit+rtgwork
 
 [other-servers]
 bioit-build
+bioit+bioitlite
+bioit+lentest
+bioit+build

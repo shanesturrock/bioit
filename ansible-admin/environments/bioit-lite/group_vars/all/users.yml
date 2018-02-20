@@ -1,6 +1,6 @@
 # This list of users is created into this environment
 bioit_group_list:
-  - name: "masseyifs"
+  - name: "massey-ifs-group"
     gid: 50001
     state: present
   - name: "lincoln"
@@ -12,9 +12,9 @@ bioit_group_list:
 bioit_user_list:
   - name: "Aakansha Kanojia"
     username: "akanojia"
-    uid: 10001
+    uid: 10191
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -27,9 +27,9 @@ bioit_user_list:
     remove: yes
   - name: "Asad Razzaq"
     username: "arazzaq"
-    uid: 10002
+    uid: 10209
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -42,9 +42,9 @@ bioit_user_list:
     remove: yes
   - name: "Andre Sim"
     username: "asim"
-    uid: 10003
+    uid: 10265
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -57,9 +57,9 @@ bioit_user_list:
     remove: yes
   - name: "Bastien Labarrere"
     username: "blabarrere"
-    uid: 10004
+    uid: 10244
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -72,9 +72,9 @@ bioit_user_list:
     remove: yes
   - name: "Bojian Zhong"
     username: "bzhong"
-    uid: 10005
+    uid: 10192
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -87,7 +87,7 @@ bioit_user_list:
     remove: yes
   - name: "Chris Winefield"
     username: "cwinefield"
-    uid: 10006
+    uid: 10050
     groups:
       - lincoln
     keys:
@@ -102,7 +102,7 @@ bioit_user_list:
     remove: yes
   - name: "Darrell Lizamore"
     username: "dlizamore"
-    uid: 10007
+    uid: 10049
     groups:
       - lincoln
     keys:
@@ -117,9 +117,9 @@ bioit_user_list:
     remove: yes
   - name: "Daniel Rexin"
     username: "drexin"
-    uid: 10008
+    uid: 10195
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -132,9 +132,9 @@ bioit_user_list:
     remove: yes
   - name: "Dave Wheeler"
     username: "dwheeler"
-    uid: 10009
+    uid: 10030
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -147,9 +147,9 @@ bioit_user_list:
     remove: yes
   - name: "Mathias Becker"
     username: "mbecker"
-    uid: 10010
+    uid: 10190
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -162,9 +162,9 @@ bioit_user_list:
     remove: yes
   - name: "Mauro Truglio"
     username: "mtruglio"
-    uid: 10011
+    uid: 10017
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -177,9 +177,9 @@ bioit_user_list:
     remove: yes
   - name: "Ngonidzashe Faya"
     username: "nfaya"
-    uid: 10012
+    uid: 10405
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -192,9 +192,9 @@ bioit_user_list:
     remove: yes
   - name: "Nikolai Kondratev"
     username: "nkondratev"
-    uid: 10013
+    uid: 10395
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -207,9 +207,9 @@ bioit_user_list:
     remove: yes
   - name: "Nikola Staykov"
     username: "nstaykov"
-    uid: 10014
+    uid: 10223
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -222,9 +222,9 @@ bioit_user_list:
     remove: yes
   - name: "Saurabh Gupta"
     username: "sgupta"
-    uid: 10015
+    uid: 10391
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -237,9 +237,9 @@ bioit_user_list:
     remove: yes
   - name: "Simon Hall"
     username: "shall"
-    uid: 10016
+    uid: 10189
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -252,9 +252,9 @@ bioit_user_list:
     remove: yes
   - name: "Silvia Schwartz"
     username: "sschwartz"
-    uid: 10017
+    uid: 10236
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -267,7 +267,7 @@ bioit_user_list:
     remove: yes
   - name: "Susan Thomson"
     username: "sthomson"
-    uid: 10018
+    uid: 10051
     groups:
       - lincoln
     keys:
@@ -282,7 +282,7 @@ bioit_user_list:
     remove: yes
   - name: "Ting-Hsuan Chen"
     username: "thchen"
-    uid: 10019
+    uid: 10455
     groups:
       - lincoln
     keys:
@@ -297,9 +297,9 @@ bioit_user_list:
     remove: yes
   - name: "Tariq Mahmood"
     username: "tmahmood"
-    uid: 10020
+    uid: 10246
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
@@ -312,9 +312,9 @@ bioit_user_list:
     remove: yes
   - name: "Yanni Dong"
     username: "ydong"
-    uid: 10021
+    uid: 10319
     groups:
-      - masseyifs
+      - massey-ifs-group
     keys:
       # Change to 'disabled:' to remove the key
       active:
