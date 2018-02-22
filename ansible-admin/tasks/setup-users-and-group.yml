@@ -24,11 +24,15 @@
   with_items:
     - "{{ bioit_group_list }}"
 
+- name: Decide whether end-users can log in
+  when: inventory_hostname not in groups['bioit-login-hosts']
+  set_fact: no_login="/sbin/nologin"
+
 - name: Setup non admin users
   user:
     name: "{{ item.username }}"
     state: "{{ item.state | default('present') }}"
-    shell: "{{ item.shell | default('/sbin/nologin') }}"
+    shell: "{{ no_login | default(item.shell) | default('/sbin/nologin') }}"
     uid: "{{ item.uid }}"
     groups: "{{ item.groups }}"
     remove: "{{ item.remove | default('yes') }}"

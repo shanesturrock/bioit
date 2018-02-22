@@ -1,17 +1,26 @@
 [slurm-controllers]
+# We could set up redundant control machines. Perhaps not much point if they're on the same hypervisor
 bioit+control
 
 [slurm-compute-nodes]
+# These guys do the work
 bioit+com1
 bioit+com2
 bioit+com3
 
 [slurm-submit-hosts]
+# Additional hosts that jobs can be submitted from
+bioit+rtgwork
+bioit+bioitlite
+
+[bioit-login-hosts]
+# These are the only hosts that end-users can log in to
 bioit+rtgwork
 bioit+bioitlite
 
 [other-servers]
-bioit-build
-bioit+bioitlite
+# Random other VMs for testing, builds, etc
+# They won't have slurm or end-user logins permitted, but will have other common
+# setup (NFS mounts, user/groups created)
 bioit+lentest
 bioit+build
