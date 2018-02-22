@@ -8,7 +8,7 @@ bioit+com3
 
 [slurm-submit-hosts]
 bioit+rtgwork
-#bioit+bioitlite
+bioit+bioitlite
 
 [other-servers]
 bioit-build
