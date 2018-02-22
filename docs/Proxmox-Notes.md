@@ -61,12 +61,12 @@ ln -s /sequencing /archive
 ln -s /work /active
 
 cat <<EOF >>/etc/fstab
-chips:/home/masseyifs /home/masseyifs nfs defaults 0 2
-chips:/scratch/masseyifs /scratch/masseyifs nfs defaults 0 2
-chips:/sequencing/masseyifs /sequencing/masseyifs nfs defaults 0 2
-chips:/work/masseyifs /work/masseyifs nfs defaults 0 2
-chips:/opt/bioit /opt/bioit nfs defaults 0 2
-chips:/databases /databases nfs defaults 0 2
+chips:/home/masseyifs /home/masseyifs nfs defaults 0 0
+chips:/scratch/masseyifs /scratch/masseyifs nfs defaults 0 0
+chips:/sequencing/masseyifs /sequencing/masseyifs nfs defaults 0 0
+chips:/work/masseyifs /work/masseyifs nfs defaults 0 0
+chips:/opt/bioit /opt/bioit nfs defaults 0 0
+adenine:/export/nas/databases /databases nfs defaults 0 0
 EOF
 
 mount -a
@@ -75,7 +75,7 @@ mount -a
 Also, when home is mounted via NFS, we need to let SELinux know about that:
 
 ````
-setsebook -P use_nfs_home_dirs 1
+setsebool -P use_nfs_home_dirs 1
 ````
 
 

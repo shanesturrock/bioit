@@ -140,7 +140,9 @@ Install the RPMs:
     cd rpmbuild/RPMS/x86_64
     export VER=17.11.2
     sudo yum --nogpgcheck localinstall -y \
-    slurm-$VER*.el7.centos.x86_64.rpm
+    slurm-$VER*.el7.centos.x86_64.rpm \
+    slurm-perlapi-$VER*.el7.centos.x86_64.rpm \
+    slurm-openlava-$VER*.el7.centos.x86_64.rpm \
 
 On submit nodes, we also need to disable the firewall:
 

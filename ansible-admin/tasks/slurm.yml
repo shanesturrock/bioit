@@ -39,3 +39,40 @@
   copy: src=files/slurm/slurm.conf dest=/etc/slurm/slurm.conf owner=root group=root mode=0644
   tags:
     - slurm
+
+- name: Install slurm packages (submit hosts)
+  when: inventory_hostname in groups['slurm-submit-hosts']
+  yum:
+    name: /opt/bioit/repo/RPMS/{{ item }}-{{ slurm_version }}-1.el7.centos.x86_64.rpm
+    state: present
+  with_items:
+    - slurm
+    - slurm-perlapi
+    - slurm-openlava
+
+- name: Install slurm packages (compute nodes)
+  when: inventory_hostname in groups['slurm-compute-nodes']
+  yum:
+    name: /opt/bioit/repo/RPMS/slurm-{{ slurm_version }}-1.el7.centos.x86_64.rpm
+    state: present
+  with_items:
+    - slurm
+    - slurm-libpmi
+    - slurm-perlapi
+    - slurm-slurmd
+    - slurm-pam_slurm
+
+- name: Install slurm packages (controllers)
+  when: inventory_hostname in groups['slurm-controllers']
+  yum:
+    name: /opt/bioit/repo/RPMS/slurm-{{ slurm_version }}-1.el7.centos.x86_64.rpm
+    state: present
+  with_items:
+    - slurm
+    - slurm-devel
+    - slurm-libpmi
+    - slurm-perlapi
+    - slurm-slurmctld
+    - slurm-slurmd
+    - slurm-slurmdbd
+    - slurm-pam_slurm
