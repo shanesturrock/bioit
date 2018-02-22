@@ -6,6 +6,7 @@
     name: "{{ item.username }}"
     state: "{{ item.state | default('present') }}"
     shell: "{{ item.shell | default('/bin/bash') }}"
+    uid: "{{ item.uid }}"
     group: "{{ admin_group }}"
     remove: yes
   when: item.username is defined
