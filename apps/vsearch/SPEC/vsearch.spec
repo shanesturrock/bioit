@@ -1,11 +1,11 @@
-%define priority 262
+%define priority 271
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.6.2
+Version:	2.7.1
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,12 @@ fi
 %files
 
 %changelog
+* Thu Feb 22 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.7.1-1
+- 2.7.0
+  - Added cluster_unoise, uchime2_denovo and uchime3_denovo commands.
+- 2.7.1
+  - Fixes several bugs on Windows.
+
 * Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.6.2-1
 - Fix for partially inactive xsize option.
 

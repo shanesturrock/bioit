@@ -1,11 +1,11 @@
-%define priority 115
+%define priority 116
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	1.15
+Version:	1.16
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,9 @@ fi
 %files
 
 %changelog
+* Thu Feb 22 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.16-1
+- Install sphinx_issues into docs testenv
+
 * Fri Dec 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.15-1
 - Require the most recent xopen
 

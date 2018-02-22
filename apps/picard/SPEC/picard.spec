@@ -1,11 +1,11 @@
-%define priority 21709
+%define priority 21710
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.17.9
+Version:	2.17.10
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -18,7 +18,6 @@ Requires:	java >= 1:1.8.0
 Requires(post):   %{_sbindir}/alternatives
 # Postun requires alternatives to uninstall tool alternatives.
 Requires(postun): %{_sbindir}/alternatives
-Obsoletes:	picard-2.17.3
 %description
 
 Picard comprises Java-based command-line utilities that manipulate SAM
@@ -42,6 +41,9 @@ fi
 %files
 
 %changelog
+* Thu Feb 22 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.10-1
+- Update htsjdk version to 2.14.3
+
 * Tue Feb 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.9-1
 - 2.17.5
   - Jc base dir fix (#1095)
