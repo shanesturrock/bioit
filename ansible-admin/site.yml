@@ -1,38 +1,66 @@
 ##
 # Install python into all machines to start using ansible
+# Ensures users/groups and munge is installed.
+# Assumes you have done: ansible-galaxy install goozback.EPEL
 ##
-- name: Setup ansible dependencies
-  hosts: all
+- name: Verify local setup
+  hosts: localhost
   tags: ['pre-deploy']
-  gather_facts: no
-  become: yes
   tasks:
-    - name: Install python for ansible
-      raw: sudo yum install python
-      tags: ['centos']
-    - name: Verify Ansible meets this playbook minimum version requirements.
+    - name: Check ansible version meets this playbook minimum version requirements.
       assert:
         that: "ansible_version.full | version_compare('2.4', '>=')"
         msg: >
           "You must update Ansible to at least 2.4 to use this playbook."
 
+# - name: Setup ansible dependencies
+#   hosts: all
+#   tags: ['pre-deploy']
+#   gather_facts: no
+#   become: yes
+#   tasks:
+#     - name: Install python for ansible
+#       raw: sudo yum install python
+#       tags: ['centos']
+
+- name: Setup network mounts
+  hosts: all
+  gather_facts: no
+  tags: ['mounts']
+  become: true
+  tasks:
+    - include: tasks/mounts.yml
+
+# Must be done after user mounts, so that homes are already in the right place
 - name: Setup users
   hosts: all
-  gather_facts: yes
+  gather_facts: no
   tags: ['users']
   become: yes
   vars_files:
     - vars/users.yml
   tasks:
-    # Creates users from
+    # Creates users
     - include: tasks/setup-users-and-group.yml
 
     # Allows sudo for created users without passwords
     - include: tasks/allow-sudo.yml
 
+- name: Setup slurm
+  hosts: slurm-controllers slurm-compute-nodes slurm-submit-hosts
+  gather_facts: yes
+  tags: ['slurm']
+  become: true
+  roles:
+    - goozbach.EPEL
+  tasks:
+    - include: tasks/slurm.yml
+
 # This is just a small best practise for all ssh connections
+# Must be done after user creation
 - name: Setup SSH Security hardening
   hosts: all
+  gather_facts: no
   tags: ['security']
   become: yes
   tasks:
