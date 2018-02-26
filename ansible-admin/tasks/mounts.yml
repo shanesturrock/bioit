@@ -15,11 +15,11 @@
   mount: state=mounted src=chips:/home/bioithome path=/home fstype=nfs
 
 # Mounts for MasseyIFS
-- name: Mount for masseyifs scratch
-  mount: state=mounted src=chips:/scratch/masseyifs path=/scratch/masseyifs fstype=nfs
+- name: Mount for massey-ifs-group scratch
+  mount: state=mounted src=chips:/scratch/massey-ifs-group path=/scratch/massey-ifs-group fstype=nfs
 
-- name: Mount for masseyifs work
-  mount: state=mounted src=chips:/work/masseyifs path=/work/masseyifs fstype=nfs
+- name: Mount for massey-ifs-group work
+  mount: state=mounted src=chips:/work/massey-ifs-group path=/work/massey-ifs-group fstype=nfs
 
-- name: Mount for masseyifs sequencing
-  mount: state=mounted src=chips:/sequencing/masseyifs path=/sequencing/masseyifs fstype=nfs
+- name: Mount for massey-ifs-group sequencing
+  mount: state=mounted src=chips:/sequencing/massey-ifs-group path=/sequencing/massey-ifs-group fstype=nfs
