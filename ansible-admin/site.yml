@@ -63,6 +63,8 @@
     - goozbach.EPEL
   tasks:
     - include: tasks/slurm.yml
+  handlers:
+    - include: handlers/slurm.yml
 
 # This is just a small best practise for all ssh connections
 # Must be done after user creation

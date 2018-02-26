@@ -6,6 +6,7 @@
 - name: Copy munge key
   copy: src=files/slurm/munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0400
   tags: ['munge']
+  notify: restart munge
 
 - name: munge service
   action: service name=munge state=started enabled=yes
@@ -35,6 +36,7 @@
 - name: Copy slurm config
   copy: src=files/slurm/slurm.conf dest=/etc/slurm/slurm.conf owner=root group=root mode=0644
   tags: ['slurm']
+  notify: restart slurm
 
 - name: Turn off firewall
   action: service name=firewalld state=stopped enabled=no
