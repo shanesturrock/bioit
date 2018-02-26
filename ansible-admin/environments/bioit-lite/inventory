@@ -22,5 +22,3 @@ bioit+bioitlite
 # Random other VMs for testing, builds, etc
 # They won't have slurm or end-user logins permitted, but will have other common
 # setup (NFS mounts, user/groups created)
-bioit+lentest
-bioit+build

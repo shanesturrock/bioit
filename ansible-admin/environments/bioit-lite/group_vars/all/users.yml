@@ -250,8 +250,8 @@ bioit_user_list:
     state: present
     #state: absent
     remove: yes
-  - name: "Simon Hall"
-    username: "shall"
+  - name: "Sebastian Schmeier"
+    username: "sschmeier"
     uid: 10189
     groups:
       - massey-ifs-group
