@@ -18,7 +18,19 @@ bioit+bioitlite
 bioit+rtgwork
 bioit+bioitlite
 
-[other-servers]
+[other-vms]
 # Random other VMs for testing, builds, etc
 # They won't have slurm or end-user logins permitted, but will have other common
 # setup (NFS mounts, user/groups created)
+
+[hypervisor]
+# This guy isn't a VM, so we're more careful what tasks get run here
+# Currently just user/group account created for quota application on NFS exports
+bioit
+
+[vms:children]
+slurm-controllers
+slurm-compute-nodes
+slurm-submit-hosts
+bioit-login-hosts
+other-vms

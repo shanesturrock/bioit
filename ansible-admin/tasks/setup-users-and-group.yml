@@ -1,5 +1,5 @@
 - name: Create admin group
-  group: name={{ admin_group }} state=present
+  group: name={{ admin_group }} gid=1000 state=present
 
 - name: Setup admin users
   user:

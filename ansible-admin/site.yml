@@ -24,7 +24,7 @@
 #       tags: ['centos']
 
 - name: Setup OS base packages
-  hosts: all
+  hosts: vms
   gather_facts: no
   tags: ['base']
   become: true
@@ -32,7 +32,7 @@
     - include: tasks/base.yml
 
 - name: Setup network mounts
-  hosts: all
+  hosts: vms
   gather_facts: no
   tags: ['mounts']
   become: true
@@ -69,7 +69,7 @@
 # This is just a small best practise for all ssh connections
 # Must be done after user creation
 - name: Setup SSH Security hardening
-  hosts: all
+  hosts: vms
   gather_facts: no
   tags: ['security']
   become: yes
