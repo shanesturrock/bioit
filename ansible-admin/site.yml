@@ -23,6 +23,14 @@
 #       raw: sudo yum install python
 #       tags: ['centos']
 
+- name: Setup OS base packages
+  hosts: all
+  gather_facts: no
+  tags: ['base']
+  become: true
+  tasks:
+    - include: tasks/base.yml
+
 - name: Setup network mounts
   hosts: all
   gather_facts: no
