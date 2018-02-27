@@ -259,6 +259,7 @@ bioit_user_list:
     keys:
       # Change to 'disabled:' to remove the key
       active:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIA/Cx0gFzXt2Tj20uBPou3/f0QZ3TKRtTXtoiyFu2y324IA0EfFynMrFtqNXs5RWCWDJYS+44gj3DxXazMLGN/Bj+O5/S9vTwEc/3QEKSmz33avXegXy30VkzcCYnmgSYBxPDVltgXNAvOlVQH7i19Z5XF+9QsxIF7toPzM48/0w0Dv4+pAN8t78EA5h0WLTyH9m39NJQbX7RhA9PoeQ16Dq/rU4A8Ea9KobzQB34R6zng6iNKmefkdWy6NNWZLBfgy+zeOIx3DtC/scwcZw66ql30wN/Boasex+uxLCwFQJiiO5v3JeHkjDTmDXA20AJDbhu+mW728lZyBkE7rZz sschmeie@C02PHDPPG3QC"
       - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC34jhmDu4DO2iGthqK9kEoJvt3Rzolmu8HeCJtcvPlkjwSFyqXk1lGLQTWMZbAbVl3AufgF3+hTwxwJSmdrY8X8WJrp9Y+i1z/GFKkXYeAmmxJrl+/JL9c3DUGiPJHKLCt2cvB/JZb4ZDsXnq5gvJKyGHJ1nkEOPoKw5GsipZT9Th6jBI7jomtjdxFPCmfdeDxnZaUCQyEE2grPxzfE/GS0x/14tN/rrRFfkTr1tIaWRdXYMnsaVmxqta0MC30CDt6SdFqO+43MRlChkP+LhTwK2t5KbZuh6iMHlvpyxorGfILH1nwGPFBcVH+lzl7C9lK8SBEVX9MFU/vK050TLRR sss@Shanes-MBP"
     # Comment out shell: to disable account
     shell: "/bin/bash"
