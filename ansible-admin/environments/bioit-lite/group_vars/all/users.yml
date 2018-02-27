@@ -50,6 +50,7 @@ bioit_user_list:
     keys:
       # Change to 'disabled:' to remove the key
       active:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC6i1znZF68eQRyWVfU5o2Dsv4KsSTaMagDt2VC4j902F7pSjHEbHuI8EF6DED7AzZBbO5BNljZHnq//Xxv5/GWIalBlTB/B1xYzKcmJImxZtQG6OE2z4NVgciUTMkD8BZJOSzF9UWWW8qV7U9dvKRhwJ1eO/Yu3LPAMlKLQmh34t3P9B1Fu6qhAC8J87lY9qoP6E/xC6gYWSN+/Zu4vEGbWVZZ9ge7dBfWtEkhJU5jDrvKkCrmjfq+Z2qusKE4Spf2iR7xAubxrpVhK5TzecyjRIEsBC4HqFYt+AGiFB5rRwG58Ryw6EXdO5S4ZXUCI+RNny6sFc50m78RAOcJI2Ht Guest@MacBook-Pro.local"
       - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC34jhmDu4DO2iGthqK9kEoJvt3Rzolmu8HeCJtcvPlkjwSFyqXk1lGLQTWMZbAbVl3AufgF3+hTwxwJSmdrY8X8WJrp9Y+i1z/GFKkXYeAmmxJrl+/JL9c3DUGiPJHKLCt2cvB/JZb4ZDsXnq5gvJKyGHJ1nkEOPoKw5GsipZT9Th6jBI7jomtjdxFPCmfdeDxnZaUCQyEE2grPxzfE/GS0x/14tN/rrRFfkTr1tIaWRdXYMnsaVmxqta0MC30CDt6SdFqO+43MRlChkP+LhTwK2t5KbZuh6iMHlvpyxorGfILH1nwGPFBcVH+lzl7C9lK8SBEVX9MFU/vK050TLRR sss@Shanes-MBP"
     # Comment out shell: to disable account
     shell: "/bin/bash"
