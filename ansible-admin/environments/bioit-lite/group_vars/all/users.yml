@@ -215,6 +215,7 @@ bioit_user_list:
     keys:
       # Change to 'disabled:' to remove the key
       active:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDunSxOLVdpGCbgd3hpxLvjd24Mg9r6I6gXq3+gtJ2FOTrephXYNh3nsumH+tQ4SsRrKptiA50KePhsSo7jrt/9mFd5+ssVbsPgcKNFn78xSpeuFc2jy+Yv1+5mEImqS2a4gPW6x5egUD4kDqyFleDQoczCdj0Xzf9AqMLp9csktMserPo1PKQEBUEDU/twRhvJ/VbEb8aF1VYE02XGjwmuKYaJu649koOUS4zgeK2/rDzWmXjmZvy5NZDikIvLe3rpMHBXkjFc55+5Sw0L6J1IAh7Rq2YyOmjedncUB0l94GltY+kQH3XPucwdu+nMLWZBo82oWBEMo0xAvzEZr+iP Nick@Nikolais-MacBook-Air-2.local"
       - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC34jhmDu4DO2iGthqK9kEoJvt3Rzolmu8HeCJtcvPlkjwSFyqXk1lGLQTWMZbAbVl3AufgF3+hTwxwJSmdrY8X8WJrp9Y+i1z/GFKkXYeAmmxJrl+/JL9c3DUGiPJHKLCt2cvB/JZb4ZDsXnq5gvJKyGHJ1nkEOPoKw5GsipZT9Th6jBI7jomtjdxFPCmfdeDxnZaUCQyEE2grPxzfE/GS0x/14tN/rrRFfkTr1tIaWRdXYMnsaVmxqta0MC30CDt6SdFqO+43MRlChkP+LhTwK2t5KbZuh6iMHlvpyxorGfILH1nwGPFBcVH+lzl7C9lK8SBEVX9MFU/vK050TLRR sss@Shanes-MBP"
     # Comment out shell: to disable account
     shell: "/bin/bash"
@@ -336,6 +337,7 @@ bioit_user_list:
     keys:
       # Change to 'disabled:' to remove the key
       active:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAkUqhosv/rZxamv31qeicHmgmlIPz2xZd1jkxxqXbXqD0B7BNW09BsroPwkN026YUdPyZMirikXbHGbqrzcd0uNewSNls3ihEn/JcWNDzX1oi8QlpeR3n82I7DNZk9rXgvTvdXD2KumJtlBVnok3AiKlmSXnnpq4DIYNHyOSjUDO7rQgrwyOQFO8xpKUN6kNBRbsgom/txS2haMj+P8V4YuGiNHJHJyyj3uQtxWJCicmNwQiA7RPXntohgCbt9srYRh8x4oXVTAn4Utv9JUfXQbrXFybDAr3/KOCxXZEhhhdTi2vn9kTyAOJo9y9HDh2RhlCzElfb4gTi+qLX2o+OQQ== rsa-key-20180227"
       - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC34jhmDu4DO2iGthqK9kEoJvt3Rzolmu8HeCJtcvPlkjwSFyqXk1lGLQTWMZbAbVl3AufgF3+hTwxwJSmdrY8X8WJrp9Y+i1z/GFKkXYeAmmxJrl+/JL9c3DUGiPJHKLCt2cvB/JZb4ZDsXnq5gvJKyGHJ1nkEOPoKw5GsipZT9Th6jBI7jomtjdxFPCmfdeDxnZaUCQyEE2grPxzfE/GS0x/14tN/rrRFfkTr1tIaWRdXYMnsaVmxqta0MC30CDt6SdFqO+43MRlChkP+LhTwK2t5KbZuh6iMHlvpyxorGfILH1nwGPFBcVH+lzl7C9lK8SBEVX9MFU/vK050TLRR sss@Shanes-MBP"
     # Comment out shell: to disable account
     shell: "/bin/bash"
