@@ -1,21 +1,6 @@
 - name: Create admin group
   group: name={{ admin_group }} gid=1000 state=present
 
-- name: Setup admin users
-  user:
-    name: "{{ item.username }}"
-    state: "{{ item.state | default('present') }}"
-    shell: "{{ item.shell | default('/bin/bash') }}"
-    uid: "{{ item.uid }}"
-    group: "{{ admin_group }}"
-    remove: yes
-  when: item.username is defined
-  with_items:
-    - "{{ bioit_admin_list }}"
-
-- name: Identify all project groups
-  set_fact: bioit_project_groups="{{ bioit_user_list|map(attribute='groups')| sum(start=[]) | unique }}"
-
 - name: Setup non admin groups
   group:
     name: "{{ item.name }}"
@@ -23,6 +8,19 @@
     state: "{{ item.state | default('present') }}"
   with_items:
     - "{{ bioit_group_list }}"
+
+- name: Setup admin users
+  user:
+    name: "{{ item.username }}"
+    state: "{{ item.state | default('present') }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    uid: "{{ item.uid }}"
+    group: "{{ admin_group }}"
+    groups: "{{ item.groups | default(omit) }}"
+    remove: yes
+  when: item.username is defined
+  with_items:
+    - "{{ bioit_admin_list }}"
 
 - name: Decide whether end-users can log in
   when: inventory_hostname not in groups['bioit-login-hosts']
