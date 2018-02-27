@@ -20,6 +20,14 @@ bioit_admin_list:
         - "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAzEUUwX9BDsF92s/6tCjyVtx3SP4CuOWjQ4JhPrIAIp7uEdnCqOy4bn3zgyYpBAJDmKd/ZOlH693VlrwGQBpRrGyDC+YD31zldWJZVEDbsgli4PAiVkmn0p/Mjjom/Zj63WIRpfBFfK0mUonHXbokdn4S7FZrBE5zlP7tEqTOmIeNuB+sho0jBUrjqK8IgWOSVo2hjMPqVuv31zrz4mZrC+b+h2/U9pweNCNre0B01aXw3TSZmhAtZ4FHOiAUDVidwy3n7/GgetWMGeRANZX6IIxR6i8+orpck8irpeR8LYBjqYsHL6rb2TQZXJM+8tN+hI3yYLUraNKxIfFGUnLnLagYnOliSbnj4GRTL+O2GfYR95+5e27MhhPY71nAMY/Zx2wW/aGXgKx45XOLuPxQr7V6gMGF2Oa58PfkmL+nBPKM9eHPoAtGbtge5ps0rEcEKlpGa++H5xxQO4hj+KTJrHkac2+KwQkMBZIXdKUF2nj0u70K0oFh3sKwxCSOcG6QZFQu8UjjoeEIK72cAYoACvDEaRWEYCMXjx2BkkkHM0KulXr4wSqBzZsJJCYEr5i9aUw9L9G0xBai9xkxjW31j0sLd5153/6dyQujzcGFixQwop6eeU1taVnXcreagBIYkWnYiKdSbS96s27Ps1M4qSpwSqX0BZv2CUANKL0aF2c= len@noir"
     shell: "/bin/bash"
     state: present
+  - name: "Sean A. Irvine"
+    username: "sean"
+    uid: 10022
+    keys:
+      active:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/zwMp8fCGMVMN/CM85HdSnXTcG8TwHhbdw4oWsE2VU540EpPnwF0+qtVBIBpct8aHUdHDsu8W29oL744rMNxZF4HEvEzZwUwsJx4mPYgHKK1FT+aFdJYyZjH+y144oRMaj1yK0GBZgZSAn1F9cxnIkUSXh6FsDmJo2H0qwQhOIsJUN4gR7sS3/HDlv4fN4gVM1TbYxGT6vtkC/n5IX2fLJOZE00ag7RPVmZz9u8+jyVQc/1oYLeUyQaIIVamSXectG8rCzo6wb+ut0UrGeGkzLwE1VKHuCGhpIO/IrX9bwaPocLFdPoCOOZvuscYZTtLaB/8xXiezAXwI2+1AlmRd sean@shannon"
+    shell: "/bin/bash"
+    state: present
 
 # This is the admin group where we will add users with sudo access
 admin_group: bioit_admin

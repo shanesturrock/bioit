@@ -342,18 +342,3 @@ bioit_user_list:
     state: present
     #state: absent
     remove: yes
-  - name: "Sean A. Irvine"
-    username: "sean"
-    uid: 10022
-    groups:
-      - rtgrnd
-    keys:
-      # Change to 'disabled:' to remove the key
-      active:
-      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/zwMp8fCGMVMN/CM85HdSnXTcG8TwHhbdw4oWsE2VU540EpPnwF0+qtVBIBpct8aHUdHDsu8W29oL744rMNxZF4HEvEzZwUwsJx4mPYgHKK1FT+aFdJYyZjH+y144oRMaj1yK0GBZgZSAn1F9cxnIkUSXh6FsDmJo2H0qwQhOIsJUN4gR7sS3/HDlv4fN4gVM1TbYxGT6vtkC/n5IX2fLJOZE00ag7RPVmZz9u8+jyVQc/1oYLeUyQaIIVamSXectG8rCzo6wb+ut0UrGeGkzLwE1VKHuCGhpIO/IrX9bwaPocLFdPoCOOZvuscYZTtLaB/8xXiezAXwI2+1AlmRd sean@shannon"
-    # Comment out shell: to disable account
-    shell: "/bin/bash"
-    # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
-    remove: yes
