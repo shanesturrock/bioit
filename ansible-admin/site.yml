@@ -66,6 +66,14 @@
   handlers:
     - include: handlers/slurm.yml
 
+- name: Setup bioit-repo
+  hosts: slurm-compute-nodes slurm-submit-hosts
+  gather_facts: yes
+  tags: ['bioit-repo']
+  become: yes
+  tasks:
+    - include: tasks/bioit-repo.yml
+
 # This is just a small best practise for all ssh connections
 # Must be done after user creation
 - name: Setup SSH Security hardening
