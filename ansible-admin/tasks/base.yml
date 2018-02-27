@@ -40,6 +40,7 @@
     - perl-GD
     - perl-GDGraph
     - perl-Perl4-CoreLibs
+    - perl-PerlIO-gzip
     - perl-Statistics-Descriptive
     - perl-Test-Base
     - postgresql-devel
