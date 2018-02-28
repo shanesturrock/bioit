@@ -61,6 +61,7 @@
     - texinfo
     - texinfo-tex
     - texlive-*
+    - time
     - tk-devel
     - tmux
     - wget
