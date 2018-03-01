@@ -1,11 +1,11 @@
-%define priority 21710
+%define priority 21711
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.17.10
+Version:	2.17.11
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,11 @@ fi
 %files
 
 %changelog
+* Fri Mar 02 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.11-1
+- Fix regex for barcode files in basecalling metrics for novaseq. (#1125)
+- Replace individual developer names with dsde-pipelines-developers
+- Add .pullapprove.yml file to picard public
+
 * Thu Feb 22 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.10-1
 - Update htsjdk version to 2.14.3
 
