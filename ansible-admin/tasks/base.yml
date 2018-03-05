@@ -49,6 +49,7 @@
     - python-devel
     - python-networkx
     - python-nose
+    - python-pip
     - python34-devel
     - python34-pip
     - readline-devel
