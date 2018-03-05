@@ -18,6 +18,8 @@
     - git
     - gnuplot
     - gsl-devel
+    - gtk3-devel
+    - hdf5-devel
     - htop
     - java-1.6.0-openjdk-devel
     - java-devel
@@ -45,6 +47,7 @@
     - perl-Test-Base
     - postgresql-devel
     - python-devel
+    - python-networkx
     - python-nose
     - python34-devel
     - python34-pip
