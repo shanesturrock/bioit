@@ -34,6 +34,7 @@
     - mlocate
     - mpich-devel
     - ncurses-devel
+    - nfs4-acl-tools
     - nfs-utils
     - openmpi-devel
     - openssl-devel
