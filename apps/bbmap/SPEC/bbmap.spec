@@ -1,11 +1,11 @@
-%define priority 3790
+%define priority 3793
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.90
+Version:	37.93
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -178,6 +178,42 @@ fi
 %files
 
 %changelog
+* Fri Mar 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.93-1
+- 37.91
+  - Multithreaded FilterVCF.  Poor speedup with vcfline.toVar, for reasons that
+    are hard to diagnose.
+  - Fixed a bug in ScafMap.loadVcfHeader.
+  - Wrote Tools.parseDelimited.
+  - Var.fromVCF now optionally imports extended information.
+  - Added maxReads, minCov, and maxCov to VarFilter.
+  - Reordered VCF info fields for faster parsing.
+  - Added code to convince compiler some possible null pointer acceses were
+    safe.
+  - Added ConcurrentReadInputStream.returnList(ListNum) with internal null
+    check.
+  - Added an assertion to most paring statements expecting a non-null b.
+  - Fixed several other potential null accesses.
+  - Made AccessionToTaxid/RenameGiToNcbi somewhat faster; running multiple
+    concurrent unpigz processes makes it slow.
+  - Fixed taxpath setting failure in RenameGiToNcbi and other programs.
+  - Added G.species name format support for TaxServer and taxonomy in general.
+  - PreParser now supports printexecuting flag for command-line suppression of
+    repeating the parameters.
+  - Wrote SuperLongList.
+  - Column needed for percent of library in sketch output, something like depth
+    * genome size.
+  - TestFormat2 now works better with negative numbers for quality and broken
+    quality scores.
+  - TestFormat2 supports additional fields like length mode and stddev.
+- 37.92
+  - Bump for Jenkins.
+- 37.93
+  - RQCFilter now defaults to auto for taxTreeFile.
+  - Fixed BBSplit crashing when parsing flags without an = symbol.
+  - Fixed some missing accession numbers in TaxServer.
+  - TaxServer now timestamps queries and displays the number of NotFound
+    queries.
+
 * Tue Feb 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.90-1
 - 37.89
   - Wrote ByteBuilder.appendFast(double, int).

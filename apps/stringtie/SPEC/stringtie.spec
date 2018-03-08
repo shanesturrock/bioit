@@ -5,7 +5,7 @@ fi )
 %define dist .el7.bioit
 
 Name:		stringtie
-Version:	1.3.4c
+Version:	1.3.4d
 Release:	1%{?dist}
 Summary:	StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts.
 Group:		Applications/Engineering
@@ -46,6 +46,9 @@ fi
 %files
 
 %changelog
+* Fri Mar 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.3.4d-1
+- No changes listed
+
 * Thu Feb 22 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.3.4c-1
 - No changes listed
 
