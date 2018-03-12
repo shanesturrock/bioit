@@ -10,8 +10,7 @@
     - name: Check ansible version meets this playbook minimum version requirements.
       assert:
         that: "ansible_version.full | version_compare('2.4', '>=')"
-        msg: >
-          "You must update Ansible to at least 2.4 to use this playbook."
+        msg: "You must update Ansible to at least 2.4 to use this playbook."
 
 # - name: Setup ansible dependencies
 #   hosts: all
@@ -25,9 +24,11 @@
 
 - name: Setup OS base packages
   hosts: vms
-  gather_facts: no
+  gather_facts: yes
   tags: ['base']
   become: true
+  roles:
+    - goozbach.EPEL
   tasks:
     - include: tasks/base.yml
 
