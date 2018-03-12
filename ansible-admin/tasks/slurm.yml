@@ -86,3 +86,8 @@
   when: inventory_hostname in groups['slurm-controllers']
   file: path=/var/spool/slurmctld state=directory owner=slurm group=root mode=0755
   tags: ['slurm']
+
+- name: Create slurm accounting destination dir (controllers)
+  when: inventory_hostname in groups['slurm-controllers']
+  file: path=/var/log/slurm state=directory owner=slurm group=root mode=0755
+  tags: ['slurm']

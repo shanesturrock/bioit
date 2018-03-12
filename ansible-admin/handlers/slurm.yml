@@ -1,7 +1,7 @@
 ---
 
 - name: restart munge
-  service: name=munge state=restarted
+  service: name=munge state=restarted enabled=yes
 
 - name: restart slurm
   command: /bin/true
@@ -11,9 +11,9 @@
   changed_when: True
 
 - name: restart slurmd
-  service: name=slurmd state=restarted
+  service: name=slurmd state=restarted enabled=yes
   when: inventory_hostname in groups['slurm-compute-nodes']
 
 - name: restart slurmctld
-  service: name=slurmctld state=restarted
+  service: name=slurmctld state=restarted enabled=yes
   when: inventory_hostname in groups['slurm-controllers']

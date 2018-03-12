@@ -39,10 +39,13 @@ SelectTypeParameters=CR_CPU
 #
 #
 # LOGGING AND ACCOUNTING
-AccountingStorageType=accounting_storage/none
+AccountingStorageType=accounting_storage/filetxt
+AccountingStorageLoc=/var/log/slurm/accounting
 ClusterName=cluster
 #JobAcctGatherFrequency=30
-JobAcctGatherType=jobacct_gather/none
+JobAcctGatherType=jobacct_gather/linux
+JobCompType=jobcomp/filetxt
+JobCompLoc=/var/log/slurm/job_completions
 #SlurmctldDebug=3
 SlurmctldLogFile=/var/log/slurmctld.log
 #SlurmdDebug=3
