@@ -35,7 +35,16 @@ SchedulerType=sched/backfill
 SelectType=select/cons_res
 SelectTypeParameters=CR_CPU
 #SelectTypeParameters=
-#PriorityType=priority/multifactor
+PriorityType=priority/multifactor
+PriorityDecayHalfLife=7-0
+PriorityFavorSmall=NO
+PriorityMaxAge=14-0
+PriorityWeightAge=1000
+PriorityWeightFairshare=10000
+PriorityWeightJobSize=0
+PriorityWeightPartition=0
+PriorityWeightQOS=0
+
 #
 #
 # LOGGING AND ACCOUNTING
