@@ -32,7 +32,8 @@
     state: "{{ item.state | default('present') }}"
     shell: "{{ no_login | default(item.shell) | default('/sbin/nologin') }}"
     uid: "{{ item.uid }}"
-    groups: "{{ item.groups }}"
+    group: "{{ item.group | default(omit) }}"
+    groups: "{{ item.groups | default(omit) }}"
     remove: "{{ item.remove | default('yes') }}"
   when: item.username is defined
   with_items:
