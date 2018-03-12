@@ -34,7 +34,7 @@
   tags: ['slurm']
 
 - name: Copy slurm config
-  copy: src=files/slurm/slurm.conf dest=/etc/slurm/slurm.conf owner=root group=root mode=0644
+  template: src=templates/slurm/slurm.conf.j2 dest=/etc/slurm/slurm.conf owner=root group=root mode=0644
   tags: ['slurm']
   notify: restart slurm
 
@@ -80,4 +80,9 @@
     - slurm-slurmd
     - slurm-slurmdbd
     - slurm-pam_slurm
+  tags: ['slurm']
+
+- name: Create slurm spool dir (controllers)
+  when: inventory_hostname in groups['slurm-controllers']
+  file: path=/var/spool/slurmctld state=directory owner=slurm group=root mode=0755
   tags: ['slurm']

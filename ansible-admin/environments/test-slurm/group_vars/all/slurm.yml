@@ -1,0 +1,4 @@
+slurm_version: 17.11.2
+slurm_controller_host: "test-control"
+slurm_compute_hosts: "test-com1"
+slurm_compute_host_config: "RealMemory=1 Sockets=1 CoresPerSocket=1 ThreadsPerCore=1"
