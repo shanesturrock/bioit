@@ -1,11 +1,11 @@
-%define priority 202
+%define priority 203
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.0.2
+Version:	2.0.3
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -94,5 +94,53 @@ fi
 %files
 
 %changelog
+* Fri Mar 16 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.0.3-1
+- This minor release provides bug fixes and improved reliability for both MPI
+  assemblies and Bloom filter assemblies on large datasets. In addition, many
+  usability improvements have been made to the abyss-samtobreak program for
+  misasssembly assessment.
+- Overall:
+  - Many compiler fixes for GCC >= 6, Boost >= 1.64
+  - Read and write GFA 2 assembly graphs with abyss-pe graph=gfa2
+  - Support reading CRAM via samtools
+- abyss-bloom:
+  - New abyss-bloom build -t rolling-hash option, to pre-build input Bloom
+    filters for abyss-bloom-dbg
+  - Fix incorrect output of abyss-bloom kmers -r (thanks to @notestaff!)
+- abyss-bloom-dbg:
+  - New -i option to read Bloom filter files built by abyss-bloom build -t
+    rolling-hash
+  - Improved error branch trimming (reduces number of small output sequences)
+  - Fix intermittent segfaults caused by non-null-terminated strings
+- abyss-map:
+  - Append BX tag to SAM output (Chromium 10x Genomics data)
+- ABYSS-P:
+  - Increase default number of sparsehash buckets from 200,000,000 =>
+    1,000,000,000
+  - Benefit: Allows larger datasets to be assembled without time-consuming
+    sparsehash resize operations (e.g. H. sapiens)
+  - Caveat: Increases minimum memory requirement per CPU core from 89 MB to 358
+    MB
+- abyss-pe:
+  - Parallelize gzip with pigz, if available
+  - Report time/memory for each program with zsh, if available
+  - Fix: use N instead of n for scaffold stage, when set by user
+- abyss-samtobreak:
+  - New --alignment-length (-a) option to exclude alignments shorter than a
+    given length
+  - New --contig-length (-l) option to exclude contigs shorter than a given
+    length
+  - New --genome-size (-G) option, for contiguity metrics that depend on the
+    reference genome size
+  - New --mapq (-q) option for minimum MAPQ score
+  - New --patch-gaps (-g) option to join alignments separated by small gaps
+  - New TSV output format with additional contiguity stats (e.g. L50, NG50)
+  - Fix handling of hard-clipped alignments
+- abyss-todot:
+  - New --add-complements option
+- abyss-tofastq:
+  - New --bx option to copy BX tag from from SAM/BAM to FASTQ header comment
+    (Chromium 10x Genomics data)
+
 * Tue Aug 15 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.0.2-1
 - Fix compile errors with gcc-6 and boost-1.62.

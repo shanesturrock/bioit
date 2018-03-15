@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 343
+%define priority 344
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        3.4.3
+Version:        3.4.4
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -42,6 +42,42 @@ fi
 %files
 
 %changelog
+* Fri Mar 16 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.4.4-1
+- NEW FEATURES
+  - Sys.timezone() tries more heuristics on Unix-alikes and so is more likely
+    to succeed (especially on Linux). For the slowest method, a warning is
+    given recommending that TZ is set to avoid the search.
+  - The version of LAPACK included in the sources has been updated to 3.8.0
+    (for the routines used by R, a very minor bug-fix change).
+  - parallel::detectCores(logical = FALSE) is ignored on Linux systems, since
+    the information is not available with virtualized OSes.
+- INSTALLATION on a UNIX-ALIKE
+  - configure will use pkg-config to find the flags to link to jpeg if
+    available (as it should be for the recently-released jpeg-9c and
+    libjpeg-turbo). (This amends the code added in R 3.3.0 as the module name in
+    jpeg-9c is not what that tested for.)
+- DEPRECATED AND DEFUNCT
+  - Sys.timezone(location = FALSE) (which was a stop-gap measure for Windows
+    long ago) is deprecated. It no longer returns the value of environment
+    variable TZ (usually a location).
+  - Legacy support of make macros such as CXX1X is formally deprecated: use the
+    CXX11 forms instead.
+- BUG FIXES
+  - power.prop.test() now warns when it cannot solve the problem, typically
+    because of impossible constraints. (PR#17345)
+  - removeSource() no longer erroneously removes NULL in certain cases, thanks
+    to Dénes Tóth.
+  - nls(`NO [mol/l]` ~ f(t)) and nls(y ~ a) now work. (Partly from PR#17367)
+  - R CMD build checks for GNU cp rather than assuming Linux has it. (PR#17370
+    says ‘Alpine Linux’ does not.)
+  - Non-UTF-8 multibyte character handling fixed more permanently (PR#16732).
+  - sum(<large ints>, <stuff>) is more consistent. (PR#17372)
+  - rf() and rbeta() now also work correctly when ncp is not scalar, notably
+    when (partly) NA. (PR#17375)
+  - is.na(NULL) no longer warns. (PR#16107)
+  - R CMD INSTALL now correctly sets C++ compiler flags when all source files
+    are in sub-directories of ‘src’.
+
 * Fri Dec 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 3.4.3-1
 - INSTALLATION on a UNIX-ALIKE:
   - A workaround has been added for the changes in location of time-zone files
