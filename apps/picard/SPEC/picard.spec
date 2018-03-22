@@ -1,11 +1,11 @@
-%define priority 21711
+%define priority 21800
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.17.11
+Version:	2.18.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,14 @@ fi
 %files
 
 %changelog
+* Fri Mar 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.0-1
+- Made unpaired reads not fall through to paired read checks (#1133)
+- illumina directory return code conforms to posix standards
+- CrosscheckFingerprint speedup, extra functionality and NIO enabling (#1086)
+- Refactor SamToFastq and add SamToFastqWithTags (#1110)
+- Change order of iteration in pickTranscripts for speed. (#1126)
+- Add IdentifyContaminant CLP (#1107)
+
 * Fri Mar 02 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.11-1
 - Fix regex for barcode files in basecalling metrics for novaseq. (#1125)
 - Replace individual developer names with dsde-pipelines-developers

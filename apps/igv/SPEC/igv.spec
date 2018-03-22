@@ -1,11 +1,11 @@
-%define priority 2409
+%define priority 2410
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.4.9
+Version:	2.4.10
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Mar 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.10-1
+- Allow setting max data range to zero (vs 1E-45). Fixes #517
+
 * Fri Mar 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.9-1
 - Fix "is proper pair" test
 
