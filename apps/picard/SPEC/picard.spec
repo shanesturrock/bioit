@@ -1,11 +1,11 @@
-%define priority 21800
+%define priority 21802
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.0
+Version:	2.18.2
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,10 @@ fi
 %files
 
 %changelog
+* Fri Apr 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.2-1
+- DSDEGP-2199 Switch to shaded NIO jar used by GATK. (#1152)
+- Add test for reading bam data from stdin (#1131)
+
 * Fri Mar 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.0-1
 - Made unpaired reads not fall through to paired read checks (#1133)
 - illumina directory return code conforms to posix standards

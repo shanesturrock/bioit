@@ -1,11 +1,11 @@
-%define priority 3793
+%define priority 3795
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.93
+Version:	37.95
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -151,6 +151,7 @@ alternatives \
    --slave %{_bindir}/stats.sh stats.sh /opt/bioit/%{name}/%{version}/stats.sh \
    --slave %{_bindir}/statswrapper.sh statswrapper.sh /opt/bioit/%{name}/%{version}/statswrapper.sh \
    --slave %{_bindir}/streamsam.sh streamsam.sh /opt/bioit/%{name}/%{version}/streamsam.sh \
+   --slave %{_bindir}/summarizecontam.sh summarizecontam.sh /opt/bioit/%{name}/%{version}/summarizecontam.sh \
    --slave %{_bindir}/summarizecrossblock.sh summarizecrossblock.sh /opt/bioit/%{name}/%{version}/summarizecrossblock.sh \
    --slave %{_bindir}/summarizemerge.sh summarizemerge.sh /opt/bioit/%{name}/%{version}/summarizemerge.sh \
    --slave %{_bindir}/summarizequast.sh summarizequast.sh /opt/bioit/%{name}/%{version}/summarizequast.sh \
@@ -167,6 +168,7 @@ alternatives \
    --slave %{_bindir}/textfile.sh textfile.sh /opt/bioit/%{name}/%{version}/textfile.sh \
    --slave %{_bindir}/translate6frames.sh translate6frames.sh /opt/bioit/%{name}/%{version}/translate6frames.sh \
    --slave %{_bindir}/unicode2ascii.sh unicode2ascii.sh /opt/bioit/%{name}/%{version}/unicode2ascii.sh \
+   --slave %{_bindir}/vcf2gff.sh vcf2gff.sh /opt/bioit/%{name}/%{version}/vcf2gff.sh \
    --slave %{_bindir}/webcheck.sh webcheck.sh /opt/bioit/%{name}/%{version}/webcheck.sh
 
 %postun
@@ -178,6 +180,42 @@ fi
 %files
 
 %changelog
+* Fri Apr 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.95-1
+- 37.94
+  - Found and replaced some instances of z2=Xmx with z2=Xms in shells.
+  - Reimplemented ByteFile.pushBack(line) to sidestep a NERSC slowdown in
+    multithreaded java reading.
+  - Fixed VcfLine.type().
+  - Wrote GffLine and vcf2gff.sh.
+  - Added CallVariants gff output.
+  - Fixed pairLength() and pairCount() swap.
+  - Fixed the way sambamba was being called.
+  - Re-tested bcftools 1.7 and BBMap 37.94. CallVariants is 14x more efficient
+    and 180x faster.
+  - It is now difficult to replicate the memory/timing bug in 37.94 with
+    CompareSketch bf1, but partially replicates with bf2.
+  - TaxTree now checks for the auto keyword just before tree load.
+  - Moved TaxNode size tracking from TaxServer to TaxTree.
+  - Wrote SummarizeContamReport and summarizecontam.sh.
+  - Fixed an off-by-one error in Var to GFF translation.
+  - Added match generation from cigar, bases, and reference with no MDTags.
+  - Fixed bug in MDWalker for substitutions immediately after deletions.
+- 37.95
+  - Reformat is now able to generate match strings from a reference instead of
+    an MD Tag.
+  - Default SamStreamer threads increased to 6, to deal with match string
+    generation from sam 1.3.
+  - ref added as a flag for various programs to enable MD-free sam line
+    processing.
+  - Fixed an assertion preventing # replacement for BBMap input.
+  - Fixed handling of assertion errors during fastq quality encoding
+    autodetection during initialization, for paired files in which file 2 has
+    corrupted quality scores.
+  - Program now prints a warning instead of terminating when quality format is
+    specified but it seems wrong, in at least one case.
+  - Check where BBNorm is writing temp files on Lustre.
+  - Failed an attempt to accelerate FASTQ.quadToRead.
+
 * Fri Mar 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.93-1
 - 37.91
   - Multithreaded FilterVCF.  Poor speedup with vcfline.toVar, for reasons that

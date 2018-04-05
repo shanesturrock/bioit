@@ -1,11 +1,11 @@
-%define priority 17
+%define priority 18
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bcftools
-Version:	1.7
+Version:	1.8
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -43,6 +43,15 @@ fi
 %files
 
 %changelog
+* Fri Apr 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.8-1
+- -i, -e filtering: Support for custom perl scripts
+- +contrast: New plugin to annotate genotype differences between groups of
+  samples
+- +fixploidy: New options for simpler ploidy usage
+- +setGT: Target genotypes can be set to phased by giving --new-gt p
+- run-roh.pl: Allow to pass options directly to bcftools roh
+- Number of bug fixes
+
 * Tue Feb 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.7-1
 - -i, -e filtering: Major revamp, improved filtering by FORMAT fields and
   missing values. New GT=ref,alt,mis etc keywords, check the documentation for

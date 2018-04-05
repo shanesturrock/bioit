@@ -1,11 +1,11 @@
-%define priority 17
+%define priority 18
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		samtools
-Version:	1.7
+Version:	1.8
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -64,6 +64,26 @@ fi
 %files
 
 %changelog
+* Fri Apr 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.8-1
+- samtools calmd now has a quiet mode. This can be enabled by passing -Q to
+  calmd. (Thanks to Colin Davenport)
+- In samtools depth -d 0 will effectively remove the depth limit. (#764)
+- Improvements made to samtools collate's interface and documentation. It is
+  now possible to specify an output file name using -o, instead of deriving it
+  from the prefix used for temporary files. The prefix itself is now optional if
+  -o or -O (to stdout) is used. (#780)
+- Bug-fixes:
+  - Make samtools addreplacerg choose output format by file extension. (#767;
+    reported by Argy Megalios)
+  - Merge tests now work on ungzipped data, allowing tests to be run against
+    different deflate libraries.
+  - samtools markdup error messages about missing tags have been updated with
+    the suggestion that samtools fixmate is run beforehand. (#765; reported by
+    Yudong Cai)
+  - Enables the --reference option for samtools fastq. Now works like other
+    programs when a reference sequence is needed for CRAM files. (#791,
+    reported by Milana Kaljevic)
+
 * Tue Feb 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.7-1
 - HTSlib, and so samtools, now support BAMs which include CIGARs with more than
   65535 operations as per HTS-Specs 18th November (dab57f4 and 2f915a8).

@@ -1,11 +1,11 @@
-%define priority 17
+%define priority 18
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		htslib
-Version:	1.7
+Version:	1.8
 Release:	1%{?dist}
 Summary:	C library for high-throughput sequencing data formats
 
@@ -55,6 +55,40 @@ fi
 %files
 
 %changelog
+* Fri Apr 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.8-1
+- The URL to get sequences from the EBI reference server has been changed to
+  https://. This is because the EBI no longer serve sequences via plain HTTP -
+  requests to the http:// endpoint just get redirected. HTSlib needs to be 
+  linked against libcurl to download https:// URLs, so CRAM users who want to
+  get references from the EBI will need to run configure and ensure libcurl
+  support is enabled using the --enable-libcurl option.
+- Added libdeflate as a build option for alternative faster compression and
+  decompression. Results vary by CPU but compression should be twice as fast
+  and decompression faster.
+- It is now possible to set the compression level in bgzip. (#675; thanks to
+  Nathan Weeks).
+- bgzip now gets its own manual page.
+- CRAM encoding now stored MD and NM tags verbatim where the reference contains
+  'N' characters, to work around ambiguities in the SAM specification (samtools
+  #717/762). Also added "store_md" and "store_nm" cram-options for forcing
+  these tags to be stored at all locations. This is best when combined with a
+  subsequent decode_md=0 option while reading CRAM.
+- Multiple CRAM bug fixes, including a fix to free and the subsequent reuse of
+  references with -T ref.fa. (#654; reported by Chris Saunders)
+- CRAM multi-threading bugs fixed: don't try to call flush on reading;
+  processing of multiple range queries; problems with multi-slice containers.
+- Fixed crashes caused when decoding some cramtools produced CRAM files.
+- Fixed a couple of minor rANS issues with handling invalid data.
+- Fixed bug where probaln_glocal() tried to allocate far more memory than
+  needed when the query sequence was much longer than the reference. This
+  caused crashes in samtools and bcftools mpileup when used on data with very
+  long reads. (#572, problem reported by Felix Bemm via minimap2).
+- sam_prop_realn() now returns -1 (the same value as for unmapped reads) on
+  reads that do not include at least one 'M', 'X' or '=' CIGAR operator, and no
+  longer adds BQ or ZQ tags. BAQ adjustments are only made to bases covered by
+  these operators so there is no point in trying to align reads that do not have
+  them. (#572)
+
 * Thu Feb 01 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.7-1
 - BAM: HTSlib now supports BAMs which include CIGARs with more than 65535
   operations as per HTS-Specs 18th November (dab57f4 and 2f915a8).
