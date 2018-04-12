@@ -1,11 +1,11 @@
-%define priority 3795
+%define priority 3797
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.95
+Version:	37.97
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -47,6 +47,7 @@ alternatives \
    --slave %{_bindir}/bbsketch.sh bbsketch.sh /opt/bioit/%{name}/%{version}/bbsketch.sh \
    --slave %{_bindir}/bbsplitpairs.sh bbsplitpairs.sh /opt/bioit/%{name}/%{version}/bbsplitpairs.sh \
    --slave %{_bindir}/bbsplit.sh bbsplit.sh /opt/bioit/%{name}/%{version}/bbsplit.sh \
+   --slave %{_bindir}/bbsstats.sh bbstats.sh /opt/bioit/%{name}/%{version}/bbstats.sh \
    --slave %{_bindir}/bbversion.sh bbversion.sh /opt/bioit/%{name}/%{version}/bbversion.sh \
    --slave %{_bindir}/bbwrap.sh bbwrap.sh /opt/bioit/%{name}/%{version}/bbwrap.sh \
    --slave %{_bindir}/calcmem.sh calcmem.sh /opt/bioit/%{name}/%{version}/calcmem.sh \
@@ -81,8 +82,10 @@ alternatives \
    --slave %{_bindir}/filterbytaxa.sh filterbytaxa.sh /opt/bioit/%{name}/%{version}/filterbytaxa.sh \
    --slave %{_bindir}/filterbytile.sh filterbytile.sh /opt/bioit/%{name}/%{version}/filterbytile.sh \
    --slave %{_bindir}/filterlines.sh filterlines.sh /opt/bioit/%{name}/%{version}/filterlines.sh \
+   --slave %{_bindir}/filtersam.sh filtersam.sh /opt/bioit/%{name}/%{version}/filtersam.sh \
    --slave %{_bindir}/filtersubs.sh filtersubs.sh /opt/bioit/%{name}/%{version}/filtersubs.sh \
    --slave %{_bindir}/filtervcf.sh filtervcf.sh /opt/bioit/%{name}/%{version}/filtervcf.sh \
+   --slave %{_bindir}/fq.sh fq.sh /opt/bioit/%{name}/%{version}/fq.sh \
    --slave %{_bindir}/fungalrelease.sh fungalrelease.sh /opt/bioit/%{name}/%{version}/fungalrelease.sh \
    --slave %{_bindir}/fuse.sh fuse.sh /opt/bioit/%{name}/%{version}/fuse.sh \
    --slave %{_bindir}/getreads.sh getreads.sh /opt/bioit/%{name}/%{version}/getreads.sh \
@@ -93,6 +96,7 @@ alternatives \
    --slave %{_bindir}/gradesam.sh gradesam.sh /opt/bioit/%{name}/%{version}/gradesam.sh \
    --slave %{_bindir}/idmatrix.sh idmatrix.sh /opt/bioit/%{name}/%{version}/idmatrix.sh \
    --slave %{_bindir}/idtree.sh idtree.sh /opt/bioit/%{name}/%{version}/idtree.sh \
+   --slave %{_bindir}/invertkey.sh invertkey.sh /opt/bioit/%{name}/%{version}/invertkey.sh \
    --slave %{_bindir}/kcompress.sh kcompress.sh /opt/bioit/%{name}/%{version}/kcompress.sh \
    --slave %{_bindir}/khist.sh khist.sh /opt/bioit/%{name}/%{version}/khist.sh \
    --slave %{_bindir}/kmercountexact.sh kmercountexact.sh /opt/bioit/%{name}/%{version}/kmercountexact.sh \
@@ -102,6 +106,7 @@ alternatives \
    --slave %{_bindir}/loglog.sh loglog.sh /opt/bioit/%{name}/%{version}/loglog.sh \
    --slave %{_bindir}/makechimeras.sh makechimeras.sh /opt/bioit/%{name}/%{version}/makechimeras.sh \
    --slave %{_bindir}/makecontaminatedgenomes.sh makecontaminatedgenomes.sh /opt/bioit/%{name}/%{version}/makecontaminatedgenomes.sh \
+   --slave %{_bindir}/mappolymers.sh mappolymers.sh /opt/bioit/%{name}/%{version}/mappolymers.sh \
    --slave %{_bindir}/mapPacBio.sh mapPacBio.sh /opt/bioit/%{name}/%{version}/mapPacBio.sh \
    --slave %{_bindir}/matrixtocolumns.sh matrixtocolumns.sh /opt/bioit/%{name}/%{version}/matrixtocolumns.sh \
    --slave %{_bindir}/mergebarcodes.sh mergebarcodes.sh /opt/bioit/%{name}/%{version}/mergebarcodes.sh \
@@ -119,6 +124,7 @@ alternatives \
    --slave %{_bindir}/printtime.sh printtime.sh /opt/bioit/%{name}/%{version}/printtime.sh \
    --slave %{_bindir}/processfrag.sh processfrag.sh /opt/bioit/%{name}/%{version}/processfrag.sh \
    --slave %{_bindir}/processspeed.sh processspeed.sh /opt/bioit/%{name}/%{version}/processspeed.sh \
+   --slave %{_bindir}/processhi-c.sh processhi-c.sh /opt/bioit/%{name}/%{version}/processhi-c.sh \
    --slave %{_bindir}/randomreads.sh randomreads.sh /opt/bioit/%{name}/%{version}/randomreads.sh \
    --slave %{_bindir}/readlength.sh readlength.sh /opt/bioit/%{name}/%{version}/readlength.sh \
    --slave %{_bindir}/reducesilva.sh reducesilva.sh /opt/bioit/%{name}/%{version}/reducesilva.sh \
@@ -133,7 +139,10 @@ alternatives \
    --slave %{_bindir}/repair.sh repair.sh /opt/bioit/%{name}/%{version}/repair.sh \
    --slave %{_bindir}/rename.sh rename.sh /opt/bioit/%{name}/%{version}/rename.sh \
    --slave %{_bindir}/replaceheaders.sh replaceheaders.sh /opt/bioit/%{name}/%{version}/replaceheaders.sh \
+   --slave %{_bindir}/representative.sh representative.sh /opt/bioit/%{name}/%{version}/representative.sh \
+   --slave %{_bindir}/rqcfilter2.sh rqcfilter2.sh /opt/bioit/%{name}/%{version}/rqcfilter2.sh \
    --slave %{_bindir}/rqcfilter.sh rqcfilter.sh /opt/bioit/%{name}/%{version}/rqcfilter.sh \
+   --slave %{_bindir}/rq.sh rq.sh /opt/bioit/%{name}/%{version}/rq.sh \
    --slave %{_bindir}/samtoroc.sh samtoroc.sh /opt/bioit/%{name}/%{version}/samtoroc.sh \
    --slave %{_bindir}/seal.sh seal.sh /opt/bioit/%{name}/%{version}/seal.sh \
    --slave %{_bindir}/sendsketch.sh sendsketch.sh /opt/bioit/%{name}/%{version}/sendsketch.sh \
@@ -157,14 +166,19 @@ alternatives \
    --slave %{_bindir}/summarizequast.sh summarizequast.sh /opt/bioit/%{name}/%{version}/summarizequast.sh \
    --slave %{_bindir}/summarizescafstats.sh summarizescafstats.sh /opt/bioit/%{name}/%{version}/summarizescafstats.sh \
    --slave %{_bindir}/summarizeseal.sh summarizeseal.sh /opt/bioit/%{name}/%{version}/summarizeseal.sh \
+   --slave %{_bindir}/summarizesketch.sh summarizesketch.sh /opt/bioit/%{name}/%{version}/summarizesketch.sh \
    --slave %{_bindir}/synthmda.sh synthmda.sh /opt/bioit/%{name}/%{version}/synthmda.sh \
    --slave %{_bindir}/tadpipe.sh tadpipe.sh /opt/bioit/%{name}/%{version}/tadpipe.sh \
    --slave %{_bindir}/tadpole.sh tadpole.sh /opt/bioit/%{name}/%{version}/tadpole.sh \
    --slave %{_bindir}/tadwrapper.sh tadwrapper.sh /opt/bioit/%{name}/%{version}/tadwrapper.sh \
    --slave %{_bindir}/taxonomy.sh taxonomy.sh /opt/bioit/%{name}/%{version}/taxonomy.sh \
    --slave %{_bindir}/taxserver.sh taxserver.sh /opt/bioit/%{name}/%{version}/taxserver.sh \
+   --slave %{_bindir}/taxsize.sh taxsize.sh /opt/bioit/%{name}/%{version}/taxsize.sh \
    --slave %{_bindir}/taxtree.sh taxtree.sh /opt/bioit/%{name}/%{version}/taxtree.sh \
+   --slave %{_bindir}/testfilesystem.sh testfilesystem.sh /opt/bioit/%{name}/%{version}/testfilesystem.sh \
+   --slave %{_bindir}/testformat2.sh testformat2.sh /opt/bioit/%{name}/%{version}/testformat2.sh \
    --slave %{_bindir}/testformat.sh testformat.sh /opt/bioit/%{name}/%{version}/testformat.sh \
+   --slave %{_bindir}/tetramerfreq.sh tetramerfreq.sh /opt/bioit/%{name}/%{version}/tetramerfreq.sh \
    --slave %{_bindir}/textfile.sh textfile.sh /opt/bioit/%{name}/%{version}/textfile.sh \
    --slave %{_bindir}/translate6frames.sh translate6frames.sh /opt/bioit/%{name}/%{version}/translate6frames.sh \
    --slave %{_bindir}/unicode2ascii.sh unicode2ascii.sh /opt/bioit/%{name}/%{version}/unicode2ascii.sh \
@@ -180,6 +194,31 @@ fi
 %files
 
 %changelog
+* Fri Apr 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.97-1
+- 37.96
+  - Wrote FindJiCJunctions and processhi-c.sh for identifying and trimming
+    junctions.
+  - Added formatting functions in Tools to handle printing reads and bases
+    processed.
+  - Fixed a crash bug in CallVariants realign mode.
+  - Fixed missing sample names in CallVariants multisample mode.
+  - Fastawrap now supports kmg extensions.
+  - Fixed assemblers trying to get stats from stdout.fa.
+  - Fuse now allows length limits of fused output.
+  - Wrote preliminary junction detection for CallVariants.
+  - Made new RiboKmers files from Silva 132, and made a script for replicating
+    the creation process (in /pipelines/).
+  - Wrote var2.SoftClipper.
+- 37.97
+  - Added FilterByTile to RQCFilter.
+  - Fixed a Clumpify crash-hang with low memory.
+  - Made a Clumpify KmerSort superclass to reduce code redundancy between
+    KmerSort versions.
+  - Changed an exception handler in FastaReadInputStream to handle null-pointer
+    exceptions as well.
+  - Wrote RQCFilter2, with dependencies in a single path set by the
+    rqcfilterdata flag.
+
 * Fri Apr 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.95-1
 - 37.94
   - Found and replaced some instances of z2=Xmx with z2=Xms in shells.
