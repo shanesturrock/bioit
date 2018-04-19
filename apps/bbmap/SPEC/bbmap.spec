@@ -1,11 +1,11 @@
-%define priority 3797
+%define priority 3799
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.97
+Version:	37.99
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -194,6 +194,29 @@ fi
 %files
 
 %changelog
+* Fri Apr 20 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.99-1
+- 37.98
+  - Fixed a bug in RQCFilter2 mousecatdoghuman mode with read-only files.
+  - Added ksplit to BBDuk.
+- 37.99
+  - Improved error message when processing sam files with no MD tag in
+    Reformat.
+  - Possibly fixed a crash-hang during OutOfMemory exception handling in
+    ConcurrentGenericReadInputStream.
+  - Merged DNA and RNA artifact files for RQCFilter2; modified the primary
+    artifact files, and removed redundancies.
+  - Adapters are no longer present in Illumina.artifacts, only in adapters.fa.
+  - Nextera linkers are no longer present in Illumina.artifacts.
+  - PolyA is now a flag.
+  - Created a second RQCFilterData - RQCFilterData_Local, identical but with
+    unmasked sequence names.
+  - Added ploidy flag to CallPeaks documentation.
+  - Added polyA.fa.gz to resources.
+  - Modified resources/sequencing_artifacts.fa.gz to remove adapter sequences
+    and Nextera linkers.
+  - Changed Read constructors to ensure amino acid flag is passed correctly.
+  - Fixed an array length overflow in ByteBuilder.
+
 * Fri Apr 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.97-1
 - 37.96
   - Wrote FindJiCJunctions and processhi-c.sh for identifying and trimming

@@ -1,11 +1,11 @@
-%define priority 203
+%define priority 210
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.0.3
+Version:	2.1.0
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -94,6 +94,29 @@ fi
 %files
 
 %changelog
+* Fri Apr 20 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.0-1
+- This release adds support for misassembly correction and scaffolding using
+  linked reads, using Tigmint and ARCS. (Tigmint and ARCS must be installed
+  separately.) In addition, simultaneous optimization of s (seed length) and n
+  (min supporting read pairs / Chromium barcodes) is now supported during
+  scaffolding.
+- Abyss-longseqdist:
+  - Fix hang on input SAM containing no alignments with MAPQ > 0
+- Abyss-pe:
+  - New lr parameter. Provide linked reads (i.e. 10x Genomics Chromium reads)
+    via this parameter to perform misassembly correction and scaffolding using
+    Chromium barcode information.
+  - Requires Tigmint and ARCS tools to be installed in addition to ABySS.
+  - Fix bug where j (threads) was not being correctly passed to to bgzip/pigz
+  - Fix bug where zsh time/memory profiling was not being used, even when zsh
+    was available
+- Abyss-scaffold:
+  - Simultaneous optimization of n and s using line search or grid search
+    [default]
+- SimpleGraph:
+  - add options -s and -n to filter paired-end paths by seed length and edge
+    weight, respectively
+
 * Fri Mar 16 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.0.3-1
 - This minor release provides bug fixes and improved reliability for both MPI
   assemblies and Bloom filter assemblies on large datasets. In addition, many

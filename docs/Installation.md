@@ -55,13 +55,13 @@ Defaults tools and changelogs are provided by the meta-RPMS that are built to se
 
 Lastly, the Oracle JDK is required to build IGV (as of 2.4.1) due to it needing JavaFX. Once built it will run with the standard OpenJDK. To install it download the current release using the following command:
 
-    wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u162-b12/0da788060d494f5095bf8624735fa2f1/jdk-8u162-linux-x64.rpm
+    wget --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jdk-8u172-linux-x64.rpm
 
 If that doesn't work, go to [this site](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and download it manually after accepting the license.
 
 Install the downloaded RPM:
 
-    yum install jdk-8u162-linux-x64.rpm
+    yum install jdk-8u172-linux-x64.rpm
 
 It won't be the default after this but the IGV build script will manually set the `$JAVA_HOME` and `$JAVA_PATH` variables it needs to build IGV using this. The `version_check` script includes a check that the Oracle JDK is the latest version. Update by downloading the newest version when this warns that it is out of date.
 
