@@ -1,11 +1,11 @@
-%define priority 21802
+%define priority 21803
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.2
+Version:	2.18.3
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,17 @@ fi
 %files
 
 %changelog
+* Fri Apr 27 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.3-1
+- Add arguments and reporting around recovering REF/ALT swapped alleles (#1151)
+- Added reverse cycle and base dir lookup for tile metrics. (#1158)
+- Allow processing of a single tile. Append tile integer to output filename to
+  avoid overwrites by multiple tiles. (#1154)
+- Add to gradle build pre-requisites check (#1156)
+- Integrate @experimentalfeature and @betafeature tags (#1094)
+- Yf fix infinite loop md (#1147)
+- Make picardcloud accessible in docker image (#1153)
+- Remove sbt & Eclipse files from gradle project (#1137)
+
 * Fri Apr 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.2-1
 - DSDEGP-2199 Switch to shaded NIO jar used by GATK. (#1152)
 - Add test for reading bam data from stdin (#1131)

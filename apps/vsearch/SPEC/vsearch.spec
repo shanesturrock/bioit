@@ -1,11 +1,11 @@
-%define priority 271
+%define priority 280
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.7.1
+Version:	2.8.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,9 @@ fi
 %files
 
 %changelog
+* Fri Apr 27 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.0-1
+- Added fastq_maxdiffpct option.
+
 * Thu Feb 22 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.7.1-1
 - 2.7.0
   - Added cluster_unoise, uchime2_denovo and uchime3_denovo commands.
