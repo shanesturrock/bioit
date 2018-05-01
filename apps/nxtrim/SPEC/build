@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Script to auto build and install nxtrim. Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+VERSION=$1
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building nxtrim ${VERSION} on ${DATE}"
+cd /opt/bioit/nxtrim/src
+wget https://github.com/sequencing/NxTrim/archive/v${VERSION}.tar.gz
+mv v${VERSION}.tar.gz NxTrim-${VERSION}.tar.gz
+tar xvf NxTrim-${VERSION}.tar.gz
+cd NxTrim-${VERSION}
+make 
+mkdir /opt/bioit/nxtrim/${VERSION}
+mv nxtrim /opt/bioit/nxtrim/${VERSION}
+echo "Writing modulefile"
+echo "#%Module 1.0
+#
+#  nxtrim module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/nxtrim/${VERSION}" > /opt/bioit/modulefiles/nxtrim/${VERSION}

@@ -27,6 +27,7 @@
       <packagereq type="mandatory">htslib</packagereq>
       <packagereq type="mandatory">igv</packagereq>
       <packagereq type="mandatory">ncbi-blast</packagereq>
+      <packagereq type="mandatory">nxtrim</packagereq>
       <packagereq type="mandatory">picard</packagereq>
       <packagereq type="mandatory">R-core</packagereq>
       <packagereq type="mandatory">rtg-tools</packagereq>

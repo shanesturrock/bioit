@@ -22,6 +22,7 @@ cp $script_dir/../apps/igv/SPEC/* ${HOME}/rpmbuild/SOURCES
 rpmbuild -bb $script_dir/../apps/igv/SPEC/igv.spec
 rm -f ${HOME}/rpmbuild/SOURCES/*
 rpmbuild -bb $script_dir/../apps/ncbi-blast/SPEC/ncbi-blast.spec
+rpmbuild -bb $script_dir/../apps/nxtrim/SPEC/nxtrim.spec
 rpmbuild -bb $script_dir/../apps/picard/SPEC/picard.spec
 rpmbuild -bb $script_dir/../apps/R-core/SPEC/R-core.spec
 rpmbuild -bb $script_dir/../apps/rtg-tools/SPEC/rtg-tools.spec

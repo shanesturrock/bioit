@@ -24,6 +24,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [htslib](htslib.md)
 * [igv](igv.md)
 * [ncbi-blast](ncbi-blast.md)
+* [nxtrim](nxtrim.md)
 * [picard](picard.md)
 * [R-core](R-core.md)
 * [rtg-tools](rtg-tools.md)

@@ -31,6 +31,7 @@ Start at the [Installation](Installation.md) page.
 * [htslib](htslib.md)
 * [igv](igv.md)
 * [ncbi-blast](ncbi-blast.md)
+* [nxtrim](nxtrim.md)
 * [picard](picard.md)
 * [R-core](R-core.md)
 * [rtg-tools](rtg-tools.md)
