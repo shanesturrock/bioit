@@ -1,11 +1,11 @@
-%define priority 21803
+%define priority 21804
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.3
+Version:	2.18.4
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,14 @@ fi
 %files
 
 %changelog
+* Fri May 04 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.4-1
+- DSDEGP-2199 Add new MakeVcfSampleNameMap tool. (#1160)
+- Move setting of TMP_DIR prior to inflater/deflater check. This ensures that
+  java.io.tmpdir is set (which is used when checking if we have space for using
+  the intel deflater/inflater). Currently it will always check system temp dir.
+  (#1165)
+- Jc fix executor exception handling (#1163)
+
 * Fri Apr 27 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.3-1
 - Add arguments and reporting around recovering REF/ALT swapped alleles (#1151)
 - Added reverse cycle and base dir lookup for tile metrics. (#1158)

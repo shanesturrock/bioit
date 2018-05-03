@@ -1,11 +1,11 @@
-%define priority 3799
+%define priority 3800
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	37.99
+Version:	38.00
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -50,6 +50,7 @@ alternatives \
    --slave %{_bindir}/bbsstats.sh bbstats.sh /opt/bioit/%{name}/%{version}/bbstats.sh \
    --slave %{_bindir}/bbversion.sh bbversion.sh /opt/bioit/%{name}/%{version}/bbversion.sh \
    --slave %{_bindir}/bbwrap.sh bbwrap.sh /opt/bioit/%{name}/%{version}/bbwrap.sh \
+   --slave %{_bindir}/bloomfilter.sh bloomfilter.sh /opt/bioit/%{name}/%{version}/bloomfilter.sh \
    --slave %{_bindir}/calcmem.sh calcmem.sh /opt/bioit/%{name}/%{version}/calcmem.sh \
    --slave %{_bindir}/calctruequality.sh calctruequality.sh /opt/bioit/%{name}/%{version}/calctruequality.sh \
    --slave %{_bindir}/callpeaks.sh callpeaks.sh /opt/bioit/%{name}/%{version}/callpeaks.sh \
@@ -194,6 +195,66 @@ fi
 %files
 
 %changelog
+* Fri May 04 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.00-1
+- Moved ByteBuilder to Structures.
+- Added some formatting and comments to SuperLongList.
+- JsonObject printing now has an inArray state that prevents newlines from
+  arrays of JsonObjects.
+- Improved JsonParser handling of booleans.
+- Added a JsonParser validate command.
+- Wrote TaxClient for internally doing tax lookups from the TaxServer.
+- Added post mode to TaxClient and TaxServer, for URLs over 2000 characters.
+- Moved StringNum to Structures.
+- Accession loader now sorts files in ascending order of size and can load some
+  before others.
+- Fixed a flaw in the hash function for accession numbers that may have allowed
+  collisions.
+- TaxTree.parseNodeFromHeader will now try harder for headers with certain
+  formatting.
+- Fixed potential overflows by changing Integer.MAX_VALUE to
+  Shared.MAX_ARRAY_LEN.
+- SketchTool now has a custom, low-garbage loader instead of relying on
+  ByteFile.
+- RQCFilter2 now uses half as many threads for pigz as logical cores.
+- Wrote BloomFilter and BloomFilterWrapper.
+- Added BloomFilter support into BBMap and RQCFilter.
+- Wrote a better available memory estimation function for BloomFilter.
+- Accelerated BloomFilter lookup when minConsecutiveMatches>1.
+- Fixed logging of BBSplit vs BBMap in RQCFilter2.
+- Bloom filter creation from BBMap index now uses multiple threads per chunk.
+- Fixed a null pointer in TextStringWriter.
+- Fixed a static variable (ef) persisting in RQCFilter, which slowed human
+  removal.
+- Moved ByteBuilder to Structures.
+- Added some formatting and comments to SuperLongList.
+- JsonObject printing now has an inArray state that prevents newlines from
+  arrays of JsonObjects.
+- Improved JsonParser handling of booleans.
+- Added a JsonParser validate command.
+- Wrote TaxClient for internally doing tax lookups from the TaxServer.
+- Added post mode to TaxClient and TaxServer, for URLs over 2000 characters.
+- Moved StringNum to Structures.
+- Accession loader now sorts files in ascending order of size and can load some
+  before others.
+- Fixed a flaw in the hash function for accession numbers that may have allowed
+  collisions.
+- TaxTree.parseNodeFromHeader will now try harder for headers with certain
+  formatting.
+- Fixed potential overflows by changing Integer.MAX_VALUE to
+  Shared.MAX_ARRAY_LEN.
+- SketchTool now has a custom, low-garbage loader instead of relying on
+  ByteFile.
+- RQCFilter2 now uses half as many threads for pigz as logical cores.
+- Wrote BloomFilter and BloomFilterWrapper.
+- Added BloomFilter support into BBMap and RQCFilter.
+- Wrote a better available memory estimation function for BloomFilter.
+- Accelerated BloomFilter lookup when minConsecutiveMatches>1.
+- Fixed logging of BBSplit vs BBMap in RQCFilter2.
+- Bloom filter creation from BBMap index now uses multiple threads per chunk.
+- Fixed a null pointer in TextStringWriter.
+- Fixed a static variable (ef) persisting in RQCFilter, which slowed human
+  removal.
+
 * Fri Apr 20 2018 Shane Sturrock <shane.sturrock@gmail.com> - 37.99-1
 - 37.98
   - Fixed a bug in RQCFilter2 mousecatdoghuman mode with read-only files.
