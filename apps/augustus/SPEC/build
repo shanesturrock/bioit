@@ -48,7 +48,36 @@ sed "s+LIBS = -lbamtools -lz+LIBS = \$(BAMTOOLS)/lib/bamtools/libbamtools.a -lz+
 sed "s+INSTALLDIR = /opt/augustus-\$(AUGVERSION)+INSTALLDIR = /opt/bioit/augustus/${VERSION}+" --in-place Makefile
 # Remove symlinks lines to avoid permission denied error
 sed '/ln /d' --in-place Makefile
-
+echo "Getting htslib"
+git clone https://github.com/samtools/htslib.git
+cd htslib
+autoheader
+autoconf
+./configure --prefix=/opt/bioit/augustus/${VERSION}/tooldir
+make
+make install
+cd ..
+git clone https://github.com/samtools/bcftools.git
+cd bcftools
+autoheader
+autoconf
+./configure --prefix=/opt/bioit/augustus/${VERSION}/tooldir
+make
+make install
+cd ..
+git clone https://github.com/samtools/tabix.git
+cd tabix
+make
+cd ..
+git clone https://github.com/samtools/samtools.git
+cd samtools
+autoheader
+autoconf -Wno-syntax
+./configure --prefix=/opt/bioit/augustus/${VERSION}/tooldir
+make
+make install
+cd ..
+export TOOLDIR=/opt/bioit/augustus/${VERSION}/tooldir
 # Now build augustus
 make
 make install
