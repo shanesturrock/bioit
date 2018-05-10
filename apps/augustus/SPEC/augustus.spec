@@ -1,11 +1,11 @@
-%define priority 33
+%define priority 331
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		augustus
-Version:	3.3
+Version:	3.3.1
 Release:	1%{?dist}
 Summary:	AUGUSTUS is a gene prediction program for eukaryotes
 Group:		Applications/Engineering
@@ -30,12 +30,14 @@ predict the genes simultaneously in several aligned genomes.
 alternatives \
    --install %{_bindir}/augustus %{name} /opt/bioit/%{name}/%{version}/bin/augustus %{priority} \
    --slave %{_bindir}/bam2hints bam2hints /opt/bioit/%{name}/%{version}/bin/bam2hints \
+   --slave %{_bindir}/bam2wig bam2wig /opt/bioit/%{name}/%{version}/bin/bam2wig \
    --slave %{_bindir}/etraining etraining /opt/bioit/%{name}/%{version}/bin/etraining \
    --slave %{_bindir}/fastBlockSearch fastBlockSearch /opt/bioit/%{name}/%{version}/bin/fastBlockSearch \
    --slave %{_bindir}/filterBam filterBam /opt/bioit/%{name}/%{version}/bin/filterBam \
    --slave %{_bindir}/homGeneMapping homGeneMapping /opt/bioit/%{name}/%{version}/bin/homGeneMapping \
    --slave %{_bindir}/joingenes joingenes /opt/bioit/%{name}/%{version}/bin/joingenes \
-   --slave %{_bindir}/prepareAlign prepareAlign /opt/bioit/%{name}/%{version}/bin/prepareAlign
+   --slave %{_bindir}/prepareAlign prepareAlign /opt/bioit/%{name}/%{version}/bin/prepareAlign \
+   --slave %{_bindir}/utrrnaseq utrrnaseq /opt/bioit/%{name}/%{version}/bin/utrrnaseq
 
 %postun
 if [ $1 -eq 0 ]
@@ -47,6 +49,13 @@ fi
 %files
 
 %changelog
+* Fri May 11 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.3.1-1
+- new species pisaster (Pisaster ochraceus, ochre starfish)
+- bugfixes of sampling error in intron model and in check of
+  frame-compatibility of CDSpart hints without frame
+- new auxiliary program utrrnaseq to find training UTRs
+- new script setStopCodonFreqs.pl
+
 * Tue Aug 08 2017 Shane Sturrock <shane.sturrock@gmail.com> - 3.3-1
 - new program ESPOCA to estimate selective pressure on codon alignments
 - gene finding on ancestral genomes is enabled

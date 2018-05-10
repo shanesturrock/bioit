@@ -44,40 +44,43 @@ sed "s+LIBS = -lbamtools -lz+LIBS = /opt/bioit/augustus/src/augustus-${VERSION}/
 sed "s+BAMTOOLS = /usr/include/bamtools+BAMTOOLS = /opt/bioit/augustus/src/augustus-${VERSION}/bamtools+" --in-place auxprogs/filterBam/src/Makefile
 sed "s+INCLUDES = -I\$(BAMTOOLS) -Iheaders -I./bamtools+INCLUDES = -I\$(BAMTOOLS)/include/bamtools -Iheaders -I./bamtools+" --in-place auxprogs/filterBam/src/Makefile
 sed "s+LIBS = -lbamtools -lz+LIBS = \$(BAMTOOLS)/lib/bamtools/libbamtools.a -lz+" --in-place auxprogs/filterBam/src/Makefile
+# patch bam2wig Makefile
+sed "s+LIBS=\$(SAMTOOLS)/libbam.a \$(HTSLIB)/libhts.a -lcurses -lm -lz -lpthread+LIBS=\$(SAMTOOLS)/libbam.a \$(HTSLIB)/libhts.a -lcurses -lm -lz -lpthread -lcurl -lcrypto+" --in-place auxprogs/bam2wig/Makefile
 # patch Makefile to set install directory
 sed "s+INSTALLDIR = /opt/augustus-\$(AUGVERSION)+INSTALLDIR = /opt/bioit/augustus/${VERSION}+" --in-place Makefile
 # Remove symlinks lines to avoid permission denied error
 sed '/ln /d' --in-place Makefile
+# Build dependencies for bam2wig
 echo "Getting htslib"
 git clone https://github.com/samtools/htslib.git
 cd htslib
 autoheader
 autoconf
-./configure --prefix=/opt/bioit/augustus/${VERSION}/tooldir
+./configure
 make
-make install
 cd ..
+echo "Getting bcftools"
 git clone https://github.com/samtools/bcftools.git
 cd bcftools
 autoheader
 autoconf
-./configure --prefix=/opt/bioit/augustus/${VERSION}/tooldir
+./configure
 make
-make install
 cd ..
+echo "Getting tabix"
 git clone https://github.com/samtools/tabix.git
 cd tabix
 make
 cd ..
+echo "Getting samtools"
 git clone https://github.com/samtools/samtools.git
 cd samtools
 autoheader
 autoconf -Wno-syntax
-./configure --prefix=/opt/bioit/augustus/${VERSION}/tooldir
+./configure
 make
-make install
 cd ..
-export TOOLDIR=/opt/bioit/augustus/${VERSION}/tooldir
+export TOOLDIR=`pwd`
 # Now build augustus
 make
 make install
