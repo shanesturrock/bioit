@@ -1,11 +1,11 @@
-%define priority 3800
+%define priority 3802
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.00
+Version:	38.02
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -30,7 +30,9 @@ higher). All tools are efficient and multithreaded.
 alternatives \
    --install %{_bindir}/bbmap.sh bbmap /opt/bioit/%{name}/%{version}/bbmap.sh %{priority} \
    --slave %{_bindir}/addadapters.sh addadapters.sh /opt/bioit/%{name}/%{version}/addadapters.sh \
+   --slave %{_bindir}/analyzeaccession.sh analyzeaccession.sh /opt/bioit/%{name}/%{version}/analyzeaccession.sh \
    --slave %{_bindir}/a_sample_mt.sh a_sample_mt.sh /opt/bioit/%{name}/%{version}/a_sample_mt.sh \
+   --slave %{_bindir}/bbcms.sh bbcms.sh /opt/bioit/%{name}/%{version}/bbcms.sh \
    --slave %{_bindir}/bbcountunique.sh bbcountunique.sh /opt/bioit/%{name}/%{version}/bbcountunique.sh \
    --slave %{_bindir}/bbduk.sh bbduk.sh /opt/bioit/%{name}/%{version}/bbduk.sh \
    --slave %{_bindir}/bbest.sh bbest.sh /opt/bioit/%{name}/%{version}/bbest.sh \
@@ -113,6 +115,7 @@ alternatives \
    --slave %{_bindir}/mergebarcodes.sh mergebarcodes.sh /opt/bioit/%{name}/%{version}/mergebarcodes.sh \
    --slave %{_bindir}/mergeOTUs.sh mergeOTUs.sh /opt/bioit/%{name}/%{version}/mergeOTUs.sh \
    --slave %{_bindir}/mergesam.sh mergesam.sh /opt/bioit/%{name}/%{version}/mergesam.sh \
+   --slave %{_bindir}/mergesorted.sh mergesorted.sh /opt/bioit/%{name}/%{version}/mergesorted.sh \
    --slave %{_bindir}/msa.sh msa.sh /opt/bioit/%{name}/%{version}/msa.sh \
    --slave %{_bindir}/mutate.sh mutate.sh /opt/bioit/%{name}/%{version}/mutate.sh \
    --slave %{_bindir}/muxbyname.sh muxbyname.sh /opt/bioit/%{name}/%{version}/muxbyname.sh \
@@ -195,6 +198,58 @@ fi
 %files
 
 %changelog
+* Fri May 18 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.02-1
+- 38.01
+  - Added support for lowercase letters in accessions.
+  - gi2ncbi now supports streaming and some other options like shrinknames in
+    server mode.
+  - Sketch can now return json format from a curl call.
+  - Sketch server no longer crashes from invalid symbols in sequence in local
+    mode.
+  - SketchMaker now has a local cache of SketchHeaps per thread in per-taxa
+    mode, allowing a 6x speedup by reducing synchronization and rework.
+  - RefSeq now uses a 250-species blacklist limit with sizemult=2 instead of
+    300.
+  - Wrote MergeSorted and mergesorted.sh to resume SortByName runs that crashed
+    or were killed during merging.
+  - Removed DumpCount from SortByName and CrisContainer.  It was too confusing.
+    To shuffle large datasets, they can be merged round-robin.
+  - Fixed an error message when autodetecting quality encoding.
+  - Refseq sketch server is now double the normal resolution (sizemult=2).
+  - SendSketch defaults to sizemult=2 for RefSeq.
+  - Sketch server startup script now sets sizemult=2 for refseq.
+  - Added logscale peak calling.
+  - Added peaks file GC annotation.
+  - Fixed an array out of bounds in EntropyTracker.
+  - CallVariants now ignores duplicates by default (0x400 bit).
+  - StatsWrapper will now append to the gc output if there are multiple
+    assemblies.
+  - Wrote AnalyzeAccession and analyzeaccession.sh to reduce the memory
+    footprint of accessions in the tax server.
+  - Added entropy filter flag to RQCFilter2.
+  - BloomFilter can now act as a highpass filter.
+- 38.02
+  - BloomFilter can now do error correction, using the Tadpole algorithm.
+  - Added merge and unmerge to Tadpole and BloomFilter for dramatic error
+    correction improvements.
+  - Improved BloomFilter error correction defaults and added smoothing.
+  - Improved BloomFilter's memory management and added a memfraction flag.
+  - Fixed tuc not working.
+  - Tadpole.BloomFilter ECC_ROLLBACK will now roll back merges also (but not
+    ecco currently).
+  - Wrote Rollback object to simplify rollbacks during error correction.
+  - Spun BloomFilterCorrectorWrapper of from BloomFilterWrapper.
+  - Spun bbcms.sh off of bloomfilter.sh.
+  - Fixed a bug in msa.sh handling of reverse-complements.
+  - Improved msa.sh to fully expand undefined bases, accept fasta files, and
+    name the output such that it is clear whether an alignment was forward or
+    reverse.
+  - msa.sh now allows a cutoff for min identity.
+  - Improved bbcms smoothing.
+  - bbcms now allows a minimum fraction of kmers above a certain count to be
+    specified.
+  - bbcms now prints more statistics about the loaded bloom filter.
+  
 * Fri May 04 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.00-1
 - Moved ByteBuilder to Structures.
 - Added some formatting and comments to SuperLongList.
