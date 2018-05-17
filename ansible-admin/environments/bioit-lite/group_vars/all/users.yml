@@ -250,6 +250,7 @@ bioit_user_list:
       # Change to 'disabled:' to remove the key
       active:
       - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC34jhmDu4DO2iGthqK9kEoJvt3Rzolmu8HeCJtcvPlkjwSFyqXk1lGLQTWMZbAbVl3AufgF3+hTwxwJSmdrY8X8WJrp9Y+i1z/GFKkXYeAmmxJrl+/JL9c3DUGiPJHKLCt2cvB/JZb4ZDsXnq5gvJKyGHJ1nkEOPoKw5GsipZT9Th6jBI7jomtjdxFPCmfdeDxnZaUCQyEE2grPxzfE/GS0x/14tN/rrRFfkTr1tIaWRdXYMnsaVmxqta0MC30CDt6SdFqO+43MRlChkP+LhTwK2t5KbZuh6iMHlvpyxorGfILH1nwGPFBcVH+lzl7C9lK8SBEVX9MFU/vK050TLRR sss@Shanes-MBP"
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAhrEzXdqcb/xqrDX6vjdF7DLcl0PWjieSlEmzNwcTSTNjjuYCOPzyagg1RwMPRR5G+5diUjE0DrlaI79Oz/zYnndYZb6mTrh/ss0PkBATCISPomxdTTKnTA9QglhADP+mjJfb3e3bvFX2YIO3jb4aUYv/TS5cBfmvxLLrFdow0ErPJiTdn5jIPzX2Bukq+fzzDlrv9Y7MXwaiyRfmKnax2r7VMu0QlVfQlx+rLRcxwapKoBByhmOSGl+gZkgN+vyDs5l9RyIKyNubOrMpw+GTxY/ejDBWqLCbLmoIxvuAuVFF81648i9DhVZRILhpU4HMgxVagTZC3e2RH2znvv4gYw=="
     # Comment out shell: to disable account
     shell: "/bin/bash"
     # Change state to 'absent' to delete the user account entirely
