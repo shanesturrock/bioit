@@ -1,11 +1,11 @@
-%define priority 21804
+%define priority 21805
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.4
+Version:	2.18.5
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,13 @@ fi
 %files
 
 %changelog
+* Fri May 25 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.5-1
+- Generalization of Theoretical Het Sensitivity to handle arbitrary all… (#1144)
+- Allowing static fields in MergableMetrics to be not annotated (#1173)
+- Update htsjdk (#1171)
+- Use the awaitThreadPool from new util class (#1169)
+- Avoid overflow when computing barcode metrics. (#1167)
+
 * Fri May 04 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.4-1
 - DSDEGP-2199 Add new MakeVcfSampleNameMap tool. (#1160)
 - Move setting of TMP_DIR prior to inflater/deflater check. This ensures that

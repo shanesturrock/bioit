@@ -1,11 +1,11 @@
-%define priority 3802
+%define priority 3804
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.02
+Version:	38.04
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -198,6 +198,29 @@ fi
 %files
 
 %changelog
+* Fri May 25 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.04-1
+- 38.03
+  - Fixed broken interleaving in bbcms output.
+  - Added seed flag to bbcms and bloomfilter.
+  - Added BBMerge vstrict and ustrict flags to bbcms.
+  - Added mergeOK and testmerge flags to BBMerge.
+  - Added BloomFilter support to BBMerge.
+  - BBMerge now automatically writes both mergable and unmergable pairs to out
+    if ecco=t and mix is unset.
+  - testmerge flag now works with ecco.
+  - Fixed indentation for Tadpole/bbcms results.
+- 38.04
+  - bbcms and bloom filter now allow random seeds.
+  - Changed version printing to not repeat arguments.
+  - Eliminated redundant copies of mergeOK functions.
+  - Fixed bbcms testmerge flag.
+  - Fixed trim/qtrim flag in BBSplit help.
+  - Added relative error threshold for mergeOK.  TODO: Does not seem to help in
+    my test; try on single cell data.
+  - Added variable smooth width to bbcms.
+  - Changed bbcms default bits to 4 after testing.
+  - Fixed bbcms extra flag.
+
 * Fri May 18 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.02-1
 - 38.01
   - Added support for lowercase letters in accessions.
