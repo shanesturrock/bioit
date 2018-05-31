@@ -1,11 +1,11 @@
-%define priority 390
+%define priority 391
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		rtg-tools
-Version:	3.9
+Version:	3.9.1
 Release:	1%{?dist}
 Summary:	Utilities for accurate VCF comparison and manipulation
 Group:		Applications/Engineering
@@ -38,6 +38,21 @@ fi
 %files
 
 %changelog
+* Fri Jun 01 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.9.1-1
+- map: Fix a rare circumstance where mapping using a reference based
+  hash blacklist would use significantly more memory than required.
+- vcffilter: JavaScript functions can test for the version of RTG they
+  are running under (for checking minimum required version for feature
+  compatibility) via a call of the form: "checkMinVersion('3.9.2')"
+- vcffilter: JavaScript now supports writing of ID, QUAL, and FILTER
+  fields. Added function "ensureFilterHeader" that works the same way as
+  ensureInfoHeader and ensureFormatHeader for defining new FILTERs.
+- coverage: Improve binning when reporting coverage levels for very deep
+  (e.g. >10000X) sequencing datasets.
+- vcfeval: More graceful handling of a malformed GT in an input VCF.
+- many: Fix escaping of description fields when writing VCF header
+  lines.
+
 * Fri Mar 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.9-1
 - Basic Formatting and Mapping
   - format: In addition to minimum and maximum length of input and output

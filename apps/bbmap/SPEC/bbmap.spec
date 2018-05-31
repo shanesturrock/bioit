@@ -1,11 +1,11 @@
-%define priority 3804
+%define priority 3805
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.04
+Version:	38.05
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -198,6 +198,12 @@ fi
 %files
 
 %changelog
+* Fri Jun 01 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.05-1
+- Fixed interleaving detection in SortByName.
+- Changed interleaving detection in FileFormat to audodetect more aggressively.
+- Fixed a bug with RQCFilter2 interleaving settings carrying over from BBMerge
+  to FilterByTaxa.
+
 * Fri May 25 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.04-1
 - 38.03
   - Fixed broken interleaving in bbcms output.
