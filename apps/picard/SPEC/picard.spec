@@ -1,11 +1,11 @@
-%define priority 21805
+%define priority 21807
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.5
+Version:	2.18.7
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,17 @@ fi
 %files
 
 %changelog
+* Fri Jun 08 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.7-1
+- 2.18.6
+  - Bump to Intel GKL version 0.8.5. (#1182)
+  - upgrade htsjdk to 2.15.1 (#1181)
+  - Fixes intermittent failures in TheoreticalHetSensitivityTests. (#1178)
+  - remove non-ascii character
+  - Added forgotten (test) class that tests MarkDuplicates on queryname sorted
+    input. (#1174)
+- 2.18.7
+  - pass all tile metrics files to parser and id correct one there
+
 * Fri May 25 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.5-1
 - Generalization of Theoretical Het Sensitivity to handle arbitrary all… (#1144)
 - Allowing static fields in MergableMetrics to be not annotated (#1173)

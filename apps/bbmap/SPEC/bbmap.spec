@@ -1,11 +1,11 @@
-%define priority 3805
+%define priority 3806
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.05
+Version:	38.06
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -198,6 +198,20 @@ fi
 %files
 
 %changelog
+* Fri Jun 08 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.06-1
+- Changed KmerArray to collide all possible kmer extensions into the same cell.
+- Wrote FillFast to grab all 4 possible kmer extensions with a single modulo
+  operation.
+- Simplified some of BBDuk pair-tracking and discarding logic.
+- Added trimfailures bbduk flag.
+- Fixed a division by zero bug in SortByName.mergeRecursive.
+- Fixed an array-out-of-bounds in CallPeaks.
+- Made dual-kmer ANI estimation from Sketch more accurate.
+- Added loglog support to BBMerge and Seal.
+- Added loglogout support to BBMerge, BBDuk, and Seal.
+- RQCFilter2 status.log now tracks kmers.
+- Removed RQCFilter and pointed rqcfilter.sh to rqcfilter2.sh.
+
 * Fri Jun 01 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.05-1
 - Fixed interleaving detection in SortByName.
 - Changed interleaving detection in FileFormat to audodetect more aggressively.
