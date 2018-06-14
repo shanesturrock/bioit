@@ -1,11 +1,11 @@
-%define priority 3806
+%define priority 3807
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.06
+Version:	38.07
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -198,6 +198,23 @@ fi
 %files
 
 %changelog
+* Fri Jun 15 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.07-1
+- Changed KmerTable increment functions to require an incr value.
+- Added sortbuffer flag to Tadpole, but speed was barely improved on high-depth
+  Clumpified data.
+- Migrated coremask and fillfast to tadpole2, but they make it slower for some
+  reason.
+- Migrated shave and rinse improvements to Tadpole2; these can make those steps
+  dramatically faster in metagenomes.
+- Added BloomFilter serialization.
+- Increased default k and minhits of Bloom filter in RQCFilter2 and added
+  serialized filters.
+- Reduced RandomReads default quality.
+- Made gaussian insert size distribution default for RandomReads.
+- Wrote FastaShredInputStream for faster Bloom filter loading with lower memory
+  consumption.
+- Fixed number of threads allocated to Bloom filter loading from index.
+
 * Fri Jun 08 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.06-1
 - Changed KmerArray to collide all possible kmer extensions into the same cell.
 - Wrote FillFast to grab all 4 possible kmer extensions with a single modulo
