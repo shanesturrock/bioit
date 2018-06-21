@@ -1,11 +1,11 @@
-%define priority 3807
+%define priority 3808
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.07
+Version:	38.08
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -198,6 +198,10 @@ fi
 %files
 
 %changelog
+* Fri Jun 22 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.08-1
+- FilterByTaxa and RQCFilter no longer crash if a header cannot be parsed and
+  the accession tables are not loaded.
+
 * Fri Jun 15 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.07-1
 - Changed KmerTable increment functions to require an incr value.
 - Added sortbuffer flag to Tadpole, but speed was barely improved on high-depth
