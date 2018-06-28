@@ -1,11 +1,11 @@
-%define priority 280
+%define priority 281
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.8.0
+Version:	2.8.1
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,9 @@ fi
 %files
 
 %changelog
+* Fri Jun 28 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.1-1
+- Fixes for compilation warnings with GCC 8.
+
 * Fri Apr 27 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.0-1
 - Added fastq_maxdiffpct option.
 

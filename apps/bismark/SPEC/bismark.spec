@@ -1,11 +1,11 @@
-%define priority 190
+%define priority 191
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bismark
-Version:	0.19.0
+Version:	0.19.1
 Release:	1%{?dist}
 Summary:	A bisulfite read mapper and methylation caller
 Group:		Applications/Engineering
@@ -49,6 +49,40 @@ fi
 %files
 
 %changelog
+* Fri Jun 29 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.19.1-1
+- Bismark
+  - Child processes are now terminated properly once the mapping and merging
+    steps have completed successfully. This means that supplying a
+    comma-separated list of input files such as 
+      -1 R1.fastq,simulated_1.fastq,ZZZ_R1.fastq \
+      -2 R2.fastq,simulated_2.fastq,ZZZ_R2.fastq \
+      --multicore 4 
+    does no longer spawn a steadily increasing number of Bismark instances.
+    issue #138
+  - Bismark now also accepts genome FastA files if they are gzip compressed
+    (ending in .gz)
+- coverage2cytosine
+  - Restructured the way output and input file paths are handled. All should be
+    working now, including combinations of --gzip, --dir /PATH/, --merge_CpG,
+    --disco, --split_by_chromosome etc.
+  - The genome folder may now be specified as full or relative path.
+  - Now also accepts genome FastA files if they are gzip compressed (ending in
+    .gz)
+- bam2nuc
+  - Now also accepts genome FastA files if they are gzip compressed (ending in
+    .gz)
+- bismark_genome_preparation
+  - Now also accepts genome FastA files if they are gzip compressed (ending in
+    .gz)
+- deduplicate_bismark
+  - Changed the way strands are handled by replacing + and - for a strand
+    identity OT,CTOT, CTOB and OB instead. This should avoid conflicts in (the
+    extremely rare) occasions where reads with the same starting and end
+    positions might have come from both the OT and CTOB strands, or its bottom
+    strand equivalent. (see here for more info: issue #161 )
+  - Completely removed the code for the --representative mode. People should
+    have stopped wanting that anyway.
+
 * Tue Oct 17 2017 Shane Sturrock <shane.sturrock@gmail.com> - 0.19.0-1
 - Bismark
   - Changed the methylation call behaviour so that insertions in a read (which
