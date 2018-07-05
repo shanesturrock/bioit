@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 350
+%define priority 351
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        3.5.0
+Version:        3.5.1
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -42,6 +42,49 @@ fi
 %files
 
 %changelog
+* Fri Jul 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.5.1-1
+- BUG FIXES
+  - file("stdin") is no longer considered seekable.
+  - dput() and dump() are no longer truncating when options(deparse.max.lines =
+    *) is set.
+  - Calls with an S3 class are no longer evaluated when printed, fixing part of
+    PR#17398, thanks to a patch from Lionel Henry.
+  - Allow file argument of Rscript to include space even when it is first on
+    the command line.
+  - callNextMethod() uses the generic from the environment of the calling
+    method. Reported by Hervé Pagès with well documented examples.
+  - Compressed file connections are marked as blocking.
+  - optim(*, lower = c(-Inf, -Inf)) no longer warns (and switches the method),
+    thanks to a suggestion by John Nash.
+  - predict(fm, newdata) is now correct also for models where the formula has
+    terms such as splines::ns(..) or stats::poly(..), fixing PR#17414, based on
+    a patch from Duncan Murdoch.
+  - simulate.lm(glm(*, gaussian(link = <non-default>))) has been corrected,
+    fixing PR#17415 thanks to Alex Courtiol.
+  - unlist(x) no longer fails in some cases of nested empty lists. Reported by
+    Steven Nydick.
+  - qr.coef(qr(<all 0, w/ colnames>)) now works. Reported by Kun Ren.
+  - The radix sort is robust to vectors with >1 billion elements (but long
+    vectors are still unsupported). Thanks to Matt Dowle for the fix.
+  - Terminal connections (e.g., stdin) are no longer buffered. Fixes PR#17432.
+  - deparse(x), dput(x) and dump() now respect c()'s argument names recursive
+    and use.names, e.g., for x <- setNames(0, "recursive"), thanks to Suharto
+    Anggono's PR#17427.
+  - Unbuffered connections now work with encoding conversion. Reported by
+    Stephen Berman.
+  - ‘.Renviron’ on Windows with Rgui is again by default searched for in user
+    documents directory when invoked via the launcher icon. Reported by Jeroen
+    Ooms.
+  - printCoefmat() now also works with explicit right=TRUE.
+  - print.noquote() now also works with explicit quote=FALSE.
+  - The default method for pairs(.., horInd=*, verInd=*) now gets the correct
+    order, thanks to reports by Chris Andrews and Gerrit Eichner. Additionally,
+    when horInd or verInd contain only a subset of variables, all the axes are
+    labeled correctly now.
+  - agrep("..|..", .., fixed=FALSE) now matches when it should, thanks to a
+    reminder by Andreas Kolter.
+  - str(ch) now works for more invalid multibyte strings.
+
 * Fri Apr 27 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.5.0-1
 - SIGNIFICANT USER-VISIBLE CHANGES
   - All packages are by default byte-compiled on installation. This makes the

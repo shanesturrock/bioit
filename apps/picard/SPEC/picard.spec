@@ -1,11 +1,11 @@
-%define priority 21807
+%define priority 21809
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.7
+Version:	2.18.9
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,12 @@ fi
 %files
 
 %changelog
+* Fri Jul 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.9-1
+- 2.18.8
+  - upgrading htsjdk 2.15.1 -> 2.16.0 (#1184)
+- 2.18.9
+  - DSDEGP-2516 Make RevertSam resilient to read groups with no reads. (#1191)
+
 * Fri Jun 08 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.7-1
 - 2.18.6
   - Bump to Intel GKL version 0.8.5. (#1182)

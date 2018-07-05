@@ -1,11 +1,11 @@
-%define priority 3808
+%define priority 3811
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.08
+Version:	38.11
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -198,6 +198,36 @@ fi
 %files
 
 %changelog
+* Fri Jul 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.11-1
+- 38.09
+  - bbcms default bits changed from 1 to 2.
+  - Improved bbcms tossjunk function.
+  - Added documentation to bbcms and Tadpole.
+  - Added fixextensions flag, and enabled it for CallVariants, BBDuk, Reformat,
+    RQCFilter, BBNorm, BBMerge, BBMap, Tadpole, and bbcms.
+  - RQCFilter now extends reads prior to merging if there is enough memory.
+    This means the insert size histogram will take longer, but allow
+    non-overlapping inserts.
+  - BBMap now tracks statistics correctly when Bloom filter is enabled.
+  - Fixed Children flag in TaxServer.
+  - Shave and rinse no longer checks owner for initial high kmers.
+  - Shave and rinse now ignores initial high kmers above the isJunction trigger
+    for extension in some cases, for a large speedup in isolates (uses
+    shaveFast flag).
+  - Changed RandomReads default insert size distribution to more closely match
+    JGI fragment library targets.
+  - Multithreaded KmerCountArray/KmerCountArrayU ownership array allocation via
+    OwnershipThread for a large speed increase in assembly.
+  - Added 2passresize flag to Tadpole but it didn't seem to speed things up.
+  - Added Constellation-like output option for CompareSketch.
+  - Major changes to Kmer table sizing - a premade resize schedule is now used.
+    Only for Kmer so far not UKmer.
+- 38.10
+  - Merged dev python changes.
+- 38.11
+  - Ported schedule to UKmer.
+  - Fixed a bytesPerKmer bug in KmerCountExact for k>31.
+
 * Fri Jun 22 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.08-1
 - FilterByTaxa and RQCFilter no longer crash if a header cannot be parsed and
   the accession tables are not loaded.
