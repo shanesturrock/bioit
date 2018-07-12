@@ -1,15 +1,15 @@
-%define priority 3102
+%define priority 3210
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		hmmer
-Version:	3.1b2
+Version:	3.2.1
 Release:	1%{?dist}
 Summary:	HMMER database search and aligner
 Group:		Applications/Engineering
-License:	GPL
+License:	BSD
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # Post requires alternatives to install tool alternatives.
 Requires(post):   %{_sbindir}/alternatives
@@ -26,59 +26,116 @@ called profile hidden Markov models (profile HMMs).
 
 %post
 alternatives \
-   --install %{_bindir}/hmmalign %{name} /opt/bioit/%{name}/%{version}/hmmalign %{priority} \
-   --slave %{_bindir}/alimask alimask /opt/bioit/%{name}/%{version}/alimask \
-   --slave %{_bindir}/esl-afetch esl-afetch /opt/bioit/%{name}/%{version}/esl-afetch \
-   --slave %{_bindir}/esl-alimanip esl-alimanip /opt/bioit/%{name}/%{version}/esl-alimanip \
-   --slave %{_bindir}/esl-alimap esl-alimap /opt/bioit/%{name}/%{version}/esl-alimap \
-   --slave %{_bindir}/esl-alimask esl-alimask /opt/bioit/%{name}/%{version}/esl-alimask \
-   --slave %{_bindir}/esl-alimerge esl-alimerge /opt/bioit/%{name}/%{version}/esl-alimerge \
-   --slave %{_bindir}/esl-alipid esl-alipid /opt/bioit/%{name}/%{version}/esl-alipid \
-   --slave %{_bindir}/esl-alistat esl-alistat /opt/bioit/%{name}/%{version}/esl-alistat \
-   --slave %{_bindir}/esl-cluster esl-cluster /opt/bioit/%{name}/%{version}/esl-cluster \
-   --slave %{_bindir}/esl-compalign esl-compalign /opt/bioit/%{name}/%{version}/esl-compalign \
-   --slave %{_bindir}/esl-compstruct esl-compstruct /opt/bioit/%{name}/%{version}/esl-compstruct \
-   --slave %{_bindir}/esl-construct esl-construct /opt/bioit/%{name}/%{version}/esl-construct \
-   --slave %{_bindir}/esl-histplot esl-histplot /opt/bioit/%{name}/%{version}/esl-histplot \
-   --slave %{_bindir}/esl-mask esl-mask /opt/bioit/%{name}/%{version}/esl-mask \
+   --install %{_bindir}/hmmalign %{name} /opt/bioit/%{name}/%{version}/bin/hmmalign %{priority} \
+   --slave %{_bindir}/alimask alimask /opt/bioit/%{name}/%{version}/bin/alimask \
+   --slave %{_bindir}/esl-afetch esl-afetch /opt/bioit/%{name}/%{version}/bin/esl-afetch \
+   --slave %{_bindir}/esl-alimanip esl-alimanip /opt/bioit/%{name}/%{version}/bin/esl-alimanip \
+   --slave %{_bindir}/esl-alimap esl-alimap /opt/bioit/%{name}/%{version}/bin/esl-alimap \
+   --slave %{_bindir}/esl-alimask esl-alimask /opt/bioit/%{name}/%{version}/bin/esl-alimask \
+   --slave %{_bindir}/esl-alimerge esl-alimerge /opt/bioit/%{name}/%{version}/bin/esl-alimerge \
+   --slave %{_bindir}/esl-alipid esl-alipid /opt/bioit/%{name}/%{version}/bin/esl-alipid \
+   --slave %{_bindir}/esl-alirev esl-alirev /opt/bioit/%{name}/%{version}/bin/esl-alirev \
+   --slave %{_bindir}/esl-alistat esl-alistat /opt/bioit/%{name}/%{version}/bin/esl-alistat \
+   --slave %{_bindir}/esl-compalign esl-compalign /opt/bioit/%{name}/%{version}/bin/esl-compalign \
+   --slave %{_bindir}/esl-compstruct esl-compstruct /opt/bioit/%{name}/%{version}/bin/esl-compstruct \
+   --slave %{_bindir}/esl-construct esl-construct /opt/bioit/%{name}/%{version}/bin/esl-construct \
+   --slave %{_bindir}/esl-histplot esl-histplot /opt/bioit/%{name}/%{version}/bin/esl-histplot \
+   --slave %{_bindir}/esl-mask esl-mask /opt/bioit/%{name}/%{version}/bin/esl-mask \
    --slave %{_bindir}/esl-reformat esl-reformat /opt/bioit/%{name}/%{version}/esl-reformat \
-   --slave %{_bindir}/esl-selectn esl-selectn /opt/bioit/%{name}/%{version}/esl-selectn \
-   --slave %{_bindir}/esl-seqrange esl-seqrange /opt/bioit/%{name}/%{version}/esl-seqrange \
-   --slave %{_bindir}/esl-seqstat esl-seqstat /opt/bioit/%{name}/%{version}/esl-seqstat \
-   --slave %{_bindir}/esl-sfetch esl-sfetch /opt/bioit/%{name}/%{version}/esl-sfetch \
-   --slave %{_bindir}/esl-shuffle esl-shuffle /opt/bioit/%{name}/%{version}/esl-shuffle \
-   --slave %{_bindir}/esl-ssdraw esl-ssdraw /opt/bioit/%{name}/%{version}/esl-ssdraw \
-   --slave %{_bindir}/esl-stranslate esl-stranslate /opt/bioit/%{name}/%{version}/esl-stranslate \
-   --slave %{_bindir}/esl-weight esl-weight /opt/bioit/%{name}/%{version}/esl-weight \
-   --slave %{_bindir}/hmmbuild hmmbuild /opt/bioit/%{name}/%{version}/hmmbuild \
-   --slave %{_bindir}/hmmc2 hmmc2 /opt/bioit/%{name}/%{version}/hmmc2 \
-   --slave %{_bindir}/hmmconvert hmmconvert /opt/bioit/%{name}/%{version}/hmmconvert \
-   --slave %{_bindir}/hmmemit hmmemit /opt/bioit/%{name}/%{version}/hmmemit \
-   --slave %{_bindir}/hmmerfm-exactmatch hmmerfm-exactmatch /opt/bioit/%{name}/%{version}/hmmerfm-exactmatch \
-   --slave %{_bindir}/hmmfetch hmmfetch /opt/bioit/%{name}/%{version}/hmmfetch \
-   --slave %{_bindir}/hmmlogo hmmlogo /opt/bioit/%{name}/%{version}/hmmlogo \
-   --slave %{_bindir}/hmmpgmd hmmpgmd /opt/bioit/%{name}/%{version}/hmmpgmd \
-   --slave %{_bindir}/hmmpress hmmpress /opt/bioit/%{name}/%{version}/hmmpress \
-   --slave %{_bindir}/hmmscan hmmscan /opt/bioit/%{name}/%{version}/hmmscan \
-   --slave %{_bindir}/hmmsearch hmmsearch /opt/bioit/%{name}/%{version}/hmmsearch \
-   --slave %{_bindir}/hmmsim hmmsim /opt/bioit/%{name}/%{version}/hmmsim \
-   --slave %{_bindir}/hmmstat hmmstat /opt/bioit/%{name}/%{version}/hmmstat \
-   --slave %{_bindir}/jackhmmer jackhmmer /opt/bioit/%{name}/%{version}/jackhmmer \
-   --slave %{_bindir}/makehmmerdb makehmmerdb /opt/bioit/%{name}/%{version}/makehmmerdb \
-   --slave %{_bindir}/nhmmer nhmmer /opt/bioit/%{name}/%{version}/nhmmer \
-   --slave %{_bindir}/nhmmscan nhmmscan /opt/bioit/%{name}/%{version}/nhmmscan \
-   --slave %{_bindir}/phmmer phmmer /opt/bioit/%{name}/%{version}/phmmer
+   --slave %{_bindir}/esl-selectn esl-selectn /opt/bioit/%{name}/%{version}/bin/esl-selectn \
+   --slave %{_bindir}/esl-seqrange esl-seqrange /opt/bioit/%{name}/%{version}/bin/esl-seqrange \
+   --slave %{_bindir}/esl-seqstat esl-seqstat /opt/bioit/%{name}/%{version}/bin/esl-seqstat \
+   --slave %{_bindir}/esl-sfetch esl-sfetch /opt/bioit/%{name}/%{version}/bin/esl-sfetch \
+   --slave %{_bindir}/esl-shuffle esl-shuffle /opt/bioit/%{name}/%{version}/bin/esl-shuffle \
+   --slave %{_bindir}/esl-ssdraw esl-ssdraw /opt/bioit/%{name}/%{version}/bin/esl-ssdraw \
+   --slave %{_bindir}/esl-stranslate esl-stranslate /opt/bioit/%{name}/%{version}/bin/esl-stranslate \
+   --slave %{_bindir}/esl-weight esl-weight /opt/bioit/%{name}/%{version}/bin/esl-weight \
+   --slave %{_bindir}/hmmalign hmmalign /opt/bioit/%{name}/%{version}/bin/hmmalign \
+   --slave %{_bindir}/hmmbuild hmmbuild /opt/bioit/%{name}/%{version}/bin/hmmbuild \
+   --slave %{_bindir}/hmmconvert hmmconvert /opt/bioit/%{name}/%{version}/bin/hmmconvert \
+   --slave %{_bindir}/hmmemit hmmemit /opt/bioit/%{name}/%{version}/bin/hmmemit \
+   --slave %{_bindir}/hmmfetch hmmfetch /opt/bioit/%{name}/%{version}/bin/hmmfetch \
+   --slave %{_bindir}/hmmlogo hmmlogo /opt/bioit/%{name}/%{version}/bin/hmmlogo \
+   --slave %{_bindir}/hmmpgmd hmmpgmd /opt/bioit/%{name}/%{version}/bin/hmmpgmd \
+   --slave %{_bindir}/hmmpress hmmpress /opt/bioit/%{name}/%{version}/bin/hmmpress \
+   --slave %{_bindir}/hmmscan hmmscan /opt/bioit/%{name}/%{version}/bin/hmmscan \
+   --slave %{_bindir}/hmmsearch hmmsearch /opt/bioit/%{name}/%{version}/bin/hmmsearch \
+   --slave %{_bindir}/hmmsim hmmsim /opt/bioit/%{name}/%{version}/bin/hmmsim \
+   --slave %{_bindir}/hmmstat hmmstat /opt/bioit/%{name}/%{version}/bin/hmmstat \
+   --slave %{_bindir}/jackhmmer jackhmmer /opt/bioit/%{name}/%{version}/bin/jackhmmer \
+   --slave %{_bindir}/makehmmerdb makehmmerdb /opt/bioit/%{name}/%{version}/bin/makehmmerdb \
+   --slave %{_bindir}/nhmmer nhmmer /opt/bioit/%{name}/%{version}/bin/nhmmer \
+   --slave %{_bindir}/nhmmscan nhmmscan /opt/bioit/%{name}/%{version}/bin/nhmmscan \
+   --slave %{_bindir}/phmmer phmmer /opt/bioit/%{name}/%{version}/bin/phmmer
 
 %postun
 if [ $1 -eq 0 ]
 then
   alternatives \
-   --remove %{name} /opt/bioit/%{name}/%{version}/hmmalign
+   --remove %{name} /opt/bioit/%{name}/%{version}/bin/hmmalign
 fi
 
 %files
 
 %changelog
+* Tue Jul 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.2.1-1
+- Larger changes:
+  - HMMER is now distributed under the BSD license, instead of the GPL.
+  - The 'make install' has been streamlined. Now we install only
+    programs and man pages, for 18 HMMER programs and 22 Easel miniapps.
+    We don't install development .h headers or .a libraries.
+  - We changed our default policy on the number of threads/cores that
+    the search programs use. Previously multithreaded programs would use
+    all available cores by default; now we use two worker threads by
+    default (~2 cores), if multiple cores are available. HMMER3 search
+    programs do not scale much beyond 2 cores anyway, due to input
+    saturation and memory use.
+  - H3 now strictly requires either SSE2 or Altivec/VMX vector
+    support. The portable 'dummy' implementation has been removed. This
+    was an non-vectorized portable pure C implementation, much slower
+    than HMMER3 on x86 and PowerPC platforms with SSE2 or Altivec/VMX
+    vector instructions. We had included it because we could -- HMMER3
+    implements "generic" non-vectorized versions of its core algorithms
+    for unit testing purposes anyway. We thought maybe it'd be useful.
+    As far as I can tell, it was never useful, but several packagers on
+    non-x86, non-PowerPC platforms packaged and distributed it, ignoring
+    the prominent health warnings we put on it.
+- Smaller new features include:
+  - improved documentation of --mxfile and score matrix file format
+  - adds support for EBI's "uncheck all hits" on jackhmmer web site
+  - removed experimental hmmbuild --seq_weights_r and --seq_weights_e options
+  - appeased new gcc6 --Wmisleading-indentation warning
+  - SSI indexing is now robust against duplicate keys
+  - autoconf now robust against someone running gnu `autoheader`
+  - improved autoconf of SIMD vector support
+  - improved autoconf of DAZ,FTZ support on x86 processors
+  - improved autodetection of phylip interleaved vs sequential format
+  - improved autodetection of A2M vs. aligned FASTA format
+  - clarified A2M format parse error when file contains 'O' residue 
+  - improved portability to Intel/Solaris
+  - FASTA parser now ignores description line after a ctrl-A
+  - MSAs output with -A option now include name, acc, desc, author markup.
+  - In Easel miniapps, esl-translate replaces previous (buggy) esl-stranslate.
+  - Easel miniapps include esl-alirev, reverse complementing RNA/DNA alignment
+  - nhmmer/nhmmscan now allow alignments as target dbs
+  - target relentropy for DNA models changed from 0.45 to 0.62
+  - updated the User Guide
+- Fixed bugs include:
+  - nhmmscan faulted on old model files because it expected MAXL field
+  - --cut-ga wasn't checking that GA line was actually present in model
+  - GA thresholds weren't being captured from DNA/RNA Stockholm alignments
+  - A2M alignment parsing was corrupted on lines ending in insertions
+  - alphabet-guessing failed for FASTA seq >4096 bytes and <4000 residues
+  - genbank to fasta format conversion was leaving extra \n in accession
+  - NCBI db format: multithreaded nhmmer was failing to read 
+  - NCBI db format: 1st database sequence was skipped for second query (#e6)
+  - unit test failures in esl_normal, esl_random due to floating point math
+  - nhmmer was corrupted by * symbols in input sequence (iss#118)
+  - hmmsearch -A crashed if top-ranked hit has no domains (iss#131)
+  - new variety of "backconverted subseq" hmmsearch crash on *'s (iss#135)
+  - qsort() callbacks now return -1/0/1 as they should. (Infernal iss#11)
+  - esl_buffer hangs when input ends with \r (Easel iss#23) 
+
 * Tue Aug 08 2017 Shane Sturrock <shane.sturrock@gmail.com> - 3.1b2-1
 - New heuristic for accelerating nhmmer roughly 10-fold. 
 

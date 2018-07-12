@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to auto build and install igv. Just provide the version
+# Script to auto download and install igv. Just provide the version
 
 function usage() {
  cat << EOF
@@ -17,29 +17,18 @@ if [ $# -lt 1 ]; then
  exit 1
 fi
 
-export JAVA_HOME=/usr/java/latest
-export JRE_HOME=/usr/java/latest/jre
-export PATH=$JAVA_HOME/bin:$PATH
 VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
-echo "Building IGV ${VERSION} on ${DATE}"
+echo "Installing IGV ${VERSION} on ${DATE}"
 cd /opt/bioit/igv/src
-wget https://github.com/igvteam/igv/archive/v${VERSION}.zip
-mv v${VERSION}.zip igv-${VERSION}.zip
-unzip igv-${VERSION}.zip
-cd igv-${VERSION}
-#sed "s+@VERSION@+${VERSION}+" --in-place src/main/resources/resources/about.properties
-#sed "s+@TIMESTAMP@+${DATE}+" --in-place src/main/resources/resources/about.properties
-#sed "s+@BUILD+86@+" --in-place src/main/resources/resources/about.properties
-#sed "s+@DEVELOPMENT+false@+" --in-place src/main/resources/resources/about.properties
-sed "s+@VERSION+${VERSION}+" --in-place src/resources/about.properties
-sed "s+@TIMESTAMP+${DATE}+" --in-place src/resources/about.properties
-sed "s+@BUILD+86+" --in-place src/resources/about.properties
-sed "s+@DEVELOPMENT+false+" --in-place src/resources/about.properties
-ant -Dinclude.libs=true
-mkdir /opt/bioit/igv/${VERSION}
-mv igv.jar /opt/bioit/igv/${VERSION}
-mv lib /opt/bioit/igv/${VERSION}
+wget http://data.broadinstitute.org/igv/projects/downloads/2.4/IGV_${VERSION}.zip
+unzip IGV_${VERSION}.zip
+mv IGV_${VERSION} /opt/bioit/igv/${VERSION}
+# Get rid of unwanted starters to not confuse the shell
+rm /opt/bioit/igv/${VERSION}/igv.sh
+rm /opt/bioit/igv/${VERSION}/igv.command
+rm /opt/bioit/igv/${VERSION}/igv.bat
+# Copy our own start up script
 cp ${HOME}/bioit/apps/igv/SPEC/igv /opt/bioit/igv/${VERSION}
 echo "Writing modulefile"
 echo "#%Module 1.0

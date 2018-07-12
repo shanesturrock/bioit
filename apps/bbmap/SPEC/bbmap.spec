@@ -1,11 +1,11 @@
-%define priority 3811
+%define priority 3812
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.11
+Version:	38.12
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -198,6 +198,17 @@ fi
 %files
 
 %changelog
+* Fri Jul 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.12-1
+- Stats now omits the first size bracket if it is less than minscaf.
+- Fixed problems with extended stats in format 4-6.
+- Fixed a bug in reporting amount of spikin removed in RQCFilter.
+- Multithreaded kmer frequency histogram generation using kmer and ukmer
+  packages.
+- mutate.sh now outputs vcf files.
+- Fixed processing of sam files with M, =, and X in cigar string.
+- Fixed a bloom filter BBMap bug in counting reads.
+- Updated some pipelines shell scripts.
+
 * Fri Jul 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.11-1
 - 38.09
   - bbcms default bits changed from 1 to 2.

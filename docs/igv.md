@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/igv/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/igv/SPEC/build 2.4.10
+    ${HOME}/bioit/apps/igv/SPEC/build 2.4.11
 
 When that completes check that the new version is available using:
 
@@ -14,36 +14,23 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load igv/2.4.10
+    module load igv/2.4.11
     which igv
 
 If all is good, you can move to the RPM building step.
 
-## Manual Build
+## Manual Install
 
-Get the zip file and unzip it in the src directory. Before building this will need to be patched to make the version number show up for users.
+Get the zip file from [https://software.broadinstitute.org/software/igv/download](https://software.broadinstitute.org/software/igv/download) and unzip it in the src directory. Then you just need to move the unzipped directory into its final location:
 
-Edit the `~/bioit/apps/igv/SPEC/about.properties.patch` file and change the version number and date to suit, then do the following:
+    mv IGV_2.4.11 /opt/bioit/igv/2.4.11
 
-    cd igv-2.4.10
-    patch -p0 < ~/bioit/apps/igv/SPEC/about.properties.patch 
+Remove the run scripts that are included in this intall and copy over the run script we use:
 
-Set the JAVA variables so the build will use the OracleJDK instead of OpenJDK:
-
-    export JAVA_HOME=/usr/java/latest
-    export JRE_HOME=/usr/java/latest/jre
-    export PATH=$JAVA_HOME/bin:$PATH
-
-Now you can build the package:
-
-    ant -Dinclude.libs=true
-
-Make an install directory for it and move the built files and libraries in, as well as the launcher script users will execute:
-
-    mkdir /opt/bioit/igv/2.4.10
-    mv igv.jar /opt/bioit/igv/2.4.10
-    mv lib /opt/bioit/igv/2.4.10
-    cp ~/bioit/apps/igv/SPEC/igv /opt/bioit/igv/2.4.10
+    rm /opt/bioit/igv/2.4.11/igv.sh
+    rm /opt/bioit/igv/2.4.11/igv.command
+    rm /opt/bioit/igv/2.4.11/igv.bat
+    cp ~/bioit/apps/igv/SPEC/igv /opt/bioit/igv/2.4.11
 
 That should be enough for users to launch this version.
 
@@ -55,7 +42,7 @@ Add a module file in `/opt/bioit/modulefiles/igv/` for this version by copying p
     #
     #  igv module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/igv/2.4.10/
+    prepend-path  PATH         /opt/bioit/igv/2.4.11/
 
 ## RPM
 
