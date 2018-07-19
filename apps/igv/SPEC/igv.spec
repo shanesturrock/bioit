@@ -1,11 +1,11 @@
-%define priority 2411
+%define priority 2413
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.4.11
+Version:	2.4.13
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Wed Jul 20 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.13-1
+- fix recursive startup bug
+
 * Wed Jul 11 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.11-1
 - Menu and popup text for cluster track
 

@@ -1,11 +1,11 @@
-%define priority 18
+%define priority 19
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bcftools
-Version:	1.8
+Version:	1.9
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -43,6 +43,49 @@ fi
 %files
 
 %changelog
+* Fri Jul 20 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.9-1
+- annotate
+  - REF and ALT columns can be now transferred from the annotation file.
+  - fixed bug when setting vector_end values.
+- consensus
+  - new -M option to control output at missing genotypes
+  - variants immediately following insersions should not be skipped. Note
+    however, that the current fix requires normalized VCF and may still falsely
+    skip variants adjacent to multiallelic indels.
+  - bug fixed in -H selection handling
+- convert
+  - the --tsv2vcf option now makes the missing genotypes diploid, "./." instead
+    of "."
+  - the behavior of -i/-e with --gvcf2vcf changed. Previously only sites with
+    FILTER set to "PASS" or "." were expanded and the -i/-e options dropped
+    sites completely. The new behavior is to let the -i/-e options control
+    which records will be expanded. In order to drop records completely, one
+    can stream through "bcftools view" first.
+- csq
+  - since the real consequence of start/splice events are not known, the
+    aminoacid positions at subsequent variants should stay unchanged
+  - add --force option to skip malformatted transcripts in GFFs with
+    out-of-phase CDS exons.
+- +dosage: output all alleles and all their dosages at multiallelic sites
+- +fixref: fix serious bug in -m top conversion
+- -i/-e filtering expressions:
+  - add two-tailed binomial test
+  - add functions N_PASS() and F_PASS()
+  - add support for lists of samples in filtering expressions, with many
+    samples it was impractical to list them all on the command line. Samples
+    can be now in a file as, e.g., GT[@samples.txt]="het"
+  - allow multiple perl functions in the expressions and some bug fixes
+  - fix a parsing problem, @ was not removed from @filename expressions
+- mpileup: fixed bug where, if samples were renamed using the -G
+  (--read-groups) option, some samples could be omitted from the output file.
+- norm: update INFO/END when normalizing indels
+- +split: new -S option to subset samples and to use custom file names instead
+  of the defaults
+- +smpl-stats: new plugin
+- +trio-stats: new plugin
+- Fixed build problems with non-functional configure script produced on some
+  platforms
+
 * Fri Apr 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.8-1
 - -i, -e filtering: Support for custom perl scripts
 - +contrast: New plugin to annotate genotype differences between groups of
