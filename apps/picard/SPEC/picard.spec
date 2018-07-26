@@ -1,11 +1,11 @@
-%define priority 21809
+%define priority 21811
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.9
+Version:	2.18.11
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,25 @@ fi
 %files
 
 %changelog
+* Fri Jul 27 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.11-1
+- 2.18.10
+  - Tidy up TileMetricsOutReader a bit. (#1200)
+  - MarkDuplicates to accept Query-Grouped (not Sorted) input and a slight
+    change in tiebreak order
+  - Adding a LIBRARY field to the umi metrics file in
+    UmiAwareMarkDuplicatesWithMateCigar (#1193)
+  - Adding error in LiftoverVcf if reference dictionary does not exist (Issue
+    #1157) (#1189)
+  - new CLP: CollectSamErrorMetric (#1180)
+  - Merge branch 'epam-ls_bug_collectmultiplemetrics_no_refflat' of
+    https://github.com/EpamLifeSciencesTeam/picard into
+    epam-ls_bug_collectmultiplemetrics_no_refflat
+  - Bug when no refflat file input in CollectMultipleMetrics fixed. New test
+    for CollectMultipleMetrics.
+- 2.18.11
+  - Fix an issue where the google NIO code would try to load even when the NIO
+    library wasn't present. (#1201)
+
 * Fri Jul 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.9-1
 - 2.18.8
   - upgrading htsjdk 2.15.1 -> 2.16.0 (#1184)

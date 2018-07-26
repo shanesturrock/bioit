@@ -1,11 +1,11 @@
-%define priority 3812
+%define priority 3816
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.12
+Version:	38.16
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -129,6 +129,7 @@ alternatives \
    --slave %{_bindir}/processfrag.sh processfrag.sh /opt/bioit/%{name}/%{version}/processfrag.sh \
    --slave %{_bindir}/processspeed.sh processspeed.sh /opt/bioit/%{name}/%{version}/processspeed.sh \
    --slave %{_bindir}/processhi-c.sh processhi-c.sh /opt/bioit/%{name}/%{version}/processhi-c.sh \
+   --slave %{_bindir}/randomgenome.sh randomgenome.sh /opt/bioit/%{name}/%{version}/randomgenome.sh \
    --slave %{_bindir}/randomreads.sh randomreads.sh /opt/bioit/%{name}/%{version}/randomreads.sh \
    --slave %{_bindir}/readlength.sh readlength.sh /opt/bioit/%{name}/%{version}/readlength.sh \
    --slave %{_bindir}/reducesilva.sh reducesilva.sh /opt/bioit/%{name}/%{version}/reducesilva.sh \
@@ -198,6 +199,49 @@ fi
 %files
 
 %changelog
+* Fri Jul 27 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.16-1
+- 38.12
+  - Stats now omits the first size bracket if it is less than minscaf.
+  - Fixed problems with extended stats in format 4-6.
+  - Fixed a bug in reporting amount of spikin removed in RQCFilter.
+  - Multithreaded kmer frequency histogram generation using kmer and ukmer
+    packages.
+  - mutate.sh now outputs vcf files.
+  - Fixed processing of sam files with M, =, and X in cigar string.
+  - Fixed a bloom filter BBMap bug in counting reads.
+  - Updated some pipelines shell scripts.
+  - Started writing a new KCountArray class, but abandoned it as the current
+    one looks as efficient as possible.
+- 38.13
+  - Fixed a casting exception in Shared.sort.
+  - Fixed missing column from mutate.sh vcf output.
+  - Addslash for RandomReads now works with the illuminanames flag.
+  - Fixed mutate.sh VCF files.
+  - Wrote Contig and Edge classes.
+  - Wrote ContigLengthComparator.
+  - Transitioned Tadpole from building Reads to building Contigs.
+  - Wrote ProcessContigThread.
+  - Tadpole now writes additional information about contig ends to headers.
+  - Tadpole now strictly uses F_BRANCH and B_BRANCH instead of just BRANCH
+    (TODO: D_BRANCH).
+  - Tadpole output should now have canonical orientation, order, and names
+    (apart from circular contigs).
+  - Tadpole1 now has a preliminary contig graph processing phase (in progress).
+  - Tadpole now supports preliminary dot output (not yet correct).
+  - Added appendln to some ByteBuilder methods.
+  - Added print(Contig) to bsw.
+- 38.14-38.15
+  - Integrated dev Python changes; merging Git branches.
+- 38.16
+  - Ported Tadpole1 ProcessContigThread to Tadpole2.
+  - Added perfile flag to CompareSketch, which allows multithreaded loading.
+  - Added prealloc flag to CompareSketch.
+  - Revised TaxServer to use Sketch index, and typically run 1 thread per
+    sketch.
+  - Added outsketch flag to CompareSketch.
+  - Modified RandomGenome to be faster and more flexible, and added a shell
+    script.
+
 * Fri Jul 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.12-1
 - Stats now omits the first size bracket if it is less than minscaf.
 - Fixed problems with extended stats in format 4-6.
