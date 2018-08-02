@@ -1,11 +1,11 @@
-%define priority 3816
+%define priority 3819
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.16
+Version:	38.19
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -40,10 +40,8 @@ alternatives \
    --slave %{_bindir}/bbmapskimmer.sh bbmapskimmer.sh /opt/bioit/%{name}/%{version}/bbmapskimmer.sh \
    --slave %{_bindir}/bbmask.sh bbmask.sh /opt/bioit/%{name}/%{version}/bbmask.sh \
    --slave %{_bindir}/bbmerge-auto.sh bbmerge-auto.sh /opt/bioit/%{name}/%{version}/bbmerge-auto.sh \
-   --slave %{_bindir}/bbmergegapped.sh bbmergegapped.sh /opt/bioit/%{name}/%{version}/bbmergegapped.sh \
    --slave %{_bindir}/bbmerge.sh bbmerge.sh /opt/bioit/%{name}/%{version}/bbmerge.sh \
    --slave %{_bindir}/bbnorm.sh bbnorm.sh /opt/bioit/%{name}/%{version}/bbnorm.sh \
-   --slave %{_bindir}/bbqc.sh bbqc.sh /opt/bioit/%{name}/%{version}/bbqc.sh \
    --slave %{_bindir}/bbrealign.sh bbrealign.sh /opt/bioit/%{name}/%{version}/bbrealign.sh \
    --slave %{_bindir}/bbrename.sh bbrename.sh /opt/bioit/%{name}/%{version}/bbrename.sh \
    --slave %{_bindir}/bbsketch.sh bbsketch.sh /opt/bioit/%{name}/%{version}/bbsketch.sh \
@@ -105,6 +103,8 @@ alternatives \
    --slave %{_bindir}/kmercountexact.sh kmercountexact.sh /opt/bioit/%{name}/%{version}/kmercountexact.sh \
    --slave %{_bindir}/kmercountmulti.sh kmercountmulti.sh /opt/bioit/%{name}/%{version}/kmercountmulti.sh \
    --slave %{_bindir}/kmercoverage.sh kmercoverage.sh /opt/bioit/%{name}/%{version}/kmercoverage.sh \
+   --slave %{_bindir}/kmerlimit2.sh kmerlimit2.sh /opt/bioit/%{name}/%{version}/kmerlimit2.sh \
+   --slave %{_bindir}/kmerlimit.sh kmerlimit.sh /opt/bioit/%{name}/%{version}/kmerlimit.sh \
    --slave %{_bindir}/loadreads.sh loadreads.sh /opt/bioit/%{name}/%{version}/loadreads.sh \
    --slave %{_bindir}/loglog.sh loglog.sh /opt/bioit/%{name}/%{version}/loglog.sh \
    --slave %{_bindir}/makechimeras.sh makechimeras.sh /opt/bioit/%{name}/%{version}/makechimeras.sh \
@@ -115,6 +115,7 @@ alternatives \
    --slave %{_bindir}/mergebarcodes.sh mergebarcodes.sh /opt/bioit/%{name}/%{version}/mergebarcodes.sh \
    --slave %{_bindir}/mergeOTUs.sh mergeOTUs.sh /opt/bioit/%{name}/%{version}/mergeOTUs.sh \
    --slave %{_bindir}/mergesam.sh mergesam.sh /opt/bioit/%{name}/%{version}/mergesam.sh \
+   --slave %{_bindir}/mergesketch.sh mergesketch.sh /opt/bioit/%{name}/%{version}/mergesketch.sh \
    --slave %{_bindir}/mergesorted.sh mergesorted.sh /opt/bioit/%{name}/%{version}/mergesorted.sh \
    --slave %{_bindir}/msa.sh msa.sh /opt/bioit/%{name}/%{version}/msa.sh \
    --slave %{_bindir}/mutate.sh mutate.sh /opt/bioit/%{name}/%{version}/mutate.sh \
@@ -154,6 +155,7 @@ alternatives \
    --slave %{_bindir}/shred.sh shred.sh /opt/bioit/%{name}/%{version}/shred.sh \
    --slave %{_bindir}/shrinkaccession.sh shrinkaccession.sh /opt/bioit/%{name}/%{version}/shrinkaccession.sh \
    --slave %{_bindir}/shuffle.sh shuffle.sh /opt/bioit/%{name}/%{version}/shuffle.sh \
+   --slave %{_bindir}/shuffle2.sh shuffle2.sh /opt/bioit/%{name}/%{version}/shuffle2.sh \
    --slave %{_bindir}/sketchblacklist.sh sketchblacklist.sh /opt/bioit/%{name}/%{version}/sketchblacklist.sh \
    --slave %{_bindir}/sketch.sh sketch.sh /opt/bioit/%{name}/%{version}/sketch.sh \
    --slave %{_bindir}/sortbyname.sh sortbyname.sh /opt/bioit/%{name}/%{version}/sortbyname.sh \
@@ -199,6 +201,34 @@ fi
 %files
 
 %changelog
+* Fri Aug 03 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.19-1
+- 38.17
+  - Added Sketch minLevelExtended flag.  ***TODO: Document.
+  - Fixed bbcms loglog using quality scores from the wrong read.
+  - Wrote MergeSketch and mergesketch.sh.
+  - Fixed a major bug in TaxTree.getNodeAtLevel and restarted all servers.
+  - Wrote KmerLimit and kmerlimit.sh.
+  - Wrote Shuffle2 and shuffle2.sh.
+  - Changed blacklist_nt_species_1000.sketch to blacklist_nt_species_500.sketch
+- 38.18
+  - Modified RQCFilter and BBMap to correctly track and report unmapped reads
+    and bases when using the Bloom filter.
+  - Wrote RQCFilterStats for tracking relevant RQCFilter stats.  This is
+    printed tofilterStats2.txt.
+  - Added some columns to BBMap scafstats/refstats where a read is assigned to
+    at most a single reference.
+  - All classes that used ThreadLocalRandom now call Shared.threadLocalRandom()
+    to comply with Java 6.
+  - Wrote KmerLimit and kmerlimit.sh to restrict a randomly-ordered file to a
+    specific number of unique kmers.
+  - Wrote KmerLimit2 and kmerlimit2.sh to restrict an arbitrarily-ordered file
+    to a specific number of unique kmers via subsampling.
+  - Updated /pipelines/ scripts for fetching and sketching.
+- 38.19
+  - Updated RQCFilterData tar.
+  - Updated wrapper shellscripts to handle Cori error messages.
+  - Fixed a bug in tracking duplicate reads in RQCFilter.
+
 * Fri Jul 27 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.16-1
 - 38.12
   - Stats now omits the first size bracket if it is less than minscaf.
