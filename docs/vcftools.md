@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/vcftools/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows: 
 
-    ${HOME}/bioit/apps/vcftools/SPEC/build 0.1.15
+    ${HOME}/bioit/apps/vcftools/SPEC/build 0.1.16
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load vcftools/0.1.15
+    module load vcftools/0.1.16
     which vcftools
     vcftools --version
 
@@ -24,14 +24,14 @@ If all is good, you can move to the RPM building step.
 
 Download the version to be built into `/opt/bioit/vcftools/src` and untar
 
-    ./configure --prefix=/opt/bioit/vcftools/0.1.15
+    ./configure --prefix=/opt/bioit/vcftools/0.1.16
     make
     make install
 
 All perl scripts need to have the following change so that they'll find the perl modules they need to load:
 
-    cd /opt/bioit/vcftools/0.1.15/bin
-    sed "s+use strict;+use lib '/opt/bioit/vcftools/0.1.15/share/perl5'; use strict;+" \
+    cd /opt/bioit/vcftools/0.1.16/bin
+    sed "s+use strict;+use lib '/opt/bioit/vcftools/0.1.16/share/perl5'; use strict;+" \
     --in-place *
 
 ## Module setup
@@ -42,8 +42,8 @@ Add a module file in `/opt/bioit/modulefiles/vcftools/` for this version by copy
     #
     #  vcftools module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/vcftools/0.1.15/bin
-    prepend-path  MANPATH      /opt/bioit/vcftools/0.1.15/share/man
+    prepend-path  PATH         /opt/bioit/vcftools/0.1.16/bin
+    prepend-path  MANPATH      /opt/bioit/vcftools/0.1.16/share/man
 
 ## RPM
 

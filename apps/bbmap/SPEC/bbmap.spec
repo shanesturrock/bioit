@@ -1,11 +1,11 @@
-%define priority 3819
+%define priority 3820
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.19
+Version:	38.20
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -201,6 +201,15 @@ fi
 %files
 
 %changelog
+* Fri Aug 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.20-1
+- Added logsum and powsum to stats.sh gc output format 5.
+- Fixed a bug in tracking reads in RQCFilter.
+- Fixed a basic to extended taxonomy translation routine in TaxTree.
+- Added JSON (format 8) to stats.sh.
+- Fixed(?) BBMap tracking of trimm/untrimmed bases for mapped and unmapped
+  reads.
+- Fixed bugs in RQCFilter tracking of trim/untrimmed mapped bases.
+
 * Fri Aug 03 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.19-1
 - 38.17
   - Added Sketch minLevelExtended flag.  ***TODO: Document.

@@ -1,11 +1,11 @@
-%define priority 0115
+%define priority 0116
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vcftools
-Version:	0.1.15
+Version:	0.1.16
 Release:	1%{?dist}
 Summary:	VCF file manipulation tools
 
@@ -66,6 +66,9 @@ fi
 %files
 
 %changelog
+* Fri Aug 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.1.16-1
+- Minor release to address security vulnerabilities.
+
 * Thu Jul 06 2017 Shane Sturrock <shane.sturrock@gmail.com> - 0.1.15-1
 - Minor release to include recent small code changes.
 - Output in LDhelmet format

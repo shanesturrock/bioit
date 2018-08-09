@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2341
+%define priority 2342
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.3.4.1
+Version:	2.3.4.2
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,27 @@ fi
 %files
 
 %changelog
+* Fri Aug 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.4.2-1
+- Fixed issue causing bowtie2 to fail in --fast-local mode.
+- Fixed issue causing --soft-clipped-unmapped-tlen to be a positional argument.
+- New option --trim-to N causes bowtie2 to trim reads longer than N bases to
+  exactly N bases. Can trim from either 3' or 5' end, e.g. --trim-to 5:30 trims
+  reads to 30 bases, truncating at the 5' end.
+- Updated "Building from source" manual section with additional instructions on
+  installing TBB.
+- Several other updates to manual, including new mentions of Bioconda and
+  Biocontainers.
+- Fixed an issue preventing bowtie2 from processing more than one pattern
+  source when running single threaded.
+- Fixed an issue causing bowtie2 and bowtie2-inspect to crash if the index
+  contains a gap-only segment.
+- Added experimental BAM input mode -b. Works only with unpaired input reads
+  and BAM files that are sorted by read name (samtools sort -n). BAM input mode
+  also supports the following options: 
+    --preserve-sam-tags: Preserve any optional fields present in BAM record 
+    --align-paired-reads: Paired-end mode for BAM files
+- Add experimental CMake support
+
 * Tue Feb 13 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.4.1-1
 - Fixed an issue with `--reorder` that caused bowtie2 to crash while reordering
   SAM output
