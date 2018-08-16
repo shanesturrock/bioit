@@ -1,11 +1,11 @@
-%define priority 3820
+%define priority 3822
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.20
+Version:	38.22
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -83,10 +83,10 @@ alternatives \
    --slave %{_bindir}/filterbytaxa.sh filterbytaxa.sh /opt/bioit/%{name}/%{version}/filterbytaxa.sh \
    --slave %{_bindir}/filterbytile.sh filterbytile.sh /opt/bioit/%{name}/%{version}/filterbytile.sh \
    --slave %{_bindir}/filterlines.sh filterlines.sh /opt/bioit/%{name}/%{version}/filterlines.sh \
+   --slave %{_bindir}/filterqc.sh filterqc.sh /opt/bioit/%{name}/%{version}/filterlines.sh \
    --slave %{_bindir}/filtersam.sh filtersam.sh /opt/bioit/%{name}/%{version}/filtersam.sh \
    --slave %{_bindir}/filtersubs.sh filtersubs.sh /opt/bioit/%{name}/%{version}/filtersubs.sh \
    --slave %{_bindir}/filtervcf.sh filtervcf.sh /opt/bioit/%{name}/%{version}/filtervcf.sh \
-   --slave %{_bindir}/fq.sh fq.sh /opt/bioit/%{name}/%{version}/fq.sh \
    --slave %{_bindir}/fungalrelease.sh fungalrelease.sh /opt/bioit/%{name}/%{version}/fungalrelease.sh \
    --slave %{_bindir}/fuse.sh fuse.sh /opt/bioit/%{name}/%{version}/fuse.sh \
    --slave %{_bindir}/getreads.sh getreads.sh /opt/bioit/%{name}/%{version}/getreads.sh \
@@ -124,6 +124,7 @@ alternatives \
    --slave %{_bindir}/partition.sh partition.sh /opt/bioit/%{name}/%{version}/partition.sh \
    --slave %{_bindir}/phylip2fasta.sh phylip2fasta.sh /opt/bioit/%{name}/%{version}/phylip2fasta.sh \
    --slave %{_bindir}/pileup.sh pileup.sh /opt/bioit/%{name}/%{version}/pileup.sh \
+   --slave %{_bindir}/plotflowcell.sh plotflowcell.sh /opt/bioit/%{name}/%{version}/plotflowcell.sh \
    --slave %{_bindir}/plotgc.sh plotgc.sh /opt/bioit/%{name}/%{version}/plotgc.sh \
    --slave %{_bindir}/postfilter.sh postfilter.sh /opt/bioit/%{name}/%{version}/postfilter.sh \
    --slave %{_bindir}/printtime.sh printtime.sh /opt/bioit/%{name}/%{version}/printtime.sh \
@@ -133,6 +134,7 @@ alternatives \
    --slave %{_bindir}/randomgenome.sh randomgenome.sh /opt/bioit/%{name}/%{version}/randomgenome.sh \
    --slave %{_bindir}/randomreads.sh randomreads.sh /opt/bioit/%{name}/%{version}/randomreads.sh \
    --slave %{_bindir}/readlength.sh readlength.sh /opt/bioit/%{name}/%{version}/readlength.sh \
+   --slave %{_bindir}/readqc.sh readqc.sh /opt/bioit/%{name}/%{version}/readqc.sh \
    --slave %{_bindir}/reducesilva.sh reducesilva.sh /opt/bioit/%{name}/%{version}/reducesilva.sh \
    --slave %{_bindir}/reformat.sh reformat.sh /opt/bioit/%{name}/%{version}/reformat.sh \
    --slave %{_bindir}/removebadbarcodes.sh removebadbarcodes.sh /opt/bioit/%{name}/%{version}/removebadbarcodes.sh \
@@ -148,7 +150,6 @@ alternatives \
    --slave %{_bindir}/representative.sh representative.sh /opt/bioit/%{name}/%{version}/representative.sh \
    --slave %{_bindir}/rqcfilter2.sh rqcfilter2.sh /opt/bioit/%{name}/%{version}/rqcfilter2.sh \
    --slave %{_bindir}/rqcfilter.sh rqcfilter.sh /opt/bioit/%{name}/%{version}/rqcfilter.sh \
-   --slave %{_bindir}/rq.sh rq.sh /opt/bioit/%{name}/%{version}/rq.sh \
    --slave %{_bindir}/samtoroc.sh samtoroc.sh /opt/bioit/%{name}/%{version}/samtoroc.sh \
    --slave %{_bindir}/seal.sh seal.sh /opt/bioit/%{name}/%{version}/seal.sh \
    --slave %{_bindir}/sendsketch.sh sendsketch.sh /opt/bioit/%{name}/%{version}/sendsketch.sh \
@@ -201,6 +202,37 @@ fi
 %files
 
 %changelog
+* Fri Aug 17 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.22-1
+- 38.21
+  - Wrote JsonLiteral and modified Stats to not put quotes around formatted
+    floats.
+  - Added support for accession, gi, and header lookups to RenameGiToNcbi.
+  - --help or --version now exit with status 0 rather than 1.
+  - Updated some documentation.
+  - Added BBDuk trimpolyg flag.
+  - FlowCell MicroTiles now track more data and have more methods.
+  - Wrote PlotFlowCell and plotflowcell.sh, to look at the distribution of
+    polyG in NovaSeq runs.
+  - Fixed a broken if-else in AccessionToTaxId that was causing TaxServer to
+    start with prealloc false.
+  - Fixed a bug in verifying other mapped stats in RQCFilter2.
+- 38.22
+  - Added getters for sketch.Comparison and Ssketch.CompareBuffer, and made
+    fields private.
+  - Fixed bug causing Sketch unique count to display incorrectly - bitsetbits
+    had been changed from 2 to 1.  It should be 2; made static final.
+  - Fixed an array size bug in Tadpole caused by increasing the range of
+    termination codes.
+  - Fixed a problem of Kmers being appended to ByteBuilders
+    reverse-complemented.  This impacted Shaver2.
+  - Fixed a static variable (MASK_CORE) hangover from Tadpole1 into Tadpole2
+    with Ta dWrapper.
+  - Added more BBDuk polyG options.
+  - Added polyG options and tracking to RQCFilter.
+  - Fixed an incident where a new KmerComparator was created unnecessarily.
+  - Clumpify now correctly counts the number of reads when a temp file is
+    streamed without being clumped.
+
 * Fri Aug 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.20-1
 - Added logsum and powsum to stats.sh gc output format 5.
 - Fixed a bug in tracking reads in RQCFilter.

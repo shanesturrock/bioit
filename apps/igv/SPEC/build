@@ -27,7 +27,7 @@ mv IGV_${VERSION} /opt/bioit/igv/${VERSION}
 # Get rid of unwanted starters to not confuse the shell
 rm /opt/bioit/igv/${VERSION}/igv.sh
 rm /opt/bioit/igv/${VERSION}/igv.command
-rm /opt/bioit/igv/${VERSION}/igv.bat
+#rm /opt/bioit/igv/${VERSION}/igv.bat
 # Copy our own start up script
 cp ${HOME}/bioit/apps/igv/SPEC/igv /opt/bioit/igv/${VERSION}
 echo "Writing modulefile"

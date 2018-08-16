@@ -1,11 +1,11 @@
-%define priority 191
+%define priority 200
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bismark
-Version:	0.19.1
+Version:	0.20.0
 Release:	1%{?dist}
 Summary:	A bisulfite read mapper and methylation caller
 Group:		Applications/Engineering
@@ -49,6 +49,31 @@ fi
 %files
 
 %changelog
+* Fri Aug 17 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.20.0-1
+- bismark_methylation_extractor
+  - The methylation extractor now creates output directories if they don't
+    exist already.
+  - The options --ample_mem and --buffer_size <string> are now mutually
+    exclusive.
+  - Changed the directory being passed on when --cytosine_report is specified
+    from parent directory' to 'output directory'.
+- bismark2report
+  - Major rewrite of bismark2report: HTML file are now rendered using Plotly.js
+    [plotly.js v1.39.4] which is completely open source and free to use.
+    Highcharts and JQuery were dropped, as was raised here: #177.
+  - The files bioinfo.logo, bismark.logo, plot.ly and plotly_template.tpl are
+    read in dynamically from a new folder plotly. bismark_sitrep and all its
+    contents no longer ship with Bismark. The Bismark HTML reports should be
+    completely self-contained, here is an example paired-end Bismark report.
+- bismark2summary
+  - Major rewrite of bismark2summary: HTML file are now rendered using
+    Plotly.js [plotly.js v1.39.4] which is completely open source and free to
+    use. Highcharts and JQuery were dropped, as was raised here: #177. The
+    files bioinfo.logo, bismark.logo, plot.ly and plotly_template.tpl are read
+    in dynamically from a new folder plotly. bismark_sitrep and all its
+    contents no longer ship with Bismark. The Bismark HTML Summary reports
+    should be completely self-contained.
+
 * Fri Jun 29 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.19.1-1
 - Bismark
   - Child processes are now terminated properly once the mapping and merging
