@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/vsearch/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows: 
 
-    ${HOME}/bioit/apps/vsearch/SPEC/build 2.8.1
+    ${HOME}/bioit/apps/vsearch/SPEC/build 2.8.2
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load vsearch/2.8.1
+    module load vsearch/2.8.2
     which vsearch
     vsearch --version
 
@@ -25,9 +25,12 @@ If all is good, you can move to the RPM building step.
 Download the version to be built into `/opt/bioit/vsearch/src` and untar
 
     ./autogen.sh
-    ./configure --prefix=/opt/bioit/vsearch/2.8.1
+    ./configure --prefix=/opt/bioit/vsearch/2.8.2
+    sed -i -e 's/native/x86-64/g' Makefile src/Makefile
     make
     make install
+
+The `sed` line prevents it building binaries that won't run on all 64 bit pricessors.
 
 ## Module setup
 
@@ -37,8 +40,8 @@ Add a module file in `/opt/bioit/modulefiles/vsearch/` for this version by copyi
     #
     #  vsearch module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/vsearch/2.8.1/bin
-    prepend-path  MANPATH      /opt/bioit/vsearch/2.8.1/share/man
+    prepend-path  PATH         /opt/bioit/vsearch/2.8.2/bin
+    prepend-path  MANPATH      /opt/bioit/vsearch/2.8.2/share/man
 
 ## RPM
 

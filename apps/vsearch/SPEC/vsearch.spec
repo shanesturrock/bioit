@@ -1,11 +1,11 @@
-%define priority 281
+%define priority 282
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.8.1
+Version:	2.8.2
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,7 +43,16 @@ fi
 %files
 
 %changelog
-* Fri Jun 28 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.1-1
+* Fri Aug 24 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.2-1
+- Fix for wrong placement of semicolons in header lines in some cases when
+  using the sizeout or xsize options.
+- Reduced memory requirements for full-length dereplication in cases with many
+  duplicate sequences.
+- Improved wording of fastq_mergepairs report.
+- Updated manual regarding use of sizein and sizeout with dereplication.
+- Changed a compiler option.
+
+* Fri Jun 29 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.1-1
 - Fixes for compilation warnings with GCC 8.
 
 * Fri Apr 27 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.0-1

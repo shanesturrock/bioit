@@ -29,6 +29,8 @@ tar xvf vsearch-${VERSION}.tar.gz
 cd vsearch-${VERSION}
 ./autogen.sh
 ./configure --prefix=/opt/bioit/vsearch/${VERSION}
+# Building native can produce binaries that don't work on all x86-64 machines
+sed -i -e 's/native/x86-64/g' Makefile src/Makefile
 make
 make install
 echo "Writing modulefile"
