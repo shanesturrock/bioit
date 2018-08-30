@@ -45,6 +45,12 @@ The machine will need a reboot any time a kernel update is applied. To avoid thi
 
 If there's a bad kernel issue comment this line out, update the kernel and reboot the machine to apply the update but otherwise this should be fine and will allow the machine to stay up for extended periods.
 
+## Turn off the automatic bug reporting tool
+
+Users can't see the crash reports anyway so remove it using:
+
+    yum -y remove abrt
+
 ## Tools required for application support
 
 The following packages are required for building the suite of applications on a fresh BioIT server:
