@@ -1,11 +1,11 @@
-%define priority 3822
+%define priority 3823
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.22
+Version:	38.23
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -202,6 +202,22 @@ fi
 %files
 
 %changelog
+* Fri Aug 31 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.23-1
+- Wrote hiseq.CycleTracker.
+- Fixed a parse error in AnalyzeFlowCell.
+- Added preliminary G-bubble-detection and elimination to AnalyzeFlowCell, but
+  it is not clear if it is working correctly.
+- Wrote hiseq.IlluminaHeaderParser.
+- Revised A_Sample, A_SampleMT, and A_SampleByteFile with additional submethods
+  to reduce the length of long methods.
+- Removed JNI path flag from BBMerge, BBMap, and RQCFilter shell scripts.
+- Fixed a bug in reading adaptersOut.fa from RQCFilter2.
+- Changed the way path is appended to output files in RQCFilter2.
+- Added poly-C flags to BBDuk.
+- Wrote PolymerTracker.
+- Added polymer count tracking to BBDuk and RQCFilter.
+- Added clipfilter to Reformat.
+
 * Fri Aug 17 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.22-1
 - 38.21
   - Wrote JsonLiteral and modified Stats to not put quotes around formatted

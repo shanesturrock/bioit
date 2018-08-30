@@ -1,11 +1,11 @@
-%define priority 21811
+%define priority 21812
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.11
+Version:	2.18.12
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,13 @@ fi
 %files
 
 %changelog
+* Fri Aug 31 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.12-1
+- Diagnose missing barcodes in ExtractIlluminaBarcodes instead of throwing NPE.
+  (#1212)
+- FixVcfHeader can now add missing FILTER header lines. (#1205)
+- Yf fix scatter with overflow mode (#1206)
+- Added options to IlluminaBasecallsToSam (#1162)
+
 * Fri Jul 27 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.11-1
 - 2.18.10
   - Tidy up TileMetricsOutReader a bit. (#1200)
