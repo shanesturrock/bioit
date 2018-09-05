@@ -71,6 +71,25 @@ Install the downloaded RPM:
 
 It won't be the default after this but the IGV build script will manually set the `$JAVA_HOME` and `$JAVA_PATH` variables it needs to build IGV using this. The `version_check` script includes a check that the Oracle JDK is the latest version. Update by downloading the newest version when this warns that it is out of date.
 
+## Disable shutdown by normal users
+
+The user's desktop will have a shutdown button and they could in theory close the whole machine down. To stop this, create the following file:
+
+    /etc/polkit-1/rules.d/55-inhibit-shutdown.rules
+
+And paste the following in:
+
+    polkit.addRule(function(action, subject) {
+        if ((action.id == "org.freedesktop.consolekit.system.stop" || action.id == "org.freedesktop.consolekit.system.restart") && subject.isInGroup("admin")) {
+            return polkit.Result.YES;
+        }
+        else {
+            return polkit.Result.NO;
+        }
+    });
+
+Now when users log in they won't see the shutdown button and they won't be able to call the shutdown command from the shell either.
+
 ## Secure ssh but retain admin access
 
 Create a build user account with admin rights which will be used to do tool updates:
