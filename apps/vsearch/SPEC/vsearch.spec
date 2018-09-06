@@ -1,11 +1,11 @@
-%define priority 282
+%define priority 284
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.8.2
+Version:	2.8.4
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,12 @@ fi
 %files
 
 %changelog
+* Fri Sep 07 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.4-1
+- Fix for segfault bug with derep_fulllength and uc.
+- Further reduce memory requirements for dereplication when not using the uc
+  option. 
+- Fix output during subsampling when quiet or log options are in effect.
+
 * Fri Aug 24 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.2-1
 - Fix for wrong placement of semicolons in header lines in some cases when
   using the sizeout or xsize options.
