@@ -46,6 +46,10 @@ install.packages("RMySQL",repos="https://cloud.r-project.org/")
 install.packages("RPostgreSQL",repos="https://cloud.r-project.org/")
 install.packages("haplo.stats",repos="https://cloud.r-project.org/")
 install.packages("https://cran.r-project.org/src/contrib/Archive/RcppArmadillo/RcppArmadillo_0.6.600.4.0.tar.gz", repos=NULL, type="source")
+install.packages("mvtnorm",repos="https://cloud.r-project.org/")
+install.packages("modeltools",repos="https://cloud.r-project.org/")
+install.packages("coin",repos="https://cloud.r-project.org/")
+install.packages("MASS",repos="https://cloud.r-project.org/")
 
 ### BioC Packages for R.
 source("http://www.bioconductor.org/biocLite.R")
