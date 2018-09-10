@@ -3,3 +3,4 @@
 #  R-core module for use with 'environment-modules' package:
 #
 prepend-path  PATH              /opt/bioit/R-core/3.5.0/bin
+prepend-path  LD_LIBRARY_PATH   /opt/bioit/R-core/3.5.0/lib64/R/lib

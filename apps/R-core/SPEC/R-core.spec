@@ -7,11 +7,12 @@ fi )
 
 Name:           R-core
 Version:        3.5.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        R statistical computing and graphics environment
 
 Group:          Applications/Engineering
 License:	GPL
+Source0:	R-x86_64.conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Provides:	libR.so()(64bit) libRblas.so()(64bit) libRlapack.so()(64bit)
 
@@ -28,20 +29,35 @@ compiles and runs on a wide variety of UNIX platforms, Windows and MacOS.
 %pre
 %dir_exists
 
+%install
+rm -rf %{buildroot}
+# Install ld.so.conf.d file
+mkdir -p %{buildroot}/%{_sysconfdir}/ld.so.conf.d/
+install -m 644 %{SOURCE0} %{buildroot}/%{_sysconfdir}/ld.so.conf.d/
+
 %post
 alternatives \
   --install %{_bindir}/R R /opt/bioit/%{name}/%{version}/bin/R %{priority} \
   --slave %{_bindir}/Rscript Rscript /opt/bioit/%{name}/%{version}/bin/Rscript
+rm /usr/lib64/R
+ln -s /opt/bioit/%{name}/%{version}/lib64/R /usr/lib64/R
+ldconfig
 
 %postun
 if [ $1 -eq 0 ]
 then
   alternatives --remove R /opt/bioit/%{name}/%{version}/bin/R
+  rm /usr/lib64/R
+  ldconfig
 fi
 
 %files
+/etc/ld.so.conf.d/R-x86_64.conf
 
 %changelog
+* Tue Sep 11 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.5.1-2
+- Fixed issue with linked libraries
+
 * Fri Jul 06 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.5.1-1
 - BUG FIXES
   - file("stdin") is no longer considered seekable.
