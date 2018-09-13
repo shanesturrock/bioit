@@ -1,11 +1,11 @@
-%define priority 21812
+%define priority 21814
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.12
+Version:	2.18.14
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,23 @@ fi
 %files
 
 %changelog
+* Fri Sep 14 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.14-1
+- 2.18.13
+  - upgrade to htsjdk 2.16.1 (#1224)
+  - now starting from the origin commit
+  - Fix output file naming
+  - Fix to ValidateSamFile to warn when NM validation occurs without reference
+    (#258) (#1220)
+  - improves MarkDuplcates documentation, fixes #1087 (#1088)
+  - Installation of r-base in Docker Image allows RExecutor to work (#1198)
+  - Warning message about upcoming command line syntax transition. (#1204)
+  - CreateSequenceDictionary support for alternative names (@SQ-AN) (#1127)
+  - Fix GenotypeConcordance bug writing spanning deletion (#1210)
+  - The method createTemporaryIndexedVcfFromInput(File, String) was changed
+    (#1213)
+- 2.18.14
+  - DSDEGP-2749: too many tokens exception in download genotypes (#1226)
+
 * Fri Aug 31 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.12-1
 - Diagnose missing barcodes in ExtractIlluminaBarcodes instead of throwing NPE.
   (#1212)

@@ -1,11 +1,11 @@
-%define priority 210
+%define priority 211
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.1.0
+Version:	2.1.1
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -94,6 +94,29 @@ fi
 %files
 
 %changelog
+* Fri Sep 14 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.1-1
+- This release provides bug fixes and modest improvements to Bloom filter
+  assembly contiguity/correctness. Parallelization of Sealer has also been
+  improved, thanks to contributions by @schutzekatze.
+- Abyss-bloom-dbg:
+  - upgrade to most recent version of ntHash to reduce some assembly/hashing
+    artifacts. On a human assembly, this reduced QUAST major misassemblies by
+    5% and increased scaffold contiguity by 10%
+  - kc parameter now also applies to MPI assemblies (see below)
+- Abyss-fac:
+  - change N20 and N80 to N25 and N75, respectively
+- ABYSS-P:
+  - add --kc option, with implements a hard minimum k-mer multiplicity cutoff
+- Abyss-pe:
+  - fix zsh: no such option: pipefail error with old versions of zsh (fallback
+    to bash instead)
+  - adding time=1 now times all assembly commands
+- Abyss-sealer:
+  - parallelize gap sealing with OpenMP (thanks to @schutzekatze!)
+  - add --gap-file option (thanks to @schutzekatze!)
+- DistanceEst:
+  - add support for GFA output
+
 * Fri Apr 20 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.0-1
 - This release adds support for misassembly correction and scaffolding using
   linked reads, using Tigmint and ARCS. (Tigmint and ARCS must be installed
