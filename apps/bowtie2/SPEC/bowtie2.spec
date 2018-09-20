@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2342
+%define priority 2343
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.3.4.2
+Version:	2.3.4.3
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,13 @@ fi
 %files
 
 %changelog
+* Fri Sep 21 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.4.3-1
+- Fixed an issue causing `bowtie2-build` and `bowtie2-inspect` to output
+  incomplete help text.
+- Fixed an issue causing `bowtie2-inspect` to crash.
+- Fixed an issue preventing `bowtie2` from processing paired and/or unpaired
+  FASTQ reads together with interleaved FASTQ reads.
+
 * Fri Aug 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.4.2-1
 - Fixed issue causing bowtie2 to fail in --fast-local mode.
 - Fixed issue causing --soft-clipped-unmapped-tlen to be a positional argument.
