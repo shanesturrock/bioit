@@ -1,11 +1,11 @@
-%define priority 331
+%define priority 332
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		augustus
-Version:	3.3.1
+Version:	3.3.2
 Release:	1%{?dist}
 Summary:	AUGUSTUS is a gene prediction program for eukaryotes
 Group:		Applications/Engineering
@@ -49,6 +49,12 @@ fi
 %files
 
 %changelog
+* Fri Oct 12 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.3.2-1
+- bugfixes in comparative augustus, utrrnaseq
+- new species Chiloscyllium punctatum (bamboo shark), Scyliorhinus torazame
+  (cat shark), Rhincodon typus (whale shark)
+- updated comparative augustus (CGP) tutorial
+
 * Fri May 11 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.3.1-1
 - new species pisaster (Pisaster ochraceus, ochre starfish)
 - bugfixes of sampling error in intron model and in check of

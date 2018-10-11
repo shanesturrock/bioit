@@ -1,11 +1,11 @@
-%define priority 3823
+%define priority 3826
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.23
+Version:	38.26
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -31,6 +31,7 @@ alternatives \
    --install %{_bindir}/bbmap.sh bbmap /opt/bioit/%{name}/%{version}/bbmap.sh %{priority} \
    --slave %{_bindir}/addadapters.sh addadapters.sh /opt/bioit/%{name}/%{version}/addadapters.sh \
    --slave %{_bindir}/analyzeaccession.sh analyzeaccession.sh /opt/bioit/%{name}/%{version}/analyzeaccession.sh \
+   --slave %{_bindir}/analyzegenes.sh analyzegenes.sh /opt/bioit/%{name}/%{version}/analyzegenes.sh \
    --slave %{_bindir}/a_sample_mt.sh a_sample_mt.sh /opt/bioit/%{name}/%{version}/a_sample_mt.sh \
    --slave %{_bindir}/bbcms.sh bbcms.sh /opt/bioit/%{name}/%{version}/bbcms.sh \
    --slave %{_bindir}/bbcountunique.sh bbcountunique.sh /opt/bioit/%{name}/%{version}/bbcountunique.sh \
@@ -53,11 +54,13 @@ alternatives \
    --slave %{_bindir}/bloomfilter.sh bloomfilter.sh /opt/bioit/%{name}/%{version}/bloomfilter.sh \
    --slave %{_bindir}/calcmem.sh calcmem.sh /opt/bioit/%{name}/%{version}/calcmem.sh \
    --slave %{_bindir}/calctruequality.sh calctruequality.sh /opt/bioit/%{name}/%{version}/calctruequality.sh \
+   --slave %{_bindir}/callgenes.sh callgenes.sh /opt/bioit/%{name}/%{version}/callgenes.sh \
    --slave %{_bindir}/callpeaks.sh callpeaks.sh /opt/bioit/%{name}/%{version}/callpeaks.sh \
    --slave %{_bindir}/callvariants2.sh callvariants2.sh /opt/bioit/%{name}/%{version}/callvariants2.sh \
    --slave %{_bindir}/callvariants.sh callvariants.sh /opt/bioit/%{name}/%{version}/callvariants.sh \
    --slave %{_bindir}/clumpify.sh clumpify.sh /opt/bioit/%{name}/%{version}/clumpify.sh \
    --slave %{_bindir}/commonkmers.sh commonkmers.sh /opt/bioit/%{name}/%{version}/commonkmers.sh \
+   --slave %{_bindir}/comparegff.sh comparegff.sh /opt/bioit/%{name}/%{version}/comparegff.sh \
    --slave %{_bindir}/comparesketch.sh comparesketch.sh /opt/bioit/%{name}/%{version}/comparesketch.sh \
    --slave %{_bindir}/comparevcf.sh comparevcf.sh /opt/bioit/%{name}/%{version}/comparevcf.sh \
    --slave %{_bindir}/consect.sh consect.sh /opt/bioit/%{name}/%{version}/consect.sh \
@@ -98,6 +101,7 @@ alternatives \
    --slave %{_bindir}/idmatrix.sh idmatrix.sh /opt/bioit/%{name}/%{version}/idmatrix.sh \
    --slave %{_bindir}/idtree.sh idtree.sh /opt/bioit/%{name}/%{version}/idtree.sh \
    --slave %{_bindir}/invertkey.sh invertkey.sh /opt/bioit/%{name}/%{version}/invertkey.sh \
+   --slave %{_bindir}/kapastats.sh kapastats.sh /opt/bioit/%{name}/%{version}/kapastats.sh \
    --slave %{_bindir}/kcompress.sh kcompress.sh /opt/bioit/%{name}/%{version}/kcompress.sh \
    --slave %{_bindir}/khist.sh khist.sh /opt/bioit/%{name}/%{version}/khist.sh \
    --slave %{_bindir}/kmercountexact.sh kmercountexact.sh /opt/bioit/%{name}/%{version}/kmercountexact.sh \
@@ -114,13 +118,13 @@ alternatives \
    --slave %{_bindir}/matrixtocolumns.sh matrixtocolumns.sh /opt/bioit/%{name}/%{version}/matrixtocolumns.sh \
    --slave %{_bindir}/mergebarcodes.sh mergebarcodes.sh /opt/bioit/%{name}/%{version}/mergebarcodes.sh \
    --slave %{_bindir}/mergeOTUs.sh mergeOTUs.sh /opt/bioit/%{name}/%{version}/mergeOTUs.sh \
+   --slave %{_bindir}/mergepgm.sh mergepgm.sh /opt/bioit/%{name}/%{version}/mergepgm.sh \
    --slave %{_bindir}/mergesam.sh mergesam.sh /opt/bioit/%{name}/%{version}/mergesam.sh \
    --slave %{_bindir}/mergesketch.sh mergesketch.sh /opt/bioit/%{name}/%{version}/mergesketch.sh \
    --slave %{_bindir}/mergesorted.sh mergesorted.sh /opt/bioit/%{name}/%{version}/mergesorted.sh \
    --slave %{_bindir}/msa.sh msa.sh /opt/bioit/%{name}/%{version}/msa.sh \
    --slave %{_bindir}/mutate.sh mutate.sh /opt/bioit/%{name}/%{version}/mutate.sh \
    --slave %{_bindir}/muxbyname.sh muxbyname.sh /opt/bioit/%{name}/%{version}/muxbyname.sh \
-   --slave %{_bindir}/normandcorrectwrapper.sh normandcorrectwrapper.sh /opt/bioit/%{name}/%{version}/normandcorrectwrapper.sh \
    --slave %{_bindir}/partition.sh partition.sh /opt/bioit/%{name}/%{version}/partition.sh \
    --slave %{_bindir}/phylip2fasta.sh phylip2fasta.sh /opt/bioit/%{name}/%{version}/phylip2fasta.sh \
    --slave %{_bindir}/pileup.sh pileup.sh /opt/bioit/%{name}/%{version}/pileup.sh \
@@ -202,6 +206,45 @@ fi
 %files
 
 %changelog
+* Fri Oct 12 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.26-1
+- 38.24
+  - Skipped this version.
+- 38.25
+  - Added maxcov flag to Tadpole.
+  - Seal now supports filenames without the ref= flag to allow wildcard
+    expansion.
+  - Removed calcmem.sh perl dependency on Genepool, since Genepool is gone.
+  - Fixed a logging bug in RQCFilter.
+  - Added optical alias to RQCFilter.
+  - Modified mergesorted.sh.
+  - SortByName and MergeSorted buffer-resizing logic made safer.
+  - Fixed leftRatio calculation in Tadpole for printing in contig headers.
+  - Fixed an unwanted print statement in Tadpole dot generation.
+  - Fixed a crash in Clumpify when handling Ns.
+  - BBMap bloomserial now defaults to true.
+  - Deleted normandcorrectwrapper.sh.
+  - Updated removehuman, removehuman2, etc. to use Bloom filters and clarified
+    that the scripts are for NERSC.
+  - Wrote PercentEncoding for translating URLs, and made it more efficient by
+    removing String functions.
+- 38.26
+  - Improved Blacklist name translation.
+  - Data internmap is now faster and takes less memory.
+  - Made prok package for prok gene-calling.
+  - Moved LOGICAL_PROCESSORS to Shared to avoid an initialization order
+    problem.
+  - Fixed a bug in FastaReadInputStream with buffer resizing logic.
+  - Disabled some assertions in BBIndex that do not appear to be valid with a
+    long maxindel and many short contigs.
+  - Added nl() and tab() to ByteBuilder.
+  - Reduced memory prealloc request for kmer tables on high memory (>120G)
+    nodes.
+  - Fixed CallVariants reporting of deletion count.
+  - Clarified CallVariants SamStreamer flag, and capped it at Shared.threads().
+  - Clarified callvariants2.sh purpose and function.
+  - Wrote AnalyzeGenes, CallGenes, and CompareGff.
+  - Added amino acid output to CallGenes.
+
 * Fri Aug 31 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.23-1
 - Wrote hiseq.CycleTracker.
 - Fixed a parse error in AnalyzeFlowCell.

@@ -1,11 +1,11 @@
-%define priority 284
+%define priority 290
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.8.4
+Version:	2.9.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,14 @@ fi
 %files
 
 %changelog
+* Fri Oct 12 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.9.0-1
+- 2.8.5
+  - Fix bug with fastq_eestats2.
+- 2.8.6
+  - Fixed bug in derep_fulllength causing headers not to be truncated after the first space. This bug was unfortunately introduced in version 2.8.2.
+- 2.9.0
+  - Added the fastq_join command.
+
 * Fri Sep 07 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.4-1
 - Fix for segfault bug with derep_fulllength and uc.
 - Further reduce memory requirements for dereplication when not using the uc

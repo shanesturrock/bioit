@@ -84,6 +84,8 @@ export TOOLDIR=`pwd`
 # Now build augustus
 make
 make install
+# Augustus build misses utrrnaseq bin for some reason
+cp auxprogs/utrrnaseq/Debug/utrrnaseq /opt/bioit/augustus/${VERSION}/bin
 # Fix directory and file permissions after install
 find /opt/bioit/augustus/${VERSION} -type d -exec chmod a+rx {} +
 find /opt/bioit/augustus/${VERSION} -type f -exec chmod a+r {} +

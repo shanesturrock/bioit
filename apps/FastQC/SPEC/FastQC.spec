@@ -1,17 +1,21 @@
-%define priority 0117
+%define priority 118
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		FastQC
-Version:	0.11.7
+Version:	0.11.8
 Release:	1%{?dist}
 Summary:	A quality control application for high throughput sequence data
 Group:		Applications/Engineering
 License:	GPLv3
 URL:		http://www.bioinformatics.babraham.ac.uk/projects/%{name}/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# Post requires alternatives to install tool alternatives.
+Requires(post):   %{_sbindir}/alternatives
+# Postun requires alternatives to uninstall tool alternatives.
+Requires(postun): %{_sbindir}/alternatives
 
 %description
 FastQC aims to provide a simple way to do some quality control checks on raw
@@ -28,7 +32,7 @@ alternatives \
    --install %{_bindir}/fastqc FastQC /opt/bioit/%{name}/%{version}/fastqc %{priority}
 
 %postun
-if [ $1 -eq 0 ]
+if [ $1 -eq 0 ] 
 then
   alternatives \
    --remove FastQC /opt/bioit/%{name}/%{version}/fastqc
@@ -37,6 +41,11 @@ fi
 %files
 
 %changelog
+* Fri Oct 12 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.11.8-1
+- Fixed a performance bug in highly duplicated sequences
+- Changed the behaviour of the sequence length module when run with --nogroup
+- Other minor bug fixes
+
 * Thu Jan 11 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.11.7-1
 - Fixed a crash if the first sequence in a file was shorter than 12bp
 
