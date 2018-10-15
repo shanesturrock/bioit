@@ -154,6 +154,10 @@ Enable and start the service
 
 This should now allow you to install the latest x2go client for your platform and connect to the server via the GUI MATE Desktop environment.
 
+Since users are connecting remotely and assuming there are no local connections, the screensaver should be removed as this gets rid of the lock screen menu item which has caught some users out as we have no passwords:
+
+    yum -y remove mate-screensaver
+
 ## Next Step
 
 Go to the [Storage-Setup](Storage-Setup.md) page.
