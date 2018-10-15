@@ -23,6 +23,10 @@ If the machine will mount NFS storage you need to install the following:
 
     yum -y install nfs-utils
 
+Also, if you're using NFS mounted home directories and you've got selinux enabled you'll need to set the following otherwise key authenticated ssh won't work:
+
+    setsebool -P use_nfs_home_dirs 1
+
 Install `wget` as this makes it much easier to download packages:
 
     yum -y install wget
