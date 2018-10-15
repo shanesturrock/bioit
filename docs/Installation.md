@@ -13,11 +13,15 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
     yum -y update
     reboot
 
-The machine should now come back up with a full GUI running.
+The machine should now come back up with a full GUI running. If the machine will only be used remotely then you can use the following instead:
+
+    systemctl set-default multi-user.target
+
+This will prevent the X11 GUI from starting, but later when you install X2go, that will still work fine.
 
 If the machine will mount NFS storage you need to install the following:
 
-    yum -u install nfs-utils
+    yum -y install nfs-utils
 
 Install `wget` as this makes it much easier to download packages:
 
