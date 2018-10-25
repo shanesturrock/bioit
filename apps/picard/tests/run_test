@@ -9,8 +9,8 @@ function cleanup() {
 }
 
 cleanup
-#picard CreateSequenceDictionary OUTPUT=Asperg.sam R=Asperg.fasta
-picard CreateSequenceDictionary -OUTPUT Asperg.sam -R Asperg.fasta
-#picard SortSam INPUT=Asperg.sam OUTPUT=new.sam SORT_ORDER=coordinate
-picard SortSam -INPUT Asperg.sam -OUTPUT new.sam -SORT_ORDER coordinate
+picard CreateSequenceDictionary OUTPUT=Asperg.sam R=Asperg.fasta
+#picard CreateSequenceDictionary -OUTPUT Asperg.sam -R Asperg.fasta
+picard SortSam INPUT=Asperg.sam OUTPUT=new.sam SORT_ORDER=coordinate
+#picard SortSam -INPUT Asperg.sam -OUTPUT new.sam -SORT_ORDER coordinate
 cleanup
