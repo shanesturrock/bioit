@@ -13,11 +13,19 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
     yum -y update
     reboot
 
-The machine should now come back up with a full GUI running.
+The machine should now come back up with a full GUI running. If the machine will only be used remotely then you can use the following instead:
+
+    systemctl set-default multi-user.target
+
+This will prevent the X11 GUI from starting, but later when you install X2go, that will still work fine.
 
 If the machine will mount NFS storage you need to install the following:
 
-    yum -u install nfs-utils
+    yum -y install nfs-utils
+
+Also, if you're using NFS mounted home directories and you've got selinux enabled you'll need to set the following otherwise key authenticated ssh won't work:
+
+    setsebool -P use_nfs_home_dirs 1
 
 Install `wget` as this makes it much easier to download packages:
 
@@ -55,7 +63,7 @@ Users can't see the crash reports anyway so remove it using:
 
 The following packages are required for building the suite of applications on a fresh BioIT server:
 
-    yum -y install ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build git screen htop root root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel python-devel python-nose python-pip perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env perl-Statistics-Descriptive cmake3 emacs-nox perl-Perl4-CoreLibs lapack-devel mpich-devel java-1.6.0-openjdk-devel zeromq-devel ghc cifs-utils python34-pip python34-devel perl-PerlIO-gzip hdf5-devel python-networkx gtk3-devel pigz tkinter python34-tkinter tcsh python-devel python34-devel python34-Cython libtiff-devel
+    yum -y install ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build git screen htop root root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel python-devel python-nose python-pip perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env perl-Statistics-Descriptive cmake3 emacs-nox perl-Perl4-CoreLibs lapack-devel mpich-devel java-1.6.0-openjdk-devel zeromq-devel ghc cifs-utils python34-pip python34-devel perl-PerlIO-gzip hdf5-devel python-networkx gtk3-devel pigz tkinter python34-tkinter tcsh python-devel python34-devel python34-Cython libtiff-devel tmux
 
 Defaults tools and changelogs are provided by the meta-RPMS that are built to set alternatives with symlinks into `/usr/bin` so they'll see them as usual. To set this up go to the [BioIT repository](BioIT-repository.md) page, but not just yet.
 
@@ -145,6 +153,10 @@ Enable and start the service
     yum -y install x2goserver-xsession
 
 This should now allow you to install the latest x2go client for your platform and connect to the server via the GUI MATE Desktop environment.
+
+Since users are connecting remotely and assuming there are no local connections, the screensaver should be removed as this gets rid of the lock screen menu item which has caught some users out as we have no passwords:
+
+    yum -y remove mate-screensaver
 
 ## Next Step
 
