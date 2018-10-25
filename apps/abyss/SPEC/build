@@ -22,10 +22,12 @@ DATE=`date +"%d/%m/%Y %r"`
 echo "Building abyss ${VERSION} on ${DATE}"
 cd /opt/bioit/abyss/src
 wget https://github.com/bcgsc/abyss/releases/download/${VERSION}/abyss-${VERSION}.tar.gz
+#wget --no-check-certificate https://github.com/bcgsc/abyss/releases/download/${VERSION}/abyss-${VERSION}.tar.gz
 tar xvf abyss-${VERSION}.tar.gz
 cd abyss-${VERSION}
 # Requires specific version of boost
 wget http://sourceforge.net/projects/boost/files/boost/1.56.0/boost_1_56_0.tar.bz2
+#wget --no-check-certificate http://sourceforge.net/projects/boost/files/boost/1.56.0/boost_1_56_0.tar.bz2
 tar xvf boost_1_56_0.tar.bz2
 ./configure --prefix=/opt/bioit/abyss/${VERSION}
 make clean

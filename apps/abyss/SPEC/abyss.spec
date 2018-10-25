@@ -1,11 +1,11 @@
-%define priority 211
+%define priority 212
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.1.1
+Version:	2.1.2
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -94,6 +94,23 @@ fi
 %files
 
 %changelog
+* Fri Oct 26 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.2-1
+- This release improves scaffold N50 on human by ~10%, due to implementation of
+  a new --median option for DistanceEst (thanks to @lcoombe!).
+- This release also adds a new --max-cost option for konnector and abyss-sealer
+  that curbs indeterminately long running times, particularly at low k values.
+- abyss-pe:
+  - Use the new DistanceEst --median option as the default for the scaffolding
+    stage
+- Dockerfile:
+  - Fix OpenMPI setup
+- DistanceEst:
+  - Added --median option
+- konnector:
+  - Added --max-cost option to bound running time
+- sealer:
+  - Added --max-cost option to bound running time
+
 * Fri Sep 14 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.1-1
 - This release provides bug fixes and modest improvements to Bloom filter
   assembly contiguity/correctness. Parallelization of Sealer has also been

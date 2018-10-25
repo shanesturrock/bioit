@@ -1,11 +1,11 @@
-%define priority 21814
+%define priority 21815
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.14
+Version:	2.18.15
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,15 @@ fi
 %files
 
 %changelog
+* Fri Oct 26 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.15-1
+- Add Scatter by IntervalCount (IntervalListTools) (#1208)
+- fixing mistake in documentation of RevertSam (#1232)
+- Revert "Changed the OpticalDuplicateFinding code to rely on a proper
+  clustering algorithm"
+- Changed the OpticalDuplicateFinding code to rely on a proper clustering
+  algorithm
+- Made OpticalDuplicateFinder Serializable (#1230)
+
 * Fri Sep 14 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.14-1
 - 2.18.13
   - upgrade to htsjdk 2.16.1 (#1224)
