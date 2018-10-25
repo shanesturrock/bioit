@@ -23,13 +23,10 @@ If all is good, you can move to the RPM building step.
 
 Get the zip file from [https://software.broadinstitute.org/software/igv/download](https://software.broadinstitute.org/software/igv/download) and unzip it in the src directory. Then you just need to move the unzipped directory into its final location:
 
-    mv IGV_2.4.14 /opt/bioit/igv/2.4.14
+    mv IGV_2.4.14/lib/* /opt/bioit/igv/2.4.14
 
-Remove the run scripts that are included in this intall and copy over the run script we use:
+Copy over the run script we use:
 
-    rm /opt/bioit/igv/2.4.14/igv.sh
-    rm /opt/bioit/igv/2.4.14/igv.command
-    rm /opt/bioit/igv/2.4.14/igv.bat
     cp ~/bioit/apps/igv/SPEC/igv /opt/bioit/igv/2.4.14
 
 That should be enough for users to launch this version.
