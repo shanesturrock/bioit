@@ -1,7 +1,7 @@
 ##
 # Install python into all machines to start using ansible
 # Ensures users/groups and munge is installed.
-# Assumes you have done: ansible-galaxy install goozback.EPEL
+# Assumes you have done: ansible-galaxy install goozbach.EPEL
 ##
 - name: Verify local setup
   hosts: localhost
