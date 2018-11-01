@@ -70,8 +70,8 @@ This will create an installable RPM file which you can find in `${HOME}/rpmbuild
 
 With R installed you can now install Rstudio:
 
-    wget https://download1.rstudio.org/rstudio-1.1.447-x86_64.rpm
-    yum -y install ./rstudio-1.1.447-x86_64.rpm
+    wget https://download1.rstudio.org/rstudio-1.1.463-x86_64.rpm
+    yum -y install ./rstudio-1.1.463-x86_64.rpm
 
 The 'version_check' script can check if there are newer versions of rstudio available once the current version is installed.
 
