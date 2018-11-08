@@ -1,11 +1,11 @@
-%define priority 212
+%define priority 213
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.1.2
+Version:	2.1.3
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -94,6 +94,16 @@ fi
 %files
 
 %changelog
+* Fri Nov 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.3-1
+- This release fixes a SAM-formatting bug that broke the ABySS-LR pipeline
+  (Tigmint/ARCS).
+- Abyss-bloom:
+  - Added graph command for visualizing neighbourhoods of the Bloom filter de
+    Bruijn graph (produces GraphViz)
+- Abyss-fixmate-ssq:
+  - Fixed missing tab in SAM output which broke ABySS linked reads pipeline
+    (Tigmint/ARCS)
+
 * Fri Oct 26 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.2-1
 - This release improves scaffold N50 on human by ~10%, due to implementation of
   a new --median option for DistanceEst (thanks to @lcoombe!).

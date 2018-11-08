@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/rtg-tools/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.9.1
+    ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.10
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load rtg-tools/3.9.1
+    module load rtg-tools/3.10
     which rtg-tools
     rtg-tools version
 
@@ -26,9 +26,9 @@ Download the `linux-x64.zip` file into `/opt/bioit/rtg-tools/src` and unzip it.
 
 Move the unpackaged directory as follows:
 
-    mv rtg-tools-3.9.1 /opt/bioit/rtg-tools/3.9.1
+    mv rtg-tools-3.10 /opt/bioit/rtg-tools/3.10
 
-Make sure you run `/opt/bioit/rtg-tools/3.9.1/rtg` once as build to set up the initial configuration file.
+Make sure you run `/opt/bioit/rtg-tools/3.10/rtg` once as build to set up the initial configuration file.
 
 That should do it.
 
@@ -40,7 +40,7 @@ Add a module file in `/opt/bioit/modulefiles/rtg-tools/` for this version by cop
     #
     #  rtg-tools module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/rtg-tools/3.9.1
+    prepend-path  PATH         /opt/bioit/rtg-tools/3.10
 
 ## RPM
 

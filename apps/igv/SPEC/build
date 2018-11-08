@@ -23,6 +23,7 @@ echo "Installing IGV ${VERSION} on ${DATE}"
 cd /opt/bioit/igv/src
 wget http://data.broadinstitute.org/igv/projects/downloads/2.4/IGV_${VERSION}.zip
 unzip IGV_${VERSION}.zip
+mkdir /opt/bioit/igv/${VERSION}
 mv IGV_${VERSION}/lib/* /opt/bioit/igv/${VERSION}
 # Get rid of unwanted starters to not confuse the shell
 #rm /opt/bioit/igv/${VERSION}/igv.sh

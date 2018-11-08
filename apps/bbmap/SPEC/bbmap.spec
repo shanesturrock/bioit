@@ -1,11 +1,11 @@
-%define priority 3826
+%define priority 3829
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.26
+Version:	38.29
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -206,6 +206,29 @@ fi
 %files
 
 %changelog
+* Fri Nov 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.29-1
+- 38.27
+  - Bugfixes and improvements to gene calling.
+  - Began adding RNA models to gene calling.
+  - Refactored gene-caller to allow more flexibility with models; pgm format
+    changed.
+  - Adjusted default gene model.
+- 38.28
+  - Multithreaded AnalyzeGenes.
+  - Wrote FloatList.
+  - Fixed a bug in Tools.reverseInPlace for partial arrays.
+  - Added trimcircular flag to Tadpole to trim ends of loop-loop contigs, which
+    are presumably circular.
+  - Finished tRNA and rRNA models and calling functions.
+- 38.28
+  - Fixed a bug in 3-column Sketch colors.
+- 38.29
+  - Calibration of gene models.
+  - Fixed a bug with chloroOutFile/fbtOutFile name in RQCFilter2.
+  - Sketch now allows integrated gene-calling for nucleotide to protein
+    translation.
+  - Added minsize and maxsize to RepresentativeSet.
+
 * Fri Oct 12 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.26-1
 - 38.24
   - Skipped this version.

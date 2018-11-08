@@ -1,11 +1,11 @@
-%define priority 134
+%define priority 135
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		stringtie
-Version:	1.3.4d
+Version:	1.3.5
 Release:	1%{?dist}
 Summary:	StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts.
 Group:		Applications/Engineering
@@ -46,6 +46,18 @@ fi
 %files
 
 %changelog
+* Fri Nov 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.3.5-1
+- spliced alignments produced by minimap2 (in SAM format) are now supported;
+  there is no need to pre-process them in order to add the XS tag, the cs tag
+  is recognized as an alternative. Note: sorting of the SAM/BAM file is still
+  required!
+- the default value for the -M option (maximum multi-mapping fraction) is now
+  set to 1.0, such that transcripts assembled from only multi-mapped reads are
+  no longer excluded (e.g. in case of multiple gene copies).
+- read alignments not having a transcription strand assigned (generally
+  unspliced mappings) can be now automatically assigned the strand of the
+  overlaping reference (guide) transcript, if any such overlap exists.
+
 * Fri Mar 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.3.4d-1
 - No changes listed
 

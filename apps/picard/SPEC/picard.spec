@@ -1,11 +1,11 @@
-%define priority 21815
+%define priority 21816
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.15
+Version:	2.18.16
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,23 @@ fi
 %files
 
 %changelog
+* Fri Nov 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.16-1
+- Adds DUPLEX_UMI argument to UmiAwareMarkDuplicatesWithMateCigar (#1235)
+- Fixed bug in MarkDuplicates where it was mismarking which reads were optical
+  duplicates when TAGGING_POLICY is set. (#1244)
+- Fixed order dependance bug in graphUtils.cluster() algorithm. (#1245)
+- Protection against using the wrong sample alias which produces zero L…
+  (#1242)
+- Use provided sequence dictionary with MergeVcfs. (#1234)
+- As dsdegp 2574 pf percent misreported (#1231)
+- Add Scatter by IntervalCount (IntervalListTools) (#1208)
+- fixing mistake in documentation of RevertSam (#1232)
+- Revert "Changed the OpticalDuplicateFinding code to rely on a proper
+  clustering algorithm"
+- Changed the OpticalDuplicateFinding code to rely on a proper clustering
+  algorithm
+- Made OpticalDuplicateFinder Serializable (#1230)
+
 * Fri Oct 26 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.15-1
 - Add Scatter by IntervalCount (IntervalListTools) (#1208)
 - fixing mistake in documentation of RevertSam (#1232)
