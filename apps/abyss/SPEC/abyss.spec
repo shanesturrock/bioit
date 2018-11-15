@@ -1,11 +1,11 @@
-%define priority 213
+%define priority 214
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.1.3
+Version:	2.1.4
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -94,6 +94,19 @@ fi
 %files
 
 %changelog
+* Fri Nov 16 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.4-1
+- This release provides major improvements to Bloom filter assembly contiguity
+  and correctness. Bloom filter assemblies now have equivalent scaffold
+  contiguity and better correctness than MPI assemblies of the same data, while
+  still requiring less than 1/10th of the memory. On human, Bloom filter
+  assembly times are still a few hours longer than MPI assemblies (e.g. 17
+  hours vs. 13 hours, using 48 threads).
+- Abyss-pe:
+  - Change default value of m from 50 => 0, which has the effect of disallowing
+    sequence overlaps < k-1 bp. QUAST tests on E. coli / C. elegans / H.
+    sapiens showed that both contiguity and correctness were improved by
+    allowing only overlaps of k-1 bp between sequence ends.
+
 * Fri Nov 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.3-1
 - This release fixes a SAM-formatting bug that broke the ABySS-LR pipeline
   (Tigmint/ARCS).

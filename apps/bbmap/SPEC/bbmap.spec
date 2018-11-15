@@ -1,11 +1,11 @@
-%define priority 3829
+%define priority 3831
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.29
+Version:	38.31
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -206,6 +206,27 @@ fi
 %files
 
 %changelog
+* Fri Nov 16 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.31-1
+- 38.30
+  - More calibration of gene models.
+  - Fixed some misassumptions in percent encoding.
+  - Modified GatherKapaStats to output raw data.
+  - Generated a minimal representation of RefSeq Microbial...  achieved 80%
+    size reduction.
+  - Changed the way pileup calculates coverage from soft-clipped bases; they
+    are now ignored.
+  - Changed the way samtools/sambamba exclusion flags are processed to be more
+    flexible and faster.
+  - Pileup now uses samtools to parse the header and sambamba to parse the
+    reads, since sambamba is slow at reading headers.
+  - Added key=value pair output to pileup.
+  - Wrote ScoreTracker to track scores of accepted and rejected ORFs when
+    calling genes.
+- 38.31
+  - Added long kmer support to RNA calling in CallGenes.
+  - Added BBMerge flags maxmismatches and forcemerge.
+  - Added Tadpole flag filtermem.
+
 * Fri Nov 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.29-1
 - 38.27
   - Bugfixes and improvements to gene calling.
