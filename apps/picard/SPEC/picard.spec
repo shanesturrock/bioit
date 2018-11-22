@@ -1,11 +1,11 @@
-%define priority 21816
+%define priority 21817
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.16
+Version:	2.18.17
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,10 @@ fi
 %files
 
 %changelog
+* Fri Nov 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.17-1
+- Fixes off by one error in trimDistribution that causes CollectHsMetrics to
+  crash on edge case (#1248)
+
 * Fri Nov 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.16-1
 - Adds DUPLEX_UMI argument to UmiAwareMarkDuplicatesWithMateCigar (#1235)
 - Fixed bug in MarkDuplicates where it was mismarking which reads were optical

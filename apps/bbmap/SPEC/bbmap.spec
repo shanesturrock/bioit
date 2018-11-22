@@ -1,11 +1,11 @@
-%define priority 3831
+%define priority 3832
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.31
+Version:	38.32
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -107,6 +107,7 @@ alternatives \
    --slave %{_bindir}/kmercountexact.sh kmercountexact.sh /opt/bioit/%{name}/%{version}/kmercountexact.sh \
    --slave %{_bindir}/kmercountmulti.sh kmercountmulti.sh /opt/bioit/%{name}/%{version}/kmercountmulti.sh \
    --slave %{_bindir}/kmercoverage.sh kmercoverage.sh /opt/bioit/%{name}/%{version}/kmercoverage.sh \
+   --slave %{_bindir}/kmerfilterset.sh kmerfilterset.sh /opt/bioit/%{name}/%{version}/kmerfilterset.sh \
    --slave %{_bindir}/kmerlimit2.sh kmerlimit2.sh /opt/bioit/%{name}/%{version}/kmerlimit2.sh \
    --slave %{_bindir}/kmerlimit.sh kmerlimit.sh /opt/bioit/%{name}/%{version}/kmerlimit.sh \
    --slave %{_bindir}/loadreads.sh loadreads.sh /opt/bioit/%{name}/%{version}/loadreads.sh \
@@ -206,6 +207,14 @@ fi
 %files
 
 %changelog
+* Fri Nov 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.32-1
+- Tadpole now refuses to run with no input files.
+- BBMerge now supports filtermemory flag.
+- Wrote KmerFilterSetMaker and kmerfilterset.sh to generate small covering sets
+  of kmers for use with BBDuk.
+- Added silent flags to suppress screen messages from BBDuk, Reformat, and
+  KmerTab leSet-related classes.
+
 * Fri Nov 16 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.31-1
 - 38.30
   - More calibration of gene models.
