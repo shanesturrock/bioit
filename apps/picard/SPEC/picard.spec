@@ -1,11 +1,11 @@
-%define priority 21817
+%define priority 21820
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.17
+Version:	2.18.20
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,10 @@ fi
 %files
 
 %changelog
+* Fri Dec 07 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.20-1
+- Fixed a NullPointerException in the OpticalDuplicateFinder (#1254)
+- Reverts the changes in as_DSDEGP-2574_PF_percent_misreported
+
 * Fri Nov 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.17-1
 - Fixes off by one error in trimDistribution that causes CollectHsMetrics to
   crash on edge case (#1248)

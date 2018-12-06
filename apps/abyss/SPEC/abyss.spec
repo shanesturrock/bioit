@@ -1,11 +1,11 @@
-%define priority 214
+%define priority 215
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.1.4
+Version:	2.1.5
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -61,6 +61,7 @@ alternatives \
    --slave %{_bindir}/abyss-samtoafg abyss-samtoafg /opt/bioit/%{name}/%{version}/bin/abyss-samtoafg \
    --slave %{_bindir}/abyss-scaffold abyss-scaffold /opt/bioit/%{name}/%{version}/bin/abyss-scaffold \
    --slave %{_bindir}/abyss-sealer abyss-sealer /opt/bioit/%{name}/%{version}/bin/abyss-sealer \
+   --slave %{_bindir}/abyss-stack-size abyss-stack-size /opt/bioit/%{name}/%{version}/bin/abyss-stack-size \
    --slave %{_bindir}/abyss-tabtomd abyss-tabtomd /opt/bioit/%{name}/%{version}/bin/abyss-tabtomd \
    --slave %{_bindir}/abyss-todot abyss-todot /opt/bioit/%{name}/%{version}/bin/abyss-todot \
    --slave %{_bindir}/abyss-tofastq abyss-tofastq /opt/bioit/%{name}/%{version}/bin/abyss-tofastq \
@@ -94,6 +95,12 @@ fi
 %files
 
 %changelog
+* Fri Dec 07 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.5-1
+- Compiler fixes and increase stack size limits to avoid stack overflows.
+- Abyss-pe:
+  - Add 'ulimit' statements to the Makefile to increase a thread's stack size
+    to 64MB.
+
 * Fri Nov 16 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.4-1
 - This release provides major improvements to Bloom filter assembly contiguity
   and correctness. Bloom filter assemblies now have equivalent scaffold

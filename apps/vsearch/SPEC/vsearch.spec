@@ -1,11 +1,11 @@
-%define priority 290
+%define priority 2100
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.9.0
+Version:	2.10.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,9 @@ fi
 %files
 
 %changelog
+* Fri Dec 07 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.0-1
+- Added the sff_convert command to convert SFF files to FASTQ
+
 * Fri Oct 12 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.9.0-1
 - 2.8.5
   - Fix bug with fastq_eestats2.
