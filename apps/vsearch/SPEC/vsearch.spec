@@ -1,11 +1,11 @@
-%define priority 2102
+%define priority 2103
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.10.2
+Version:	2.10.3
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,10 @@ fi
 %files
 
 %changelog
+* Fri Dec 21 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.3-1
+- Support for 64-bit ARMv8 systems.
+- Fix gcc 8 warning.
+
 * Fri Dec 14 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.2-1
 - Improved sff_convert command. It will now read several variants of the SFF
   format. It is also able to read from a pipe. Warnings are given if there are

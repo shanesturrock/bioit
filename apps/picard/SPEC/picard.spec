@@ -1,11 +1,11 @@
-%define priority 21820
+%define priority 21821
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.20
+Version:	2.18.21
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,10 @@ fi
 %files
 
 %changelog
+* Fri Dec 21 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.21-1
+- Increment of RIBOSOMAL_BASES logic changed, new test checking PCT_RIB… (#1143)
+- Fixes bug so that isTopStrand now deals properly with unmapped reads (#1256)
+
 * Fri Dec 07 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.20-1
 - Fixed a NullPointerException in the OpticalDuplicateFinder (#1254)
 - Reverts the changes in as_DSDEGP-2574_PF_percent_misreported

@@ -1,11 +1,11 @@
-%define priority 3832
+%define priority 3834
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.32
+Version:	38.34
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -69,6 +69,7 @@ alternatives \
    --slave %{_bindir}/countsharedlines.sh countsharedlines.sh /opt/bioit/%{name}/%{version}/countsharedlines.sh \
    --slave %{_bindir}/crossblock.sh crossblock.sh /opt/bioit/%{name}/%{version}/crossblock.sh \
    --slave %{_bindir}/crosscontaminate.sh crosscontaminate.sh /opt/bioit/%{name}/%{version}/crosscontaminate.sh \
+   --slave %{_bindir}/cutgff.sh cutgff.sh /opt/bioit/%{name}/%{version}/cutgff.sh \
    --slave %{_bindir}/cutprimers.sh cutprimers.sh /opt/bioit/%{name}/%{version}/cutprimers.sh \
    --slave %{_bindir}/decontaminate.sh decontaminate.sh /opt/bioit/%{name}/%{version}/decontaminate.sh \
    --slave %{_bindir}/dedupe2.sh dedupe2.sh /opt/bioit/%{name}/%{version}/dedupe2.sh \
@@ -207,6 +208,31 @@ fi
 %files
 
 %changelog
+* Fri Dec 21 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.34-1
+- 38.33
+  - Shred now validates input files.
+  - Reformat now has options for padding sequences.
+  - ****KmerFilterSet now accepts an initial kmer set.
+  - Wrote IntList3.
+  - Wrote HashArrayHybridFast.
+  - Changed HashArray bulk add contract.
+  - Back-ported HashArrayHybridFast changes to KmerNode2D.
+  - Seal now uses HashArrayHybrid; indexing Silva became >100x faster.
+  - Sketch now uses HashArrayHybrid; indexing speed increased somewhat.
+  - Added amino support to BBDuk.
+  - Added amino support to KmerCountExact.
+  - Added amino support to EntropyTracker.
+  - Modified entropy defaults for amino acid mode with Sketch(?) and BBDuk(?)
+  - Fixed tracking of PercentOfPairs for insert size statistics.
+  - CompareSketch now automatically sets the protein, fungi, or mito path on
+    NERSC.
+  - Mutate.sh now works on amino acid sequences.
+  - Validated CompareSketch on raw reads in protein space; it works amazingly well.
+- 38.34
+  - Wrote MetagenomeDataWriter to produce some stats for Brian Foster.
+  - Modified PreParser and Shared to deal with determining the original command
+    line
+
 * Fri Nov 23 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.32-1
 - Tadpole now refuses to run with no input files.
 - BBMerge now supports filtermemory flag.
