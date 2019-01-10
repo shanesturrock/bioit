@@ -1,11 +1,11 @@
-%define priority 2103
+%define priority 2104
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.10.3
+Version:	2.10.4
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,13 @@ fi
 %files
 
 %changelog
+* Fri Jan 11 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.4-1
+- Fixed serious bug in x86_64 SIMD alignment code introduced in version 2.10.3.
+- Added link to BioConda in README.
+- Fixed bug in fastq_stats with sequence length 1.
+- Fixed use of equals symbol in UC files for identical sequences with
+  cluster_fast.
+
 * Fri Dec 21 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.3-1
 - Support for 64-bit ARMv8 systems.
 - Fix gcc 8 warning.

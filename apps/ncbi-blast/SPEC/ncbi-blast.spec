@@ -1,11 +1,11 @@
-%define priority 271
+%define priority 281
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		ncbi-blast
-Version:	2.7.1+
+Version:	2.8.1+
 Release:	1%{?dist}
 Summary:	BLAST+ is a suite of command-line tools to run BLAST
 Group:		Applications/Engineering
@@ -60,6 +60,25 @@ fi
 %files
 
 %changelog
+* Fri Jan 11 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.1+-1
+- Improvements
+  - A new option (-subject_besthit) culls HSPs on a per subject sequence basis
+    by removing HSPs that are completely enveloped by another HSP. This is an
+    experimental option and is subject to change.
+  - Allow use of the -max_target_seqs option for formats 0-4. The number of
+    alignments and descriptions will be set to the max_target_seqs.
+  - Issue a warning if -max_target_seqs is set to less than five.
+- Bug fixes
+  - Disabled an overly aggressive optimization that caused problems mentioned
+    by Shah et al. in https://www.ncbi.nlm.nih.gov/pubmed/30247621
+  - Fixed an invalid memory error that occurred when composition-based
+    statistics and SEG were used.
+  - Fixed some memory problems with the culling option.
+  - Nucleotide scores for even rewards are no longer rounded down to an even
+    number when displayed.
+  - Blastdbcmd now reports intervals in the output FASTA if a partial sequence
+    is requested with the range option.
+
 * Tue Oct 31 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.7.1+-1
 - Improvements
   - Provided an upper limit on the number of threads for BLAST+ search
