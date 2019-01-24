@@ -1,11 +1,11 @@
-%define priority 3100
+%define priority 3101
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		rtg-tools
-Version:	3.10
+Version:	3.10.1
 Release:	1%{?dist}
 Summary:	Utilities for accurate VCF comparison and manipulation
 Group:		Applications/Engineering
@@ -38,6 +38,30 @@ fi
 %files
 
 %changelog
+* Fri Jan 25 2019 Shane Sturrock <shane.sturrock@gmail.com> - 3.10.1-1
+- This release primarily includes bugfixes and minor improvements:
+  - vcfdecompose: Fix a case where extremely long indels could cause an
+    exception during call decomposition. This also affected vcfeval when using
+    --decompose.
+  - demo scripts: Fix the demo script not pausing for the user under newer
+    versions of bash.
+  - map: Fix an exception that could be triggered during report generation when
+    using --all-hits.
+  - rocplot: (gui) Fix the status bar metrics not showing when the curve hugs
+    an axis.
+  - rocplot: Fix a rare exception that would occur during precision/sensitivity
+    plotting if the input data file contained redundant initial points.
+  - vcveval: Initial support for "partial spanning deletion" notation that
+    octopus uses in some calls.
+  - vcfmerge: Now allows -f to be a comma-separated list.
+  - vcfstats: The percent phased genotypes statistic was incorrectly calculated
+    for call sets using partial genotypes (e.g. ".|1")
+  - many: VCF header parsing of the INFO/FORMAT Description component was
+    incorrectly de-escaping additional backslash sequences, which could result
+    in invalid VCF output.
+  - readsim: Warn if the user supplied taxonomic distribution make reference to
+    unusable taxon ids.
+
 * Fri Nov 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.10-1
 - Basic Formatting and Mapping
   - petrim: Now outputs read length distribution statistics.
