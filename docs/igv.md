@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/igv/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/igv/SPEC/build 2.4.16
+    ${HOME}/bioit/apps/igv/SPEC/build 2.4.17
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load igv/2.4.16
+    module load igv/2.4.17
     which igv
 
 If all is good, you can move to the RPM building step.
@@ -23,11 +23,11 @@ If all is good, you can move to the RPM building step.
 
 Get the zip file from [https://software.broadinstitute.org/software/igv/download](https://software.broadinstitute.org/software/igv/download) and unzip it in the src directory. Then you just need to move the unzipped directory into its final location:
 
-    mv IGV_2.4.16/lib/* /opt/bioit/igv/2.4.16
+    mv IGV_2.4.17/lib/* /opt/bioit/igv/2.4.17
 
 Copy over the run script we use:
 
-    cp ~/bioit/apps/igv/SPEC/igv /opt/bioit/igv/2.4.16
+    cp ~/bioit/apps/igv/SPEC/igv /opt/bioit/igv/2.4.17
 
 That should be enough for users to launch this version.
 
@@ -39,7 +39,7 @@ Add a module file in `/opt/bioit/modulefiles/igv/` for this version by copying p
     #
     #  igv module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/igv/2.4.16/
+    prepend-path  PATH         /opt/bioit/igv/2.4.17/
 
 ## RPM
 

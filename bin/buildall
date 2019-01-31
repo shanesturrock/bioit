@@ -6,7 +6,7 @@
 ${HOME}/bioit/apps/abyss/SPEC/build 2.1.5
 ${HOME}/bioit/apps/augustus/SPEC/build 3.3.2
 ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.1
-${HOME}/bioit/apps/bbmap/SPEC/build 38.34
+${HOME}/bioit/apps/bbmap/SPEC/build 38.35
 ${HOME}/bioit/apps/bcftools/SPEC/build 1.9
 ${HOME}/bioit/apps/bedtools2/SPEC/build 2.27.1
 ${HOME}/bioit/apps/bismark/SPEC/build 0.20.0
@@ -19,11 +19,11 @@ ${HOME}/bioit/apps/FastQC/SPEC/build 0.11.8
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.1.0
 ${HOME}/bioit/apps/hmmer/SPEC/build 3.2.1
 ${HOME}/bioit/apps/htslib/SPEC/build 1.9
-${HOME}/bioit/apps/igv/SPEC/build 2.4.16
+${HOME}/bioit/apps/igv/SPEC/build 2.4.17
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.8.1+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
 ${HOME}/bioit/apps/picard/SPEC/build 2.18.25
-${HOME}/bioit/apps/R-core/SPEC/build 3.5.1
+${HOME}/bioit/apps/R-core/SPEC/build 3.5.2
 ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.10.1
 ${HOME}/bioit/apps/samtools/SPEC/build 1.9
 ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 241

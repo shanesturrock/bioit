@@ -1,11 +1,11 @@
-%define priority 3834
+%define priority 3835
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.34
+Version:	38.35
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -208,6 +208,47 @@ fi
 %files
 
 %changelog
+* Fri Feb 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.35-1
+- Added sketchonly flag to CompareSketch, allowing it to just sketch and write
+  files but not actually run comparisons.
+- Protein sketch server is now active.
+- Added TaxTree.descendsFrom(child, parent).
+- TaxTree now classifies species-attached no-rank archaeal nodes as strains in
+  addition to bacteria.
+- pigz --version is now recorded to determine whether -11 and -I flags are
+  supported.
+- Added sketch sixframes flag, for dealing with indels.  This works
+  surprisingly well but bloats the genome size.  Probably the size should be
+  divided by 6.
+- Added prokprot sketch to RQCFilter.
+- Sketch now ignores AA kmers spanning stop codons in sixframes mode.
+- Fixed a flaw in rkmer generation following Ns, in many classes.
+- Added Sketch toValue2 function to process dual kmers in an unbiased manner.
+  This yields more accurate ANI.
+- Added comparison logic for tracking k1 and k2 matches independently.
+- toValue2 now handles aminos as well.
+- Changed default kmer lengths from 31,0 to 32,23, and 10,7 to 11,7.
+- Simplified some parts of Sketch, like removing aniFromWkid flag.
+- Changed an assertion in TaxTree to a warning, because the latest version of
+  NCBI taxdump contains errors.
+- Validation of K and hash version between sketches is now more robust.
+- Fixed all instances of kmer bitmasks to work correctly with k=32; prior limit
+  was k=31.
+- Added 1-bit antialiasing to Sketch hashcodes.
+- Bumped hash version to 2.
+- Increased amino default kmer length to 12,8 to increase specificity.
+- Fixed an assertion failure in comparesketch perfile mode.
+- Increased size of prokprot blacklist.
+- Added Sketch refhits flag, to indicate the number of references sharing kmers
+  with keys hitting a reference.
+- Remade prokprot blacklists at a higher taxonomic level to deal with high
+  conservation.
+- Fixed an assertion with regards to sketchonly mode in comparesketch.
+- avgrefhits is now weakly factored into score.
+- Modified some rqcfilter2 sketch flags such as minprob.
+- NOTE: Entropy is disabled in Sketch amino acid mode; might be worth checking
+  the entropy of common amino kmers.
+
 * Fri Dec 21 2018 Shane Sturrock <shane.sturrock@gmail.com> - 38.34-1
 - 38.33
   - Shred now validates input files.
