@@ -1,11 +1,11 @@
-%define priority 21825
+%define priority 21826
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.25
+Version:	2.18.26
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,10 @@ fi
 %files
 
 %changelog
+* Fri Feb 08 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.26-1
+- Added handling for indels within CollectHsMetrics and
+  CollectTargetedPcrMetrics.
+
 * Fri Jan 25 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.25-1
 - update to htsjdk 2.18.2 (#1267)
 - changing ADD_PG_TAG_TO_READ to boolean (#1262)

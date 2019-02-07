@@ -1,11 +1,11 @@
-%define priority 2417
+%define priority 2418
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.4.17
+Version:	2.4.18
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Feb 08 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.18-1
+- update bam csi test files
+
 * Fri Feb 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.17-1
 - index path logic
 

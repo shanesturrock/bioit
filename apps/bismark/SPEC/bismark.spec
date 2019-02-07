@@ -1,11 +1,11 @@
-%define priority 200
+%define priority 201
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bismark
-Version:	0.20.0
+Version:	0.20.1
 Release:	1%{?dist}
 Summary:	A bisulfite read mapper and methylation caller
 Group:		Applications/Engineering
@@ -49,6 +49,39 @@ fi
 %files
 
 %changelog
+* Fri Feb 08 2019 Shane Sturrock <shane.sturrock@gmail.com> - 0.20.1-1
+- This is an early notice that this will be the last release of Bismark that
+  supports the use of Bowtie 1. We have added warning statements to both the
+  genome preparation and alignment steps to warn users that Bowtie1 is now
+  deprecated. All Bowtie 1 functionality and support will disappear in a future
+  release. Please shout now if you think this will be a disaster for you...
+- bismark
+  - Added check to prevent users from inadvertently specifying the very same
+    file as both R1 and R2
+  - Added a check for file truncation, or more generally the same number of
+    reads between R1 and R2 for paired-end FastQ files (directional,
+    non-directional and PBAT mode).
+  - Added Travis CI testing for most Bismark modules and commands. This should
+    help spotting problems a early, e.g. if I release a new version right
+    before the Christmas holidays …
+  - Changed error message for failed fork command in --parallel mode to [FATAL
+    ERROR]: ... to alert users that something isn't working as intended.
+- bismark_genome_preparation
+  - Added multi-threading to the Bowtie2-based genome preparation (thanks to
+    Rahul Karnik)
+  - Added test to see whether specified files exist, or die otherwise
+- bismark2summary
+  - Fixed division by zero errors when a C-context was not covered by any
+    reads. This will now use values of 0/0 for the context plots, which looks a
+    bit odd, but at least it still works.
+  - Detects if (non-deduplicated) RRBS and WGBS samples are mixed together, and
+    bails with a meaningful error message.
+- bam2nuc
+  - Changed samtools to $samtools_path during single-end/paired-end file
+    testing.
+- bismark_methylation_extractor
+  - Changed the order in which --ample_mem and --buffer_size are checked.
+
 * Fri Aug 17 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.20.0-1
 - bismark_methylation_extractor
   - The methylation extractor now creates output directories if they don't
