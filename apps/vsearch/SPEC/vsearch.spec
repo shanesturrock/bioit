@@ -1,11 +1,11 @@
-%define priority 2104
+%define priority 2110
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.10.4
+Version:	2.11.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,12 @@ fi
 %files
 
 %changelog
+* Fri Feb 15 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.0-1
+- Added ability to trim and filter paired-end reads using the reverse option
+  with the fastx_filter and fastq_filter commands. 
+- Added xee option to remove ee attributes from FASTA headers. Minor invisible
+  improvement to the progress indicator.
+
 * Fri Jan 11 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.4-1
 - Fixed serious bug in x86_64 SIMD alignment code introduced in version 2.10.3.
 - Added link to BioConda in README.

@@ -1,11 +1,11 @@
-%define priority 3835
+%define priority 3838
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.35
+Version:	38.38
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -208,6 +208,36 @@ fi
 %files
 
 %changelog
+* Fri Feb 15 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.38-1
+- 38.36
+  - Increased Sketch minprob to 0.0008.  Q7 (80% accurate) areas will be used
+    but Q6 (75%) will be ignored; before it was 0.0001 (Q6.1).  This slightly
+increases accuracy with raw reads.
+  - Trimrname now works on sam headers.
+  - Trimrname is now automatically set to the same as trd unless explicitly
+    overriden with the trimrname flag.
+  - Added small RNA adapters to adapters.fa (thanks to Daniel N.)
+  - Sketch now reports the number of unique kmers indexed.
+  - BBTools can now read embl and gbk formats.
+  - Added support for subcohort taxonomic level.
+- 38.37
+  - Fixed a bug in BBDuk JSON readsOut reporting.
+  - BBSketch format 3 now prints taxID.
+  - Fixed broken qin flag (was being overriden by autodetection).
+  - Improved quality autodetection for out-of-range quality scores.
+  - FastqReadInputStream now correctly inherits interleaving from FileFormat
+    rather than running internal tests.
+  - Added JsonParser.parseJsonObjectStatic.
+  - Added Blacklist.toBlacklist.
+  - Added SendSketch.toAddress, .setFromAddress, and .sendSketch (static).
+  - Simplified SendSketch parsing.
+  - TestFormat now automatically tries to detect organism with SendSketch.
+  - ReadStats bhist is now faster by formatting with ByteBuilder.
+  - Added TestFormat bhistlen flag to disable gigantic bhists.
+- 38.38
+  - Fixed a parsing error in SendSketch.
+  - Wrote docs/RestartingServers.txt
+
 * Fri Feb 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.35-1
 - Added sketchonly flag to CompareSketch, allowing it to just sketch and write
   files but not actually run comparisons.
