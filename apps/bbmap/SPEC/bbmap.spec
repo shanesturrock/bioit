@@ -1,11 +1,11 @@
-%define priority 3838
+%define priority 3839
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.38
+Version:	38.39
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -208,6 +208,14 @@ fi
 %files
 
 %changelog
+* Fri Feb 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.39-1
+- Fixed a bug in phist (required polysymbol to be set).
+- Fixed a bug in BBDuk amino mode (failure to support k=12).
+- Fixed a bug in bhist (no newlines!).
+- Sketch and Tax servers now tracks single versus bulk queries.
+- Converted several ReadStats histograms from TextStreamWriter to
+  ByteStreamWriter.
+
 * Fri Feb 15 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.38-1
 - 38.36
   - Increased Sketch minprob to 0.0008.  Q7 (80% accurate) areas will be used
