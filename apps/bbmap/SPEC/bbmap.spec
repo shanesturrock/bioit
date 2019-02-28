@@ -1,11 +1,11 @@
-%define priority 3839
+%define priority 3841
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.39
+Version:	38.41
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -208,6 +208,9 @@ fi
 %files
 
 %changelog
+* Fri Mar 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.41-1
+- No details of updates
+
 * Fri Feb 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.39-1
 - Fixed a bug in phist (required polysymbol to be set).
 - Fixed a bug in BBDuk amino mode (failure to support k=12).

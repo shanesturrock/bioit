@@ -1,11 +1,11 @@
-%define priority 2110
+%define priority 2111
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.11.0
+Version:	2.11.1
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,10 @@ fi
 %files
 
 %changelog
+* Fri Mar 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.1-1
+- Minor change to the handling of the weak_id and id options when using
+  cluster_unoise.
+
 * Fri Feb 15 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.0-1
 - Added ability to trim and filter paired-end reads using the reverse option
   with the fastx_filter and fastq_filter commands. 
