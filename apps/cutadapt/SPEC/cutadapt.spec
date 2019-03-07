@@ -1,11 +1,11 @@
-%define priority 118
+%define priority 200
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	1.18
+Version:	2.0
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,69 @@ fi
 %files
 
 %changelog
+* Fri Mar 08 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.0-1
+- This is a major new release with lots of bug fixes and new features, but also
+  some backwards-incompatible changes. These should hopefully not affect too
+  many users, but please make sure to review them and possibly update your
+  scripts!
+- Backwards-incompatible changes
+  - :issue:`329`: Linked adapters specified with ``-a ADAPTER1...ADAPTER2``
+    are no longer anchored by default. To get results consist with the old
+    behavior, use ``-a ^ADAPTER1...ADAPTER2`` instead.
+  - Support for colorspace data was removed. Thus, the following command-line
+    options can no longer be used: ``-c``, ``-d``, ``-t``, ``--strip-f3``,
+    ``--maq``, ``--bwa``, ``--no-zero-cap``.
+  - “Legacy mode” has been removed. This mode was enabled under certain
+    conditions and would change the behavior such that the read-modifying
+    options such as ``-q`` would only apply to the forward/R1 reads. This was
+    necessary for compatibility with old Cutadapt versions, but became
+    increasingly confusing.
+  - :issue:`360`: Computation of the error rate of an adapter match no longer
+    counts the ``N`` wildcard bases. Previously, an adapter like ``N{18}CC``
+    (18 ``N`` wildcards followed by ``CC``) would effectively match
+    anywhere because the default error rate of 0.1 (10%) would allow for
+    two errors. The error rate of a match is now computed as
+    the number of non-``N`` bases in the matching part of the adapter
+    divided by the number of errors.
+  - This release of Cutadapt requires at least Python 3.4 to run. Python 2.7
+    is no longer supported.
+- Features
+  - A progress indicator is printed while Cutadapt is working. If you redirect
+    standard error to a file, the indicator is disabled.
+  - Reading of FASTQ files has gotten faster due to a new parser. The FASTA
+    and FASTQ reading/writing functions are now available as part of the
+    `dnaio library <https://github.com/marcelm/dnaio/>`_. This is a separate
+    Python package that can be installed independently from Cutadapt.
+    There is one regression at the moment: FASTQ files that use a second
+    header (after the "+") will have that header removed in the output.
+  - Some other performance optimizations were made. Speedups of up to 15%
+    are possible.
+  - Demultiplexing has become a lot faster :ref:`under certain conditions
+    <speed-up-demultiplexing>`.
+  - :issue:`335`: For linked adapters, it is now possible to :ref:`specify
+    which of the two adapters should be required <linked-override>`, overriding
+    the default.
+  - :issue:`166`: By specifying ``--action=lowercase``, it is now possible
+    to not trim adapters, but to instead convert the section of the read
+    that would have been trimmed to lowercase.
+- Bug fixes
+  - Removal of legacy mode fixes also :issue:`345`: ``--length`` would not
+    enable legacy mode.
+  - The switch to ``dnaio`` also fixed :issue:`275`: Input files with
+    non-standard names now no longer lead to a crash. Instead the format
+    is now recognized from the file content.
+  - Fix :issue:`354`: Sequences given using ``file:`` can now be unnamed.
+  - Fix :issue:`257` and :issue:`242`: When only R1 or only R2 adapters are
+    given, the ``--pair-filter`` setting is now forced to ``both`` for the
+    ``--discard-untrimmed`` (and ``--untrimmed-(paired-)output``) filters.
+    Otherwise, with the default ``--pair-filter=any``, all pairs would be
+    considered untrimmed because one of the reads in the pair is always
+    untrimmed.
+- Other
+  - :issue:`359`: The ``-f``/``--format`` option is now ignored and a warning
+    will be printed if it is used. The input file format is always
+    auto-detected.
+
 * Fri Sep 14 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.18-1
 - Features
   - Close #327: Maximum and minimum lengths can now be specified separately for
