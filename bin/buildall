@@ -13,7 +13,7 @@ ${HOME}/bioit/apps/bismark/SPEC/build 0.20.1
 ${HOME}/bioit/apps/bowtie/SPEC/build 1.2.2
 ${HOME}/bioit/apps/bowtie2/SPEC/build 2.3.4.3
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
-${HOME}/bioit/apps/cutadapt/SPEC/build 1.17
+${HOME}/bioit/apps/cutadapt/SPEC/build 2.0
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
 ${HOME}/bioit/apps/FastQC/SPEC/build 0.11.8
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.1.0
