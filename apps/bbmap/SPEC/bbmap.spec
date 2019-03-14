@@ -1,11 +1,11 @@
-%define priority 3841
+%define priority 3842
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.41
+Version:	38.42
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -174,6 +174,7 @@ alternatives \
    --slave %{_bindir}/stats.sh stats.sh /opt/bioit/%{name}/%{version}/stats.sh \
    --slave %{_bindir}/statswrapper.sh statswrapper.sh /opt/bioit/%{name}/%{version}/statswrapper.sh \
    --slave %{_bindir}/streamsam.sh streamsam.sh /opt/bioit/%{name}/%{version}/streamsam.sh \
+   --slave %{_bindir}/subsketch.sh subsketch.sh /opt/bioit/%{name}/%{version}/subsketch.sh \
    --slave %{_bindir}/summarizecontam.sh summarizecontam.sh /opt/bioit/%{name}/%{version}/summarizecontam.sh \
    --slave %{_bindir}/summarizecrossblock.sh summarizecrossblock.sh /opt/bioit/%{name}/%{version}/summarizecrossblock.sh \
    --slave %{_bindir}/summarizemerge.sh summarizemerge.sh /opt/bioit/%{name}/%{version}/summarizemerge.sh \
@@ -208,8 +209,38 @@ fi
 %files
 
 %changelog
-* Fri Mar 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.41-1
-- No details of updates
+* Fri Mar 15 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.42-1
+- 38.40
+  - Replaced some obsolete StringBuilder methods (mainly for read printing)
+    with ByteBuilder.
+  - Deleted obsolete classes ReadStreamStringWriter and SortByMapping.
+  - Replaced many instances of StringBuilder with ByteBuilder.
+  - Moved some fields from Gene to Shared.
+  - Made Header class.
+  - Fixed a float-to-int rounding-down problem making BBMerge not strictly obey
+    the maxmismatches flag.
+  - Redid RandomReads naming format to be pair-capable in sam format.
+  - Converted all known header-parsing functions to use the new format.
+  - Wrote SuperLongList.toString
+  - Added Reformat prioritizelength flag for subsampling variable-length reads.
+  - Fixed trailing whitespace in bhist.
+- 38.41
+  - Fixed a compile error.
+- 38.42
+  - Added stats handler to TaxServer, with version and quantity tracking.
+  - Added bbversion field to sendsketch header.
+  - Fixed SendSketch address parsing.
+  - Added p and q suffixes to parseKMG.
+  - Added PacBio read length modelling to RandomReads.
+  - Fixed a CallVariants assertion with SamLine.RNAME_AS_BYTES.
+  - Fixed major bug in vcf line reading, misinterpreting variant types,
+    preventing BBDuk from parsing vcf properly.
+  - Wrote SamStreamerMF, a multifile SamStreamer.
+  - Integrated SamStreamerMF into CallVariants.  Now, with 8 sam.gz files,
+    CallVariants is about 5x as fast on a 32-core node.
+  - Fixed CallVariants vcf output MCOV reporting -1 when out= is set instead of
+    vcf=.
+  - Fixed ihist not working in BBDuk.
 
 * Fri Feb 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.39-1
 - Fixed a bug in phist (required polysymbol to be set).
