@@ -1,11 +1,11 @@
-%define priority 200
+%define priority 210
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	2.0
+Version:	2.1
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,12 @@ fi
 %files
 
 %changelog
+* Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.1-1
+- Fix problems when combining ``--cores`` with reading from standard input or
+  writing to standard output.
+- Support :ref:`“paired adapters” <paired-adapters>`. One use case is
+  demultiplexing Illumina *Unique Dual Indices* (UDI).
+
 * Fri Mar 08 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.0-1
 - This is a major new release with lots of bug fixes and new features, but also
   some backwards-incompatible changes. These should hopefully not affect too

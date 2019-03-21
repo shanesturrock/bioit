@@ -1,3 +1,0 @@
-#!/bin/sh
-igv_dir="$(dirname $(readlink -f $0))"
-java -Xmx4000m -jar ${igv_dir}/igv.jar "$@"

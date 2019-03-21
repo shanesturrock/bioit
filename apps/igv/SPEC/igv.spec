@@ -1,11 +1,11 @@
-%define priority 2419
+%define priority 2500
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.4.19
+Version:	2.5.0
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.5.0-1
+- Switched to Java 11
+
 * Fri Feb 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.19-1
 - update genome registry url
 - npe fix in AlignmentTrack

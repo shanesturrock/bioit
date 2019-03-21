@@ -1,11 +1,11 @@
-%define priority 21827
+%define priority 21829
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.27
+Version:	2.18.29
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,20 @@ fi
 %files
 
 %changelog
+* Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.29-1
+- Simplify BedToIntervalList by not reimplementing coordinate conversion
+  (#1292)
+- Removing strange import in gradle.settings (#1291)
+- Updated the documentation for SortSam to be clearer in detailing
+  Queryname-sort tie-breaking
+- Include aligned adapter reads in metrics (#1282)
+- Fix "end" tag in inverted variants in liftover VCF. (#1268)
+- Yf stratify chimeric (#1269)
+- added comment about versioning of the tiebreaking
+- catching the tool help output as well
+- responding to review comment
+- updated the documentation for SortSam where it was somewhat misleading
+
 * Fri Feb 15 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.27-1
 - Demultiplex only when read structure has barcodes
 

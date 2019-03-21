@@ -21,16 +21,17 @@ VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Installing IGV ${VERSION} on ${DATE}"
 cd /opt/bioit/igv/src
-wget http://data.broadinstitute.org/igv/projects/downloads/2.4/IGV_${VERSION}.zip
-unzip IGV_${VERSION}.zip
+wget http://data.broadinstitute.org/igv/projects/downloads/2.5/IGV_Linux_${VERSION}.zip
+unzip IGV_Linux_${VERSION}.zip
 mkdir /opt/bioit/igv/${VERSION}
-mv IGV_${VERSION}/lib/* /opt/bioit/igv/${VERSION}
+mv IGV_Linux_${VERSION}/* /opt/bioit/igv/${VERSION}
 # Get rid of unwanted starters to not confuse the shell
 #rm /opt/bioit/igv/${VERSION}/igv.sh
 #rm /opt/bioit/igv/${VERSION}/igv.command
 #rm /opt/bioit/igv/${VERSION}/igv.bat
 # Copy our own start up script
-cp ${HOME}/bioit/apps/igv/SPEC/igv /opt/bioit/igv/${VERSION}
+#cp ${HOME}/bioit/apps/igv/SPEC/igv /opt/bioit/igv/${VERSION}
+mv /opt/bioit/igv/${VERSION}/igv.sh /opt/bioit/igv/${VERSION}/igv
 echo "Writing modulefile"
 echo "#%Module 1.0
 #

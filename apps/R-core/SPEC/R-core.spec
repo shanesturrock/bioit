@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 352
+%define priority 353
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        3.5.2
+Version:        3.5.3
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -55,6 +55,20 @@ fi
 /etc/ld.so.conf.d/R-x86_64.conf
 
 %changelog
+* Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 3.5.3-1
+- INSTALLATION on a UNIX-ALIKE
+  - Detection of flags for C++98/11/14/17 has been improved: in particular if
+    CXX??STD is set, it is tried first with no additional flags.
+- PACKAGE INSTALLATION
+  - New macro F_VISIBILITY as an alternative to F77_VISIBILITY. This will
+    become the preferred form in R 3.6.0.
+- BUG FIXES
+  - writeLines(readLines(fnam), fnam) now works as expected, thanks to Peter
+    Meissner's PR#17528.
+  - setClassUnion() no longer warns, but uses message() for now, when
+    encountering “non local” subclasses of class members.
+  - stopifnot(exprs = T) no longer fails.
+
 * Fri Feb 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 3.5.2-1
 - PACKAGE INSTALLATION
   - New macro CXX_VISIBILITY analogous to C_VISIBILITY (which several packages

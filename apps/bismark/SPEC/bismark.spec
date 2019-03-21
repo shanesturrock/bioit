@@ -1,11 +1,11 @@
-%define priority 201
+%define priority 210
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bismark
-Version:	0.20.1
+Version:	0.21.0
 Release:	1%{?dist}
 Summary:	A bisulfite read mapper and methylation caller
 Group:		Applications/Engineering
@@ -49,6 +49,108 @@ fi
 %files
 
 %changelog
+* Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 0.21.0-1
+- [New]: HISAT2 and SLAM-mode; [Retired]: Bowtie 1
+- For the upcoming version Bismark has undergone some substantial changes,
+  which sometimes affect more than one module within the Bismark suite. Here is
+  a short description of the major changes:
+- [Retired]: Bowtie 1 support
+  - Bowtie (1) support, and all of its options, has been completely dropped
+    from bismark_genome_preparation and bismark. This decision was not made
+    lightly, but it seems no one is using the original Bowtie short read aligner
+    anymore, even short reads have moved on…
+  - Consequently, the option --vanilla and its handling has been removed from a
+    number of modules (bismark_genome_preparation, bismark,
+    bismark_methylation_extractor and deduplicate_bismark). Too bad, I liked
+    that name…
+- [Added]: HISAT2 support
+  - Instead, the DNA and RNA aligner HISAT2 has been added as a new choice of
+    aligner. The reason for this is not necessarily that RNA methylation is now
+    a thing, but certain alignment modes (see below) do require splice-aware
+    mapping if we don't want to miss out on a whole class of (spliced)
+    alignments.  Bowtie 2 is the default mode, HISAT2 alignments can be enabled
+    with the option --hisat2
+  - Similar to the Bowtie2 mode, alignments with HISAT2 are restricted to
+    global (end-to-end) alignments, i.e. soft-clipping is disabled.
+    Furthermore, in paired-end mode, the options --no-mixed and --no-discordant
+    are permanently enabled, meaning that only properly aligned read pairs are
+    put out.
+  - As the --hisat2 mode supports spliced alignments, the new CIGAR operation N
+    is now supported in all Bismark modules (this includes
+    bismark_genome_preparation, bismark, bismark_methylation_extractor,
+    deduplicate_bismark and some others).
+  - At the time of writing this, the --hisat2 mode appears to be working as
+    expected. It should be mentioned however that we have not done a lot of
+    testing of these new files, so comments and feedback are welcome.
+- SLAM-seq mode
+  - We also added a new, experimental and completely different type of
+    alignment for SLAM-seq type data (option --slam). This fairly recent method
+    to interrogate newly synthesized messenger RNA is akin to bisulfite
+    conversion, in that newly synthesized RNA may contain T to C conversions
+    following an alkylation reaction (original publication and
+    https://www.nature.com/articles/nmeth.4435). The new Bismark alignment mode
+    --slam performs T>C conversions of both the genome (in the genome
+    preparation step) and the subsequent alignment steps (Bismark alignment
+    step).  Currently, the rest of the processing of SLAM-seq data hijacks the
+    standard methylation
+pipeline:
+  - T>C conversions are written out as methylation events in CpG context, while
+    T-T matches are scored as unmethylated events in CpG context. Other
+    cytosine contexts are not being used.
+  - So in a nut-shell: methylation calls in --slam mode are either Ts
+    (unmethylated calls = matches at T positions), or T to C mismatches
+    (methylated calls = C mismatches at T positions).
+  - It should be noted that this is currently an experimental workflow. One
+    might argue that T/C conversion aware (or T/C mis-mapping agnostic) mapping
+    is currently not necessary for SLAM-seq, NASC-Seq, or scSLAM-seq data as the
+    labeling reaction is very inefficient (1 in only 50 to 200 newly
+    incorporated Ts is a 4sU, which may get alkylated). This might be true - for
+    now. If and when the conversion reaction improves over time, C/T agnostic
+    mapping, similar to bisulfite-Seq data, might very well become necessary.
+  - Added documentation for NOMe-seq or scNMT-seq processing.
+- bismark
+  - Dropped support for Bowtie
+  - Removed all traces of --vanilla
+  - Added support for HISAT2 with option --hisat2.
+  - Added HISAT2 option --no-spliced-aligments to disable spliced alignments
+    altogether
+  - Added HISAT2 option --known-splicesite-infile <path> to provide a list of
+    known splice sites.
+  - Added option --slam to allow T/C mismatch agnostic mapping (3-letter
+    alignment). More here.
+  - Added a new option --icpc to truncate read IDs at the first space (or tab)
+    it encounters in the (FastQ) read ID, which are sometimes used to add
+    comments to a FastQ entry (instead of replacing them with underscores which
+    is the default behaviour).
+- bismark_genome_preparation
+  - Dropped support for Bowtie
+  - Added support for HISAT2 with option --hisat2.
+  - Added option --slam. Instead of performing an in-silico bisulfite
+    conversion, this mode transforms T to C (forward strand), or A to G
+    (reverse strand). The folder structure and rest of the indexing process is
+    currently exactly the same as for bisulfite sequences, but this might
+    change at some point. This means that a genome prepared in --slam mode is
+    currently indistinguishable from a true Bisulfite Genome (until the
+    alignments are in) so please make sure you name the genome folder
+    appropriately to avoid confusion.
+- deduplicate_bismark
+  - Removed all traces of --vanilla
+  - --bam mode is now the default. Uncompressed SAM output may still be
+    obtained using the new option --sam
+  - Added new option -o/--outfile <basename>. This basename is then modified to
+    remove file endings such as .bam, .sam, .txt or .gz, and .deduplicated.bam,
+    or .multiple.deduplicated.bam in --multiple mode, is then appended for
+    consistency reasons.
+  - Added support for new CIGAR operation N
+- bismark_methylation_extractor
+  - Added support for new CIGAR operation N for all extraction modes
+  - Removed all traces of --vanilla
+- bismark2summary/bismark2report
+  - Adapted to work with Bismark HISAT2 reports instead of Bowtie 1 reports.
+- bam2nuc
+  - Reads containing spliced reads are now also skipped when determining the
+    genomic base composition (as are reads with InDels).
+
 * Fri Feb 08 2019 Shane Sturrock <shane.sturrock@gmail.com> - 0.20.1-1
 - This is an early notice that this will be the last release of Bismark that
   supports the use of Bowtie 1. We have added warning statements to both the

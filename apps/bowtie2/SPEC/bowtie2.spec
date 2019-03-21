@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2343
+%define priority 2350
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.3.4.3
+Version:	2.3.5
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,37 @@ fi
 %files
 
 %changelog
+* Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.5-1
+- Added support for obtaining input reads directly from the Sequence Read
+  Archive, via NCBI's [NGS language bindings](https://github.com/ncbi/ngs).
+  This is activated via the [`--sra-acc`](manual.shtml#bowtie2-options-sra-acc)
+  option.  This implementation is based on Daehwan Kim's in
+  [HISAT2](https://ccb.jhu.edu/software/hisat2).  Supports both unpaired and
+  paired-end inputs.
+- Bowtie 2 now compiles on ARM architectures (via
+  [#216](https://github.com/BenLangmead/bowtie2/pull/216))
+- `--interleaved` can now be combined with FASTA inputs (worked only with FASTQ
+  before)
+- Fixed issue whereby large indexes were not successfully found in the
+  `$BOWTIE2_INDEXES` directory
+- Fixed input from FIFOs (e.g. via process substitution) to distinguish
+  gzip-compressed versus uncompressed input
+- Fixed issue whereby arguments containing `bz2` `lz4` were misinterpreted as
+  files
+- Fixed several compiler warnings
+- Fixed issue whereby both ends of a paired-end read could have negative TLEN
+  if they exactly coincided
+- Fixed issue whereby `bowtie2-build` would hang on end-of-file (via
+  [#228](https://github.com/BenLangmead/bowtie2/pull/228))
+- Fixed issue whereby wrapper script would sometimes create zombie processes
+  (via [#51](https://github.com/BenLangmead/bowtie2/pull/51))
+- Fixed issue whereby `bowtie2-build` and `bowtie2-inspect` wrappers would fail
+  on some versions of Python/PyPy
+- Replaced old, unhelpful `README.md` in the project with a version that
+  includes badges, links and some highlights from the manual
+- Note: BAM input support and CMake build support both remain experimental, but
+  we expect to finalize them in the next release
+
 * Fri Sep 21 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.4.3-1
 - Fixed an issue causing `bowtie2-build` and `bowtie2-inspect` to output
   incomplete help text.

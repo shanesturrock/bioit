@@ -1,11 +1,11 @@
-%define priority 2111
+%define priority 2120
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.11.1
+Version:	2.12.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,13 @@ fi
 %files
 
 %changelog
+* Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.12.0-1
+- Take sequence abundance into account when computing consensus sequences or
+  profiles after clustering.
+- Warn when rereplicating sequences without abundance info.
+- Guess offset 33 in more cases with fastq_chars.
+- Stricter checking of option arguments and option combinations.
+
 * Fri Mar 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.1-1
 - Minor change to the handling of the weak_id and id options when using
   cluster_unoise.
