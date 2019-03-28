@@ -1,11 +1,11 @@
-%define priority 2271
+%define priority 2280
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bedtools2
-Version:	2.27.1
+Version:	2.28.0
 Release:	1%{?dist}
 Summary:	Tools for handing BED files
 Group:		Applications/Engineering
@@ -77,6 +77,17 @@ fi
 %files
 
 %changelog
+* Fri Mar 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.28.0-1
+- Included support for htslib to enable CRAM support and long-term stability
+  (Thanks to Hao Hou!)
+- Included support for genomes with large chromosomes by moving to 64-bit
+  integers throughout the code base. Thanks to Brent Pedersen and John
+  Marshall!
+- We now provide a statically-linked binary for LINUX (not OSX) systems (see
+  "bedtools" link below).
+- As a result of 1-3, tools are ~10% faster.
+- Various minor bug fixes.
+
 * Mon Dec 18 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.27.1-1
 - Fixed a bug in the Makefile that caused a substantial penalty in performance.
 

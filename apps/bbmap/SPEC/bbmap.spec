@@ -1,11 +1,11 @@
-%define priority 3842
+%define priority 3843
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.42
+Version:	38.43
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -209,6 +209,32 @@ fi
 %files
 
 %changelog
+* Fri Mar 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.43-1
+- Wrote var2.VarKey for hashing.  May not use it.
+- Added indel processing to fixVars, and Read.containsVars().
+- Fixed bugs in reading insertions from VCF files.
+- TaxServer usage no longer displays stats (stats are on the /stats page).
+- Added ref flag to CompareVCF.
+- Added shist to FilterVCF (for vars passing filter).
+- FilterVCF no longer requires a reference (in most cases) if the VCF has a
+  correct header.
+- CallVariants modified to reduce negative impact of strand bias and read bias
+  on score, in cases that otherwise appear fine.
+- Demuxbyname can now do 1 file per sequence header, but it does not close the
+  streams as soon as a sequence is written.  This would be better as a custom
+  program.
+- Removed a mysterious automatic newline from Read.toSam(bb).
+- Wrote CoverageArray3A, Atomic version.
+- Added atomic flag to CallVariants, which increases speed by up to 300
+  percent.
+- Increased speed of multithreaded coverage calculation even without atomic
+  flag.
+- Fixed stranded coverage default to false.
+- Added CoverageArray.incrementRangeSynchronized.
+- CallVariants trackstrand now correctly defaults to false, which disables the
+  DP4 field.
+- CalcTrueQuality should now ignore indels declared in a VCF.
+
 * Fri Mar 15 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.42-1
 - 38.40
   - Replaced some obsolete StringBuilder methods (mainly for read printing)

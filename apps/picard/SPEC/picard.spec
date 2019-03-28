@@ -1,11 +1,11 @@
-%define priority 21829
+%define priority 21900
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.18.29
+Version:	2.19.00
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,11 @@ fi
 %files
 
 %changelog
+* Fri Mar 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.19.00-1
+- Updating htsjdk to 2.19.0 (#1297)
+- Add COUNT_OUTPUT input parameter to IntervalListTools to output count of
+  bases/intervals to file
+
 * Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.29-1
 - Simplify BedToIntervalList by not reimplementing coordinate conversion
   (#1292)
