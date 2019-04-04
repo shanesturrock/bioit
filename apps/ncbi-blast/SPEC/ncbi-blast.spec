@@ -1,11 +1,11 @@
-%define priority 281
+%define priority 290
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		ncbi-blast
-Version:	2.8.1+
+Version:	2.9.0+
 Release:	1%{?dist}
 Summary:	BLAST+ is a suite of command-line tools to run BLAST
 Group:		Applications/Engineering
@@ -60,6 +60,19 @@ fi
 %files
 
 %changelog
+* Fri Apr 05 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.9.0+-1
+- New features
+  - Support for PDB biopolymer chain identifiers up to four-characters long in
+    BLASTDB version 5 (not supported in BLASTDB version 4).
+  - Configurable output separator for tabular and CSV output formats (see
+    manual entry).
+- Improvements
+  - Better error messages in get_species_taxids.sh.
+  - Fix memory leaks in BLAST libraries and unit tests.
+- Bug fixes
+  - Fix taxID filtering combined with mask-based alias BLAST databases.
+  - Fix ordering of sequence IDs in BLAST report.
+
 * Fri Jan 11 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.1+-1
 - Improvements
   - A new option (-subject_besthit) culls HSPs on a per subject sequence basis

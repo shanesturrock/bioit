@@ -5,7 +5,7 @@ fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.19.00
+Version:	2.19.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,7 +41,7 @@ fi
 %files
 
 %changelog
-* Fri Mar 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.19.00-1
+* Fri Mar 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.19.0-1
 - Updating htsjdk to 2.19.0 (#1297)
 - Add COUNT_OUTPUT input parameter to IntervalListTools to output count of
   bases/intervals to file

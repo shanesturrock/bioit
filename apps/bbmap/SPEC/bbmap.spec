@@ -1,11 +1,11 @@
-%define priority 3843
+%define priority 3844
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.43
+Version:	38.44
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -209,6 +209,17 @@ fi
 %files
 
 %changelog
+* Fri Apr 05 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.44-1
+- Fixed a bug in Tools.parseKMG.
+- Added qualhist to CallVariants.
+- Added code in CallVariants to deal with recalibrated base quality.
+- CallVariants no longer needs ref= prefix before fasta reference.
+- FilterVCF can now split alleles.
+- Modified mutate.sh to allow variable-length indels, and not put them too
+  close together (to allow better grading).
+- Major: Fixed BBDuk/Seal/Clumpify issue in failure to correctly
+  reverse-complement some kmers.
+
 * Fri Mar 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.43-1
 - Wrote var2.VarKey for hashing.  May not use it.
 - Added indel processing to fixVars, and Read.containsVars().
