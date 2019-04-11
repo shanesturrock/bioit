@@ -1,11 +1,11 @@
-%define priority 2120
+%define priority 2130
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.12.0
+Version:	2.13.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,13 @@ fi
 %files
 
 %changelog
+* Fri Apr 12 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.0-1
+- Added the fastx_getseq, fastx_getseqs and fastx_getsubseq commands to extract
+  sequences from a FASTA or FASTQ file based on their labels.
+- Improved handling of ambiguous nucleotide symbols.
+- Corrected behaviour of uchime_ref command with and options self and selfid.
+  Strict detection of illegal options for each command.
+
 * Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.12.0-1
 - Take sequence abundance into account when computing consensus sequences or
   profiles after clustering.
