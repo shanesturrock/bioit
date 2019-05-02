@@ -1,11 +1,11 @@
-%define priority 210
+%define priority 230
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	2.1
+Version:	2.3
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,16 @@ fi
 %files
 
 %changelog
+* Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.3-1
+- V2.3
+  - :issue:`378`: The ``--pair-adapters`` option, added in version 2.1, was not
+    actually usable for demultiplexing.
+- V2.2
+  - :issue:`376`: Fix a crash when using anchored 5' adapters together with
+    ``--no-indels`` and trying to trim an empty read.
+  - :issue:`369`: Fix a crash when attempting to trim an empty read using a
+    ``-g`` adapter with wildcards.
+
 * Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.1-1
 - Fix problems when combining ``--cores`` with reading from standard input or
   writing to standard output.

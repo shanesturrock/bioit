@@ -1,11 +1,11 @@
-%define priority 2500
+%define priority 2502
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.5.0
+Version:	2.5.2
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,11 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.5.2-1
+- Replace creation of URLHelper by reflection with factory object. See issue
+  #646
+- remove unused imports (2.5.1)
+
 * Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.5.0-1
 - Switched to Java 11
 

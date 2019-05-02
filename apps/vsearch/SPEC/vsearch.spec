@@ -1,11 +1,11 @@
-%define priority 2130
+%define priority 2133
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.13.0
+Version:	2.13.3
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,18 @@ fi
 %files
 
 %changelog
+* Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.3-1
+- 2.13.3
+  - Fix bug in FASTQ parsing introduced in version 2.13.2.
+- 2.13.2
+  - Fix to print error message to log file not stderr
+- 2.13.1
+  - Minor changes to the allowed options for each command. All commands now
+    allow the log, quiet and threads options. If more than 1 thread is
+    specified for commands that are not multi-threaded, a warning will be 
+    issued.
+  - Minor changes to the manual.
+
 * Fri Apr 12 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.0-1
 - Added the fastx_getseq, fastx_getseqs and fastx_getsubseq commands to extract
   sequences from a FASTA or FASTQ file based on their labels.

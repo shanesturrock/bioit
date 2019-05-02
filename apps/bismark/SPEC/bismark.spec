@@ -1,11 +1,11 @@
-%define priority 210
+%define priority 221
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bismark
-Version:	0.21.0
+Version:	0.22.1
 Release:	1%{?dist}
 Summary:	A bisulfite read mapper and methylation caller
 Group:		Applications/Engineering
@@ -49,6 +49,61 @@ fi
 %files
 
 %changelog
+* Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 0.22.1-1
+- 0.22.1 Essential Easter Performance Release [EEPR]
+  - Bismark
+    - Hot-fixed (read: removed) the cause of delay during the MD:Z: field
+      computation for reads containing a deletion (which was roughly equal to 1
+      second per read). Apologies, I did it again…
+    - Changed the default --score_min function for HISAT2 in --local mode back
+      to a linear function (instead of using the logarithmic model that is
+      employed by Bowtie 2). The default is now --score_min L,0,-0.2 for both
+      end-to-end (default) and --local mode. It should be mentioned that we
+      currently don't understand how exactly the scoring mode in HISAT2 works
+      (even though the scores appear to be all negative with a maximum value 
+      of 0), so this might change somewhat in the future.
+- 0.22.0 Easter Release - local alignments for single-cell and scNMT-seq
+  - Expanding on our observation that single-cell BS-seq, or PBAT libraries in
+    general, can generate chimeric read pairs, a recent publication by Wu et
+    al. described in further detail that intra-fragment chimeras can hinder the
+    efficient alignment of single-cell BS-seq libraries. In there, the authors
+    described a pipeline that uses paired-end alignments first, followed by a
+    second, single-end alignment step that uses local alignments in a bid to
+    improve the mapping of intra-molecular chimeras. To allow this type of
+    improvement for single-cell or PBAT libraries, we have been experimenting
+    with allowing local alignments.
+      Please note that we still do not recommend using local alignments as a
+    means to magically increase mapping efficiencies (please see here), but we
+    do acknowledge that PBAT/scBSs-seq/scNMT-seq are exceptional applications
+    where local alignments might indeed make a difference (there is only so much
+    data to be had from a single cell...).
+      We didn't have the time yet to set more appropriate or stringent default
+    values for local alignments (suggestions welcome), nor did we investigate
+    whether the methylation extraction will require an additional --ignore flag
+    if a read was found to the be soft-clipped (the so called 'micro-homology
+    domains'). This might be added in the near future.
+  - Bismark
+    - Added support for local alignments by introducing the new option --local.
+      This means that the CIGAR operation S (soft-clipping) is now supported
+    - fixed typo in option --path_to_bowtie2 (a single missing 2 was preventing
+      the specified path to be accepted)
+    - fixed typo in option --no-spliced-alignment in HISAT2 mode
+    - fixed missing end-of-line character for unmapped or ambiguous FastQ
+      sequences in paired-end FastQ mode
+    - fixed output file naming in --hisat2 and --parallel mode (_hisat2 was
+      missing in --parallel mode). Thanks to @phue for spotting this.
+  - Bismark_genome_preparation
+    - Added option --large-index to force the generation of LARGE genome
+      indexes. This may be required for indexing extremely large genomes (e.g.
+      the Axolotl (32 GigaBases)) in --parallel mode. For more information on 
+      why the indexing was failing previously see here
+  - Bismark_methylation_extractor
+    - Now supporting reads containing soft-clipped bases (CIGAR operation S)
+  - Bam2nuc
+    - Now supporting reads containing soft-clipped bases (CIGAR operation S)
+  - Deduplicate_bismark
+    - Now supporting reads containing soft-clipped bases (CIGAR operation S)
+
 * Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 0.21.0-1
 - [New]: HISAT2 and SLAM-mode; [Retired]: Bowtie 1
 - For the upcoming version Bismark has undergone some substantial changes,

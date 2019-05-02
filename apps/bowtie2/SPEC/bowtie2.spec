@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2350
+%define priority 2351
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.3.5
+Version:	2.3.5.1
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,16 @@ fi
 %files
 
 %changelog
+* Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.5.1-1
+- Added official support for BAM input files
+- Added official support for CMake build system
+- Added changes to Makefile for creating Reproducible builds (via
+  [210](https://github.com/BenLangmead/bowtie2/pull/210))
+- Fix an issue whereby building on aarch64 would require patching sed commands
+  (via [#243](https://github.com/BenLangmead/bowtie2/pull/243))
+- Fix an issue whereby `bowtie2` would incorrectly throw an error while
+  processing `--interleaved` input
+
 * Fri Mar 22 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.5-1
 - Added support for obtaining input reads directly from the Sequence Read
   Archive, via NCBI's [NGS language bindings](https://github.com/ncbi/ngs).

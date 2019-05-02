@@ -1,11 +1,11 @@
-%define priority 3844
+%define priority 3845
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.44
+Version:	38.45
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -197,6 +197,7 @@ alternatives \
    --slave %{_bindir}/textfile.sh textfile.sh /opt/bioit/%{name}/%{version}/textfile.sh \
    --slave %{_bindir}/translate6frames.sh translate6frames.sh /opt/bioit/%{name}/%{version}/translate6frames.sh \
    --slave %{_bindir}/unicode2ascii.sh unicode2ascii.sh /opt/bioit/%{name}/%{version}/unicode2ascii.sh \
+   --slave %{_bindir}/unzip.sh unzip.sh /opt/bioit/%{name}/%{version}/unzip.sh \
    --slave %{_bindir}/vcf2gff.sh vcf2gff.sh /opt/bioit/%{name}/%{version}/vcf2gff.sh \
    --slave %{_bindir}/webcheck.sh webcheck.sh /opt/bioit/%{name}/%{version}/webcheck.sh
 
@@ -209,6 +210,46 @@ fi
 %files
 
 %changelog
+* Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.45-1
+- Last restarted timestamp fixed for TaxServer stats page.
+- Clarified randomreads.sh description of generating twin files versus
+  interleaved.
+- Added Read.countVars, CallVariants.findUniqueVars.
+- Added support for indels and border to FilterSam.
+- CallVariants can now force calls of specific alleles with an input vcf.
+- VarMap is now iterable over values.
+- Modified ShrinkAccession to optionally retain GI numbers.
+- Fixed VCF genotype call of 1 for haploids failing filters.
+- Updated GiToNcbi to read gi numbers from accession files since gi files will
+  disappear soon.
+- Clarified bbduk.sh comment on maxlength.
+- Added unzip.sh script.
+- Split Sketch displayfname into rfname and qfname.
+- Fixed file column being enabled by default for sendsketch.
+- Changed VarMap WAYS to 8, allowing 16 billion variants.
+- Short match strings no longer generate consecutive symbols like mm because it
+  is hard to parse.
+- MSA.score() now accepts short or long match strings.
+- CallVariants no longer generates long match strings prior to trimming, for
+  perfect matches; 5-10% faster.
+- FilterVCF can now split long substitutions into SNPs with the splitsubs flag.
+- Fixed CalcTrueQuality ploidy unset warning.
+- Add ls to testfilesystem.  May be inaccurate due to cache effects.
+- Added amino acid codes B and Z, mapped to ANY (same as X).
+- CallVariants now integrated into FilterSam.
+- BBCMS now supports sam files, if error-correction is disabled (depth
+  filtering is allowed).
+- Added some columns to CallVariants screen output for average allele depth.
+- Added taxonomic levels series and section.
+- Added RenameGiToTaxid badheaders flag for logging.
+- Added RenameGiToTaxid maxbadheaders flag for early termination when exceeded,
+  and included it in the download scripts (at 5000 since recent nt contains
+  2440 headers with no TaxID).
+- Removed sharedVarMap from CallVariants2; replace with forcedVars1 or
+  forcedVars2 for the two passes.
+- FungalRelease agp generation now uses ByteStreamWriter over tsw and
+  Read.breakAtGaps uses ByteBuilder over sb to save memory.
+
 * Fri Apr 05 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.44-1
 - Fixed a bug in Tools.parseKMG.
 - Added qualhist to CallVariants.

@@ -1,11 +1,11 @@
-%define priority 21900
+%define priority 22000
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.19.0
+Version:	2.20.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,26 @@ fi
 %files
 
 %changelog
+* Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.0-1
+- 2.20.0
+  - Add fingerprint Metric (not FingerprintingMetric) (#1312)
+  - liftovervcf: remove '##reference=...' and set the new one. (#1321)
+- 2.19.2
+  - GL-143 Move the probe metrics into TargetMetrics and add a test for
+    HsMetrics (#1318)
+  - liftovervcf without sorting the variants (#1306)
+- 2.19.1
+  - Fix CollectInsertSizeMetrics temporary file creation. (#1313)
+  - update google cloud NIO provider (#1300)
+  - GL-143 remove fields defined in base class (#1307)
+  - Add ability to crosscheck (and check) fingerprints on CRAMS directly.
+    (#1302)
+  - Fixes assert statement in UmiAwareMDWMC tester (#1271)
+  - Update README.md (#1293)
+  - Factor out a SamComparison class from CompareSAMs for reuse. (#913)
+  - Update CreateSequenceDictionary.java (#1286)
+  - fix a typo (#1296)
+
 * Fri Mar 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.19.0-1
 - Updating htsjdk to 2.19.0 (#1297)
 - Add COUNT_OUTPUT input parameter to IntervalListTools to output count of
