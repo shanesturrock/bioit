@@ -1,11 +1,11 @@
-%define priority 3845
+%define priority 3846
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.45
+Version:	38.46
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -76,6 +76,7 @@ alternatives \
    --slave %{_bindir}/dedupebymapping.sh dedupebymapping.sh /opt/bioit/%{name}/%{version}/dedupebymapping.sh \
    --slave %{_bindir}/dedupe.sh dedupe.sh /opt/bioit/%{name}/%{version}/dedupe.sh \
    --slave %{_bindir}/demuxbyname.sh demuxbyname.sh /opt/bioit/%{name}/%{version}/demuxbyname.sh \
+   --slave %{_bindir}/demuxbyname2.sh demuxbyname2.sh /opt/bioit/%{name}/%{version}/demuxbyname2.sh \
    --slave %{_bindir}/ecc.sh ecc.sh /opt/bioit/%{name}/%{version}/ecc.sh \
    --slave %{_bindir}/estherfilter.sh estherfilter.sh /opt/bioit/%{name}/%{version}/estherfilter.sh \
    --slave %{_bindir}/explodetree.sh explodetree.sh /opt/bioit/%{name}/%{version}/explodetree.sh \
@@ -210,6 +211,9 @@ fi
 %files
 
 %changelog
+* Fri May 10 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.46-1
+- Added demuxbyname2.sh
+
 * Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.45-1
 - Last restarted timestamp fixed for TaxServer stats page.
 - Clarified randomreads.sh description of generating twin files versus

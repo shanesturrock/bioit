@@ -1,11 +1,11 @@
-%define priority 135
+%define priority 136
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		stringtie
-Version:	1.3.5
+Version:	1.3.6
 Release:	1%{?dist}
 Summary:	StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts.
 Group:		Applications/Engineering
@@ -46,6 +46,14 @@ fi
 %files
 
 %changelog
+* Fri May 10 2019 Shane Sturrock <shane.sturrock@gmail.com> - 1.3.6-1
+- fixing a GFF/GTF sorting issue causing occasional errors when the --merge
+  option was used
+- addressing a float precision problem causing negative coverage/TPM/FPKM
+  values in some cases
+- various GFF/GTF parsing adjustments improving support for some reference
+  annotation sources
+
 * Fri Nov 09 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.3.5-1
 - spliced alignments produced by minimap2 (in SAM format) are now supported;
   there is no need to pre-process them in order to add the XS tag, the cs tag
