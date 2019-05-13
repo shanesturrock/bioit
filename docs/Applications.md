@@ -4,6 +4,14 @@ Each application is listed here with the necessary instructions to build it from
 
 Note that all tools go into the `/opt/bioit` directory followed by their name and then versions for each. This way we can keep all versions of tools available. By default RPMs are built that set the alternatives for each tool to the latest version so users will always have the best version but they can also use the environment modules to choose another version.
 
+## Notes on installing rstudio
+
+The latest rstudio 1.2 requires `libxkbcommon-x11` to be installed. Also, the first time a user starts rstudio, they'll need to run the following:
+
+    QMLSCENE_DEVICE=softwarecontext rstudio
+
+This will set the rendering engine to software mode required to start under X2Go. Once they're in, they go go into the options and set software rendering to be the default and then they'll be able to start it from the menu.
+
 ## List of applications and instructions on building them
 
 * [abyss](abyss.md)
