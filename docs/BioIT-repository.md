@@ -13,6 +13,10 @@ Before you can commit changes back from this checkout you need to set up git so 
     git config --global user.email "you@example.com"
     git config --global user.name "Your Name"
 
+Also run the following:
+
+    git config --global push.default simple
+
 If you want to store your credentials do the following:
 
     git config --global credential.helper store
