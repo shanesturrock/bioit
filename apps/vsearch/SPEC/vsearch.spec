@@ -1,11 +1,11 @@
-%define priority 2133
+%define priority 2134
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.13.3
+Version:	2.13.4
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,11 @@ fi
 %files
 
 %changelog
+* Fri May 17 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.4-1
+- Added information about support for gzip- and bzip2-compressed input files to
+  the output of the version command. 
+- Adapted source code for compilation on FreeBSD and NetBSD systems.
+
 * Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.3-1
 - 2.13.3
   - Fix bug in FASTQ parsing introduced in version 2.13.2.

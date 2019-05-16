@@ -1,11 +1,11 @@
-%define priority 22000
+%define priority 22001
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.20.0
+Version:	2.20.1
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,11 @@ fi
 %files
 
 %changelog
+* Fri May 17 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.1-1
+- Enabled CRAM input into MarkDuplicates. (#1275)
+- Make CollectSamErrorMetrics show up in docs (#1326)
+- Sort CRAM test that are used with tests that create an index. (#1317)
+
 * Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.0-1
 - 2.20.0
   - Add fingerprint Metric (not FingerprintingMetric) (#1312)

@@ -1,11 +1,11 @@
-%define priority 3846
+%define priority 3847
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.46
+Version:	38.47
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -211,8 +211,31 @@ fi
 %files
 
 %changelog
+* Fri May 17 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.47-1
+- Added demuxbyname2 hamming distance support.
+- Renamed Var.COMPOUND to Var.MULTI and added Var.COMPLEX.
+- Modified demuxbyname2.sh to use pigz.
+- Increased compiler error level (@Override, shadowing) and fixed resulting
+  errors.
+- Wrote MultiCros3, which supports concurrent streams; this makes DemuxByName2
+  faster.
+- Made BufferedMultiCross an abstract superclass of MultiCros2 and MultiCros3.
+
 * Fri May 10 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.46-1
-- Added demuxbyname2.sh
+- Added Unzip.java and fixed unzip.sh.  It is pretty resource-intensive,
+  though, for a program that does nothing.  This is possible to improve.
+- Added KID and WKID to Sketch format 3, and flags to disable them.
+- CompareVCF now prints results to screen correctly when there is no output
+  file.
+- TaxServer now defaults to 200k max reads in local mode.
+- In local mode, TaxServer no longer reads files with pigz.
+- FilterVCF now correctly observes del and ins flags.
+- Added Var.COMPOUND type for multiallelic variations.
+- Added VCFLine.trimPrefix() and trimSuffix().
+- Fixed bugs in trimToCanonical handling of compound variations.
+- VCFLines split by allele now split INFO fields as well.
+- Wrote demuxbyname2, to support massively multiplexed Novaseq runs.
+- Splitting alleles now also splits the info field of VCFLines.
 
 * Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.45-1
 - Last restarted timestamp fixed for TaxServer stats page.
