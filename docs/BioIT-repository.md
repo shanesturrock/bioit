@@ -8,6 +8,21 @@ The BioIT packages can be installed by cloning the bioit GitHub repository as fo
 
 Once that is done, you should be able to run `~/bioit/bin/setup_bioit` and it will do all the work.
 
+Before you can commit changes back from this checkout you need to set up git so it knows who you are:
+
+    git config --global user.email "you@example.com"
+    git config --global user.name "Your Name"
+
+Also run the following:
+
+    git config --global push.default simple
+
+If you want to store your credentials do the following:
+
+    git config --global credential.helper store
+
+Now, do a `git pull` and it will ask for your git username and password and these will be saved for future use and you won't be asked for them again.
+
 All the packages are compiled as versions in `/opt/bioit` but by default they're not in the user's path unless they choose them with module load. RPMs have been created that set alternatives up to allow them to be run without calling module load and also allows the system to maintain updates and provide changelogs. To set this up, first make sure that `/opt/bioit` is installed on the machine and the modules are setup as per the Installation page. Once that is done, follow the instructions here to create the repository and then install all packages.
 
 ## Set up the repository on a new machine
