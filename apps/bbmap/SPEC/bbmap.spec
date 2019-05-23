@@ -1,11 +1,11 @@
-%define priority 3847
+%define priority 3849
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.47
+Version:	38.49
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -211,6 +211,23 @@ fi
 %files
 
 %changelog
+* Fri May 24 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.49-1
+- 38.48
+  - Added samline field to Read. obj field is no longer used for SamLines.
+    Caused substantial refactoring; may have introduced bugs when processing
+    sam files (they will not be subtle if present).
+  - BufferedMultiCross now offers a threaded mode, but this has not improved
+    performance.
+  - BufferedMultiCross now supports minReadsToDump and puts residual reads into
+    unknown.
+  - Fixed DemuxByName2 hamming distance code, and improved it to only remove
+    colliding keys.
+- 38.49
+  - Fully commented DemuxByName2, BufferedMultiCros, MultiCros2, and
+    MultiCros3.
+  - Fixed a bug in MultiCros3 that created some duplicate reads.  Speed is now
+    >950MB/s for twin files.
+
 * Fri May 17 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.47-1
 - Added demuxbyname2 hamming distance support.
 - Renamed Var.COMPOUND to Var.MULTI and added Var.COMPLEX.
