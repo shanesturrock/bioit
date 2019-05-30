@@ -1,11 +1,11 @@
-%define priority 22001
+%define priority 22002
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.20.1
+Version:	2.20.2
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,9 @@ fi
 %files
 
 %changelog
+* Fri May 31 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.2-1
+- Improving missing tools.jar error message.
+
 * Fri May 17 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.1-1
 - Enabled CRAM input into MarkDuplicates. (#1275)
 - Make CollectSamErrorMetrics show up in docs (#1326)
