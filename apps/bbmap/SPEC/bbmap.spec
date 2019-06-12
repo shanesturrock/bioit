@@ -1,11 +1,11 @@
-%define priority 3849
+%define priority 3850
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.49
+Version:	38.50b
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -77,7 +77,7 @@ alternatives \
    --slave %{_bindir}/dedupe.sh dedupe.sh /opt/bioit/%{name}/%{version}/dedupe.sh \
    --slave %{_bindir}/demuxbyname.sh demuxbyname.sh /opt/bioit/%{name}/%{version}/demuxbyname.sh \
    --slave %{_bindir}/demuxbyname2.sh demuxbyname2.sh /opt/bioit/%{name}/%{version}/demuxbyname2.sh \
-   --slave %{_bindir}/ecc.sh ecc.sh /opt/bioit/%{name}/%{version}/ecc.sh \
+   --slave %{_bindir}/diskbench.sh diskbench.sh /opt/bioit/%{name}/%{version}/diskbench.sh \
    --slave %{_bindir}/estherfilter.sh estherfilter.sh /opt/bioit/%{name}/%{version}/estherfilter.sh \
    --slave %{_bindir}/explodetree.sh explodetree.sh /opt/bioit/%{name}/%{version}/explodetree.sh \
    --slave %{_bindir}/filterassemblysummary.sh filterassemblysummary.sh /opt/bioit/%{name}/%{version}/filterassemblysummary.sh \
@@ -116,7 +116,7 @@ alternatives \
    --slave %{_bindir}/loglog.sh loglog.sh /opt/bioit/%{name}/%{version}/loglog.sh \
    --slave %{_bindir}/makechimeras.sh makechimeras.sh /opt/bioit/%{name}/%{version}/makechimeras.sh \
    --slave %{_bindir}/makecontaminatedgenomes.sh makecontaminatedgenomes.sh /opt/bioit/%{name}/%{version}/makecontaminatedgenomes.sh \
-   --slave %{_bindir}/mappolymers.sh mappolymers.sh /opt/bioit/%{name}/%{version}/mappolymers.sh \
+   --slave %{_bindir}/makepolymers.sh makepolymers.sh /opt/bioit/%{name}/%{version}/makepolymers.sh \
    --slave %{_bindir}/mapPacBio.sh mapPacBio.sh /opt/bioit/%{name}/%{version}/mapPacBio.sh \
    --slave %{_bindir}/matrixtocolumns.sh matrixtocolumns.sh /opt/bioit/%{name}/%{version}/matrixtocolumns.sh \
    --slave %{_bindir}/mergebarcodes.sh mergebarcodes.sh /opt/bioit/%{name}/%{version}/mergebarcodes.sh \
@@ -136,8 +136,8 @@ alternatives \
    --slave %{_bindir}/postfilter.sh postfilter.sh /opt/bioit/%{name}/%{version}/postfilter.sh \
    --slave %{_bindir}/printtime.sh printtime.sh /opt/bioit/%{name}/%{version}/printtime.sh \
    --slave %{_bindir}/processfrag.sh processfrag.sh /opt/bioit/%{name}/%{version}/processfrag.sh \
-   --slave %{_bindir}/processspeed.sh processspeed.sh /opt/bioit/%{name}/%{version}/processspeed.sh \
    --slave %{_bindir}/processhi-c.sh processhi-c.sh /opt/bioit/%{name}/%{version}/processhi-c.sh \
+   --slave %{_bindir}/processspeed.sh processspeed.sh /opt/bioit/%{name}/%{version}/processspeed.sh \
    --slave %{_bindir}/randomgenome.sh randomgenome.sh /opt/bioit/%{name}/%{version}/randomgenome.sh \
    --slave %{_bindir}/randomreads.sh randomreads.sh /opt/bioit/%{name}/%{version}/randomreads.sh \
    --slave %{_bindir}/readlength.sh readlength.sh /opt/bioit/%{name}/%{version}/readlength.sh \
@@ -148,11 +148,11 @@ alternatives \
    --slave %{_bindir}/removecatdogmousehuman.sh removecatdogmousehuman.sh /opt/bioit/%{name}/%{version}/removecatdogmousehuman.sh \
    --slave %{_bindir}/removehuman2.sh removehuman2.sh /opt/bioit/%{name}/%{version}/removehuman2.sh \
    --slave %{_bindir}/removehuman.sh removehuman.sh /opt/bioit/%{name}/%{version}/removehuman.sh \
+   --slave %{_bindir}/removemicrobes.sh removemicrobes.sh /opt/bioit/%{name}/%{version}/removemicrobes.sh \
    --slave %{_bindir}/removesmartbell.sh removesmartbell.sh /opt/bioit/%{name}/%{version}/removesmartbell.sh \
    --slave %{_bindir}/renameimg.sh renameimg.sh /opt/bioit/%{name}/%{version}/renameimg.sh \
    --slave %{_bindir}/rename.sh rename.sh /opt/bioit/%{name}/%{version}/rename.sh \
    --slave %{_bindir}/repair.sh repair.sh /opt/bioit/%{name}/%{version}/repair.sh \
-   --slave %{_bindir}/rename.sh rename.sh /opt/bioit/%{name}/%{version}/rename.sh \
    --slave %{_bindir}/replaceheaders.sh replaceheaders.sh /opt/bioit/%{name}/%{version}/replaceheaders.sh \
    --slave %{_bindir}/representative.sh representative.sh /opt/bioit/%{name}/%{version}/representative.sh \
    --slave %{_bindir}/rqcfilter2.sh rqcfilter2.sh /opt/bioit/%{name}/%{version}/rqcfilter2.sh \
@@ -162,8 +162,8 @@ alternatives \
    --slave %{_bindir}/sendsketch.sh sendsketch.sh /opt/bioit/%{name}/%{version}/sendsketch.sh \
    --slave %{_bindir}/shred.sh shred.sh /opt/bioit/%{name}/%{version}/shred.sh \
    --slave %{_bindir}/shrinkaccession.sh shrinkaccession.sh /opt/bioit/%{name}/%{version}/shrinkaccession.sh \
-   --slave %{_bindir}/shuffle.sh shuffle.sh /opt/bioit/%{name}/%{version}/shuffle.sh \
    --slave %{_bindir}/shuffle2.sh shuffle2.sh /opt/bioit/%{name}/%{version}/shuffle2.sh \
+   --slave %{_bindir}/shuffle.sh shuffle.sh /opt/bioit/%{name}/%{version}/shuffle.sh \
    --slave %{_bindir}/sketchblacklist.sh sketchblacklist.sh /opt/bioit/%{name}/%{version}/sketchblacklist.sh \
    --slave %{_bindir}/sketch.sh sketch.sh /opt/bioit/%{name}/%{version}/sketch.sh \
    --slave %{_bindir}/sortbyname.sh sortbyname.sh /opt/bioit/%{name}/%{version}/sortbyname.sh \
@@ -211,6 +211,39 @@ fi
 %files
 
 %changelog
+* Thu Jun 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.50b-1
+- 38.49
+  - Fully commented DemuxByName2, BufferedMultiCros, MultiCros2, and
+    MultiCros3.
+  - Fixed a bug in MultiCros3 that created some duplicate reads.  Speed is now
+    >950MB/s for twin files.
+- 38.50
+  - Added bgzip control flags and version parsing.
+  - .vcf.gz files now default to being written and read by bgzip.
+  - All gzip files now default to being read with bgzip over pigz.
+  - Non-vcf files will only be written with bgzip if the bgzip flag is added
+    (for now).
+  - Added alternate Sketch addresses via vm flag.
+  - minProb and minQual moved from SketchObject to DisplayParams, requiring the
+    modification of many methods.
+  - Simplified some Sketch method signatures by allowing DisplayParams to
+    substitute for multiple parameters.
+  - Added Locale to all String formatting without it.
+  - Refactored DemuxByName2.
+  - Improved commenting of DemuxByName2 and related classes.
+  - Added PacBio subread support to PartionReads (partition.sh).
+  - Disabled ByteFile1 being forced outside of JGI.  ByteFile2 caused some
+    problems, but those should be resolved now, I think...
+  - Added loglog and barcode flags to DemuxByName2.
+  - Fixed order of SendSketch setting server address to allow alternate (VM)
+    server use.
+  - Fixed DemuxByName2 order of parsing parser args, allowing the barcode flag
+    to trigger.
+  - Unified DemuxByName2 modes under a single mode field.
+  - Fixed maxrecords not being observed in Sketch JSON format.
+  - TaxServer sketch handler now does full parsing of URL arguments.
+  - Added D3 support to Sketch results.
+
 * Fri May 24 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.49-1
 - 38.48
   - Added samline field to Read. obj field is no longer used for SamLines.

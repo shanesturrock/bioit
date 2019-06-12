@@ -6,7 +6,7 @@ fi )
 
 Name:		hmmer
 Version:	3.2.1
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	HMMER database search and aligner
 Group:		Applications/Engineering
 License:	BSD
@@ -41,14 +41,14 @@ alternatives \
    --slave %{_bindir}/esl-construct esl-construct /opt/bioit/%{name}/%{version}/bin/esl-construct \
    --slave %{_bindir}/esl-histplot esl-histplot /opt/bioit/%{name}/%{version}/bin/esl-histplot \
    --slave %{_bindir}/esl-mask esl-mask /opt/bioit/%{name}/%{version}/bin/esl-mask \
-   --slave %{_bindir}/esl-reformat esl-reformat /opt/bioit/%{name}/%{version}/esl-reformat \
+   --slave %{_bindir}/esl-reformat esl-reformat /opt/bioit/%{name}/%{version}/bin/esl-reformat \
    --slave %{_bindir}/esl-selectn esl-selectn /opt/bioit/%{name}/%{version}/bin/esl-selectn \
    --slave %{_bindir}/esl-seqrange esl-seqrange /opt/bioit/%{name}/%{version}/bin/esl-seqrange \
    --slave %{_bindir}/esl-seqstat esl-seqstat /opt/bioit/%{name}/%{version}/bin/esl-seqstat \
    --slave %{_bindir}/esl-sfetch esl-sfetch /opt/bioit/%{name}/%{version}/bin/esl-sfetch \
    --slave %{_bindir}/esl-shuffle esl-shuffle /opt/bioit/%{name}/%{version}/bin/esl-shuffle \
    --slave %{_bindir}/esl-ssdraw esl-ssdraw /opt/bioit/%{name}/%{version}/bin/esl-ssdraw \
-   --slave %{_bindir}/esl-stranslate esl-stranslate /opt/bioit/%{name}/%{version}/bin/esl-stranslate \
+   --slave %{_bindir}/esl-translate esl-translate /opt/bioit/%{name}/%{version}/bin/esl-translate \
    --slave %{_bindir}/esl-weight esl-weight /opt/bioit/%{name}/%{version}/bin/esl-weight \
    --slave %{_bindir}/hmmalign hmmalign /opt/bioit/%{name}/%{version}/bin/hmmalign \
    --slave %{_bindir}/hmmbuild hmmbuild /opt/bioit/%{name}/%{version}/bin/hmmbuild \
@@ -78,6 +78,9 @@ fi
 %files
 
 %changelog
+* Thu Jun 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 3.2.1-2
+- Fixed some faulty symlinks
+
 * Tue Jul 10 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.2.1-1
 - Larger changes:
   - HMMER is now distributed under the BSD license, instead of the GPL.
