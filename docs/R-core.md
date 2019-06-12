@@ -4,7 +4,7 @@
 
 ## Automatic Build
 
-Before starting to build R you must be sure you've used `ssh -Y` to get in because it will fail without X11 support. 
+Before starting to build R you must be sure you've used `ssh -Y` to get in because it will fail without X11 support. Alternatively, run the build in X2Go.
 
 Inside `${HOME}/bioit/apps/R-core/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows: 
 
