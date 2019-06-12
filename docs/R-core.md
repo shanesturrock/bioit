@@ -4,9 +4,11 @@
 
 ## Automatic Build
 
+Before starting to build R you must be sure you've used `ssh -Y` to get in because it will fail without X11 support. 
+
 Inside `${HOME}/bioit/apps/R-core/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows: 
 
-    ${HOME}/bioit/apps/R-core/SPEC/build 3.5.3
+    ${HOME}/bioit/apps/R-core/SPEC/build 3.6.0
 
 This will take a long time because it also installs the BioConductor packages into the new R installation. When that completes check that the new version is available using:
 
@@ -14,7 +16,7 @@ This will take a long time because it also installs the BioConductor packages in
 
 If that shows as being there you can test it works with:
 
-    module load R/3.5.3
+    module load R/3.6.0
     which R
 
 If all is good, you can move to the RPM building step.
@@ -23,8 +25,9 @@ If all is good, you can move to the RPM building step.
 
 Download the version to be built into `/opt/bioit/R-core/src` and untar
 
-    ./configure --prefix=/opt/bioit/R-core/3.5.3 --enable-R-shlib --with-x \ 
-    --with-libpng --with-jpeglib --with-cairo --with-libtiff
+    ./configure --prefix=/opt/bioit/R-core/3.6.0 --enable-R-shlib --with-x \ 
+    --with-libpng --with-jpeglib --with-cairo --with-libtiff \
+    --with-blas --with-lapack --enable-memory-profiling
 
 There will be an warning message about `inconsolata.sty` not being found but this just isn't available on CentOS 7 so can't be helped.
 
@@ -37,14 +40,14 @@ There will be an warning message about `inconsolata.sty` not being found but thi
 
 Now you have an installation of this build, you need to install the bioconductor and related packages for the users so they don't have to install all that themselves. A script called `bioC_install.R` is in `/opt/bioit/R-core/src` so do the following to start your new R build so you can run this script:
 
-    cd /opt/bioit/R-core/3.5.3/bin
+    cd /opt/bioit/R-core/3.6.0/bin
     ./R
 
 Once R starts type the following:
 
     source("/root/bioit/apps/R-core/SPEC/bioC_install.R") 
 
-It will automatically go through and install all the packages the team requires.
+It will automatically go through and install all the packages the team requires. Some of the packages require X support to install so you must use -Y to the build machine.
 
 Lastly, run `biocValid()` and it will probably complain about a bunch of newer packages and how to downgrade them to the current stable versions. Do that. When it completes just type `q()` to quit and don't save the workspace image.
 
@@ -56,9 +59,9 @@ Add a module file in `/opt/bioit/modulefiles/R/` for this version by copying pre
     #
     #  R-core module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/R-core/3.5.3/bin
-
-## RPM
+    prepend-path  PATH             /opt/bioit/R-core/3.6.0/bin
+    prepend-path  MANPATH          /opt/bioit/R-core/3.6.0/share/man
+    prepend-path  LD_LIBRARY_PATH  /opt/bioit/R-core/3.6.0/lib64/R/lib
 
 There's a SPEC file for this package in `${HOME}/bioit/apps/R-core/SPEC` so modify that with the new version details. Once changed, build it with the following command:
 
@@ -99,6 +102,6 @@ Then start R again and redo the update.
 
 Sometimes package updates fail because of a lock file such as:
 
-    /opt/bioit/R-core/3.5.3/lib64/R/library/00LOCK-RMySQL/
+    /opt/bioit/R-core/3.6.0/lib64/R/library/00LOCK-RMySQL/
 
 Deleting that should allow you to complete an update.

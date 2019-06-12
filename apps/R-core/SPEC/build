@@ -24,7 +24,8 @@ cd /opt/bioit/R-core/src
 wget https://cloud.r-project.org/src/base/R-3/R-${VERSION}.tar.gz
 tar xvf R-${VERSION}.tar.gz
 cd R-${VERSION}
-./configure --prefix=/opt/bioit/R-core/${VERSION} --enable-R-shlib --with-x --with-libpng --with-jpeglib --with-cairo --with-libtiff
+./configure --prefix=/opt/bioit/R-core/${VERSION} --enable-R-shlib --with-x --with-libpng --with-jpeglib --with-cairo --with-libtiff --with-blas --with-lapack --enable-memory-profiling
+ 
 make clean
 make
 make install
@@ -33,6 +34,7 @@ echo "#%Module 1.0
 #  R-core module for use with 'environment-modules' package:
 #
 prepend-path  PATH              /opt/bioit/R-core/${VERSION}/bin
+prepend-path  MANPATH		/opt/bioit/R-core/${VERSION}/share/man
 prepend-path  LD_LIBRARY_PATH   /opt/bioit/R-core/${VERSION}/lib64/R/lib" > /opt/bioit/modulefiles/R/${VERSION}
 echo "Install required packages"
 /opt/bioit/R-core/${VERSION}/bin/Rscript ${HOME}/bioit/apps/R-core/SPEC/bioC_install.R
