@@ -212,37 +212,31 @@ fi
 
 %changelog
 * Thu Jun 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.50b-1
-- 38.49
-  - Fully commented DemuxByName2, BufferedMultiCros, MultiCros2, and
-    MultiCros3.
-  - Fixed a bug in MultiCros3 that created some duplicate reads.  Speed is now
-    >950MB/s for twin files.
-- 38.50
-  - Added bgzip control flags and version parsing.
-  - .vcf.gz files now default to being written and read by bgzip.
-  - All gzip files now default to being read with bgzip over pigz.
-  - Non-vcf files will only be written with bgzip if the bgzip flag is added
-    (for now).
-  - Added alternate Sketch addresses via vm flag.
-  - minProb and minQual moved from SketchObject to DisplayParams, requiring the
-    modification of many methods.
-  - Simplified some Sketch method signatures by allowing DisplayParams to
-    substitute for multiple parameters.
-  - Added Locale to all String formatting without it.
-  - Refactored DemuxByName2.
-  - Improved commenting of DemuxByName2 and related classes.
-  - Added PacBio subread support to PartionReads (partition.sh).
-  - Disabled ByteFile1 being forced outside of JGI.  ByteFile2 caused some
-    problems, but those should be resolved now, I think...
-  - Added loglog and barcode flags to DemuxByName2.
-  - Fixed order of SendSketch setting server address to allow alternate (VM)
-    server use.
-  - Fixed DemuxByName2 order of parsing parser args, allowing the barcode flag
-    to trigger.
-  - Unified DemuxByName2 modes under a single mode field.
-  - Fixed maxrecords not being observed in Sketch JSON format.
-  - TaxServer sketch handler now does full parsing of URL arguments.
-  - Added D3 support to Sketch results.
+- Added bgzip control flags and version parsing.
+- .vcf.gz files now default to being written and read by bgzip.
+- All gzip files now default to being read with bgzip over pigz.
+- Non-vcf files will only be written with bgzip if the bgzip flag is added
+  (for now).
+- Added alternate Sketch addresses via vm flag.
+- minProb and minQual moved from SketchObject to DisplayParams, requiring the
+  modification of many methods.
+- Simplified some Sketch method signatures by allowing DisplayParams to
+  substitute for multiple parameters.
+- Added Locale to all String formatting without it.
+- Refactored DemuxByName2.
+- Improved commenting of DemuxByName2 and related classes.
+- Added PacBio subread support to PartionReads (partition.sh).
+- Disabled ByteFile1 being forced outside of JGI.  ByteFile2 caused some
+  problems, but those should be resolved now, I think...
+- Added loglog and barcode flags to DemuxByName2.
+- Fixed order of SendSketch setting server address to allow alternate (VM)
+  server use.
+- Fixed DemuxByName2 order of parsing parser args, allowing the barcode flag
+  to trigger.
+- Unified DemuxByName2 modes under a single mode field.
+- Fixed maxrecords not being observed in Sketch JSON format.
+- TaxServer sketch handler now does full parsing of URL arguments.
+- Added D3 support to Sketch results.
 
 * Fri May 24 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.49-1
 - 38.48
