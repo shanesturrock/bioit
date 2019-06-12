@@ -38,7 +38,9 @@ install -m 644 %{SOURCE0} %{buildroot}/%{_sysconfdir}/ld.so.conf.d/
 %post
 alternatives \
   --install %{_bindir}/R R /opt/bioit/%{name}/%{version}/bin/R %{priority} \
-  --slave %{_bindir}/Rscript Rscript /opt/bioit/%{name}/%{version}/bin/Rscript
+  --slave %{_bindir}/Rscript Rscript /opt/bioit/%{name}/%{version}/bin/Rscript \
+  --slave %{_mandir}/man1/R.1 R.1 /opt/bioit/%{name}/%{version}/share/man/man1/R.1 \
+  --slave %{_mandir}/man1/Rscript.1 Rscript.1 /opt/bioit/%{name}/%{version}/share/man/man1/Rscript.1
 rm /usr/lib64/R
 ln -s /opt/bioit/%{name}/%{version}/lib64/R /usr/lib64/R
 ldconfig
@@ -46,7 +48,7 @@ ldconfig
 %postun
 if [ $1 -eq 0 ]
 then
-  alternatives --remove R /opt/bioit/%{name}/%{version}/bin/R
+  alternatives --remove R /opt/bioit/%{name}/%{version}/bin/R 
   rm /usr/lib64/R
   ldconfig
 fi
