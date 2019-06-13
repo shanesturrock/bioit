@@ -1,11 +1,11 @@
-%define priority 3850
+%define priority 3851
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.50b
+Version:	38.51
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -75,8 +75,8 @@ alternatives \
    --slave %{_bindir}/dedupe2.sh dedupe2.sh /opt/bioit/%{name}/%{version}/dedupe2.sh \
    --slave %{_bindir}/dedupebymapping.sh dedupebymapping.sh /opt/bioit/%{name}/%{version}/dedupebymapping.sh \
    --slave %{_bindir}/dedupe.sh dedupe.sh /opt/bioit/%{name}/%{version}/dedupe.sh \
-   --slave %{_bindir}/demuxbyname.sh demuxbyname.sh /opt/bioit/%{name}/%{version}/demuxbyname.sh \
    --slave %{_bindir}/demuxbyname2.sh demuxbyname2.sh /opt/bioit/%{name}/%{version}/demuxbyname2.sh \
+   --slave %{_bindir}/demuxbyname.sh demuxbyname.sh /opt/bioit/%{name}/%{version}/demuxbyname.sh \
    --slave %{_bindir}/diskbench.sh diskbench.sh /opt/bioit/%{name}/%{version}/diskbench.sh \
    --slave %{_bindir}/estherfilter.sh estherfilter.sh /opt/bioit/%{name}/%{version}/estherfilter.sh \
    --slave %{_bindir}/explodetree.sh explodetree.sh /opt/bioit/%{name}/%{version}/explodetree.sh \
@@ -100,6 +100,9 @@ alternatives \
    --slave %{_bindir}/gitable.sh gitable.sh /opt/bioit/%{name}/%{version}/gitable.sh \
    --slave %{_bindir}/grademerge.sh grademerge.sh /opt/bioit/%{name}/%{version}/grademerge.sh \
    --slave %{_bindir}/gradesam.sh gradesam.sh /opt/bioit/%{name}/%{version}/gradesam.sh \
+   --slave %{_bindir}/icecreamfinder.sh icecreamfinder.sh /opt/bioit/%{name}/%{version}/icecreamfinder.sh \
+   --slave %{_bindir}/icecreamgrader.sh icecreamgrader.sh /opt/bioit/%{name}/%{version}/icecreamgrader.sh \
+   --slave %{_bindir}/icecreammaker.sh icecreammaker.sh /opt/bioit/%{name}/%{version}/icecreammaker.sh \
    --slave %{_bindir}/idmatrix.sh idmatrix.sh /opt/bioit/%{name}/%{version}/idmatrix.sh \
    --slave %{_bindir}/idtree.sh idtree.sh /opt/bioit/%{name}/%{version}/idtree.sh \
    --slave %{_bindir}/invertkey.sh invertkey.sh /opt/bioit/%{name}/%{version}/invertkey.sh \
@@ -211,6 +214,24 @@ fi
 %files
 
 %changelog
+* Fri Jun 14 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.51-1
+- Changed handling of same-name JSON keys; by default they are now replaced.
+- Improved Sketch D3 output - added more keys, fixed depth handling.
+- Subprocess testing now returns false for exit codes 126 and higher (missing
+  libraries yield 127).
+- Turned bgzip and pigz on by default for all programs.
+- Made bgzip the default for RQCFilter.
+- Modified TaxServer sketch portion to prevent carryover of parameters from
+  subsequent queries.
+- Fixed Sketch header reporting observed depth as actual depth.
+- Wrote IceCreamFinder, IceCreamAligner, and icecreamfinder.sh.
+- Wrote A_Sample_Generator, IceCreamMaker, and icecreammaker.sh.
+- Moved A_Sample classes to new templates package.
+- Changed some new Random() calls to Shared.threadLocalRandom().
+- Added jsonarrays flag to Sketch.
+- Wrote IceCreamGrader and icecreamgrader.sh.
+- Renamed demuxbyname2.sh to demuxbyname.sh.
+
 * Thu Jun 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.50b-1
 - Added bgzip control flags and version parsing.
 - .vcf.gz files now default to being written and read by bgzip.
