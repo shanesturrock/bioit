@@ -1,11 +1,11 @@
-%define priority 3851
+%define priority 3855
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.51
+Version:	38.55
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -214,6 +214,24 @@ fi
 %files
 
 %changelog
+* Fri Jun 28 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.55-1
+- Made IceCreamFinder ~50% faster by debranching loops and optimizing cache
+  footprint.
+- Added IceCreamFinder junction output.
+- Simplified shell scripts by centralizing path-setting commands.
+- Moved JNI library loading to Shared.
+- Wrote IceCreamAligner JNI version.
+- Made IceCreamAligner JNI faster by adding functions for all alignments and
+  adding 16-bit versions.
+- Fixed bugs in calcmem.sh path setting and module loading on Cori.
+- Automated jni library path setting (-Djava.library.path flag is no longer
+  required).
+- Disabled BBMerge attempt to load JNI libraries.
+- Added magic number detection for .gz files.
+- Disabled bgzip reading of non-bgzip .gz files, awaiting new bgzip release,
+  because current bgzip breaks on concatenated gzip files (supposedly addressed
+  after v1.9).
+
 * Fri Jun 14 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.51-1
 - Changed handling of same-name JSON keys; by default they are now replaced.
 - Improved Sketch D3 output - added more keys, fixed depth handling.
