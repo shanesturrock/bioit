@@ -1,11 +1,11 @@
-%define priority 2134
+%define priority 2136
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.13.4
+Version:	2.13.6
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,14 @@ fi
 %files
 
 %changelog
+* Fri Jul 05 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.6-1
+- 2.13.5
+  - Added cut command to fragment sequences at restriction sites.
+  - Silenced output from the fastq_stats command if quiet option was given.
+  - Updated manual.
+- 2.13.6
+  - Added info about the cut command to the output of the help command.
+
 * Fri May 17 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.4-1
 - Added information about support for gzip- and bzip2-compressed input files to
   the output of the version command. 

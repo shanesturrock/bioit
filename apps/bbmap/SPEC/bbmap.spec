@@ -1,11 +1,11 @@
-%define priority 3855
+%define priority 3857
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.55
+Version:	38.57
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -214,6 +214,23 @@ fi
 %files
 
 %changelog
+* Fri Jul 05 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.57-1
+- 38.56
+  - Improved and accelerated IceCreamFinder adapter detection.
+  - Reduced discarding of reads with adapters only at the tips.
+- 38.57
+  - Greatly improved IceCreamFinder adapter detection sensitivity by aligning
+    to more reads.
+  - Increased speed of adapter aligner.
+  - Added less-specific adapter-screening phases to reduce calls to the adapter
+    aligner.
+  - Added ambig output stream and changed the logic for determining ambiguous
+    inverted repeats.
+  - Adapter-containing inverted repeats no longer go to junctions output.
+  - Improved timeless adapter aligner and made it default.
+  - Added start location to low bits of timeless aligner score, but it does not
+    seem to work.
+
 * Fri Jun 28 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.55-1
 - Made IceCreamFinder ~50% faster by debranching loops and optimizing cache
   footprint.

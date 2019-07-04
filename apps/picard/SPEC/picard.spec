@@ -1,11 +1,11 @@
-%define priority 22002
+%define priority 22003
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.20.2
+Version:	2.20.3
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,26 @@ fi
 %files
 
 %changelog
+* Fri Jul 05 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.3-1
+- Bugfix: Update default platform for IlluminaBasecallsToSam (#1351)
+- Recover from side effects introduced in CollectIndependentReplicatesMetric
+  tests. (#1341)
+- Adding in some enum constants that are used in existing/old extended manifest
+  files. (#1347)
+- Yf provide arbtrary inputs to cmm (#1337)
+- GtcToVcf a tool to convert Illumina GTC files to VCF format Responded to a
+  lot (but not all) comments dont recompute tan Refactored some math Enable
+  support for zeroed-out SNPs Generalize AA/AB/BB related fields in VCF Headers
+  Reove zcall from GtcToVcf Added test for GtcToVcf.getGenotypes Use BidiMap
+  Error out / inform user if reference is not HG19 Use IlluminaStrand for
+  Illumina-strand specific fields. Update test to cover all chromosomes used.
+- Added whitepaper describing fingerprinting Math (#1247)
+- Fixes bug that prevented liftover of spanning deletions. (#1339)
+- Removed boilerplate "main" function from picard CLPs. (#1311)
+- Trim descriptions to shorten --list display width. (#1259)
+- Handle edge cases with no evidence in CrosscheckFingerprints consistently
+  (#1323)
+
 * Fri May 31 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.2-1
 - Improving missing tools.jar error message.
 
