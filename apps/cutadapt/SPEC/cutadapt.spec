@@ -1,11 +1,11 @@
-%define priority 230
+%define priority 240
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	2.3
+Version:	2.4
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,17 @@ fi
 %files
 
 %changelog
+* Fri Jul 19 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.4-1
+- Implement support for demultiplexing paired-end reads that use combinatorial
+  indexing (“combinatorial demultiplexing”).
+- Speed up reading compressed files by requiring an xopen version that uses an
+  external pigz process even for reading compressed input files (not only for
+  writing).
+- Fix --report=minimal not working.
+- Add a --fasta option for forcing that FASTA is written to standard output
+  even when input is FASTQ. Previously, forcing FASTA was only possible by
+  providing an output file name.
+
 * Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.3-1
 - V2.3
   - :issue:`378`: The ``--pair-adapters`` option, added in version 2.1, was not

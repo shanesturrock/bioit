@@ -1,11 +1,11 @@
-%define priority 3857
+%define priority 3858
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.57
+Version:	38.58
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -214,6 +214,20 @@ fi
 %files
 
 %changelog
+* Fri Jul 19 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.58-1
+- Fixed PreParser failure when encountering a standalone equals sign.
+- Fixed a bug in automatically setting Sketch blacklists for known databases.
+- Updated server-starting shellscripts to point to the new URLs.
+- Renamed Missing Adapter as Absent Adapter.
+- Changed ambiguity logic to better classify reads when there are 2 passes.
+- Adapter alignment is slightly more lenient when an inverted repeat is
+  detected.
+- Slightly accelerated adapter detection by changing conditionals to array
+  lookups in the inner loop.
+- SendSketch can now load TaxTree.
+- Increased Sketch number of comparisons returned, to compensate for potential
+  los ses during TaxFilter.
+
 * Fri Jul 05 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.57-1
 - 38.56
   - Improved and accelerated IceCreamFinder adapter detection.

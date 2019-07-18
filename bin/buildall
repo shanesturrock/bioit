@@ -6,14 +6,14 @@
 ${HOME}/bioit/apps/abyss/SPEC/build 2.1.5
 ${HOME}/bioit/apps/augustus/SPEC/build 3.3.2
 ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.1
-${HOME}/bioit/apps/bbmap/SPEC/build 38.57
+${HOME}/bioit/apps/bbmap/SPEC/build 38.58
 ${HOME}/bioit/apps/bcftools/SPEC/build 1.9
 ${HOME}/bioit/apps/bedtools2/SPEC/build 2.28.0
 ${HOME}/bioit/apps/bismark/SPEC/build 0.22.1
 ${HOME}/bioit/apps/bowtie/SPEC/build 1.2.2
 ${HOME}/bioit/apps/bowtie2/SPEC/build 2.3.5.1
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
-${HOME}/bioit/apps/cutadapt/SPEC/build 2.3
+${HOME}/bioit/apps/cutadapt/SPEC/build 2.4
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
 ${HOME}/bioit/apps/FastQC/SPEC/build 0.11.8
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.1.0
