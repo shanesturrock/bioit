@@ -1,11 +1,11 @@
-%define priority 2503
+%define priority 2600
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.5.3
+Version:	2.6.0
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Jul 26 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.6.0-1
+- Increase max cigar length for popup info from 60 to 1000. See issue #667
+
 * Fri May 31 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.5.3-1
 - base64 encode proxy password field
 

@@ -21,7 +21,7 @@ VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Installing IGV ${VERSION} on ${DATE}"
 cd /opt/bioit/igv/src
-wget http://data.broadinstitute.org/igv/projects/downloads/2.5/IGV_Linux_${VERSION}.zip
+wget http://data.broadinstitute.org/igv/projects/downloads/${VERSION:0:3}/IGV_Linux_${VERSION}.zip
 unzip IGV_Linux_${VERSION}.zip
 mkdir /opt/bioit/igv/${VERSION}
 mv IGV_Linux_${VERSION}/* /opt/bioit/igv/${VERSION}

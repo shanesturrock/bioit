@@ -1,11 +1,11 @@
-%define priority 3858
+%define priority 3859
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.58
+Version:	38.59
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -214,6 +214,21 @@ fi
 %files
 
 %changelog
+* Fri Jul 26 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.59-1
+- Added json output and stats redirection to IceCreamFinder.
+- Added preliminary SamStreamer support to IceCreamFinder.
+- SamStreamer now supports a limited number of reads.
+- Added libbbtools.dylib (Mac version) to jni folder.  Thanks Jie Wang for
+  compiling it!
+- Updated makefile.osx and jni readme.
+- CoveragePileup now detects and aborts when a scaffold is specified multiple
+  times with different lengths.
+- Added ByteBuilder.print(float x, int decimals).
+- Added asrhist and irsrhist to IceCreamFinder.
+- Fixed an unnecessary array copy in adapter detection; X is no properly added
+  to reads with adapters detected.
+- Added trim support to IceCreamFinder.
+
 * Fri Jul 19 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.58-1
 - Fixed PreParser failure when encountering a standalone equals sign.
 - Fixed a bug in automatically setting Sketch blacklists for known databases.

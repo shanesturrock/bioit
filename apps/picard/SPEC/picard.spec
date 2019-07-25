@@ -1,11 +1,11 @@
-%define priority 22003
+%define priority 22004
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.20.3
+Version:	2.20.4
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,19 @@ fi
 %files
 
 %changelog
+* Fri Jul 26 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.4-1
+- GL-422 Move MergePedIntoVCF into picard (#1356)
+- MergeSamFiles from cloud (#1346)
+- Change default to not throw exception for a call on a zeroed out assay
+  Reverted InfiniumDataFile byteArray <-> Int/Float back to bitwise operations
+  for performance reasons (using ByteBuffer was very slow) Added tests
+- Fixes several small issues that needed some help (#1316)
+- refactored IntervalListTools to use a "map-reduce" paradigm (#1319)
+- Add MIN_TARGET_COVERAGE to HsMetrics (#1345)
+- Fix travis build badge (#1357)
+- VcfToAdpc a tool to generate an adpc.bin file (Illumina genotyping intensity
+  data) from a Genotyping Arrays VCF.
+
 * Fri Jul 05 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.3-1
 - Bugfix: Update default platform for IlluminaBasecallsToSam (#1351)
 - Recover from side effects introduced in CollectIndependentReplicatesMetric
