@@ -78,7 +78,7 @@
 # This is just a small best practise for all ssh connections
 # Must be done after user creation
 - name: Setup SSH Security hardening
-  hosts: vms
+  hosts: all
   gather_facts: no
   tags: ['security']
   become: yes

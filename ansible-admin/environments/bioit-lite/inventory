@@ -8,6 +8,9 @@ bioit+com1
 bioit+com2
 bioit+com3
 
+[slurm-test]
+bioit+com1
+
 [slurm-submit-hosts]
 # Additional hosts that jobs can be submitted from
 bioit+rtgwork
@@ -23,10 +26,10 @@ bioit+bioitlite
 # setup (NFS mounts, user/groups created)
 bioit+rtgwork
 
-[hypervisor]
-# This guy isn't a VM, so we're more careful what tasks get run here
+[nfsserver]
+# This is a VM but exports NFS, so we're more careful what tasks get run here
 # Currently just user/group account created for quota application on NFS exports
-bioit
+bioit+nfs
 
 [vms:children]
 slurm-controllers
