@@ -1,6 +1,6 @@
 # Mount points for bioit common data
 - name: Mount for bioit executables
-  mount: state=mounted src=chips:/opt/bioit path=/opt/bioit fstype=nfs opts="defaults"
+  mount: state=mounted src=nfs:/opt/bioit path=/opt/bioit fstype=nfs opts="defaults"
 
 - name: Mount for biological databases
   mount: state=mounted src=adenine:/export/nas/databases path=/databases fstype=nfs
@@ -12,17 +12,17 @@
   seboolean: name=use_nfs_home_dirs persistent=yes state=yes
 
 - name: Mount for homes
-  mount: state=mounted src=chips:/home path=/home fstype=nfs opts="defaults"
+  mount: state=mounted src=nfs:/home path=/home fstype=nfs opts="defaults"
 
 # Mounts for MasseyIFS
 - name: Mount for massey-ifs-group scratch
-  mount: state=mounted src=chips:/scratch/massey-ifs-group path=/scratch/massey-ifs-group fstype=nfs opts="defaults" 
+  mount: state=mounted src=nfs:/scratch/massey-ifs-group path=/scratch/massey-ifs-group fstype=nfs opts="defaults" 
 
 - name: Mount for massey-ifs-group work
-  mount: state=mounted src=chips:/work/massey-ifs-group path=/work/massey-ifs-group fstype=nfs opts="defaults"
+  mount: state=mounted src=nfs:/work/massey-ifs-group path=/work/massey-ifs-group fstype=nfs opts="defaults"
 
 - name: Mount for massey-ifs-group sequencing
-  mount: state=mounted src=chips:/sequencing/massey-ifs-group path=/sequencing/massey-ifs-group fstype=nfs opts="defaults"
+  mount: state=mounted src=nfs:/sequencing/massey-ifs-group path=/sequencing/massey-ifs-group fstype=nfs opts="defaults"
 
 # Create symlinks
 
