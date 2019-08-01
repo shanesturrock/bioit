@@ -1,3 +1,4 @@
 version=3
-http://ccb.jhu.edu/software/stringtie .*/stringtie-([0-9].[0-9].[0-9])\.tar\.gz
+https://github.com/gpertea/stringtie/releases (?:.*/)?stringtie-?(\d[\d\.]*)\.tar\.gz
+#http://ccb.jhu.edu/software/stringtie .*/stringtie-([0-9].[0-9].[0-9])\.tar\.gz
 #http://ccb.jhu.edu/software/stringtie .*/stringtie-([0-9].[0-9].[0-9][a-z])\.tar\.gz

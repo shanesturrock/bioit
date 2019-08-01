@@ -1,11 +1,11 @@
-%define priority 136
+%define priority 200
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		stringtie
-Version:	1.3.6
+Version:	2.0
 Release:	1%{?dist}
 Summary:	StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts.
 Group:		Applications/Engineering
@@ -46,6 +46,14 @@ fi
 %files
 
 %changelog
+* Fri Aug 02 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.0-1
+- added support for long read alignments (enabled with -L option)
+- added a new "super-reads" module (found in the SuperReads_RNA directory of
+  the source distribution) which can be used to perform de-novo assembly and
+  alignment of RNA-Seq reads preparing them for assembly with StringTie
+- overall improved handling of read alignments and their transcription strand
+  assignment
+
 * Fri May 10 2019 Shane Sturrock <shane.sturrock@gmail.com> - 1.3.6-1
 - fixing a GFF/GTF sorting issue causing occasional errors when the --merge
   option was used

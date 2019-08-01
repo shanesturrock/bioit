@@ -21,7 +21,9 @@ VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Building stringtie ${VERSION} on ${DATE}"
 cd /opt/bioit/stringtie/src
-wget http://ccb.jhu.edu/software/stringtie/dl/stringtie-${VERSION}.tar.gz
+#wget http://ccb.jhu.edu/software/stringtie/dl/stringtie-${VERSION}.tar.gz
+wget https://github.com/gpertea/stringtie/archive/v${VERSION}.tar.gz
+mv v${VERSION}.tar.gz stringtie-${VERSION}.tar.gz
 tar xvf stringtie-${VERSION}.tar.gz
 cd stringtie-${VERSION}
 make release
