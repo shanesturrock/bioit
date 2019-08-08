@@ -1,11 +1,11 @@
-%define priority 215
+%define priority 220
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.1.5
+Version:	2.2.0
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -95,6 +95,12 @@ fi
 %files
 
 %changelog
+* Fri Aug 09 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.2.0-1
+- Construct a counting bloom filter instead of a cascading bloom filter.
+- abyss-bloom:
+  - Add 'counting' as valid argument to '-t' option to build a counting bloom
+    filter
+
 * Fri Dec 07 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.5-1
 - Compiler fixes and increase stack size limits to avoid stack overflows.
 - Abyss-pe:

@@ -1,11 +1,11 @@
-%define priority 2601
+%define priority 2602
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.6.1
+Version:	2.6.2
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Aug 09 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.6.2-1
+- fix "exists" test
+
 * Fri Aug 02 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.6.1-1
 - draw bedpe arcs between absolute center of features, don't round down to an
   int

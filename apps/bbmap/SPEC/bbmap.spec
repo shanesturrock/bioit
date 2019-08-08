@@ -1,11 +1,11 @@
-%define priority 3859
+%define priority 3861
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.59
+Version:	38.61b
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -214,6 +214,35 @@ fi
 %files
 
 %changelog
+* Fri Aug 09 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.61b-1
+- 38.60
+  - maxReads is now a required parameter for SamStreamer; this allows
+    acceleration of some other tools when reads are limited.
+  - Redid Sketch taxfilter.  Now there are two different taxfilters, white
+    (include) and black (exclude).  The flags have changed.
+  - Organism names are now acceptable for TaxFilter.
+  - JNI mode for IceCreamFinder and BBMap is now automatic on NERSC or
+    Mac/Linux AMD64 systems.
+  - Moved OS/CPU environment detection from Data to Shared.
+  - Restarted Sketch servers; they will no longer handle the old taxonomy
+    filtering flags.
+  - Added reformat complement flag.
+  - Fixed spelling of complement in some cases.
+  - Added Sketch taxID to Sketch lookup table.
+  - Added Sketch server reference mode.
+  - Sketch taxonomy and metadata filtering are now handled by DisplayParams,
+    and done prior to comparison, exactly once, and in threads.
+- 38.61
+  - Added Sketch KID, WKID, and hits comparators.
+  - Revised TaxonomyGuide.txt.
+  - Wrote ThreadWaiter and simplified A_SampleMT.
+  - Fixed an accidental use of bgzip for decompression.
+  - Fixed an erroneous error message (header with no bases) from splitting
+    reads of target length in FastaReadInputStream.
+  - Added fixsra and addpairnum flags to RenameReads.
+  - Modified and moved ncbi and sketch scripts to pipelines/fetch and
+    pipelines/server.
+
 * Fri Jul 26 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.59-1
 - Added json output and stats redirection to IceCreamFinder.
 - Added preliminary SamStreamer support to IceCreamFinder.

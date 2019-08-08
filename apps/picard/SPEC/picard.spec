@@ -1,11 +1,11 @@
-%define priority 22004
+%define priority 22005
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.20.4
+Version:	2.20.5
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,15 @@ fi
 %files
 
 %changelog
+* Fri Aug 09 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.5-1
+- Trigger travis with a small commit.
+- CreateVerifyIDIntensityContaminationMetricsFile A little program to create a
+  standard picard metrics file from the output of VerifyIDIntensity.
+- updating htsjdk to 2.20.0 (#1367)
+- Remove docker_helper usage in docker script Remove docker-helper.sh itself
+  Switch base base image to google managed image
+- Yf debug sam collector error (#1362)
+
 * Fri Jul 26 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.4-1
 - GL-422 Move MergePedIntoVCF into picard (#1356)
 - MergeSamFiles from cloud (#1346)
