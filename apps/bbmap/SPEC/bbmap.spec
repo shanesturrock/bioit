@@ -1,11 +1,11 @@
-%define priority 3861
+%define priority 3862
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.61b
+Version:	38.62
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -80,6 +80,7 @@ alternatives \
    --slave %{_bindir}/diskbench.sh diskbench.sh /opt/bioit/%{name}/%{version}/diskbench.sh \
    --slave %{_bindir}/estherfilter.sh estherfilter.sh /opt/bioit/%{name}/%{version}/estherfilter.sh \
    --slave %{_bindir}/explodetree.sh explodetree.sh /opt/bioit/%{name}/%{version}/explodetree.sh \
+   --slave %{_bindir}/fetchproks.sh fetchproks.sh /opt/bioit/%{name}/%{version}/fetchproks.sh \
    --slave %{_bindir}/filterassemblysummary.sh filterassemblysummary.sh /opt/bioit/%{name}/%{version}/filterassemblysummary.sh \
    --slave %{_bindir}/filterbarcodes.sh filterbarcodes.sh /opt/bioit/%{name}/%{version}/filterbarcodes.sh \
    --slave %{_bindir}/filterbycoverage.sh filterbycoverage.sh /opt/bioit/%{name}/%{version}/filterbycoverage.sh \
@@ -94,6 +95,7 @@ alternatives \
    --slave %{_bindir}/filtervcf.sh filtervcf.sh /opt/bioit/%{name}/%{version}/filtervcf.sh \
    --slave %{_bindir}/fungalrelease.sh fungalrelease.sh /opt/bioit/%{name}/%{version}/fungalrelease.sh \
    --slave %{_bindir}/fuse.sh fuse.sh /opt/bioit/%{name}/%{version}/fuse.sh \
+   --slave %{_bindir}/gbff2gff.sh gbff2gff.sh /opt/bioit/%{name}/%{version}/gbff2gff.sh \
    --slave %{_bindir}/getreads.sh getreads.sh /opt/bioit/%{name}/%{version}/getreads.sh \
    --slave %{_bindir}/gi2ancestors.sh gi2ancestors.sh /opt/bioit/%{name}/%{version}/gi2ancestors.sh \
    --slave %{_bindir}/gi2taxid.sh gi2taxid.sh /opt/bioit/%{name}/%{version}/gi2taxid.sh \
@@ -214,6 +216,31 @@ fi
 %files
 
 %changelog
+* Fri Aug 16 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.62-1
+- Added ACGT count tracking and printgc to Sketch.
+- Sketch JSON format now caps decimals places of some numbers.
+- MergeSorted can now use subprocess for decompression.
+- Added linear sketch sizing via the density flag.
+- Added polyploid support for MutateGenome (ploidy and hetrate flags).
+- Added nohomopolymers flag to MutateGenome.
+- Updated calcmem.sh with path for pigz.
+- Revised fetch pipeline scripts again.
+- Added plasmids to prokprot; removed viroids which no longer exist.
+- Sambamba should no longer print the banner.
+- Wrote FetchProks and fetchproks.sh, for downloading one genome assembly and
+  gff per prokaryotic genus.
+- Updated model.pgm with all archaea and one bacteria per genus.
+- Deleted spurious copy of GffLine.
+- Split VcfToGff off of GffLine.
+- Moved Gff-related classes to gff package.
+- Wrote GbffFile, GbffLocus, and GbffFeature.
+- Fixed equals method in StringNum.
+- Rewrote CompareGff to take sequence name and type into account.
+- Generated pgms for plastid and plasmid, but they made bacterial calling
+  worse.
+- Enabled 5S long kmer support (9-mers) for CallGenes.  Might be worthwhile
+  ignoring the 1-count kmers.
+
 * Fri Aug 09 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.61b-1
 - 38.60
   - maxReads is now a required parameter for SamStreamer; this allows

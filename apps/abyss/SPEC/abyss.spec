@@ -1,11 +1,11 @@
-%define priority 220
+%define priority 221
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.2.0
+Version:	2.2.1
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -95,6 +95,10 @@ fi
 %files
 
 %changelog
+* Fri Aug 16 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.2.1-1
+- Release version 2.2.1
+- Fix abyss-bloom for macOS
+
 * Fri Aug 09 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.2.0-1
 - Construct a counting bloom filter instead of a cascading bloom filter.
 - abyss-bloom:
