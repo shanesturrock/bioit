@@ -1,11 +1,11 @@
-%define priority 22005
+%define priority 22006
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.20.5
+Version:	2.20.6
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,18 @@ fi
 %files
 
 %changelog
+* Fri Aug 23 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.6-1
+- adding logging to help debug a JVM core-dump (#1387)
+- Update instructions for running single tests (#1382)
+- ReorderSam was having trouble when new dictionary is larger than old one
+  (#1074)
+- relaxing requirements for VCFIndex in tools that don't need one (#1295)
+- Add levenshtein distance to eibc (#1331)
+- Added a MIN_HISTOGRAM_WIDTH to CollectInsertSizeMetrics. (#1368)
+- Adds a buffer to the index stream (#1348)
+- revert base image change due to issues building on dockerhub (#1371)
+- Upgrades to CompareSAMs (for functional equivalence) (#1305)
+
 * Fri Aug 09 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.5-1
 - Trigger travis with a small commit.
 - CreateVerifyIDIntensityContaminationMetricsFile A little program to create a

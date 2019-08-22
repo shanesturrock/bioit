@@ -1,11 +1,11 @@
-%define priority 3862
+%define priority 3863
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.62
+Version:	38.63
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -216,6 +216,13 @@ fi
 %files
 
 %changelog
+* Fri Aug 23 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.63-1
+- Gene-calling long kmers are now uncompressed.
+- tRNA and 5S now use 10-mers instead of 9-mers; plastid, plasmid, and viral
+  sources are included.
+- Fixed some remaining crash bugs from adding GC content to Sketches.
+- Updated RefSeq protein sketching pipeline.
+
 * Fri Aug 16 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.62-1
 - Added ACGT count tracking and printgc to Sketch.
 - Sketch JSON format now caps decimals places of some numbers.
