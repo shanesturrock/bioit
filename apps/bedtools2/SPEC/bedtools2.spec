@@ -1,11 +1,11 @@
-%define priority 2280
+%define priority 2290
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bedtools2
-Version:	2.28.0
+Version:	2.29.0
 Release:	1%{?dist}
 Summary:	Tools for handing BED files
 Group:		Applications/Engineering
@@ -77,6 +77,27 @@ fi
 %files
 
 %changelog
+* Fri Sep 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.29.0-1
+- Added a new -C option to the intersect tool that separately reports the count
+  of intersections observed for each database (-b) file given. Formerly, the -c
+  option reported to sum of all intersections observed across all database 
+  files.
+- Fixed an important bug in intersect that prevented some split reads from
+  being counted properly with using the -split option with the -f option.
+- Fixed a bug in shuffle such that shuffled regions should have the same strand
+  as the chose -incl region.
+- Added a new -L option to L`imit the output of the `complement tool to solely
+  the chromosomes that are represented in the -i file.
+- Fixed a regression in the multicov tool introduced in 2.28 that caused
+  incorrect counts.
+- Added support for multi-mapping reads in the bamtofastq tool.
+- Fixed a bug that prevented the “window” tool from properly adding interval
+  “slop” to BAM records.
+- Fixed a bug that caused the slop tool to not truncate an interval’s end
+  coordinate when it overlapped the end of a chromosome.
+- Added support for the “=” and “X” CIGAR operations to bamtobed.
+- Various other minor bug fixes and improvements to documentation.
+
 * Fri Mar 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.28.0-1
 - Included support for htslib to enable CRAM support and long-term stability
   (Thanks to Hao Hou!)

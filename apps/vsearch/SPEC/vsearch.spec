@@ -1,11 +1,11 @@
-%define priority 2136
+%define priority 2140
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.13.6
+Version:	2.14.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,13 @@ fi
 %files
 
 %changelog
+* Fri Sep 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.0-1
+- 2.14.0
+  - Added relabel_self option. Added fasta_width, sizein, sizeout and
+    relabelling options as valid for certain commands.
+- 2.13.7
+  - Fixes a bug when generating consensus sequences.
+
 * Fri Jul 05 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.6-1
 - 2.13.5
   - Added cut command to fragment sequences at restriction sites.

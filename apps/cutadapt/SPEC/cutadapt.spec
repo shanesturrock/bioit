@@ -1,11 +1,11 @@
-%define priority 240
+%define priority 250
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	2.4
+Version:	2.5
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,17 @@ fi
 %files
 
 %changelog
+* Fri Sep 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.5-1
+- Multicore is now supported even when using --untrimmed-output,
+  --too-short-output, --too-long-output or the corresponding ...-paired-output
+  options.
+- Using --info-file no longer crashes when processing paired-end data.
+  However, the info file itself will only contain results for R1.
+- Options -e/--no-indels/-O were ignored for linked adapters
+- When a "Too many open files" error occurs during demultiplexing,
+  Cutadapt can now automatically raise the limit and re-try if the limit is a
+  "soft" limit.
+
 * Fri Jul 19 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.4-1
 - Implement support for demultiplexing paired-end reads that use combinatorial
   indexing (“combinatorial demultiplexing”).

@@ -1,11 +1,11 @@
-%define priority 22006
+%define priority 22007
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.20.6
+Version:	2.20.7
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,19 @@ fi
 %files
 
 %changelog
+* Fri Sep 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.7-1
+- Initial Move Calculate the detail metric correctly (on a per-genotype basis).
+  Add more tests Add test to handle multi-sample VCF Refactor detail->summary
+  metrics accumulation. Fix CreateVerifyIDIntensityContaminationMetricsFile to
+  handle LLK and LLK0 as doubles. Added new metric, refined naming of others.
+  Enhanced multiple sample tests.
+- Updating gradle to 5.6 (#1380)
+- Updating NIO dependency and fixing a dependency issue (#1391)
+- Update to htsjdk 2.20.3 (#1381)
+- Extend travis build matrix to separate Barclay tests from legacy tests.
+  (#952)
+- PO-18867 Catch NaN Percent_Duplication edge case (#1389)
+
 * Fri Aug 23 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.6-1
 - adding logging to help debug a JVM core-dump (#1387)
 - Update instructions for running single tests (#1382)
