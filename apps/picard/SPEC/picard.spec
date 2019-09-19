@@ -1,11 +1,11 @@
-%define priority 22007
+%define priority 22008
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.20.7
+Version:	2.20.8
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,17 @@ fi
 %files
 
 %changelog
+* Fri Sep 20 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.8-1
+- Throw exception in MergeBamAlignments if UNMAPPED_BAM has mapped reads
+  (#1394)
+- Order the MarkDuplicatesMetric file (#1398)
+- Remove unnecessary import of com.sun.xml.internal class (#1401)
+- Propagate errors from threads and add error logging (#1393)
+- Fixes a bug in the determination of the distance to the second nearest
+  barcode. (#1395)
+- typo (#1392)
+- Revert UpdateVcfSequenceDictionary handles stdout logic and repair test
+
 * Fri Sep 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.7-1
 - Initial Move Calculate the detail metric correctly (on a per-genotype basis).
   Add more tests Add test to handle multi-sample VCF Refactor detail->summary

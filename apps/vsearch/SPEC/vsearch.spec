@@ -1,11 +1,11 @@
-%define priority 2140
+%define priority 2141
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.14.0
+Version:	2.14.1
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,10 @@ fi
 %files
 
 %changelog
+* Fri Sep 20 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.1-1
+- Fixed bug with sequences written to file specified with fastaout_rev for
+  commands fastx_filter and fastq_filter.
+
 * Fri Sep 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.0-1
 - 2.14.0
   - Added relabel_self option. Added fasta_width, sizein, sizeout and
