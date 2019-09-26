@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/augustus/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/augustus/SPEC/build 3.3.2
+    ${HOME}/bioit/apps/augustus/SPEC/build 3.3.3
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load augustus/3.3.2
+    module load augustus/3.3.3
     which augustus
     augusutus
 
@@ -22,10 +22,9 @@ If all is good, you can move to the RPM building step.
 
 ## Manual Build
 
-Download the binary tarball from [here](http://bioinf.uni-greifswald.de/augustus/binaries/augustus-3.3.2.tar.gz) into `/opt/bioit/augustus/src`, untar it and cd into the resulting directory then run the following:
+Download the binary tarball from [here](http://bioinf.uni-greifswald.de/augustus/binaries/augustus-3.3.3.tar.gz) into `/opt/bioit/augustus/src`, untar it and cd into the resulting directory then run the following:
 
-    mv augustus augustus-3.3.2
-    cd augustus-3.3.2
+    cd augustus-3.3.3
     make clean
 
 The binaries supplied with this won't run so you need to recompile from source. This requires bamtools as a dependency and rather than run the version already installed it is better to include the dependency inside this package separately.
@@ -35,18 +34,18 @@ The binaries supplied with this won't run so you need to recompile from source. 
     cd bamtools-2.4.1
     mkdir build
     cd build
-    cmake -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/augustus/src/augustus-3.3.2/bamtools ..
+    cmake -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/augustus/src/augustus-3.3.3/bamtools ..
     make all
     make install
 
 To use this internal version of bamtools a few files need to be patched as follows:
 
-    cd /opt/bioit/augustus/src/augustus-3.3.2
+    cd /opt/bioit/augustus/src/augustus-3.3.3
     # patch bam2hints Makefile
-    sed "s+INCLUDES = /usr/include/bamtools+INCLUDES = /opt/bioit/augustus/src/augustus-3.3.2/bamtools/include/bamtools+" --in-place auxprogs/bam2hints/Makefile
-    sed "s+LIBS = -lbamtools -lz+LIBS = /opt/bioit/augustus/src/augustus-3.3.2/bamtools/lib/bamtools/libbamtools.a -lz+" --in-place auxprogs/bam2hints/Makefile
+    sed "s+INCLUDES = /usr/include/bamtools+INCLUDES = /opt/bioit/augustus/src/augustus-3.3.3/bamtools/include/bamtools+" --in-place auxprogs/bam2hints/Makefile
+    sed "s+LIBS = -lbamtools -lz+LIBS = /opt/bioit/augustus/src/augustus-3.3.3/bamtools/lib/bamtools/libbamtools.a -lz+" --in-place auxprogs/bam2hints/Makefile
     # patch filterBam Makefile
-    sed "s+BAMTOOLS = /usr/include/bamtools+BAMTOOLS = /opt/bioit/augustus/src/augustus-3.3.2/bamtools+" --in-place auxprogs/filterBam/src/Makefile
+    sed "s+BAMTOOLS = /usr/include/bamtools+BAMTOOLS = /opt/bioit/augustus/src/augustus-3.3.3/bamtools+" --in-place auxprogs/filterBam/src/Makefile
     sed "s+INCLUDES = -I\$(BAMTOOLS) -Iheaders -I./bamtools+INCLUDES = -I\$(BAMTOOLS)/include/bamtools -Iheaders -I./bamtools+" --in-place auxprogs/filterBam/src/Makefile
     sed "s+LIBS = -lbamtools -lz+LIBS = \$(BAMTOOLS)/lib/bamtools/libbamtools.a -lz+" --in-place auxprogs/filterBam/src/Makefile
     # patch bam2wig Makefile
@@ -58,7 +57,7 @@ To use this internal version of bamtools a few files need to be patched as follo
 
 The auxprog bam2wig won't build without the following:
 
-    cd /opt/bioit/augustus/src/augustus-3.3.2
+    cd /opt/bioit/augustus/src/augustus-3.3.3
     # Build dependencies for bam2wig
     echo "Getting htslib"
     git clone https://github.com/samtools/htslib.git
@@ -98,8 +97,8 @@ Now build augustus
 
 Lastly, the permissions on the install need to be fixed otherwise users will get a permission denied error when trying to use it:
 
-    find /opt/bioit/augustus/3.3.2 -type d -exec chmod a+rx {} +
-    find /opt/bioit/augustus/3.3.2 -type f -exec chmod a+r {} +
+    find /opt/bioit/augustus/3.3.3 -type d -exec chmod a+rx {} +
+    find /opt/bioit/augustus/3.3.3 -type f -exec chmod a+r {} +
 
 ## Module setup
 
@@ -109,7 +108,7 @@ Add a module file in `/opt/bioit/modulefiles/augustus/` for this version by copy
     #
     #  augustus module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/augustus/3.3.2/
+    prepend-path  PATH         /opt/bioit/augustus/3.3.3/
 
 ## RPM
 

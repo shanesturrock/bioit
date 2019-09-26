@@ -4,7 +4,7 @@
 # The versions are known to work.
 
 ${HOME}/bioit/apps/abyss/SPEC/build 2.2.1
-${HOME}/bioit/apps/augustus/SPEC/build 3.3.2
+${HOME}/bioit/apps/augustus/SPEC/build 3.3.3
 ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.1
 ${HOME}/bioit/apps/bbmap/SPEC/build 38.63
 ${HOME}/bioit/apps/bcftools/SPEC/build 1.9

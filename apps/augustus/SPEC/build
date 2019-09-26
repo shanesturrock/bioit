@@ -23,7 +23,7 @@ echo "Building augustus ${VERSION} on ${DATE}"
 cd /opt/bioit/augustus/src
 wget http://bioinf.uni-greifswald.de/augustus/binaries/augustus-${VERSION}.tar.gz
 tar xvf augustus-${VERSION}.tar.gz
-mv augustus augustus-${VERSION}
+#mv augustus augustus-${VERSION}
 cd augustus-${VERSION}
 make clean
 # Grab bamtools dependency

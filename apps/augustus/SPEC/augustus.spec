@@ -1,11 +1,11 @@
-%define priority 332
+%define priority 333
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		augustus
-Version:	3.3.2
+Version:	3.3.3
 Release:	1%{?dist}
 Summary:	AUGUSTUS is a gene prediction program for eukaryotes
 Group:		Applications/Engineering
@@ -49,6 +49,16 @@ fi
 %files
 
 %changelog
+* Fri Sep 27 2019 Shane Sturrock <shane.sturrock@gmail.com> - 3.3.3-1
+- new script tfix_in_frame_stop_codon_genes.py that replaces genes where
+  spliced in-frame stop codons were predicted
+- new scripts: compare_masking.pl, merge_masking.pl
+- new program bamToWig.py as alternative to bam2wig C++ binary
+- fix warnings on new GCC compiler (8.3)
+- introduced unit tests of C++ code (make test)
+- bugfixes (lex.cc, autoAug.pl)
+- DIAMOND as alternative to BLAST in aa2nonred.pl
+
 * Fri Oct 12 2018 Shane Sturrock <shane.sturrock@gmail.com> - 3.3.2-1
 - bugfixes in comparative augustus, utrrnaseq
 - new species Chiloscyllium punctatum (bamboo shark), Scyliorhinus torazame
