@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/picard/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/picard/SPEC/build 2.20.8
+    ${HOME}/bioit/apps/picard/SPEC/build 2.21.1
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load picard/2.20.8
+    module load picard/2.21.1
     which picard
     picard SortVcf --version
 
@@ -24,22 +24,22 @@ If all is good, you can move to the RPM building step.
 
 You can't build from the downloaded zip unfortuantely. You have to clone the git repo into `/opt/bioit/picard/src` using the following:
 
-    git clone -b 2.20.8 https://github.com/broadinstitute/picard.git
-    mv picard picard-2.20.8
+    git clone -b 2.21.1 https://github.com/broadinstitute/picard.git
+    mv picard picard-2.21.1
 
 Build the `picard.jar` file by running the following:
 
-    cd picard-2.20.8
+    cd picard-2.21.1
     ./gradlew shadowJar
 
 Now make a directory for the jar to go into and move it into there:
 
-    mkdir /opt/bioit/picard/2.20.8
-    mv build/libs/picard.jar /opt/bioit/picard/2.20.8
+    mkdir /opt/bioit/picard/2.21.1
+    mv build/libs/picard.jar /opt/bioit/picard/2.21.1
 
 Finally, copy the picard wrapper from inside the SPEC directory of the git repository:
 
-    cp ~/bioit/apps/picard/SPEC/picard /opt/bioit/picard/2.20.8
+    cp ~/bioit/apps/picard/SPEC/picard /opt/bioit/picard/2.21.1
 
 This wrapper figures out what directory it is in and sets `picard_dir` to that so there's no need to edit it.
 
@@ -53,7 +53,7 @@ Add a module file in `/opt/bioit/modulefiles/picard/` for this version by copyin
     #
     #  picard module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/picard/2.20.8/
+    prepend-path  PATH         /opt/bioit/picard/2.21.1/
 
 ## RPM
 

@@ -19,10 +19,10 @@ ${HOME}/bioit/apps/FastQC/SPEC/build 0.11.8
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.1.0
 ${HOME}/bioit/apps/hmmer/SPEC/build 3.2.1
 ${HOME}/bioit/apps/htslib/SPEC/build 1.9
-${HOME}/bioit/apps/igv/SPEC/build 2.6.2
+${HOME}/bioit/apps/igv/SPEC/build 2.7.1
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.9.0+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
-${HOME}/bioit/apps/picard/SPEC/build 2.20.8
+${HOME}/bioit/apps/picard/SPEC/build 2.21.1
 ${HOME}/bioit/apps/R-core/SPEC/build 3.6.1
 ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.10.1
 ${HOME}/bioit/apps/samtools/SPEC/build 1.9

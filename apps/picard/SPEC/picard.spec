@@ -1,11 +1,11 @@
-%define priority 22008
+%define priority 22101
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.20.8
+Version:	2.21.1
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,23 @@ fi
 %files
 
 %changelog
+* Fri Oct 18 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.1-1
+- Fixing up tests in MarkDuplicates so that tests with duplex UMIs are handled
+  properly. (#1404)
+- Make crosscheck take a file->sample map input so that we can crosscheck to a
+  un-duplicated vcf. (#1303)
+- Improvements to the locus iteration. (#1376)
+- Added in a progress meter to CollectSamErrorMetrics.
+- Added a flag to enable jumping to loci rather than iterating through all
+  variants / loci in order each run.
+- Added a test to CollectHsMetrics to harden against future code changes
+  (#1386)
+- Added a test to CollectHsMetrics to harden against future code changes.
+- removed non-working (and unneeded) code in reflectiveCopy
+- added some protection against NPE
+- cleaned-up some code formatting issues.
+- sanitized some sam files.
+
 * Fri Sep 20 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.20.8-1
 - Throw exception in MergeBamAlignments if UNMAPPED_BAM has mapped reads
   (#1394)
