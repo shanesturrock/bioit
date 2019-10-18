@@ -7,6 +7,9 @@ bioit+control
 bioit+com1
 bioit+com2
 bioit+com3
+bioit+com4
+bioit+com5
+bioit+com6
 
 [slurm-test]
 bioit+com1
