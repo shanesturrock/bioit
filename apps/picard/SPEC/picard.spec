@@ -1,11 +1,11 @@
-%define priority 22101
+%define priority 22102
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.21.1
+Version:	2.21.2
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,15 @@ fi
 %files
 
 %changelog
+* Fri Nov 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.2-1
+- Fix bug in VcfToAdpc Some poor performing sites in VCFs have null normalized
+  X or Y intensity. This fixes the code to handle these.
+- Speeds up MarkDuplicates on queryname input by using the in memory read-ends
+  map. (#1411)
+- Document two CLPs
+- Update plugin versions for github-pages documentation (#1405)
+- Removing a spurious newline from the logging output of ReorderSam (#1403)
+
 * Fri Oct 18 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.1-1
 - Fixing up tests in MarkDuplicates so that tests with duplex UMIs are handled
   properly. (#1404)

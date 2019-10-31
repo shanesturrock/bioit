@@ -1,11 +1,11 @@
-%define priority 250
+%define priority 260
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	2.5
+Version:	2.6
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,16 @@ fi
 %files
 
 %changelog
+* Fri Nov 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.6-1
+- Do not show animated progress when ``--quiet`` is used.
+- When two adapters align to a read equally well (in terms of the number of
+  matches), prefer the alignment that has fewer errors.
+- Give priority to adapters given earlier on the command line. Previously, the
+  priority was: All 3' adapters, all 5' adapters, all anywhere adapters. In
+  rare cases this could lead to different results.
+- Fix an issue preventing Cutadapt from being used on Windows.
+- This release no longer supports Python 3.4 (which has reached end of life).
+
 * Fri Sep 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.5-1
 - Multicore is now supported even when using --untrimmed-output,
   --too-short-output, --too-long-output or the corresponding ...-paired-output
