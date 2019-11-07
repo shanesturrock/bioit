@@ -1,11 +1,11 @@
-%define priority 2701
+%define priority 2702
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.7.1
+Version:	2.7.2
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Nov 08 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.7.2-1
+- Fix line plot error (see #715)
+
 * Fri Oct 18 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.7.1-1
 - remove unused code
 - catch error when removing provisioning URL (don't try to load "")
