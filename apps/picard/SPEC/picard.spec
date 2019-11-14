@@ -1,11 +1,11 @@
-%define priority 22102
+%define priority 22103
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.21.2
+Version:	2.21.3
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,11 @@ fi
 %files
 
 %changelog
+* Fri Nov 15 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.3-1
+- Yf optimize query for independent replicate metrics (#1420)
+- Make CheckIlluminaDirectory log if faking files (#1417)
+- Modified CollectAlignmentSummaryMetric to collect more metrics (#1374)
+
 * Fri Nov 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.2-1
 - Fix bug in VcfToAdpc Some poor performing sites in VCFs have null normalized
   X or Y intensity. This fixes the code to handle these.
