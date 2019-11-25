@@ -433,6 +433,21 @@ bioit_user_list:
       - "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAzEUUwX9BDsF92s/6tCjyVtx3SP4CuOWjQ4JhPrIAIp7uEdnCqOy4bn3zgyYpBAJDmKd/ZOlH693VlrwGQBpRrGyDC+YD31zldWJZVEDbsgli4PAiVkmn0p/Mjjom/Zj63WIRpfBFfK0mUonHXbokdn4S7FZrBE5zlP7tEqTOmIeNuB+sho0jBUrjqK8IgWOSVo2hjMPqVuv31zrz4mZrC+b+h2/U9pweNCNre0B01aXw3TSZmhAtZ4FHOiAUDVidwy3n7/GgetWMGeRANZX6IIxR6i8+orpck8irpeR8LYBjqYsHL6rb2TQZXJM+8tN+hI3yYLUraNKxIfFGUnLnLagYnOliSbnj4GRTL+O2GfYR95+5e27MhhPY71nAMY/Zx2wW/aGXgKx45XOLuPxQr7V6gMGF2Oa58PfkmL+nBPKM9eHPoAtGbtge5ps0rEcEKlpGa++H5xxQO4hj+KTJrHkac2+KwQkMBZIXdKUF2nj0u70K0oFh3sKwxCSOcG6QZFQu8UjjoeEIK72cAYoACvDEaRWEYCMXjx2BkkkHM0KulXr4wSqBzZsJJCYEr5i9aUw9L9G0xBai9xkxjW31j0sLd5153/6dyQujzcGFixQwop6eeU1taVnXcreagBIYkWnYiKdSbS96s27Ps1M4qSpwSqX0BZv2CUANKL0aF2c= len@noir"
       - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDnuMqI3GRePXOfbkf6qmTaO5KBzmznr65mJh8kdoApAxnB7P8ZrtswKXZLiTzz1VTaD4AcDQd4hc96QI156m+RbKyDgCbCX6kjPa9calPvWxfhvXj7rO3nsVOECO3ByNm1qNuvFYT2NUvgpuKbfiBscaPyQoIVi9WkVokOsWuNEndaB5l8sq2BGnNhjwK7PizTufDtzmQwXWQNvDVUaqF4FeHEjZ7Lj/f8KU19uJ2YYWwdxrw08xT5HJ/cO5pryt7Xt/tosNm6q6qZ6AB9LFPQZMP1eqSsIfbxjruClO4jWiAYeu9vYLu57FDz7V78C3/e5N0ZCfKPVbLzKZgzDPQ7 ryan@realtimegenomics.com"
     # Comment out shell: to disable account
+    shell: "/sbin/nologin"
+    # Change state to 'absent' to delete the user account entirely
+    state: present
+    #state: absent
+    remove: yes
+  - name: "Wayne Wu"
+    username: "waynewu"
+    uid: 10463
+    group: rtgrnd
+    keys:
+      # Change to 'disabled:' to remove the key
+      active:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAzEUUwX9BDsF92s/6tCjyVtx3SP4CuOWjQ4JhPrIAIp7uEdnCqOy4bn3zgyYpBAJDmKd/ZOlH693VlrwGQBpRrGyDC+YD31zldWJZVEDbsgli4PAiVkmn0p/Mjjom/Zj63WIRpfBFfK0mUonHXbokdn4S7FZrBE5zlP7tEqTOmIeNuB+sho0jBUrjqK8IgWOSVo2hjMPqVuv31zrz4mZrC+b+h2/U9pweNCNre0B01aXw3TSZmhAtZ4FHOiAUDVidwy3n7/GgetWMGeRANZX6IIxR6i8+orpck8irpeR8LYBjqYsHL6rb2TQZXJM+8tN+hI3yYLUraNKxIfFGUnLnLagYnOliSbnj4GRTL+O2GfYR95+5e27MhhPY71nAMY/Zx2wW/aGXgKx45XOLuPxQr7V6gMGF2Oa58PfkmL+nBPKM9eHPoAtGbtge5ps0rEcEKlpGa++H5xxQO4hj+KTJrHkac2+KwQkMBZIXdKUF2nj0u70K0oFh3sKwxCSOcG6QZFQu8UjjoeEIK72cAYoACvDEaRWEYCMXjx2BkkkHM0KulXr4wSqBzZsJJCYEr5i9aUw9L9G0xBai9xkxjW31j0sLd5153/6dyQujzcGFixQwop6eeU1taVnXcreagBIYkWnYiKdSbS96s27Ps1M4qSpwSqX0BZv2CUANKL0aF2c= len@noir"
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCiTQCZImbzmyTQPGLcVMXYsobRb/JMgEsD3u9W5zuO15g4HOMVF46upf/F0d83TymJzNT/5Usek2j8p1S26rTC2oemKHT3TvNwoDSXgsy43zU24CLQpVD90dvGlaYoO5TbIKXCsEdXR5fpsFZl20rLjEpFDG1TivSfEnfr+CNrd5Rc3oUVyl9DBuldLbEAtsW1+vigsLbkqjZ3xkJsaU/GP9ocnuZOAveotv1rJ1j/vgH5Bw+91sNrQjAMtK1T6z6clEGgA+ePICV45iF60lZmv0RJOr3y1QtY3msGuphxz+URZhpyXkOaDv5dHdEta023+lMm6Mv4FdY5caQCEFcp wayne.wu@realtimegenomics.com"
+    # Comment out shell: to disable account
     shell: "/bin/bash"
     # Change state to 'absent' to delete the user account entirely
     state: present
