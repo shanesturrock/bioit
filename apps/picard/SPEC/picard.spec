@@ -1,11 +1,11 @@
-%define priority 22103
+%define priority 22104
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.21.3
+Version:	2.21.4
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,13 @@ fi
 %files
 
 %changelog
+* Fri Nov 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.4-1
+- CollectRnaSeqMetrics: Made IGNORE_SEQUENCE optional (#1423)
+- replaced int with long to avoid integer overflow in large files. (#1427)
+- only adding a period if there's not already a period is pathological (#1430)
+- Yf collect duplicate metrics (#1424)
+- update htsjdk to 2.21.0 (#1422)
+
 * Fri Nov 15 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.3-1
 - Yf optimize query for independent replicate metrics (#1420)
 - Make CheckIlluminaDirectory log if faking files (#1417)

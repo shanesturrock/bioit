@@ -1,11 +1,11 @@
-%define priority 260
+%define priority 270
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	2.6
+Version:	2.7
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,15 @@ fi
 %files
 
 %changelog
+* Fri Nov 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.7-1
+- Multicore is now supported even when using --info-file, --rest-file or
+  --wildcard-file. The only remaining feature that still does not work with
+  multicore is now demultiplexing.
+- When running on a single core, Cutadapt no longer spawns external pigz
+  processes for writing gzip-compressed files. This is a first step towards
+  ensuring that using --cores=n uses only at most n CPU cores.
+- This release adds support for Python 3.8.
+
 * Fri Nov 01 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.6-1
 - Do not show animated progress when ``--quiet`` is used.
 - When two adapters align to a read equally well (in terms of the number of
