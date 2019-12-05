@@ -17,7 +17,7 @@ ${HOME}/bioit/apps/cutadapt/SPEC/build 2.7
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
 ${HOME}/bioit/apps/FastQC/SPEC/build 0.11.8
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.1.0
-${HOME}/bioit/apps/hmmer/SPEC/build 3.2.1
+${HOME}/bioit/apps/hmmer/SPEC/build 3.3
 ${HOME}/bioit/apps/htslib/SPEC/build 1.9
 ${HOME}/bioit/apps/igv/SPEC/build 2.7.2
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.9.0+
