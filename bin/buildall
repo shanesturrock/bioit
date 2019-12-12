@@ -8,7 +8,7 @@ ${HOME}/bioit/apps/augustus/SPEC/build 3.3.3
 ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.1
 ${HOME}/bioit/apps/bbmap/SPEC/build 38.63
 ${HOME}/bioit/apps/bcftools/SPEC/build 1.9
-${HOME}/bioit/apps/bedtools2/SPEC/build 2.29.0
+${HOME}/bioit/apps/bedtools2/SPEC/build 2.29.1
 ${HOME}/bioit/apps/bismark/SPEC/build 0.22.1
 ${HOME}/bioit/apps/bowtie/SPEC/build 1.2.2
 ${HOME}/bioit/apps/bowtie2/SPEC/build 2.3.5.1
@@ -28,7 +28,7 @@ ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.10.1
 ${HOME}/bioit/apps/samtools/SPEC/build 1.9
 ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 241
 ${HOME}/bioit/apps/SolexaQA++/SPEC/build 3.1.7.1
-${HOME}/bioit/apps/stringtie/SPEC/build 2.0.4
+${HOME}/bioit/apps/stringtie/SPEC/build 2.0.5
 ${HOME}/bioit/apps/tophat/SPEC/build 2.1.1
 ${HOME}/bioit/apps/vcftools/SPEC/build 0.1.16
 ${HOME}/bioit/apps/velvet/SPEC/build 1.2.10

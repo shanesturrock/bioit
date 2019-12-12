@@ -1,11 +1,11 @@
-%define priority 2290
+%define priority 2291
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bedtools2
-Version:	2.29.0
+Version:	2.29.1
 Release:	1%{?dist}
 Summary:	Tools for handing BED files
 Group:		Applications/Engineering
@@ -77,6 +77,23 @@ fi
 %files
 
 %changelog
+* Fri Dec 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.29.1-1
+- Fixed a bug that now allows blocked intersection to be counted based on
+  unique base pairs of overlap. The resolution for issue 750 in version 2.29.0
+  mistakenly allowed for fractional overlap to be counted based upon redundant
+  overlap.
+- Moved to Github Continuous Integration for automatic testing.
+- Fixed a bug that injected erroneous quality values with BAM records had no
+  valid quality values.
+- Fixed a bug that destroyed backwards compatibility in the getfasta tool.
+  Thanks to Torsten Seeman for reporting this.
+- Fixed a corner case bug in the reldist tool.
+- Fixed a bug in the bedtobam tool that caused the last character in read names
+  to be removed.
+- Fixed a bug causing a segfault in the jaccard tool.
+- Fixed a bug causing a corner case issue in the way coordinates are reported
+  in the flank tool.
+
 * Fri Sep 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.29.0-1
 - Added a new -C option to the intersect tool that separately reports the count
   of intersections observed for each database (-b) file given. Formerly, the -c
