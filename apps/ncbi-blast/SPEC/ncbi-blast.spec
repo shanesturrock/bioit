@@ -1,11 +1,11 @@
-%define priority 290
+%define priority 2100
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		ncbi-blast
-Version:	2.9.0+
+Version:	2.10.0+
 Release:	1%{?dist}
 Summary:	BLAST+ is a suite of command-line tools to run BLAST
 Group:		Applications/Engineering
@@ -60,6 +60,40 @@ fi
 %files
 
 %changelog
+* Fri Jan 17 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.0+-1
+- New features
+  - Enhancements to composition-based statistics to ensure the consistency of
+    matches if fewer than the default number of matches is selected. Read about
+    the details in the “Outline of the BLAST process” section of the BLAST+ user
+    manual appendix.
+  - Adaptive composition-based statistics may process more sequences in the CBS
+    stage of BLAST if many matches have a similar score, increasing the
+    likelihood of finding novel results. To enable: set the environment variable
+    ADAPTIVE_CBS to 1. This is an experimental feature and your feedback is
+    welcome.
+  - Default BLAST database version changes:
+    - makeblastdb generates BLAST databases in version 5 format.
+  - New script to clean up BLAST database volumes (cleanup-blastdb-volumes.py).
+  - Add support for genetic code 33 for blastx and rpstblastn.
+- Improvements
+  - Better error messages for -taxids argument.
+  - Consistent error reporting in get_species_taxids.sh to standard error.
+- Bug fixes
+  - Restore sum statistics (-sum_stat parameter) for BLASTN.
+  - Fix Blast-archive generation/ingestion when subject_besthits flag is used.
+  - Fix problem with empty lines in files provided to the taxidlist argument.
+  - Fix blastdb_aliastool input file size overflow problem.
+  - Fix blastdb_aliastool problem in Windows with binary GI list files.
+  - Fix search failures using -remote option in BLAST+ 2.9.0.
+  - Fix reading from standard input in Windows.
+  - Fix missing space in descriptions defline.
+  - Fix HTML BLAST report to include version in accession anchors.
+  - Fix segmentation fault in tabular BLAST output format when sequences have
+    no defline.
+  - Fix to prevent generation of local Seq-IDs in Seq-align output format when
+    accessions are available.
+  - Fix blast_formatter output when searches are limited by taxonomy.
+
 * Fri Apr 05 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.9.0+-1
 - New features
   - Support for PDB biopolymer chain identifiers up to four-characters long in

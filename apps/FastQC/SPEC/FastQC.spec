@@ -1,11 +1,11 @@
-%define priority 118
+%define priority 119
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		FastQC
-Version:	0.11.8
+Version:	0.11.9
 Release:	1%{?dist}
 Summary:	A quality control application for high throughput sequence data
 Group:		Applications/Engineering
@@ -41,6 +41,16 @@ fi
 %files
 
 %changelog
+* Fri Jan 17 2020 Shane Sturrock <shane.sturrock@gmail.com> - 0.11.9-1
+- We removed the native look and feel from the linux application since it's
+  horribly broken
+- Fixed a hang if a run terminated from an out-of-memory error
+- Bundle a suitable JRE with the OSX app build
+- Fixed a corner case where adapters could occasionally be double-counted
+- Updated the fast5 parser to account for the newer format multi-read oxford
+  nanopore fast5 files
+- Fixed problems if analysing a completely blank file
+
 * Fri Oct 12 2018 Shane Sturrock <shane.sturrock@gmail.com> - 0.11.8-1
 - Fixed a performance bug in highly duplicated sequences
 - Changed the behaviour of the sequence length module when run with --nogroup

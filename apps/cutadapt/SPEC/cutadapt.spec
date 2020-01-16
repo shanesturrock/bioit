@@ -1,11 +1,11 @@
-%define priority 270
+%define priority 280
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	2.7
+Version:	2.8
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,13 @@ fi
 %files
 
 %changelog
+* Fri Jan 17 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.8-1
+- With option "--revcomp", Cutadapt now searches both the read and its reverse
+  complement for adapters. The version that matches best is kept. This can be
+  used to "normalize" strandedness.
+- "--action=lowercase" now works with linked adapters
+- Info files can now be written even for linked adapters.
+
 * Fri Nov 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.7-1
 - Multicore is now supported even when using --info-file, --rest-file or
   --wildcard-file. The only remaining feature that still does not work with

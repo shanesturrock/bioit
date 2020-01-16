@@ -1,11 +1,11 @@
-%define priority 22104
+%define priority 22106
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.21.4
+Version:	2.21.6
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,14 @@ fi
 %files
 
 %changelog
+* Fri Jan 17 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.6-1
+- 2.21.5
+  - CreateVerifyIDIntensityContaminationMetricsFile handle negative LLK
+  - Parse Floats from GtcToVcf in VcfToAdpc
+  - Compile and test on 11
+- 2.21.6
+  - Re-add DecimalFormat, but get rid of comma
+
 * Fri Nov 29 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.4-1
 - CollectRnaSeqMetrics: Made IGNORE_SEQUENCE optional (#1423)
 - replaced int with long to avoid integer overflow in large files. (#1427)
