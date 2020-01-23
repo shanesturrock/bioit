@@ -1,11 +1,11 @@
-%define priority 2291
+%define priority 2292
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bedtools2
-Version:	2.29.1
+Version:	2.29.2
 Release:	1%{?dist}
 Summary:	Tools for handing BED files
 Group:		Applications/Engineering
@@ -77,6 +77,10 @@ fi
 %files
 
 %changelog
+* Fri Jan 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.29.2-1
+- Fixed a bug (#803) that mistakenly removed a BAM/CRAM header line (sorting
+  criteria).
+
 * Fri Dec 13 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.29.1-1
 - Fixed a bug that now allows blocked intersection to be counted based on
   unique base pairs of overlap. The resolution for issue 750 in version 2.29.0

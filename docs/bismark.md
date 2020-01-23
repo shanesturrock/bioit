@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/bismark/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/bismark/SPEC/build 0.22.1
+    ${HOME}/bioit/apps/bismark/SPEC/build 0.22.3
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load bismark/0.22.1
+    module load bismark/0.22.3
     which bismark
     bismark --version
 
@@ -22,9 +22,9 @@ If all is good, you can move to the RPM building step.
 
 ## Manual Build
 
-Download the source tarball from [here](https://github.com/FelixKrueger/Bismark/archive/0.22.1.tar.gz) into `/opt/bioit/bismark/src`, untar it and move it into place as there's nothing to compile:
+Download the source tarball from [here](https://github.com/FelixKrueger/Bismark/archive/0.22.3.tar.gz) into `/opt/bioit/bismark/src`, untar it and move it into place as there's nothing to compile:
 
-    mv Bismark-0.22.1 /opt/bioit/bismark/0.22.1
+    mv Bismark-0.22.3 /opt/bioit/bismark/0.22.3
 
 That should be it.
 
@@ -36,7 +36,7 @@ Add a module file in `/opt/bioit/modulefiles/bismark/` for this version by copyi
     #
     #  bismark module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/bismark/0.22.1/
+    prepend-path  PATH         /opt/bioit/bismark/0.22.3/
 
 ## RPM
 

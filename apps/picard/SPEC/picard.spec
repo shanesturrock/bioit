@@ -1,11 +1,11 @@
-%define priority 22106
+%define priority 22107
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.21.6
+Version:	2.21.7
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,9 @@ fi
 %files
 
 %changelog
+* Fri Jan 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.7-1
+- Corrected LiftOverIntervalList documentation
+
 * Fri Jan 17 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.6-1
 - 2.21.5
   - CreateVerifyIDIntensityContaminationMetricsFile handle negative LLK

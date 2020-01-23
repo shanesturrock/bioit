@@ -1,11 +1,11 @@
-%define priority 221
+%define priority 223
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bismark
-Version:	0.22.1
+Version:	0.22.3
 Release:	1%{?dist}
 Summary:	A bisulfite read mapper and methylation caller
 Group:		Applications/Engineering
@@ -38,6 +38,7 @@ alternatives \
    --slave %{_bindir}/coverage2cytosine coverage2cytosine /opt/bioit/%{name}/%{version}/coverage2cytosine \
    --slave %{_bindir}/deduplicate_bismark deduplicate_bismark /opt/bioit/%{name}/%{version}/deduplicate_bismark \
    --slave %{_bindir}/filter_non_conversion filter_non_conversion /opt/bioit/%{name}/%{version}/filter_non_conversion \
+   --slave %{_bindir}/methylation_consistency methylation_consistency /opt/bioit/%{name}/%{version}/methylation_consistency \
    --slave %{_bindir}/NOMe_filtering NOMe_filtering /opt/bioit/%{name}/%{version}/NOMe_filtering
 
 %postun
@@ -49,6 +50,42 @@ fi
 %files
 
 %changelog
+* Fri Jan 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 0.22.3-1
+- 0.22.3
+  - Bismark
+    - Accepted pull request to fix the MAPQ score calculation in local mode.
+  - Methylation_consistency
+    - Added a new script to assess the concordance of methylation calls.
+- 0.22.2
+  - Added FAQ document for questions that keep coming up. Will be populated
+    over time.
+  - Bismark
+    - the option --non_bs_mm is now only allowed in end-to-end mode
+    - Fixed the calculation of non bisulfite mismatches for paired-end data
+      which happened correctly only when R2 had an InDel
+    - When the option -u was used in conjunction with --parallel, only -u
+      sequences will be written to the temporary subset files for each spawn of
+      Bismark (previously, the entire file was split for --parallel, but then
+      only a small subset of those files was used for -u, which resulted in
+      very long runs even for a small number of analysed sequences)
+  - Deduplicate_bismark
+    - the command deduplicate_bismark *bam now works again. Previously the
+      output file names were accidentally all derived from the first supplied
+      file.
+  - Coverage2cytosine
+    - Added new option --coverage_threshold INT. Positions have to be covered
+      by at least INT calls (irrespective of their methylation state) before
+      they get reported. For NOMe-seq, the minimum threshold is automatically
+      set to 1 unless specified explicitly. Setting a coverage threshold does
+      not work in conjunction with --merge_CpGs (as all genomix CpGs are
+      required for this).  Default: 0 (i.e. all genomic positions get reported)
+  - Bismark2report
+    - added seconds to the timestamp report statement (which caused a warning
+      on certain, but not all, platforms)
+  - Bismark2summary
+    - Now reads splitting reports even for non-deduplicated files (such as
+      RRBS).
+
 * Fri May 03 2019 Shane Sturrock <shane.sturrock@gmail.com> - 0.22.1-1
 - 0.22.1 Essential Easter Performance Release [EEPR]
   - Bismark
