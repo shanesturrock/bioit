@@ -1,11 +1,11 @@
-%define priority 2141
+%define priority 2142
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.14.1
+Version:	2.14.2
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,11 @@ fi
 %files
 
 %changelog
+* Fri Jan 31 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.2-1
+- Fixed some issues with the cut, fastx_revcomp, fastq_convert,
+  fastq_mergepairs, and makeudb_usearch commands. 
+- Updated manual.
+
 * Fri Sep 20 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.1-1
 - Fixed bug with sequences written to file specified with fastaout_rev for
   commands fastx_filter and fastq_filter.
