@@ -1,11 +1,11 @@
-%define priority 22107
+%define priority 22108
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.21.7
+Version:	2.21.8
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,10 @@ fi
 %files
 
 %changelog
+* Thu Feb 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.8-1
+- Remove pullapprove configuration and replace it with github branch
+  protections. 
+
 * Fri Jan 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.7-1
 - Corrected LiftOverIntervalList documentation
 

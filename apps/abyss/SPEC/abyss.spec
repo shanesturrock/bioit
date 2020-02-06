@@ -1,11 +1,11 @@
-%define priority 221
+%define priority 224
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.2.1
+Version:	2.2.4
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -95,6 +95,24 @@ fi
 %files
 
 %changelog
+* Thu Feb 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.2.4-1
+- 2.2.2
+  - Fix abyss-overlap for 32-bit systems
+- 2.2.3
+  - Revert memory consumption of Bloom filters to pre 2.2.0 behaviour.
+    ABySS will now share the specified memory among all Bloom filters
+    instead of just the counting Bloom filter.
+  - Fix gcc-9 compilation warnings
+- 2.2.4
+  - General:
+    - Refactor deprecated functions in clang-8
+  - Sealer:
+    - Remove unsupported -D option from help page
+  - abyss-bloom:
+    - Add counting Bloom Filter instruction to help page
+  - abyss-bloom-dbg:
+    - Report coverage information of unitigs
+
 * Fri Aug 16 2019 Shane Sturrock <shane.sturrock@gmail.com> - 2.2.1-1
 - Release version 2.2.1
 - Fix abyss-bloom for macOS

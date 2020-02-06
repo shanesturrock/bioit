@@ -29,7 +29,7 @@ cd abyss-${VERSION}
 wget http://sourceforge.net/projects/boost/files/boost/1.56.0/boost_1_56_0.tar.bz2
 #wget --no-check-certificate http://sourceforge.net/projects/boost/files/boost/1.56.0/boost_1_56_0.tar.bz2
 tar xvf boost_1_56_0.tar.bz2
-./configure --prefix=/opt/bioit/abyss/${VERSION}
+./configure --prefix=/opt/bioit/abyss/${VERSION} --disable-werror
 make clean
 make
 make install
