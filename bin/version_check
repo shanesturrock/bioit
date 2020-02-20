@@ -154,5 +154,5 @@ for application in ${application_list}; do
 done 
 
 # Now check if Java is up to date
-JavaisUpToDate
+#JavaisUpToDate
 exit 0
