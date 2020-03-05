@@ -1,11 +1,11 @@
-%define priority 22109
+%define priority 22200
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.21.9
+Version:	2.22.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,17 @@ fi
 %files
 
 %changelog
+* Fri Mar 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.0-1
+- Modify VcfToAdpc to handle multiple samples. (#1470)
+- Update htsjdk to 2.21.2 (#1471)
+- Fix non-symmetry bug in FingerprintChecker (#1455)
+- Cleaned up javadoc... (#1434)
+- Removed plain asserts and replaced them with ValidationUtil function (#1465)
+- Fixed a bug where the merging of fingerprints changes the original list of
+  fingerprints leading to incorrect results in the self-lod case when using
+  Crosscheck without SECOND_INPUT. (#1458)
+- Port CombineVcfs from picard private to picard (#1463)
+
 * Fri Feb 21 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.9-1
 - Port CombineVcfs from picard private to picard (#1463)
 
