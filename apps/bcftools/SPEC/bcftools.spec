@@ -1,11 +1,11 @@
-%define priority 19
+%define priority 1102
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bcftools
-Version:	1.9
+Version:	1.10.2
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -30,8 +30,12 @@ to replace the Perl-based tools from vcftools.
 %post
 alternatives \
    --install %{_bindir}/bcftools bcftools /opt/bioit/%{name}/%{version}/bin/bcftools %{priority} \
+   --slave %{_bindir}/guess-ploidy.py guess-ploidy.py /opt/bioit/%{name}/%{version}/bin/guess-ploidy.py \
    --slave %{_bindir}/plot-vcfstats plot-vcfstats /opt/bioit/%{name}/%{version}/bin/plot-vcfstats \
    --slave %{_bindir}/vcfutils.pl vcfutils.pl /opt/bioit/%{name}/%{version}/bin/vcfutils.pl \
+   --slave %{_bindir}/color-chrs.pl color-chrs.pl /opt/bioit/%{name}/%{version}/bin/color-chrs.pl \
+   --slave %{_bindir}/plot-roh.py plot-roh.py /opt/bioit/%{name}/%{version}/bin/plot-roh.py \
+   --slave %{_bindir}/run-roh.pl run-roh.pl /opt/bioit/%{name}/%{version}/bin/run-roh.pl \
    --slave %{_mandir}/man1/bcftools.1 bcftools.1 /opt/bioit/%{name}/%{version}/share/man/man1/bcftools.1
 
 %postun
@@ -43,6 +47,76 @@ fi
 %files
 
 %changelog
+* Fri Mar 20 2020 Shane Sturrock <shane.sturrock@gmail.com> - 1.10.2-1
+- Numerous bug fixes, usability improvements and sanity checks were added to
+  prevent common user errors.
+- The -r, --regions (and -R, --regions-file) option should never create
+  unsorted VCFs or duplicates records again. This also fixes rare cases where a
+  spanning deletion makes a subsequent record invisible to bcftools isec and
+  other commands.
+- Additions to filtering and formatting expressions
+  - support for the spanning deletion alternate allele (ALT=*)
+  - new ILEN filtering expression to be able to filter by indel length
+  - new MEAN, MEDIAN, MODE, STDEV, phred filtering functions
+  - new formatting expression %PBINOM (phred-scaled binomial probability),
+    %INFO (the whole INFO column), %FORMAT (the whole FORMAT column), %END (end
+    %position of the REF allele), %END0 (0-based end position of the REF
+    %allele), %MASK (with multiple files indicates the presence of the site in
+    %other files)
+- New plugins
+  - +gvcfz: compress gVCF file by resizing gVCF blocks according to specified
+    criteria
+  - +indel-stats: collect various indel-specific statistics
+  - +parental-origin: determine parental origin of a CNV region
+  - +remove-overlaps: remove overlapping variants.
+  - +split-vep: query structured annotations such INFO/CSQ created by
+    bcftools/csq or VEP
+  - +trio-dnm: screen variants for possible de-novo mutations in trios
+- annotate
+  - new -l, --merge-logic option for combining multiple overlapping regions
+- call
+  - new bcftools call -G, --group-samples option which allows grouping samples
+    into populations and applying the HWE assumption within but not across the
+    groups.
+- csq
+  - significant reduction of memory usage in the local -l mode for VCFs with
+    thousands of samples and 20% reduction in the non-local haplotype-aware
+    mode.
+  - fixes a small memory leak and formatting issue in FORMAT/BCSQ at sites with
+    many consequences
+  - do not print protein sequence of start_lost events
+  - support for "start_retained" consequence
+  - support for symbolic insertions (ALT="<INS...>"), "feature_elongation"
+    consequence
+  - new -b, --brief-predictions option to output abbreviated protein
+    predictions.
+- concat
+  - the --naive command now checks header compatibility when concatenating
+    multiple files.
+- consensus
+  - add a new -H, --haplotype 1pIu/2pIu feature to output first/second allele
+    for phased genotypes and the IUPAC code for unphased genotypes
+  - new -p, --prefix option to add a prefix to sequence names on output
+- +contrast
+  - added support for Fisher's test probability and other annotations
+- +fill-from-fasta
+  - new -N, --replace-non-ACGTN option
+- +dosage
+  - fix some serious bugs in dosage calculation
+- +fill-tags
+  - extended to perform simple on-the-fly calculations such as calculating
+    INFO/DP from FORMAT/DP.
+- merge
+  - add support for merging FORMAT strings
+  - bug fixed in gVCF merging
+- mpileup
+  - a new optional SCR annotation for the number of soft-clipped reads
+- reheader
+  - new -f, --fai option for updating contig lines in the VCF header
+- +trio-stats
+  - extend output to include DNM homs and recurrent DNMs
+- VariantKey support
+
 * Fri Jul 20 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.9-1
 - annotate
   - REF and ALT columns can be now transferred from the annotation file.

@@ -1,11 +1,11 @@
-%define priority 19
+%define priority 1100
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		samtools
-Version:	1.9
+Version:	1.10
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -48,7 +48,6 @@ alternatives \
    --slave %{_bindir}/samtools.pl samtools.pl /opt/bioit/%{name}/%{version}/bin/samtools.pl \
    --slave %{_bindir}/seq_cache_populate.pl seq_cache_populate.pl /opt/bioit/%{name}/%{version}/bin/seq_cache_populate.pl \
    --slave %{_bindir}/soap2sam.pl soap2sam.pl /opt/bioit/%{name}/%{version}/bin/soap2sam.pl \
-   --slave %{_bindir}/varfilter.py varfilter.py /opt/bioit/%{name}/%{version}/bin/varfilter.py \
    --slave %{_bindir}/wgsim wgsim /opt/bioit/%{name}/%{version}/bin/wgsim \
    --slave %{_bindir}/wgsim_eval.pl wgsim_eval.pl /opt/bioit/%{name}/%{version}/bin/wgsim_eval.pl \
    --slave %{_bindir}/zoom2sam.pl zoom2sam.pl /opt/bioit/%{name}/%{version}/bin/zoom2sam.pl \
@@ -64,6 +63,194 @@ fi
 %files
 
 %changelog
+* Fri Mar 20 2020 Shane Sturrock <shane.sturrock@gmail.com> - 1.10-1
+- Changes affecting the whole of samtools, or multiple sub-commands:
+  - Samtools now uses the new HTSlib header API. As this adds more checks for
+    invalid headers, it is possible that some illegal files will now be
+    rejected when they would have been allowed by earlier versions. (#998)
+  - Examples of problems that will now be rejected include @SQ lines with no
+    SN: tag, and @RG or @PG lines with no ID: tag.
+  - samtools sub-commands will now add @PG header lines to output sam/bam/cram
+    files. To disable this, use the --no-PG option. (#1087; #1097)
+  - samtools now supports alignment records with reference positions greater
+    than 2 gigabases. This allows samtools to process alignments for species
+    which have large chromosomes, like axolotl and lungfish. Note that due to
+    file format limitations, data with large reference positions must use the
+    SAM format. (#1107; #1117)
+  - Improved the efficiency of reading and writing SAM format data by 2 fold
+    (single thread). This is further improved by the ability to use multiple
+    threads, as previously done with BAM and CRAM.
+  - samtools can now write BGZF-compressed SAM format. To enable this, either
+    save files with a .sam.gz suffix, or use --output-fmt sam.gz.
+  - samtools can now index BGZF-compressed SAM files.
+  - The region parsing code has been improved to handle colons in reference
+    names. Strings can be disambiguated by the use of braces, so for example
+    when reference sequences called chr1 and chr1:100-200 are both present, the
+    regions {chr1}:100-200 and {chr1:100-200} unambiguously indicate which
+    reference is being used. (#864)
+  - samtools flags, flagstats, idxstats and stats now have aliases flag,
+    flagstat, idxstat and stat. (#934)
+  - A new global --write-index option has been added. This allows output
+    sam.gz/bam/cram files to be indexed while they are being written out. This
+    should work with addreplacerg, depad, markdup, merge, sort, split, and view.
+    (#1062)
+  - A global --verbosity option has been added to enable/disable debugging
+    output. (#1124, thanks to John Marshall)
+  - It is now possible to have data and index files stored in different
+    locations. There are two ways to tell samtools where to find the index:
+  - Samtools bedcov, depth, merge, mpileup, stats, tview, and view accept a new
+    option (-X). When this is used, each input sam/bam/cram listed on the
+    command line should have a corresponding index file. Note that all the data
+    files should be listed first, followed by all the index files. (#978,
+    thanks to Mingfei Shao) A delimiter ##idx## can be appended to the data file
+    name followed by the index file name. This can be used both for input files
+    and outputs when indexing on-the-fly.
+  - HTSlib (and therefore SAMtools) now uses version 4 signatures by default
+    for its s3:// plug-in. It can also write to S3 buckets, as long as version
+    4 signatures are in use. See HTSlib's NEWS file and htslib-s3-plugin manual
+    page for more information.
+  - HTSlib (and therefore SAMtools) no longer considers a zero-length file to
+    be a valid SAM file. This has been changed so that pipelines such as
+    somecmd | samtools ... with somecmd aborting before outputting anything will
+    now propagate the error to the second command.
+  - The samtools manual page has been split up into one for each sub-command.
+    The main samtools.1 manual page now lists the sub-commands and describes
+    the common global options. (#894)
+  - The meaning of decode_md, store_md and store_nm in the fmt-option section
+    of the samtools.1 man page has been clarified. (#898, thanks to Evan Benn)
+  - Fixed numerous memory leaks. (#892)
+  - Fixed incorrect macro definition on Windows. (#950)
+  - bedcov, phase, misc/ace2sam and misc/wgsim now check for failure to open
+    files. (#1013, thanks to Julie Blommaert and John Marshall)
+- Changes affecting specific sub-commands:
+  - A new "coverage" sub-command has been added. This prints a tabular format
+    of the average coverage and percent coverage for each reference sequence,
+    as well as number of aligned reads, average mapping quality and base
+    quality.  It can also (with the -m option) plot a histogram of coverage
+    across the genome. (#992, thanks to Florian Breitwieser)
+  - samtools calmd:
+    - Reference bases in MD: tags are now converted to upper case. (#981, #988)
+      samtools depth:
+    - Add new options to write a header to the output (-H) and to direct the
+      output to a file (-o). (#937, thanks to Pierre Lindenbaum)
+    - New options -g and -G can be used to filter reads. (#953)
+    - Fix memory leak when failing to set CRAM options. (#985, thanks to
+      Florian Breitwieser)
+    - Fix bug when using region filters where the -a option did not work for
+      regions with no coverage. (#1113; #1112 reported by Paweł Sztromwasser)
+  - samtools fasta and fastq:
+    - -1 FILE -2 FILE with the same filename now works properly. (#1042)
+    - -o FILE is added as a synonym for -1 FILE -2 FILE. (#1042)
+    - The -F option now defaults to 0x900 (SECONDARY,SUPPLEMENTARY). Previously
+      secondary and supplementary records were filtered internally in a way
+      that could not be turned off. (#1042; #939 reported by @finswimmer)
+    - Allow reading from a pipe without an explicit - on the command line.
+      (#1042; #874 reported by John Marshall)
+    - Turn on multi-threading for bgzf compressed output files. (#908)
+    - Fixed bug where the samtools fastq -i would output incorrect information
+      in the Casava tags for dual-index reads. It also now prints the tags for
+      dual indices in the same way as bcl2fastq, using a + sign between the two
+      parts of the index. (#1059; #1047 reported by Denis Loginov)
+  - samtools flagstat:
+    - Samtools flagstat can now optionally write its output in JSON format or
+      as a tab-separated values file. (#1106, thanks to Vivek Rai).
+  - samtools markdup:
+    - It can optionally tag optical duplicates (reads following Illumina naming
+      conventions only). The is enabled with the -d option, which sets the
+      distance for duplicates to be considered as optical. (#1091; #1103; #1121;
+      #1128; #1134)
+    - The report stats (-s) option now outputs counts for optical and
+      non-primary (supplementary / secondary) duplicates. It also reports the
+      Picard "estimate library size" statistic. A new -f option can be used to
+      save the statistics in a given file. (#1091)
+    - The rules for calling duplicates can be changed using the new --mode
+      option. This mainly changes the position associated with each read in a
+      pair. --mode t (the default) is the existing behaviour where the position
+      used is that of the outermost template base associated with the read.
+      Alternatively --mode s always uses the first unclipped sequence base. In
+      practice, this only makes a difference for read pairs where the two reads
+      are aligned in the same direction. (#1091)
+    - A new -c option can be used to clear any existing duplicate tags. (#1091)
+    - A new --include-fails option makes markdup include QC-failed reads.
+      (#1091)
+    - Fixed buffer overflow in temporary file writer when writing a mixture of
+      long and short alignment records. (#911; #909)
+  - samtools mpileup:
+    - mpileup can now process alignments including CIGAR P (pad) operators
+      correctly. They will now also produce the correct output for alignments
+      where insertions are immediately followed by deletions, or deletions by
+      insertions. Note that due to limitations in HTSlib, they are still unable
+      to output sequences that have been inserted before the first aligned base
+      of a read. (#847; #842 reported by Tiffany Delhomme. See also htslib
+      issue #59 and pull request #699).
+    - In samtools mpileup, a deletion or pad on the reverse strand is now
+      marked with a different character (#) than the one used on a forward
+      strand (*), if the --reverse-del option is used. (#1070)
+    - New option --output-extra can be used to add columns for user selected
+      alignment fields or aux tags. (#1073)
+    - Fixed double-counting of overlapping bases in alignment records with
+      deletions or reference skips longer than twice the insert size. (#989;
+      #987 reported by @dariomel)
+    - Improved manual page with documentation about what each output column
+      means. (#1055, thanks to John Marshall)
+  - samtools quickcheck:
+    - Add unmapped (-u) option, which disables the check for @SQ lines in the
+      header. (#920, thanks to Shane McCarthy) samtools reheader:
+    - A new option -c allows the input header to be passed to a given command.
+      Samtools then takes the output of this command and uses it as the
+      replacement header. (#1007)
+    - Make it clear in help message that reheader --in-place only works on CRAM
+      files. (#921, thanks to Julian Gehring)
+    - Refuse to in-place reheader BAM files, instead of unexpectedly writing a
+      BAM file to stdout. (#935)
+  - samtools split:
+    - In samtools split, the -u option no longer accepts an extra file name
+      from which a replacement header was read. The two file names were
+      separated using a colon, which caused problems on Windows and prevented
+      the use of URLs. A new -h option has been added to allow the replacement
+      header file to be specified in its own option. (#961)
+    - Fixed bug where samtools split would crash if it read a SAM header that
+      contained an @RG line with no ID tag. (#954, reported by @blue-bird1)
+  - samtools stats:
+    - stats will now compute base compositions for BC, CR, OX and RX tags, and
+      quality histograms for QT, CY, BZ and QX tags. (#904)
+    - New stats FTC and LTC showing total number of nucleotides for first and
+      last fragments. (#946)
+    - The rules for classifying reads as "first" or "last" fragment have been
+      tightened up. (#949)
+    - Fixed bug where stats could over-estimate coverage when using the
+      target-regions option or when a region was specified on the command-line.
+      (#1027; #1025, reported by Miguel Machado; #1029, reported by Jody
+      Phelan).
+    - Fixed error in stats GCD percentile depth calculation when the depth to
+      be reported fell between two bins. It would report the depth entirely
+      from the lower bin instead of taking a weighted average of the two.
+      (#1048)
+    - Better catching and reporting of out of memory conditions. (#984; #982,
+      reported by Jukka Matilainen)
+    - Improved manual page. (#927)
+  - samtools tview:
+    - tview can now display alignments including CIGAR P operators, D followed
+      by I and I followed by D correctly. See mpileup above for more
+      information. (#847; #734, reported by Ryan Lorig-Roach)
+    - The "go to position" text entry box has been made wider. (#968, thanks to
+      John Marshall)
+    - Fixed samtools tview -s option which was not filtering reads correctly.
+      It now only shows reads from the requested sample or read group. (#1089)
+  - samtools view:
+    - New options -d and -D to only output alignments which have a tag with a
+      given type and value. (#1001, thanks to Gert Hulselmans)
+      misc/plot-bamstats script:
+    - Fixed merge (-m) option. (#923, #924 both thanks to Marcus D Sherman)
+    - Made the quality heatmap work with gnuplot version 5.2.7 and later.
+      (#1068; #1065 reported by Martin Mokrejš)
+    - Fixed --do-ref-stats bug where fasta header lines would be counted as
+      part of the sequence when the --targets option was used. (#1120, thanks
+      to Neil Goodgame)
+    - Removed the misc/varfilter.py Python script, as it takes consensus-pileup
+      as input, which was removed from samtools in release 0.1.17 in 2011.
+      (#1125)
+
 * Fri Jul 20 2018 Shane Sturrock <shane.sturrock@gmail.com> - 1.9-1
 - Samtools mpileup VCF and BCF output is now deprecated. It is still
   functional, but will warn. Please use bcftools mpileup instead. (#884)
