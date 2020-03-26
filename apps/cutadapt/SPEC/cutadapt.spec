@@ -1,11 +1,11 @@
-%define priority 280
+%define priority 290
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	2.8
+Version:	2.9
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,13 @@ fi
 %files
 
 %changelog
+* Fri Mar 27 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.9-1
+- Add a "--max-ee" (or "--max-expected-errors") option for filtering reads
+  whose number of expected errors exceeds the given threshold.
+- The info file now contains the "rc" suffix that is added to the names of
+  reverse-complemented reads (with "--revcomp").
+- ".bz2" and ".xz" output wasn’t possible in multi-core mode.
+
 * Fri Jan 17 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.8-1
 - With option "--revcomp", Cutadapt now searches both the read and its reverse
   complement for adapters. The version that matches best is kept. This can be

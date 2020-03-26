@@ -1,11 +1,11 @@
-%define priority 2800
+%define priority 2802
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.8.0
+Version:	2.8.2
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,11 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Mar 27 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.2-1
+- Rework reload session & tracks.
+- Simplify autoscaling - respect track line.
+- fix minor issues with "Reload Tracks" and "Reload Sessions"
+
 * Fri Jan 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.0-1
 - oAuth init error messages
 
