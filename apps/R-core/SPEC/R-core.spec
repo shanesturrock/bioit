@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 361
+%define priority 363
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        3.6.1
+Version:        3.6.3
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -59,13 +59,125 @@ fi
 #/etc/ld.so.conf.d/R-x86_64.conf
 
 %changelog
+* Tue Apr 07 2020 Shane Sturrock <shane.sturrock@gmail.com> - 3.6.3-1
+- CHANGES IN R 3.6.3
+  - NEW FEATURES:
+    - The included LAPACK has been updated to version 3.9.0 (for the included
+      routines, just bug fixes).
+  - BUG FIXES:
+    - Fixed a C level integer overflow in rhyper(); reported by Benjamin Tyner
+      in PR#17694.
+    - Uses of url(gzcon(.)) needing to extend buffer size have failed (with
+      HTTP/2 servers), reported by G´abor Cs´ardi.
+    - predict(loess(..),se=TRUE) now errors out (instead of seg.faulting etc)
+      for large sample sizes, thanks to a report and patch by Benjamin Tyner in
+      PR#17121.
+    - tools:assertCondition(.,"error") and hence assertError() no longer return
+      errors twice (invisibly).
+    - update(form,new) in the case of a long new formula sometimes wrongly
+      eliminated the intercept from form, or (more rarely) added a garbage term
+      (or seg.faulted !); the fix happened by simplifying the C-level logic of
+      terms.formula(). Reported by Mathias Ambuhl in ¨ PR#16326.
+    - The error message from stopifnot(..,<error producing call>) again
+      contains the full "stopifnot(.......)" call: Its attempted suppression
+      did not work consistently.
+    - On Windows, download.file(.,,"wininet",headers=character()) would fail;
+      reported with patch proposal by Kevin Ushey in PR#17710.
+- CHANGES IN R 3.6.2
+  - NEW FEATURES:
+    - runmed(x,*) gains a new option na.action determining how to handle NaN or
+      NA in x.
+    - dotchart() gains new options ann, xaxt, frame.plot and log.
+  - INSTALLATION on a UNIX-ALIKE:
+    - Detection of the C stack direction has been moved from run-time to
+      configure: this is safer with LTO builds and allows the detection to be
+      overridden – see file 'config.site'.
+    - Source-code changes enable installation on platforms using gcc
+      -fno-common (the expected default for gcc 10.x).
+  - C-LEVEL FACILITIES:
+    - installTrChar (which is nowadays is wrapped by installChar) is defined in
+      'Rinternals.h'. (Neither are part of the API.)
+  - PACKAGE INSTALLATION:
+    - Header 'Rconfig.h' contains the value of FC_LEN_T deduced at installation
+      which is used by the prototypes in headers 'R_ext/BLAS.h' and
+      'R_ext/Lapack.h' but to avoid extensive breakage this is only exposed when
+      USE_FC_LEN_T is defined. If a package's C/C++ calls to BLAS/LAPACK allow
+      for the 'hidden' arguments used by most Fortran compilers to pass the
+      lengths of Fortran character arguments, define USE_FC_LEN_T and include
+      'Rconfig.h' (possibly via 'R.h') before including 'R_ext/BLAS.h' or
+      'R_ext/Lapack.h'.
+    - A package with Fortran source code and perhaps C (but not C++) sources
+      can request for its shared object/DLL to be linked by the Fortran
+      compiler by including a line USE_FC_TO_LINK= in 'src/Makevars[.win]' and
+      using $(SHLIB_OPENMP_FFLAGS) as part of PKG_LIBS. The known reason for
+      doing so is a package which uses Fortran (only) OpenMP on a platform
+      where the Fortran OpenMP runtime is incompatible with the C one (e.g.
+      gfortran 9.x with clang).
+  - UTILITIES:
+    - R CMD check has a new option to mitigate checks leaving files/directories
+      in '/tmp'. See the 'R Internals' manual – this is part of --as-cran.
+  - Windows:
+    - The default standard for C++ in package installation is C++11 (as it has
+      been on other platforms where available since R 3.6.0: the default
+      toolchain on Windows was defaulting to C++98).
+  - DEPRECATED AND DEFUNCT:
+    - Support for specifying C++98 in package installation is deprecated.
+    - Support in R CMD config for 'F77', 'FCPIFCPLAGS', 'CPP', 'CXXCPP' and
+      'CXX98' and similar is deprecated. ('CPP' is found from the system make
+      and may well not be set.) Use '$CC -E' and '$CXX -E' instead of 'CPP' and
+      'CXXCPP.
+  - BUG FIXES:
+    - runmed(x,*) when x contains missing values now works consistently for
+      both algorithm="Stuetzle" and "Turlach", and no longer segfaults for
+      "Turlach", as reported by Hilmar Berger.
+    - apply(diag(3),2:3,mean) now gives a helpful error message.
+    - dgamma(x,shape,log=TRUE) now longer overflows to Inf for shape < 1 and
+      very small x, fixing PR#17577, reported by Jonathan Rougier.
+    - Buffer overflow in building error messages fixed. Reported by Benjamin
+      Tremblay.
+    - options(str = .) is correctly initialized at package utils load time,
+      now. A consequence is that str() in scripts now is more consistent to
+      interactive use, e.g., when displaying function(**) argument lists.
+    - as.numeric(<call>) now gives correct error message.
+    - Printing ls.str() no longer wrongly shows "<missing>" in rare cases.
+    - Auto-printing S4 objects no longer duplicates the object, for faster
+      speed and reduced memory consumption. Reported by Aaron Lun.
+    - pchisq(<LRG>,<LRG>,ncp=100) no longer takes practically forever in some
+      cases. Hence ditto for corresponding qchisq() calls.
+    - x %% L for finite x no longer returns NaN when L is infinite, nor suffers
+      from cancellation for large finite L, thanks to Long Qu's PR#17611.
+      Analogously, x %/% L and L %/% x suffer less from cancellation and return
+      values corresponding to limits for large L.
+    - grepl(NA,*) now returns logical as documented.
+    - options(warn=1e11) is an error now, instead of later leading to C stack
+      overflow because of infinite recursion.
+    - R_tryCatch no longer transfers control for all conditions. Reported and
+      patch provided by Lionel Henry in PR#17617.
+    - format(object.size(.),digits=NULL) now works, fixing PR#17628 reported by
+      Jonathan Carroll.
+    - get_all_vars(f,d) now also works for cases, e.g. where d contains a
+      matrix. Reported by Simon Wood in 2009 and patch provided by Ben Bolker
+      in PR#13624. Additionally, it now also works when some variables are data
+      frames, fixing PR#14905, reported by Patrick Breheny.
+    - barplot() could get spacings wrong if there were exactly two bars
+      PR#15522. Patch by Michael Chirico.
+    - power.t.test() works in more cases when returning values of n smaller
+      than 2.
+    - dotchart(*,pch=.,groups=.) now works better. Reported by Robert and
+      confirmed by Nic Rochette in PR#16953.
+    - canCoerce(obj,cl) no longer assumes length(class(obj)) == 1.
+    - plot.formula(*,subset = *) now also works in a boundary case reported by
+      Robert Schlicht (TU Dresden).
+    - readBin() and writeBin() of a rawConnection() now also work in large
+      cases, thanks to a report and proposal by Taeke Harkema in PR#17665.
+
 * Fri Jul 26 2019 Shane Sturrock <shane.sturrock@gmail.com> - 3.6.1-1
 - UTILITIES
   - R CMD config knows the values of AR and RANLIB, often set for LTO builds.
 - DEPRECATED AND DEFUNCT
   - The use of a character vector with .Fortran() is formally deprecated and
     gives a non-portability warning. (It has long been strongly discouraged in
-    ‘Writing R Extensions’.)
+    'Writing R Extensions'.)
 - BUG FIXES
   - On Windows, GUI package installation via menuInstallPkgs() works again,
     thanks to Len Weil's and Duncan Murdoch's PR#17556.
@@ -101,7 +213,7 @@ fi
     TRUE.
   - On Unix alikes (when readline is active), only expand tilde (~) file names
     starting with a tilde, instead of almost all tildes.
-  - In R documentation (‘*.Rd’) files, \item [..] is no longer treated
+  - In R documentation ('*.Rd') files, \item [..] is no longer treated
     specially when rendered in LaTeX and hence pdf, but rather shows the
     brackets in all cases.
 
@@ -115,7 +227,7 @@ fi
     save/serialization functions. The default can be changed back for the whole
     R session by setting environment variables R_DEFAULT_SAVE_VERSION and
     R_DEFAULT_SERIALIZE_VERSION to 2. For maximal back-compatibility, files
-    ‘vignette.rds’ and ‘partial.rdb’ generated by R CMD build are in
+    'vignette.rds' and 'partial.rdb' generated by R CMD build are in
     serialization format version 2, and resave by default produces files in
     serialization format version 2 (unless the original is already in format
     version 3).
@@ -126,7 +238,7 @@ fi
     The previous method can be requested using RNGkind() or RNGversion() if
     necessary for reproduction of old results. Thanks to Duncan Murdoch for
     contributing the patch and Gabe Becker for further assistance.
-  - The output of RNGkind() has been changed to also return the ‘kind’ used by
+  - The output of RNGkind() has been changed to also return the 'kind' used by
     sample().
 - NEW FEATURES
   - Sys.setFileTime() has been vectorized so arguments path and time of length
@@ -147,14 +259,14 @@ fi
   - lengths() dispatches internally to S4 methods.
   - download.file() on Windows now uses URLdecode() to determine the file
     extension, and uses binary transfer (mode = "wb") also for file extension
-    ‘.rds’.
+    '.rds'.
   - The help page for download.file() now contains the same information on all
     platforms.
   - Setting C locale for collation via environment variables LC_ALL and
     LC_COLLATE and via a call to Sys.setlocale() now takes precedence over
     environment variable R_ICU_LOCALE.
   - There is a new function, nullfile(), to give the file name of the null
-    system device (e.g., ‘/dev/null’) on the current platform.
+    system device (e.g., '/dev/null') on the current platform.
   - There are two new options, keep.parse.data and keep.parse.data.pkgs, which
     control whether parse data are included into sources when keep.source or
     keep.source.pkgs is TRUE. By default, keep.parse.data.pkgs is now FALSE,
@@ -191,7 +303,7 @@ fi
   - The new functions mem.maxVSize() and mem.maxMSize() allow the maximal size
     of the vector heap and the maximal number of nodes allowed in the current R
     process to be queried and set.
-  - news() gains support for ‘NEWS.md’ files.
+  - news() gains support for 'NEWS.md' files.
   - An effort has been started to have our reference manuals, i.e., all help
     pages. show platform-independent information (rather than Windows or
     Unix-alike specifics visible only on that platform). Consequently, the
@@ -204,7 +316,7 @@ fi
     type. This has been true of all mainstream implementations since 2009 (for
     GNU tar, since version 1.22): older implementations are still supported via
     the new argument support_old_tars whose default is controlled by environment
-    variable R_SUPPORT_OLD_TARS. (It looks like NetBSD and OpenBSD have ‘older’
+    variable R_SUPPORT_OLD_TARS. (It looks like NetBSD and OpenBSD have 'older'
     tar commands for this purpose.)
   - The new function asplit() allow splitting an array or matrix by its
     margins.
@@ -212,16 +324,16 @@ fi
     way to create structured error and warning objects.
   - .Deprecated() now signals a warning of class "deprecatedWarning", and
     .Defunct() now signals an error of class "defunctError".
-  - Many ‘package not found’ errors are now signaled as errors of class
+  - Many 'package not found' errors are now signaled as errors of class
     "packageNotFoundError".
   - As an experimental feature, when loadNamespace() fails because the
     requested package is not available the error is initially signaled with a
     retry_loadNamespace restart available. This allows a calling handler to try
     to install the package and continue.
-  - S3method() directives in ‘NAMESPACE’ can now also be used to perform
+  - S3method() directives in 'NAMESPACE' can now also be used to perform
     delayed S3 method registration.
   - Experimentally, setting environment variable _R_CHECK_LENGTH_1_LOGIC2_ will
-    lead to warnings (or errors if the variable is set to a ‘true’ value) when
+    lead to warnings (or errors if the variable is set to a 'true' value) when
     && or || encounter and use arguments of length more than one.
   - Added "lines" and "chars" coordinate systems to grconvertX() and
     grconvertY().
@@ -236,7 +348,7 @@ fi
     remove ... from the list of possible function arguments.
   - library() no longer checks packages with compiled code match
     R.version$platform. loadNamespace() never has, and increasingly the
-    ‘canonical name’ does not reflect the important characteristics of compiled
+    'canonical name' does not reflect the important characteristics of compiled
     code.
   - The primitive functions drop() and unclass() now avoid duplicating their
     data for atomic vectors that are large enough, by returning ALTREP wrapper
@@ -283,7 +395,7 @@ fi
   - Performance of substr() and substring() has been improved.
   - stopifnot() has been simplified thanks to Suharto Anggono's proposals to
     become considerably faster for cheap expressions.
-  - The default ‘user agent’ has been changed when accessing http:// and
+  - The default 'user agent' has been changed when accessing http:// and
     https:// sites using libcurl. (A site was found which caused libcurl to
     infinite-loop with the previous default.)
   - sessionInfo() now also contains RNGkind() and prints it when it differs
@@ -313,27 +425,27 @@ fi
     index, instead of rebuilding the index from scratch. Thanks to Gabe Becker
     in PR#17544 for the patch, based on part of his switchr package.
 - PACKAGE INSTALLATION
-  - Source package installation is by default ‘staged’: the package is
+  - Source package installation is by default 'staged': the package is
     installed into a temporary location under the final library directory and
     moved into place once the installation is complete. The benefit is that
     partially-installed packages are hidden from other R sessions.
   - The overall default is set by environment variable R_INSTALL_STAGED. R CMD
     INSTALL has new options --staged-install and --no-staged-install, and
-    packages can use the StagedInstall field in their ‘DESCRIPTION’ file to opt
+    packages can use the StagedInstall field in their 'DESCRIPTION' file to opt
     out. (That opt-out is a temporary measure which may be withdrawn in future.)
   - Staged installation requires either --pkglock or --lock, one of which is
     used by default.
-  - The interpretation of source code with extension ‘.f’ is changing.
+  - The interpretation of source code with extension '.f' is changing.
     Previously this denoted FORTRAN 77 code, but current compilers no longer
-    have a FORTRAN 77 mode and interpret it as ‘fixed-form’ Fortran 90 (or later
-    where supported) code. Extensions ‘.f90’ and ‘.f95’ continue to indicate
-    ‘free-form’ Fortran code.
+    have a FORTRAN 77 mode and interpret it as 'fixed-form' Fortran 90 (or later
+    where supported) code. Extensions '.f90' and '.f95' continue to indicate
+    'free-form' Fortran code.
   - Legal FORTRAN 77 code is also legal fixed-form Fortran 9x; however this
     change legitimizes the use of later features, in particular to replace
-    features marked ‘obsolescent’ in Fortran 90 and ‘deleted’ in Fortran 2018
+    features marked 'obsolescent' in Fortran 90 and 'deleted' in Fortran 2018
     which gfortran 8.x and later warn about.
-  - Packages containing files in the ‘src’ directory with extensions ‘.f90’ or
-    ‘.f95’ are now linked using the C or C++ compiler rather than the Fortran
+  - Packages containing files in the 'src' directory with extensions '.f90' or
+    '.f95' are now linked using the C or C++ compiler rather than the Fortran
     9x compiler. This is consistent with fixed-form Fortran code and allows
     mixing of C++ and free-form Fortran on most platforms.
   - Consequentially, a package which includes free-form Fortran 9x code which
@@ -341,50 +453,50 @@ fi
     they also include C++ code) in PKG_LIBS rather than SHLIB_OPENMP_FCFLAGS —
     fortunately on almost all current platforms they are the same flag.
   - Macro PKG_FFLAGS will be used for the compilation of both fixed-form and
-    free-form Fortran code unless PKG_FCFLAGS is also set (in ‘src/Makevars’ or
-    ‘src/Makevars.win’).
+    free-form Fortran code unless PKG_FCFLAGS is also set (in 'src/Makevars' or
+    'src/Makevars.win').
   - The make macro F_VISIBILITY is now preferred for both fixed-form and
-    free-form Fortran, for use in ‘src/Makevars’ and similar.
+    free-form Fortran, for use in 'src/Makevars' and similar.
   - R CMD INSTALL gains a new option --strip which (where supported) strips
     installed shared object(s): this can also be achieved by setting the
     environment variable _R_SHLIB_STRIP_ to a true value.
   - The new option --strip-lib attempts stripping of static and shared
-    libraries installed under ‘lib’.
+    libraries installed under 'lib'.
   - These are most useful on platforms using GNU binutils (such as Linux) and
     compiling with -g flags.
   - There is more support for installing UTF-8-encoded packages in a strict
     Latin-1 locale (and probably for other Latin locales): non-ASCII comments
-    in R code (and ‘NAMESPACE’ files) are worked around better.
+    in R code (and 'NAMESPACE' files) are worked around better.
 - UTILITIES
   - R CMD config knows the values of AR and RANLIB, often set for LTO builds.
   - R CMD check now optionally checks makefiles for correct and portable use of
     the SHLIB_OPENMP_*FLAGS macros.
   - R CMD check now evaluates \Sexpr{} expressions (including those in macros)
-    before checking the contents of ‘Rd’ files and so detects issues both in
+    before checking the contents of 'Rd' files and so detects issues both in
     evaluating the expressions and in the expanded contents.
   - R CMD check now lists missing packages separated by commas and with regular
     quotes such as to be useful as argument in calling install.packages(c(..));
     from a suggestion by Marcel Ramos.
   - tools::Rd2latex() now uses UTF-8 as its default output encoding.
-  - R CMD check now checks line endings of files with extension ‘.hpp’ and
-    those under ‘inst/include’. The check now includes that a non-empty file is
+  - R CMD check now checks line endings of files with extension '.hpp' and
+    those under 'inst/include'. The check now includes that a non-empty file is
     terminated with a newline.
   - R CMD build will correct line endings in such files.
   - R CMD check now tries re-building all vignettes rather than stopping at the
-    first error: whilst doing so it adds ‘bookmarks’ to the log. By default
-    (see the ‘R Internals’ manual) it re-builds each vignette in a separate
+    first error: whilst doing so it adds 'bookmarks' to the log. By default
+    (see the 'R Internals' manual) it re-builds each vignette in a separate
     process.
-  - It now checks for duplicated vignette titles (also known as ‘index
-    entries’): they are used as hyperlinks on CRAN package pages and so do need
+  - It now checks for duplicated vignette titles (also known as 'index
+    entries'): they are used as hyperlinks on CRAN package pages and so do need
     to be unique.
-  - R CMD check has more comprehensive checks on the ‘data’ directory and the
+  - R CMD check has more comprehensive checks on the 'data' directory and the
     functioning of data() in a package.
-  - R CMD check now checks autoconf-generated ‘configure’ files have their
+  - R CMD check now checks autoconf-generated 'configure' files have their
     corresponding source files, including optionally attempting to regenerate
     them on platforms with autoreconf.
   - R CMD build has a new option --compression to select the compression used
     for the tarball.
-  - R CMD build now removes ‘src/*.mod’ files on all platforms.
+  - R CMD build now removes 'src/*.mod' files on all platforms.
 - C-LEVEL FACILITIES
   - New pointer protection C functions R_PreserveInMSet and R_ReleaseFromMSet
     have been introduced to replace UNPROTECT_PTR, which is not safe to mix
@@ -398,7 +510,7 @@ fi
 - DEPRECATED AND DEFUNCT
   - The use of a character vector with .Fortran() is formally deprecated and
     gives a non-portability warning. (It has long been strongly discouraged in
-    ‘Writing R Extensions’.)
+    'Writing R Extensions'.)
   - Argument compressed of untar() is deprecated — it is only used for external
     tar commands which increasingly for extraction auto-detect compression and
     ignore their zjJ flags.
@@ -408,7 +520,7 @@ fi
     deprecated since Feb 2016), being partly replaced by newly exported
     vignetteInfo().
   - The f77_f2c script has been removed: it no longer sufficed to compile the
-    ‘.f’ files in R.
+    '.f' files in R.
   - The deprecated legacy support of make macros such as CXX1X has been
     removed: use the CXX11 forms instead.
   - Make macro F77_VISIBILITY is deprecated in favour of F_VISIBILITY.
@@ -524,14 +636,14 @@ fi
     3.0.0, namely identically to sample.int(2, ..).
   - Fixes to convertColor() for chromatic adaptation; thanks to Brodie Gaslam
     PR#17473.
-  - Using \Sexpr[stage=install]{..} to create an ‘Rd’ section no longer gives a
+  - Using \Sexpr[stage=install]{..} to create an 'Rd' section no longer gives a
     warning in R CMD check; problem originally posted by Gábor Csárdi, then
     reported as PR#17479 with a partial patch by Duncan Murdoch.
   - Parse data now include a special node for equal assignment.
   - split.default() no longer relies on [[<-(), so it behaves as expected when
     splitting an object by a factor with the empty string as one of its levels.
     Thanks to Brad Friedman for the report.
-  - Line numbers in messages about ‘.Rd’ files are now more reliable, thanks to
+  - Line numbers in messages about '.Rd' files are now more reliable, thanks to
     a patch from Duncan Murdoch.
   - In the numeric method for all.equal(), a numeric scale argument is now
     checked to be positive and allowed to be of length > 1. (The latter worked
@@ -587,7 +699,7 @@ fi
     as.roman(NA). (Partly reported by Bill Dunlap in PR#17542.)
   - reformulate("x", response = "sin(y)") no longer produces extra back quotes,
     PR#17359, and gains new optional argument env.
-  - When reading console input from ‘stdin’ with re-encoding (R --encoding=enc
+  - When reading console input from 'stdin' with re-encoding (R --encoding=enc
     < input) the code on a Unix-alike now ensures that each converted input
     line is terminated with a newline even if re-encoding fails.
   - as.matrix.data.frame() now produces better strings from logicals, thanks to
@@ -621,7 +733,7 @@ fi
     have been misusing for C++ code) for the default C++ compiler (but not
     necessarily one used for non-default C++ dialects like C++14).
 - TESTING
-  - The random number generator tests in ‘tests/p-r-random-tests.R’ no longer
+  - The random number generator tests in 'tests/p-r-random-tests.R' no longer
     fail occasionally as they now randomly sample from “certified” random
     seeds.
 - BUG FIXES
@@ -717,7 +829,7 @@ fi
     Anggono's PR#17427.
   - Unbuffered connections now work with encoding conversion. Reported by
     Stephen Berman.
-  - ‘.Renviron’ on Windows with Rgui is again by default searched for in user
+  - '.Renviron' on Windows with Rgui is again by default searched for in user
     documents directory when invoked via the launcher icon. Reported by Jeroen
     Ooms.
   - printCoefmat() now also works with explicit right=TRUE.
@@ -750,7 +862,7 @@ fi
   - (methods package.) .self is now automatically registered as a global
     variable when registering a reference class method.
   - tempdir(check = TRUE) recreates the tempdir() directory if it is no longer
-    valid (e.g. because some other process has cleaned up the ‘/tmp’
+    valid (e.g. because some other process has cleaned up the '/tmp'
     directory).
   - New askYesNo() function and "askYesNo" option to ask the user binary
     response questions in a customizable but consistent way. (Suggestion of
@@ -789,7 +901,7 @@ fi
   - The list method of within() gains an option keepAttrs = FALSE for some
     speed-up.
   - system() and system2() now allow the specification of a maximum elapsed
-    time (‘timeout’).
+    time ('timeout').
   - debug() supports debugging of methods on any object of S4 class
     "genericFunction", including group generics.
   - Attempting to increase the length of a variable containing NULL using
@@ -842,7 +954,7 @@ fi
   - glm() and glm.fit get the same singular.ok = TRUE argument that lm() has
     had forever. As a consequence, in glm(*, method = <your_own>), user
     specified methods need to accept a singular.ok argument as well.
-  - aspell() gains a filter for Markdown (‘.md’ and ‘.Rmd’) files.
+  - aspell() gains a filter for Markdown ('.md' and '.Rmd') files.
   - intToUtf8(multiple = FALSE) gains an argument to allow surrogate pairs to
     be interpreted.
   - The maximum number of DLLs that can be loaded into R e.g. via dyn.load()
@@ -876,7 +988,7 @@ fi
     shorter output.
   - write.dcf() gets optional argument useBytes.
   - New, partly experimental packageDate() which tries to get a valid "Date"
-    object from a package ‘DESCRIPTION’ file, thanks to suggestions in
+    object from a package 'DESCRIPTION' file, thanks to suggestions in
     PR#17324.
   - tools::resaveRdaFiles() gains a version argument, for use when packages
     should remain compatible with earlier versions of R.
@@ -958,13 +1070,13 @@ fi
     https://svn.r-project.org/R/branches/ALTREP/ALTREP.html.
 - UTILITIES
   - install.packages() for source packages now has the possibility to set a
-    ‘timeout’ (elapsed-time limit). For serial installs this uses the timeout
+    'timeout' (elapsed-time limit). For serial installs this uses the timeout
     argument of system2(): for parallel installs it requires the timeout utility
     command from GNU coreutils.
-  - It is now possible to set ‘timeouts’ (elapsed-time limits) for most parts
-    of R CMD check via environment variables documented in the ‘R Internals’
+  - It is now possible to set 'timeouts' (elapsed-time limits) for most parts
+    of R CMD check via environment variables documented in the 'R Internals'
     manual.
-  - The ‘BioC extra’ repository which was dropped from Bioconductor 3.6 and
+  - The 'BioC extra' repository which was dropped from Bioconductor 3.6 and
     later has been removed from setRepositories(). This changes the mapping for
     6–8 used by setRepositories(ind=).
   - R CMD check now also applies the settings of environment variables
@@ -976,7 +1088,7 @@ fi
     field.
 - INSTALLATION on a UNIX-ALIKE
   - Support for a system Java on macOS has been removed — install a fairly
-    recent Oracle Java (see ‘R Installation and Administration’ §C.3.2).
+    recent Oracle Java (see 'R Installation and Administration' §C.3.2).
   - configure works harder to set additional flags in SAFE_FFLAGS only where
     necessary, and to use flags which have little or no effect on performance.
   - In rare circumstances it may be necessary to override the setting of
@@ -987,12 +1099,12 @@ fi
     not done in a few cases where the default standard passed the tests made
     (e.g.  clang 6.0.0 for C++11).
 - C-LEVEL FACILITIES
-  - ‘Writing R Extensions’ documents macros MAYBE_REFERENCED, MAYBE_SHARED and
+  - 'Writing R Extensions' documents macros MAYBE_REFERENCED, MAYBE_SHARED and
     MARK_NOT_MUTABLE that should be used by package C code instead NAMED or
     SET_NAMED.
   - The object header layout has been changed to support merging the ALTREP
     branch. This requires re-installing packages that use compiled code.
-  - ‘Writing R Extensions’ now documents the R_tryCatch, R_tryCatchError, and
+  - 'Writing R Extensions' now documents the R_tryCatch, R_tryCatchError, and
     R_UnwindProtect functions.
   - NAMEDMAX has been raised to 3 to allow protection of intermediate results
     from (usually ill-advised) assignments in arguments to BUILTIN functions.
@@ -1001,9 +1113,9 @@ fi
   - Sys.timezone(location = FALSE) is defunct, and is ignored (with a warning).
   - methods:::bind_activation() is defunct now; it typically has been unneeded
     for years.
-  - The undocumented ‘hidden’ objects .__H__.cbind and .__H__.rbind in package
+  - The undocumented 'hidden' objects .__H__.cbind and .__H__.rbind in package
     base are deprecated (in favour of cbind and rbind).
-  - The declaration of pythag() in ‘Rmath.h’ has been removed — the entry point
+  - The declaration of pythag() in 'Rmath.h' has been removed — the entry point
     has not been provided since R 2.14.0.
 - BUG FIXES
   - printCoefmat() now also works without column names.
@@ -1047,7 +1159,7 @@ fi
     in some Windows locales. This fixes the citation() issue in PR#17291.
   - poly(<matrix>, 3) now works, thanks to prompting by Marc Schwartz.
   - readLines() no longer segfaults on very large files with embedded '\0' (aka
-    ‘nul’) characters. (PR#17311)
+    'nul') characters. (PR#17311)
   - ns() (package splines) now also works for a single observation.
     interpSpline() gives a more friendly error message when the number of
     points is less than four.
@@ -1088,7 +1200,7 @@ fi
   - Subassignment with zero length vectors now coerces as documented
     (PR#17344).
   - Further, x <- numeric(); x[1] <- character() now signals an error
-    ‘replacement has length zero’ (or a translation of that) instead of doing
+    'replacement has length zero' (or a translation of that) instead of doing
     nothing.
   - (Package parallel.) mclapply(), pvec() and mcparallel() (when mccollect()
     is used to collect results) no longer leave zombie processes behind.
@@ -1149,14 +1261,14 @@ fi
     to Dénes Tóth.
   - nls(`NO [mol/l]` ~ f(t)) and nls(y ~ a) now work. (Partly from PR#17367)
   - R CMD build checks for GNU cp rather than assuming Linux has it. (PR#17370
-    says ‘Alpine Linux’ does not.)
+    says 'Alpine Linux' does not.)
   - Non-UTF-8 multibyte character handling fixed more permanently (PR#16732).
   - sum(<large ints>, <stuff>) is more consistent. (PR#17372)
   - rf() and rbeta() now also work correctly when ncp is not scalar, notably
     when (partly) NA. (PR#17375)
   - is.na(NULL) no longer warns. (PR#16107)
   - R CMD INSTALL now correctly sets C++ compiler flags when all source files
-    are in sub-directories of ‘src’.
+    are in sub-directories of 'src'.
 
 * Fri Dec 01 2017 Shane Sturrock <shane.sturrock@gmail.com> - 3.4.3-1
 - INSTALLATION on a UNIX-ALIKE:
@@ -1199,7 +1311,7 @@ fi
     scripts configure and cleanup (even on Windows).
 - INSTALLATION on a UNIX-ALIKE
   - A workaround has been added for the change in location of time-zone files
-    on macOS 10.13 ‘High Sierra’, so the default time zone is deduced correctly
+    on macOS 10.13 'High Sierra', so the default time zone is deduced correctly
     from the system setting when R is configured with --with-internal-tzcode 
     (the default on macOS).
   - The order of selection of OpenMP flags has been changed: Oracle Developer
@@ -1256,7 +1368,7 @@ fi
     do_gc to the C interface R_gc. This helps with reclaiming inaccessible
     connections.
   - help.search(topic) and ??topic matching topics in vignettes with multiple
-    file name extensions (e.g., ‘*.md.rsp’ but not ‘*.Rmd’) failed with an
+    file name extensions (e.g., '*.md.rsp' but not '*.Rmd') failed with an
     error when using options(help_type = "html").
   - The X11 device no longer uses the Xlib backing store (PR#16497).
   - array(character(), 1) now gives (a 1D array with) NA as has been documented
@@ -1275,7 +1387,7 @@ fi
     (PR#17250)
   - readRDS(url(....)) now works.
   - R CMD Sweave again returns status = 0 on successful completion.
-  - Vignettes listed in ‘.Rbuildignore’ were not being ignored properly.
+  - Vignettes listed in '.Rbuildignore' were not being ignored properly.
     (PR#17246)
   - file.mtime() no longer returns NA on Windows when the file or directory is
     being used by another process. This affected installed.packages(), which 
@@ -1289,7 +1401,7 @@ fi
     ratio. (PR#17286)
   - parse() no longer gives spurious warnings when extracting srcrefs from a
     file not encoded in the current locale.
-  - This was seen from R CMD check with ‘inst/doc/*.R’ files, and check has
+  - This was seen from R CMD check with 'inst/doc/*.R' files, and check has
     some additional protection for such files.
   - print.noquote(x) now always returns its argument x (invisibly).
   - Non-UTF-8 multibyte character sets were not handled properly in source
