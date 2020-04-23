@@ -1,11 +1,11 @@
-%define priority 22201
+%define priority 22203
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.22.1
+Version:	2.22.3
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,23 @@ fi
 %files
 
 %changelog
+* Fri Apr 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.3-1
+- 2.22.3
+  - Fixes CheckIlluminaDirectory problem with cbcl files and skips in the
+    READ_STRUCTURE (#1489)
+  - Add arguments for inputs and output to the ConvertSequencingArtifactToOxoG
+    command (#1492)
+  - Fixes LiftoverVCF for indels (again) (#1469)
+  - Only requiring that the input VCF be indexed if an INTERVAL is provided
+    (#1487)
+  - Allow more SD inputs to LiftoverIntervals and BedToIntervalList (#1446)
+  - Improvements to CompareMetrics - Now gives fuller description of
+    differences in metrics. - Added feature to ignore differences in certain
+    metrics. - Added 'fuzzy' metric comparison. - Added ability to output a
+    differences file.
+- 2.22.2
+  - Fixed two problems in CompareGtcFiles (#1486)
+
 * Fri Mar 27 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.1-1
 - Ported CompareGtcFiles from Picard private repo (#1468)
 - Update htsjdk (#1482)
