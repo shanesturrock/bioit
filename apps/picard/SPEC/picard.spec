@@ -1,11 +1,11 @@
-%define priority 22203
+%define priority 22204
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.22.3
+Version:	2.22.4
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,10 @@ fi
 %files
 
 %changelog
+* Fri Apr 30 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.4-1
+- Have CompareMetrics consider two NaN metrics equal. Added absolute
+  difference.
+
 * Fri Apr 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.3-1
 - 2.22.3
   - Fixes CheckIlluminaDirectory problem with cbcl files and skips in the

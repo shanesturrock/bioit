@@ -1,11 +1,11 @@
-%define priority 290
+%define priority 2100
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	2.9
+Version:	2.10
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,19 @@ fi
 %files
 
 %changelog
+* Fri Apr 30 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.10-1
+- Fixed a performance regression introduced in version 2.9. 
+- "--action=" could not be used with "--pair-adapters". Fix contributed by
+  wlokhorst.  
+- "--untrimmed-output", "--too-short-output" and "--too-long-output" can
+  now be written interleaved.
+- Fix problem that "N" wildcards in adapters did not match "N" characters in the
+  read. "N" characters now match any character in the read, independent of
+  whether "--match-read-wildcards" is used or not.
+- With "--action=lowercase"/"mask", print which sequences would have been
+  removed in the "Overview of removed sequences" statistics. Previously, it
+  would show that no sequences have been removed.
+
 * Fri Mar 27 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.9-1
 - Add a "--max-ee" (or "--max-expected-errors") option for filtering reads
   whose number of expected errors exceeds the given threshold.
