@@ -27,7 +27,7 @@ Download the version to be built into `/opt/bioit/R-core/src` and untar
 
     ./configure --prefix=/opt/bioit/R-core/3.6.3 --enable-R-shlib --with-x \ 
     --with-libpng --with-jpeglib --with-cairo --with-libtiff \
-    --with-blas --with-lapack --enable-memory-profiling
+    --with-blas --with-lapack --enable-memory-profiling --with-pcre1
 
 There will be an warning message about `inconsolata.sty` not being found but this just isn't available on CentOS 7 so can't be helped.
 
