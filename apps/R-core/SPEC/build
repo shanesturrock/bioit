@@ -25,7 +25,7 @@ cd /opt/bioit/R-core/src
 wget https://cloud.r-project.org/src/base/R-${RELEASE}/R-${VERSION}.tar.gz
 tar xvf R-${VERSION}.tar.gz
 cd R-${VERSION}
-./configure --prefix=/opt/bioit/R-core/${VERSION} --enable-R-shlib --with-x --with-libpng --with-jpeglib --with-cairo --with-libtiff --with-blas --with-lapack --enable-memory-profiling
+./configure --prefix=/opt/bioit/R-core/${VERSION} --enable-R-shlib --with-x --with-libpng --with-jpeglib --with-cairo --with-libtiff --with-blas --with-lapack --enable-memory-profiling --with-pcre1
  
 make clean
 make
