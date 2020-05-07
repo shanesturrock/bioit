@@ -1,11 +1,11 @@
-%define priority 211
+%define priority 212
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		stringtie
-Version:	2.1.1
+Version:	2.1.2
 Release:	1%{?dist}
 Summary:	StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts.
 Group:		Applications/Engineering
@@ -46,6 +46,10 @@ fi
 %files
 
 %changelog
+* Fri May 08 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.2-1
+- added --ptf option for loading point-feature data (TSA, CPAS)
+- improve accuracy of assemblies from long read alignments
+
 * Fri Jan 31 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.1-1
 - fixed small bug in trimming procedure
 - resolved rlink.cpp merge conflict
