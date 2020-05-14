@@ -1,11 +1,11 @@
-%define priority 22204
+%define priority 22206
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.22.4
+Version:	2.22.6
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,11 @@ fi
 %files
 
 %changelog
+* Fri May 15 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.6-1
+- Hardclip adapter option in MergeBamAlignments (#1484)
+- fix CollectSequencingArtifactMetrics so that it doesn't die when encountering
+  IUPAC bases (#1506)
+
 * Fri Apr 30 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.4-1
 - Have CompareMetrics consider two NaN metrics equal. Added absolute
   difference.
