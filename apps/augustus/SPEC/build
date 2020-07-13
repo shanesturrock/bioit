@@ -95,3 +95,9 @@ echo "#%Module 1.0
 #  augustus module for use with 'environment-modules' package:
 #
 prepend-path  PATH              /opt/bioit/augustus/${VERSION}/bin" > /opt/bioit/modulefiles/augustus/${VERSION}
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of augustus
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/augustus/.version

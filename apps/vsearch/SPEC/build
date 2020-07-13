@@ -40,3 +40,9 @@ echo "#%Module 1.0
 #
 prepend-path  PATH              /opt/bioit/vsearch/${VERSION}/bin 
 prepend-path  MANPATH           /opt/bioit/vsearch/${VERSION}/share/man" > /opt/bioit/modulefiles/vsearch/${VERSION}
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of vsearch
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/vsearch/.version

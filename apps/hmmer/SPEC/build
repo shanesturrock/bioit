@@ -36,3 +36,9 @@ echo "#%Module 1.0
 #
 prepend-path  PATH              /opt/bioit/hmmer/${VERSION}/bin
 prepend-path  MANPATH           /opt/bioit/hmmer/${VERSION}/share/man" > /opt/bioit/modulefiles/hmmer/${VERSION}
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of hmmer
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/hmmer/.version

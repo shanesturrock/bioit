@@ -35,3 +35,9 @@ echo "#%Module 1.0
 module load bcftools/${VERSION}
 prepend-path  PATH              /opt/bioit/samtools/${VERSION}/bin
 prepend-path  MANPATH           /opt/bioit/samtools/${VERSION}/share/man" > /opt/bioit/modulefiles/samtools/${VERSION}
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of samtools
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/samtools/.version

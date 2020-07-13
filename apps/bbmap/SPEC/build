@@ -33,3 +33,9 @@ echo "#%Module 1.0
 #  bbmap module for use with 'environment-modules' package:
 #
 prepend-path  PATH              /opt/bioit/bbmap/${VERSION}" > /opt/bioit/modulefiles/bbmap/${VERSION}
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of bbmap
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/bbmap/.version

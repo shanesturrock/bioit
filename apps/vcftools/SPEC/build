@@ -36,3 +36,9 @@ echo "#%Module 1.0
 #
 prepend-path  PATH              /opt/bioit/vcftools/${VERSION}/bin 
 prepend-path  MANPATH           /opt/bioit/vcftools/${VERSION}/share/man" > /opt/bioit/modulefiles/vcftools/${VERSION}
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of vcftools
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/vcftools/.version

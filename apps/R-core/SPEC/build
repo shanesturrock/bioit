@@ -39,3 +39,9 @@ prepend-path  MANPATH		/opt/bioit/R-core/${VERSION}/share/man
 prepend-path  LD_LIBRARY_PATH   /opt/bioit/R-core/${VERSION}/lib64/R/lib" > /opt/bioit/modulefiles/R/${VERSION}
 echo "Install required packages"
 /opt/bioit/R-core/${VERSION}/bin/Rscript ${HOME}/bioit/apps/R-core/SPEC/bioC_install.R
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of R
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/R/.version

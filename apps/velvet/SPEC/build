@@ -40,3 +40,9 @@ echo "#%Module 1.0
 #  velvet module for use with 'environment-modules' package:
 #
 prepend-path  PATH              /opt/bioit/velvet/${VERSION}" > /opt/bioit/modulefiles/velvet/${VERSION}
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of velvet
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/velvet/.version
