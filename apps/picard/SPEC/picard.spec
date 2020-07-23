@@ -1,11 +1,11 @@
-%define priority 22206
+%define priority 22303
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.22.6
+Version:	2.23.3
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,12 +41,44 @@ fi
 %files
 
 %changelog
+* Fri Jul 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.3-1
+- 2.22.7
+  - Change default in RevertSam for restoring hard-clips to true (#1509)
+  - NP-remove_r_from_argument (#1508)
+  - Fix for corrupted CO tag issue (#1461)
+- 2.22.8
+  - Fixes edge case where soft-cliped portion of a read ends up at a nega…
+    (#1513)
+  - GatherVcfs and MergeVcfs: add COMMENT= + GatherVcfs SORT (#1480)
+- 2.22.9
+  - gl-916 add pipeline version to metrics (#1515)
+  - Update htsjdk to 2.22.0 (#1518)
+- 2.23.0
+  - Added GtcCallRate to GtcToVcf, parse it out and report it in
+    CollectArraysVariantCallingMetrics. (#1525)
+  - Bugfix for IdentifyContamiant + small improvements to Fingerprinting
+    (#1496)
+  - GtcFile now uses bpm rather than bpm.csv (#1517)
+- 2.23.1
+  - cleanup and better error messaging (#1529)
+- 2.23.2
+  - Update to htsjdk 2.23.0 (#1537)
+  - Upgrade to Barclay 3.0.0. (#1526)
+- 2.23.3
+  - Add haplotype map liftover (#1457)
+  - Determine arg parser to use. (#1265)
+  - Update CREATE_INDEX arg javadoc. (#1547)
+  - Update README.md (#1543)
+  - Use a mutable list when initializing MergeBamAlignment
+    MATCHING_DICTIONARY_TAGS arg. (#1545)
+  - New CheckDuplicateMarking CLP (#1507)
+
 * Fri May 15 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.6-1
 - Hardclip adapter option in MergeBamAlignments (#1484)
 - fix CollectSequencingArtifactMetrics so that it doesn't die when encountering
   IUPAC bases (#1506)
 
-* Fri Apr 30 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.4-1
+* Fri May 01 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.4-1
 - Have CompareMetrics consider two NaN metrics equal. Added absolute
   difference.
 
