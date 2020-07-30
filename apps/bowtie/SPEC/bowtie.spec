@@ -1,11 +1,11 @@
-%define priority 1220
+%define priority 1300
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie
-Version:	1.2.2
+Version:	1.3.0
 Release:	1%{?dist}
 Summary:	An ultrafast, memory-efficient short read aligner
 Group:		Applications/Engineering
@@ -48,6 +48,35 @@ fi
 %files
 
 %changelog
+* Fri Jul 31 2020 Shane Sturrock <shane.sturrock@gmail.com> - 1.3.0-1
+- v1.2.3
+  - Added support for reading and inspecting Bowtie 2 indexes. Bowtie 2 indexes
+    can now be used with either Bowtie or Bowtie 2.
+  - Added support for building an index from a gzipped-compressed FASTA.
+  - Fixed issue preventing bowtie from reporting repeated alignments when -M is
+    specified.
+  - Fixed issue with -F mode omitting final base of each read.
+  - Fixed clipping of first letter of first read in batches after first.
+  - Fixed an issue preventing bowtie wrapper script from finding indexes.
+- v1.3.0
+  - Fixed an issue causing bowtie to report incorrect results when using a
+    Bowtie 2 index.
+  - New, more efficient implementation of --reorder for keeping SAM output
+    lines in same order as input reads
+  - Added -x parameter for specifying index. bowtie still supports specifying
+    an index via positional parameter, but this behavior will be deprecated.
+  - Migrated python scripts to python3.
+  - Fully removed colorspace functionality.
+  - Added support for compiling on ARM architectures.
+  - Fixed an issue preventing bowtie from outputting newlines in --max and --un
+    output files.
+  - Fixed an issue causing alignment results to vary based on read names.
+  - Fixed an issue preventing --no-unal from suppressing unmapped reads.
+  - Removed dependence on some third-party libraries, simplifying the code and
+    improving portability.
+  - Fix an issue preventing bowtie from running with many threads on big-endian
+    machines.
+
 * Wed Dec 13 2017 Shane Sturrock <shane.sturrock@gmail.com> - 1.2.2-1
 - Fixed major issue causing corrupt SAM output when using many threads
   (-p/--threads) on certain systems

@@ -1,11 +1,11 @@
-%define priority 2142
+%define priority 2150
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.14.2
+Version:	2.15.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,19 @@ fi
 %files
 
 %changelog
+* Fri Jul 31 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.0-1
+- Update manual and documentation.
+- Turn on notrunclabels option for sintax command by default.
+- Change maxhits 0 to mean unlimited hits, like the default.
+- Allow non-ascii characters in headers, with a warning.
+- Sort centroids and uc too when clusterout_sort specified.
+- Add cluster id to centroids output when clusterout_id specified.
+- Improve error messages when parsing FASTQ files.
+- Add missing fastq_qminout option and fix label_suffix option for
+  fastq_mergepairs.
+- Add derep_id command that dereplicates based on both label and sequence. 
+- Remove compilation warnings.
+
 * Fri Jan 31 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.2-1
 - Fixed some issues with the cut, fastx_revcomp, fastq_convert,
   fastq_mergepairs, and makeudb_usearch commands. 

@@ -22,10 +22,10 @@ DATE=`date +"%d/%m/%Y %r"`
 echo "Building bowtie ${VERSION} on ${DATE}"
 cd /opt/bioit/bowtie/src
 #wget https://github.com/BenLangmead/bowtie/releases/download/v${VERSION}/bowtie-${VERSION}-src.zip
-wget https://github.com/BenLangmead/bowtie/archive/v${VERSION}_p1.zip
-mv v${VERSION}_p1.zip bowtie-${VERSION}-src.zip
+wget https://github.com/BenLangmead/bowtie/archive/v${VERSION}.zip
+mv v${VERSION}.zip bowtie-${VERSION}-src.zip
 unzip bowtie-${VERSION}-src.zip
-cd bowtie-${VERSION}_p1
+cd bowtie-${VERSION}
 sed "s+prefix = /usr/local+prefix = /opt/bioit/bowtie/${VERSION}+" --in-place Makefile
 make NO_TBB=1
 make install

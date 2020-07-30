@@ -31,13 +31,13 @@ Install `wget` as this makes it much easier to download packages:
 
     yum -y install wget
 
-You should not install EPEL `R-core` on this system so do the following to remove it if it is already installed:
+You should not install EPEL `R-core or bowtie` on this system so do the following to remove it if it is already installed:
 
     yum remove R-core
 
-To prevent `R-core` being installed from EPEL edit `/etc/yum.repos.d/epel.repo` and add the following line after the `gpgcheck=1` for the `[epel]` section:
+To prevent `R-core or bowtie` being installed from EPEL edit `/etc/yum.repos.d/epel.repo` and add the following line after the `gpgcheck=1` for the `[epel]` section:
 
-    exclude=R-core
+    exclude=R-core bowtie
 
 If you try the following you should now get an error that there's no package available:
 
