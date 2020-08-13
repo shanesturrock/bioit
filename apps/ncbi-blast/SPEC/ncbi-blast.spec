@@ -1,11 +1,11 @@
-%define priority 2100
+%define priority 2101
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		ncbi-blast
-Version:	2.10.0+
+Version:	2.10.1+
 Release:	1%{?dist}
 Summary:	BLAST+ is a suite of command-line tools to run BLAST
 Group:		Applications/Engineering
@@ -60,6 +60,10 @@ fi
 %files
 
 %changelog
+* Fri Aug 14 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.1+-1
+- Bug fixes
+  - Fix for TBLASTN Multi-Threading bug.
+
 * Fri Jan 17 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.0+-1
 - New features
   - Enhancements to composition-based statistics to ensure the consistency of

@@ -1,11 +1,11 @@
-%define priority 2802
+%define priority 2809
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.8.2
+Version:	2.8.9
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Aug 14 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.9-1
+- more precise alignment width calculation (round vs floor)
+
 * Fri Mar 27 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.2-1
 - Rework reload session & tracks.
 - Simplify autoscaling - respect track line.
