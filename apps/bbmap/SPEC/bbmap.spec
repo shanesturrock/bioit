@@ -1,11 +1,11 @@
-%define priority 3863
+%define priority 3886
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.63
+Version:	38.86
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -30,8 +30,13 @@ higher). All tools are efficient and multithreaded.
 alternatives \
    --install %{_bindir}/bbmap.sh bbmap /opt/bioit/%{name}/%{version}/bbmap.sh %{priority} \
    --slave %{_bindir}/addadapters.sh addadapters.sh /opt/bioit/%{name}/%{version}/addadapters.sh \
+   --slave %{_bindir}/addssu.sh addssu.sh /opt/bioit/%{name}/%{version}/addssu.sh \
+   --slave %{_bindir}/adjusthomopolymers.sh adjusthomopolymers.sh /opt/bioit/%{name}/%{version}/adjusthomopolymers.sh \
+   --slave %{_bindir}/alltoall.sh alltoall.sh /opt/bioit/%{name}/%{version}/alltoall.sh \
    --slave %{_bindir}/analyzeaccession.sh analyzeaccession.sh /opt/bioit/%{name}/%{version}/analyzeaccession.sh \
    --slave %{_bindir}/analyzegenes.sh analyzegenes.sh /opt/bioit/%{name}/%{version}/analyzegenes.sh \
+   --slave %{_bindir}/analyzesketchresults.sh analyzesketchresults.sh /opt/bioit/%{name}/%{version}/analyzesketchresults.sh \
+   --slave %{_bindir}/applyvariants.sh applyvariants.sh /opt/bioit/%{name}/%{version}/applyvariants.sh \
    --slave %{_bindir}/a_sample_mt.sh a_sample_mt.sh /opt/bioit/%{name}/%{version}/a_sample_mt.sh \
    --slave %{_bindir}/bbcms.sh bbcms.sh /opt/bioit/%{name}/%{version}/bbcms.sh \
    --slave %{_bindir}/bbcountunique.sh bbcountunique.sh /opt/bioit/%{name}/%{version}/bbcountunique.sh \
@@ -62,8 +67,10 @@ alternatives \
    --slave %{_bindir}/commonkmers.sh commonkmers.sh /opt/bioit/%{name}/%{version}/commonkmers.sh \
    --slave %{_bindir}/comparegff.sh comparegff.sh /opt/bioit/%{name}/%{version}/comparegff.sh \
    --slave %{_bindir}/comparesketch.sh comparesketch.sh /opt/bioit/%{name}/%{version}/comparesketch.sh \
+   --slave %{_bindir}/comparessu.sh comparessu.sh /opt/bioit/%{name}/%{version}/comparessu.sh \
    --slave %{_bindir}/comparevcf.sh comparevcf.sh /opt/bioit/%{name}/%{version}/comparevcf.sh \
    --slave %{_bindir}/consect.sh consect.sh /opt/bioit/%{name}/%{version}/consect.sh \
+   --slave %{_bindir}/consensus.sh consensus.sh /opt/bioit/%{name}/%{version}/consensus.sh \
    --slave %{_bindir}/countbarcodes.sh countbarcodes.sh /opt/bioit/%{name}/%{version}/countbarcodes.sh \
    --slave %{_bindir}/countgc.sh countgc.sh /opt/bioit/%{name}/%{version}/countgc.sh \
    --slave %{_bindir}/countsharedlines.sh countsharedlines.sh /opt/bioit/%{name}/%{version}/countsharedlines.sh \
@@ -75,7 +82,6 @@ alternatives \
    --slave %{_bindir}/dedupe2.sh dedupe2.sh /opt/bioit/%{name}/%{version}/dedupe2.sh \
    --slave %{_bindir}/dedupebymapping.sh dedupebymapping.sh /opt/bioit/%{name}/%{version}/dedupebymapping.sh \
    --slave %{_bindir}/dedupe.sh dedupe.sh /opt/bioit/%{name}/%{version}/dedupe.sh \
-   --slave %{_bindir}/demuxbyname2.sh demuxbyname2.sh /opt/bioit/%{name}/%{version}/demuxbyname2.sh \
    --slave %{_bindir}/demuxbyname.sh demuxbyname.sh /opt/bioit/%{name}/%{version}/demuxbyname.sh \
    --slave %{_bindir}/diskbench.sh diskbench.sh /opt/bioit/%{name}/%{version}/diskbench.sh \
    --slave %{_bindir}/estherfilter.sh estherfilter.sh /opt/bioit/%{name}/%{version}/estherfilter.sh \
@@ -91,8 +97,10 @@ alternatives \
    --slave %{_bindir}/filterlines.sh filterlines.sh /opt/bioit/%{name}/%{version}/filterlines.sh \
    --slave %{_bindir}/filterqc.sh filterqc.sh /opt/bioit/%{name}/%{version}/filterlines.sh \
    --slave %{_bindir}/filtersam.sh filtersam.sh /opt/bioit/%{name}/%{version}/filtersam.sh \
+   --slave %{_bindir}/filtersilva.sh filtersilva.sh /opt/bioit/%{name}/%{version}/filtersilva.sh \
    --slave %{_bindir}/filtersubs.sh filtersubs.sh /opt/bioit/%{name}/%{version}/filtersubs.sh \
    --slave %{_bindir}/filtervcf.sh filtervcf.sh /opt/bioit/%{name}/%{version}/filtervcf.sh \
+   --slave %{_bindir}/fixgaps.sh fixgaps.sh /opt/bioit/%{name}/%{version}/fixgaps.sh \
    --slave %{_bindir}/fungalrelease.sh fungalrelease.sh /opt/bioit/%{name}/%{version}/fungalrelease.sh \
    --slave %{_bindir}/fuse.sh fuse.sh /opt/bioit/%{name}/%{version}/fuse.sh \
    --slave %{_bindir}/gbff2gff.sh gbff2gff.sh /opt/bioit/%{name}/%{version}/gbff2gff.sh \
@@ -110,6 +118,7 @@ alternatives \
    --slave %{_bindir}/invertkey.sh invertkey.sh /opt/bioit/%{name}/%{version}/invertkey.sh \
    --slave %{_bindir}/kapastats.sh kapastats.sh /opt/bioit/%{name}/%{version}/kapastats.sh \
    --slave %{_bindir}/kcompress.sh kcompress.sh /opt/bioit/%{name}/%{version}/kcompress.sh \
+   --slave %{_bindir}/keepbestcopy.sh keepbestcopy.sh /opt/bioit/%{name}/%{version}/keepbestcopy.sh \
    --slave %{_bindir}/khist.sh khist.sh /opt/bioit/%{name}/%{version}/khist.sh \
    --slave %{_bindir}/kmercountexact.sh kmercountexact.sh /opt/bioit/%{name}/%{version}/kmercountexact.sh \
    --slave %{_bindir}/kmercountmulti.sh kmercountmulti.sh /opt/bioit/%{name}/%{version}/kmercountmulti.sh \
@@ -117,6 +126,7 @@ alternatives \
    --slave %{_bindir}/kmerfilterset.sh kmerfilterset.sh /opt/bioit/%{name}/%{version}/kmerfilterset.sh \
    --slave %{_bindir}/kmerlimit2.sh kmerlimit2.sh /opt/bioit/%{name}/%{version}/kmerlimit2.sh \
    --slave %{_bindir}/kmerlimit.sh kmerlimit.sh /opt/bioit/%{name}/%{version}/kmerlimit.sh \
+   --slave %{_bindir}/lilypad.sh lilypad.sh /opt/bioit/%{name}/%{version}/lilypad.sh \
    --slave %{_bindir}/loadreads.sh loadreads.sh /opt/bioit/%{name}/%{version}/loadreads.sh \
    --slave %{_bindir}/loglog.sh loglog.sh /opt/bioit/%{name}/%{version}/loglog.sh \
    --slave %{_bindir}/makechimeras.sh makechimeras.sh /opt/bioit/%{name}/%{version}/makechimeras.sh \
@@ -127,6 +137,7 @@ alternatives \
    --slave %{_bindir}/mergebarcodes.sh mergebarcodes.sh /opt/bioit/%{name}/%{version}/mergebarcodes.sh \
    --slave %{_bindir}/mergeOTUs.sh mergeOTUs.sh /opt/bioit/%{name}/%{version}/mergeOTUs.sh \
    --slave %{_bindir}/mergepgm.sh mergepgm.sh /opt/bioit/%{name}/%{version}/mergepgm.sh \
+   --slave %{_bindir}/mergeribo.sh mergeribo.sh /opt/bioit/%{name}/%{version}/mergeribo.sh \
    --slave %{_bindir}/mergesam.sh mergesam.sh /opt/bioit/%{name}/%{version}/mergesam.sh \
    --slave %{_bindir}/mergesketch.sh mergesketch.sh /opt/bioit/%{name}/%{version}/mergesketch.sh \
    --slave %{_bindir}/mergesorted.sh mergesorted.sh /opt/bioit/%{name}/%{version}/mergesorted.sh \
@@ -149,6 +160,7 @@ alternatives \
    --slave %{_bindir}/readqc.sh readqc.sh /opt/bioit/%{name}/%{version}/readqc.sh \
    --slave %{_bindir}/reducesilva.sh reducesilva.sh /opt/bioit/%{name}/%{version}/reducesilva.sh \
    --slave %{_bindir}/reformat.sh reformat.sh /opt/bioit/%{name}/%{version}/reformat.sh \
+   --slave %{_bindir}/reformatpb.sh reformatpb.sh /opt/bioit/%{name}/%{version}/reformatpb.sh \
    --slave %{_bindir}/removebadbarcodes.sh removebadbarcodes.sh /opt/bioit/%{name}/%{version}/removebadbarcodes.sh \
    --slave %{_bindir}/removecatdogmousehuman.sh removecatdogmousehuman.sh /opt/bioit/%{name}/%{version}/removecatdogmousehuman.sh \
    --slave %{_bindir}/removehuman2.sh removehuman2.sh /opt/bioit/%{name}/%{version}/removehuman2.sh \
@@ -170,10 +182,12 @@ alternatives \
    --slave %{_bindir}/shuffle2.sh shuffle2.sh /opt/bioit/%{name}/%{version}/shuffle2.sh \
    --slave %{_bindir}/shuffle.sh shuffle.sh /opt/bioit/%{name}/%{version}/shuffle.sh \
    --slave %{_bindir}/sketchblacklist.sh sketchblacklist.sh /opt/bioit/%{name}/%{version}/sketchblacklist.sh \
+   --slave %{_bindir}/sketchblacklist2.sh sketchblacklist2.sh /opt/bioit/%{name}/%{version}/sketchblacklist2.sh \
    --slave %{_bindir}/sketch.sh sketch.sh /opt/bioit/%{name}/%{version}/sketch.sh \
    --slave %{_bindir}/sortbyname.sh sortbyname.sh /opt/bioit/%{name}/%{version}/sortbyname.sh \
    --slave %{_bindir}/splitbytaxa.sh splitbytaxa.sh /opt/bioit/%{name}/%{version}/splitbytaxa.sh \
    --slave %{_bindir}/splitnextera.sh splitnextera.sh /opt/bioit/%{name}/%{version}/splitnextera.sh \
+   --slave %{_bindir}/splitribo.sh splitribo.sh /opt/bioit/%{name}/%{version}/splitribo.sh \
    --slave %{_bindir}/splitsam4way.sh splitsam4way.sh /opt/bioit/%{name}/%{version}/splitsam4way.sh \
    --slave %{_bindir}/splitsam6way.sh splitsam6way.sh /opt/bioit/%{name}/%{version}/splitsam6way.sh \
    --slave %{_bindir}/splitsam.sh splitsam.sh /opt/bioit/%{name}/%{version}/splitsam.sh \
@@ -182,6 +196,7 @@ alternatives \
    --slave %{_bindir}/streamsam.sh streamsam.sh /opt/bioit/%{name}/%{version}/streamsam.sh \
    --slave %{_bindir}/subsketch.sh subsketch.sh /opt/bioit/%{name}/%{version}/subsketch.sh \
    --slave %{_bindir}/summarizecontam.sh summarizecontam.sh /opt/bioit/%{name}/%{version}/summarizecontam.sh \
+   --slave %{_bindir}/summarizecoverage.sh summarizecoverage.sh /opt/bioit/%{name}/%{version}/summarizecoverage.sh \
    --slave %{_bindir}/summarizecrossblock.sh summarizecrossblock.sh /opt/bioit/%{name}/%{version}/summarizecrossblock.sh \
    --slave %{_bindir}/summarizemerge.sh summarizemerge.sh /opt/bioit/%{name}/%{version}/summarizemerge.sh \
    --slave %{_bindir}/summarizequast.sh summarizequast.sh /opt/bioit/%{name}/%{version}/summarizequast.sh \
@@ -216,6 +231,38 @@ fi
 %files
 
 %changelog
+* Fri Aug 28 2020 Shane Sturrock <shane.sturrock@gmail.com> - 38.86-1
+- 38.85
+  - Fixed fastq interleaving detection for a rare failure with PacBio reads.
+  - Added entropy histogram support to BBDuk.
+  - Pileup modifications and a bugfix.
+  - Wrote ReformatPacBio, reformatpb.sh, and various support classes (ZMW,
+    ZMWStreamer, PBHeader).
+  - Modified BaseGraph to do alignment.
+  - Modified BaseGraph to do piecewise alignment and handle overlaps correctly.
+  - Added CCS support to ReformatPacBio, but it currently only works well on
+    synthetic data.
+  - Added artic3 primers to resources.
+  - Wrote FlatAligner2.
+  - Added hmm package and classes for parsing hmmsearch results.
+  - Added jasper package for intern.
+  - Added KmerPosition, KmerPosition3, and kmerposition.sh for positional kmer
+    counts.  These were written by Jasper Toscani Field.
+  - Added FlatAligner2 with flatter weights than FlatAligner.
+  - Added ApplyVariants support for renaming, excluding certain indels, and
+    better handling of variations in low-coverage regions.
+  - Updated Covid scripts.
+  - Added A_SampleSummary template.
+  - Added BBDuk entropy histogram.
+  - Fixed IceCreamMaker reference loading.
+  - Fixed Tadpole1 ownership reinitialization bug.
+  - Added total sub/var count to FilterSam.
+  - Added CallVariants/VCF support for NearbyVarCount and Flag fields.
+  - Added seed to RandomGenome.
+  - Added TrimRead handling of aligned reads without attached SamLines.
+- 38.86
+  - Bump due to git glitch.
+
 * Fri Aug 23 2019 Shane Sturrock <shane.sturrock@gmail.com> - 38.63-1
 - Gene-calling long kmers are now uncompressed.
 - tRNA and 5S now use 10-mers instead of 9-mers; plastid, plasmid, and viral
