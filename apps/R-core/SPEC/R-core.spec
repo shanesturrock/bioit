@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 363
+%define priority 402
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        3.6.3
+Version:        4.0.2
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -59,6 +59,22 @@ fi
 #/etc/ld.so.conf.d/R-x86_64.conf
 
 %changelog
+* Mon Aug 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 4.0.2-1
+- UTILITIES:
+  - R CMD check skips vignette re-building (with a warning) if the
+    ‘VignetteBuilder’ package(s) are not available.
+- BUG FIXES:
+  - Paths with non-ASCII characters caused problems for package loading on
+    Windows PR#17833.
+  - Using tcltk widgets no longer crashes R on Windows.
+  - source(*,echo=TRUE) no longer fails in some cases with empty lines;
+    reported by Bill Dunlap in PR#17769.
+  - on.exit() now correctly matches named arguments, thanks to PR#17815
+    (including patch) by Brodie Gaslam.
+  - regexpr(*,perl=TRUE) no longer returns incorrect positions into text
+    containing characters outside of the Unicode Basic Multilingual Plane on
+    Windows.
+
 * Tue Apr 07 2020 Shane Sturrock <shane.sturrock@gmail.com> - 3.6.3-1
 - CHANGES IN R 3.6.3
   - NEW FEATURES:
@@ -70,7 +86,6 @@ fi
     - Uses of url(gzcon(.)) needing to extend buffer size have failed (with
       HTTP/2 servers), reported by G´abor Cs´ardi.
     - predict(loess(..),se=TRUE) now errors out (instead of seg.faulting etc)
-      for large sample sizes, thanks to a report and patch by Benjamin Tyner in
       PR#17121.
     - tools:assertCondition(.,"error") and hence assertError() no longer return
       errors twice (invisibly).
