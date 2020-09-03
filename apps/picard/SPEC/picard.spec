@@ -1,11 +1,11 @@
-%define priority 22303
+%define priority 22304
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.23.3
+Version:	2.23.4
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,18 @@ fi
 %files
 
 %changelog
+* Fri Sep 04 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.4-1
+- Adjust MBA read overhang clipping to be consistent with past behavior (#1571)
+- add support for CRAM reading in IdentifyContaminant and ExtractFingerprint
+  (#1572)
+- Yf fix typo in histogram column name asm (#1568)
+- Use new IntervalMergingIterator to merge intervals on the fly (#1456)
+- Several changes to metrics collections (AlignmentSummaryMetrics and
+  WgsMetrics) + some fluff (#1555)
+- Make Fingerprint checking fail when run on a truly unsorted file (currently
+  it returns a non-informative fingerprint) (#1556)
+- Added a simple test for LiftoverHaplotypeMap (#1550)
+
 * Fri Jul 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.3-1
 - 2.22.7
   - Change default in RevertSam for restoring hard-clips to true (#1509)
