@@ -1,11 +1,11 @@
-%define priority 224
+%define priority 225
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.2.4
+Version:	2.2.5
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -95,6 +95,21 @@ fi
 %files
 
 %changelog
+* Fri Oct 09 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.2.5-1
+- General:
+  - Resolve various compilation errors in newer versions of clang
+  - Use ntHash's 0th hash as the default hash instead of the 1st hash
+  - Added optional RResolver module, not currently part of the ABySS assembly
+    pipeline
+- abyss-rresolver-short:
+  - Improves genome assemblies at unitig stage by using a sliding window at
+    read size level
+  - across repeats to determine which paths are correct
+  - For further information: consult
+    http://www.birollab.ca/assets/posts/195_Nikolic_Vladimir_HiTSeq_ISMB2020.pdf
+- Misc:
+  - Extract all tags in a SAM file
+
 * Thu Feb 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.2.4-1
 - 2.2.2
   - Fix abyss-overlap for 32-bit systems

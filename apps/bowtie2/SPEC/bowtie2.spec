@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2410
+%define priority 2420
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.4.1
+Version:	2.4.2
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,16 @@ fi
 %files
 
 %changelog
+* Fri Oct 09 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.2-1
+- Fixed an issue that would cause the bowtie2 wrapper script to throw an error
+  when using wrapper-specific arguments.
+- Added new --sam-append-comment flag that appends comment from FASTA/Q read to
+  corresponding SAM record.
+- Fixed an issue that would cause qupto, -u, to overflow when there are >= 232
+  query sequences (PR #312).
+- Fixed an issue that would cause bowtie2-build script to incorrectly process
+  reference files.
+
 * Fri Mar 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.1-1
 - 2.4.1
   - Fixed an issue that would cause the bowtie2 wrapper script to incorrectly

@@ -1,11 +1,11 @@
-%define priority 22304
+%define priority 22306
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.23.4
+Version:	2.23.6
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,14 @@ fi
 %files
 
 %changelog
+* Fri Oct 09 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.6-1
+- 2.23.5
+  - Add testing for methods within sex enum
+- 2.23.6
+  - Remove deprecated syntax (#1585)
+  - Fixed a bug in MergeBamAlignment (#1581)
+  - Support standard input in IntervalListTools (#1582)
+
 * Fri Sep 04 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.4-1
 - Adjust MBA read overhang clipping to be consistent with past behavior (#1571)
 - add support for CRAM reading in IdentifyContaminant and ExtractFingerprint
