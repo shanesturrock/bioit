@@ -1,11 +1,11 @@
-%define priority 22306
+%define priority 22308
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.23.6
+Version:	2.23.8
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,17 @@ fi
 %files
 
 %changelog
+* Fri Oct 23 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.8-1
+- 2.23.8
+  - There was a buggy interactino between CollectMultipleMetrics and
+    CollectAlignmentSummaryMetrics with regards to the collection and emission
+    of the readlength histrogram. This PR fixes it. (#1595)
+- 2.23.7
+  - extra protection and messaging for the histogram of read lengths in
+    CollectAlignmentSummaryMetrics (#1593)
+  - Safely run DownsampleSam multiple times (#1584)
+  - MBA deletion edge case alternate solution and minor bug fix (#1589)
+
 * Fri Oct 09 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.6-1
 - 2.23.5
   - Add testing for methods within sex enum
