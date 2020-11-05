@@ -1,11 +1,11 @@
-%define priority 3886
+%define priority 3887
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.86
+Version:	38.87
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -231,6 +231,16 @@ fi
 %files
 
 %changelog
+* Fri Nov 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 38.87-1
+- SamStreamer now correctly sets the header for sam files with no reads, fixing
+  a hang.
+- LoadSharedHeader wait delay reduced from 1000 to 100ms.
+- Removed leftover BBDuk entropy-trimming print statement.
+- make universal flag document including e.g. cq (changequality).
+- bzip2 fails on JGI cloud, though lbzip2 works.  Test bzip2 on Cori.
+- Since code knows where docs are it should point to it.
+- Complete list of common flags in a file, point every shell script to this.
+
 * Fri Aug 28 2020 Shane Sturrock <shane.sturrock@gmail.com> - 38.86-1
 - 38.85
   - Fixed fastq interleaving detection for a rare failure with PacBio reads.

@@ -1,11 +1,11 @@
-%define priority 2150
+%define priority 2151
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.15.0
+Version:	2.15.1
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,9 @@ fi
 %files
 
 %changelog
+* Fri Nov 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.1-1
+- Fix for derep_fulllength and fastx_filter in special cases
+
 * Fri Jul 31 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.0-1
 - Update manual and documentation.
 - Turn on notrunclabels option for sintax command by default.

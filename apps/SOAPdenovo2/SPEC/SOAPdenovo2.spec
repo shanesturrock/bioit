@@ -1,11 +1,11 @@
-%define priority 241
+%define priority 242
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		SOAPdenovo2
-Version:	241
+Version:	242
 Release:	1%{?dist}
 Summary:	SOAPdenovo is a novel short-read assembly method
 Group:		Applications/Engineering
@@ -43,5 +43,8 @@ fi
 %files
 
 %changelog
-* Wed Jun 28 2017 Shane Sturrock <shane.sturrock@gmail.com> - r240
+* Fri Nov 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - r242
+- Bugfixes
+
+* Wed Jun 28 2017 Shane Sturrock <shane.sturrock@gmail.com> - r241
 - Added a scaffolding preparation module.

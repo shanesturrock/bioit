@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/ncbi-blast/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.10.1+
+    ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.11.0+
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load ncbi-blast/2.10.1+
+    module load ncbi-blast/2.11.0+
     which blastp
     blastp -h
 
@@ -26,7 +26,7 @@ Download the `x64-linux.tar.gz` file into `/opt/bioit/ncbi-blast/src` and untar 
 
 Move the unpackaged directory as follows:
 
-    mv ncbi-blast-2.10.1+ /opt/bioit/ncbi-blast/2.10.1+
+    mv ncbi-blast-2.11.0+ /opt/bioit/ncbi-blast/2.11.0+
 
 That should do it.
 
@@ -38,7 +38,7 @@ Add a module file in `/opt/bioit/modulefiles/ncbi-blast/` for this version by co
     #
     #  ncbi-blast module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/ncbi-blast/2.10.1+/bin
+    prepend-path  PATH         /opt/bioit/ncbi-blast/2.11.0+/bin
 
 ## RPM
 

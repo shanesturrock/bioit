@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/SOAPdenovo2/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 241
+    ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 242
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load SOAPdenovo2/241
+    module load SOAPdenovo2/242
     which SOAPdenovo-63mer
     SOAPdenovo-63mer --version
 
@@ -29,8 +29,8 @@ Download the `tar.gz` file into `/opt/bioit/SOAPdenovo2/src` and untar it.
 Build is simple, just `make` and then `mv` the resulting `SOAPdenovo-*` binaries into place:
 
     make
-    mkdir /opt/bioit/SOAPdenovo2/241/
-    mv SOAPdenovo-* /opt/bioit/SOAPdenovo2/241/
+    mkdir /opt/bioit/SOAPdenovo2/242/
+    mv SOAPdenovo-* /opt/bioit/SOAPdenovo2/242/
 
 ## Module setup
 
@@ -40,7 +40,7 @@ Add a module file in `/opt/bioit/modulefiles/SOAPdenovo2/` for this version by c
     #
     #  SOAPdenovo2 module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/SOAPdenovo2/241
+    prepend-path  PATH         /opt/bioit/SOAPdenovo2/242
 
 ## RPM
 

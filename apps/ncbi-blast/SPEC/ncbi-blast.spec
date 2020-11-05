@@ -1,11 +1,11 @@
-%define priority 2101
+%define priority 2110
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		ncbi-blast
-Version:	2.10.1+
+Version:	2.11.0+
 Release:	1%{?dist}
 Summary:	BLAST+ is a suite of command-line tools to run BLAST
 Group:		Applications/Engineering
@@ -60,6 +60,23 @@ fi
 %files
 
 %changelog
+* Fri Nov 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.0+-1
+_ New features
+  - Usage reporting - Help improve BLAST by sharing limited information about
+    your search. Details on the information collected, how it is used, and how
+    to opt-out at https://www.ncbi.nlm.nih.gov/books/NBK563686/
+  - Threading by query batch for rpsblast/rpstblast can BLAST large numbers of
+    queries faster. For large numbers of queries, use the -mt option to more
+    efficiently multi-thread the search.
+- Bug fixes
+  - Fix slowdown in TBLASTN searches run without composition-based statistics
+    on long database sequences.
+  - Remove necessity of a network connection for blast_formatter. This also
+    speeds up blast_formatter if the database can be found locally.
+  - A core dump for RPSBLAST and RPSTBLASTN has been fixed.
+  - Makeblastdb for windows has been fixed to not require as much virtual
+    memory and to not produce overly large LMDB files.
+
 * Fri Aug 14 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.1+-1
 - Bug fixes
   - Fix for TBLASTN Multi-Threading bug.
