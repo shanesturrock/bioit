@@ -1,11 +1,11 @@
-%define priority 223
+%define priority 230
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bismark
-Version:	0.22.3
+Version:	0.23.0
 Release:	1%{?dist}
 Summary:	A bisulfite read mapper and methylation caller
 Group:		Applications/Engineering
@@ -50,6 +50,40 @@ fi
 %files
 
 %changelog
+* Fri Nov 20 2020 Shane Sturrock <shane.sturrock@gmail.com> - 0.23.0-1
+- deduplicate_bismark
+  - the command deduplicate_bismark --barcode *bam now works again. Previously
+    the output file names were accidentally all derived from the first supplied
+    file in --barcode (= UMI) mode (it had been fixed for normal files in
+    0.22.2).
+  - Changed the way the library auto-detection works to only look at the @PG
+    ID:Bismark line of the SAM header (to only look for the Bismark command)
+- bismark_methylation_extractor / bismark2bedGraph
+  - Added a new option --ucsc to bismark2bedGraph and
+    bismark_methylation_extractor that will produce a UCSC-ready bedGraph file
+    if the genome version used came from Ensembl. This option (i) prefixes
+    chromosome names with 'chr', and (ii) changes the mitochondrial chromosome
+    from 'MT' to 'chrM'. In addition, it will also write out a new file ending
+    in .chromosome_sizes.txt for easier use of bedGraphToBigWig. More here.
+  - Changed the way the library auto-detection works to only look at the @PG
+    ID:Bismark line of the SAM header.
+- coverage2cytosine
+  - Added a new output file for all cytosine context methylation totals. More
+    information here: #321.
+  - Added new option --drach/--m6A. Most m6A sites are found in the conserved
+    sequence motif DRACH (where D=G/A/U, R=G/A, H=A/U/C), and if bound by
+    anti-m6A antibody, it causes the reverse transcriptase to introduce C to T
+    transitions at the cytosine which follows A in the DRACH motif. This option
+    also sets a coverage threshold of at 1 unless specified explicitly. This is
+    a very specialised option and should only be used by experimentalists
+    looking at m6A methylation (where the C to T transition acts as a proxy of
+    m6A).
+- bismark2summary
+  - Samples with absolutely 0 methylation calls in some context are now
+    excluded from the graphical HTML output (as they break rendering the entire
+    summary graph section). These samples and their statistics do still appear
+    in the file bismark_summary_report.txt. More information here: #315.
+
 * Fri Jan 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 0.22.3-1
 - 0.22.3
   - Bismark

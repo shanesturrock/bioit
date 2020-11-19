@@ -10,6 +10,8 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
     yum -y groupinstall "Mate Desktop"
     yum -y install libreoffice
     systemctl set-default graphical.target
+    yum install centos-release-scl
+    yum install devtoolset-9
     yum -y update
     reboot
 

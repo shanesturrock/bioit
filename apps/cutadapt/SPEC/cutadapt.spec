@@ -1,11 +1,11 @@
-%define priority 2100
+%define priority 3000
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	2.10
+Version:	3.0
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,35 @@ fi
 %files
 
 %changelog
+* Fri Nov 20 2020 Shane Sturrock <shane.sturrock@gmail.com> - 3.0-1
+- Demultiplexing on multiple cores is now supported. This was the last feature
+  that only ran single-threaded.
+- #478: Demultiplexing now always generates all possible output files.
+- #358: You can now use -e also to specify the maximum number of errors
+  (instead of the maximum error rate). For example, write -e 2 to allow two
+  errors over a full-length adapter match.
+- #486: Trimming many anchored adapters (for example when demultiplexing) is
+  now faster by using an index even when indels are allowed. Previously,
+  Cutadapt would only be able to build an index with --no-indels.
+- #469: Cutadapt did not run under Python 3.8 on recent macOS versions.
+- #425: Change the default compression level for .gz output files from 6 to 5.
+  This reduces the time used for compression by about 50% while increasing file
+  size by less than 10%. To get the old behavior, use --compression-level=6. If
+  you use Cutadapt to create intermediate files that are deleted anyway,
+  consider also using the even faster option -Z (same as --compression-level=1).
+- #485: Fix that, under some circumstances, in particular when trimming a 5’
+  adapter and there was a mismatch in its last nucleotide(s), not the entire
+  adapter sequence would be trimmed from the read. Since fixing this required
+  changed the alignment algorithm slightly, this is a backwards incompatible
+  change.
+- Fix that the report did not include the number of reads that are too long,
+  too short or had too many N. (This unintentionally disappeared in a previous
+  version.)
+- #487: When demultiplexing, the reported number of written pairs was always
+  zero.
+- Ensure Cutadapt runs under Python 3.9.
+- Drop support for Python 3.5.
+
 * Fri Apr 30 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.10-1
 - Fixed a performance regression introduced in version 2.9. 
 - "--action=" could not be used with "--pair-adapters". Fix contributed by
