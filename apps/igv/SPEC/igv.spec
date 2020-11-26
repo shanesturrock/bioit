@@ -1,11 +1,11 @@
-%define priority 2812
+%define priority 2813
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.8.12
+Version:	2.8.13
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Nov 27 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.13-1
+- Minor bug fixes
+
 * Fri Nov 20 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.8.12-1
 - remove diagnostic print
 
