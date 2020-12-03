@@ -1,11 +1,11 @@
-%define priority 3000
+%define priority 3100
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	3.0
+Version:	3.1
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,22 @@ fi
 %files
 
 %changelog
+* Fri Dec 04 2020 Shane Sturrock <shane.sturrock@gmail.com> - 3.1-1
+- With --action=retain, it is now possible to trim reads while leaving the
+  adapter sequence itself in the read. That is, only the sequence before (for
+  5’ adapters) or after (for 3’ adapters) is removed. With linked adapters, both
+  adapters are retained.
+- Running with multiple cores did not work using macOS and Python 3.8+. To
+  prevent problems like these in the future, automated testing has been
+  extended to also run on macOS.
+- Print statistics for --discard-casava and --max-ee in the report.
+- The changelog for 3.0 previously forgot to mention that the following
+  options, which were deprecated in version 2.0, have now been removed, and
+  using them will lead to an error: --format, --colorspace, -c, -d,
+  --double-encode, -t, --trim-primer, --strip-f3, --maq, --bwa, --no-zero-cap.
+  This frees up some single-character options, allowing them to be re-purposed
+  for future Cutadapt features.
+
 * Fri Nov 20 2020 Shane Sturrock <shane.sturrock@gmail.com> - 3.0-1
 - Demultiplexing on multiple cores is now supported. This was the last feature
   that only ran single-threaded.

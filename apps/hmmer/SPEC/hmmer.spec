@@ -1,12 +1,12 @@
-%define priority 3301
+%define priority 3302
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		hmmer
-Version:	3.3.1
-Release:	2%{?dist}
+Version:	3.3.2
+Release:	1%{?dist}
 Summary:	HMMER database search and aligner
 Group:		Applications/Engineering
 License:	BSD
@@ -78,6 +78,27 @@ fi
 %files
 
 %changelog
+* Fri Dec 04 2020 Shane Sturrock <shane.sturrock@gmail.com> - 3.3.2-1
+- bug fixes:
+  - Fixed a recently introduced bug that could cause hmmsearch (and
+    presumably hmmscan) to segfault on rare comparisons involving highly
+    biased sequences. In domain postprocessing
+    (p7_domaindef.c::rescore_isolated_domain()), when p7_Decoding()
+    returns an eslERANGE error on garbage sequences in long_target mode,
+    nhmmer needs to reset its background model, which it modifies on the
+    fly. This was in the fix for iss #198, which we added in the 3.3.1
+    release. However, that fix failed to check for long_target mode,
+    which introduced this new bug for hmmsearch/hmmscan.
+  - ./configure --enable-PIC wasn't setting -fPIC option in impl-sse,
+    impl-vmx Makefiles.
+    (Thanks to Martin Larralde.)
+  - fixed an uninitialized ptr in makehmmerdb, in the fm_data
+    structure, which could cause makehmmerdb to crash.
+    (Thanks to Augustin Zidek.)
+- new thingies:
+  - added a `make install-strip` target.
+    (Thanks to Sebastien Jaenicke.)
+
 * Fri Aug 14 2020 Shane Sturrock <shane.sturrock@gmail.com> - 3.3.1-1
 - Most important changes:
   - Default sequence weighting behavior was slightly changed, making it
