@@ -1,11 +1,11 @@
-%define priority 22308
+%define priority 22309
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.23.8
+Version:	2.23.9
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,15 @@ fi
 %files
 
 %changelog
+* Fri Dec 11 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.9-1
+- Fast fail if R is not installed in tools that use R (#1613)
+- enable CollectIndependentReplicateMetrics to read a cram file (#1599)
+- Remove cluster intensity data.
+- Check Sequence Dictionaries Match in CollectWgsMetrics (#1610)
+- Add flowcell location stratifier for CollectSamErrorMetrics (#1603)
+- GtcToVcf should not fail if AS tag is missing (#1445)
+- Increase fraction of target coverage for panel metrics (#1542)
+
 * Fri Oct 23 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.8-1
 - 2.23.8
   - There was a buggy interactino between CollectMultipleMetrics and
