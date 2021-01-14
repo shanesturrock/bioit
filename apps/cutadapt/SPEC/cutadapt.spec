@@ -1,11 +1,11 @@
-%define priority 3100
+%define priority 3200
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	3.1
+Version:	3.2
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,13 @@ fi
 %files
 
 %changelog
+* Fri Jan 15 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.2-1
+- Implement a --rename option for flexible read name modifications such as
+  moving a barcode sequence into the read name.
+- The index for demultiplexing is now created a lot faster (within seconds
+  instead of minutes) when allowing indels.
+- Fix combinatorial demultiplexing not working when using multiple cores.
+
 * Fri Dec 04 2020 Shane Sturrock <shane.sturrock@gmail.com> - 3.1-1
 - With --action=retain, it is now possible to trim reads while leaving the
   adapter sequence itself in the read. That is, only the sequence before (for

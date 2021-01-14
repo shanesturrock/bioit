@@ -1,11 +1,11 @@
-%define priority 22309
+%define priority 22400
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.23.9
+Version:	2.24.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,14 @@ fi
 %files
 
 %changelog
+* Fri Jan 15 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.24.0-1
+- Adds support for reading CSI indexes. (#998)
+- Fix default PAR values for hg37 for FindMendelianViolations (#1600)
+- using guava instead of rolling my own CollectionsUtils... (#1619)
+- Added a metric to CollectAlignmentSummaryMetrics for the mean length of 3'
+  softclips (#1586)
+- Add functionality to not combine abutting intervals (#1608)
+
 * Fri Dec 11 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.9-1
 - Fast fail if R is not installed in tools that use R (#1613)
 - enable CollectIndependentReplicateMetrics to read a cram file (#1599)
