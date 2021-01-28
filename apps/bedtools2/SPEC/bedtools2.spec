@@ -1,11 +1,11 @@
-%define priority 2292
+%define priority 2300
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bedtools2
-Version:	2.29.2
+Version:	2.30.0
 Release:	1%{?dist}
 Summary:	Tools for handing BED files
 Group:		Applications/Engineering
@@ -77,6 +77,38 @@ fi
 %files
 
 %changelog
+* Fri Jan 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.30.0-1
+- Thanks to Hao Hou (github: @38), we have made substantial improvements in the
+  speed associated with parsing input files and in printing results. It turns
+  out that these tasks consume a large proportion of run time, especially as
+  input files increase in size. These changes result in a 2-3X improvement in
+  speed, depending on input types, options, etc.
+- Thanks to John Marshall (github: @jmarshall), who improved the stability and
+  cleanliness of the code used for random number generation. These changes also
+  squash a bug that arises on Debian systems.
+- John Marshall cleaned up some lingering data type problems in the slop tool.
+- Thanks to @gringer for adding the -ignoreD option to the genomecov tool,
+  which allows D CIGAR operations to be ignored when calculating coverage. This
+  is useful for long-read technologies with high INDEL error rates.
+- Added a fix for a bug that did not properly handle the splitting of intervals
+  in BED12 records with one block.
+- Thanks to John Marshall (github: @jmarshall), we have addressed numerical
+  instability issues in the fisher tool.
+- Thanks to Hao Hou (github: @38), reference genomes can be read as an
+  environment variable (CRAM_REFERENCE) when using CRAM input files.
+- Added a -rna option to the getfasta tool to allow support for RNA genomes.
+- Thanks to Hao Hou (github: @38), we fixed input file format detection bugs
+  arising in ZSH.
+- Thanks to Josh Shapiro (github:@jashapiro) for clarifying a confusing
+  inconsistency in the documentation for the coverage tool.
+- Thanks to Hao Hou (github: @38), we suppressed unnecessary warnings when
+  reading GZIPP'ed files.
+- Thanks to Hao Hou (github: @38), we fixed an overflow bug in the shuffle
+  tool.
+- Thanks to Hao Hou (github: @38), we fixed a data type bug in the shift tool.
+- Thanks to John Marshall (github: @jmarshall) and Hao Hou (github: @38), we
+  have cleaned up the internal support for htslib.
+
 * Fri Jan 24 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.29.2-1
 - Fixed a bug (#803) that mistakenly removed a BAM/CRAM header line (sorting
   criteria).

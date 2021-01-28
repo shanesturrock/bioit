@@ -1,11 +1,11 @@
-%define priority 2151
+%define priority 2152
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.15.1
+Version:	2.15.2
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,13 @@ fi
 %files
 
 %changelog
+* Fri Jan 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.2-1
+  - No real functional changes, but some code and compilation changes. Code
+    updated for C++11. Switch to C++ header files. Minor adaptations for
+    Windows compatibility, including the use of the C++ standard library for
+    regular expressions. Minor changes for compatibility with Power8. Compiles
+    successfully on macOS running on Apple Silicon (ARMv8).
+
 * Fri Nov 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.1-1
 - Fix for derep_fulllength and fastx_filter in special cases
 

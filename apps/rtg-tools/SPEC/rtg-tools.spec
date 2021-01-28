@@ -1,11 +1,11 @@
-%define priority 3110
+%define priority 3120
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		rtg-tools
-Version:	3.11
+Version:	3.12
 Release:	1%{?dist}
 Summary:	Utilities for accurate VCF comparison and manipulation
 Group:		Applications/Engineering
@@ -38,6 +38,67 @@ fi
 %files
 
 %changelog
+* Fri Jan 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.12-1
+- Variant Calling and Evaluation
+  - calling: Fixed a rare exception during variant calling arising from
+    attempted output of an empty region when calling a single base region with
+--all mode.
+  - vcfeval: Support for the comparison of sample calls with ploidy greater
+    than 2. This is enabled via the new flag --sample-ploidy N (the GT of any
+    calls without the specified ploidy will be ignored). Note that as the ploidy
+    increases the search space of possible phasings can expand significantly,
+    which may cause long run times and/or regions where vcfeval cannot fully
+    evaluate the alternatives.
+  - vcfeval: New flag --roc-subset to allow stratifications by common variant
+    types. While the default is to produce SNP and non-SNP breakdowns, this
+    flag allows a couple more presets.
+  - vcfeval: New flag --roc-regions to allow stratification by overlap with
+    regions loaded from BED file, for example the stratification regions
+    provided by the Genome in a Bottle project.
+  - vcfeval: New flag --roc-expr to allow custom stratifications defined by a
+    user-supplied JavaScript expression, for example to stratify by depth of
+    coverage during calling, variant allelic fraction or other annotations
+    present in the input VCFs. For more information see the user manual.
+  - vcf2rocplot: New beta command to produce a rocplot-compatible data file
+    from one or more vcfeval output directories. See the user manual for more
+    information on usage.
+  - rocplot: User-selectable preset palettes are available via --palette. In
+    particular, several of the palettes are more color-blind friendly than the
+    default palette.
+  - rocplot: Fix graph bounds maintenance when switching between ROC/PR.
+  - rocplot: Unified the GUI vs non-GUI plot styles. Both default to the
+    "pretty" version with background gradient etc (previously the GUI default),
+    and a new flag --plain switches to the plain style (which was previously the
+    non-GUI default).
+  - rocplot: (GUI) Supports loading ROC data files by drag and drop into the
+    graph or curve configuration widget areas.
+  - rocplot: PNG images now include rocplot command line as image metadata for
+    future reference. A new flag --cmd when run on a previously saved rocplot
+    PNG image containing this metadata will display the rocplot command line.
+- Variant Processing and Analysis
+  - vcffilter: Javascript filters can now easily test for genomic range
+    overlaps with ranges loaded from BED or VCF. See the user manual for more
+information.
+  - vcfdecompose: Graceful error handling of the case where the supplied SDF
+    does not contain a reference sequence named in the VCF.
+  - vcfmerge: Ensure that when merging files with and without GT that the GT is
+    maintained as the first FORMAT field, as per VCF specification.
+- Other
+  - docker: Include fontconfig in docker images so that image writing during
+    rocplot and other command reports doesn't crash.
+  - childsim: Better detection of inconsistent sex declarations in VCF header /
+    pedigree.
+  - samplesim: With appropriate reference.txt configuration specifying expected
+    ploidy, now allows the simulation of higher ploidies.
+  - many: Improved the handling of SAM records containing invalid CIGAR fields.
+  - misc: Updated htsjdk to 2.23.0.
+  - misc: Updated the JRE used in bundled builds to Zulu Community OpenJDK
+    8u282.
+  - misc: Compatibility testing with JDK 15. Note that JDK15 removes the
+    nashorn JavaScript engine, which disables the JavaScript functionality of
+    vcffilter, vcfeval, vcf2rocplot unless your JVM has been augmented with the
+    GraalVM JavaScript engine.
+
 * Fri Feb 28 2020 Shane Sturrock <shane.sturrock@gmail.com> - 3.11-1
 - This release includes several new features and commands, along with the usual
   assortment of minor features and bug fixes. Several of these result in

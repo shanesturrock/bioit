@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/bedtools2/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/bedtools2/SPEC/build 2.29.2
+    ${HOME}/bioit/apps/bedtools2/SPEC/build 2.30.0
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load bedtools2/2.29.2
+    module load bedtools2/2.30.0
     which bedtools
     bedtools --version
 
@@ -26,7 +26,7 @@ Download the version to be built into `/opt/bioit/bedtools2/src` and untar
 
 Edit the `Makefile` to change the prefix:
 
-    prefix ?= /opt/bioit/bedtools2/2.29.2
+    prefix ?= /opt/bioit/bedtools2/2.30.0
 
 Then type the following commands:
 
@@ -41,7 +41,7 @@ Add a module file in `/opt/bioit/modulefiles/bedtools2/` for this version by cop
     #
     #  bedtools2 module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/bedtools2/2.29.2/bin
+    prepend-path  PATH         /opt/bioit/bedtools2/2.30.0/bin
 
 ## RPM
 
@@ -54,11 +54,11 @@ This will create an RPM file which you can find in `${HOME}/rpmbuild/RPMS/x86_64
 Before you install this, you need to sign it using:
 
     rpm --addsign \
-    ${HOME}/rpmbuild/RPMS/x86_64/bedtools2-2.29.2-1.el7.bioit.x86_64.rpm
+    ${HOME}/rpmbuild/RPMS/x86_64/bedtools2-2.30.0-1.el7.bioit.x86_64.rpm
 
 Now you can move it to /opt/bioit/repo/RPMS
 
-    mv ${HOME}/rpmbuild/RPMS/x86_64/bedtools2-2.29.2-1.el7.bioit.x86_64.rpm \
+    mv ${HOME}/rpmbuild/RPMS/x86_64/bedtools2-2.30.0-1.el7.bioit.x86_64.rpm \
     /opt/bioit/repo/RPMS
 
 Lastly, run the `buildrepo` command:

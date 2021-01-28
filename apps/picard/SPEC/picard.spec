@@ -1,11 +1,11 @@
-%define priority 22400
+%define priority 22401
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.24.0
+Version:	2.24.1
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,9 @@ fi
 %files
 
 %changelog
+* Fri Jan 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.24.1-1
+- adding read information to an error.
+
 * Fri Jan 15 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.24.0-1
 - Adds support for reading CSI indexes. (#998)
 - Fix default PAR values for hg37 for FindMendelianViolations (#1600)

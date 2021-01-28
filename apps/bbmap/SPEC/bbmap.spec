@@ -1,11 +1,11 @@
-%define priority 3887
+%define priority 3888
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.87
+Version:	38.88
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -231,6 +231,23 @@ fi
 %files
 
 %changelog
+* Fri Jan 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 38.88-1
+- Refactored many instances of numeric array initialization to use KillSwitch.
+- Added donefile to RQCFilter2.
+- Wrote initial Walker class for kmer set iteration.
+- Added in-place condense to IntList/LongList/etc.
+- Wrote LongListSet for extending LongList beyond 2b elements.
+- Wrote LongListSetIterator.
+- Fixed BBDuk speed flag; was limited to range 0-7.
+- Changed BBDuk rcomp calls to accomodate amino mode.
+- Added SuperLongList functionality and checks.
+- Integrated SuperLongList into ReadStats for length histograms; read length
+  histograms no longer have an upper length limit.
+- ApplyVariants should correctly handle truncated scaffold names now.
+- RQCFilter/ReadStats static variable hangover fixed.
+- Wrote KExpand and kmutate.sh for creating sets of mutant kmers.
+- Split Parse class off from Tools.
+
 * Fri Nov 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 38.87-1
 - SamStreamer now correctly sets the header for sam files with no reads, fixing
   a hang.
