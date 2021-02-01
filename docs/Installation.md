@@ -160,6 +160,10 @@ Since users are connecting remotely and assuming there are no local connections,
 
     yum -y remove mate-screensaver
 
+Also remove the pulseaudio tools to stop logs being filled with errors as users try and start it from x2go:
+
+    yum -y remove pulseaudio-gdm-hooks pulseaudio-utils pulseaudio-module-bluetooth pulseaudio
+
 ## Next Step
 
 Go to the [Storage-Setup](Storage-Setup.md) page.
