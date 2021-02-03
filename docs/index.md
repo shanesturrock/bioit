@@ -26,6 +26,7 @@ Start at the [Installation](Installation.md) page.
 * [cutadapt](cutadapt.md)
 * [ea-utils](ea-utils.md)
 * [FastQC](FastQC.md)
+* [gvcftools](gvcftools.md)
 * [hisat2](hisat2.md)
 * [hmmer](hmmer.md)
 * [htslib](htslib.md)
