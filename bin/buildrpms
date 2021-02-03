@@ -15,6 +15,7 @@ rpmbuild -bb $script_dir/../apps/bwa/SPEC/bwa.spec
 rpmbuild -bb $script_dir/../apps/cutadapt/SPEC/cutadapt.spec
 rpmbuild -bb $script_dir/../apps/ea-utils/SPEC/ea-utils.spec
 rpmbuild -bb $script_dir/../apps/FastQC/SPEC/FastQC.spec
+rpmbuild -bb $script_dir/../apps/gvcftools/SPEC/gvcftools.spec
 rpmbuild -bb $script_dir/../apps/hisat2/SPEC/hisat2.spec
 rpmbuild -bb $script_dir/../apps/hmmer/SPEC/hmmer.spec
 rpmbuild -bb $script_dir/../apps/htslib/SPEC/htslib.spec

@@ -27,6 +27,7 @@ This will set the rendering engine to software mode required to start under X2Go
 * [cutadapt](cutadapt.md)
 * [ea-utils](ea-utils.md)
 * [FastQC](FastQC.md)
+* [gvcftools](gvcftools.md)
 * [hisat2](hisat2.md)
 * [hmmer](hmmer.md)
 * [htslib](htslib.md)

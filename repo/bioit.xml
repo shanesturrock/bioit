@@ -22,6 +22,7 @@
       <packagereq type="mandatory">cutadapt</packagereq>
       <packagereq type="mandatory">ea-utils</packagereq>
       <packagereq type="mandatory">FastQC</packagereq>
+      <packagereq type="mandatory">gvcftools</packagereq>
       <packagereq type="mandatory">hisat2</packagereq>
       <packagereq type="mandatory">hmmer</packagereq>
       <packagereq type="mandatory">htslib</packagereq>

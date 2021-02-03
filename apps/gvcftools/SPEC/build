@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Script to auto build and install gvcftools. Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+VERSION=$1
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building gvcftools ${VERSION} on ${DATE}"
+cd /opt/bioit/gvcftools/src
+wget https://github.com/sequencing/gvcftools/releases/download/v${VERSION}/gvcftools-${VERSION}.tar.gz
+tar xvf gvcftools-${VERSION}.tar.gz
+cd gvcftools-${VERSION}
+make
+mkdir /opt/bioit/gvcftools/${VERSION}/
+mv bin /opt/bioit/gvcftools/${VERSION}/
+echo "Writing modulefile"
+echo "#%Module 1.0
+#
+#  tophat module for use with 'environment-modules' package:
+#
+prepend-path  PATH           /opt/bioit/gvcftools/${VERSION}/bin" > /opt/bioit/modulefiles/gvcftools/${VERSION}
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of gvcftools
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/gvcftools/.version
