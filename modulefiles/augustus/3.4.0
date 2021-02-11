@@ -1,0 +1,5 @@
+#%Module 1.0
+#
+#  augustus module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/augustus/3.4.0/bin:/opt/bioit/augustus/3.4.0/scripts

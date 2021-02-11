@@ -28,60 +28,67 @@ cd augustus-${VERSION}
 make clean
 # Grab bamtools dependency
 echo "Getting and installing bamtools dependency"
-wget https://github.com/pezmaster31/bamtools/archive/v2.4.1.tar.gz
-tar xvf v2.4.1.tar.gz
-cd bamtools-2.4.1
+wget https://github.com/pezmaster31/bamtools/archive/v2.5.1.tar.gz
+tar xvf v2.5.1.tar.gz
+cd bamtools-2.5.1
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/augustus/src/augustus-${VERSION}/bamtools ..
+cmake3 -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/augustus/src/augustus-${VERSION}/bamtools ..
 make all
 make install
 cd /opt/bioit/augustus/src/augustus-${VERSION}
 # patch bam2hints Makefile
-sed "s+INCLUDES = /usr/include/bamtools+INCLUDES = /opt/bioit/augustus/src/augustus-${VERSION}/bamtools/include/bamtools+" --in-place auxprogs/bam2hints/Makefile
-sed "s+LIBS = -lbamtools -lz+LIBS = /opt/bioit/augustus/src/augustus-${VERSION}/bamtools/lib/bamtools/libbamtools.a -lz+" --in-place auxprogs/bam2hints/Makefile
+sed "s+INCLUDES = -I/usr/include/bamtools+INCLUDES = -I/opt/bioit/augustus/src/augustus-${VERSION}/bamtools/include/bamtools+" --in-place auxprogs/bam2hints/Makefile
+sed "s+LIBS = -lbamtools -lz+LIBS = /opt/bioit/augustus/src/augustus-${VERSION}/bamtools/lib64/libbamtools.a -lz+" --in-place auxprogs/bam2hints/Makefile
 # patch filterBam Makefile
 sed "s+BAMTOOLS = /usr/include/bamtools+BAMTOOLS = /opt/bioit/augustus/src/augustus-${VERSION}/bamtools+" --in-place auxprogs/filterBam/src/Makefile
 sed "s+INCLUDES = -I\$(BAMTOOLS) -Iheaders -I./bamtools+INCLUDES = -I\$(BAMTOOLS)/include/bamtools -Iheaders -I./bamtools+" --in-place auxprogs/filterBam/src/Makefile
-sed "s+LIBS = -lbamtools -lz+LIBS = \$(BAMTOOLS)/lib/bamtools/libbamtools.a -lz+" --in-place auxprogs/filterBam/src/Makefile
+sed "s+LIBS = -lbamtools -lz+LIBS = \$(BAMTOOLS)/lib64/libbamtools.a -lz+" --in-place auxprogs/filterBam/src/Makefile
 # patch bam2wig Makefile
-sed "s+LIBS=\$(SAMTOOLS)/libbam.a \$(HTSLIB)/libhts.a -lcurses -lm -lz -lpthread+LIBS=\$(SAMTOOLS)/libbam.a \$(HTSLIB)/libhts.a -lcurses -lm -lz -lpthread -lcurl -lcrypto+" --in-place auxprogs/bam2wig/Makefile
+sed "s+TOOLDIR=\$(HOME)/tools+TOOLDIR=/opt/bioit/augustus/src/augustus-${VERSION}+" --in-place auxprogs/bam2wig/Makefile
+#sed "s+LIBS=\$(SAMTOOLS)/libbam.a \$(HTSLIB)/libhts.a -lcurses -lm -lz -lpthread+LIBS=\$(SAMTOOLS)/libbam.a \$(HTSLIB)/libhts.a -lcurses -lm -lz -lpthread -lcurl -lcrypto+" --in-place auxprogs/bam2wig/Makefile
 # patch Makefile to set install directory
 sed "s+INSTALLDIR = /opt/augustus-\$(AUGVERSION)+INSTALLDIR = /opt/bioit/augustus/${VERSION}+" --in-place Makefile
 # Remove symlinks lines to avoid permission denied error
 sed '/ln /d' --in-place Makefile
 # Build dependencies for bam2wig
 echo "Getting htslib"
-git clone https://github.com/samtools/htslib.git
-cd htslib
+#git clone https://github.com/samtools/htslib.git
+wget https://github.com/samtools/htslib/releases/download/1.11/htslib-1.11.tar.bz2
+tar xvf htslib-1.11.tar.bz2
+cd htslib-1.11
 autoheader
 autoconf
 ./configure
 make
 cd ..
+ln -s htslib-1.11 htslib
 echo "Getting bcftools"
-git clone https://github.com/samtools/bcftools.git
-cd bcftools
+#git clone https://github.com/samtools/bcftools.git
+wget https://github.com/samtools/bcftools/releases/download/1.11/bcftools-1.11.tar.bz2
+tar xvf bcftools-1.11.tar.bz2
+cd bcftools-1.11
 autoheader
 autoconf
 ./configure
 make
 cd ..
-echo "Getting tabix"
-git clone https://github.com/samtools/tabix.git
-cd tabix
-make
-cd ..
+ln -s bcftools-1.11 bcftools
 echo "Getting samtools"
-git clone https://github.com/samtools/samtools.git
-cd samtools
+# git clone https://github.com/samtools/samtools.git
+wget https://github.com/samtools/samtools/releases/download/1.11/samtools-1.11.tar.bz2
+tar xvf samtools-1.11.tar.bz2
+cd samtools-1.11
 autoheader
 autoconf -Wno-syntax
 ./configure
 make
 cd ..
+ln -s samtools-1.11 samtools
 export TOOLDIR=`pwd`
 # Now build augustus
+# Turn off comparative gene prediction
+#sed "s+COMPGENEPRED = true+COMPGENEPRED = false+" --in-place common.mk
 make
 make install
 # Augustus build misses utrrnaseq bin for some reason
@@ -94,7 +101,7 @@ echo "#%Module 1.0
 #
 #  augustus module for use with 'environment-modules' package:
 #
-prepend-path  PATH              /opt/bioit/augustus/${VERSION}/bin" > /opt/bioit/modulefiles/augustus/${VERSION}
+prepend-path  PATH              /opt/bioit/augustus/${VERSION}/bin:/opt/bioit/augustus/${VERSION}/scripts" > /opt/bioit/modulefiles/augustus/${VERSION}
 echo "Writing module .version to set default"
 echo "#%Module1.0
 ##

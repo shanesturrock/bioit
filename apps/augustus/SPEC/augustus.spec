@@ -1,11 +1,11 @@
-%define priority 333
+%define priority 340
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		augustus
-Version:	3.3.3
+Version:	3.4.0
 Release:	1%{?dist}
 Summary:	AUGUSTUS is a gene prediction program for eukaryotes
 Group:		Applications/Engineering
@@ -29,13 +29,19 @@ predict the genes simultaneously in several aligned genomes.
 %post
 alternatives \
    --install %{_bindir}/augustus %{name} /opt/bioit/%{name}/%{version}/bin/augustus %{priority} \
+   --slave %{_bindir}/aln2wig aln2wig /opt/bioit/%{name}/%{version}/bin/aln2wig \
    --slave %{_bindir}/bam2hints bam2hints /opt/bioit/%{name}/%{version}/bin/bam2hints \
    --slave %{_bindir}/bam2wig bam2wig /opt/bioit/%{name}/%{version}/bin/bam2wig \
+   --slave %{_bindir}/compileSpliceCands compileSpliceCands /opt/bioit/%{name}/%{version}/bin/compileSpliceCands \
    --slave %{_bindir}/etraining etraining /opt/bioit/%{name}/%{version}/bin/etraining \
    --slave %{_bindir}/fastBlockSearch fastBlockSearch /opt/bioit/%{name}/%{version}/bin/fastBlockSearch \
    --slave %{_bindir}/filterBam filterBam /opt/bioit/%{name}/%{version}/bin/filterBam \
+   --slave %{_bindir}/getSeq getSeq /opt/bioit/%{name}/%{version}/bin/getSeq \
    --slave %{_bindir}/homGeneMapping homGeneMapping /opt/bioit/%{name}/%{version}/bin/homGeneMapping \
    --slave %{_bindir}/joingenes joingenes /opt/bioit/%{name}/%{version}/bin/joingenes \
+   --slave %{_bindir}/load2db load2db /opt/bioit/%{name}/%{version}/bin/load2db \
+   --slave %{_bindir}/load2sqlitedb load2sqlitedb /opt/bioit/%{name}/%{version}/bin/load2sqlitedb \
+   --slave %{_bindir}/pp_simScore pp_simScore /opt/bioit/%{name}/%{version}/bin/pp_simScore \
    --slave %{_bindir}/prepareAlign prepareAlign /opt/bioit/%{name}/%{version}/bin/prepareAlign \
    --slave %{_bindir}/utrrnaseq utrrnaseq /opt/bioit/%{name}/%{version}/bin/utrrnaseq
 
@@ -49,6 +55,31 @@ fi
 %files
 
 %changelog
+* Fri Feb 12 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.4.0-1
+- shortrunning (make test) and longrunning tests for monitoring functionality
+  and performance
+- drop dependency on static bam library, e.g. of bam2wig
+- new program pp_simScore to score a protein against a protein profile (.prfl)
+- new option --/CompPred/printExonCandsMSA=1 for CGP to produce MSAs of
+  candidate coding regions
+- new scripts augustify, fix_in_frame_stop_codon_genes.py
+- new default: softmasking is assumed
+- compile with CGP and ZIPINPUT support by default
+- compile with SQLite and MySQL support for CGP (switch of by adding SQLite =
+  false and MySQL = false to common.mk)
+- new species Cassiopea xamachana, Ptychodera flava, Argopecten irridians,
+  Nemopilema nomurai, Notospermus geniculatus, Chrysaora chesapeakeij,
+  Ectocarpus siliculosus, Trichoplax adhaerens, Aurelia aurita, Rhopilema
+  esculentum, Encephalitozoon cuniculi, Gonapodya prolifera, Dunaliella_salina
+  Sordaria macrospora, Sphaceloma murrayae, Vitrella brassicaformis,
+  Monoraphidium neglectum, Raphidocelis subcapita, Ostreococcus tauri,
+  Ostreococcus sp. lucimarinus, Micromonas pusilla, Micromonas_commoda,
+  Chlamydomonas eustigma, Thalassiosira pseudonana, Pseudo-nitzschia
+  multistriata, Phaeodactylum tricornutum, Fragilariopsis cylindrus, Fistulifera
+  solaris, Bathycoccus prasinos, Chloropicon primus
+- added Windows Subsystem for Linux Installation documentation
+- fixes of bugs, compiler warnings
+
 * Fri Sep 27 2019 Shane Sturrock <shane.sturrock@gmail.com> - 3.3.3-1
 - new script tfix_in_frame_stop_codon_genes.py that replaces genes where
   spliced in-frame stop codons were predicted
