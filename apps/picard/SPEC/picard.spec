@@ -1,11 +1,11 @@
-%define priority 22401
+%define priority 22500
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.24.1
+Version:	2.25.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,17 @@ fi
 %files
 
 %changelog
+* Fri Feb 19 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.25.0-1
+- Added mapping quality concordance functionality to CompareSAMs (#1617)
+- Yf fix il to bed sorting (#1612)
+- Update htsjdk 2.23.0 -> 2.24.0 (#1641)
+- Include common (engine-level) args in help output. (#1580)
+- [refactor] Large refactor of IlluminaBaseCallsConverter (#1626)
+  - Refactor the IlluminaBasecallsConverter and IlluminaDataFactory to
+    normalize creation when dealing with cbcls vs bcls
+  - Include a BasecallsConverter that doesn't do read name sorting by default
+  - Performance enhancements
+
 * Fri Jan 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.24.1-1
 - adding read information to an error.
 

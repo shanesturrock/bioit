@@ -1,11 +1,11 @@
-%define priority 3888
+%define priority 3890
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.88
+Version:	38.90
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -231,6 +231,12 @@ fi
 %files
 
 %changelog
+* Fri Feb 19 2021 Shane Sturrock <shane.sturrock@gmail.com> - 38.90-1
+- Added support for degenerate amino acid symbols B, J, Z.
+- Added workaround for BubblePopper 640 assertion failure.
+- RQCFilter deterministic mode added for mapping phases.
+- Wrapped instances of byte array instantiation in allocByte1D.
+
 * Fri Jan 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 38.88-1
 - Refactored many instances of numeric array initialization to use KillSwitch.
 - Added donefile to RQCFilter2.
