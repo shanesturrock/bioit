@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 403
+%define priority 404
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        4.0.3
+Version:        4.0.4
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -59,6 +59,59 @@ fi
 #/etc/ld.so.conf.d/R-x86_64.conf
 
 %changelog
+* Fri Mar 05 2021 Shane Sturrock <shane.sturrock@gmail.com> - 4.0.4-1
+- NEW FEATURES
+  - File ‘share/texmf/tex/latex/jss.cls’ has been updated to work with LaTeX
+    versions since Oct 2020.
+  - Unicode character width tables (as used by nchar(, type = "w")) have been
+    updated to Unicode 12.1 by Brodie Gaslam (PR#17781), including many emoji.
+  - The internal table for iswprint (used on Windows, macOS and AIX) has been
+    updated to include many recent Unicode characters.
+- INSTALLATION on a UNIX-ALIKE
+  - If an external BLAS is specified by --with-blas=foo or via environment
+    variable BLAS_LIBS is not found, this is now a configuration error. The
+    previous behaviour was not clear from the documentation: it was to continue
+    the search as if --with-blas=yes was specified.
+- BUG FIXES
+  - all.equal(x,y) now “sees” the two different NAs in factors, thanks to Bill
+    Dunlap and others in PR#17897.
+  - (~ NULL)[1] and similar formula subsetting now works, thanks to a report
+    and patch by Henrik Bengtsson in PR#17935. Additionally, subsetting leaving
+    an empty formula now works too, thanks to suggestions by Suharto Anggono.
+  - .traceback(n) keeps source references again, as before R 4.0.0, fixing a
+    regression; introduced by the PR#17580, reported including two patch
+    proposals by Brodie Gaslam.
+  - unlist(plst, recursive=FALSE) no longer drops content for pairlists with
+    list components, thanks to the report and patch by Suharto Anggono in
+    PR#17950.
+  - iconvlist() now also works on MUSL based (Linux) systems, from a report and
+    patch suggestion by Wesley Chan in PR#17970.
+  - round() and signif() no longer tolerate wrong argument names, notably in
+    1-argument calls; reported by Shane Mueller on R-devel (mailing list);
+    later reported as PR#17976.
+  - .Machine has longdouble.* elements only if capabilities("long.double") is
+    true, as documented. (Previously they were included if the platform had
+    long double identical to double, as ARM does.)
+  - p.adjust(numeric(), n=0) now works, fixing PR#18002.
+  - identical(x,y) no longer prints "Unknown Type .." for typeof(x) == "..."
+    objects.
+  - Fix (auto-)print()ing of named complex vectors, see PR#17868 and PR#18019.
+  - all.equal(<language>, <...>) now works, fixing PR#18029.
+  - as.data.frame.list(L, row.names=NULL) now behaves in line with
+    data.frame(), disregarding names of components of L, fixing PR#18034,
+    reported by Kevin Tappe.
+  - checkRdaFiles(ff)$version is now correct also when ff contains files of
+    different versions, thanks to a report and patch from Sebastian Meyer in
+    PR#18041.
+  - Message translation domains, e.g., for errors and warnings, are now
+    correctly determined also when e.g., a base function is called from
+    “top-level” function (i.e., defined in globalenv()), thanks to a patch from
+    Joris Goosen fixing PR#17998.
+  - macOS: Quartz device live drawing could fail (no plot is shown) if the
+    system changes the drawing context after view update (often the case since
+    macOS Big Sur). System log may show "CGContextDelegateCreateForContext:
+    invalid context" error.
+
 * Fri Nov 20 2020 Shane Sturrock <shane.sturrock@gmail.com> - 4.0.3-1
 - NEW FEATURES:
   - On platforms using configure option ‘--with-internal-tzcode’, additional
