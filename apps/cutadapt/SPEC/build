@@ -28,7 +28,7 @@ tar xvf cutadapt-${VERSION}.tar.gz
 # Actual install is done from pip in venv
 mkdir -p /opt/bioit/cutadapt/${VERSION}
 python3 -m venv /opt/bioit/cutadapt/${VERSION}/venv
-/opt/bioit/cutadapt/${VERSION}/venv/bin/pip install --install-option="--install-scripts=/opt/bioit/cutadapt/${VERSION}" cutadapt==${VERSION}
+/opt/bioit/cutadapt/${VERSION}/venv/bin/pip3 install --install-option="--install-scripts=/opt/bioit/cutadapt/${VERSION}" cutadapt==${VERSION}
 echo "Writing modulefile"
 echo "#%Module 1.0
 #
