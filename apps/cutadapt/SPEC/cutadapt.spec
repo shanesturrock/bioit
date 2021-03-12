@@ -1,11 +1,11 @@
-%define priority 3200
+%define priority 3300
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	3.2
+Version:	3.3
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,18 @@ fi
 %files
 
 %changelog
+* Fri Mar 12 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.3-1
+- Fix a crash on Windows.
+- When --rename is used with --revcomp, disable adding the rc suffix to reads
+  that were reverse-complemented.
+- Also, there is now a {rc}` template variable for the ``--rename option, which
+  is replaced with “rc” if the read was reverse-complemented (and the empty
+  string if not).
+- Fix issue #128 once more (the “Reads written” figure in the report
+  incorrectly included both trimmed and untrimmed reads if --untrimmed-output
+  was used).
+- The report is now send to stderr if any output file is written to stdout
+
 * Fri Jan 15 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.2-1
 - Implement a --rename option for flexible read name modifications such as
   moving a barcode sequence into the read name.
