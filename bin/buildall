@@ -23,7 +23,7 @@ ${HOME}/bioit/apps/htslib/SPEC/build 1.11
 ${HOME}/bioit/apps/igv/SPEC/build 2.9.2
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.11.0+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
-${HOME}/bioit/apps/picard/SPEC/build 2.25.0
+${HOME}/bioit/apps/picard/SPEC/build 2.25.1
 ${HOME}/bioit/apps/R-core/SPEC/build 4.0.4
 ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.12
 ${HOME}/bioit/apps/samtools/SPEC/build 1.11
@@ -33,4 +33,4 @@ ${HOME}/bioit/apps/stringtie/SPEC/build 2.1.5
 ${HOME}/bioit/apps/tophat/SPEC/build 2.1.1
 ${HOME}/bioit/apps/vcftools/SPEC/build 0.1.16
 ${HOME}/bioit/apps/velvet/SPEC/build 1.2.10
-${HOME}/bioit/apps/vsearch/SPEC/build 2.15.2
+${HOME}/bioit/apps/vsearch/SPEC/build 2.16.0

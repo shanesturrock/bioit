@@ -1,11 +1,11 @@
-%define priority 22500
+%define priority 22501
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.25.0
+Version:	2.25.1
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,40 @@ fi
 %files
 
 %changelog
+* Fri Mar 26 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.25.1-1
+- Use AsyncWriterPool for Fastq writing. (#1645)
+- Merge branch 'master' into rz_rnaseqmetrics_parameterize_endbias_length
+- Update to htsjdk 2.24.1 (#1655)
+- Merge branch 'rz_rnaseqmetrics_parameterize_endbias_length' of
+  https://github.com/watchmaker-genomics/picard into
+  rz_rnaseqmetrics_parameterize_endbias_length
+  - Added an additional constructor for RnaSeqMetricsCollector to be backwards
+    compatible. 
+  - Added a static default endBias in the RnaSeqMetricsCollector to define the
+    default value, and reference that in the constructor and in
+    CollectRnaSeqMetrics
+- Merge branch 'master' into rz_rnaseqmetrics_parameterize_endbias_length
+  - Spellcheck.
+- Add ConvertHaplotypeDatabaseToVcf clp (#1648)
+  - Addressed test description comment. 
+  - Parameterized test start and stop positions. 
+  - Cleaned up whitespace.
+- Updated test cases to derive from DataProvider 
+  - Updated documentation to mention the role of end bias bases in bias
+    calculation and coverage metrics filtering transcripts under the end bias
+    length.
+- Change docker base image for security reasons. (#1654)
+- Add sample -> individual map capability to CrosscheckFingerprints (#1643)
+- Updated the unit test to explicitly call the parameters for each case.
+- Added an option to specify an end bias into a transcript replacing the
+  constant PRIME_BASES (100 nt) variable. The default of this parameter set to
+  the previous fixed value.
+- Fix multi-tile bcl file faking (#1640)
+- A tool to convert BafRegress output to a Picard metrics file. (#1597)
+- Parse version directly from tile metrics instead of using a clp flag. (#1633)
+- Add AppSec GitHub Trivy Action (#1634)
+- Update RefFlatReader.java (#1530)
+
 * Fri Feb 19 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.25.0-1
 - Added mapping quality concordance functionality to CompareSAMs (#1617)
 - Yf fix il to bed sorting (#1612)

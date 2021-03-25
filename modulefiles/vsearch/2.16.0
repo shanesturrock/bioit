@@ -1,0 +1,6 @@
+#%Module 1.0
+#
+#  tophat module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/vsearch/2.16.0/bin 
+prepend-path  MANPATH           /opt/bioit/vsearch/2.16.0/share/man
