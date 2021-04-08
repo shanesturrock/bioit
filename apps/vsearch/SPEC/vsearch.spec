@@ -1,11 +1,11 @@
-%define priority 2160
+%define priority 2170
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.16.0
+Version:	2.17.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,14 @@ fi
 %files
 
 %changelog
+* Fri Apr 09 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.0-1
+- The fastq_mergepairs command has been changed. It now allows merging of
+  sequences with overlaps as short as 5 bp if the --fastq_minovlen option has
+  been adjusted down from the default 10. In addition, much fewer pairs of reads
+  should now be rejected with the reason 'multiple potential alignments' as the
+  algorithm for detecting those have been changed.
+- The orient command has also been improved.
+
 * Fri Mar 26 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.16.0-1
 - This version adds the orient command. It also handles empty input files
   properly. Documentation has been updated.
