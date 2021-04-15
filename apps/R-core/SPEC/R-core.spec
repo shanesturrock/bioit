@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 404
+%define priority 405
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        4.0.4
+Version:        4.0.5
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -59,6 +59,14 @@ fi
 #/etc/ld.so.conf.d/R-x86_64.conf
 
 %changelog
+* Thu Apr 15 2021 Shane Sturrock <shane.sturrock@gmail.com> - 4.0.5-1
+- BUG FIXES
+  - The change to the internal table in R 4.0.4 for iswprint has been reverted:
+    it contained some errors in printability of ‘East Asian’ characters.
+  - For packages using LazyData, R CMD build ignored the --resave-data option
+    and the BuildResaveData field of the ‘DESCRIPTION’ file (in R versions
+    4.0.0 to 4.0.4).
+
 * Fri Mar 05 2021 Shane Sturrock <shane.sturrock@gmail.com> - 4.0.4-1
 - NEW FEATURES
   - File ‘share/texmf/tex/latex/jss.cls’ has been updated to work with LaTeX
