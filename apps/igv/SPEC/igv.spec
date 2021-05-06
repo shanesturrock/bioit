@@ -1,11 +1,11 @@
-%define priority 2902
+%define priority 2904
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.9.2
+Version:	2.9.4
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,12 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri May 07 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.9.4-1
+- 2.9.4
+  - Minor bug fixes and code cleanup
+- 2.9.3
+  - Read stats optimization (alignment experiment type heuristics)
+
 * Fri Feb 19 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.9.2-1
 - Minor bug fixes
 

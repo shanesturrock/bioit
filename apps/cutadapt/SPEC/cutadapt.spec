@@ -1,11 +1,11 @@
-%define priority 3300
+%define priority 3400
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	3.3
+Version:	3.4
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,12 @@ fi
 %files
 
 %changelog
+* Fri May 07 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.4-1
+- Report correct sequence in info file if read was reverse complemented
+- Added a column to the info file that shows whether the read was
+  reverse-complemented (if --revcomp was used)
+- Fix (again) “Too many open files” when demultiplexing
+
 * Fri Mar 12 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.3-1
 - Fix a crash on Windows.
 - When --rename is used with --revcomp, disable adding the rc suffix to reads
