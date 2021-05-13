@@ -1,11 +1,11 @@
-%define priority 22501
+%define priority 22504
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.25.1
+Version:	2.25.4
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,22 @@ fi
 %files
 
 %changelog
+* Fri May 14 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.25.4-1
+- 2.25.2
+  - Throw an exception if one of the pooled threads has an error. (#1663)
+  - Delay data provider instantiation to avoid caching too many tiles when
+    using cbcls. (#1658)
+  - Added multi-lane support to BasecallsConverter (#1642)
+- 2.25.3
+  - Add validation of existence of input directories (#1673)
+  - [bugfix] Fix an issue with cbcl parsing when barcodes files are in a
+    different directory from basecalls. (#1672)
+  - Only run PR build, not the branch build (#1656)
+  - Fix: getCumulative R method optimized (#1659)
+- 2.25.4
+  - Allow for no barcode files case. (#1675)
+  - R Chart/PDF output filenames escape '%' with '%%' (#1671)
+
 * Fri Mar 26 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.25.1-1
 - Use AsyncWriterPool for Fastq writing. (#1645)
 - Merge branch 'master' into rz_rnaseqmetrics_parameterize_endbias_length
