@@ -144,7 +144,7 @@ fi
 * Fri Aug 17 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.14-1
 - Fix bisulfite coloring bug
 
-* Wed Jul 20 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.13-1
+* Fri Jul 20 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.13-1
 - fix recursive startup bug
 
 * Wed Jul 11 2018 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.11-1
