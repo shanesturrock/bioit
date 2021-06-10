@@ -24,7 +24,7 @@ cd /opt/bioit/SolexaQA++/src
 wget https://downloads.sourceforge.net/project/solexaqa/src/SolexaQA%2B%2B_v${VERSION}.zip
 unzip SolexaQA++_v${VERSION}.zip
 mkdir /opt/bioit/SolexaQA++/${VERSION}/
-mv Linux_x64/SolexaQA++ /opt/bioit/SolexaQA++/${VERSION}/
+mv SolexaQA++_v${VERSION}/Linux_x64/SolexaQA++ /opt/bioit/SolexaQA++/${VERSION}/
 cd /opt/bioit/SolexaQA++/${VERSION}/
 chmod 755 SolexaQA++
 echo "Writing modulefile"

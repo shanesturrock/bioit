@@ -1,11 +1,11 @@
-%define priority 22504
+%define priority 22506
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.25.4
+Version:	2.25.6
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,16 @@ fi
 %files
 
 %changelog
+* Fri Jun 11 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.25.6-1
+- 2.25.5
+  - Created CreateExtendedIlluminaManifest tool (#1667)
+  - SortGff tool (#1531)
+  - Handle error case in interruptAndShutdownExecutors. (#1678)
+- 2.25.6
+  - [bugfix] Pass MAX_RECORDS_IN_RAM to BasecallsConverter
+  - Use a different thread pool executor for each tile to ensure no race
+    conditions can occur
+
 * Fri May 14 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.25.4-1
 - 2.25.2
   - Throw an exception if one of the pooled threads has an error. (#1663)
