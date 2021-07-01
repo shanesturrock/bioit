@@ -1,11 +1,11 @@
-%define priority 2110
+%define priority 2120
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		ncbi-blast
-Version:	2.11.0+
+Version:	2.12.0+
 Release:	1%{?dist}
 Summary:	BLAST+ is a suite of command-line tools to run BLAST
 Group:		Applications/Engineering
@@ -60,6 +60,23 @@ fi
 %files
 
 %changelog
+* Fri Jul 02 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.12.0+-1
+- New features
+  - Threading by query batch (for BLASTN, BLASTP, BLASTX, RPSBLAST, and
+    RPSTBLASTN) may more efficiently BLAST large numbers of queries, especially
+    if the database is small or the search is limited by taxid. Use "-mt_mode
+    1" to enable this option.
+  - Makeblastdb requires less virtual memory for smaller databases.
+  - Makeprofiledb creates multiple volumes for a CDD database, which allows
+    RPSBLAST to handle a larger number of records. The number of SMP files
+    included in a volume can be controlled with the new -new_smp_vol option.
+  - update_blastdb.pl now supports the "-showall pretty" option for databases
+    hosted at the NCBI.
+  - update_blastdb.pl now reports the database timestamp in ISO8601 format.
+- Bug fixes
+  - Fixed phiblast core dump when -subject option is used.
+  - Fixed memory leak in setup procedures.
+
 * Fri Nov 06 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.0+-1
 _ New features
   - Usage reporting - Help improve BLAST by sharing limited information about

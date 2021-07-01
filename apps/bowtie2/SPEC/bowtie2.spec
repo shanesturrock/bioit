@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2420
+%define priority 2440
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.4.2
+Version:	2.4.4
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,23 @@ fi
 %files
 
 %changelog
+* Fri Jul 02 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.4-1
+- 2.4.3
+  - Replaced TBB concurrency with C++ threads
+  - Added native support for processing Zstd-compressed read files to >bowtie2
+  - Added native support for processing Zstd-compressed reference-genome files
+    to bowtie2-build
+  - Fixed an issue causing bowtie2 to report incorrect alignments on big-endian
+    machines
+  - Fixed an issue causing bowtie2 to incorrectly process BAM files on
+    big-endian machines
+  - Fixed an issue causing bowtie2 to set an incorrect MAPQ when AS and XS are
+    the maximum for read length
+  - Add support for building on Apple M1 processors
+- 2.4.4
+  - Fixed an issue that would sometimes cause deadlocks in bowtie2 when running
+    multithreaded
+
 * Fri Oct 09 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.2-1
 - Fixed an issue that would cause the bowtie2 wrapper script to throw an error
   when using wrapper-specific arguments.
