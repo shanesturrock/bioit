@@ -71,6 +71,10 @@ Fix an issue building augustus with this:
 
     ln -s /usr/lib64/mysql/libmysqlclient.so /usr/lib64/libmysqlclient.so
 
+Fix problems building openmpi based tools:
+
+    ldconfig /usr/lib64/openmpi/lib/
+
 Defaults tools and changelogs are provided by the meta-RPMS that are built to set alternatives with symlinks into `/usr/bin` so they'll see them as usual. To set this up go to the [BioIT repository](BioIT-repository.md) page, but not just yet.
 
 Lastly, the Oracle JDK is required to build IGV (as of 2.4.1) due to it needing JavaFX. Once built it will run with the standard OpenJDK. To install it download the current release using the following command:
