@@ -1,3 +1,4 @@
+options(Ncpus = 8)
 install.packages("abind",repos="https://cloud.r-project.org/")
 install.packages("ade4",repos="https://cloud.r-project.org/")
 install.packages("anytime",repos="https://cloud.r-project.org/")

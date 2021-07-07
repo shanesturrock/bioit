@@ -29,7 +29,7 @@ cd R-${VERSION}
 ./configure --prefix=/opt/bioit/R-core/${VERSION} --enable-R-shlib --with-x --with-libpng --with-jpeglib --with-cairo --with-libtiff --with-blas --with-lapack --enable-memory-profiling --with-pcre1
  
 make clean
-make
+make -j8
 make install
 # Make sure devtoolset is used by default by appending location to PATH
 echo PATH=/opt/rh/devtoolset-9/root/usr/bin:$\{PATH\} >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
