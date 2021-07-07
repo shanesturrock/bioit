@@ -6,6 +6,18 @@
 
 Before starting to build R you must be sure you've used `ssh -Y` to get in because it will fail without X11 support. Alternatively, run the build in X2Go.
 
+Also, you need to have the following installed from source if you haven't already:
+
+    gdal-2.4.3
+    geos-3.6.5
+
+Download them, untar, run `./configure` and `make` and `sudo install` in `/usr/local` (the default location) plus you'll also need to run this as root:
+
+    echo "/usr/local/lib" >> /etc/ld.so.conf.d/local.conf
+    ldconfig
+
+That should be all that is required to get tools like `sf` to compile.
+
 Inside `${HOME}/bioit/apps/R-core/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows: 
 
     ${HOME}/bioit/apps/R-core/SPEC/build 4.1.0
