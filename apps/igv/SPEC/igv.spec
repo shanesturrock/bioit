@@ -1,11 +1,11 @@
-%define priority 2904
+%define priority 21000
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.9.4
+Version:	2.10.0
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,27 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Thu Jul 08 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.0-1
+- New features
+  - Support for displaying RNA and DNA base modification tags in BAM files,
+    described in samtools/hts-specs Git issue #362. These tags are now
+    implemented by several Oxford Nanopore tools that detect base modifications,
+    including Megalodon and Guppy. (Git issue #945)
+  - Allow filtering of feature/annotation tracks based on attributes, via
+    Tracks > Filter Tracks. (Git issue #941)
+  - New batch command: sortByAttribute
+- Bug fixes
+  - Couldn't open .igv files from pre-signed Amazon S3 links. (Git issue #922)
+    ASK JIM -FIX ONLY FOR .IGV FILES?
+  - Tracks were not autoscaling when loading from a port or batch script. (Git
+    issue #925)
+  - Changing to autoscale or group autoscale on numeric tracks would not take
+    effect until the user did something to cause a redraw, for example, pan or
+    zoom the view.
+  - Fixed issue with gene track translations. When the translation table was
+    changed to "vertebrate mitochondrial" and then back to "standard", the
+    translations in the RefSeq track were incorrect. (Git issue #923)
+
 * Fri May 07 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.9.4-1
 - 2.9.4
   - Minor bug fixes and code cleanup
