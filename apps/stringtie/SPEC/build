@@ -26,7 +26,7 @@ wget https://github.com/gpertea/stringtie/archive/v${VERSION}.tar.gz
 mv v${VERSION}.tar.gz stringtie-${VERSION}.tar.gz
 tar xvf stringtie-${VERSION}.tar.gz
 cd stringtie-${VERSION}
-make release
+make -j8 release
 mkdir /opt/bioit/stringtie/${VERSION}
 mv stringtie /opt/bioit/stringtie/${VERSION}/
 echo "Writing modulefile"

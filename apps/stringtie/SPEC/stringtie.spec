@@ -1,11 +1,11 @@
-%define priority 215
+%define priority 217
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		stringtie
-Version:	2.1.5
+Version:	2.1.7
 Release:	1%{?dist}
 Summary:	StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts.
 Group:		Applications/Engineering
@@ -46,6 +46,15 @@ fi
 %files
 
 %changelog
+* Thu Jul 08 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.7-1
+- 2.1.6
+  - new --mix option added to use both short and long read alignments; when
+    this option is used, the 2nd .bam file in the command line is expected to
+    be a long reads alignment file (the 1st being the short-reads alignment
+    file); -L option should not be used in this case.
+- 2.1.7
+  - fix an occasional bug (crash) when --mix option was used
+
 * Fri Mar 12 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.5-1
 - Bug fixes
 
