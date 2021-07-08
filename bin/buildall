@@ -3,7 +3,7 @@
 # This script builds all tools automatically.
 # The versions are known to work.
 
-${HOME}/bioit/apps/abyss/SPEC/build 2.2.5
+${HOME}/bioit/apps/abyss/SPEC/build 2.3.1
 ${HOME}/bioit/apps/augustus/SPEC/build 3.4.0
 ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.1
 ${HOME}/bioit/apps/bbmap/SPEC/build 38.90

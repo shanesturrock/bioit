@@ -1,11 +1,11 @@
-%define priority 225
+%define priority 231
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.2.5
+Version:	2.3.1
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -95,6 +95,17 @@ fi
 %files
 
 %changelog
+* Thu Jul 08 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.1-1
+- 2.3.0
+  - General:
+    - The RResolver algorithm is now part of the default pipeline. RResolver
+      resolves repeats using short reads and generates assemblies with better
+      contiguity and often fewer misassemblies.
+- 2.3.1
+  - abyss-rresolver-short:
+    - Fixed a bug that crashed ABySS if Bloom filter size is not specified.
+    - Fixed a compilation error for clang-10.
+
 * Fri Oct 09 2020 Shane Sturrock <shane.sturrock@gmail.com> - 2.2.5-1
 - General:
   - Resolve various compilation errors in newer versions of clang
