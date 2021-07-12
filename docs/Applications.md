@@ -6,11 +6,15 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 
 ## Notes on installing rstudio
 
-The latest rstudio 1.2 requires `libxkbcommon-x11` to be installed. Also, the first time a user starts rstudio, they'll need to run the following:
+Install the latest Rstudio Server using the following:
 
-    QMLSCENE_DEVICE=softwarecontext rstudio
+    wget https://download2.rstudio.org/server/centos7/x86_64/rstudio-server-rhel-1.4.1717-x86_64.rpm
+    sudo yum install rstudio-server-rhel-1.4.1717-x86_64.rpm
 
-This will set the rendering engine to software mode required to start under X2Go. Once they're in, they go go into the options and set software rendering to be the default and then they'll be able to start it from the menu.
+Open firewall port to allow this to work:
+
+    sudo firewall-cmd --zone=public --add-port=8787/tcp --permanent
+    sudo firewall-cmd --reload
 
 ## List of applications and instructions on building them
 
