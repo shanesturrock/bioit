@@ -21,10 +21,10 @@ rpmbuild -bb $script_dir/../apps/hmmer/SPEC/hmmer.spec
 rpmbuild -bb $script_dir/../apps/htslib/SPEC/htslib.spec
 cp $script_dir/../apps/igv/SPEC/* ${HOME}/rpmbuild/SOURCES
 rpmbuild -bb $script_dir/../apps/igv/SPEC/igv.spec
-rm -f ${HOME}/rpmbuild/SOURCES/*
 rpmbuild -bb $script_dir/../apps/ncbi-blast/SPEC/ncbi-blast.spec
 rpmbuild -bb $script_dir/../apps/nxtrim/SPEC/nxtrim.spec
 rpmbuild -bb $script_dir/../apps/picard/SPEC/picard.spec
+cp $script_dir/../apps/R-core/SPEC/R-x86_64.conf ${HOME}/rpmbuild/SOURCES
 rpmbuild -bb $script_dir/../apps/R-core/SPEC/R-core.spec
 rpmbuild -bb $script_dir/../apps/rtg-tools/SPEC/rtg-tools.spec
 rpmbuild -bb $script_dir/../apps/samtools/SPEC/samtools.spec
