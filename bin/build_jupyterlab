@@ -1,0 +1,170 @@
+ROOT=/opt/bioit
+PY3_VER=3.9
+PY2_VER=2.7
+JLAB_VER=3.0.16
+ENV_NAME=jupyterlab_${JLAB_VER}
+JLAB_PATH=${ROOT}/jupyterlab/${JLAB_VER}
+CONDA_BIN=${ROOT}/jupyterlab/anaconda3/2021.05/bin
+JLAB_CONFIG_DIR=${JLAB_PATH}/${ENV_NAME}/etc/jupyter
+JHUB_PORT=443
+JHUB_PROTO=https
+
+# Set up directory for this and go into it
+mkdir ${ROOT}/jupyterlab
+cd ${ROOT}/jupyterlab
+
+# Download and install Anaconda
+wget -N https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
+bash ./Anaconda3-2021.05-Linux-x86_64.sh -b -p ${ROOT}/jupyterlab/anaconda3/2021.05
+
+# don't rebuild the env if it already exists
+CHECK_ENV=$( ${CONDA_BIN}/conda list -n ${ENV_NAME} 2>&1 )
+
+if [[ ${CHECK_ENV} =~ EnvironmentLocationNotFound ]] ;
+then
+   echo "env ${ENV_NAME} not found, creating it now"
+
+   # can't use both --name and --prefix
+   # by default you can't have names in envs that are outside the default
+   ${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/${ENV_NAME} python=${PY3_VER} ipykernel jupyterlab=${JLAB_VER} jupyterhub nodejs jedi python-language-server unixodbc
+ 
+   # add the env path to the default path so the name becomes visible :-)
+   ${CONDA_BIN}/conda config --append envs_dirs ${JLAB_PATH}/${ENV_NAME}
+
+else
+   echo "env ${ENV_NAME} already exists, exiting."
+   exit 0
+fi
+# need to set the $PATH or it won't find nodejs
+export PATH=${JLAB_PATH}/${ENV_NAME}/bin:${PATH}
+
+# install a load of common libs
+	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy
+	# ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy  tensorflow
+	# install some useful extensions
+	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install jupyter-lsp 'python-language-server[all]'
+	${JLAB_PATH}/${ENV_NAME}/bin/jupyter labextension install @krassowski/jupyterlab-lsp
+	${JLAB_PATH}/${ENV_NAME}/bin/jupyter serverextension enable --py jupyterlab --sys-prefix
+	${JLAB_PATH}/${ENV_NAME}/bin/jupyter serverextension enable --py jupyter_lsp --sys-prefix
+
+	# Now build Python2 env
+	# don't rebuild the env if it already exists
+	CHECK_ENV=$( ${CONDA_BIN}/conda list -n python${PY2_VER} 2>&1 )
+
+	if [[ ${CHECK_ENV} =~ EnvironmentLocationNotFound ]] ;
+	then
+	   echo "env python${PY2_VER} not found, creating it now"
+
+	   # can't use both --name and --prefix
+	   # by default you can't have names in envs that are outside the default
+	   ${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/python${PY2_VER} python=${PY2_VER} ipykernel unixodbc
+
+	   # add the env path to the default path so the name becomes visible :-)
+	   ${CONDA_BIN}/conda config --append envs_dirs ${JLAB_PATH}/python${PY2_VER}
+
+	else
+	   echo "env python${PY2_VER} already exists, exiting."
+	   exit 0
+	fi
+
+	# Install common libs
+	${JLAB_PATH}/python${PY2_VER}/bin/python2.7 -mpip install conversion keras matplotlib numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy
+
+# set the config paths
+CONFIG_FILE=${JLAB_CONFIG_DIR}/jupyterhub_config.py
+(
+cat <<CONFIG
+import os
+os.umask(0o0007)
+c.JupyterHub.authenticator_class = 'jupyterhub.auth.PAMAuthenticator'
+c.JupyterHub.bind_url = '${JHUB_PROTO}://:${JHUB_PORT}'
+c.JupyterHub.config_file = '${JLAB_CONFIG_DIR}/jupyterhub_config.py'
+c.JupyterHub.cookie_secret_file = '${JLAB_CONFIG_DIR}/jupyterhub_cookie_secret'
+c.JupyterHub.db_url = 'sqlite:///${JLAB_CONFIG_DIR}/jupyterhub.sqlite'
+c.JupyterHub.extra_log_file = '/var/log/jupyterhub.log'
+c.JupyterHub.last_activity_interval = 300
+c.JupyterHub.port = 8000
+c.Spawner.args = ['--log-level=ERROR']
+c.Spawner.cmd = ['jupyter-labhub']
+c.Spawner.cpu_limit = 8
+c.Spawner.default_url = '/lab'
+c.Authenticator.admin_users = {'build','sss'}
+c.LocalAuthenticator.create_system_users = False
+c.PAMAuthenticator.check_account = True
+c.PAMAuthenticator.encoding = 'utf8'
+c.PAMAuthenticator.open_sessions = True
+c.PAMAuthenticator.service = 'login'
+c.NotebookApp.iopub_data_rate_limit = 10000000
+CONFIG
+) > ${CONFIG_FILE}
+
+# set the service paths, store the file in the env
+SERVICE_PATH=${JLAB_PATH}/${ENV_NAME}/usr/lib/systemd/system/
+mkdir -p ${SERVICE_PATH}
+SERVICE_FILE=${SERVICE_PATH}/jupyterhub.service
+(
+cat <<SERVICE
+[Unit]
+Description=JupyterHub
+After=syslog.target network.target
+
+[Service]
+User=root
+Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:${JLAB_PATH}/${ENV_NAME}/bin/"
+ExecStart=${JLAB_PATH}/${ENV_NAME}/bin/jupyterhub -f ${JLAB_CONFIG_DIR}/jupyterhub_config.py --ssl-cert=/etc/ssl/certs/`hostname`.crt --ssl-key=/etc/ssl/private/`hostname`.key &>> /var/log/jupyterhub.log
+
+[Install]
+WantedBy=multi-user.target
+SERVICE
+) > ${SERVICE_FILE}
+
+# link in the service file
+sudo ln -s ${SERVICE_FILE} /usr/lib/systemd/system/jupyterhub.service
+
+# Create a kernel.json file for the system Python2.7
+PY2_VER_STRING=$(${JLAB_PATH}/python${PY2_VER}/bin/python2.7 --version 2>&1)
+KERNEL_FILE=$(mktemp /tmp/py2kernel.XXXXXX)
+(
+cat <<KERNEL
+{
+ "display_name": "${PY2_VER_STRING}",
+ "language": "python",
+ "argv": [
+  "${JLAB_PATH}/python${PY2_VER}/bin/python2.7",
+  "-m",
+  "ipykernel_launcher",
+  "-f",
+  "{connection_file}"
+ ]
+}
+KERNEL
+) > ${KERNEL_FILE}
+
+
+# Tweak the Python3.9 kernel file to display the correct Python version
+# I think it's easier to overwrite the existing one than edit the old via script
+PY3_VER_STRING=$(${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} --version 2>&1)
+${JLAB_PATH}/${ENV_NAME}/bin/python3 -m ipykernel install --name python3 --display-name "${PY3_VER_STRING}" --prefix="${JLAB_PATH}/${ENV_NAME}"
+
+# Make the python2.7 env available as a kernel
+# Copy the python3 kernel and overwrite the kernel.json file
+cp -rf ${JLAB_PATH}/${ENV_NAME}/share/jupyter/kernels/python3 ${JLAB_PATH}/${ENV_NAME}/share/jupyter/kernels/python2
+cp -f ${KERNEL_FILE}  ${JLAB_PATH}/${ENV_NAME}/share/jupyter/kernels/python2/kernel.json
+rm -f ${KERNEL_FILE}
+
+# extensionmanager doesn't work so disable it by default
+# https://discourse.jupyter.org/t/extension-manager-now-default-in-jupyterlab-2-1/4057/5
+EXT_SETTINGS_FILE=${JLAB_PATH}/${ENV_NAME}/share/jupyter/lab/settings/page_config.json
+(
+cat <<EXT_SETTINGS
+{
+  "disabledExtensions": [ "@jupyterlab/extensionmanager-extension" ]
+}
+EXT_SETTINGS
+) > ${EXT_SETTINGS_FILE}
+
+sudo systemctl daemon-reload
+sudo systemctl enable jupyterhub.service
+sudo systemctl start  jupyterhub.service
+sudo systemctl status jupyterhub.service
+

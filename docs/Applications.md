@@ -16,6 +16,25 @@ Open firewall port to allow this to work:
     sudo firewall-cmd --zone=public --add-port=8787/tcp --permanent
     sudo firewall-cmd --reload
 
+## Notes on installing jupyterlab
+
+Ensure SE Linux is turned off by editing `/etc/selinux/config` and setting `SELINUX=disabled` then reboot the server.
+
+Create a self-signed certificate for the server to use as it runs on port 443. This command will create files for the server.
+
+    sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/`hostname`.key -out /etc/ssl/certs/`hostname`.crt
+
+Answer the questions with sensible values.
+
+Run the `build_jupyterlab` script which will download everything it needs and use the cert you just created.
+
+Once that completes open port 443 on the firewall:
+
+    sudo firewall-cmd --zone=public --add-port=443/tcp --permanent
+    sudo firewall-cmd --reload
+
+Users can now go to https://hostname and they should see the login.
+
 ## List of applications and instructions on building them
 
 * [abyss](abyss.md)
