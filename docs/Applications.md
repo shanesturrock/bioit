@@ -36,6 +36,23 @@ Once that completes open port 443 on the firewall:
 
 Users can now go to <https://localhost> and they should see the login prompt.
 
+## Other useful tools
+
+Remote desktop via RDP client (good for Windows users) can be enabled by
+installing xrdp:
+
+    sudo yum -y install xrdp
+    sudo systemctl enable xrdp
+    sudo systemctl start xrdp
+    sudo firewall-cmd --permanent --add-port=3389/tcp
+    sudo firewall-cmd --reload
+
+For a user to connect they need to create the `.Xclients` file in their home directory:
+
+    echo "mate-session" > ~/.Xclients
+
+Then they can connect to the server using the default port an RDP client expects.
+
 ## List of applications and instructions on building them
 
 * [abyss](abyss.md)
