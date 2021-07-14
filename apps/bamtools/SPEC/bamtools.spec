@@ -1,11 +1,11 @@
-%define priority 251
+%define priority 252
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bamtools
-Version:	2.5.1
+Version:	2.5.2
 Release:	1%{?dist}
 Summary:	Tools for handing BAM files
 Group:		Applications/Engineering
@@ -39,6 +39,16 @@ fi
 %files
 
 %changelog
+* Thu Jul 15 2021 Shane Sturrock <shane.sturrock@gmail.com> 2.5.2-1
+- Fixed multiple compilations issues, compiles cleanly with GCC 11 and Clang 12
+- Cleaned up codebase. Because constructors become trivial, the ABI changed,
+  necessitating a SONAME bump.
+- Hidden visibility support on Unix. If you relied on being able to link to
+  implementation details, this will fail now due to internal classes being
+  marked with __attribute__((visibility("hidden"))).
+- Fix c/C parsing
+- Support B-type arrays
+
 * Tue Jan 09 2018 Shane Sturrock <shane.sturrock@gmail.com> 2.5.1-1
 - Fixed the provided pkg-config file to contain correct static dependencies.
 

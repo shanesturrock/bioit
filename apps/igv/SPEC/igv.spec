@@ -1,11 +1,11 @@
-%define priority 21000
+%define priority 21002
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.10.0
+Version:	2.10.2
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,12 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Thu Jul 15 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.2-1
+- 2.10.1
+  - Use full height of track to render features in "COLLAPSED" mode.
+- 2.10.2
+  - Protect more calculated end positions from integer overflow.
+
 * Thu Jul 08 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.0-1
 - New features
   - Support for displaying RNA and DNA base modification tags in BAM files,
