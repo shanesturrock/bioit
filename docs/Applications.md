@@ -53,6 +53,10 @@ For a user to connect they need to create the `.Xclients` file in their home dir
 
 Then they can connect to the server using the default port an RDP client expects.
 
+Another couple of nice programs are `ncdu` and `baobab` both of which allow uers to see how much disc space they're using.
+
+    sudo yum -y install ncdu baobab
+
 ## List of applications and instructions on building them
 
 * [abyss](abyss.md)
