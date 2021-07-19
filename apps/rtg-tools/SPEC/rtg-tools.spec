@@ -1,11 +1,11 @@
-%define priority 3120
+%define priority 3121
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		rtg-tools
-Version:	3.12
+Version:	3.12.1
 Release:	1%{?dist}
 Summary:	Utilities for accurate VCF comparison and manipulation
 Group:		Applications/Engineering
@@ -38,6 +38,14 @@ fi
 %files
 
 %changelog
+* Tue Jul 20 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.12.1-1
+- vcfeval: When ignoring filtered variants, also take per-sample filter
+  status (FORMAT FT) into account.
+- vcfdecompose: Treat a missing value in a field sub-value (e.g.:
+  components of an AD annotation) as zero when computing updated field
+  values for the decomposed variant.
+- vcfstats: Include summary statistics for polyploid variants.
+
 * Fri Jan 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.12-1
 - Variant Calling and Evaluation
   - calling: Fixed a rare exception during variant calling arising from

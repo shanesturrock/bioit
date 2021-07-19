@@ -1,11 +1,11 @@
-%define priority 3890
+%define priority 3891
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.90
+Version:	38.91
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -231,6 +231,10 @@ fi
 %files
 
 %changelog
+* Tue Jul 20 2021 Shane Sturrock <shane.sturrock@gmail.com> - 38.91-1
+- Fixed SendSketch json array format for very large input, on client side.
+- Added maxload flag to BBCMS.
+
 * Fri Feb 19 2021 Shane Sturrock <shane.sturrock@gmail.com> - 38.90-1
 - Added support for degenerate amino acid symbols B, J, Z.
 - Added workaround for BubblePopper 640 assertion failure.
