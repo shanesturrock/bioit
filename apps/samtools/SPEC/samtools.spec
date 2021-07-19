@@ -1,11 +1,11 @@
-%define priority 1110
+%define priority 1130
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		samtools
-Version:	1.11
+Version:	1.13
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -64,6 +64,10 @@ fi
 %files
 
 %changelog
+* Tue Jul 20 2021 Shane Sturrock <shane.sturrock@gmail.com> - 1.13-1
+- 1.12 https://github.com/samtools/samtools/releases/tag/1.12
+- 1.13 https://github.com/samtools/samtools/releases/tag/1.13
+
 * Fri Oct 16 2020 Shane Sturrock <shane.sturrock@gmail.com> - 1.11-1
 - New samtools ampliconclip sub-command for removing primers from
   amplicon-based sequencing experiments, including the current COVID-19

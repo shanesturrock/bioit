@@ -25,7 +25,7 @@ wget https://github.com/samtools/bcftools/releases/download/${VERSION}/bcftools-
 tar xvf bcftools-${VERSION}.tar.bz2
 cd bcftools-${VERSION}
 ./configure --prefix=/opt/bioit/bcftools/${VERSION}
-make
+make -j8
 make install
 echo "Writing modulefile"
 echo "#%Module 1.0
