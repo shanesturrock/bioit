@@ -1,11 +1,11 @@
-%define priority 22506
+%define priority 22507
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.25.6
+Version:	2.25.7
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,11 @@ fi
 %files
 
 %changelog
+* Thu Jul 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.25.7-1
+- [bugfix] fix underflow in HaplotypeProbabilitiesFromContaminatorSequence
+  (#1697)
+- [bugfix] and nio access in Fingerprinting code (no need to panic) (#1694)
+
 * Fri Jun 11 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.25.6-1
 - 2.25.5
   - Created CreateExtendedIlluminaManifest tool (#1667)

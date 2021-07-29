@@ -1,11 +1,11 @@
-%define priority 230
+%define priority 2301
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bismark
-Version:	0.23.0
+Version:	0.23.1
 Release:	1%{?dist}
 Summary:	A bisulfite read mapper and methylation caller
 Group:		Applications/Engineering
@@ -50,6 +50,17 @@ fi
 %files
 
 %changelog
+* Thu Jul 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 0.23.1-1
+- filter_non_conversion
+  - fixed global setting of --paired or --single mode. Auto-detection now works
+    by only looking at the @PG ID:Bismark line of the SAM header.
+- methylation_consistency
+  - Auto-detection now works by only looking at the @PG ID:Bismark line of the
+    SAM header.
+- coverage2cytosine
+  - Swapped the columns for count methylated and count unmethylated for the
+    context summary report to match the header line.
+
 * Fri Nov 20 2020 Shane Sturrock <shane.sturrock@gmail.com> - 0.23.0-1
 - deduplicate_bismark
   - the command deduplicate_bismark --barcode *bam now works again. Previously
