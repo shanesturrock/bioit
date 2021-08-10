@@ -21,21 +21,25 @@ VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Building hisat2 ${VERSION} on ${DATE}"
 cd /opt/bioit/hisat2/src
-wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-${VERSION}-source.zip
+wget https://github.com/DaehwanKimLab/hisat2/archive/refs/tags/v${VERSION}.zip
+#wget ftp://ftp.ccb.jhu.edu/pub/infphilo/hisat2/downloads/hisat2-${VERSION}-source.zip
+mv v${VERSION}.zip hisat2-${VERSION}-source.zip
 unzip hisat2-${VERSION}-source.zip
 cd hisat2-${VERSION}
-make
+make -j4
 mv scripts /opt/bioit/hisat2/${VERSION}/
-mv doc /opt/bioit/hisat2/${VERSION}/
+mv docs /opt/bioit/hisat2/${VERSION}/
+#mv doc /opt/bioit/hisat2/${VERSION}/
 mv example /opt/bioit/hisat2/${VERSION}/
-mv hisatgenotype_scripts /opt/bioit/hisat2/${VERSION}/
-mv hisatgenotype_modules /opt/bioit/hisat2/${VERSION}/
+#mv hisatgenotype_scripts /opt/bioit/hisat2/${VERSION}/
+#mv hisatgenotype_modules /opt/bioit/hisat2/${VERSION}/
 mkdir /opt/bioit/hisat2/${VERSION}/bin
 mv hisat2 /opt/bioit/hisat2/${VERSION}/bin/
 mv hisat2-* /opt/bioit/hisat2/${VERSION}/bin/
 mv *.py /opt/bioit/hisat2/${VERSION}/bin/
+chmod a+x /opt/bioit/hisat2/${VERSION}/*.py
 cd /opt/bioit/hisat2/${VERSION}/bin 
-find . -type f -name '*genotype*.py' | xargs sed "/ sys,/a sys.path.append('/opt/bioit/hisat2/${VERSION}/hisatgenotype_modules')" --in-place
+#find . -type f -name '*genotype*.py' | xargs sed "/ sys,/a sys.path.append('/opt/bioit/hisat2/${VERSION}/hisatgenotype_modules')" --in-place
 echo "Writing modulefile"
 echo "#%Module 1.0
 #

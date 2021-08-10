@@ -1,11 +1,11 @@
-%define priority 210
+%define priority 221
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		hisat2
-Version:	2.1.0
+Version:	2.2.1
 Release:	1%{?dist}
 Summary:	A fast and sensitive alignment program for mapping NGS reads
 Group:		Applications/Bioinformatics
@@ -55,13 +55,16 @@ alternatives \
    --slave %{_bindir}/hisat2-inspect hisat2-inspect /opt/bioit/%{name}/%{version}/bin/hisat2-inspect \
    --slave %{_bindir}/hisat2-inspect-l hisat2-inspect-l /opt/bioit/%{name}/%{version}/bin/hisat2-inspect-l \
    --slave %{_bindir}/hisat2-inspect-s hisat2-inspect-s /opt/bioit/%{name}/%{version}/bin/hisat2-inspect-s \
-   --slave %{_bindir}/hisat2_simulate_reads.py hisat2_simulate_reads.py /opt/bioit/%{name}/%{version}/bin/hisat2_simulate_reads.py \
-   --slave %{_bindir}/hisatgenotype_build_genome.py hisatgenotype_build_genome.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_build_genome.py \
-   --slave %{_bindir}/hisatgenotype_extract_reads.py hisatgenotype_extract_reads.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_extract_reads.py \
-   --slave %{_bindir}/hisatgenotype_extract_vars.py hisatgenotype_extract_vars.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_extract_vars.py \
-   --slave %{_bindir}/hisatgenotype_hla_cyp.py hisatgenotype_hla_cyp.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_hla_cyp.py \
-   --slave %{_bindir}/hisatgenotype_locus.py hisatgenotype_locus.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_locus.py \
-   --slave %{_bindir}/hisatgenotype.py hisatgenotype.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype.py
+   --slave %{_bindir}/hisat2_read_statistics.py hisat2_read_statistics.py /opt/bioit/%{name}/%{version}/bin/hisat2_read_statistics.py \
+   --slave %{_bindir}/hisat2-repeat hisat2-repeat /opt/bioit/%{name}/%{version}/bin/hisat2-repeat \
+   --slave %{_bindir}/hisat2_simulate_reads.py hisat2_simulate_reads.py /opt/bioit/%{name}/%{version}/bin/hisat2_simulate_reads.py
+
+   #--slave %{_bindir}/hisatgenotype_build_genome.py hisatgenotype_build_genome.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_build_genome.py \
+   #--slave %{_bindir}/hisatgenotype_extract_reads.py hisatgenotype_extract_reads.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_extract_reads.py \
+   #--slave %{_bindir}/hisatgenotype_extract_vars.py hisatgenotype_extract_vars.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_extract_vars.py \
+   #--slave %{_bindir}/hisatgenotype_hla_cyp.py hisatgenotype_hla_cyp.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_hla_cyp.py \
+   #--slave %{_bindir}/hisatgenotype_locus.py hisatgenotype_locus.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype_locus.py \
+   #--slave %{_bindir}/hisatgenotype.py hisatgenotype.py /opt/bioit/%{name}/%{version}/bin/hisatgenotype.py
 
 %postun
 if [ $1 -eq 0 ]
@@ -73,6 +76,29 @@ fi
 %files
 
 %changelog
+* Tue Aug 10 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.2.1-1
+- 2.2.0
+  - This major version update includes a new feature to handle “repeat” reads.
+    Based on sets of 100-bp simulated and 101-bp real reads that we tested, we
+    found that 2.6-3.4% and 1.4-1.8% of the reads were mapped to >5 locations
+    and >100 locations, respectively. Attempting to report all alignments would
+    likely consume a prohibitive amount of disk space. In order to address this
+    issue, our repeat indexing and alignment approach directly aligns reads to
+    repeat sequences, resulting in one repeat alignment per read. HISAT2
+    provides application programming interfaces (API) for C++, Python, and JAVA
+    that rapidly retrieve genomic locations from repeat alignments for use in
+    downstream analyses.
+  - Other minor bug fixes are also included as follows:
+    - Fixed occasional sign (+ or -) issues of template lengths in SAM file
+    - Fixed duplicate read alignments in SAM file
+    - Skip a splice site if exon’s last base or first base is ambiguous (N)
+- 2.2.1
+  - This patch version includes the following changes.
+    - Python3 support
+    - Remove HISAT-genotype related scripts. HISAT-genotype moved to
+      https://daehwankimlab.github.io/hisat-genotype/
+    - Fixed bugs related to --read-lengths option
+
 * Wed Jun 28 2017 Shane Sturrock <shane.sturrock@gmail.com> - 2.1.0-1
 - This major version includes the first release of HISAT-genotype, which
   currently performs HLA typing, DNA fingerprinting analysis, and CYP typing on
