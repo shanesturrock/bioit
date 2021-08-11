@@ -1,6 +1,6 @@
 # Mount points for bioit common data
 - name: Mount for bioit executables
-  mount: state=mounted src=silver:/opt path=/opt fstype=nfs opts="defaults"
+  mount: state=mounted src=silver:/opt/bioit path=/opt/bioit fstype=nfs opts="defaults"
 
 #- name: Mount for biological databases
   #mount: state=mounted src=adenine:/export/nas/databases path=/databases fstype=nfs
