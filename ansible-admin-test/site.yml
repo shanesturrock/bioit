@@ -32,13 +32,13 @@
   tasks:
     - include: tasks/base.yml
 
-# - name: Setup network mounts
-  # hosts: vms
-  # gather_facts: no
-  # tags: ['mounts']
-  # become: true
-  # tasks:
-    # - include: tasks/mounts.yml
+- name: Setup network mounts
+  hosts: nfs-clients
+  gather_facts: no
+  tags: ['mounts']
+  become: true
+  tasks:
+    - include: tasks/mounts.yml
 
 # Must be done after user mounts, so that homes are already in the right place
 - name: Setup users
