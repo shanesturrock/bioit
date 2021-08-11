@@ -77,7 +77,7 @@
     - name: Disallow R-core and bowtie2 from EPEL
       lineinfile: dest=/etc/yum.repos.d/epel.repo
                   regexp="^gpgcheck=1"
-                  line="exclude=R-Core bowtie\ngpgcheck=1"
+                  line="exclude=R-Core bowtie2\ngpgcheck=1"
                   firstmatch=yes
                   state=present
 
