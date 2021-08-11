@@ -1,0 +1,16 @@
+# Script to setup the bioit repo and modules
+- name: Write bioit.sh 
+  copy: src="../repo/bioit.sh" dest="/etc/profile.d/bioit.sh"
+
+- name: Add repository
+  copy: src="../repo/bioit.repo" dest="/etc/yum.repos.d/bioit.repo"
+
+- name: Import RPM signature
+  rpm_key:
+    state: present
+    key: /home/build/RPM-GPG-KEY-BioIT
+
+- name: Install BioIT Packages 
+  yum:
+    name: '@bioit'
+    state: present

@@ -1,0 +1,22 @@
+# This list of users is created into this environment
+bioit_group_list:
+  - name: "massey-ifs-group"
+    gid: 50001
+    state: present
+  - name: "vboxusers"
+    gid: 979
+    state: present
+bioit_user_list:
+  - name: "Aakansha Kanojia"
+    username: "akanojia"
+    uid: 10191
+    group: massey-ifs-group
+    keys:
+      # Change to 'disabled:' to remove the key
+      active:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC34jhmDu4DO2iGthqK9kEoJvt3Rzolmu8HeCJtcvPlkjwSFyqXk1lGLQTWMZbAbVl3AufgF3+hTwxwJSmdrY8X8WJrp9Y+i1z/GFKkXYeAmmxJrl+/JL9c3DUGiPJHKLCt2cvB/JZb4ZDsXnq5gvJKyGHJ1nkEOPoKw5GsipZT9Th6jBI7jomtjdxFPCmfdeDxnZaUCQyEE2grPxzfE/GS0x/14tN/rrRFfkTr1tIaWRdXYMnsaVmxqta0MC30CDt6SdFqO+43MRlChkP+LhTwK2t5KbZuh6iMHlvpyxorGfILH1nwGPFBcVH+lzl7C9lK8SBEVX9MFU/vK050TLRR sss@Shanes-MBP"
+    # Comment out shell: to disable account
+    shell: "/bin/bash"
+    # Change state to 'absent' to delete the user account entirely
+    state: present
+    remove: yes

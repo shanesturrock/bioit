@@ -1,0 +1,101 @@
+##
+# Install python into all machines to start using ansible
+# Ensures users/groups and munge is installed.
+# Assumes you have done: ansible-galaxy install goozbach.EPEL
+##
+- name: Verify local setup
+  hosts: localhost
+  tags: ['pre-deploy']
+  tasks:
+    - name: Check ansible version meets this playbook minimum version requirements.
+      assert:
+        that: ansible_version.major == 2 and ansible_version.minor == 9
+        msg: "You must update Ansible to at least 2.9 to use this playbook."
+
+# - name: Setup ansible dependencies
+#   hosts: all
+#   tags: ['pre-deploy']
+#   gather_facts: no
+#   become: yes
+#   tasks:
+#     - name: Install python for ansible
+#       raw: sudo yum install python
+#       tags: ['centos']
+
+- name: Setup OS base packages
+  hosts: vms
+  gather_facts: yes
+  tags: ['base']
+  become: true
+  roles:
+    - goozbach.EPEL
+  tasks:
+    - include: tasks/base.yml
+
+# - name: Setup network mounts
+  # hosts: vms
+  # gather_facts: no
+  # tags: ['mounts']
+  # become: true
+  # tasks:
+    # - include: tasks/mounts.yml
+
+# Must be done after user mounts, so that homes are already in the right place
+- name: Setup users
+  hosts: all
+  gather_facts: no
+  tags: ['users']
+  become: yes
+  vars_files:
+    - vars/users.yml
+  tasks:
+    # Creates users
+    - include: tasks/setup-users-and-group.yml
+
+    # Allows sudo for created users without passwords
+    - include: tasks/allow-sudo.yml
+
+# - name: Setup slurm
+  # hosts: slurm-controllers slurm-compute-nodes slurm-submit-hosts
+  # gather_facts: yes
+  # tags: ['slurm']
+  # become: true
+  # roles:
+    # - goozbach.EPEL
+  # tasks:
+    # - include: tasks/slurm.yml
+  # handlers:
+    # - include: handlers/slurm.yml
+
+# - name: Setup bioit-repo
+  # hosts: slurm-compute-nodes slurm-submit-hosts
+  # gather_facts: yes
+  # tags: ['bioit-repo']
+  # become: yes
+  # tasks:
+    # - include: tasks/bioit-repo.yml
+
+# This is just a small best practise for all ssh connections
+# Must be done after user creation
+- name: Setup SSH Security hardening
+  hosts: all
+  gather_facts: no
+  tags: ['security']
+  become: yes
+  tasks:
+    - name: Disallow root SSH access
+      lineinfile: dest=/etc/ssh/sshd_config
+                  regexp="^PermitRootLogin"
+                  line="PermitRootLogin no"
+                  state=present
+      notify: restart sshd
+
+    - name: Disallow password SSH access
+      lineinfile: dest=/etc/ssh/sshd_config
+                  regexp="^PasswordAuthentication"
+                  line="PasswordAuthentication no"
+                  state=present
+      notify: restart sshd
+  handlers:
+    - name: restart sshd
+      service: name=sshd state=restarted

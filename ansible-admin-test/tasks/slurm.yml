@@ -1,0 +1,93 @@
+# Script a little of the munge/slurm configuration setup.
+- name: Install munge
+  yum: name=munge state=present
+  tags: ['munge']
+
+- name: Copy munge key
+  copy: src=files/slurm/munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0400
+  tags: ['munge']
+  notify: restart munge
+
+- name: munge service
+  action: service name=munge state=started enabled=yes
+  tags: ['munge']
+
+- name: Ensure slurm group
+  group:
+    name: slurm
+    gid: 982
+    state: present
+  tags: ['slurm']
+
+- name: Ensure slurm user
+  user:
+    name: slurm
+    uid: 982
+    group: slurm
+    createhome: no
+    shell: /sbin/nologin
+    state: present
+  tags: ['slurm']
+
+- name: Ensure slurm etc dir
+  file: path=/etc/slurm state=directory owner=root group=root mode=0755
+  tags: ['slurm']
+
+- name: Copy slurm config
+  template: src=templates/slurm/slurm.conf.j2 dest=/etc/slurm/slurm.conf owner=root group=root mode=0644
+  tags: ['slurm']
+  notify: restart slurm
+
+- name: Turn off firewall
+  action: service name=firewalld state=stopped enabled=no
+  tags: ['slurm']
+
+- name: Install slurm packages (submit hosts)
+  when: inventory_hostname in groups['slurm-submit-hosts']
+  yum:
+    name: /opt/bioit/repo/RPMS/{{ item }}-{{ slurm_version }}-1.el7.centos.x86_64.rpm
+    state: present
+  with_items:
+    - slurm
+    - slurm-perlapi
+    - slurm-openlava
+  tags: ['slurm']
+
+- name: Install slurm packages (compute nodes)
+  when: inventory_hostname in groups['slurm-compute-nodes']
+  yum:
+    name: /opt/bioit/repo/RPMS/{{ item }}-{{ slurm_version }}-1.el7.centos.x86_64.rpm
+    state: present
+  with_items:
+    - slurm
+    - slurm-libpmi
+    - slurm-perlapi
+    - slurm-slurmd
+    - slurm-pam_slurm
+  tags: ['slurm']
+
+- name: Install slurm packages (controllers)
+  when: inventory_hostname in groups['slurm-controllers']
+  yum:
+    name: /opt/bioit/repo/RPMS/{{ item }}-{{ slurm_version }}-1.el7.centos.x86_64.rpm
+    state: present
+  with_items:
+    - slurm
+    - slurm-devel
+    - slurm-libpmi
+    - slurm-perlapi
+    - slurm-slurmctld
+    - slurm-slurmd
+    - slurm-slurmdbd
+    - slurm-pam_slurm
+  tags: ['slurm']
+
+- name: Create slurm spool dir (controllers)
+  when: inventory_hostname in groups['slurm-controllers']
+  file: path=/var/spool/slurmctld state=directory owner=slurm group=root mode=0755
+  tags: ['slurm']
+
+- name: Create slurm accounting destination dir (controllers)
+  when: inventory_hostname in groups['slurm-controllers']
+  file: path=/var/log/slurm state=directory owner=slurm group=root mode=0755
+  tags: ['slurm']

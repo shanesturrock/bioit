@@ -1,0 +1,68 @@
+- name: Create admin group
+  group: name={{ admin_group }} gid=10000 state=present
+
+- name: Setup non admin groups
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+    state: "{{ item.state | default('present') }}"
+  with_items:
+    - "{{ bioit_group_list }}"
+
+- name: Setup admin users
+  user:
+    name: "{{ item.username }}"
+    state: "{{ item.state | default('present') }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    uid: "{{ item.uid }}"
+    group: "{{ admin_group }}"
+    groups: "{{ item.groups | default(omit) }}"
+    remove: yes
+  when: item.username is defined
+  with_items:
+    - "{{ bioit_admin_list }}"
+
+- name: Decide whether end-users can log in
+  when: inventory_hostname not in groups['bioit-login-hosts']
+  set_fact: no_login="/sbin/nologin"
+
+- name: Setup non admin users
+  user:
+    name: "{{ item.username }}"
+    state: "{{ item.state | default('present') }}"
+    shell: "{{ no_login | default(item.shell) | default('/sbin/nologin') }}"
+    uid: "{{ item.uid }}"
+    group: "{{ item.group | default(omit) }}"
+    groups: "{{ item.groups | default(omit) }}"
+    remove: "{{ item.remove | default('yes') }}"
+  when: item.username is defined
+  with_items:
+    - "{{ bioit_user_list }}"
+
+# SSH authorized key addition/removal is the same for admin and users alike
+- set_fact: full_user_list="{{ bioit_admin_list + bioit_user_list }}"
+  tags: ['debug']
+
+- name: Add SSH-keys to all users
+  authorized_key:
+    user: "{{ item.0.username }}"
+    key: "{{ item.1 }}"
+  with_subelements:
+    - "{{ full_user_list }}"
+    - keys.active
+    - flags:
+      skip_missing: True
+  when: item.0.state != "absent"
+
+- name: Remove old SSH-keys from all users
+  authorized_key:
+    user: "{{ item.0.username }}"
+    key: "{{ item.1 }}"
+    state: absent
+  with_subelements:
+    - "{{ full_user_list }}"
+    - keys.disabled
+    - flags:
+      skip_missing: True
+  when: item.0.state != "absent"
+  tags: ['debug']
