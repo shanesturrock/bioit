@@ -1,0 +1,50 @@
+Adding new machine to the system. Set up a basic machine (real or a VM) and
+boot it using a CentOS iso. It doesn't need to be the full one because the
+kickstart pulls everything off the internet. 
+Once booted to the screen that offers to install or check media, hit the 'Tab'
+key and you'll get the command that will boot Linux. Add the following:
+
+inst.ks=nfs://hostname/opt/bioit/repo/bioit.ks
+
+Replace 'hostname' with the real hostname of your server that is providing this
+file, or even the IP address.
+
+In this case, the server is my main machine and I've copied the bioit.ks
+into the repo directory. Since /opt/bioit is set as an NFS export on the
+main machine it should be visible. If you prefer, you can set up an Apache
+web server and serve the kickstart from there but the above is easy to set
+up.
+
+Once the VM is booting with the above it should go through the whole process
+automatically and eventually reboot.
+
+You should now log into the machine from the build user on the main host
+that runs ansible by ssh'ing as root. This is currently allowed but will be
+disallowed by the playbook once executed fully. It will ask you to add
+the key to your authorized_keys which you should do. The default password is
+"ChangeMeNow" so use the passwd command to change that to the password you
+would use for your build user that runs anisble. Also edit the /etc/hostname
+file to match what your DNS server is using to assign the IP address and reboot
+the machine so this all takes.
+
+At this point, the machine should be ready for adding to Ansible. Edit the
+environments/bioit-lite/inventory file and add the machine wherever it needs
+to be depending on the role. The most obvious place is slurm-compute-nodes
+and nfs-clients.
+
+With that done you need to intialise the install so that the build user is
+created and can sudo. Do this with the following:
+
+ansible-playbook -i environments/bioit-lite site.yml -u root --ask-pass --tags users -l newhost
+
+The last bit makes the playbook only work on this new host so replace 'newhost'
+with the actual hostname. Use the new password you've set and it will set up
+the user accounts.
+
+If that all runs correctly, you can run the full playbook again without the
+root bit:
+
+ansible-playbook -i environments/bioit-lite site.yml -l newhost
+
+This will bring the machine up to the same standard as other machines on the
+network and you can now run the playbook on all machines as you make changes.
