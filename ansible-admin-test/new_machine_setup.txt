@@ -35,7 +35,8 @@ and nfs-clients.
 With that done you need to intialise the install so that the build user is
 created and can sudo. Do this with the following:
 
-ansible-playbook -i environments/bioit-lite site.yml -u root --ask-pass --tags users -l newhost
+ansible-playbook -i environments/bioit-lite site.yml -u root --ask-pass \
+                 --tags users -l newhost
 
 The last bit makes the playbook only work on this new host so replace 'newhost'
 with the actual hostname. Use the new password you've set and it will set up
