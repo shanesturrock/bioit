@@ -7,6 +7,7 @@ slurm
 silver
 slurm
 bioit
+centosks
 
 [slurm-test]
 slurm
@@ -14,13 +15,15 @@ slurm
 [slurm-submit-hosts]
 # Additional hosts that jobs can be submitted from
 silver
-slurm
-bioit
 
 [bioit-login-hosts]
-# These are the only hosts that end-users can log in to
+# These are the only hosts that end-users can log in to, if the
+# host isn't in here then their account will be set to /sbin/nologin
+# even when set to /bin/bash in the users.yml
+#
+# Admin users should be in group_vars/all/users.yml so this rule doesn't
+# apply to them and can log into any host
 silver
-
 
 [other-vms]
 # Random other VMs for testing, builds, etc
@@ -36,6 +39,7 @@ silver
 # Other VMs mount storage off the server
 slurm
 bioit
+centosks
 
 [vms:children]
 slurm-controllers
