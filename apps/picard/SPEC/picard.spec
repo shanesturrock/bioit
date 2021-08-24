@@ -1,11 +1,11 @@
-%define priority 22507
+%define priority 22600
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.25.7
+Version:	2.26.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,16 @@ fi
 %files
 
 %changelog
+* Wed Aug 25 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.0-1
+- Make cram valid input to remaining CLPs (#1622)
+- Add on the fly demux and speed up barcode matching. (#1649)
+- Cleaned up some variable names and order in the alignment metrics code.
+  (#1707)
+- Added some more skew-resistent metrics for read length (#1706)
+- Fix typo in usage (#1703)
+- HaplotypeMap bug fix (#1702)
+- Fix bug in CollectSamErrorMetrics (#1618)
+
 * Thu Jul 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.25.7-1
 - [bugfix] fix underflow in HaplotypeProbabilitiesFromContaminatorSequence
   (#1697)
