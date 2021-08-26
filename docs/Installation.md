@@ -81,6 +81,7 @@ In order to complete the compile of packages for R you need the following instal
 
     wget https://download.osgeo.org/geos/geos-3.6.5.tar.bz2
     wget https://download.osgeo.org/gdal/2.4.3/gdal-2.4.3.tar.gz
+    wget https://github.com/OSGeo/PROJ/releases/download/6.1.1/proj-6.1.1.tar.gz
 
 Download them, untar, run `./configure` and `make` and `sudo install` in `/usr/l
 ocal` (the default location) plus you'll also need to run this as root:
