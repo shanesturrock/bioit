@@ -1,11 +1,11 @@
-%define priority 21003
+%define priority 21100
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.10.3
+Version:	2.11.0
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Thu Sep 02 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.0-1
+- Changed to use sha512 for signing Windows installers
+
 * Thu Aug 05 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.10.3-1
 - Fixed a problem with displaying the popup information in alignment tracks -
   no details where shown for paired-end alignments when "View as pairs" was

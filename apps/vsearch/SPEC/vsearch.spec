@@ -1,11 +1,11 @@
-%define priority 2171
+%define priority 2180
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.17.1
+Version:	2.18.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,14 @@ fi
 %files
 
 %changelog
+* Thu Sep 02 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.0-1
+- Added the fasta2fastq command. 
+- Fixed search bug on ppc64le. 
+- Fixed bug with removal of size and ee info in uc files. 
+- Fixed compilation errors in some cases. 
+- Made some general code improvements. 
+- Updated manual.
+
 * Thu Jul 08 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.17.1-1
 - Modernized code. 
 - Minor updates to help info
