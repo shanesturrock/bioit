@@ -1,11 +1,11 @@
-%define priority 22601
+%define priority 22602
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.26.1
+Version:	2.26.2
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,7 +41,10 @@ fi
 %files
 
 %changelog
-* Fri Sep 03 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.26.1-1
+* Fri Sep 10 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.2-1
+- Changed calculation of call rate to account for zeroed out SNPs. (#1711)
+
+* Fri Sep 03 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.1-1
 - Updated documentation for MarkDuplicates.java (#1704) 
 - Fixed a tiny typo in CollectWgsMetrics (#1705) 
 - Added adapter and quality trimming to IlluminaBasecallsToFastq. (#1646) 
