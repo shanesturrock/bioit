@@ -1,11 +1,11 @@
-%define priority 21100
+%define priority 21101
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.11.0
+Version:	2.11.1
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,10 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Thu Sep 16 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.1-1
+- Bug fix -- preference overrides from batch script were being stored
+  persistently
+
 * Thu Sep 02 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.0-1
 - Changed to use sha512 for signing Windows installers
 

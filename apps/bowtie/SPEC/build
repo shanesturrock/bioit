@@ -27,7 +27,7 @@ mv v${VERSION}.zip bowtie-${VERSION}-src.zip
 unzip bowtie-${VERSION}-src.zip
 cd bowtie-${VERSION}
 sed "s+prefix = /usr/local+prefix = /opt/bioit/bowtie/${VERSION}+" --in-place Makefile
-make NO_TBB=1
+make -j8 NO_TBB=1
 make install
 echo "Writing modulefile"
 echo "#%Module 1.0

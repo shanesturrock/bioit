@@ -1,11 +1,11 @@
-%define priority 1300
+%define priority 1301
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie
-Version:	1.3.0
+Version:	1.3.1
 Release:	1%{?dist}
 Summary:	An ultrafast, memory-efficient short read aligner
 Group:		Applications/Engineering
@@ -48,6 +48,17 @@ fi
 %files
 
 %changelog
+* Thu Sep 16 2021 Shane Sturrock <shane.sturrock@gmail.com> - 1.3.1-1
+- Fixed an overflow issue in `bowtie-build` that would sometimes yield corrupt
+  "large" (64-bit) indexes; the resulting index would sometimes cause `bowtie`
+  to hang. Note: `bowtie2-build` does not have this issue.
+- Fixed an issue in `bowtie` causing XM:i SAM optional field to sometimes be
+  off by 1 when using the `-m/-M` flags.
+- Fixed an issue that would sometimes cause deadlocks in `bowtie` when running
+  multithreaded.
+- Fixed an issue causing build errors when compiling against a pre-C++11
+  standard.
+
 * Fri Jul 31 2020 Shane Sturrock <shane.sturrock@gmail.com> - 1.3.0-1
 - v1.2.3
   - Added support for reading and inspecting Bowtie 2 indexes. Bowtie 2 indexes
