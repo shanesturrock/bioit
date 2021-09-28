@@ -39,13 +39,14 @@ fi
 export PATH=${JLAB_PATH}/${ENV_NAME}/bin:${PATH}
 
 # install a load of common libs
-	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy
+	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy ipywidgets
 	# ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy  tensorflow
 	# install some useful extensions
 	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install jupyter-lsp 'python-language-server[all]'
 	${JLAB_PATH}/${ENV_NAME}/bin/jupyter labextension install @krassowski/jupyterlab-lsp
 	${JLAB_PATH}/${ENV_NAME}/bin/jupyter serverextension enable --py jupyterlab --sys-prefix
 	${JLAB_PATH}/${ENV_NAME}/bin/jupyter serverextension enable --py jupyter_lsp --sys-prefix
+	${JLAB_PATH}/${ENV_NAME}/bin/jupyter nbextension enable --py widgetsnbextension
 
 	# Now build Python2 env
 	# don't rebuild the env if it already exists
