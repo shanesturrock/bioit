@@ -1,4 +1,6 @@
 ROOT=/opt/bioit
+PY2_VER=2.7
+JLAB_VER=3.0.16
 echo "Stopping jupyterhub.service" 
 sudo systemctl stop jupyterhub.service  
 echo "Unlinking service" 
@@ -10,7 +12,7 @@ echo "Checking the service is gone"
 sudo systemctl status jupyterhub.service 
 echo "Removing env"
 CONDA_BIN=${ROOT}/jupyterlab/anaconda3/2021.05/bin
-${CONDA_BIN}/conda env remove --name jupyterlab_3.0.16
+${CONDA_BIN}/conda env remove --name jupyterlab_${JLAB_VER}
 ${CONDA_BIN}/conda env remove --name python${PY2_VER}
 echo "Deleting jupyterlab"  
 rm -rf ${ROOT}/jupyterlab

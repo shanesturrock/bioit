@@ -39,10 +39,10 @@ fi
 export PATH=${JLAB_PATH}/${ENV_NAME}/bin:${PATH}
 
 # install a load of common libs
-	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy ipywidgets
-	# ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy  tensorflow
+	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy ipywidgets jupyterlab-system-monitor
+	# ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy ipywidgets tensorflow jupyterlab-system-monitor
 	# install some useful extensions
-	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install jupyter-lsp 'python-language-server[all]'
+	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyter-lsp 'python-language-server[all]'
 	${JLAB_PATH}/${ENV_NAME}/bin/jupyter labextension install @krassowski/jupyterlab-lsp
 	${JLAB_PATH}/${ENV_NAME}/bin/jupyter serverextension enable --py jupyterlab --sys-prefix
 	${JLAB_PATH}/${ENV_NAME}/bin/jupyter serverextension enable --py jupyter_lsp --sys-prefix
@@ -69,7 +69,7 @@ export PATH=${JLAB_PATH}/${ENV_NAME}/bin:${PATH}
 	fi
 
 	# Install common libs
-	${JLAB_PATH}/python${PY2_VER}/bin/python2.7 -mpip install conversion keras matplotlib numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy
+	${JLAB_PATH}/python${PY2_VER}/bin/python2.7 -m pip install conversion keras matplotlib numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy
 
 # set the config paths
 CONFIG_FILE=${JLAB_CONFIG_DIR}/jupyterhub_config.py
@@ -96,6 +96,9 @@ c.PAMAuthenticator.encoding = 'utf8'
 c.PAMAuthenticator.open_sessions = True
 c.PAMAuthenticator.service = 'login'
 c.NotebookApp.iopub_data_rate_limit = 10000000
+c.ResourceUseDisplay.mem_limit = 4294967296
+c.ResourceUseDisplay.track_cpu_percent = True
+c.ResourceUseDisplay.cpu_limit = 2
 CONFIG
 ) > ${CONFIG_FILE}
 
