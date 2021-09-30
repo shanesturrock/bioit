@@ -1,7 +1,26 @@
+#!/bin/bash
+
+# Script to auto build and install jupyterhub Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
 ROOT=/opt/bioit
 PY3_VER=3.9
 PY2_VER=2.7
-JLAB_VER=3.0.16
+JLAB_VER=$1
 ENV_NAME=jupyterlab_${JLAB_VER}
 JLAB_PATH=${ROOT}/jupyterlab/${JLAB_VER}
 CONDA_BIN=${ROOT}/jupyterlab/anaconda3/2021.05/bin
@@ -114,7 +133,7 @@ After=syslog.target network.target
 
 [Service]
 User=root
-Environment="PATH=/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:${JLAB_PATH}/${ENV_NAME}/bin/"
+Environment="PATH=${JLAB_PATH}/${ENV_NAME}/bin/:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin/"
 ExecStart=${JLAB_PATH}/${ENV_NAME}/bin/jupyterhub -f ${JLAB_CONFIG_DIR}/jupyterhub_config.py --ssl-cert=/etc/ssl/certs/`hostname`.crt --ssl-key=/etc/ssl/private/`hostname`.key &>> /var/log/jupyterhub.log
 
 [Install]
