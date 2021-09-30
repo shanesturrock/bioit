@@ -1,11 +1,11 @@
-%define priority 3400
+%define priority 3500
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	3.4
+Version:	3.5
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,21 @@ fi
 %files
 
 %changelog
+* Fri Oct 01 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.5-1
+- Add support for dumping statistics in JSON format using --json.
+- Add a “Read fate breakdown” section heading to the report, and also add
+  statistics for reads discarded because of --discard-untrimmed and
+--discard-trimmed. With this, the numbers in that section should add up to
+  100%.
+- Add option -Q, which allows to specify a quality-trimming threshold for R2
+  that is different from the one for R1.
+- Add noindels adapter-trimming parameter. You can now write -a
+  "ADAPTER;noindels" to disallow indels for a single adapter only.
+- Fix --pair-adapters not finding some pairs when reads contain more than one
+  adapter.
+- Fix a memory leak when using --info-file with multiple cores.
+- Fix adjacent base statistics not being shown for linked adapters.
+
 * Fri May 07 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.4-1
 - Report correct sequence in info file if read was reverse complemented
 - Added a column to the info file that shows whether the read was

@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/cutadapt/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/cutadapt/SPEC/cutadapt 3.4
+    ${HOME}/bioit/apps/cutadapt/SPEC/cutadapt 3.5
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load cutadapt/3.4
+    module load cutadapt/3.5
     which cutadapt
     cutadapt --version
 
@@ -24,15 +24,15 @@ If all is good, you can move to the RPM building step.
 
 Make the directory for the install
 
-    mkdir /opt/bioit/cutadapt/3.4
+    mkdir /opt/bioit/cutadapt/3.5
 
 Create a virtual environment for Python3.6
 
-    python3 -m venv /opt/bioit/cutadapt/3.4/venv
+    python3 -m venv /opt/bioit/cutadapt/3.5/venv
 
 Install cutadapt using pip
 
-    /opt/bioit/cutadapt/3.4/venv/bin/pip install --install-option="--install- scripts=/opt/bioit/cutadapt/3.4" cutadapt==3.4
+    /opt/bioit/cutadapt/3.5/venv/bin/pip install --install-option="--install- scripts=/opt/bioit/cutadapt/3.5" cutadapt==3.5
 
 That should be it.
 
@@ -44,7 +44,7 @@ Add a module file in `/opt/bioit/modulefiles/cutadapt/` for this version by copy
     #
     #  cutadapt module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/cutadapt/3.4
+    prepend-path  PATH         /opt/bioit/cutadapt/3.5
 
 ## RPM
 
