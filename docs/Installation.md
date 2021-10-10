@@ -11,7 +11,7 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
     yum -y install libreoffice
     systemctl set-default graphical.target
     yum -y install centos-release-scl
-    yum -y install devtoolset-9
+    yum -y install devtoolset-9 sysstat figlet
     yum -y install devscripts perl-LWP-Protocol-https
     yum -y update
     reboot

@@ -1,0 +1,161 @@
+#!/usr/bin/env python3
+#
+# Update the message of the day with system stats.
+#
+# Version history
+# original  - Russell Smithies
+
+import datetime
+import subprocess
+import sys
+
+def system_uptime():
+    """Format system uptime as a nice string."""
+    f = open("/proc/uptime")
+    try:
+        t = float(f.readline().split()[0])
+        d = int(t // (60 * 60 * 24))
+        h = int(t // (60 * 60)) % 24
+        m = int(t // 60) % 60
+        s = int(t) % 60
+        result = ""
+        if d > 0: result += "%d days " % d
+        if h > 0: result += "%d hours " % h
+        if m > 0: result += "%d minutes " % m
+        if s > 0:
+            if (d > 0 or h > 0 or m > 0): result += "and "
+            result += "%d seconds " % s
+    except ValueError:
+        result = "<unknown>"
+    f.close()
+    return result
+
+def cpu_average():
+    """Return average CPU usage, as returned by mpstat."""
+    cpu_average = "<unknown>"
+#    mpstat = subprocess.Popen(["mpstat", "1", "1"], stdout = subprocess.PIPE)
+#    for line in mpstat.stdout:
+#        if line.startswith("Average:"):
+#            cpu_average = line.split()[2]
+#    return cpu_average
+#    mpstat = subprocess.run(["/usr/bin/mpstat","1", "1"],capture_output=True)
+    mpstat = subprocess.run(["/usr/bin/mpstat","1", "1"],stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    data = mpstat.stdout.splitlines()  # decode("utf-8")
+    for line in data:
+        if line.startswith(b'Average'):
+            cpu_average = line.split()[2]
+    return cpu_average.decode("utf-8")
+
+
+
+
+def write_header(outfile):
+    hostname_banner = open('/etc/hostname-banner')
+    outfile.write("""#####################################################
+%s
+#####################################################
+
+This server is the property of SSS Ltd.
+Unauthorised access strictly prohibited.  All access may be monitored.
+
+System Summary (collected %s)
+
+ - CPU Usage (average) = %s%%
+ - System Uptime = %s
+""" % (
+        hostname_banner.read(),
+        datetime.datetime.now().ctime(),
+        cpu_average(),
+        system_uptime()
+    ))
+    hostname_banner.close()
+
+def get_filesystem_properties(utilisation_file):
+    """Read filesystem properties from utilisation file."""
+    properties = {}
+    columns = utilisation_file.readline().rstrip('\n').split()
+    name_column = columns.index("NAME")
+    for line in utilisation_file:
+        field = {}
+        values = line.rstrip('\n').split()
+        properties[values[name_column]] = {}
+        for i,column in enumerate(columns):
+            if i != name_column:
+                properties[values[name_column]][columns[i]] = values[i]
+    return properties
+
+def storage_string_to_GB(s):
+    """Convert storage sizes in M, T, G to floating GiB."""
+    # zfs uses tebi, gibi, mebi bytes
+    x = float(s[:-1])
+    unit = s[-1]
+    if unit == 'T':
+        x *= 1024
+    elif unit == 'M':
+        x /= 1024
+    return x
+
+def write_disk_usage(outfile, properties, phase, comment):
+    for filesystem in properties.keys():
+        if '/' in filesystem and filesystem.split('/')[-1] == phase:
+            used_s = properties[filesystem]['USED']
+            used = storage_string_to_GB(used_s)
+            avail_s = properties[filesystem]['AVAIL']
+            avail = storage_string_to_GB(avail_s)
+            quota_s = properties[filesystem]['QUOTA']
+            usage = int(used / (used + avail) * 100 + 0.5)
+            if quota_s == "none":
+                quota_s = "no quota"
+            outfile.write("     %-9s %5s of %5s = %2d%% used. %s\n" % (phase, avail_s, quota_s, usage, comment))
+
+def write_storage_utilisation(outfile, selector):
+    """Attempt to summarise fileserver utilisation into outfile, or fail silently."""
+    els = selector.split(':')
+    fileserver = els[0]
+    if len(els) > 1:
+        # there's also a list of tiers
+        tiers = els[1].split(',')
+    else:
+        tiers = ["active", "archive", "scratch", "home"]
+
+    outfile.write(""" - %s storage available:
+""" % (
+    fileserver
+))
+    if fileserver == "ignition":
+        utilisation_file = "/mirror/ignition/storage-utilisation"
+    elif fileserver == "integrity":
+        utilisation_file = "/mirror/integrity/storage-utilisation"
+    elif fileserver == "gypsy":
+        utilisation_file = "/mirror/gypsy/storage-utilisation"
+    else:
+        utilisation_file = None
+    if utilisation_file != None:
+        try:
+            with open(utilisation_file) as f:
+                properties = get_filesystem_properties(f)
+                if "archive" in tiers:
+                    write_disk_usage(outfile, properties, "archive", "Slow disks     backed up       initial/final project data only.")
+                if "active" in tiers:
+                    write_disk_usage(outfile, properties, "active",  "Medium disks   backed up       important project working data.")
+                if "scratch" in tiers:
+                    write_disk_usage(outfile, properties, "scratch", "Fast disks     not backed up   temporary project space.")
+                if "home" in tiers:
+                    write_disk_usage(outfile, properties, "home",    "Medium disks   backed up       not for project data.")
+        except:
+            # do nothing, just fail silently, as this script is called by cron a lot
+            pass
+
+def write_trailer(outfile):
+    outfile.write("""
+#####################################################
+""")
+
+def main():
+    motd = open("/etc/motd", 'w')
+    write_header(motd)
+    write_trailer(motd)
+
+if __name__ == '__main__':
+    main()
+                                                                                                                                                        
