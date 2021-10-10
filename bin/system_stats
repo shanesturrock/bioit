@@ -55,7 +55,7 @@ def write_header(outfile):
 %s
 #####################################################
 
-This server is the property of SSS Ltd.
+This server is the property of Scion Research Ltd.
 Unauthorised access strictly prohibited.  All access may be monitored.
 
 System Summary (collected %s)
