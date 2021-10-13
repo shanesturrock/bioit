@@ -37,7 +37,11 @@ make install
 sed 's@# Shell wrapper for R executable.@# Shell wrapper for R executable.\nexport PATH=$PATH:/opt/bioit/R-core/4.1.1/lib64/R/bin\nexport PKG_CONFIG_PATH=/opt/bioit/R-core/4.1.1/lib64/R/lib/pkgconfig@g' --in-place /opt/bioit/R-core/${VERSION}/bin/R
 
 # Make sure devtoolset is used by default by appending location to PATH
-echo PATH=/opt/rh/devtoolset-9/root/usr/bin:$\{PATH\} >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
+echo PATH=/opt/rh/devtoolset-9/root/usr/bin:$\{PATH\}:/opt/bioit/R-core/${VERSION}/lib64/R/bin >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
+
+# Make sure pkg_config is set
+echo PKG_CONFIG_PATH=/opt/bioit/R-core/${VERSION}/lib64/R/lib/pkgconfig >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
+
 echo "#%Module 1.0
 #
 #  R-core module for use with 'environment-modules' package:
