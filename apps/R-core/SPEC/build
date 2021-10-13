@@ -33,8 +33,6 @@ cd R-${VERSION}
 make clean
 make -j8
 make install
-# Modify the R script for tools
-sed 's@# Shell wrapper for R executable.@# Shell wrapper for R executable.\nexport PATH=$PATH:/opt/bioit/R-core/4.1.1/lib64/R/bin\nexport PKG_CONFIG_PATH=/opt/bioit/R-core/4.1.1/lib64/R/lib/pkgconfig@g' --in-place /opt/bioit/R-core/${VERSION}/bin/R
 
 # Make sure devtoolset is used by default by appending location to PATH
 echo PATH=/opt/rh/devtoolset-9/root/usr/bin:$\{PATH\}:/opt/bioit/R-core/${VERSION}/lib64/R/bin >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
@@ -94,12 +92,9 @@ wget https://github.com/OSGeo/gdal/releases/download/v3.3.2/gdal-3.3.2.tar.gz
 tar xvf gdal-3.3.2.tar.gz
 cd gdal-3.3.2
 ./configure --prefix=/opt/bioit/R-core/${VERSION}/lib64/R --with-geos=/opt/bioit/R-core/${VERSION}/lib64/R/bin/geos-config --with-proj=/opt/bioit/R-core/${VERSION}/lib64/R
-
 make -j8
 make install
 
-export PATH=$PATH:/opt/bioit/R-core/${VERSION}/lib64/R/bin
-export PKG_CONFIG_PATH=/opt/bioit/R-core/${VERSION}/lib64/R/lib/pkgconfig
 echo "Install required packages"
 /opt/bioit/R-core/${VERSION}/bin/Rscript ${HOME}/bioit/apps/R-core/SPEC/bioC_install.R
 echo "Writing module .version to set default"
