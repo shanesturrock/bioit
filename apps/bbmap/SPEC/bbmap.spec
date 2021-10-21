@@ -1,11 +1,11 @@
-%define priority 3893
+%define priority 3894
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.93
+Version:	38.94
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -231,6 +231,9 @@ fi
 %files
 
 %changelog
+* Fri Oct 22 2021 Shane Sturrock <shane.sturrock@gmail.com> - 38.94-1
+- Bugfix release
+
 * Thu Sep 23 2021 Shane Sturrock <shane.sturrock@gmail.com> - 38.93-1
 - Bugfix release
 
