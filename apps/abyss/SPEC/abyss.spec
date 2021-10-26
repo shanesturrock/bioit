@@ -1,11 +1,11 @@
-%define priority 231
+%define priority 232
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.3.1
+Version:	2.3.2
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -95,6 +95,13 @@ fi
 %files
 
 %changelog
+* Tue Oct 26 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.2-1
+- General:
+  - Updated the m parameter and the S and N scaffolding parameters to better
+    defaults.
+- abyss-rresolver-short:
+  - Updated btllib to 1.1.7
+
 * Thu Jul 08 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.1-1
 - 2.3.0
   - General:

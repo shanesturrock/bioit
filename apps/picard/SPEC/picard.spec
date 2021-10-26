@@ -1,11 +1,11 @@
-%define priority 22602
+%define priority 22603
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.26.2
+Version:	2.26.3
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,13 @@ fi
 %files
 
 %changelog
+* Tue Oct 26 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.3-1
+- Added CLP that can combine multiple QualityYieldMetrics files (#1717)
+- Added description of the gtcCallRate field in the VCF Header. (#1730)
+- If deprecated parameter MAX_READS_IN_RAM_PER_TILE is specified, have
+  IlluminaBasecallsToFastq set MAX_RECORDS_IN_RAM appropriately. (#1726)
+- Minor updates: https, new urls, license year (#1723)
+
 * Fri Sep 10 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.2-1
 - Changed calculation of call rate to account for zeroed out SNPs. (#1711)
 

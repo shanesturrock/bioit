@@ -1,11 +1,11 @@
-%define priority 21101
+%define priority 21102
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.11.1
+Version:	2.11.2
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,20 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Tue Oct 26 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.2-1
+- Bug Fixes
+ - zoom slider not working in Firefox and Safari
+ - error when removing a browser.
+ - list of sequences not cleared when changing genome
+ - browser.toSVG() returns a Promise
+ - showCenterGuide option is ignored
+ - browser.zoomIn(), browser.zoomOut() methods restored
+ - SVG output broken for interaction (arc) tracks
+ - fail quickly if missing initial locus by @alfonsogarciacaro
+ - rulerViewport: check tooltip defined in mouseMove/setTimeout by @f-krull
+- New Features
+  - New option to search for features based on GFF column 9 fields.
+
 * Thu Sep 16 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.1-1
 - Bug fix -- preference overrides from batch script were being stored
   persistently
