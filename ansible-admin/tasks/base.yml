@@ -9,6 +9,8 @@
     - boost-devel
     - bzip2-devel
     - cairo-devel
+    - v8-devel
+    - librsvg2-devel
     - cifs-utils
     - cmake
     - cmake3
