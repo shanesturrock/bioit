@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 411
+%define priority 412
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        4.1.1
+Version:        4.1.2
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -59,6 +59,52 @@ fi
 #/etc/ld.so.conf.d/R-x86_64.conf
 
 %changelog
+* Fri Nov 05 2021 Shane Sturrock <shane.sturrock@gmail.com> - 4.1.2-1
+- C-LEVEL FACILITIES
+  - The workaround in headers ‘R.h’ and ‘Rmath.h’ (using namespace std;) for
+    the Oracle Developer Studio compiler is no longer needed now C++11 is
+    required so has been removed. A couple more usages of log() (which should
+    have been std::log()) with an int argument are reported on Solaris.
+  - The undocumented limit of 4095 bytes on messages from the S-compatibility
+    macros PROBLEM and MESSAGE is now documented and longer messages will be
+    silently truncated rather than potentially causing segfaults.
+  - If the R_NO_SEGV_HANDLER environment variable is non-empty, the signal
+    handler for SEGV/ILL/BUS signals (which offers recovery user interface) is
+    not set. This allows more reliable debugging of crashes that involve the
+    console.
+- DEPRECATED AND DEFUNCT
+  - The legacy S-compatibility macros PROBLEM, MESSAGE, ERROR, WARN, WARNING,
+    RECOVER, ... are deprecated and will be hidden in R 4.2.0. R's native
+    interface of Rf_error and Rf_warning has long been preferred.
+- BUG FIXES
+  - .mapply(F, dots, .) no longer segfaults when dots is not a list and uses
+    match.fun(F) as always documented; reported by Andrew Simmons in PR#18164.
+  - hist(<Date>, ...) and hist(<POSIXt>, ...) no longer pass arguments for
+    rect() (such as col and density) to axis(). (Thanks to Sebastian Meyer's
+    PR#18171.)
+  - \Sexpr{ch} now preserves Encoding(ch). (Thanks to report and patch by
+    Jeroen Ooms in PR#18152.)
+  - Setting the RNG to "Marsaglia-Multicarry" e.g., by RNGkind(), now warns in
+    more places, thanks to André Gillibert's report and patch in PR#18168.
+  - gray(numeric(), alpha=1/2) no longer segfaults, fixing PR#18183, reported
+    by Till Krenz.
+  - Fixed dnbinom(x, size=<very_small>, .., log=TRUE) regression, reported by
+    Martin Morgan.
+  - as.Date.POSIXlt(x) now keeps names(x), thanks to Davis Vaughan's report and
+    patch in PR#18188.
+  - model.response() now strips an "AsIs" class typically, thanks to Duncan
+    Murdoch's report and other discussants in PR#18190.
+  - try() is considerably faster in case of an error and long call, as e.g.,
+    from some do.call(). Thanks to Alexander Kaever's suggestion posted to
+    R-devel.
+  - qqline(y = <object>) such as y=I(.), now works, see also PR#18190.
+  - Non-integer mgp par() settings are now handled correctly in axis() and
+    mtext(), thanks to Mikael Jagan and Duncan Murdoch's report and suggestion
+    in PR#18194.
+  - formatC(x) returns length zero character() now, rather than "" when x is of
+    length zero, as documented, thanks to Davis Vaughan's post to R-devel.
+  - removeSource(fn) now retains (other) attributes(fn).
+
 * Tue Aug 18 2021 Shane Sturrock <shane.sturrock@gmail.com> - 4.1.1-1
 - NEW FEATURES
   - require(pkg, quietly = TRUE) is quieter and in particular does not warn if
