@@ -1,11 +1,11 @@
-%define priority 21102
+%define priority 21103
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.11.2
+Version:	2.11.3
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,11 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Mon Nov 08 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.3-1
+- Bind "f" and "b" keystrokes to next feature and previous feature, in addition
+  to "ctrl-f" and "ctrl-b". Also "shift-f" and "shift-b" to next/prev exon, in
+  addition to "ctrl-shift-f/b". Fixes #1046
+
 * Tue Oct 26 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.2-1
 - Bug Fixes
  - zoom slider not working in Firefox and Safari

@@ -1,11 +1,11 @@
-%define priority 1130
+%define priority 1140
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		htslib
-Version:	1.13
+Version:	1.14
 Release:	1%{?dist}
 Summary:	C library for high-throughput sequencing data formats
 
@@ -57,6 +57,9 @@ fi
 %files
 
 %changelog
+* Mon Nov 08 2021 Shane Sturrock <shane.sturrock@gmail.com> - 1.14-1
+- https://github.com/samtools/htslib/releases/tag/1.14
+
 * Tue Jul 20 2021 Shane Sturrock <shane.sturrock@gmail.com> - 1.13-1
 - 1.12 https://github.com/samtools/htslib/releases/tag/1.12
 - 1.13 https://github.com/samtools/htslib/releases/tag/1.13

@@ -5,7 +5,7 @@ fi )
 %define dist .el7.bioit
 
 Name:		bcftools
-Version:	1.13
+Version:	1.14
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -47,6 +47,9 @@ fi
 %files
 
 %changelog
+* Mon Nov 08 2021 Shane Sturrock <shane.sturrock@gmail.com> - 1.14-1
+- https://github.com/samtools/bcftools/releases/tag/1.14
+
 * Tue Jul 20 2021 Shane Sturrock <shane.sturrock@gmail.com> - 1.13-1
 - 1.12 https://github.com/samtools/bcftools/releases/tag/1.12
 - 1.13 https://github.com/samtools/bcftools/releases/tag/1.13
