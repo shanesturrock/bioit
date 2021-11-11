@@ -84,7 +84,7 @@ make install
 # Ensure proj4 package will build by defining this macro
 sed -e '36i#define ACCEPT_USE_OF_DEPRECATED_PROJ_API_H' --in-place /opt/bioit/R-core/${VERSION}/lib64/R/include/proj_api.h
 # Turn on CDN for proj
-sed 's/; network = on/network = on/g' --in-place /opt/bioit/R-core/${VERSION}/lib64/R/include/proj_api.h
+sed 's/; network = on/network = on/g' --in-place /opt/bioit/R-core/${VERSION}/lib64/R/share/proj/proj.ini
 
 echo "Install gdal"
 cd /opt/bioit/R-core/src/R-${VERSION}
