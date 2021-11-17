@@ -1,11 +1,11 @@
-%define priority 22604
+%define priority 22605
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.26.4
+Version:	2.26.5
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,14 @@ fi
 %files
 
 %changelog
+* Wed Nov 17 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.5-1
+- Fixed bug in initialization of ExtractIlluminaBarcodes perfect score array.
+  (#1744)
+- Removed deprecated parameter 'IS_NOVASEQ' from CollectIlluminaLaneMetrics.
+  (#1736)
+- Updated the GKL version to 0.8.8 (#1733)
+- Added validation for existence of .bpm file to CompareGtcFiles (#1743)
+
 * Fri Nov 05 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.4-1
 - Fixed a bug in IlluminaBasecallsToFastq where ADAPTERS_TO_CHECK could not be
   set as a CLP argument. (#1740)

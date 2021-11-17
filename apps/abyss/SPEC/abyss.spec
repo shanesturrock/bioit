@@ -1,11 +1,11 @@
-%define priority 232
+%define priority 233
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.3.2
+Version:	2.3.3
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -95,6 +95,14 @@ fi
 %files
 
 %changelog
+* Wed Nov 17 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.3-1
+- General:
+  - Fixed a contig overlap distance assertion.
+- abyss-rresolver-short:
+  - Multiple read sizes are better handled. E.g. 150 and 151 are processed as
+    one read size.
+  - Updated default parameters.
+
 * Tue Oct 26 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.2-1
 - General:
   - Updated the m parameter and the S and N scaffolding parameters to better
