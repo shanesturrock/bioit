@@ -1,11 +1,11 @@
-%define priority 22605
+%define priority 22606
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.26.5
+Version:	2.26.6
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,16 @@ fi
 %files
 
 %changelog
+* Thu Nov 25 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.6-1
+- Fix error in Picard jar packaging that prevented it from running under Java
+  11. Make the shadowJar multi-release. (#1749)
+- Fix picard doc on java 11 (#1750)
+- Change IlluminaBasecallToFastq to make the parameter ADAPTERS_TO_CHECK to be
+  null by default (#1745)
+  ** Note that this reverts the behavior of IlluminaBasecallsToFastq back to
+  what it was in Picard release 2.26.0 and before.
+- Fix data provider for IlluminaBasecallsToSamTest (#1752)
+
 * Wed Nov 17 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.5-1
 - Fixed bug in initialization of ExtractIlluminaBarcodes perfect score array.
   (#1744)

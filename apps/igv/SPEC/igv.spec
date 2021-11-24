@@ -1,11 +1,11 @@
-%define priority 21103
+%define priority 21104
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.11.3
+Version:	2.11.4
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Thu Nov 25 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.4-1
+- Ignore "f" and "b" keys if no tracks are selected, do not popup dialog.
+
 * Mon Nov 08 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.3-1
 - Bind "f" and "b" keystrokes to next feature and previous feature, in addition
   to "ctrl-f" and "ctrl-b". Also "shift-f" and "shift-b" to next/prev exon, in
