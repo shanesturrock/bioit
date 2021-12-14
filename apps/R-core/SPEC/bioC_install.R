@@ -302,6 +302,12 @@ BiocManager::install(c("GO.db", "preprocessCore"))
 BiocManager::install("methylKit")
 
 install.packages("WGCNA",repos="https://cloud.r-project.org/")
+local({
+  r <- getOption("repos")
+  r["CRAN"] <- "https://cran.stat.auckland.ac.nz/"
+  options(repos = r)
+})
+install.packages("INLA",repos=c(getOption("repos"),INLA="https://inla.r-inla-download.org/R/testing"), dep=TRUE)
 
 library(devtools)
 #### locfdr removed from CRAN so may have to grab source manually to build

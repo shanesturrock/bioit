@@ -95,6 +95,15 @@ cd gdal-3.3.2
 make -j8
 make install
 
+echo "Install gsl"
+cd /opt/bioit/R-core/src/R-${VERSION}
+wget https://ftp.gnu.org/gnu/gsl/gsl-2.7.tar.gz
+tar xvf gsl-2.7.tar.gz
+cd gsl-2.7/
+./configure --prefix=/opt/bioit/R-core/${VERSION}/lib64/R
+make -j8
+make install
+
 echo "Install required packages"
 /opt/bioit/R-core/${VERSION}/bin/Rscript ${HOME}/bioit/apps/R-core/SPEC/bioC_install.R
 echo "Writing module .version to set default"
