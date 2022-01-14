@@ -41,8 +41,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Asad Razzaq"
     username: "arazzaq"
@@ -59,8 +59,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Andre Sim"
     username: "asim"
@@ -73,8 +73,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Bastien Labarrere"
     username: "blabarrere"
@@ -87,8 +87,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Bojian Zhong"
     username: "bzhong"
@@ -101,8 +101,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Chris Winefield"
     username: "cwinefield"
@@ -115,8 +115,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Darrell Lizamore"
     username: "dlizamore"
@@ -129,8 +129,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Daniel Rexin"
     username: "drexin"
@@ -143,8 +143,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Dave Wheeler"
     username: "dwheeler"
@@ -158,8 +158,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Mathias Becker"
     username: "mbecker"
@@ -172,8 +172,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Mauro Truglio"
     username: "mtruglio"
@@ -186,8 +186,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Ngonidzashe Faya"
     username: "nfaya"
@@ -202,8 +202,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Nikolai Kondratev"
     username: "nkondratev"
@@ -217,8 +217,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Nikola Staykov"
     username: "nstaykov"
@@ -231,8 +231,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Saurabh Gupta"
     username: "sgupta"
@@ -246,8 +246,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Tina Sehrish"
     username: "tsehrish"
@@ -261,8 +261,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Sebastian Schmeier"
     username: "sschmeier"
@@ -276,8 +276,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Silvia Schwartz"
     username: "sschwartz"
@@ -290,8 +290,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Susan Thomson"
     username: "sthomson"
@@ -304,8 +304,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Ting-Hsuan Chen"
     username: "thchen"
@@ -318,8 +318,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Tariq Mahmood"
     username: "tmahmood"
@@ -332,8 +332,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Yanni Dong"
     username: "ydong"
@@ -348,8 +348,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Arielle Sulit"
     username: "asulit"
@@ -363,8 +363,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Rama Dhanushkodi"
     username: "rdhanushkodi"
@@ -377,8 +377,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Stephanie Baird"
     username: "sbaird"
@@ -392,8 +392,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Nick Dreisbach"
     username: "ndreisbach"
@@ -407,8 +407,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Roy Storey"
     username: "rstorey"
@@ -422,8 +422,8 @@ bioit_user_list:
     # Comment out shell: to disable account
     shell: "/sbin/nologin"
     # Change state to 'absent' to delete the user account entirely
-    state: present
-    #state: absent
+    #state: present
+    state: absent
     remove: yes
   - name: "Ryan Le Quesne"
     username: "ryanlq"
@@ -449,6 +449,37 @@ bioit_user_list:
       active:
       - "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAzEUUwX9BDsF92s/6tCjyVtx3SP4CuOWjQ4JhPrIAIp7uEdnCqOy4bn3zgyYpBAJDmKd/ZOlH693VlrwGQBpRrGyDC+YD31zldWJZVEDbsgli4PAiVkmn0p/Mjjom/Zj63WIRpfBFfK0mUonHXbokdn4S7FZrBE5zlP7tEqTOmIeNuB+sho0jBUrjqK8IgWOSVo2hjMPqVuv31zrz4mZrC+b+h2/U9pweNCNre0B01aXw3TSZmhAtZ4FHOiAUDVidwy3n7/GgetWMGeRANZX6IIxR6i8+orpck8irpeR8LYBjqYsHL6rb2TQZXJM+8tN+hI3yYLUraNKxIfFGUnLnLagYnOliSbnj4GRTL+O2GfYR95+5e27MhhPY71nAMY/Zx2wW/aGXgKx45XOLuPxQr7V6gMGF2Oa58PfkmL+nBPKM9eHPoAtGbtge5ps0rEcEKlpGa++H5xxQO4hj+KTJrHkac2+KwQkMBZIXdKUF2nj0u70K0oFh3sKwxCSOcG6QZFQu8UjjoeEIK72cAYoACvDEaRWEYCMXjx2BkkkHM0KulXr4wSqBzZsJJCYEr5i9aUw9L9G0xBai9xkxjW31j0sLd5153/6dyQujzcGFixQwop6eeU1taVnXcreagBIYkWnYiKdSbS96s27Ps1M4qSpwSqX0BZv2CUANKL0aF2c= len@noir"
       - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCiTQCZImbzmyTQPGLcVMXYsobRb/JMgEsD3u9W5zuO15g4HOMVF46upf/F0d83TymJzNT/5Usek2j8p1S26rTC2oemKHT3TvNwoDSXgsy43zU24CLQpVD90dvGlaYoO5TbIKXCsEdXR5fpsFZl20rLjEpFDG1TivSfEnfr+CNrd5Rc3oUVyl9DBuldLbEAtsW1+vigsLbkqjZ3xkJsaU/GP9ocnuZOAveotv1rJ1j/vgH5Bw+91sNrQjAMtK1T6z6clEGgA+ePICV45iF60lZmv0RJOr3y1QtY3msGuphxz+URZhpyXkOaDv5dHdEta023+lMm6Mv4FdY5caQCEFcp wayne.wu@realtimegenomics.com"
+    # Comment out shell: to disable account
+    shell: "/sbin/nologin"
+    # Change state to 'absent' to delete the user account entirely
+    state: present
+    #state: absent
+    remove: yes
+  - name: "Dave Ware"
+    username: "david"
+    uid: 10464
+    group: rtgrnd
+    keys:
+      # Change to 'disabled:' to remove the key
+      active:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAzEUUwX9BDsF92s/6tCjyVtx3SP4CuOWjQ4JhPrIAIp7uEdnCqOy4bn3zgyYpBAJDmKd/ZOlH693VlrwGQBpRrGyDC+YD31zldWJZVEDbsgli4PAiVkmn0p/Mjjom/Zj63WIRpfBFfK0mUonHXbokdn4S7FZrBE5zlP7tEqTOmIeNuB+sho0jBUrjqK8IgWOSVo2hjMPqVuv31zrz4mZrC+b+h2/U9pweNCNre0B01aXw3TSZmhAtZ4FHOiAUDVidwy3n7/GgetWMGeRANZX6IIxR6i8+orpck8irpeR8LYBjqYsHL6rb2TQZXJM+8tN+hI3yYLUraNKxIfFGUnLnLagYnOliSbnj4GRTL+O2GfYR95+5e27MhhPY71nAMY/Zx2wW/aGXgKx45XOLuPxQr7V6gMGF2Oa58PfkmL+nBPKM9eHPoAtGbtge5ps0rEcEKlpGa++H5xxQO4hj+KTJrHkac2+KwQkMBZIXdKUF2nj0u70K0oFh3sKwxCSOcG6QZFQu8UjjoeEIK72cAYoACvDEaRWEYCMXjx2BkkkHM0KulXr4wSqBzZsJJCYEr5i9aUw9L9G0xBai9xkxjW31j0sLd5153/6dyQujzcGFixQwop6eeU1taVnXcreagBIYkWnYiKdSbS96s27Ps1M4qSpwSqX0BZv2CUANKL0aF2c= len@noir"
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAwOkpjjRKw5MI1QyJ1U42bHa9fIejdlDjLDN//5YxnAyzc7nOIXXNpCFHAzhIwh0IXvKPk875zwcSg1iQaz3sLTyqMpHJMJLZr/Xa2wJM8PFK5u+KKT+EtC0rEXFgZShwv7oVYUzvUYBJcMipmPnyVPjbKXoMIPFacN71teRZJtSqNrhukm+WNDHTVD6VOh+QFSeSQG8ycToRO0llEbgYroQoOilhC5odZ2qZ2K48C9kHW0NHsNpmJQeg6PQavB44nFw8m5qWIgZxFnqMND8A07hmT23PfBbda7YUgJL3uX4GPclaF9MWHBVK6bEn6bng/1dDTZ43Dxwh1jfX98D5IQ== Dave Ware davidw@netvalue.net.nz"
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCmx/ny1aeg5wtIaeUadoePGWahqcMDjX8Ro38cDgFX4sMrQc8r5sMMEW9urBF9J+nNm//BSP+UcI26fPKHnSpXrCrGqCeHh41KK0PhgylO23UpmaEWu9PwVdXt6FkjA6YrKcTTzHmiJ5hQJbTUG/YnLfdiPgXiArAqNSjMzdj11Fcoei3DiQ3JqaqY026hsxNjMjD4GLRrj7SCy1Tsd9voY5q9gbDbCIhlmXE1fjUqA6max4FPtBbZ9CIVg2lFRYIpQNtAg7o/XT1DJnuhaxpMEQqSuj0okVRueMN5a/51/ljcHVgawgTaJuVHPsxCQbXCqcKTL7xRAiHiHXsuJkRX07Lw3TrmsHzlKPUcJYvxdD6s9PFp0w+6gJbtkAd4FirMBJcKDO6BkPWB4O4864NTnd/07uSNMk8imkvBqeO7+unl+Nz6dru1m3DCfYhrLBfQFjA9Vgbk1g5NNcQS5wdHAcwPAx30ePOtVvU5id7RkxXyUtJrATXlEes8MeVrl7k= david@tinman rtgshare"
+    # Comment out shell: to disable account
+    shell: "/bin/bash"
+    # Change state to 'absent' to delete the user account entirely
+    state: present
+    #state: absent
+    remove: yes
+  - name: "Kurt Gaastra"
+    username: "kurt"
+    uid: 10465
+    group: rtgrnd
+    keys:
+      # Change to 'disabled:' to remove the key
+      active:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAzEUUwX9BDsF92s/6tCjyVtx3SP4CuOWjQ4JhPrIAIp7uEdnCqOy4bn3zgyYpBAJDmKd/ZOlH693VlrwGQBpRrGyDC+YD31zldWJZVEDbsgli4PAiVkmn0p/Mjjom/Zj63WIRpfBFfK0mUonHXbokdn4S7FZrBE5zlP7tEqTOmIeNuB+sho0jBUrjqK8IgWOSVo2hjMPqVuv31zrz4mZrC+b+h2/U9pweNCNre0B01aXw3TSZmhAtZ4FHOiAUDVidwy3n7/GgetWMGeRANZX6IIxR6i8+orpck8irpeR8LYBjqYsHL6rb2TQZXJM+8tN+hI3yYLUraNKxIfFGUnLnLagYnOliSbnj4GRTL+O2GfYR95+5e27MhhPY71nAMY/Zx2wW/aGXgKx45XOLuPxQr7V6gMGF2Oa58PfkmL+nBPKM9eHPoAtGbtge5ps0rEcEKlpGa++H5xxQO4hj+KTJrHkac2+KwQkMBZIXdKUF2nj0u70K0oFh3sKwxCSOcG6QZFQu8UjjoeEIK72cAYoACvDEaRWEYCMXjx2BkkkHM0KulXr4wSqBzZsJJCYEr5i9aUw9L9G0xBai9xkxjW31j0sLd5153/6dyQujzcGFixQwop6eeU1taVnXcreagBIYkWnYiKdSbS96s27Ps1M4qSpwSqX0BZv2CUANKL0aF2c= len@noir"
+      - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKwp1MqWiu6i9ZmAToODFVYAwDzpuMmv6RUB+BvJ8Bdf kurt@oomt"
     # Comment out shell: to disable account
     shell: "/bin/bash"
     # Change state to 'absent' to delete the user account entirely

@@ -16,13 +16,23 @@
 
 # Mounts for MasseyIFS
 - name: Mount for massey-ifs-group scratch
-  mount: state=mounted src=nfs:/scratch/massey-ifs-group path=/scratch/massey-ifs-group fstype=nfs opts="defaults" 
+  mount: state=absent src=nfs:/scratch/massey-ifs-group path=/scratch/massey-ifs-group fstype=nfs opts="defaults"
 
 - name: Mount for massey-ifs-group work
-  mount: state=mounted src=nfs:/work/massey-ifs-group path=/work/massey-ifs-group fstype=nfs opts="defaults"
+  mount: state=absent src=nfs:/work/massey-ifs-group path=/work/massey-ifs-group fstype=nfs opts="defaults"
 
 - name: Mount for massey-ifs-group sequencing
-  mount: state=mounted src=nfs:/sequencing/massey-ifs-group path=/sequencing/massey-ifs-group fstype=nfs opts="defaults"
+  mount: state=absent src=nfs:/sequencing/massey-ifs-group path=/sequencing/massey-ifs-group fstype=nfs opts="defaults"
+
+# Mounts for RTG R&D
+- name: Mount for rtgrnd scratch
+  mount: state=mounted src=nfs:/scratch/rtgrnd path=/scratch/rtgrnd fstype=nfs opts="defaults"
+
+- name: Mount for rtgrnd work
+  mount: state=mounted src=nfs:/work/rtgrnd path=/work/rtgrnd fstype=nfs opts="defaults"
+
+- name: Mount for rtgrnd sequencing
+  mount: state=mounted src=nfs:/sequencing/rtgrnd path=/sequencing/rtgrnd fstype=nfs opts="defaults"
 
 # Create symlinks
 
