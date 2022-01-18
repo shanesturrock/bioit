@@ -1,11 +1,11 @@
-%define priority 21104
+%define priority 21109
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.11.4
+Version:	2.11.9
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,19 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Wed Jan 19 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.9-1
+- 2.11.9
+  - Excluding Log4J from dependencies packaged into the bundles. Previous
+    commit did not get this right...
+- 2.11.8
+  - temp removal of circview contents
+- 2.11.7
+  - prefs update
+- 2.11.6
+  - Updated to Log4J 2.16.0 libraries. This is to address the Log4Shell bug.
+- 2.11.5
+  - Apply port listener preference changes immediately
+
 * Thu Nov 25 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.4-1
 - Ignore "f" and "b" keys if no tracks are selected, do not popup dialog.
 

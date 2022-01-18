@@ -1,11 +1,11 @@
-%define priority 2180
+%define priority 2211
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.18.0
+Version:	2.21.1
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,23 @@ fi
 %files
 
 %changelog
+* Wed Jan 19 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.1-1
+- 2.21.1
+  - Fix dereplication with empty input file
+- 2.21.0
+  - New sample, qsegout and tsegout options + UDB with uchime_ref
+- 2.20.1
+  - Fix hang in fastq_mergepairs with multiple threads.
+- 2.20.0
+  - Added the fastx_uniques command and the fastq_qout_max option for
+    dereplication of FASTQ files. 
+  - Some code cleaning.
+- 2.19.0
+  - Added the lcaout and lca_cutoff options to enable the output of last common
+    ancestor (LCA) information about hits when searching. 
+  - The randseed option was added as a valid option to the sintax command. 
+  - Code improvements
+
 * Thu Sep 02 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.18.0-1
 - Added the fasta2fastq command. 
 - Fixed search bug on ppc64le. 

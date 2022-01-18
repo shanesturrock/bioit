@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2440
+%define priority 2450
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.4.4
+Version:	2.4.5
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,34 @@ fi
 %files
 
 %changelog
+* Wed Jan 19 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.5-1
+- bowtie2
+  - Fixed issues with bowtie2 BAM parser that would cause bowtie2 to crash when
+    processing input that was encoded with tools other than samtools e.g.
+    Picard.
+  - Fixed an issue causing bowtie2 to drop certain optional fields when when
+    aligning BAM reads with the --preserve-tags option.
+  - Fixed an issue causing bowtie2 to produce mangled SAM output when
+    specifying --sam-append-comment together with the --passthrough option.
+  - Appended GO:query to SAM @HD entry to indicate that reads are grouped by
+    query name, bump SAM version to 1.5 to indicate support for this change.
+- bowtie2-build
+  - Implemented thread pool to address performance regressions introduced
+    during the switch to C++11 threads.
+  - Fixed an issue causing masked-sequence metadata to be omitted from index.
+    This issue would subsequently result in sequence data, @SQ, being left out
+    from alignment SAM header.
+  - Included .tmp extension to index files currenlty being built. The extension
+    is removed only upon successful build. This change seeks to address the
+    assumption that bowtie2-build ran successfully without building the reverse
+    indexes.
+  - Fixed an issue causing bowtie2-build to sometimes incorrectly calculate
+    input size. This issue would result in the wrong index type being chosen
+    and only happened with GZip compressed files.
+- bowtie2-inspect
+  - Added a new -o/--output option to save the output of bowtie2-inspect to a
+    file instead of being dumped to standard output.
+
 * Fri Jul 02 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.4-1
 - 2.4.3
   - Replaced TBB concurrency with C++ threads

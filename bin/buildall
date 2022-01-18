@@ -3,15 +3,15 @@
 # This script builds all tools automatically.
 # The versions are known to work.
 
-${HOME}/bioit/apps/abyss/SPEC/build 2.3.3
+${HOME}/bioit/apps/abyss/SPEC/build 2.3.4
 ${HOME}/bioit/apps/augustus/SPEC/build 3.4.0
 ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.2
-${HOME}/bioit/apps/bbmap/SPEC/build 38.94
+${HOME}/bioit/apps/bbmap/SPEC/build 38.95
 ${HOME}/bioit/apps/bcftools/SPEC/build 1.14
 ${HOME}/bioit/apps/bedtools2/SPEC/build 2.30.0
 ${HOME}/bioit/apps/bismark/SPEC/build 0.23.1
 ${HOME}/bioit/apps/bowtie/SPEC/build 1.3.1
-${HOME}/bioit/apps/bowtie2/SPEC/build 2.4.4
+${HOME}/bioit/apps/bowtie2/SPEC/build 2.4.5
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
 ${HOME}/bioit/apps/cutadapt/SPEC/build 3.5
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
@@ -20,10 +20,10 @@ ${HOME}/bioit/apps/gvcftools/SPEC/build 0.17.0
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.2.1
 ${HOME}/bioit/apps/hmmer/SPEC/build 3.3.2
 ${HOME}/bioit/apps/htslib/SPEC/build 1.14
-${HOME}/bioit/apps/igv/SPEC/build 2.11.4
+${HOME}/bioit/apps/igv/SPEC/build 2.11.9
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.12.0+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
-${HOME}/bioit/apps/picard/SPEC/build 2.26.6
+${HOME}/bioit/apps/picard/SPEC/build 2.26.10
 ${HOME}/bioit/apps/R-core/SPEC/build 4.1.2
 ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.12.1
 ${HOME}/bioit/apps/samtools/SPEC/build 1.14
@@ -33,4 +33,4 @@ ${HOME}/bioit/apps/stringtie/SPEC/build 2.2.0
 ${HOME}/bioit/apps/tophat/SPEC/build 2.1.1
 ${HOME}/bioit/apps/vcftools/SPEC/build 0.1.16
 ${HOME}/bioit/apps/velvet/SPEC/build 1.2.10
-${HOME}/bioit/apps/vsearch/SPEC/build 2.18.0
+${HOME}/bioit/apps/vsearch/SPEC/build 2.21.1

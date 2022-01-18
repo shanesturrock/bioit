@@ -1,11 +1,11 @@
-%define priority 22606
+%define priority 22610
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.26.6
+Version:	2.26.10
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,18 @@ fi
 %files
 
 %changelog
+* Wed Jan 19 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.10-1
+- 2.26.10
+  - Update log4j to v2.17.1
+- 2.26.9
+  - Update log4j to v2.17
+- 2.26.8
+  - Update Log4J to v2.16.0
+- 2.26.7
+  - Upgrade Barclay. (#1760)
+  - Update log4j version 2.15 to address CVE-2021-44228
+  - Clarified comment for purpose of GatherVcfs (#1758)
+
 * Thu Nov 25 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.6-1
 - Fix error in Picard jar packaging that prevented it from running under Java
   11. Make the shadowJar multi-release. (#1749)

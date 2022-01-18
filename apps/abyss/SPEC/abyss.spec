@@ -1,11 +1,11 @@
-%define priority 233
+%define priority 234
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.3.3
+Version:	2.3.4
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -95,6 +95,15 @@ fi
 %files
 
 %changelog
+* Wed Jan 19 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.4-1
+- General:
+  - Dropped support for gcc5 due to lack of support for more recent C++
+    features.
+- abyss-rresolver-short:
+  - Reduced memory consumption.
+  - Better calculation of read size proportions in the input dataset.
+  - Increased max read read size allowed.
+
 * Wed Nov 17 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.3-1
 - General:
   - Fixed a contig overlap distance assertion.
