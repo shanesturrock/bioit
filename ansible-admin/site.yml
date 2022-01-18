@@ -67,6 +67,17 @@
   handlers:
     - include: handlers/slurm.yml
 
+- name: Setup docker
+  hosts: docker-nodes
+  gather_facts: yes
+  tags: ['docker']
+  become: true
+  tasks:
+    # Primary docker install
+    - include: tasks/docker.yml
+    # Add docker group to users where apropriate
+    - include: tasks/docker-enable-users.yml
+
 - name: Setup bioit-repo
   hosts: slurm-compute-nodes slurm-submit-hosts
   gather_facts: yes

@@ -1,0 +1,44 @@
+# Script a little of the munge/slurm configuration setup.
+- name: Remove docker if installed from CentOS repo
+  yum:
+    name: "{{ item }}"
+    state: removed
+  with_items:
+    - docker
+    - docker-client
+    - docker-client-latest
+    - docker-common
+    - docker-latest
+    - docker-latest-logrotate
+    - docker-logrotate
+    - docker-engine
+  tags: ['docker']
+
+- name: Install yum utils
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+  tags: ['docker']
+
+- name: Add Docker repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+  tags: ['docker']
+
+- name: Install Docker
+  yum:
+    name: docker-ce
+    state: latest
+  tags: ['docker']
+
+- name: Start Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+  tags: ['docker']

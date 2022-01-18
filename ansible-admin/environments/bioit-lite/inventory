@@ -34,6 +34,13 @@ bioit+rtgwork
 # Currently just user/group account created for quota application on NFS exports
 bioit+nfs
 
+[docker-nodes:children]
+# Any nodes that will have docker installed
+bioit-login-hosts
+slurm-submit-hosts
+slurm-compute-nodes
+other-vms
+
 [vms:children]
 slurm-controllers
 slurm-compute-nodes

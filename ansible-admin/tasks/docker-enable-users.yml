@@ -1,0 +1,10 @@
+# This task is only called on hosts that should be docker enabled
+- name: Add users to docker group
+  user:
+    name: "{{ item.username }}"
+    groups: "docker"
+    append: yes
+  with_items:
+    - "{{ bioit_user_list + bioit_user_list }}"
+  when: item.state != "absent"
+
