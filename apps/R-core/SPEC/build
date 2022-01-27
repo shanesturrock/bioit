@@ -95,6 +95,25 @@ cd gdal-3.3.2
 make -j8
 make install
 
+echo "Install nlopt"
+cd /opt/bioit/R-core/src/R-${VERSION}
+wget https://github.com/stevengj/nlopt/archive/refs/tags/v2.7.1.tar.gz
+tar xvf v2.7.1.tar.gz
+cd nlopt-2.7.1
+mkdir build
+cd build
+cmake3 ..
+# Change destination directory for install
+sed "s+set(CMAKE_INSTALL_PREFIX \"/usr/local\")+set(CMAKE_INSTALL_PREFIX \"/opt/bioit/R-core/${VERSION}/lib64/R\")+g" --in-place cmake_install.cmake
+# Delete swig line since it isn't used by R
+sed "/swig/d" --in-place cmake_install.cmake
+# Create symlink lib64 if absent back to lib so ldconfig works
+if [ ! -L /opt/bioit/R-core/${VERSION}/lib64/R/lib64 ]; then
+  ln -s /opt/bioit/R-core/${VERSION}/lib64/R/lib /opt/bioit/R-core/${VERSION}/lib64/R/lib64
+fi
+# build and install
+make install
+
 echo "Install required packages"
 /opt/bioit/R-core/${VERSION}/bin/Rscript ${HOME}/bioit/apps/R-core/SPEC/bioC_install.R
 echo "Writing module .version to set default"
