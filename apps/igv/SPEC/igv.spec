@@ -1,11 +1,11 @@
-%define priority 21109
+%define priority 21200
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.11.9
+Version:	2.12.0
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Thu Feb 03 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.12.0-1
+- bug fix -- cytoband "red box" does not move.
+
 * Wed Jan 19 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.11.9-1
 - 2.11.9
   - Excluding Log4J from dependencies packaged into the bundles. Previous
