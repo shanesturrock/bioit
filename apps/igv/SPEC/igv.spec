@@ -1,11 +1,11 @@
-%define priority 21200
+%define priority 21202
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.12.0
+Version:	2.12.2
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,15 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Feb 18 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.12.2-1
+- 2.12.2
+  - Disable "feature jumping" from annotation tracks when typing gene name in
+    search text field. Otherwise, genes containing "f" or "r" will cause an
+    unwanted feature jump.
+- 2.12.1
+  - Account for data range thresholding when coloring coverage tracks by allele
+    fractions -- fixes #1100
+
 * Thu Feb 03 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.12.0-1
 - bug fix -- cytoband "red box" does not move.
 
