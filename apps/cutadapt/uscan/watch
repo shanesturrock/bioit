@@ -1,3 +1,4 @@
 version=3
-https://github.com/marcelm/cutadapt/releases .*/v([\d\.]*).tar.gz
+https://github.com/marcelm/cutadapt/tags .*/v([\d\.]*).tar.gz
+#https://github.com/marcelm/cutadapt/tags .*/v(.+).tar.gz
 #https://github.com/marcelm/cutadapt/releases .*/v(.+).tar.gz
