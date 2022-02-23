@@ -1,11 +1,11 @@
-%define priority 3500
+%define priority 3600
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	3.5
+Version:	3.6
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,16 @@ fi
 %files
 
 %changelog
+* Wed Feb 23 2022 Shane Sturrock <shane.sturrock@gmail.com> - 3.6-1
+- Add {match_sequence}} to the placeholders that --rename accepts. This allows
+  to add the sequence matching an adapter (including errors) to the read
+  header. An empty string is inserted if there is no match.
+- Windows wheels are now available on PyPI. That is, pip install will no longer
+  attempt to compile things, but just install a pre-compiled binary.
+- Clarify in documentation and error messages that anchored adapters need to
+  match in full and that therefore setting an explict minimum overlap
+  (min_overlap=, o=) for them is not possible.
+
 * Fri Oct 01 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.5-1
 - Add support for dumping statistics in JSON format using --json.
 - Add a “Read fate breakdown” section heading to the report, and also add

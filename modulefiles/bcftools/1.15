@@ -1,0 +1,6 @@
+#%Module 1.0
+#
+#  bcftools module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/bcftools/1.15/bin
+prepend-path  MANPATH           /opt/bioit/bcftools/1.15/share/man
