@@ -1,11 +1,11 @@
-%define priority 3600
+%define priority 3700
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	3.6
+Version:	3.7
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,9 @@ fi
 %files
 
 %changelog
+* Fri Feb 25 2022 Shane Sturrock <shane.sturrock@gmail.com> - 3.7-1
+- Avoid auto-numbering the two components of a linked adapter
+
 * Wed Feb 23 2022 Shane Sturrock <shane.sturrock@gmail.com> - 3.6-1
 - Add {match_sequence}} to the placeholders that --rename accepts. This allows
   to add the sequence matching an adapter (including errors) to the read

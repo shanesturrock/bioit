@@ -1,11 +1,11 @@
-%define priority 22610
+%define priority 22611
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.26.10
+Version:	2.26.11
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,13 @@ fi
 %files
 
 %changelog
+* Fri Feb 25 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.11-1
+- In GtcToVcf, set infinite values to missing ('.') in the VCF. (#1777)
+- Correct logic to have ExtractBarcodesProgram properly match for all Ns
+  (#1775)
+- Cluster Visualization Python Script (#1701)
+- Detect worker thread exception sooner, and stop other workers. (#1772)
+
 * Wed Jan 19 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.10-1
 - 2.26.10
   - Update log4j to v2.17.1

@@ -13,7 +13,7 @@ ${HOME}/bioit/apps/bismark/SPEC/build 0.23.1
 ${HOME}/bioit/apps/bowtie/SPEC/build 1.3.1
 ${HOME}/bioit/apps/bowtie2/SPEC/build 2.4.5
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
-${HOME}/bioit/apps/cutadapt/SPEC/build 3.6
+${HOME}/bioit/apps/cutadapt/SPEC/build 3.7
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
 ${HOME}/bioit/apps/FastQC/SPEC/build 0.11.9
 ${HOME}/bioit/apps/gvcftools/SPEC/build 0.17.0
@@ -23,7 +23,7 @@ ${HOME}/bioit/apps/htslib/SPEC/build 1.15
 ${HOME}/bioit/apps/igv/SPEC/build 2.12.2
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.12.0+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
-${HOME}/bioit/apps/picard/SPEC/build 2.26.10
+${HOME}/bioit/apps/picard/SPEC/build 2.26.11
 ${HOME}/bioit/apps/R-core/SPEC/build 4.1.2
 ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.12.1
 ${HOME}/bioit/apps/samtools/SPEC/build 1.15
