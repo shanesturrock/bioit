@@ -20,7 +20,7 @@ ${HOME}/bioit/apps/gvcftools/SPEC/build 0.17.0
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.2.1
 ${HOME}/bioit/apps/hmmer/SPEC/build 3.3.2
 ${HOME}/bioit/apps/htslib/SPEC/build 1.15
-${HOME}/bioit/apps/igv/SPEC/build 2.12.2
+${HOME}/bioit/apps/igv/SPEC/build 2.12.3
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.12.0+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
 ${HOME}/bioit/apps/picard/SPEC/build 2.26.11

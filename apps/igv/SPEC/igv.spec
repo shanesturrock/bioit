@@ -1,11 +1,11 @@
-%define priority 21202
+%define priority 21203
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.12.2
+Version:	2.12.3
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Fri Mar 11 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.12.3-1
+- Enable port by default
+
 * Fri Feb 18 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.12.2-1
 - 2.12.2
   - Disable "feature jumping" from annotation tracks when typing gene name in
