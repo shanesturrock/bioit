@@ -1,11 +1,11 @@
-%define priority 2120
+%define priority 2130
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		ncbi-blast
-Version:	2.12.0+
+Version:	2.13.0+
 Release:	1%{?dist}
 Summary:	BLAST+ is a suite of command-line tools to run BLAST
 Group:		Applications/Engineering
@@ -60,6 +60,24 @@ fi
 %files
 
 %changelog
+* Fri Mar 25 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.0+-1
+- New features
+  - Blastn_vdb and tblastn_vdb included in the 2.13.0 release.
+  - Makeblastdb now produces a (JSON) metadata file about the database. This
+    makes BLAST databases more Findable in the FAIR sense. See here for
+    details.
+- Improvements
+  - TBLASTN can now handle database sequences up to 2 billion bases (was 1
+    billion)
+  - Makeblastdb default volume size is now 3 billion bases (was 1 billion)
+  - Dustmasker has a new option to replace low complexity regions with N's
+    (hard masking)
+  - Makeblastdb will issue an error message and exit if it encounters a
+    sequence longer than the maximum supported size (2,147,483,647 letters).
+- Bug fixes
+  - Rare problem with mutex that caused BLAST to crash.
+  - Memory leaks.
+
 * Fri Jul 02 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.12.0+-1
 - New features
   - Threading by query batch (for BLASTN, BLASTP, BLASTX, RPSBLAST, and
