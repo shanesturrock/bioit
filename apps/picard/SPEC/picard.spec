@@ -1,11 +1,11 @@
-%define priority 22611
+%define priority 22700
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.26.11
+Version:	2.27.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,11 @@ fi
 %files
 
 %changelog
+* Thu Apr 07 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.27.0-1
+- Upgrade google-cloud-nio to match gatk (#1792)
+- Add support for documentation generation for metrics classes. (#1782)
+- Simplify handling of paths for input in BuildBamIndex.java (#1787)
+
 * Fri Feb 25 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.26.11-1
 - In GtcToVcf, set infinite values to missing ('.') in the VCF. (#1777)
 - Correct logic to have ExtractBarcodesProgram properly match for all Ns
