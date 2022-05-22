@@ -1,11 +1,11 @@
-%define priority 3700
+%define priority 4000
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	3.7
+Version:	4.0
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,20 @@ fi
 %files
 
 %changelog
+* Mon May 23 2022 Shane Sturrock <shane.sturrock@gmail.com> - 4.0-1
+- The alignment algorithm was tweaked to penalize indels more and to more
+  accurately pick the leftmost adapter occurrence if there are multiple. This
+  will normally affect very few reads, but should generally lead to fewer
+  surprising results in cases where it matters. Because this changes trimming
+  results, it was appropriate to bump the major version to 4.
+- Print an error when an output file was specified multiple times (for example,
+  for --untrimmed-output and --too-short-output). Sending output from different
+  filters to the same file is not supported at the moment.
+- When -e was used with an absolute number of errors and there were N wildcards
+  in the sequence, the actual number of allowed errors was too low.
+- Speed up quality trimming (both -q and --nextseq-trim) somewhat.
+- Python 3.6 is no longer supported as it is end-of-life.
+
 * Fri Feb 25 2022 Shane Sturrock <shane.sturrock@gmail.com> - 3.7-1
 - Avoid auto-numbering the two components of a linked adapter
 

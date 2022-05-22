@@ -27,7 +27,7 @@ mv v${VERSION}.tar.gz cutadapt-${VERSION}.tar.gz
 tar xvf cutadapt-${VERSION}.tar.gz
 # Actual install is done from pip in venv
 mkdir -p /opt/bioit/cutadapt/${VERSION}
-python3 -m venv /opt/bioit/cutadapt/${VERSION}/venv
+/opt/rh/rh-python38/root/usr/bin/python -m venv /opt/bioit/cutadapt/${VERSION}/venv
 # Need to upgrade pip for install to work
 /opt/bioit/cutadapt/${VERSION}/venv/bin/pip3 install --upgrade pip
 /opt/bioit/cutadapt/${VERSION}/venv/bin/pip3 install cutadapt==${VERSION}
