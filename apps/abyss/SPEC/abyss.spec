@@ -1,11 +1,11 @@
-%define priority 234
+%define priority 235
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.3.4
+Version:	2.3.5
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -95,6 +95,11 @@ fi
 %files
 
 %changelog
+* Thu Jun 02 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.5-1
+- General:
+  - Fixed compile errors when using the -DNDEBUG flag.
+  - Removed deprecated C++ features.
+
 * Wed Jan 19 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.4-1
 - General:
   - Dropped support for gcc5 due to lack of support for more recent C++

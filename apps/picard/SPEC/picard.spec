@@ -1,11 +1,11 @@
-%define priority 22701
+%define priority 22702
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.27.1
+Version:	2.27.2
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,10 @@ fi
 %files
 
 %changelog
+* Thu Jun 02 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.27.2-1
+- Update command line parser argument style detection, add tests. (#1785)
+- Convert FastqToSam and RevertSam to use PicardHtsPath (#1794)
+
 * Wed May 11 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.27.1-1
 - Add a new interval list scatter mode (#1786)
 
