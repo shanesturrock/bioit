@@ -1,11 +1,11 @@
-%define priority 4000
+%define priority 4100
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	4.0
+Version:	4.1
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,20 @@ fi
 %files
 
 %changelog
+* Thu Jun 09 2022 Shane Sturrock <shane.sturrock@gmail.com> - 4.1-1
+- You can now combine reading adapter sequences from an external file with the
+  search parameter notation. For example, -a
+  "file:adapters.fasta;min_overlap=5" sets the minimum overlap to 5 for all
+  adapters in adapters.fasta.
+- When reading 5’ adapters from an external file, they can now all be anchored
+  by using the syntax -g ^file:adapters.fasta (note the ^ before file:).
+- Finding the rightmost 5’ adapter occurrence is now supported by using the
+  rightmost search parameter (the default is to find the leftmost occurrence).
+- Fix linked adapter statistics for 5’ and 3’ end not being reported separated
+  correctly.
+- Report correct number of quality-trimmed bases when both -q and
+  --nextseq-trim are used.
+
 * Mon May 23 2022 Shane Sturrock <shane.sturrock@gmail.com> - 4.0-1
 - The alignment algorithm was tweaked to penalize indels more and to more
   accurately pick the leftmost adapter occurrence if there are multiple. This
