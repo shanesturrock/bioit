@@ -72,7 +72,8 @@ fi
     BLIS (after OpenBLAS but before ATLAS). And on macOS, the Accelerate
     framework (after ATLAS). (This is patterned after the AX_BLAS macro from the
     Autoconf Archive.)
-  - The included LAPACK sources have been updated to 3.10.1.  UTILITIES:
+  - The included LAPACK sources have been updated to 3.10.1.  
+- UTILITIES:
   - The (full path to) the command tidy to be used for HTML validation can be
     set by environment variable R_TIDYCMD.
   - Setting environment variable _R_CHECK_RD_VALIDATE_RD2HTML_ to a false value
@@ -90,8 +91,7 @@ fi
   - tk_choose.files() with multi = FALSE misbehaved on paths containing spaces
     (PR#18334) (regression introduced in R 4.0.0).
   - sort(x, partial = ind, *) now works correctly notably for the non-default
-    na.last
-  - FALSE or TRUE, fixing PR#18335 reported by James Edwards.
+    na.last FALSE or TRUE, fixing PR#18335 reported by James Edwards.
   - Environment variable _R_CHECK_XREFS_REPOSITORIES_ is only used for checking
     ‘.Rd’ cross-references in R CMD check (as documented) and not for other uses
     looking for a cran mirror.
