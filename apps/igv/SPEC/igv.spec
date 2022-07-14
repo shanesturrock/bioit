@@ -1,11 +1,11 @@
-%define priority 21301
+%define priority 21302
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.13.1
+Version:	2.13.2
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Thu Jul 14 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.2-1
+- Adjust feature query window expansion optimization to fix sashimi plot
+
 * Wed Jul 06 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.1-1
 - Apply "group by" menu option to selected alignment track only, not all
   alignment tracks.
