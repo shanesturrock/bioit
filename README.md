@@ -1,4 +1,4 @@
-CentOS 7 [BioIT](https://realtimegenomics.github.io/bioit/) Tools Repo Contents
+CentOS 7 [BioIT](https://shanesturrock.github.io/bioit/) Tools Repo Contents
 ==================================
 ## apps
 Contains tests, watch scripts, and spec files for each tool we support
@@ -9,4 +9,4 @@ Files for setting up a local bioit repository
 ## modulefiles
 Environment modules files for all packages
 ## docs
-Contains the markdown version for the github pages which can be found [here](https://realtimegenomics.github.io/bioit/)
+Contains the markdown version for the github pages which can be found [here](https://shanesturrock.github.io/bioit/)
