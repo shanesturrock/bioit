@@ -1,0 +1,21 @@
+#!/bin/bash
+
+script_dir="$(dirname $(readlink -f $0))"
+
+# Create install location (requires sudo)
+sudo sh -c "echo 'export MODULEPATH=/opt/bioit/modulefiles:/usr/share/Modules/modulefiles:/etc/modulefiles' > /etc/profile.d/bioit.sh"
+sudo mkdir /opt/bioit
+sudo chown build:build /opt/bioit
+# Copy module files and repository files
+#ln -s ~/bioit/modulefiles /opt/bioit
+mkdir /opt/bioit/modulefiles
+cd /opt/bioit/modulefiles
+mkdir abyss augustus bamtools bbmap bcftools bedtools2 bismark bowtie bowtie2 bwa cutadapt ea-utils FastQC gvcftools hisat2 hmmer htslib igv ncbi-blast nxtrim picard R rtg-tools samtools SOAPdenovo2 SolexaQA++ stringtie tophat vcftools velvet vsearch
+mkdir -p /opt/bioit/repo/RPMS
+ln -s ~/bioit/repo/bioit.xml /opt/bioit/repo/bioit.xml
+# Create all directories for packages
+cd /opt/bioit
+mkdir -p abyss/src augustus/src bamtools/src bbmap/src bcftools/src bedtools2/src bismark/src bowtie/src \
+  bowtie2/src bwa/src cutadapt/src ea-utils/src FastQC/src gvcftools/src hisat2/src hmmer/src htslib/src igv/src \
+  ncbi-blast/src nxtrim/src picard/src R-core/src rtg-tools/src samtools/src SOAPdenovo2/src \
+  SolexaQA++/src stringtie/src tophat/src vcftools/src velvet/src vsearch/src
