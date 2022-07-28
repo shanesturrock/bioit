@@ -106,11 +106,7 @@ Create a build user account with admin rights which will be used to do tool upda
     passwd build
     usermod -aG wheel build
 
-Since this user will be used for the BioIT repo, change the permissions on the home directory from the default 700 to 755 using the following:
-
-    chmod 755 /home/build
-
-Also, add the following to the build user's `.bashrc` file to make building tools nicer:
+Add the following to the build user's `.bashrc` file to make building tools nicer:
 
     alias buildrepo="cd /opt/bioit/repo ; createrepo . -g bioit.xml --database"
     alias cleanbuild="rm -rf /home/build/rpmbuild/SPECS/* \
