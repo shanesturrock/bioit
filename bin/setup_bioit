@@ -12,7 +12,7 @@ mkdir /opt/bioit/modulefiles
 cd /opt/bioit/modulefiles
 mkdir abyss augustus bamtools bbmap bcftools bedtools2 bismark bowtie bowtie2 bwa cutadapt ea-utils FastQC gvcftools hisat2 hmmer htslib igv ncbi-blast nxtrim picard R rtg-tools samtools SOAPdenovo2 SolexaQA++ stringtie tophat vcftools velvet vsearch
 mkdir -p /opt/bioit/repo/RPMS
-ln -s ~/bioit/repo/bioit.xml /opt/bioit/repo/bioit.xml
+cp ~/bioit/repo/bioit.xml /opt/bioit/repo/bioit.xml
 # Create all directories for packages
 cd /opt/bioit
 mkdir -p abyss/src augustus/src bamtools/src bbmap/src bcftools/src bedtools2/src bismark/src bowtie/src \
