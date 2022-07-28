@@ -8,8 +8,8 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 
 Install the latest Rstudio Server using the following:
 
-    wget https://download2.rstudio.org/server/centos7/x86_64/rstudio-server-rhel-1.4.1717-x86_64.rpm
-    sudo yum install rstudio-server-rhel-1.4.1717-x86_64.rpm
+    wget https://download2.rstudio.org/server/centos7/x86_64/rstudio-server-rhel-2022.02.3-492-x86_64.rpm
+    sudo yum install rstudio-server-rhel-2022.02.3-492-x86_64.rpm
 
 Open firewall port to allow this to work:
 
