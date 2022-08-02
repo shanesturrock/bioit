@@ -1,12 +1,16 @@
+set -e;
 BT=${BT-/bin/bedtools}
+FAILURES=0;
+
 check()
 {
 	if diff $1 $2; then
     	echo ok
-		return 1
+
 	else
-    	echo fail
-		return 0
+    	FAILURES=$(expr $FAILURES + 1);
+		echo fail
+
 	fi
 }
 
@@ -14,48 +18,49 @@ check()
 ###########################################################
 # test basic shuffle
 ###########################################################
-echo "    shuffle.t1...\c"
+echo -e "    shuffle.t1...\c"
 echo \
-"chr20	61832106	61832574	trf	789
-chr6	115569999	115570172	trf	346
-chr12	19014188	19014428	trf	434
-chrX	149678273	149678495	trf	273
-chr13	6248722	6248899	trf	187
-chr4	35820891	35821056	trf	199
-chr6	169069340	169069478	trf	242
-chr1	222543425	222543460	trf	70
-chr1	48470369	48470466	trf	79
-chr14	64011984	64012025	trf	73" > exp
+"chr3	192943497	192943965	trf	789
+chr4	13668420	13668593	trf	346
+chr1	114076345	114076585	trf	434
+chr13	99270316	99270538	trf	273
+chr7	64692734	64692911	trf	187
+chr3	160795229	160795394	trf	199
+chr11	112718526	112718664	trf	242
+chr10	84388736	84388771	trf	70
+chr15	74373271	74373368	trf	79
+chr7	100517230	100517271	trf	73" > exp
 $BT shuffle -seed 42 -i simrep.bed  \
             -g ../genomes/human.hg19.genome | head > obs
 check obs exp
 rm obs exp
 
+
 ###########################################################
 # test basic shuffle with -incl (choose intervals randomly)
 ###########################################################
-echo "    shuffle.t2...\c"
+echo -e "    shuffle.t2...\c"
 echo \
-"chr1	2815874	2816342	trf	789
-chr1	529762	529935	trf	346
-chr3	451246	451486	trf	434
-chr1	3354492	3354714	trf	273
-chr4	323049	323226	trf	187
-chr1	2274273	2274438	trf	199
-chr2	108019	108157	trf	242
-chr1	4924467	4924502	trf	70
-chr1	4623059	4623156	trf	79
-chr5	247430	247471	trf	73
-chr1	4156954	4156986	trf	64
-chr2	395802	395907	trf	149
-chr1	2964641	2964679	trf	58
-chr4	287685	288155	trf	278
-chr2	489835	490305	trf	339
-chr3	719832	720260	trf	202
-chr1	4463477	4463520	trf	59
-chr5	180120	180160	trf	62
-chr1	3459259	3459294	trf	52
-chr1	4647380	4647557	trf	302" > exp
+"chr3	494824	495292	trf	789
+chr3	155662	155835	trf	346
+chr5	978428	978668	trf	434
+chr2	566144	566366	trf	273
+chr1	2524257	2524434	trf	187
+chr1	974662	974827	trf	199
+chr3	511406	511544	trf	242
+chr4	372392	372427	trf	70
+chr3	252210	252307	trf	79
+chr1	429351	429392	trf	73
+chr3	637074	637106	trf	64
+chr1	3632329	3632434	trf	149
+chr1	1405460	1405498	trf	58
+chr1	4587372	4587842	trf	278
+chr3	813140	813610	trf	339
+chr3	831383	831811	trf	202
+chr3	177788	177831	trf	59
+chr1	140167	140207	trf	62
+chr3	642846	642881	trf	52
+chr1	2627907	2628084	trf	302" > exp
 $BT shuffle -incl incl.bed -seed 42 -i simrep.bed  \
             -g ../genomes/human.hg19.genome | head -20 > obs
 check obs exp
@@ -64,28 +69,28 @@ rm obs exp
 ##############################################################
 # test basic shuffle with -incl (choose chroms randomly first)
 ##############################################################
-echo "    shuffle.t3...\c"
+echo -e "    shuffle.t3...\c"
 echo \
-"chr1	2815874	2816342	trf	789
-chr1	529762	529935	trf	346
-chr3	451246	451486	trf	434
-chr1	3354492	3354714	trf	273
-chr4	323049	323226	trf	187
-chr1	2274273	2274438	trf	199
-chr2	108019	108157	trf	242
-chr1	4924467	4924502	trf	70
-chr1	4623059	4623156	trf	79
-chr5	247430	247471	trf	73
-chr1	4156954	4156986	trf	64
-chr2	395802	395907	trf	149
-chr1	2964641	2964679	trf	58
-chr4	287685	288155	trf	278
-chr2	489835	490305	trf	339
-chr3	719832	720260	trf	202
-chr1	4463477	4463520	trf	59
-chr5	180120	180160	trf	62
-chr1	3459259	3459294	trf	52
-chr1	4647380	4647557	trf	302" > exp
+"chr3	494824	495292	trf	789
+chr3	155662	155835	trf	346
+chr5	978428	978668	trf	434
+chr2	566144	566366	trf	273
+chr1	2524257	2524434	trf	187
+chr1	974662	974827	trf	199
+chr3	511406	511544	trf	242
+chr4	372392	372427	trf	70
+chr3	252210	252307	trf	79
+chr1	429351	429392	trf	73
+chr3	637074	637106	trf	64
+chr1	3632329	3632434	trf	149
+chr1	1405460	1405498	trf	58
+chr1	4587372	4587842	trf	278
+chr3	813140	813610	trf	339
+chr3	831383	831811	trf	202
+chr3	177788	177831	trf	59
+chr1	140167	140207	trf	62
+chr3	642846	642881	trf	52
+chr1	2627907	2628084	trf	302" > exp
 $BT shuffle -incl incl.bed -chromFirst -seed 42 -i simrep.bed  \
             -g ../genomes/human.hg19.genome | head -20 > obs
 check obs exp
@@ -95,7 +100,7 @@ rm obs exp
 ##############################################################
 # test basic shuffle with -excl
 ##############################################################
-echo "    shuffle.t4...\c"
+echo -e "    shuffle.t4...\c"
 echo -n "" > exp
 $BT shuffle -seed 42 -i simrep.bed  \
             -g ../genomes/human.hg19.genome \
@@ -107,20 +112,30 @@ rm obs exp
 ##############################################################
 # test basic shuffle with 
 ##############################################################
-echo "    shuffle.t5...\c"
+echo -e "    shuffle.t5...\c"
 echo \
-"chr4	35820891	35821056	trf	199
-chr1	222543425	222543460	trf	70
-chr1	222543425	222543460	trf	70
-chr1	48470369	48470466	trf	79
-chr1	48470369	48470466	trf	79
-chr3	70445746	70445851	trf	149
-chr3	58195572	58196000	trf	202
-chr3	90048150	90048533	trf	712
-chr4	33975723	33975766	trf	86
-chr2	84439645	84439715	trf	104" > exp
+"chr4	13668420	13668593	trf	346
+chr1	114076345	114076585	trf	434
+chr1	114076345	114076585	trf	434
+chr5	17088394	17088864	trf	339
+chr3	53794735	53794769	trf	68
+chr2	73265723	73265766	trf	86
+chr2	4749579	4749649	trf	68
+chr1	15263027	15263097	trf	104
+chr5	57165089	57165114	trf	50
+chr4	33917224	33917392	trf	150" > exp
 $BT shuffle -seed 42 -i simrep.bed  \
             -g ../genomes/human.hg19.genome \
 | $BT intersect -a - -b excl.bed | head > obs
 check obs exp
 rm obs exp
+
+###############################################################
+# test an interval that is bigger than the max chrom length
+###############################################################
+#echo -e "    shuffle.t6...\c"
+#echo "Error, line 1: tried 1000 potential loci for entry, but could not avoid excluded regions.  Ignoring entry and moving on." > exp 
+#$BT shuffle -i <(echo -e "chr1\t0\t110") -g < (echo -e "chr1\t100") &> obs
+#check obs exp
+#rm obs exp
+[[ $FAILURES -eq 0 ]] || exit 1;
