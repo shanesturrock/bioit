@@ -1,11 +1,11 @@
-%define priority 3896
+%define priority 3897
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.96
+Version:	38.97
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -231,6 +231,13 @@ fi
 %files
 
 %changelog
+* Thu Aug 04 2022 Shane Sturrock <shane.sturrock@gmail.com> - 38.97-1
+- Added trimtips to BBDuk, mainly for trimming adapters on both ends of PacBio
+  reads.
+- Changed processing of reads longer than 200bp to force ASCII-33 quality.
+- Enable automatic entryfilter in Clumpify to handle libraries with mostly
+  identical reads.
+
 * Fri Mar 04 2022 Shane Sturrock <shane.sturrock@gmail.com> - 38.96-1
 - Bugfix release
 
