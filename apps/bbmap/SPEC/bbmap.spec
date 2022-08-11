@@ -1,11 +1,11 @@
-%define priority 3897
+%define priority 3898
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.97
+Version:	38.98
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -231,6 +231,12 @@ fi
 %files
 
 %changelog
+* Thu Aug 11 2022 Shane Sturrock <shane.sturrock@gmail.com> - 38.98-1
+- Added bloom filter option lockedincrement, which substantially increases
+  accuracy of overloaded counting Bloom filters, with a ~15% speed reduction.
+  Disabled by default, except for BBCMS.
+- Fixed a possible race condition in RQCFilter file writing.
+
 * Thu Aug 04 2022 Shane Sturrock <shane.sturrock@gmail.com> - 38.97-1
 - Added trimtips to BBDuk, mainly for trimming adapters on both ends of PacBio
   reads.
