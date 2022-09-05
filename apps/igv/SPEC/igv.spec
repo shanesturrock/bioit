@@ -1,11 +1,11 @@
-%define priority 21400
+%define priority 21401
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.14.0
+Version:	2.14.1
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,10 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Tue Sep 06 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.1-1
+- Adjust treatment of indels for backwards compatibility -- SNPs have
+  precedence over indels
+
 * Thu Aug 11 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.0-1
 - add test xml
 
