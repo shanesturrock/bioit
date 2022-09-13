@@ -1,2 +1,2 @@
 version=3
-https://github.com/sequencing/gvcftools/releases .*/gvcftools-(.+)\.tar\.gz
+https://github.com/sequencing/gvcftools/tags .*/v(.+)\.tar\.gz

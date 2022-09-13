@@ -1,2 +1,2 @@
 version=3
-https://github.com/RealTimeGenomics/rtg-tools/releases/ .*/rtg-tools-(.+)-linux-x64\.zip
+https://github.com/RealTimeGenomics/rtg-tools/tags/ .*/(.+)\.zip

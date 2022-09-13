@@ -1,2 +1,2 @@
 version=3
-https://github.com/broadinstitute/picard/releases/ .*/(.+)\.zip
+https://github.com/broadinstitute/picard/tags/ .*/(.+)\.zip

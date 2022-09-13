@@ -1,2 +1,2 @@
 version=3
-https://github.com/ExpressionAnalysis/ea-utils/releases/ .*/(.+)\.tar\.gz
+https://github.com/ExpressionAnalysis/ea-utils/tags/ .*/(.+)\.tar\.gz
