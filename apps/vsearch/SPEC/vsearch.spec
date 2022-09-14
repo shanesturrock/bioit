@@ -1,11 +1,11 @@
-%define priority 2211
+%define priority 2212
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.21.1
+Version:	2.21.2
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,9 @@ fi
 %files
 
 %changelog
+* Thu Sep 15 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.2-1
+- Fix problems with the --lcaout option.
+
 * Wed Jan 19 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.1-1
 - 2.21.1
   - Fix dereplication with empty input file
