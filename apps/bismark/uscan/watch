@@ -1,2 +1,2 @@
 version=3
-https://github.com/FelixKrueger/Bismark/releases .*/(.+)\.tar.gz
+https://github.com/FelixKrueger/Bismark/tags .*/(.+)\.tar.gz
