@@ -1,11 +1,11 @@
-%define priority 2212
+%define priority 2221
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.21.2
+Version:	2.22.1
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,10 @@ fi
 %files
 
 %changelog
+* Thu Sep 22 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.1-1
+- Add the derep_smallmem command for dereplication with less memory usage. 
+- Remove compiler warnings.
+
 * Thu Sep 15 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.21.2-1
 - Fix problems with the --lcaout option.
 

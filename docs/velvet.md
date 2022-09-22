@@ -1,5 +1,7 @@
 # Velvet
 
+VELVET has been deleted so the URL doesn't work any more.
+
 [https://www.ebi.ac.uk/~zerbino/velvet/](https://www.ebi.ac.uk/~zerbino/velvet/)
 
 ## Automatic Build

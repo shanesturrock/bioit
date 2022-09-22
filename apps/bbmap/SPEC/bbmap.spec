@@ -1,11 +1,11 @@
-%define priority 3898
+%define priority 3900
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	38.98
+Version:	39.00
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -126,6 +126,8 @@ alternatives \
    --slave %{_bindir}/kmerfilterset.sh kmerfilterset.sh /opt/bioit/%{name}/%{version}/kmerfilterset.sh \
    --slave %{_bindir}/kmerlimit2.sh kmerlimit2.sh /opt/bioit/%{name}/%{version}/kmerlimit2.sh \
    --slave %{_bindir}/kmerlimit.sh kmerlimit.sh /opt/bioit/%{name}/%{version}/kmerlimit.sh \
+   --slave %{_bindir}/kmerposition.sh kmerposition.sh /opt/bioit/%{name}/%{version}/kmerposition.sh \
+   --slave %{_bindir}/kmutate.sh kmutate.sh /opt/bioit/%{name}/%{version}/kmutate.sh \
    --slave %{_bindir}/lilypad.sh lilypad.sh /opt/bioit/%{name}/%{version}/lilypad.sh \
    --slave %{_bindir}/loadreads.sh loadreads.sh /opt/bioit/%{name}/%{version}/loadreads.sh \
    --slave %{_bindir}/loglog.sh loglog.sh /opt/bioit/%{name}/%{version}/loglog.sh \
@@ -159,8 +161,8 @@ alternatives \
    --slave %{_bindir}/readlength.sh readlength.sh /opt/bioit/%{name}/%{version}/readlength.sh \
    --slave %{_bindir}/readqc.sh readqc.sh /opt/bioit/%{name}/%{version}/readqc.sh \
    --slave %{_bindir}/reducesilva.sh reducesilva.sh /opt/bioit/%{name}/%{version}/reducesilva.sh \
-   --slave %{_bindir}/reformat.sh reformat.sh /opt/bioit/%{name}/%{version}/reformat.sh \
    --slave %{_bindir}/reformatpb.sh reformatpb.sh /opt/bioit/%{name}/%{version}/reformatpb.sh \
+   --slave %{_bindir}/reformat.sh reformat.sh /opt/bioit/%{name}/%{version}/reformat.sh \
    --slave %{_bindir}/removebadbarcodes.sh removebadbarcodes.sh /opt/bioit/%{name}/%{version}/removebadbarcodes.sh \
    --slave %{_bindir}/removecatdogmousehuman.sh removecatdogmousehuman.sh /opt/bioit/%{name}/%{version}/removecatdogmousehuman.sh \
    --slave %{_bindir}/removehuman2.sh removehuman2.sh /opt/bioit/%{name}/%{version}/removehuman2.sh \
@@ -174,6 +176,7 @@ alternatives \
    --slave %{_bindir}/representative.sh representative.sh /opt/bioit/%{name}/%{version}/representative.sh \
    --slave %{_bindir}/rqcfilter2.sh rqcfilter2.sh /opt/bioit/%{name}/%{version}/rqcfilter2.sh \
    --slave %{_bindir}/rqcfilter.sh rqcfilter.sh /opt/bioit/%{name}/%{version}/rqcfilter.sh \
+   --slave %{_bindir}/runhmm.sh runhmm.sh /opt/bioit/%{name}/%{version}/runhmm.sh \
    --slave %{_bindir}/samtoroc.sh samtoroc.sh /opt/bioit/%{name}/%{version}/samtoroc.sh \
    --slave %{_bindir}/seal.sh seal.sh /opt/bioit/%{name}/%{version}/seal.sh \
    --slave %{_bindir}/sendsketch.sh sendsketch.sh /opt/bioit/%{name}/%{version}/sendsketch.sh \
@@ -181,8 +184,8 @@ alternatives \
    --slave %{_bindir}/shrinkaccession.sh shrinkaccession.sh /opt/bioit/%{name}/%{version}/shrinkaccession.sh \
    --slave %{_bindir}/shuffle2.sh shuffle2.sh /opt/bioit/%{name}/%{version}/shuffle2.sh \
    --slave %{_bindir}/shuffle.sh shuffle.sh /opt/bioit/%{name}/%{version}/shuffle.sh \
-   --slave %{_bindir}/sketchblacklist.sh sketchblacklist.sh /opt/bioit/%{name}/%{version}/sketchblacklist.sh \
    --slave %{_bindir}/sketchblacklist2.sh sketchblacklist2.sh /opt/bioit/%{name}/%{version}/sketchblacklist2.sh \
+   --slave %{_bindir}/sketchblacklist.sh sketchblacklist.sh /opt/bioit/%{name}/%{version}/sketchblacklist.sh \
    --slave %{_bindir}/sketch.sh sketch.sh /opt/bioit/%{name}/%{version}/sketch.sh \
    --slave %{_bindir}/sortbyname.sh sortbyname.sh /opt/bioit/%{name}/%{version}/sortbyname.sh \
    --slave %{_bindir}/splitbytaxa.sh splitbytaxa.sh /opt/bioit/%{name}/%{version}/splitbytaxa.sh \
@@ -220,7 +223,8 @@ alternatives \
    --slave %{_bindir}/unicode2ascii.sh unicode2ascii.sh /opt/bioit/%{name}/%{version}/unicode2ascii.sh \
    --slave %{_bindir}/unzip.sh unzip.sh /opt/bioit/%{name}/%{version}/unzip.sh \
    --slave %{_bindir}/vcf2gff.sh vcf2gff.sh /opt/bioit/%{name}/%{version}/vcf2gff.sh \
-   --slave %{_bindir}/webcheck.sh webcheck.sh /opt/bioit/%{name}/%{version}/webcheck.sh
+   --slave %{_bindir}/webcheck.sh webcheck.sh /opt/bioit/%{name}/%{version}/webcheck.sh \
+   --slave %{_bindir}/Xcalcmem.sh Xcalcmem.sh /opt/bioit/%{name}/%{version}/Xcalcmem.sh
 
 %postun
 if [ $1 -eq 0 ]
@@ -231,6 +235,9 @@ fi
 %files
 
 %changelog
+* Thu Sep 22 2022 Shane Sturrock <shane.sturrock@gmail.com> - 39.00-1
+- Bugfixes
+
 * Thu Aug 11 2022 Shane Sturrock <shane.sturrock@gmail.com> - 38.98-1
 - Added bloom filter option lockedincrement, which substantially increases
   accuracy of overloaded counting Bloom filters, with a ~15% speed reduction.
