@@ -1,11 +1,11 @@
-%define priority 3900
+%define priority 3901
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bbmap
-Version:	39.00
+Version:	39.01
 Release:	1%{?dist}
 Summary:	BBMap short read aligner, and other bioinformatic tools.
 Group:		Applications/Engineering
@@ -57,6 +57,7 @@ alternatives \
    --slave %{_bindir}/bbversion.sh bbversion.sh /opt/bioit/%{name}/%{version}/bbversion.sh \
    --slave %{_bindir}/bbwrap.sh bbwrap.sh /opt/bioit/%{name}/%{version}/bbwrap.sh \
    --slave %{_bindir}/bloomfilter.sh bloomfilter.sh /opt/bioit/%{name}/%{version}/bloomfilter.sh \
+   --slave %{_bindir}/bloomfilterparser.sh bloomfilterparser.sh /opt/bioit/%{name}/%{version}/bloomfilterparser.sh \
    --slave %{_bindir}/calcmem.sh calcmem.sh /opt/bioit/%{name}/%{version}/calcmem.sh \
    --slave %{_bindir}/calctruequality.sh calctruequality.sh /opt/bioit/%{name}/%{version}/calctruequality.sh \
    --slave %{_bindir}/callgenes.sh callgenes.sh /opt/bioit/%{name}/%{version}/callgenes.sh \
@@ -235,6 +236,9 @@ fi
 %files
 
 %changelog
+* Fri Oct 07 2022 Shane Sturrock <shane.sturrock@gmail.com> - 39.01-1
+- Bugfixes
+
 * Thu Sep 22 2022 Shane Sturrock <shane.sturrock@gmail.com> - 39.00-1
 - Bugfixes
 

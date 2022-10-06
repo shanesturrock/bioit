@@ -1,11 +1,11 @@
-%define priority 22704
+%define priority 22705
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.27.4
+Version:	2.27.5
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,10 @@ fi
 %files
 
 %changelog
+* Fri Oct 07 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.27.5-1
+- update htsjdk to 3.0.1 and replace use of a newly deprecated method
+- fix mismatching interval_file in tests
+
 * Wed Jul 06 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.27.4-1
 - Picard modifications to support flow based sequencing
 
