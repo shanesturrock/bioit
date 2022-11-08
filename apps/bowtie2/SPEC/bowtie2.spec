@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2450
+%define priority 2500
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.4.5
+Version:	2.5.0
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,19 @@ fi
 %files
 
 %changelog
+* Wed Nov 09 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.5.0-1
+- Overall improvements in the use of prefetch instructions. (contribution by
+  Igor Sfiligoi)
+- Made input/output fully asynchronous by using a dedicated thread.
+  (contribution by Igor Sfiligoi)
+- Added support for AVX2 256-bit instructions with can be enabled by setting
+  the SSE_AXV2 environment variable at compile time. (contribution by Igor
+  Sfiligoi)
+- Fixed an issue causing bowtie2 to crash when processing ZSTD files with high
+  compression ratios.
+- Changed the way that unique alignments are counted in summary message to
+  better match up with filters on SAM output
+
 * Wed Jan 19 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.4.5-1
 - bowtie2
   - Fixed issues with bowtie2 BAM parser that would cause bowtie2 to crash when

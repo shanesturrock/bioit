@@ -1,11 +1,11 @@
-%define priority 21401
+%define priority 21502
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.14.1
+Version:	2.15.2
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,18 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Wed Nov 09 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.2-1
+- 2.15.0
+  - Splice junction track scaling issues (fixes #1015)
+    - Autoscale correctly in expanded mode
+    - Refresh view on scaling state change
+    - Add menu item to explicitly set depth
+    - Save autoscale & maxDepth state to session
+- 2.15.1
+  - Fix Sahshimi plot gene track SVG peformance bug.
+- 2.15.2
+  - Fixes #1252, #1245
+
 * Tue Sep 06 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.1-1
 - Adjust treatment of indels for backwards compatibility -- SNPs have
   precedence over indels
