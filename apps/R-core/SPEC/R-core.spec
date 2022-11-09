@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 421
+%define priority 422
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        4.2.1
+Version:        4.2.2
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -59,6 +59,47 @@ fi
 #/etc/ld.so.conf.d/R-x86_64.conf
 
 %changelog
+* Thu Nov 10 2022 Shane Sturrock <shane.sturrock@gmail.com> - 4.2.2-1
+- NEW FEATURES
+  - tools::Rdiff(useDiff = TRUE) checks for the presence of an external diff
+    command and switches to useDiff = FALSE if none is found. This allows R CMD
+    Rdiff to always work.
+  - The LaTeX style for producing the PDF manuals, ‘Rd.sty’, now loads the
+    standard ‘⁠amsmath⁠’, ‘⁠amsfonts⁠’ and ‘⁠amssymb⁠’ packages for greater
+    coverage of math commands in the Rd ⁠\eqn⁠ and ⁠\deqn⁠ macros. The
+    ⁠\mathscr⁠ LaTeX command is also provided (via the ‘⁠mathrsfs⁠’ package, if
+    available, or the ‘⁠amsfonts⁠’ bundle otherwise), fulfilling the wish of
+    PR#18398.
+- BUG FIXES
+  - Rscript -e would fail if ‘stdin’ were closed (Reported by Henrik
+    Bengtsson.)
+  - qt(*, log.p=TRUE) in outer tails no longer produces NaN in its final steps,
+    thus fixing PR#18360.
+  - tools::Rd2latex() now escapes hashes and ampersands when writing URLs,
+    fixing LaTeX errors with such URLs in ⁠\tabular⁠.
+  - When isGeneric(f, fdef=*) is used with mismatching names, the warning is
+    better understandable; reported (with fix) in PR#18370 by Gabe Becker.
+  - poly(x, n) now works again (and is now documented) when x is a "Date" or
+    "POSIXct" object, or of another class while fulfilling mode(x) ==
+    "numeric". This also enables poly(x, *, raw=TRUE) for such variables.
+    Reported by Michael Chirico to R-devel.
+  - write.table(), write.csv() and write.csv2() restore their numerical
+    precision (internal equivalent of digits = 15) after an interrupt
+    (PR#18384).
+  - One can now read also byte FF from a clipboard connection (PR#18385).
+  - source("") and source(character()) now give more helpful error messages.
+  - R CMD check --as-cran set _R_CHECK_TIMINGS_ too late to have the intended
+    effect.
+  - as.POSIXlt(x) now also works with very large dates x, fixing PR#18401
+    reported by Hannes Mühleisen.
+  - Files can now be extracted even from very large zip archives (PR#18390,
+    thanks to Martin Jakt).
+  - Non-finite objects of class "POSIXlt" are now correctly coerced to classes
+    "Date" and "POSIXct"; following up on the extension to format() them
+    correctly.
+  - Added methods for is.finite(), is.infinite() and is.nan() for "POSIXlt"
+    date-time objects.
+
 * Fri Jul 01 2022 Shane Sturrock <shane.sturrock@gmail.com> - 4.2.1-1
 - NEW FEATURES:
   - New function utils::findCRANmirror() to find out if a cran mirror has been
