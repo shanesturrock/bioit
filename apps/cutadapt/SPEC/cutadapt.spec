@@ -1,11 +1,11 @@
-%define priority 4100
+%define priority 4200
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	4.1
+Version:	4.2
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,16 @@ fi
 %files
 
 %changelog
+* Mon Jan 16 2023 Shane Sturrock <shane.sturrock@gmail.com> - 4.2-1
+- When determining the error rate for a partial match of an adapter with N
+  wildcards, the number of non-N bases was not computed correctly, which could
+  lead to matches not being found.
+- Automatically replace I in adapter sequences with N. I is used to encode
+  inosine, which matches any base. Contributed by @peterjc.
+- Cutadapt should now no long hang in multicore mode when an error was raised
+  in a worker process (for exampl, when an incorrectly formatted FASTQ file was
+  encountered).
+
 * Thu Jun 09 2022 Shane Sturrock <shane.sturrock@gmail.com> - 4.1-1
 - You can now combine reading adapter sequences from an external file with the
   search parameter notation. For example, -a

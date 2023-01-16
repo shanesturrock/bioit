@@ -1,11 +1,11 @@
-%define priority 21502
+%define priority 21504
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.15.2
+Version:	2.15.4
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,12 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Mon Jan 16 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.4-1
+- 2.15.3
+  - update batch scripts
+- 2.15.4
+  - Add NPE protection to alignment sort method.
+
 * Wed Nov 09 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.2-1
 - 2.15.0
   - Splice junction track scaling issues (fixes #1015)
