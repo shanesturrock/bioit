@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/bowtie2/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/bowtie2/SPEC/build 2.5.0
+    ${HOME}/bioit/apps/bowtie2/SPEC/build 2.5.1
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load bowtie2/2.5.0
+    module load bowtie2/2.5.1
     which bowtie2
     bowtie2 --version
 
@@ -24,7 +24,7 @@ Download the `src.zip` file into `/opt/bioit/bowtie2/src` and unzip it.
 
 Edit the `Makefile` to change the value of prefix as follows (change the version as required):
 
-    prefix = /opt/bioit/bowtie2/2.5.0
+    prefix = /opt/bioit/bowtie2/2.5.1
 
 Compile it with the following commands:
 
@@ -39,7 +39,7 @@ Add a module file in `/opt/bioit/modulefiles/bowtie2/` for this version by copyi
     #
     #  bowtie2 module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/bowtie2/2.5.0/bin
+    prepend-path  PATH         /opt/bioit/bowtie2/2.5.1/bin
 
 ## RPM
 

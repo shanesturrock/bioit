@@ -1,12 +1,12 @@
 %define debug_package %{nil}
-%define priority 2500
+%define priority 2501
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bowtie2
-Version:	2.5.0
+Version:	2.5.1
 Release:	1%{?dist}
 Summary:	An ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences
 Group:		Applications/Engineering
@@ -52,6 +52,12 @@ fi
 %files
 
 %changelog
+* Wed Jan 25 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.5.1-1
+- Fixed an issue affecting bowtie2 alignment accuracy.
+- Updated the versions of the NCBI NGS and VDB libraries used by bowtie2.
+- Fixed a segmentation fault that would occur while aligning SRA data.
+- Fixed an issue preventing --un-mates from properly saving unaligned mates.
+
 * Wed Nov 09 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.5.0-1
 - Overall improvements in the use of prefetch instructions. (contribution by
   Igor Sfiligoi)
