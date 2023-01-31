@@ -1,11 +1,11 @@
-%define priority 21504
+%define priority 21600
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.15.4
+Version:	2.16.0
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,18 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Wed Feb 01 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.16.0-1
+- Add feature threshold indicator to zoom widget (#1196) implementing
+  getVisibilityWindow()
+- Add feature threshold indicator to zoom widget
+- Add an indicator to show which zoom level will start dispalying
+  features/reads
+- Reduce transparency value for zoom slider viz window indicator to "25".
+- Update text session xml
+- fix exception when feature window size was larger than the contig length
+- extracted a log2 function instead of using a wierd static log2 constant
+  everywhere
+
 * Mon Jan 16 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.15.4-1
 - 2.15.3
   - update batch scripts
