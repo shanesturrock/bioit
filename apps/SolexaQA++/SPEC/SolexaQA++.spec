@@ -1,11 +1,11 @@
-%define priority 3172
+%define priority 3173
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		SolexaQA++
-Version:	3.1.7.2
+Version:	3.1.7.3
 Release:	1%{?dist}
 Summary:	Calculates quality statistics and creates visual representations of data quality from FASTQ files.
 Group:		Applications/Engineering
@@ -39,6 +39,9 @@ fi
 %files
 
 %changelog
+* Thu Feb 09 2023 Shane Sturrock <shane.sturrock@gmail.com> - 3.1.7.3-1
+- Bugfixes
+
 * Fri Jun 11 2021 Shane Sturrock <shane.sturrock@gmail.com> - 3.1.7.2-1
 - Minor bugfixes
 

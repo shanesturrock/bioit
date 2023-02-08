@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/SolexaQA++/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/SolexaQA++/SPEC/build 3.1.7.2
+    ${HOME}/bioit/apps/SolexaQA++/SPEC/build 3.1.7.3
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load SolexaQA++/3.1.7.2
+    module load SolexaQA++/3.1.7.3
     which SolexaQA++
     SolexaQA++ --version
 
@@ -26,9 +26,9 @@ Download the `src.zip` file into `/opt/bioit/bowtie/src` and unzip it.
 
 cd into the unzipped directory and then into `Linux_x64` and type the following to move the prebuilt binary into position and correct the ownerships:
 
-    mkdir /opt/bioit/SolexaQA++/3.1.7.2/
-    mv Linux_x64/SolexaQA++ /opt/bioit/SolexaQA++/3.1.7.2/
-    cd /opt/bioit/SolexaQA++/3.1.7.2/
+    mkdir /opt/bioit/SolexaQA++/3.1.7.3/
+    mv Linux_x64/SolexaQA++ /opt/bioit/SolexaQA++/3.1.7.3/
+    cd /opt/bioit/SolexaQA++/3.1.7.3/
     chmod 755 SolexaQA++
 
 ## Module setup
@@ -39,7 +39,7 @@ Add a module file in `/opt/bioit/modulefiles/SolexaQA++/` for this version by co
     #
     #  SolexaQA++ module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/SolexaQA++/3.1.7.2
+    prepend-path  PATH         /opt/bioit/SolexaQA++/3.1.7.3
 
 ## RPM
 
