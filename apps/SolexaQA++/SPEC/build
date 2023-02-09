@@ -21,7 +21,8 @@ VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Building SolexaQA++ ${VERSION} on ${DATE}"
 cd /opt/bioit/SolexaQA++/src
-wget https://downloads.sourceforge.net/project/solexaqa/src/SolexaQA%2B%2B_v${VERSION}.zip
+# Need to remove cert check otherwise download fails due to proxy
+wget --no-check-certificate https://downloads.sourceforge.net/project/solexaqa/src/SolexaQA%2B%2B_v${VERSION}.zip
 unzip SolexaQA++_v${VERSION}.zip
 mkdir /opt/bioit/SolexaQA++/${VERSION}/
 mv SolexaQA++_v${VERSION}/Linux_x64/SolexaQA++ /opt/bioit/SolexaQA++/${VERSION}/
