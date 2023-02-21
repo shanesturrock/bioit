@@ -133,4 +133,4 @@ rm obs exp
 
 
 
-rm *.bam
+rm *.bam*
