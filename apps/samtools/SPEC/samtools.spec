@@ -1,11 +1,11 @@
-%define priority 1161
+%define priority 1170
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		samtools
-Version:	1.16.1
+Version:	1.17
 Release:	1%{?dist}
 Summary:	Tools for nucleotide sequence alignments in the SAM format
 
@@ -64,6 +64,9 @@ fi
 %files
 
 %changelog
+* Wed Feb 22 2023 Shane Sturrock <shane.sturrock@gmail.com> - 1.17-1
+- https://github.com/samtools/samtools/releases/tag/1.17
+
 * Tue Sep 06 2022 Shane Sturrock <shane.sturrock@gmail.com> - 1.16.1-1
 - https://github.com/samtools/samtools/releases/tag/1.16.1
 
