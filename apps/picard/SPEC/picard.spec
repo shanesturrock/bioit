@@ -1,11 +1,11 @@
-%define priority 22705
+%define priority 30000
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	2.27.5
+Version:	3.0.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,28 @@ fi
 %files
 
 %changelog
+* Thu Feb 23 2023 Shane Sturrock <shane.sturrock@gmail.com> - 3.0.0-1
+- Major changes
+  - Upgrade to Java 17. by @cmnbroad in #1833
+- Bug fixes and minor improvements
+  - Improvements to CompareMetrics by @kachulis in #1839
+  - Fix typo in a filter name output by LiftoverVcf by @lbergelson in #1842
+  - Stop removing periods from the end of output names by @tlangs in #1433
+  - Avoid merging fingerprints when there is only one by @yfarjoun in #1826
+  - Remove commons.lang dependency because it is redundant with commons lang3
+    by @lbergelson in #1856
+  - Delete the now redundant ClassFinder by @lbergelson in #1857
+  - Remove obsolete references to Google Genomics API by @lbergelson in #1858
+  - Fix Duplicate Set Index for queryname sorted input to MarkDuplicates by
+    @kachulis in #1843
+  - Allow empty input files for CollectAlignmentSummaryMetrics and FastqToSam
+    by @kachulis in #1859
+- Documentation and infrastructure changes
+  - Update CrosscheckFingerprints summary by @derekca in #1721
+  - Updated the issue template to link to our support forum by @droazen in
+    #1837
+  - Adding a gh actions test by @lbergelson in #1853
+
 * Fri Oct 07 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.27.5-1
 - update htsjdk to 3.0.1 and replace use of a newly deprecated method
 - fix mismatching interval_file in tests
