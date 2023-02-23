@@ -28,7 +28,7 @@ if [[ ! -d ${JAVA_HOME} ]]; then
    rm openjdk-17.0.2_linux-x64_bin.tar.gz
 fi
 # Should now have the right version of Java available so set the PATH variables
-export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$JAVA_HOME/bin:$PATH
 echo "Building picard ${VERSION} on ${DATE}"
 cd /opt/bioit/picard/src
 git clone -b ${VERSION} https://github.com/broadinstitute/picard.git
