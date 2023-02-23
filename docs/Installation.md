@@ -159,6 +159,13 @@ Also remove the pulseaudio tools to stop logs being filled with errors as users 
 
     yum -y remove pulseaudio-gdm-hooks pulseaudio-utils pulseaudio-module-bluetooth pulseaudio
 
+## Proxy SSL certificate
+
+If the system is behind a firewall that strips SSL certificates a number of things won't work unless the root cert is imported as follows:
+
+    cp root_certificate.crt /etc/pki/ca-trust/source/anchors/
+    update-ca-trust extract
+
 ## Next Step
 
 Go to the [Storage-Setup](Storage-Setup.md) page.
