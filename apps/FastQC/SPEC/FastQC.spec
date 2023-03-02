@@ -1,11 +1,11 @@
-%define priority 119
+%define priority 121
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		FastQC
-Version:	0.11.9
+Version:	0.12.1
 Release:	1%{?dist}
 Summary:	A quality control application for high throughput sequence data
 Group:		Applications/Engineering
@@ -41,6 +41,22 @@ fi
 %files
 
 %changelog
+* Thu Mar 02 2023 Shane Sturrock <shane.sturrock@gmail.com> - 0.12.1-1
+- 0.12.1
+  - Fix a bug in file type detection on OSX
+- 0.12.0
+  - Add total base count to basic stats
+  - Add dup_length option to set the level of truncation for duplicate finding
+  - Make default truncation length always 50bp
+  - Removed the deduplicated duplication line from the duplicate plot
+  - Improve memory handling and add a --memory option to the command line
+  - Move BAM parsing to htsjdk
+  - Make colours colourblind friendly
+  - Generate SVG versions of graphs, and add a --svg option to use these in the
+    report
+  - Add line numbers to parsing errors
+  - Change the default adapter sequences to search
+
 * Fri Jan 17 2020 Shane Sturrock <shane.sturrock@gmail.com> - 0.11.9-1
 - We removed the native look and feel from the linux application since it's
   horribly broken

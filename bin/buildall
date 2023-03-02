@@ -15,7 +15,7 @@ ${HOME}/bioit/apps/bowtie2/SPEC/build 2.5.1
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
 ${HOME}/bioit/apps/cutadapt/SPEC/build 4.2
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
-${HOME}/bioit/apps/FastQC/SPEC/build 0.11.9
+${HOME}/bioit/apps/FastQC/SPEC/build 0.12.1
 ${HOME}/bioit/apps/gvcftools/SPEC/build 0.17.0
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.2.1
 ${HOME}/bioit/apps/hmmer/SPEC/build 3.3.2
