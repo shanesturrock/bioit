@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 422
+%define priority 423
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        4.2.2
+Version:        4.2.3
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -59,6 +59,52 @@ fi
 #/etc/ld.so.conf.d/R-x86_64.conf
 
 %changelog
+* Thu Mar 16 2023 Shane Sturrock <shane.sturrock@gmail.com> - 4.2.3-1
+- C-LEVEL FACILITIES 
+  - The definition of DL_FUNC in ‘R_ext/Rdynload.h’ has been changed to be
+    fully C-compliant. This means that functions loaded via for example
+    R_GetCCallable need to be cast to an appropriate type if they have any
+    arguments.
+  - .Machine has a new element sizeof.time_t to identify old systems with a
+    32-bit type and hence a limited range of date-times (and limited support
+    for dates millions of years from present).  
+- PACKAGE INSTALLATION 
+  - (Windows) The default C++ standard had accidentally been left at C++11 when
+    it was changed to C++14 on Unix.
+- BUG FIXES 
+  - As "POSIXlt" objects may be "partially filled" and their list components
+    meant to be recycled, length() now is the length of the longest component.
+  - as.POSIXlt.Date() could underflow for dates in the far past (more than half
+    a million years BCE).
+  - as.Date.POSIXlt(x) would return "1970-01-01" instead of NA in R 4.2.2,
+    e.g., for 
+       x <- as.POSIXlt(c("2019-01-30","2001-1-1")) 
+       x$mon <- c(0L, NA); as.Date(x) 
+  - R CMD check failed to apply enabled _R_CHECK_SUGGESTS_ONLY_ to examples and
+    vignettes (regression in R 4.2.0).
+  - R CMD check did not re-build vignettes in separate processes by default
+    (regression in R 4.2.0).
+  - Running examples from HTML documentation now restores previous knitr
+    settings and options (PR#18420).
+  - Quartz: fonts are now located using Core Graphics API instead of deprecated
+    ATS which is no longer supported in the macOS 13 SDK (PR#18426). This also
+    addresses an issue where the currently used font in the Quartz device
+    context was not correctly retained.
+  - format(<POSIXlt_w/_unbalanced_sec>, "....%OS<n>") with n > 0 n>0 no longer
+    accidentally uses the unbalanced seconds, thanks to Suharto Anggono's
+    report (including patch) in PR#18448.
+  - solve.default(a, b) works around issues with some versions of LAPACK when a
+    contains NA or NaN values.
+  - When UseMethod() cannot dispatch, it no longer segfaults producing the
+    error message in case of a long class(), thanks to Joris Vankerschaver's
+    report (including patch) in PR#18447.
+  - When example(foo, ..) produces graphics on an interactive device it needs
+    to open itself, it now leaves devAskNewPage() unchanged even when it was
+    FALSE, thus fixing a 14 years old ‘<FIXME>’.
+  - packageDescription() again catches errors from encoding conversions. This
+    also fixes broken packageVersion() in C locale on systems where iconv does
+    not support transliteration.
+
 * Thu Nov 10 2022 Shane Sturrock <shane.sturrock@gmail.com> - 4.2.2-1
 - NEW FEATURES
   - tools::Rdiff(useDiff = TRUE) checks for the presence of an external diff
@@ -616,7 +662,7 @@ fi
     length zero, as documented, thanks to Davis Vaughan's post to R-devel.
   - removeSource(fn) now retains (other) attributes(fn).
 
-* Tue Aug 18 2021 Shane Sturrock <shane.sturrock@gmail.com> - 4.1.1-1
+* Tue Aug 17 2021 Shane Sturrock <shane.sturrock@gmail.com> - 4.1.1-1
 - NEW FEATURES
   - require(pkg, quietly = TRUE) is quieter and in particular does not warn if
     the package is not found.
