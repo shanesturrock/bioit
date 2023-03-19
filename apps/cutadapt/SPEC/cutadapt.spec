@@ -1,11 +1,11 @@
-%define priority 4200
+%define priority 4300
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	4.2
+Version:	4.3
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,20 @@ fi
 %files
 
 %changelog
+* Mon Mar 20 2023 Shane Sturrock <shane.sturrock@gmail.com> - 4.3-1
+- Cutadapt became significantly faster due to an added runtime heuristic that
+  avoids running the full alignment algorithm if it can be proven that it
+  cannot succeed. Thanks to @rhpvorderman for this great improvement!
+- 5’ adapters did not allow partial matches in the beginning when the rightmost
+  adapter-search parameter was used.
+- Fixed assertion error when --discard-untrimmed was used together with --json
+  and demultiplexing.
+- When reading 3’ adapters from an external file, they can now all be anchored
+  by using the syntax -a file$:adapters.fasta (note the $ in file$:).
+- The --rename option now understands the \t escape sequence and will insert a
+  tab character in its place. This is useful when transferring FASTQ header
+  comments to SAM tags.
+
 * Mon Jan 16 2023 Shane Sturrock <shane.sturrock@gmail.com> - 4.2-1
 - When determining the error rate for a partial match of an adapter with N
   wildcards, the number of non-N bases was not computed correctly, which could
