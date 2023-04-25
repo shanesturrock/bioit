@@ -1,2 +1,3 @@
 version=3
-  http://software.broadinstitute.org/software/igv/download (?:.*/)?IGV\_Linux\_?(\d[\d\.]*)\_WithJava\.zip
+  https://igv.org/download/html/download.html (?:.*/)?IGV\_Linux\_?(\d[\d\.]*)\_WithJava\.zip
+  #http://software.broadinstitute.org/software/igv/download (?:.*/)?IGV\_Linux\_?(\d[\d\.]*)\_WithJava\.zip
