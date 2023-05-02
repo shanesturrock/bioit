@@ -1,11 +1,11 @@
-%define priority 2130
+%define priority 2140
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		ncbi-blast
-Version:	2.13.0+
+Version:	2.14.0+
 Release:	1%{?dist}
 Summary:	BLAST+ is a suite of command-line tools to run BLAST
 Group:		Applications/Engineering
@@ -60,6 +60,31 @@ fi
 %files
 
 %changelog
+* Wed May 03 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.14.0+-1
+- New features
+  - BLASTP, BLASTX, and TBLASTN are now quicker when you use the "fast" tasks
+    with a command-line argument like "-task blastp-fast." You can search the
+    non-redundant protein database(nr) over 20% faster than before. Smaller
+    databases like swissprot or pdbaa will be 2-3 times faster.
+- Improvements
+  - A FASTA file that cannot be validated by makeblastdb is now a warning and
+    not an error.
+  - Update_blastdb.pl uses curl on a mac to download BLASTDB files instead of a
+    PERL module.
+  - An error is issued if the incompatible -remote and -in_pssm options are
+    used together.
+  - A formatting pre-fetch error is no longer fatal, and BLAST will try to
+    format the report.
+- Bug fixes
+  - Fixed an issue with a space before the database name that crashed the
+    rpsblast executable.
+  - Fixed a multi-threading consistency issue with the -use_sw_tback option.
+  - Fixed an issue that crashed the blastn executable.
+  - Fixed an issue sorting results with composition-based statistics.
+  - Fixed an exit code issue with update_blast.pl
+  - Corrected the expect value setting for blastn-short task
+  - Fixed an issue with sstrand in tabular formats with the tblastn executable.
+
 * Fri Mar 25 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.13.0+-1
 - New features
   - Blastn_vdb and tblastn_vdb included in the 2.13.0 release.

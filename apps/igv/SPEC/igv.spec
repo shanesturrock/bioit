@@ -1,11 +1,11 @@
-%define priority 21600
+%define priority 21601
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		igv
-Version:	2.16.0
+Version:	2.16.1
 Release:	1%{?dist}
 Summary:	Integrative Genomics Viewer
 Group:		Applications/Engineering
@@ -66,6 +66,9 @@ fi
 /etc/xdg/menus/applications-merged/bioinformatics.menu
 
 %changelog
+* Wed May 03 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.16.1-1
+- remove broken tests -- test files no longer available
+
 * Wed Feb 01 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.16.0-1
 - Add feature threshold indicator to zoom widget (#1196) implementing
   getVisibilityWindow()

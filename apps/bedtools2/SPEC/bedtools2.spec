@@ -1,11 +1,11 @@
-%define priority 2300
+%define priority 2310
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bedtools2
-Version:	2.30.0
+Version:	2.31.0
 Release:	1%{?dist}
 Summary:	Tools for handing BED files
 Group:		Applications/Engineering
@@ -77,6 +77,13 @@ fi
 %files
 
 %changelog
+* Wed May 03 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.31.0-1
+- Added new summary tool for basic sanity checks and quality control of
+  interval files. Documentation
+- Added support for gzipp'ed FASTA files to getfasta and nuc. Thanks to
+  @brentp.
+- Various typo and minor bug fixes from @38 and @jmarshall.
+
 * Fri Jan 29 2021 Shane Sturrock <shane.sturrock@gmail.com> - 2.30.0-1
 - Thanks to Hao Hou (github: @38), we have made substantial improvements in the
   speed associated with parsing input files and in printing results. It turns

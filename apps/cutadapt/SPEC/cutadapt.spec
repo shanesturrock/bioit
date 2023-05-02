@@ -1,11 +1,11 @@
-%define priority 4300
+%define priority 4400
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		cutadapt
-Version:	4.3
+Version:	4.4
 Release:	1%{?dist}
 Summary:	Removes adapter sequences, primers etc
 Group:		Applications/Engineering
@@ -38,6 +38,24 @@ fi
 %files
 
 %changelog
+* Wed May 03 2023 Shane Sturrock <shane.sturrock@gmail.com> - 4.4-1
+- Fixed very slow k-mer heuristic initialization (hours instead of seconds) for
+  degenerate adapter sequences such as A{100} as used when doing poly-A
+  trimming.
+- Added option --poly-a for trimming poly-A tails. This is more accurate and
+  multiple times faster than using -a A{100} as previously recommended. This is
+  currently experimental (that is, the algorithm may change in the next one or
+  two releases).
+- Sped up index generation somewhat. This is most noticable when demultiplexing
+  using thousands or more adapters. The speedup is different depending on
+  whether indels are allowed or not because different algorithms are used.
+- Sped up demultiplexing (when using an index) for the case when the read
+  contains N bases within the region where the adapter matches. Previously, any
+  N would disable the index for that read and trigger a fallback to the slow
+  method of matching each adapter one-by-one. Now the index is used even in
+  those cases.
+- Sped up --max-expected-errors. Thanks @rhpvorderman.
+
 * Mon Mar 20 2023 Shane Sturrock <shane.sturrock@gmail.com> - 4.3-1
 - Cutadapt became significantly faster due to an added runtime heuristic that
   avoids running the full alignment algorithm if it can be proven that it
