@@ -62,6 +62,16 @@ Users can't see the crash reports anyway so remove it using:
 
     yum -y remove abrt
 
+## Other useful packages
+
+The rpmfusion repo is also good to have as many packages not included in the base or EPEL are there. Install it with:
+
+    yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
+
+An example package would be ffmpeg which can be used to encode mp4 videos for some workflows. Install that with:
+
+    yum install ffmpeg
+
 ## Tools required for application support
 
 The following packages are required for building the suite of applications on a fresh BioIT server:
