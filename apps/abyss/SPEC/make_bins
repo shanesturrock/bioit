@@ -37,6 +37,7 @@ cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/SimpleGraph
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-align
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bloom
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bloom-dbg
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bloom-dist.mk
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bloom-dist.mk.Makefile
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bowtie
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bowtie2
@@ -63,6 +64,7 @@ cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-mergepairs
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-overlap
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-paired-dbg
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-paired-dbg-mpi
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-pe
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-pe.Makefile
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-rresolver-short
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-samtoafg

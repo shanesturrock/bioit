@@ -27,12 +27,13 @@ is capable of assembling larger genomes.
 
 %post
 alternatives \
-   --install %{_bindir}/ABYSS %{name} /opt/bioit/%{name}/%{version}/bin/ABYSS %{priority} \
+   --install %{_bindir}/ABYSS ABYSS /opt/bioit/%{name}/%{version}/bin/ABYSS %{priority} \
    --slave %{_bindir}/ABYSS-P ABYSS-P /opt/bioit/%{name}/%{version}/bin/ABYSS-P \
    --slave %{_bindir}/abyss-align abyss-align /opt/bioit/%{name}/%{version}/bin/abyss-align \
    --slave %{_bindir}/abyss-bloom abyss-bloom /opt/bioit/%{name}/%{version}/bin/abyss-bloom \
    --slave %{_bindir}/abyss-bloom-dbg abyss-bloom-dbg /opt/bioit/%{name}/%{version}/bin/abyss-bloom-dbg \
    --slave %{_bindir}/abyss-bloom-dist.mk abyss-bloom-dist.mk /opt/bioit/%{name}/%{version}/bin/abyss-bloom-dist.mk \
+   --slave %{_bindir}/abyss-bloom-dist.mk.Makefile abyss-bloom-dist.mk.Makefile /opt/bioit/%{name}/%{version}/bin/abyss-bloom-dist.mk.Makefile \
    --slave %{_bindir}/abyss-bowtie abyss-bowtie /opt/bioit/%{name}/%{version}/bin/abyss-bowtie \
    --slave %{_bindir}/abyss-bowtie2 abyss-bowtie2 /opt/bioit/%{name}/%{version}/bin/abyss-bowtie2 \
    --slave %{_bindir}/abyss-bwa abyss-bwa /opt/bioit/%{name}/%{version}/bin/abyss-bwa \
@@ -58,6 +59,7 @@ alternatives \
    --slave %{_bindir}/abyss-overlap abyss-overlap /opt/bioit/%{name}/%{version}/bin/abyss-overlap \
    --slave %{_bindir}/abyss-paired-dbg abyss-paired-dbg /opt/bioit/%{name}/%{version}/bin/abyss-paired-dbg \
    --slave %{_bindir}/abyss-pe abyss-pe /opt/bioit/%{name}/%{version}/bin/abyss-pe \
+   --slave %{_bindir}/abyss-pe.Makefile abyss-pe.Makefile /opt/bioit/%{name}/%{version}/bin/abyss-pe.Makefile \
    --slave %{_bindir}/abyss-samtoafg abyss-samtoafg /opt/bioit/%{name}/%{version}/bin/abyss-samtoafg \
    --slave %{_bindir}/abyss-scaffold abyss-scaffold /opt/bioit/%{name}/%{version}/bin/abyss-scaffold \
    --slave %{_bindir}/abyss-sealer abyss-sealer /opt/bioit/%{name}/%{version}/bin/abyss-sealer \
