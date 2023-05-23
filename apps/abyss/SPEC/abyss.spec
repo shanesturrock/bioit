@@ -1,11 +1,11 @@
-%define priority 235
+%define priority 236
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.3.5
+Version:	2.3.6
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -80,10 +80,7 @@ alternatives \
    --slave %{_bindir}/PathConsensus PathConsensus /opt/bioit/%{name}/%{version}/bin/PathConsensus \
    --slave %{_bindir}/PathOverlap PathOverlap /opt/bioit/%{name}/%{version}/bin/PathOverlap \
    --slave %{_bindir}/PopBubbles PopBubbles /opt/bioit/%{name}/%{version}/bin/PopBubbles \
-   --slave %{_bindir}/SimpleGraph SimpleGraph /opt/bioit/%{name}/%{version}/bin/SimpleGraph \
-   --slave %{_mandir}/man1/ABYSS.1 ABYSS.1 /opt/bioit/%{name}/%{version}/share/man/man1/ABYSS.1 \
-   --slave %{_mandir}/man1/abyss-pe.1 abyss-pe.1 /opt/bioit/%{name}/%{version}/share/man/man1/abyss-pe.1 \
-   --slave %{_mandir}/man1/abyss-tofastq.1 abyss-tofastq.1 /opt/bioit/%{name}/%{version}/share/man/man1/abyss-tofastq.1 
+   --slave %{_bindir}/SimpleGraph SimpleGraph /opt/bioit/%{name}/%{version}/bin/SimpleGraph
 
 %postun
 if [ $1 -eq 0 ]
@@ -95,6 +92,13 @@ fi
 %files
 
 %changelog
+* Tue May 23 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.6-1
+- General:
+  - btllib is now a dependency
+  - Documentation updates
+- abyss-rresolver-short:
+  - btllib source code removed due to btllib now being a dependency
+
 * Thu Jun 02 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.5-1
 - General:
   - Fixed compile errors when using the -DNDEBUG flag.
