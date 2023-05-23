@@ -22,6 +22,8 @@ If all is good, you can move to the RPM building step.
 
 ## Manual Build
 
+NOTE - This no longer works after 2.3.5 and I've switched to using conda inside a Singularity container. Check out the build script to see how it works.
+
 Download the source tarball from [here](https://github.com/bcgsc/abyss/releases/download/2.3.5/abyss-2.3.5.tar.gz) into `/opt/bioit/abyss/src`, untar it and cd into the resulting directory then run the following:
 
     cd abyss-2.3.5

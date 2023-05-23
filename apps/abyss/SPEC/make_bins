@@ -1,0 +1,79 @@
+#!/bin/bash
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+VERSION=$1
+
+# Create scripts to run each Abyss binary in container
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/ABYSS
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/ABYSS-P
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/AdjList
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/Consensus
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/DAssembler
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/DistanceEst
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/DistanceEst-ssq
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/KAligner
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/MergeContigs
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/MergePaths
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/Overlap
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/ParseAligns
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/PathConsensus
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/PathOverlap
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/PopBubbles
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/SimpleGraph
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-align
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bloom
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bloom-dbg
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bloom-dist.mk.Makefile
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bowtie
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bowtie2
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bwa
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bwamem
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-bwasw
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-db-txt
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-dida
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-fac
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-fatoagp
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-filtergraph
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-fixmate
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-fixmate-ssq
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-gapfill
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-gc
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-index
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-junction
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-kaligner
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-layout
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-longseqdist
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-map
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-map-ssq
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-mergepairs
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-overlap
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-paired-dbg
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-paired-dbg-mpi
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-pe.Makefile
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-rresolver-short
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-samtoafg
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-scaffold
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-sealer
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-stack-size
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-tabtomd
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-todot
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/abyss-tofastq
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/konnector
+cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/logcounter
+
+# Make all scripts executable
+chmod a+x /opt/bioit/abyss/${VERSION}/bin/*

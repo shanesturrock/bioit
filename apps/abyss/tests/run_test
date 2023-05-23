@@ -1,17 +1,24 @@
 #!/bin/bash
 
-# rm coverage.hist test*
-
 set -e
 
-# abyss-pe k=25 name=test in='reads1.fastq reads2.fastq'
-abyss-pe np=4 mpirun="/usr/lib64/openmpi/bin/mpirun --allow-run-as-root" k=25 name=test in='reads1.fastq reads2.fastq'
+# Load the latest default version so the test will
+# work even without the RPM package
+module load abyss
 
+# Show the version
+ABYSS --version
+
+# Run the tests
+abyss-pe k=25 name=test B=1G in='reads1.fastq reads2.fastq'
+
+# Verify that the test output is the same as the reference
 cmp -s reference-stats.md test-stats.md > /dev/null
 if [ $? -eq 1 ]; then
   exit 1
 fi
 
-rm coverage.hist test*
+# Clean up the test output
+rm test*
 
 exit 0

@@ -17,34 +17,24 @@ if [ $# -lt 1 ]; then
  exit 1
 fi
 
-# enable more modern compilers
-PATH=/opt/rh/devtoolset-9/root/usr/bin:$PATH
 VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Building abyss ${VERSION} on ${DATE}"
-cd /opt/bioit/abyss/src
-wget https://github.com/bcgsc/abyss/releases/download/${VERSION}/abyss-${VERSION}.tar.gz
-#wget --no-check-certificate https://github.com/bcgsc/abyss/releases/download/${VERSION}/abyss-${VERSION}.tar.gz
-tar xvf abyss-${VERSION}.tar.gz
-cd abyss-${VERSION}
-# Requires specific version of boost
-wget http://sourceforge.net/projects/boost/files/boost/1.56.0/boost_1_56_0.tar.bz2
-#wget --no-check-certificate http://sourceforge.net/projects/boost/files/boost/1.56.0/boost_1_56_0.tar.bz2
-tar xvf boost_1_56_0.tar.bz2
-./configure --prefix=/opt/bioit/abyss/${VERSION} --disable-werror
-make clean
-make AM_CXXFLAGS=-Wall -j8
-make install
-cd /opt/bioit/abyss/${VERSION}/bin
-# Some scripts expect ABYSS-P so fake it for them
-ln -sf ABYSS ABYSS-P
+
+# Create install directory
+mkdir -p /opt/bioit/abyss/${VERSION}/bin
+# Generate Singularity def file
+../../../bin/create_singularity_conda_env.py3 -a abyss -v ${VERSION} -l /opt/bioit/abyss/${VERSION}
+# Build container
+singularity build --fakeroot /opt/bioit/abyss/${VERSION}/abyss_${VERSION}.sif /opt/bioit/abyss/${VERSION}/Singularity
+sh ./make_bins ${VERSION}
+
 echo "Writing modulefile"
 echo "#%Module 1.0
 #
 #  abyss module for use with 'environment-modules' package:
 #
-prepend-path  PATH              /opt/bioit/abyss/${VERSION}/bin
-prepend-path  MANPATH           /opt/bioit/abyss/${VERSION}/share/man/man1" > /opt/bioit/modulefiles/abyss/${VERSION}
+prepend-path  PATH              /opt/bioit/abyss/${VERSION}/bin" > /opt/bioit/modulefiles/abyss/${VERSION}
 echo "Writing module .version to set default"
 echo "#%Module1.0
 ##
