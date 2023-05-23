@@ -1,0 +1,6 @@
+#!/bin/bash
+
+VERSION=CHANGE_ME
+name=${0##*/}
+
+singularity --silent exec  /opt/bioit/abyss/CHANGE_ME/abyss_CHANGE_ME.sif $name "$@"

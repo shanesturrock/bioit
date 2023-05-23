@@ -17,6 +17,9 @@ fi
 
 VERSION=$1
 
+# Create version specific template
+sed -e "s/CHANGE_ME/${VERSION}/g" bin_template > abyss_bin_template
+
 # Create scripts to run each Abyss binary in container
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/ABYSS
 cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/ABYSS-P
@@ -79,3 +82,5 @@ cat abyss_bin_template > /opt/bioit/abyss/${VERSION}/bin/logcounter
 
 # Make all scripts executable
 chmod a+x /opt/bioit/abyss/${VERSION}/bin/*
+# Remove the versioned template
+rm abyss_bin_template

@@ -1,6 +1,0 @@
-#!/bin/bash
-
-VERSION=2.3.6
-name=${0##*/}
-
-singularity --silent exec  /opt/bioit/abyss/${VERSION}/abyss_${VERSION}.sif $name "$@"
