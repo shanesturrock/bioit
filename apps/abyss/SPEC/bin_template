@@ -1,6 +1,0 @@
-#!/bin/bash
-
-VERSION=CHANGE_ME
-name=${0##*/}
-
-singularity --silent exec --bind /raid,/active,/archive,/data,/databases,/deepgene,/dunninga,/gbs_pine,/scratch,/sequencing,/treestem /opt/bioit/abyss/CHANGE_ME/abyss_CHANGE_ME.sif micromamba run -n abyss_CHANGE_ME_singularity $name "$@"

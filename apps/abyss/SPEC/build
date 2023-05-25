@@ -17,27 +17,98 @@ if [ $# -lt 1 ]; then
  exit 1
 fi
 
+APP="abyss"
 VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
-echo "Building abyss ${VERSION} on ${DATE}"
+echo "Building ${APP} ${VERSION} on ${DATE}"
 
 # Create install directory
-mkdir -p /opt/bioit/abyss/${VERSION}/bin
+mkdir -p /opt/bioit/${APP}/${VERSION}/bin
 # Generate Singularity def file (use micromamba option)
-../../../bin/create_singularity_conda_env.py3 -u -a abyss -v ${VERSION} -l /opt/bioit/abyss/${VERSION}
+../../../bin/create_singularity_conda_env.py3 -u -a ${APP} -v ${VERSION} -l /opt/bioit/${APP}/${VERSION}
 # Build container
-singularity build --fakeroot /opt/bioit/abyss/${VERSION}/abyss_${VERSION}.sif /opt/bioit/abyss/${VERSION}/Singularity
-sh ./make_bins ${VERSION}
+singularity build --fakeroot /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /opt/bioit/${APP}/${VERSION}/Singularity
+# Create version specific template
+sed -e "s%APPVER%${APP}_${VERSION}%g" ../../../bin/bin_template > ${APP}_bin_template
+sed -i "s%APPNAME%${APP}%g" ${APP}_bin_template
+sed -i "s%VERSION%${VERSION}%g" ${APP}_bin_template
+sed -i "s%BINDS%/raid,/active,/archive,/data,/databases,/deepgene,/dunninga,/gbs_pine,/scratch,/sequencing,/treestem%g" ${APP}_bin_template
+sed -i "s/EXEC/micromamba run -n ${APP}_${VERSION}_singularity/g" ${APP}_bin_template
+
+# Create scripts to run each Abyss binary in container
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/ABYSS
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/ABYSS-P
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/AdjList
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/Consensus
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/DAssembler
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/DistanceEst
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/DistanceEst-ssq
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/KAligner
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/MergeContigs
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/MergePaths
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/Overlap
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/ParseAligns
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/PathConsensus
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/PathOverlap
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/PopBubbles
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/SimpleGraph
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-align
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-bloom
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-bloom-dbg
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-bloom-dist.mk
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-bloom-dist.mk.Makefile
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-bowtie
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-bowtie2
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-bwa
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-bwamem
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-bwasw
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-db-txt
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-dida
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-fac
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-fatoagp
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-filtergraph
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-fixmate
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-fixmate-ssq
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-gapfill
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-gc
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-index
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-junction
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-kaligner
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-layout
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-longseqdist
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-map
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-map-ssq
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-mergepairs
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-overlap
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-paired-dbg
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-paired-dbg-mpi
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-pe
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-pe.Makefile
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-rresolver-short
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-samtoafg
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-scaffold
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-sealer
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-stack-size
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-tabtomd
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-todot
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/abyss-tofastq
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/konnector
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/logcounter
+
+# Make all scripts executable
+chmod a+x /opt/bioit/${APP}/${VERSION}/bin/*
+# Remove the versioned template
+rm ${APP}_bin_template
 
 echo "Writing modulefile"
 echo "#%Module 1.0
 #
-#  abyss module for use with 'environment-modules' package:
+#  ${APP} module for use with 'environment-modules' package:
 #
-prepend-path  PATH              /opt/bioit/abyss/${VERSION}/bin" > /opt/bioit/modulefiles/abyss/${VERSION}
+prepend-path  PATH              /opt/bioit/${APP}/${VERSION}/bin" > /opt/bioit/modulefiles/${APP}/${VERSION}
 echo "Writing module .version to set default"
 echo "#%Module1.0
 ##
-##  The desired version of abyss
+##  The desired version of ${APP}
 ##
-set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/abyss/.version
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/${APP}/.version

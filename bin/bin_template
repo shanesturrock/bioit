@@ -1,0 +1,5 @@
+#!/bin/bash
+
+name=${0##*/}
+
+singularity --silent exec --bind BINDS /opt/bioit/APPNAME/VERSION/APPVER.sif EXEC $name "$@"
