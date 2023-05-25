@@ -23,8 +23,8 @@ echo "Building abyss ${VERSION} on ${DATE}"
 
 # Create install directory
 mkdir -p /opt/bioit/abyss/${VERSION}/bin
-# Generate Singularity def file
-../../../bin/create_singularity_conda_env.py3 -a abyss -v ${VERSION} -l /opt/bioit/abyss/${VERSION}
+# Generate Singularity def file (use micromamba option)
+../../../bin/create_singularity_conda_env.py3 -u -a abyss -v ${VERSION} -l /opt/bioit/abyss/${VERSION}
 # Build container
 singularity build --fakeroot /opt/bioit/abyss/${VERSION}/abyss_${VERSION}.sif /opt/bioit/abyss/${VERSION}/Singularity
 sh ./make_bins ${VERSION}

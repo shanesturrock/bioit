@@ -9,12 +9,67 @@ import getopt
 
 def write_singularity_file(dirname, app, ver, ts):
   f = open("%s/Singularity" % dirname,"w+")
-  f.write(pangolin_singularity_template.format( APP = app,VER = ver, TS = ts))
+  f.write(singularity_template.format( APP = app,VER = ver, TS = ts))
   f.close()
 
 
+if __name__ == '__main__':
 
-pangolin_singularity_template = """
+  args=sys.argv[1:]
+
+  app = ''
+  version = ''
+  loc = '.'
+  micromamba = False
+ 
+  try:
+     opts, args = getopt.getopt(args,"hua:v:l:",["app=","version=","location="])
+  except getopt.GetoptError:
+     print ('test.py -l <location> -a <app> -v <version>')
+     sys.exit(2)
+ 
+  for opt, arg in opts:
+     if opt == '-h':
+        print ('args.py -a <app> -v <version>')
+        sys.exit()
+     elif opt == '-u':
+        micromamba = True
+     elif opt in ("-a", "--app"):
+        app = arg
+     elif opt in ("-l", "--location"):
+        loc = arg
+     elif opt in ("-v", "--version"):
+        version = arg
+ 
+  print ('Application is ', app)
+  print ('Version is ',     version)
+  print ('Location is ',    loc)
+  if micromamba:
+    singularity_template = """
+Bootstrap: docker
+From: mambaorg/micromamba:focal
+# based on debian bullseye
+# created {TS}
+
+%files
+
+%setup
+
+%environment
+    unset PYTHONPATH
+    export PYTHONPATH=/opt/conda/envs/{APP}_{VER}_singularity/lib
+    export PYTHONNOUSERSITE=True
+    export PYTHONWARNINGS=ignore
+
+%post
+    micromamba create --yes --quiet --name {APP}_{VER}_singularity -c conda-forge -c anaconda -c bioconda {APP}={VER}
+    micromamba clean -afy
+
+%runscript
+    exec "$@"
+"""
+  else:
+    singularity_template = """
 Bootstrap: docker
 From: continuumio/miniconda3
 # based on debian bullseye
@@ -62,43 +117,10 @@ From: continuumio/miniconda3
 
 
 """
-
-
-
-
-
-
-if __name__ == '__main__':
-
-  args=sys.argv[1:]
-
-  app = ''
-  version = ''
-  loc = '.'
- 
-  try:
-     opts, args = getopt.getopt(args,"ha:v:l:",["app=","version=","location="])
-  except getopt.GetoptError:
-     print ('test.py -l <location> -a <app> -v <version>')
-     sys.exit(2)
- 
-  for opt, arg in opts:
-     if opt == '-h':
-        print ('args.py -a <app> -v <version>')
-        sys.exit()
-     elif opt in ("-a", "--app"):
-        app = arg
-     elif opt in ("-l", "--location"):
-        loc = arg
-     elif opt in ("-v", "--version"):
-        version = arg
- 
-  print ('Application is ', app)
-  print ('Version is ',     version)
-  print ('Location is ',    loc)
-
+    
   # current date and time
   timestamp = datetime.now().strftime("%d %B %Y, %H:%M:%S")
 
   write_singularity_file(loc, app, version, timestamp)
+
 
