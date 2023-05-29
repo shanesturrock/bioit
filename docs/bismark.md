@@ -22,6 +22,8 @@ If all is good, you can move to the RPM building step.
 
 ## Manual Build
 
+Note: This is no longer current due to the switch over to using singularity container. See the build script for how that works.
+
 Download the source tarball from [here](https://github.com/FelixKrueger/Bismark/archive/0.24.1.tar.gz) into `/opt/bioit/bismark/src`, untar it and move it into place as there's nothing to compile:
 
     mv Bismark-0.24.1 /opt/bioit/bismark/0.24.1
