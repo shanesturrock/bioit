@@ -1,11 +1,11 @@
-%define priority 2400
+%define priority 2401
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		bismark
-Version:	0.24.0
+Version:	0.24.1
 Release:	1%{?dist}
 Summary:	A bisulfite read mapper and methylation caller
 Group:		Applications/Engineering
@@ -50,6 +50,19 @@ fi
 %files
 
 %changelog
+* Tue May 30 2023 Shane Sturrock <shane.sturrock@gmail.com> - 0.24.1-1
+- Documentation
+  - Added entirely new documentation website, built using Material for Mkdocs.
+    Thanks to @ewels for a fantastic (late-night) effort to break up and
+    restructure what had become a fairly unwieldy monolithic beast of markdown
+    document...
+  - Added docs for cytosine context summary, useful for GpC methylation or
+    filtering for specific C context (e.g. CpA)
+  - Updated docs for the dovetailing
+- Bismark
+  - Warning messages for closing ambiguous and unmapped file handles only occur
+    when these options were specified see here
+
 * Fri Oct 07 2022 Shane Sturrock <shane.sturrock@gmail.com> - 0.24.0-1
 - Bismark
   - Added new option --strandID which reports the alignment strand identity for

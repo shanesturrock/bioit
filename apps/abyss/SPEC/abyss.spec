@@ -1,11 +1,11 @@
-%define priority 236
+%define priority 237
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		abyss
-Version:	2.3.6
+Version:	2.3.7
 Release:	1%{?dist}
 Summary:	Sequence assembler for short reads
 Group:		Applications/Engineering
@@ -94,6 +94,10 @@ fi
 %files
 
 %changelog
+* Tue May 30 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.7-1
+- General:
+  - Fix build on macOS-12 and macOS-13 (Thanks @parham-k!)
+
 * Tue May 23 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.3.6-1
 - General:
   - btllib is now a dependency
