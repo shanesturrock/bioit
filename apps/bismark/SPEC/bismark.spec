@@ -28,18 +28,18 @@ to analyse the methylation levels of their samples straight away.
 
 %post
 alternatives \
-   --install %{_bindir}/bismark bismark /opt/bioit/%{name}/%{version}/bismark %{priority} \
-   --slave %{_bindir}/bam2nuc bam2nuc /opt/bioit/%{name}/%{version}/bam2nuc \
-   --slave %{_bindir}/bismark2bedGraph bismark2bedGraph /opt/bioit/%{name}/%{version}/bismark2bedGraph \
-   --slave %{_bindir}/bismark2report bismark2report /opt/bioit/%{name}/%{version}/bismark2report \
-   --slave %{_bindir}/bismark2summary bismark2summary /opt/bioit/%{name}/%{version}/bismark2summary \
-   --slave %{_bindir}/bismark_genome_preparation bismark_genome_preparation /opt/bioit/%{name}/%{version}/bismark_genome_preparation \
-   --slave %{_bindir}/bismark_methylation_extractor bismark_methylation_extractor /opt/bioit/%{name}/%{version}/bismark_methylation_extractor \
-   --slave %{_bindir}/coverage2cytosine coverage2cytosine /opt/bioit/%{name}/%{version}/coverage2cytosine \
-   --slave %{_bindir}/deduplicate_bismark deduplicate_bismark /opt/bioit/%{name}/%{version}/deduplicate_bismark \
-   --slave %{_bindir}/filter_non_conversion filter_non_conversion /opt/bioit/%{name}/%{version}/filter_non_conversion \
-   --slave %{_bindir}/methylation_consistency methylation_consistency /opt/bioit/%{name}/%{version}/methylation_consistency \
-   --slave %{_bindir}/NOMe_filtering NOMe_filtering /opt/bioit/%{name}/%{version}/NOMe_filtering
+   --install %{_bindir}/bismark bismark /opt/bioit/%{name}/%{version}/bin/bismark %{priority} \
+   --slave %{_bindir}/bam2nuc bam2nuc /opt/bioit/%{name}/%{version}/bin/bam2nuc \
+   --slave %{_bindir}/bismark2bedGraph bismark2bedGraph /opt/bioit/%{name}/%{version}/bin/bismark2bedGraph \
+   --slave %{_bindir}/bismark2report bismark2report /opt/bioit/%{name}/%{version}/bin/bismark2report \
+   --slave %{_bindir}/bismark2summary bismark2summary /opt/bioit/%{name}/%{version}/bin/bismark2summary \
+   --slave %{_bindir}/bismark_genome_preparation bismark_genome_preparation /opt/bioit/%{name}/%{version}/bin/bismark_genome_preparation \
+   --slave %{_bindir}/bismark_methylation_extractor bismark_methylation_extractor /opt/bioit/%{name}/%{version}/bin/bismark_methylation_extractor \
+   --slave %{_bindir}/coverage2cytosine coverage2cytosine /opt/bioit/%{name}/%{version}/bin/coverage2cytosine \
+   --slave %{_bindir}/deduplicate_bismark deduplicate_bismark /opt/bioit/%{name}/%{version}/bin/deduplicate_bismark \
+   --slave %{_bindir}/filter_non_conversion filter_non_conversion /opt/bioit/%{name}/%{version}/bin/filter_non_conversion \
+   --slave %{_bindir}/methylation_consistency methylation_consistency /opt/bioit/%{name}/%{version}/bin/methylation_consistency \
+   --slave %{_bindir}/NOMe_filtering NOMe_filtering /opt/bioit/%{name}/%{version}/bin/NOMe_filtering
 
 %postun
 if [ $1 -eq 0 ]

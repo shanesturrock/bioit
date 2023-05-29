@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script to auto build and install bismark. Just provide the version
+# Script to auto build and install bismark Just provide the version
 
 function usage() {
  cat << EOF
@@ -17,23 +17,52 @@ if [ $# -lt 1 ]; then
  exit 1
 fi
 
+APP="bismark"
 VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
-echo "Building bismark ${VERSION} on ${DATE}"
-cd /opt/bioit/bismark/src
-wget https://github.com/FelixKrueger/Bismark/archive/${VERSION}.tar.gz
-mv ${VERSION}.tar.gz bismark-${VERSION}.tar.gz
-tar xvf bismark-${VERSION}.tar.gz
-mv Bismark-${VERSION} /opt/bioit/bismark/${VERSION}
+echo "Building ${APP} ${VERSION} on ${DATE}"
+
+# Create install directory
+mkdir -p /opt/bioit/${APP}/${VERSION}/bin
+# Generate Singularity def file (use micromamba option)
+../../../bin/create_singularity_conda_env.py3 -u -a ${APP} -v ${VERSION} -l /opt/bioit/${APP}/${VERSION}
+# Build container
+singularity build --fakeroot /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /opt/bioit/${APP}/${VERSION}/Singularity
+# Create version specific template
+sed -e "s%APPVER%${APP}_${VERSION}%g" ../../../bin/bin_template > ${APP}_bin_template
+sed -i "s%APPNAME%${APP}%g" ${APP}_bin_template
+sed -i "s%VERSION%${VERSION}%g" ${APP}_bin_template
+sed -i "s%BINDS%/raid,/active,/archive,/data,/databases,/deepgene,/dunninga,/gbs_pine,/scratch,/sequencing,/treestem%g" ${APP}_bin_template
+sed -i "s/EXEC/micromamba run -n ${APP}_${VERSION}_singularity/g" ${APP}_bin_template
+
+# Create scripts to run each Abyss binary in container
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/bismark
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/bam2nuc
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/bismark2bedGraph
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/bismark2report
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/bismark2summary
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/bismark_genome_preparation
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/bismark_methylation_extractor
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/coverage2cytosine
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/deduplicate_bismark
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/filter_non_conversion
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/methylation_consistency
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/NOMe_filtering
+
+# Make all scripts executable
+chmod a+x /opt/bioit/${APP}/${VERSION}/bin/*
+# Remove the versioned template
+rm ${APP}_bin_template
+
 echo "Writing modulefile"
 echo "#%Module 1.0
 #
-#  bismark module for use with 'environment-modules' package:
+#  ${APP} module for use with 'environment-modules' package:
 #
-prepend-path  PATH              /opt/bioit/bismark/${VERSION}" > /opt/bioit/modulefiles/bismark/${VERSION}
+prepend-path  PATH              /opt/bioit/${APP}/${VERSION}/bin" > /opt/bioit/modulefiles/${APP}/${VERSION}
 echo "Writing module .version to set default"
 echo "#%Module1.0
 ##
-##  The desired version of bismark
+##  The desired version of ${APP}
 ##
-set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/bismark/.version
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/${APP}/.version
