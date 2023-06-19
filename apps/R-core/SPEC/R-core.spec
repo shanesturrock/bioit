@@ -1,12 +1,12 @@
 %global pkgbase R
-%define priority 430
+%define priority 431
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:           R-core
-Version:        4.3.0
+Version:        4.3.1
 Release:        1%{?dist}
 Summary:        R statistical computing and graphics environment
 
@@ -59,6 +59,47 @@ fi
 #/etc/ld.so.conf.d/R-x86_64.conf
 
 %changelog
+* Tue Jun 20 2023 Shane Sturrock <shane.sturrock@gmail.com> - 4.3.1-1
+- CHANGES IN R 4.3.1
+  - C-LEVEL FACILITIES
+  - The C-level API version of R's integrate(), Rdqags() in ‘Applic.h’, now
+    returns the correct number of integrand evaluations neval, fixing PR#18515
+    reported and diagnosed by Stephen Wade.
+  - The C prototypes for LAPACK calls dspgv and dtptrs in ‘R_exts/Lapack.h’ had
+    one too many and one too few character length arguments — but this has not
+    caused any known issues. To get the corrected prototypes, include
+
+      #include <Rconfig.h> // for PR18534fixed
+      #ifdef PR18534fixed
+      # define usePR18534fix 1
+            #endif
+      #include <R_exts/Lapack.h>
+
+    in your C/C++ code (PR#18534).
+- INSTALLATION
+  - Many of the checks of esoteric Internet operations and those using
+    unreliable external sites have been moved to a new target that is not run
+    by default and primarily intended for the core developers. To run them use
+    cd tests; make test-Internet-dev
+- BUG FIXES
+  - .S3methods(), typically called from methods(), again marks methods from
+    package base as visible.
+  - Also, the visibility of non-base methods is again determined by the
+    method's presence in search().
+  - tools::Rdiff() is now more robust against invalid strings, fixing
+    installation tests on Windows without Rtools installed (PR#18530).
+  - Fix (new) bug in hcl.colors(2, *), by Achim Zeileis (PR#18523).
+  - head(., <illegal>) and tail(..) now produce more useful "Error in ...."
+    error messages, fixing PR#18362.
+  - Package code syntax on Windows is checked in UTF-8 when UTF-8 is the native
+    encoding.
+  - na.contiguous(x) now also returns the first run, when it is at the
+    beginning and there is a later one of the same length; reported to R-devel,
+    including a fix, by Georgi Boshnakov. Further, by default, it modifies only
+    an existing attr(*,"tsp") but otherwise no longer sets one.
+  - chol(<not pos.def>, pivot = <T|F>) now gives a correct error or warning
+    message (depending on pivot), thanks to Mikael Jagan's (PR#18541).
+
 * Wed Apr 26 2023 Shane Sturrock <shane.sturrock@gmail.com> - 4.3.0-1
 - SIGNIFICANT USER-VISIBLE CHANGES
   - Calling && or || with LHS or (if evaluated) RHS of length greater than one
