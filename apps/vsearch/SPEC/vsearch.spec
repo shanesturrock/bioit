@@ -1,11 +1,11 @@
-%define priority 2221
+%define priority 2230
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		vsearch
-Version:	2.22.1
+Version:	2.23.0
 Release:	1%{?dist}
 Summary:	An alternative to the USEARCH
 Group:		Applications/Engineering
@@ -43,6 +43,24 @@ fi
 %files
 
 %changelog
+* Mon Jul 10 2023 Shane Sturrock <shane.sturrock@gmail.com> - 2.23.0-1
+- Update documentation. 
+- Add citation file. 
+- Modernize and improve code. 
+- Fix several minor bugs. 
+- Fix compilation with GCC 13. 
+- Print stats after fastq_mergepairs to log file instead of stderr. 
+- Handle sizein option correctly with dbmatched option for usearch_global. 
+- Allow maxseqlength option for makeudb_usearch. 
+- Fix memory allocation problem with chimera detection. 
+- Add lengthout and xlength options. 
+- Increase precision for eeout option. 
+- Add warning about sintax algorithm, random seed and multiple threads. 
+- Refactor chimera detection code. 
+- Add undocumented experimental long_chimeras_denovo command. 
+- Fix segfault with clustering. 
+- Add more references.
+
 * Thu Sep 22 2022 Shane Sturrock <shane.sturrock@gmail.com> - 2.22.1-1
 - Add the derep_smallmem command for dereplication with less memory usage. 
 - Remove compiler warnings.
