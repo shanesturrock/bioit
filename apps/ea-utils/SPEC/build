@@ -25,6 +25,7 @@ wget https://github.com/ExpressionAnalysis/ea-utils/archive/${VERSION}.tar.gz
 mv ${VERSION}.tar.gz ea-utils-${VERSION}.tar.gz
 tar xvf ea-utils-${VERSION}.tar.gz
 cd ea-utils-${VERSION}/clipper
+export PERL5LIB=`pwd`
 sed "s+PREFIX?=/usr+PREFIX?=/opt/bioit/ea-utils/${VERSION}+g" --in-place Makefile
 make
 make install
