@@ -4,6 +4,8 @@
 
 set -e
 
+module load bwa
+
 bwa index -a bwtsw example.fasta
 rm -f example.fasta.*
 exit 0

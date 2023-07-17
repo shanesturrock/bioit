@@ -4,7 +4,7 @@ set -e
 
 # Uncomment to load the latest default version so the test will
 # work even without the RPM package installed
-# module load abyss
+module load abyss
 
 # Show the version
 ABYSS --version

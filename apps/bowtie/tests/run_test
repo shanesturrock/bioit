@@ -6,6 +6,9 @@ if [ ! -d reads/ ]; then
 fi
 
 set -e
+module load bowtie
+module load samtools
+
 bowtie indexes/e_coli reads/e_coli_1000.fq
 bowtie -t indexes/e_coli reads/e_coli_1000.fq e_coli.map
 

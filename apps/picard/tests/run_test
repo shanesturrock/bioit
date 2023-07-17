@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+module load picard
 
 function cleanup() {
 	for file in Asperg.sam new.sam; do

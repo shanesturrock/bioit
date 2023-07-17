@@ -12,6 +12,8 @@
 
 set -e 
 
+module load vcftools
+
 vcf-stats valid-4.1.vcf
 vcf-sort  valid-4.1.vcf
 vcf-merge merge-test-*.vcf.gz > merged.vcf

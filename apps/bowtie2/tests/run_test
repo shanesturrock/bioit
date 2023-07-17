@@ -1,4 +1,6 @@
 #!/bin/bash
+module load bowtie2
+module load samtools
 
 if [ ! -d example/ ]; then
 	echo "bowtie2 tests need example/ directory from bowtie2 source package."

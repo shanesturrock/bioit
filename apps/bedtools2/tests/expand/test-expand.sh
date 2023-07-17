@@ -1,4 +1,6 @@
-BT=${BT-/bin/bedtools}
+module load bedtools2
+BT=`which bedtools`
+#BT=${BT-/bin/bedtools}
 
 check()
 {

@@ -6,7 +6,10 @@
 # aggggggggg
 # cggggggggg
 
-BT=${BT-/bin/bedtools}
+module load bedtools2
+module load samtools
+BT=`which bedtools`
+#BT=${BT-/bin/bedtools}
 
 check()
 {

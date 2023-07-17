@@ -1,5 +1,8 @@
 set -e;
-BT=${BT-/bin/bedtools}
+#BT=${BT-/bin/bedtools}
+module load bedtools2
+#module load samtools
+BT=`which bedtools`
 htsutil=${htsutil-../htsutil}
 
 FAILURES=0;
