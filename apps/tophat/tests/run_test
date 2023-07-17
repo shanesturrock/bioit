@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 module load tophat
+module load bowtie2
 
 tophat -r 20 test_ref reads_1.fq reads_2.fq
 rm -rf tophat_out
