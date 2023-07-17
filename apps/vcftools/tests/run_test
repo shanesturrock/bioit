@@ -13,6 +13,7 @@
 set -e 
 
 module load vcftools
+module load htslib
 
 vcf-stats valid-4.1.vcf
 vcf-sort  valid-4.1.vcf

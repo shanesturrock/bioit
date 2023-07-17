@@ -9,6 +9,7 @@ output='good_dataset.fq.matrix.pdf'
 
 set -e
 module load SolexaQA++
+module load R
 
 function cleanup() {
 	for file in good_dataset.fq.hist.pdf good_dataset.fq.matrix \
