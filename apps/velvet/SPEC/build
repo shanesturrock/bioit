@@ -21,9 +21,12 @@ VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Building velvet ${VERSION} on ${DATE}"
 cd /opt/bioit/velvet/src
-wget https://www.ebi.ac.uk/~zerbino/velvet/velvet_${VERSION}.tgz
+#wget https://www.ebi.ac.uk/~zerbino/velvet/velvet_${VERSION}.tgz
+wget https://github.com/dzerbino/velvet/archive/refs/tags/v${VERSION}.tar.gz
+mv v${VERSION}.tar.gz velvet_${VERSION}.tgz
 tar xvf velvet_${VERSION}.tgz
-cd velvet_${VERSION}
+cd velvet-${VERSION}
+#cd velvet_${VERSION}
 # Tweak makefile
 sed 's+CATEGORIES=2+CATEGORIES=99+g' --in-place Makefile
 sed 's+MAXKMERLENGTH=31+MAXKMERLENGTH=255+g' --in-place Makefile
