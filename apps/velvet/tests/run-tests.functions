@@ -3,8 +3,9 @@
 # GLOBALS
 #-----------------------------------------------
 
-VH=/usr/bin/velveth
-VG=/usr/bin/velvetg
+module load velvet
+VH=`which velveth`
+VG=`which velvetg`
 K=31
 SEQ="Sequences.$K"
 ROADMAP="Roadmaps.$K"
