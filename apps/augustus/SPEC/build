@@ -89,6 +89,8 @@ export TOOLDIR=`pwd`
 # Now build augustus
 # Turn off comparative gene prediction
 #sed "s+COMPGENEPRED = true+COMPGENEPRED = false+" --in-place common.mk
+# Turn off MYSQL support because it doesn't work on RL8
+echo "MYSQL = false" >> common.mk
 make
 make install
 # Augustus build misses utrrnaseq bin for some reason
