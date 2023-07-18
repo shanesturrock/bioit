@@ -23,18 +23,19 @@ PY2_VER=2.7
 JLAB_VER=$1
 ENV_NAME=jupyterlab_${JLAB_VER}
 JLAB_PATH=${ROOT}/jupyterlab/${JLAB_VER}
-CONDA_BIN=${ROOT}/jupyterlab/anaconda3/2021.05/bin
+CONDA_VER=2023.07-1
+CONDA_BIN=${ROOT}/jupyterlab/anaconda3/${CONDA_VER}/bin
 JLAB_CONFIG_DIR=${JLAB_PATH}/${ENV_NAME}/etc/jupyter
-JHUB_PORT=443
-JHUB_PROTO=https
+JHUB_PORT=8080
+JHUB_PROTO=http
 
 # Set up directory for this and go into it
 mkdir ${ROOT}/jupyterlab
 cd ${ROOT}/jupyterlab
 
 # Download and install Anaconda
-wget -N https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh
-bash ./Anaconda3-2021.05-Linux-x86_64.sh -b -p ${ROOT}/jupyterlab/anaconda3/2021.05
+wget -N https://repo.anaconda.com/archive/Anaconda3-${CONDA_VER}-Linux-x86_64.sh
+bash ./Anaconda3-${CONDA_VER}-Linux-x86_64.sh -b -p ${ROOT}/jupyterlab/anaconda3/${CONDA_VER}
 
 # don't rebuild the env if it already exists
 CHECK_ENV=$( ${CONDA_BIN}/conda list -n ${ENV_NAME} 2>&1 )
@@ -45,7 +46,7 @@ then
 
    # can't use both --name and --prefix
    # by default you can't have names in envs that are outside the default
-   ${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/${ENV_NAME} python=${PY3_VER} ipykernel jupyterlab=${JLAB_VER} jupyterhub nodejs jedi python-language-server unixodbc
+   ${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/${ENV_NAME} python=${PY3_VER} ipykernel jupyterhub jupyterlab=${JLAB_VER} notebook nodejs jedi python-language-server unixodbc
  
    # add the env path to the default path so the name becomes visible :-)
    ${CONDA_BIN}/conda config --append envs_dirs ${JLAB_PATH}/${ENV_NAME}
@@ -58,7 +59,7 @@ fi
 export PATH=${JLAB_PATH}/${ENV_NAME}/bin:${PATH}
 
 # install a load of common libs
-	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy ipywidgets jupyterlab-system-monitor
+	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scikit-learn-intelex scipy ipywidgets jupyterlab-system-monitor
 	# ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy ipywidgets tensorflow jupyterlab-system-monitor
 	# install some useful extensions
 	${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyter-lsp 'python-language-server[all]'
@@ -101,7 +102,6 @@ c.JupyterHub.bind_url = '${JHUB_PROTO}://:${JHUB_PORT}'
 c.JupyterHub.config_file = '${JLAB_CONFIG_DIR}/jupyterhub_config.py'
 c.JupyterHub.cookie_secret_file = '${JLAB_CONFIG_DIR}/jupyterhub_cookie_secret'
 c.JupyterHub.db_url = 'sqlite:///${JLAB_CONFIG_DIR}/jupyterhub.sqlite'
-c.JupyterHub.extra_log_file = '/var/log/jupyterhub.log'
 c.JupyterHub.last_activity_interval = 300
 c.JupyterHub.port = 8000
 c.Spawner.args = ['--log-level=ERROR']
@@ -134,7 +134,10 @@ After=syslog.target network.target
 [Service]
 User=root
 Environment="PATH=${JLAB_PATH}/${ENV_NAME}/bin/:/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin/"
-ExecStart=${JLAB_PATH}/${ENV_NAME}/bin/jupyterhub -f ${JLAB_CONFIG_DIR}/jupyterhub_config.py --ssl-cert=/etc/ssl/certs/`hostname`.crt --ssl-key=/etc/ssl/private/`hostname`.key &>> /var/log/jupyterhub.log
+ExecStart=${JLAB_PATH}/${ENV_NAME}/bin/jupyterhub -f ${JLAB_CONFIG_DIR}/jupyterhub_config.py
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=jupyterhub
 
 [Install]
 WantedBy=multi-user.target
@@ -164,7 +167,10 @@ KERNEL
 ) > ${KERNEL_FILE}
 
 
-# Tweak the Python3.9 kernel file to display the correct Python version
+# Update the database if needed
+${JLAB_PATH}/${ENV_NAME}/bin/jupyterhub upgrade-db
+
+# Tweak the Pythonkernel file to display the correct Python version
 # I think it's easier to overwrite the existing one than edit the old via script
 PY3_VER_STRING=$(${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} --version 2>&1)
 ${JLAB_PATH}/${ENV_NAME}/bin/python3 -m ipykernel install --name python3 --display-name "${PY3_VER_STRING}" --prefix="${JLAB_PATH}/${ENV_NAME}"

@@ -10,6 +10,7 @@ sudo systemctl stop jupyterhub.service
 echo "Unlinking service" 
 sudo unlink /usr/lib/systemd/system/jupyterhub.service 
 sudo unlink /etc/systemd/system/jupyterhub.service
+sudo unlink /etc/systemd/system/multi-user.target.wants/jupyterhub.service
 echo "Reloading daemon"  
 sudo systemctl daemon-reload 
 echo "Checking the service is gone" 
