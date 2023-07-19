@@ -27,7 +27,14 @@ mv v${VERSION}.tar.gz cutadapt-${VERSION}.tar.gz
 tar xvf cutadapt-${VERSION}.tar.gz
 # Actual install is done from pip in venv
 mkdir -p /opt/bioit/cutadapt/${VERSION}
-/opt/rh/rh-python38/root/usr/bin/python -m venv /opt/bioit/cutadapt/${VERSION}/venv
+# Handle differences between Rocky and CentOS
+if [ $(cat /etc/redhat-release | grep -ci "rocky") -eq 1 ]; then
+  # Rocky Linux
+  /usr/bin/python3.8 -m venv /opt/bioit/cutadapt/${VERSION}/venv
+else
+  # CentOS Linux
+  /opt/rh/rh-python38/root/usr/bin/python -m venv /opt/bioit/cutadapt/${VERSION}/venv
+fi
 # Need to upgrade pip for install to work
 /opt/bioit/cutadapt/${VERSION}/venv/bin/pip3 install --upgrade pip
 /opt/bioit/cutadapt/${VERSION}/venv/bin/pip3 install cutadapt==${VERSION}
