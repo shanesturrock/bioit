@@ -33,7 +33,7 @@ sed -e "s%APPVER%${APP}_${VERSION}%g" ${HOME}/bioit/bin/bin_template > ${APP}_bi
 sed -i "s%APPNAME%${APP}%g" ${APP}_bin_template
 sed -i "s%VERSION%${VERSION}%g" ${APP}_bin_template
 sed -i "s%BINDS%/raid,/active,/archive,/data,/databases,/deepgene,/dunninga,/gbs_pine,/scratch,/sequencing,/treestem%g" ${APP}_bin_template
-sed -i "s/EXEC/micromamba run -n ${APP}_${VERSION}_singularity/g" ${APP}_bin_template
+sed -i "s/EXEC/micromamba run -p ${APP}_${VERSION}_singularity/g" ${APP}_bin_template
 
 # Create scripts to run each binary in container
 cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/bam2fastx
