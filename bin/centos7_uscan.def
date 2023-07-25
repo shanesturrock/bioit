@@ -1,0 +1,27 @@
+Bootstrap: yum
+OSVersion: 7
+MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
+Include: yum
+
+%help
+    Container with uscan installed.
+
+%setup
+
+%post
+    yum clean all
+    yum -y update
+    yum -y install epel-release
+    yum -y install dpkg-devel dpkg perl-TimeDate lzma dpkg-perl devscripts \
+       perl-Crypt-SSLeay perl-LWP-Protocol-https perl-libwww-perl
+
+%environment
+    export LC_CTYPE=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+
+%runscript
+    exec /usr/bin/uscan "$@"
+
+%labels
+    Author Shane Sturrock
+    Version v1.0

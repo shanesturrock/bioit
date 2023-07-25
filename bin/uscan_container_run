@@ -1,2 +1,0 @@
-#!/bin/bash
-singularity --silent exec --bind /opt/bioit /home/build/centos7.9 uscan "$@"
