@@ -20,7 +20,6 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
 
 ### Rocky Linux 8
 
-    yum -y install dnf
     dnf -y install epel-release
     /usr/bin/crb enable
     dnf -y groupinstall "Development Tools"
@@ -84,18 +83,6 @@ The machine will need a reboot any time a kernel update is applied. To avoid thi
     exclude=kernel*
 
 If there's a bad kernel issue comment this line out, update the kernel and reboot the machine to apply the update but otherwise this should be fine and will allow the machine to stay up for extended periods.
-
-## Turn off the automatic bug reporting tool
-
-Users can't see the crash reports anyway so remove it using:
-
-### CentOS 7
-
-    yum -y remove abrt
-
-### Rocky Linux 8
-
-    dnf -y remove abrt
 
 ## Other useful packages
 
@@ -261,6 +248,18 @@ Also remove the pulseaudio tools to stop logs being filled with errors as users 
 ### Rocky Linux 8
 
     dnf -y remove pulseaudio-gdm-hooks pulseaudio-utils pulseaudio-module-bluetooth pulseaudio
+
+## Turn off the automatic bug reporting tool
+
+Users can't see the crash reports anyway so remove it using:
+
+### CentOS 7
+
+    yum -y remove abrt
+
+### Rocky Linux 8
+
+    dnf -y remove abrt
 
 ## Proxy SSL certificate
 
