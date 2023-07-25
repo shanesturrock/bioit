@@ -156,6 +156,54 @@ The script has help (`-h`) and in addition to running individual tests, it can r
     bismark: Passed
     velvet: Passed
 
+## Rstudio Server Install
+
+Download the installer:
+
+    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2023.06.1-524-x86_64.rpm
+
+To run RStudio Server with a specific version of R, or where no meta-RPMs are being used, do the following before installing the rstudio server package:
+
+    sudo mkdir /etc/rstudio
+    sudo vi /etc/rstudio/rserver.conf
+
+Paste the following into the rserver.conf file you're creating (changing the version of R as necessary):
+
+    # Location of R
+    rsession-which-r=/opt/bioit/R-core/4.3.1/bin/R
+    # R library path
+    rsession-ld-library-path=/opt/bioit/R-core/4.3.1/lib64/R/lib
+    # Only listen localhost
+    www-address=localhost
+    # Connection port
+    www-port=8787
+
+Note that this will cause the server to only listen to localhost and port 8787, to serve other machines we'll install nginx later which will add SSL support.
+
+Install the server:
+
+### CentOS 7
+
+    sudo yum -y install rstudio-server-rhel-2023.06.1-524-x86_64.rpm    
+
+### Rocky Linux 8
+
+    sudo dnf -y install rstudio-server-rhel-2023.06.1-524-x86_64.rpm
+
+You should now be able to open the RStudio Server interface by going to http://localhost:8787 using Firefox inside the X2Go remote desktop.
+
+## JupyterLab Install
+
+Make sure password free sudo is enabled as per the installation page. JupyterLab is installed by running the script in ~/bioit/bin
+
+   build_jupyterlab 3.6.5
+
+If it fails, you can remove it using:
+
+   destroy_jupyterlab
+
+Once running you can test it from Firefox in X2Go by going to http://localhost:8080 and you will get an SSL warning but we'll deal with that via nginx.
+
 ## Adding new packages
 
 To add a new package you can reference one of the earlier ones that may be very similar. Create the same directory structure with package name and src, and build as per the others, documenting this on a new page under [Applications](Applications.md) on this site to catch any specifics. You can copy a previous page to use as a template. Once the tool builds and you've created the module file which is tested and works, you should then create a fresh RPM again using a previous template and once that works copy the finished and signed RPM into the `repo/RPM` directory, add it to the `buildrpms` and into the `bioit.xml` file. Finally you can rerun the same `createrepo` process and do a `sudo yum groupinstall bioit` which should see your new package and add it to the system. In the git repo you can also add the new tool, create a `watch` script for `version_check` to run off and also add some tests if available. Don't forget to copy your changes modulefile and edit the `buildrpms` and `setup_bioit` scripts too.

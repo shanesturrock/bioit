@@ -98,7 +98,7 @@ cat <<CONFIG
 import os
 os.umask(0o0007)
 c.JupyterHub.authenticator_class = 'jupyterhub.auth.PAMAuthenticator'
-c.JupyterHub.bind_url = '${JHUB_PROTO}://:${JHUB_PORT}'
+c.JupyterHub.bind_url = '${JHUB_PROTO}://localhost:${JHUB_PORT}'
 c.JupyterHub.config_file = '${JLAB_CONFIG_DIR}/jupyterhub_config.py'
 c.JupyterHub.cookie_secret_file = '${JLAB_CONFIG_DIR}/jupyterhub_cookie_secret'
 c.JupyterHub.db_url = 'sqlite:///${JLAB_CONFIG_DIR}/jupyterhub.sqlite'

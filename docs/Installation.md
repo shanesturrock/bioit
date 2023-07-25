@@ -228,9 +228,8 @@ This should now allow you to install the latest x2go client for your platform an
 
 ### Rocky Linux 8
 
-Turning off the firewalld ensures the connections work, we should probably do all of this with the firewall on but for ease we'll turn it off:
+Since Rocky Linux doesn't have the groupinstall "Mate Desktop" you need to install all the following:
 
-    sudo service firewalld stop
     dnf -y install x2goserver mate-desktop mate-session-manager NetworkManager-adsl NetworkManager-bluetooth NetworkManager-libreswan-gnome NetworkManager-openvpn-gnome NetworkManager-ovs NetworkManager-ppp NetworkManager-team NetworkManager-wifi NetworkManager-wwan abrt-desktop abrt-java-connector adwaita-gtk2-theme alsa-plugins-pulseaudio atril atril-caja atril-thumbnailer caja caja-actions caja-image-converter caja-open-terminal caja-sendto caja-wallpaper caja-xattr-tags dconf-editor engrampa eom firewall-config gnome-disk-utility gnome-epub-thumbnailer gstreamer1-plugins-ugly-free gtk2-engines gucharmap gvfs-afc gvfs-afp gvfs-archive gvfs-fuse gvfs-gphoto2 gvfs-mtp gvfs-smb initial-setup-gui libmatekbd libmatemixer libmateweather libsecret lm_sensors marco mate-applets mate-backgrounds mate-calc mate-control-center mate-desktop mate-dictionary mate-disk-usage-analyzer mate-icon-theme mate-media mate-menus mate-menus-preferences-category-menu mate-notification-daemon mate-panel mate-polkit mate-power-manager mate-screensaver mate-screenshot mate-search-tool mate-session-manager mate-settings-daemon mate-system-log mate-system-monitor mate-terminal mate-themes mate-user-admin mate-user-guide mozo network-manager-applet nm-connection-editor p7zip p7zip-plugins pluma seahorse seahorse-caja xdg-user-dirs-gtk firefox
 
 Since users are connecting remotely and assuming there are no local connections, the screensaver should be removed as this gets rid of the lock screen menu item which has caught some users out as we have no passwords:
@@ -264,6 +263,14 @@ Users can't see the crash reports anyway so remove it using:
 ### Rocky Linux 8
 
     dnf -y remove abrt
+
+## Test the remote desktop
+
+On your client you should install the X2Go client for your own desktop from here:
+
+    https://wiki.x2go.org/doku.php/download:start
+
+Once that is installed, create a config pointing at your new BioIT server and choose Mate as the session type and use the build user. It should connect and bring up a Mate Desktop session. No need to modify the firewall settings because X2Go runs over the ssh daemon.
 
 ## Proxy SSL certificate
 
