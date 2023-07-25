@@ -162,7 +162,7 @@ Download the installer:
 
     wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2023.06.1-524-x86_64.rpm
 
-To run RStudio Server with a specific version of R, or where no meta-RPMs are being used, do the following before installing the rstudio server package:
+If you're using meta-RPMs ignore the next bit but if only using environment modules you need to specify where R is by doing the following before installing the rstudio server package:
 
     sudo mkdir /etc/rstudio
     sudo vi /etc/rstudio/rserver.conf
@@ -178,7 +178,7 @@ Paste the following into the rserver.conf file you're creating (changing the ver
     # Connection port
     www-port=8787
 
-Note that this will cause the server to only listen to localhost and port 8787, to serve other machines we'll install nginx later which will add SSL support.
+Note that this will cause the server to only listen to localhost and port 8787.  You should add the localhost option even if using a vanilla install as the free RStudio Server package doesn't support SSL and we need to use NGINX to provide that.
 
 Install the server:
 
@@ -202,7 +202,7 @@ If it fails, you can remove it using:
 
    destroy_jupyterlab
 
-Once running you can test it from Firefox in X2Go by going to http://localhost:8080 and you will get an SSL warning but we'll deal with that via nginx.
+Once running you can test it from Firefox in X2Go by going to http://localhost:8080 and you will get an SSL warning but we'll deal with that via NGINX.
 
 ## Adding new packages
 

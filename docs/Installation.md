@@ -164,6 +164,14 @@ Create a build user account with admin rights which will be used to do tool upda
     passwd build
     usermod -aG wheel build
 
+For sudo without password (helps with the installations later) do the following:
+
+    visudo -f /etc/sudoers
+
+Paste this in at the end:
+
+    %build  ALL=(ALL) NOPASSWD:ALL
+
 Add the following to the build user's `.bashrc` file to make building tools nicer:
 
     alias buildrepo="cd /opt/bioit/repo ; createrepo . -g bioit.xml --database"
