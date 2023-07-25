@@ -8,8 +8,18 @@
 # Carl Jones <carl@biomatters.com>
 
 application_dir="/home/build/bioit/apps"	# Default application directory
-uscan='/bin/uscan'
-#uscan='/root/bioit/bin/uscan'
+
+# Handle differences between Rocky and CentOS
+if [ $(cat /etc/redhat-release | grep -ci "rocky") -eq 1 ]; then
+  # Rocky Linux
+  export LC_CTYPE=en_US.UTF-8
+  export LC_ALL=en_US.UTF-8
+  uscan='/home/build/bioit/bin/uscan_container_run'
+else
+  # CentOS Linux
+  uscan='/bin/uscan'
+fi
+
 uscan_args='--timeout 120 --no-symlink'	# Default uscan args
 download_dir='/home/build/rpmbuild/SOURCES' # Where uscan will place downloads
 
