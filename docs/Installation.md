@@ -98,9 +98,13 @@ The rpmfusion repo is also good to have as many packages not included in the bas
 
 An example package would be ffmpeg which can be used to encode mp4 videos for some workflows. Install that with:
 
-    yum install ffmpeg
+### CentOS 7
 
-A bit more work is needed to make this work on Rocky Linux 8 but is documented on the web.
+    yum -y install ffmpeg
+
+### Rocky Linux 8
+
+    dnf -y install ffmpeg
 
 ## Tools required for application support
 
@@ -122,7 +126,7 @@ Fix an issue building augustus with this (no longer needed because Augustus has 
 
     ln -s /usr/lib64/mysql/libmysqlclient.so /usr/lib64/libmysqlclient.so
 
-Fix problems building openmpi based tools (also not needed any more as openmpi isn't including in builds):
+Fix problems building openmpi based tools (also not needed any more as openmpi isn't included in builds):
 
     echo "/usr/lib64/openmpi/lib/" > /etc/ld.so.conf.d/openmpi.conf
     ldconfig

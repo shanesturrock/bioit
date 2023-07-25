@@ -8,38 +8,82 @@ Example setting user quotas on home:
 
 Edit entry in `/etc/fstab`:
 
+### CentOS 7
+
     /dev/mapper/cl-home     /home                   xfs     defaults,usrquota,grpquota,prjquota        1 2
 
-Now execute the following command:
+### Rocky Linux 8
 
+    /dev/mapper/rl-home     /home                   xfs     defaults,usrquota,grpquota,prjquota        0 0
+
+Note the last two numbers may differ from this, just make the changes after defaults to add the quota support.
+
+Now execute the following commands:
+
+    systemctl daemon-reload
     mount -o remount /home
 
 Future reboots will mount the storage correctly, this is just to avoid having to reboot the server to enable the quotas.
 
 ## Test the quotas
 
-Test that the quotas are applied:
+Test that the quotas are applied, if you're not seeing this reboot the machine:
+
+### CentOS 7
 
     xfs_quota -x -c "state" /home
-     User quota state on /home (/dev/mapper/cl-home)
+    User quota state on /home (/dev/mapper/cl-home)
       Accounting: ON
       Enforcement: ON
       Inode: #10305 (2 blocks, 2 extents)
-     Group quota state on /home (/dev/mapper/cl-home)
+    Group quota state on /home (/dev/mapper/cl-home)
       Accounting: ON
       Enforcement: ON
       Inode: #10306 (2 blocks, 2 extents)
-     Project quota state on /home (/dev/mapper/cl-home)
+    Project quota state on /home (/dev/mapper/cl-home)
       Accounting: ON
       Enforcement: ON
       Inode: #10306 (2 blocks, 2 extents)
-     Blocks grace time: [7 days]
-     Inodes grace time: [7 days]
-     Realtime Blocks grace time: [7 days]
+    Blocks grace time: [7 days]
+    Inodes grace time: [7 days]
+    Realtime Blocks grace time: [7 days]
+
+### Rocky Linux 8
+
+    xfs_quota -x -c "state" /home
+    User quota state on /home (/dev/mapper/rl-home)
+      Accounting: ON
+      Enforcement: ON
+      Inode: #134 (2 blocks, 2 extents)
+    Blocks grace time: [7 days]
+    Blocks max warnings: 5
+    Inodes grace time: [7 days]
+    Inodes max warnings: 5
+    Realtime Blocks grace time: [7 days]
+    Group quota state on /home (/dev/mapper/rl-home)
+      Accounting: ON
+      Enforcement: ON
+      Inode: #136 (2 blocks, 2 extents)
+    Blocks grace time: [7 days]
+    Blocks max warnings: 5
+    Inodes grace time: [7 days]
+    Inodes max warnings: 5
+    Realtime Blocks grace time: [7 days]
+    Project quota state on /home (/dev/mapper/rl-home)
+      Accounting: ON
+      Enforcement: ON
+      Inode: #138 (1 blocks, 1 extents)
+    Blocks grace time: [7 days]
+    Blocks max warnings: 5
+    Inodes grace time: [7 days]
+    Inodes max warnings: 5
+    Realtime Blocks grace time: [7 days]
 
 This shows that the quotas are enabled for users, groups and projects.
 
 Report quota for users, groups and projects:
+
+### CentOS 7
 
      xfs_quota -x -c "report -h -ugp" /home
      User quota on /home (/dev/mapper/cl-home)
@@ -62,20 +106,56 @@ Report quota for users, groups and projects:
      ---------- --------------------------------- 
      #0          98.3M      0      0  00 [------]
 
+### Rocky Linux 8
+
+    xfs_quota -x -c "report -h -ugp" /home
+    User quota on /home (/dev/mapper/rl-home)
+                            Blocks
+    User ID      Used   Soft   Hard Warn/Grace
+    ---------- ---------------------------------
+    root            0      0      0  00 [------]
+    build         16K      0      0  00 [------]
+    
+    Group quota on /home (/dev/mapper/rl-home)
+                            Blocks
+    Group ID     Used   Soft   Hard Warn/Grace
+    ---------- ---------------------------------
+    root            0      0      0  00 [------]
+    build         16K      0      0  00 [------]
+    
+    Project quota on /home (/dev/mapper/rl-home)
+                            Blocks
+    Project ID   Used   Soft   Hard Warn/Grace
+    ---------- ---------------------------------
+    #0            16K      0      0  00 [------]
+
 ## Setting user quotas
 
 Set a user quota:
 
-     xfs_quota -x -c "limit -u bsoft=9g bhard=10g shane" /home
+    xfs_quota -x -c "limit -u bsoft=9g bhard=10g build" /home
 
 Rerun quota report and note that there is now a soft quota of 9GB and a hard limit of 10GB:
 
-     xfs_quota -x -c "report -h -u" /homeUser quota on /home (/dev/mapper/cl-home)
-                            Blocks              
-     User ID      Used   Soft   Hard Warn/Grace   
-     ---------- --------------------------------- 
-     root            0      0      0  00 [------]
-     shane      998.3M     9G    10G  00 [------]
+# CentOS 7
+
+    xfs_quota -x -c "report -h -u" /home
+    User quota on /home (/dev/mapper/cl-home)
+                           Blocks              
+    User ID      Used   Soft   Hard Warn/Grace   
+    ---------- --------------------------------- 
+    root            0      0      0  00 [------]
+    build      998.3M     9G    10G  00 [------]
+
+# Rocky Linux 8
+
+    xfs_quota -x -c "report -h -u" /home
+    User quota on /home (/dev/mapper/rl-home)
+                            Blocks
+    User ID      Used   Soft   Hard Warn/Grace
+    ---------- ---------------------------------
+    root            0      0      0  00 [------]
+    build         16K     9G    10G  00 [------]
 
 Test the quota by creating a large file as the user in their home directory:
 
@@ -83,12 +163,13 @@ Test the quota by creating a large file as the user in their home directory:
 
 Now run the report and you'll see that the user is at their soft quota but with 7 days to get below it.
 
-     xfs_quota -x -c "report -h -u" /homeUser quota on /home (/dev/mapper/cl-home)
-                            Blocks              
-     User ID      Used   Soft   Hard Warn/Grace   
-     ---------- --------------------------------- 
-     root            0      0      0  00 [------]
-     shane        9.1G     9G    10G  00 [7 days]
+    xfs_quota -x -c "report -h -u" /home
+    User quota on /home (/dev/mapper/cl-home)
+                           Blocks              
+    User ID      Used   Soft   Hard Warn/Grace   
+    ---------- --------------------------------- 
+    root            0      0      0  00 [------]
+    build        9.1G     9G    10G  00 [7 days]
 
 If the user tries to go over the hard limit they'll get the following:
 
@@ -99,7 +180,7 @@ If the user tries to go over the hard limit they'll get the following:
 
 The quota can be changed by setting bsoft and bhard to a new value for the user:
 
-     xfs_quota -x -c "limit bsoft=10g bhard=11g shane" /home
+     xfs_quota -x -c "limit bsoft=90g bhard=100g build" /home
 
 Rerun the report to show the new quotas:
 
@@ -109,13 +190,13 @@ Rerun the report to show the new quotas:
      User ID      Used   Soft   Hard Warn/Grace   
      ---------- --------------------------------- 
      root            0      0      0  00 [------]
-     shane       98.3M    10G    11G  00 [------]
+     build       98.3M    90G   100G  00 [------]
 
 ## Remove the quota
 
 The quota can be removed by setting bsoft and bhard to 0m for the user:
 
-     xfs_quota -x -c "limit bsoft=0g bhard=0g shane" /home
+     xfs_quota -x -c "limit bsoft=0g bhard=0g build" /home
 
 Rerunning the report shows the quota is gone again:
 
@@ -125,7 +206,7 @@ Rerunning the report shows the quota is gone again:
      User ID      Used   Soft   Hard Warn/Grace   
      ---------- --------------------------------- 
      root            0      0      0  00 [------]
-     shane      998.3M      0      0  00 [------]
+     build      998.3M      0      0  00 [------]
 
 Group quotas are handled in the same way but will limit all users in a particular group to a specific quota. Alternatively, XFS has project quotas which can be applied to specific directories.
 

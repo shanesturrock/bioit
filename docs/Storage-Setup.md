@@ -4,7 +4,13 @@ The storage array needs to be configured for CentOS 7.
 
 Install the `sg3_utils` and `multipath` packages:
 
+### CentOS 7
+
     yum -y install sg3_utils device-mapper-multipath
+
+### Rocky Linux 8
+
+    dnf -y install sg3_utils device-mapper-multipath
 
 Run the following command:
 
@@ -12,7 +18,7 @@ Run the following command:
 
 To use multipath copy the `multipath.conf` file into `/etc`:
 
-    cp /usr/share/doc/device-mapper-multipath-0.4.9/multipath.conf .
+    cp /usr/share/doc/device-mapper-multipath/multipath.conf /etc
 
 Add the following changes:
 
