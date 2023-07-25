@@ -137,7 +137,7 @@ Set a user quota:
 
 Rerun quota report and note that there is now a soft quota of 9GB and a hard limit of 10GB:
 
-# CentOS 7
+### CentOS 7
 
     xfs_quota -x -c "report -h -u" /home
     User quota on /home (/dev/mapper/cl-home)
@@ -147,7 +147,7 @@ Rerun quota report and note that there is now a soft quota of 9GB and a hard lim
     root            0      0      0  00 [------]
     build      998.3M     9G    10G  00 [------]
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     xfs_quota -x -c "report -h -u" /home
     User quota on /home (/dev/mapper/rl-home)

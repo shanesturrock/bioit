@@ -8,7 +8,13 @@ For XFS, follow the instructions on XFS quotas. This section covers EXT4.
 
 Before doing anything, ensure that the quota and nfs-utils packages are installed:
 
+### CentOS 7
+
     yum -y install nfs-utils quota
+
+### Rocky Linux 8
+
+    dnf -y install nfs-utils quota
 
 Once the quota package is installed you can set up the quotas.
 
@@ -42,7 +48,13 @@ Using the `edquota` command you can modify user and group quotas. Note that for 
 
 Install the `nfs-utils` package:
 
+### CentOS 7
+
     yum -y install nfs-utils
+
+### Rocky Linux 8
+
+    dnf -y install nfs-utils
 
 Turn on the NFS service
 
@@ -64,7 +76,13 @@ This will allow any host in the 10.0.X.X range to mount the file system.
 
 The client also needs the `quota` package installed so run the following there too:
 
+### CentOS 7
+
     sudo yum -y install quota
+
+### Rocky Linux 8
+
+   sudo dnf -y install quota
 
 On the client add the following to the `/etc/fstab` file (where 10.0.2.4 in this case is the NFS server):
 

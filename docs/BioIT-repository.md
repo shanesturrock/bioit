@@ -6,7 +6,20 @@ The BioIT packages can be installed by cloning the bioit GitHub repository as fo
 
     git clone https://github.com/shanesturrock/bioit.git
 
-Once that is done, you should be able to run `~/bioit/bin/setup_bioit` and it will do all the work.
+Run the setup command
+
+### CentOS 7
+
+This does all the steps including building RPMs
+
+    ~/bioit/bin/setup_bioit
+
+### Rocky Linux 8
+
+For Rocky Linux 8 we aren't doing RPMs any more so run these two which will create the directories and then build the packages:
+
+    ~/bioit/bin/setup_dirs
+    ~/bioit/bin/buildall
 
 Before you can commit changes back from this checkout you need to set up git so it knows who you are:
 
@@ -25,7 +38,7 @@ Now, do a `git pull` and it will ask for your git username and password and thes
 
 All the packages are compiled as versions in `/opt/bioit` but by default they're not in the user's path unless they choose them with module load. RPMs have been created that set alternatives up to allow them to be run without calling module load and also allows the system to maintain updates and provide changelogs. To set this up, first make sure that `/opt/bioit` is installed on the machine and the modules are setup as per the Installation page. Once that is done, follow the instructions here to create the repository and then install all packages.
 
-## Set up the repository on a new machine
+## Set up the repository on a new machine (Only on CentOS 7 if you want the RPMs, otherwise skip to testing)
 
 First you need to su to the build user. Before you do this to prevent issues with the gpg signing you should run the following command:
 
@@ -118,7 +131,7 @@ A `buildrepo` alias can be setup to do updates by adding the following to your `
 
 Now when you add new RPMs you can just run the `buildrepo` alias and they will be added to the repository.
 
-## Testing
+## Testing (CentOS 7 and Rocky Linux 8)
 
 Where possible, tools should have a `tests` directory with a script called `run_test` which will verify that the currently installed version works as expected. To run all tests there is a script in the bin directory called `test_apps` which will work through all tools and execute their test and report whether they pass or fail. An example run will look like this:
 
