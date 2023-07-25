@@ -4,7 +4,7 @@
 
 After a minimal install you should install EPEL, compilers and a GUI since they will be needed for users.
 
-# CentOS 7
+### CentOS 7
 
     yum -y install epel-release
     yum -y groupinstall "Development Tools"
@@ -18,7 +18,7 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
     yum -y update
     reboot
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     yum -y install dnf
     dnf -y install epel-release
@@ -35,11 +35,11 @@ X11 GUI won't start, but if you want it to run use this:
 
 If the machine will mount NFS storage you need to install the following:
 
-# CentOS 7
+### CentOS 7
 
     yum -y install nfs-utils
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     dnf -y install nfs-utils
 
@@ -49,21 +49,21 @@ Also, if you're using NFS mounted home directories and you've got selinux enable
 
 Install `wget` as this makes it much easier to download packages:
 
-# CentOS 7
+### CentOS 7
 
     yum -y install wget
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     dnf -y install wget
 
 You should not install EPEL `R-core or bowtie` on this system so do the following to remove it if it is already installed:
 
-# CentOS 7
+### CentOS 7
 
     yum remove R-core
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     dnf remove R-core
 
@@ -89,11 +89,11 @@ If there's a bad kernel issue comment this line out, update the kernel and reboo
 
 Users can't see the crash reports anyway so remove it using:
 
-# CentOS 7
+### CentOS 7
 
     yum -y remove abrt
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     dnf -y remove abrt
 
@@ -101,11 +101,11 @@ Users can't see the crash reports anyway so remove it using:
 
 The rpmfusion repo is also good to have as many packages not included in the base or EPEL are there. Install it with:
 
-# CentOS 7
+### CentOS 7
 
     yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     dnf -y localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
 
@@ -119,11 +119,11 @@ A bit more work is needed to make this work on Rocky Linux 8 but is documented o
 
 The following packages are required for building the suite of applications on a fresh BioIT server:
 
-# CentOS 7
+### CentOS 7
 
     yum -y install ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build git git-lfs screen htop root root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel python-devel python-nose python-pip perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env perl-Statistics-Descriptive cmake3 emacs-nox perl-Perl4-CoreLibs lapack-devel mpich-devel java-1.6.0-openjdk-devel zeromq-devel ghc cifs-utils python34-pip python34-devel perl-Archive-Tar perl-PerlIO-gzip hdf5-devel python-networkx gtk3-devel pigz tkinter python34-tkinter tcsh python-devel python34-devel python36-Cython libtiff-devel tmux pyqt4-devel nano python36-libs python36-devel python36-tkinter python36 python36-setuptools python36-pip python2-matplotlib NLopt-devel libsodium-devel libgit2-devel mysql++-devel lpsolve-devel suitesparse-devel mariadb-devel libsqlite3x-devel motif-devel motif-static motif ImageMagick-devel ImageMagick-c++-devel udunits2-devel proj-devel proj-epsg incron unixODBC-devel v8-devel librsvg2-devel xemacs libzstd-devel
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     dnf -y install git git-lfs ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build screen htop root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env perl-Statistics-Descriptive cmake3 emacs-nox perl-Perl4-CoreLibs lapack-devel mpich-devel python3-devel python3-nose python3-pip zeromq-devel ghc cifs-utils perl-Archive-Tar perl-PerlIO-gzip hdf5-devel python3-networkx gtk3-devel pigz python3-tkinter tcsh python3-Cython tmux  nano python3-libs python3-setuptools libsodium-devel libgit2-devel lpsolve-devel suitesparse-devel mariadb-devel libsqlite3x-devel motif-devel motif-static motif ImageMagick-devel ImageMagick-c++-devel udunits2-devel proj-devel incron unixODBC-devel librsvg2-devel xemacs apptainer libtiff-devel python2 python38 perl-Test-Harness rsync
 
@@ -200,7 +200,7 @@ Then restart the ssh daemon.
 
 ## Setup automatic updates
 
-# CentOS 7
+### CentOS 7
 
     yum -y install yum-cron
 
@@ -214,7 +214,7 @@ Enable and start the service
     systemctl enable yum-cron.service
     systemctl start yum-cron.service
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     dnf -y install dnf-automatic
 
@@ -229,13 +229,13 @@ Start the service
 
 ## Install remote desktop
 
-# CentOS 7
+### CentOS 7
 
     yum -y install x2goserver-xsession
 
 This should now allow you to install the latest x2go client for your platform and connect to the server via the GUI MATE Desktop environment.
 
-# Rocky Linux 8
+### Rocky Linux 8
 
 Turning off the firewalld ensures the connections work, we should probably do all of this with the firewall on but for ease we'll turn it off:
 
@@ -244,21 +244,21 @@ Turning off the firewalld ensures the connections work, we should probably do al
 
 Since users are connecting remotely and assuming there are no local connections, the screensaver should be removed as this gets rid of the lock screen menu item which has caught some users out as we have no passwords:
 
-# CentOS 7
+### CentOS 7
 
     yum -y remove mate-screensaver
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     dnf -y remove mate-screensaver
 
 Also remove the pulseaudio tools to stop logs being filled with errors as users try and start it from x2go:
 
-# CentOS 7
+### CentOS 7
 
     yum -y remove pulseaudio-gdm-hooks pulseaudio-utils pulseaudio-module-bluetooth pulseaudio
 
-# Rocky Linux 8
+### Rocky Linux 8
 
     dnf -y remove pulseaudio-gdm-hooks pulseaudio-utils pulseaudio-module-bluetooth pulseaudio
 
