@@ -40,14 +40,14 @@ All the packages are compiled as versions in `/opt/bioit` but by default they're
 
 ## Checking for new packages (Rocky Linux 8 only)
 
-The check_updates alias added to the .bashrc during installation won't work until uscan is available. Unfortunately, the package including this that works on CentOS 7 isn't available for Rocky Linux 8 so the solution is to build a CentOS 7 container which will be used instead.
+The `check_updates` alias added to the `.bashrc` during installation won't work until `uscan` is available. Unfortunately, the package including this that works on CentOS 7 isn't available for Rocky Linux 8 so the solution is to build a CentOS 7 container which will be used instead.
 
 Build the container with this command:
 
     cd ~/bioit/bin
     singularity build --fakeroot centos7_uscan.sif centos7_uscan.def
 
-Now you can test the version_check_modules with the following:
+Now you can test the `version_check_modules` with the following:
 
     version_check_modules -av
 
@@ -119,7 +119,7 @@ Your repo should now be ready. In future, as you create new RPMs, remember to si
 
 As new packages are added to the system, don't forget to add them into the `bioit.xml` file and copy their signed RPMs into the `/opt/bioit/repo/RPMS` directory.
 
-## Keeping it up to date
+## Keeping it up to date (CentOS 7 only, could use the container as per Rocky Linux 8 instead)
 
 The uscan watch scripts need the following installed:
 
