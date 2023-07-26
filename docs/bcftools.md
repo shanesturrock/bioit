@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/bcftools/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/bcftools/SPEC/build 1.17
+    ${HOME}/bioit/apps/bcftools/SPEC/build 1.18
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load bcftools/1.17
+    module load bcftools/1.18
     which bcftools
     bcftools --version
 
@@ -34,7 +34,7 @@ Inside the source run the following where 1.4.1 is the current one being built:
 
 For 1.5 or later they've switched to a configure based build system the same as samtools so you need to do the following:
 
-    ./configure --prefix=/opt/bioit/bcftools/1.17
+    ./configure --prefix=/opt/bioit/bcftools/1.18
     make
     make install
 
@@ -46,8 +46,8 @@ Add a module file in `/opt/bioit/modulefiles/bcftools/` for this version by copy
     #
     #  bcftools module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/bcftools/1.17/bin
-    prepend-path  MANPATH      /opt/bioit/bcftools/1.17/share/man
+    prepend-path  PATH         /opt/bioit/bcftools/1.18/bin
+    prepend-path  MANPATH      /opt/bioit/bcftools/1.18/share/man
 
 ## RPM
 
