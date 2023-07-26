@@ -272,6 +272,8 @@ You need SSL certs, these can be generated like this:
     openssl req -key private.key -new -out server.csr
     openssl x509 -signkey private.key -in server.csr -req -days 365 -out server.crt
 
+If you want the key to last longer, set more than 365 days.
+
 Put the crt and key files inside `/etc/nginx/ssl` and reference them from `nginx.conf`
 
 If you created the key with a passphrase, create `global.pass` inside `/etc/nginx/ssl` and make it only readable by root. Put the passphrase inside this which will allow nginx to decrypt the certs and serve them. Uncomment the relevant line in the `nginx.conf` file.
