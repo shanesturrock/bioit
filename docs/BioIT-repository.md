@@ -209,6 +209,18 @@ If it fails, you can remove it using:
 
 Once running you can test it from Firefox in X2Go by going to http://localhost:8080 and you will get an SSL warning but we'll deal with that via NGINX.
 
+If you have SELinux enabled you'll find that you can't log in, or if you can you should log out and log back in again when you should get a failure. Once you've had this, you need to do the following to allow authentication to work:
+
+    sudo setenforce permissive
+
+Now try and log in and it will let you but audit.log will contain the information necessary to allow it to work in enforcing mode. You need to create a module using this:
+
+    grep denied /var/log/audit/audit.log | audit2allow -M local-module
+    semodule -i local-module.pp
+    setenforce enforcing
+
+At this point, SELinux should allow JupyterHub access to authentication and will continue to work.
+
 ## Adding new packages
 
 To add a new package you can reference one of the earlier ones that may be very similar. Create the same directory structure with package name and src, and build as per the others, documenting this on a new page under [Applications](Applications.md) on this site to catch any specifics. You can copy a previous page to use as a template. Once the tool builds and you've created the module file which is tested and works, you should then create a fresh RPM again using a previous template and once that works copy the finished and signed RPM into the `repo/RPM` directory, add it to the `buildrpms` and into the `bioit.xml` file. Finally you can rerun the same `createrepo` process and do a `sudo yum groupinstall bioit` which should see your new package and add it to the system. In the git repo you can also add the new tool, create a `watch` script for `version_check` to run off and also add some tests if available. Don't forget to copy your changes modulefile and edit the `buildrpms` and `setup_bioit` scripts too.
