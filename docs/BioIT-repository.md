@@ -258,6 +258,35 @@ Log in again and there will be a new desktop launcher. Clicking that will open a
 
 Note: When a user logs ouf of this remote desktop they will need to stop their server in Hub Control otherwise they won't be able to start a new desktop. If they just close the tab, the remote desktop will continue running and they can reconnect with the desktop button in JupyterHub. They also need to make sure they don't open a JupyterHub session inside this desktop and connect to the desktop because that will go into a recursive image. They should also not use this and another desktop session such as X2Go as there will be clashes in the files.
 
+## NGINX config
+
+Install nginx:
+
+    sudo dnf -y install nginx
+
+Edit the /etc/nginx/nginx.conf file using the reference provided in ~/bioit/bin
+
+You need SSL certs, these can be generated like this:
+
+    openssl genrsa -des3 -out private.key 2048
+    openssl req -key private.key -new -out server.csr
+    openssl x509 -signkey private.key -in server.csr -req -days 365 -out server.crt
+
+Put the crt and key files inside /etc/nginx/ssl and reference them from nginx.conf
+
+If you created the key with a passphrase, create global.pass inside /etc/nginx/ssl and make it only readable by root. Put the passphrase inside this which will allow nginx to decrypt the certs and serve them.
+
+A DNS entry needs to exist for the aliases used in the conf file so make sure that's done.
+
+Lastly, you need to start nginx and if you have SELinux enabled, it will fail to work with a bad gateway message so set SELinux to permissive as we've already seen:
+
+    sudo setenforce permissive
+    sudo grep denied /var/log/audit/audit.log | audit2allow -M nginx-module
+    sudo semodule -i nginx-module.pp
+    sudo setenforce enforcing
+
+It should now work and you won't get the warning from JupyterHub about it not being SSL. It should also be accessible from external machines.
+
 ## RDP support (Rocky Linux 8)
 
 This is pretty simple, just do the following:
