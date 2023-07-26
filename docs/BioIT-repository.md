@@ -241,7 +241,24 @@ Restart the JupyterHub service
 
 Log in again and there will be a new desktop launcher. Clicking that will open a new tab with a Mate desktop session for the user. 
 
-Note: When a user logs ouf of this remote desktop they will need to stop their server in hub-control otherwise they won't be able to start a new desktop. If they just close the tab, the remote desktop will continue running and they can reconnect with the desktop button in JupyterHub. They also need to make sure they don't open a JupyterHub session inside this desktop and connect to the desktop because that will go into a recursive image. They should also not use this and another desktop session such as X2Go as there will be clashes in the files.
+Note: When a user logs ouf of this remote desktop they will need to stop their server in Hub Control otherwise they won't be able to start a new desktop. If they just close the tab, the remote desktop will continue running and they can reconnect with the desktop button in JupyterHub. They also need to make sure they don't open a JupyterHub session inside this desktop and connect to the desktop because that will go into a recursive image. They should also not use this and another desktop session such as X2Go as there will be clashes in the files.
+
+## RDP support (Rocky Linux 8)
+
+This is pretty simple, just do the following:
+
+    sudo dnf -y install xrdp
+    sudo systemctl enable xrdp
+    sudo systemctl start xrdp
+
+To connect, each user needs to have a `.Xclients` file with `mate-session` and `chmod+x` the file.
+
+Allow access through the firewall:
+
+    sudo firewall-cmd --permanent --add-port=3389/tcp
+    sudo firewall-cmd --reload
+
+It should now be possible to use MS Remote Desktop to connect to the IP address.
 
 ## Adding new packages
 
