@@ -38,6 +38,21 @@ Now, do a `git pull` and it will ask for your git username and password and thes
 
 All the packages are compiled as versions in `/opt/bioit` but by default they're not in the user's path unless they choose them with module load. RPMs have been created that set alternatives up to allow them to be run without calling module load and also allows the system to maintain updates and provide changelogs. To set this up, first make sure that `/opt/bioit` is installed on the machine and the modules are setup as per the Installation page. Once that is done, follow the instructions here to create the repository and then install all packages.
 
+## Checking for new packages (Rocky Linux 8 only)
+
+The check_updates alias added to the .bashrc during installation won't work until uscan is available. Unfortunately, the package including this that works on CentOS 7 isn't available for Rocky Linux 8 so the solution is to build a CentOS 7 container which will be used instead.
+
+Build the container with this command:
+
+    cd ~/bioit/bin
+    singularity build --fakeroot centos7_uscan.sif centos7_uscan.def
+
+Now you can test the version_check_modules with the following:
+
+    version_check_modules -av
+
+This should report all the packages are up to date because it is a newly built system. If you see an update you can build that package using the appropriate build script. The `check_updates` alias will only show the updates needed.
+
 ## Set up the repository on a new machine (Only on CentOS 7 if you want the RPMs, otherwise skip to testing)
 
 First you need to su to the build user. Before you do this to prevent issues with the gpg signing you should run the following command:
