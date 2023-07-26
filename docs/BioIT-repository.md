@@ -221,6 +221,28 @@ Now try and log in and it will let you but audit.log will contain the informatio
 
 At this point, SELinux should allow JupyterHub access to authentication and will continue to work.
 
+## NoVNC inside JupyterLab
+
+It might be useful to have a remote desktop solution inside JupyterLab. Assuming the Mate Desktop is already installed as per the installation page and X2Go config, you can do the following to add a launcher inside JupyterHub as the build user:
+
+    sudo dnf -y install tigervnc
+    cd /opt/bioit/jupyterlab/3.6.5/jupyterlab_3.6.5/bin/
+    ./pip install jupyter-remote-desktop-proxy
+    cd /opt/bioit/jupyterlab/anaconda3/2023.07-1/bin
+    ./conda install --channel conda-forge --prefix /opt/bioit/jupyterlab/3.6.5/jupyterlab_3.6.5 websockify
+
+Set mate-session instead of xfce-session in this file:
+
+    vi /opt/bioit/jupyterlab/3.6.5/jupyterlab_3.6.5/lib/python3.9/site-packages/jupyter_remote_desktop_proxy/share/xstartup
+
+Restart the JupyterHub service
+
+    sudo systemctl restart jupyterhub
+
+Log in again and there will be a new desktop launcher. Clicking that will open a new tab with a Mate desktop session for the user. 
+
+Note: When a user logs ouf of this remote desktop they will need to stop their server in hub-control otherwise they won't be able to start a new desktop. If they just close the tab, the remote desktop will continue running and they can reconnect with the desktop button in JupyterHub. They also need to make sure they don't open a JupyterHub session inside this desktop and connect to the desktop because that will go into a recursive image. They should also not use this and another desktop session such as X2Go as there will be clashes in the files.
+
 ## Adding new packages
 
 To add a new package you can reference one of the earlier ones that may be very similar. Create the same directory structure with package name and src, and build as per the others, documenting this on a new page under [Applications](Applications.md) on this site to catch any specifics. You can copy a previous page to use as a template. Once the tool builds and you've created the module file which is tested and works, you should then create a fresh RPM again using a previous template and once that works copy the finished and signed RPM into the `repo/RPM` directory, add it to the `buildrpms` and into the `bioit.xml` file. Finally you can rerun the same `createrepo` process and do a `sudo yum groupinstall bioit` which should see your new package and add it to the system. In the git repo you can also add the new tool, create a `watch` script for `version_check` to run off and also add some tests if available. Don't forget to copy your changes modulefile and edit the `buildrpms` and `setup_bioit` scripts too.
