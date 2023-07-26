@@ -275,6 +275,29 @@ Allow access through the firewall:
 
 It should now be possible to use MS Remote Desktop to connect to the IP address.
 
+## Nice login banner
+
+Having a nice banner about the machine can be done as follows:
+
+    sudo dnf -y install neofetch figlet
+    echo `hostname -s` | figlet > hostname-banner
+    echo -e "This server is the property of XXXX Ltd.\n\nAll access is monitored." >> hostname-banner
+    sudo mv hostname-banner /etc
+
+Edit the crontab as root:
+
+    sudo crontab -e
+
+Paste in this for a non-gpu server:
+
+    */2 * * * * neofetch --config /home/build/bioit/bin/neofetch.conf --ascii /etc/hostname-banner > /etc/motd
+
+Or this for a gpu server:
+
+    */2 * * * * neofetch --config /home/build/bioit/bin/neofetch_gpu.conf --ascii /etc/hostname-banner > /etc/motd
+
+Now when you log in you'll see a nice banner and updated stats on the machine.
+
 ## Adding new packages
 
 To add a new package you can reference one of the earlier ones that may be very similar. Create the same directory structure with package name and src, and build as per the others, documenting this on a new page under [Applications](Applications.md) on this site to catch any specifics. You can copy a previous page to use as a template. Once the tool builds and you've created the module file which is tested and works, you should then create a fresh RPM again using a previous template and once that works copy the finished and signed RPM into the `repo/RPM` directory, add it to the `buildrpms` and into the `bioit.xml` file. Finally you can rerun the same `createrepo` process and do a `sudo yum groupinstall bioit` which should see your new package and add it to the system. In the git repo you can also add the new tool, create a `watch` script for `version_check` to run off and also add some tests if available. Don't forget to copy your changes modulefile and edit the `buildrpms` and `setup_bioit` scripts too.
