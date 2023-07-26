@@ -216,11 +216,11 @@ You should now be able to open the RStudio Server interface by going to http://l
 
 Make sure password free sudo is enabled as per the installation page. JupyterLab is installed by running the script in ~/bioit/bin
 
-   build_jupyterlab 3.6.5
+    build_jupyterlab 3.6.5
 
 If it fails, you can remove it using:
 
-   destroy_jupyterlab
+    destroy_jupyterlab
 
 Once running you can test it from Firefox in X2Go by going to http://localhost:8080 and you will get an SSL warning but we'll deal with that via NGINX.
 
@@ -264,7 +264,7 @@ Install nginx:
 
     sudo dnf -y install nginx
 
-Edit the /etc/nginx/nginx.conf file using the reference provided in ~/bioit/bin
+Edit the `/etc/nginx/nginx.conf` file using the reference provided in `~/bioit/bin`
 
 You need SSL certs, these can be generated like this:
 
@@ -272,13 +272,17 @@ You need SSL certs, these can be generated like this:
     openssl req -key private.key -new -out server.csr
     openssl x509 -signkey private.key -in server.csr -req -days 365 -out server.crt
 
-Put the crt and key files inside /etc/nginx/ssl and reference them from nginx.conf
+Put the crt and key files inside `/etc/nginx/ssl` and reference them from `nginx.conf`
 
-If you created the key with a passphrase, create global.pass inside /etc/nginx/ssl and make it only readable by root. Put the passphrase inside this which will allow nginx to decrypt the certs and serve them.
+If you created the key with a passphrase, create `global.pass` inside `/etc/nginx/ssl` and make it only readable by root. Put the passphrase inside this which will allow nginx to decrypt the certs and serve them. Uncomment the relevant line in the `nginx.conf` file.
 
 A DNS entry needs to exist for the aliases used in the conf file so make sure that's done.
 
-Lastly, you need to start nginx and if you have SELinux enabled, it will fail to work with a bad gateway message so set SELinux to permissive as we've already seen:
+Lastly, you need to start nginx:
+
+    sudo systemctl start nginx
+
+If you have SELinux enabled, it will fail to work with a bad gateway message so set SELinux to permissive as we've already seen:
 
     sudo setenforce permissive
     sudo grep denied /var/log/audit/audit.log | audit2allow -M nginx-module
