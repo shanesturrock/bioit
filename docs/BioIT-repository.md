@@ -190,6 +190,11 @@ Install the server:
 
     sudo dnf -y install rstudio-server-rhel-2023.06.1-524-x86_64.rpm
 
+If SELinux is enabled, do the following to allow the server to actually work:
+
+    sudo chcon -R -t bin_t /usr/lib/rstudio-server/bin/
+    sudo systemctl restart rstudio-server
+
 You should now be able to open the RStudio Server interface by going to http://localhost:8787 using Firefox inside the X2Go remote desktop.
 
 ## JupyterLab Install
