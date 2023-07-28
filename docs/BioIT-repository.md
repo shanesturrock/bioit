@@ -240,9 +240,9 @@ If you have SELinux enabled you'll find that you can't log in, or if you can you
 
 Now try and log in and it will let you but audit.log will contain the information necessary to allow it to work in enforcing mode. You need to create a module using this:
 
-    grep denied /var/log/audit/audit.log | audit2allow -M local-module
-    semodule -i local-module.pp
-    setenforce enforcing
+    sudo grep denied /var/log/audit/audit.log | audit2allow -M jupyter-module
+    sudo semodule -i jupyter-module.pp
+    sudo setenforce enforcing
 
 At this point, SELinux should allow JupyterHub access to authentication and will continue to work.
 
