@@ -45,7 +45,11 @@ The `check_updates` alias added to the `.bashrc` during installation won't work 
 Build the container with this command:
 
     cd ~/bioit/bin
-    singularity build --fakeroot centos7_uscan.sif centos7_uscan.def
+    export APPTAINER_TMPDIR=`pwd`/tmp
+    mkdir $APPTAINER_TMPDIR
+    apptainer build --fakeroot centos7_uscan.sif centos7_uscan.def
+
+The TMPDIR is required on systems with high security such as CIS, regular Linux installs can omit it.
 
 Now you can test the `version_check_modules` with the following:
 
