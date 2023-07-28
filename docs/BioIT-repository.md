@@ -6,7 +6,7 @@ The BioIT packages can be installed by cloning the bioit GitHub repository as fo
 
     git clone https://github.com/shanesturrock/bioit.git
 
-If CIS hardened, R packages won't install unless each user has a tmp directory for the package builds to happen inside. Each user neeeds a `.Renviron` file with this inside it:
+If CIS hardened, R packages won't install unless each user has a tmp directory for the package builds to happen inside. Each user neeeds a `${HOME}/.Renviron` file with this inside it (this should be created for each user as they're added but it won't be automatic)::
 
     TMP=${HOME}/tmp
 
@@ -220,7 +220,7 @@ If SELinux is enabled, do the following to allow the server to actually work:
     sudo chcon -R -t bin_t /usr/lib/rstudio-server/bin/
     sudo systemctl restart rstudio-server
 
-You should now be able to open the RStudio Server interface by going to http://localhost:8787 using Firefox inside the X2Go remote desktop.
+You should now be able to open the RStudio Server interface by going to `http://localhost:8787` using Firefox inside the X2Go remote desktop.
 
 ## JupyterLab Install
 
@@ -232,7 +232,7 @@ If it fails, you can remove it using:
 
     destroy_jupyterlab
 
-Once running you can test it from Firefox in X2Go by going to http://localhost:8080 and you will get an SSL warning but we'll deal with that via NGINX.
+Once running you can test it from Firefox in X2Go by going to `http://localhost:8080` and you will get an SSL warning but we'll deal with that via NGINX.
 
 If you have SELinux enabled you'll find that you can't log in, or if you can you should log out and log back in again when you should get a failure. Once you've had this, you need to do the following to allow authentication to work:
 
