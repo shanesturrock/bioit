@@ -6,6 +6,12 @@ The BioIT packages can be installed by cloning the bioit GitHub repository as fo
 
     git clone https://github.com/shanesturrock/bioit.git
 
+If CIS hardened, R packages won't install unless each user has a tmp directory for the package builds to happen inside. Each user neeeds a .Renviron file with this inside it:
+
+    TMP=${HOME}/tmp
+
+You should also create that file with ``mkdir ~/tmp`` for the build user. Other users will need the same.
+
 Run the setup command
 
 ### CentOS 7
