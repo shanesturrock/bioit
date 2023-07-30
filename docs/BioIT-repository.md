@@ -243,6 +243,7 @@ Now try and log in and it will let you but audit.log will contain the informatio
     sudo grep denied /var/log/audit/audit.log | audit2allow -M jupyter-module
     sudo semodule -i jupyter-module.pp
     sudo setenforce enforcing
+    sudo systemctl restart jupyterhub
 
 At this point, SELinux should allow JupyterHub access to authentication and will continue to work.
 
@@ -265,6 +266,14 @@ Restart the JupyterHub service
     sudo systemctl restart jupyterhub
 
 Log in again and there will be a new desktop launcher. Clicking that will open a new tab with a Mate desktop session for the user. 
+
+If you're running selinux you'll need to enable this again with:
+
+    sudo setenforce permissive
+    sudo grep denied /var/log/audit/audit.log | audit2allow -M vnc-module
+    sudo semodule -i vnc-module.pp
+    sudo setenforce enforcing
+    sudo systemctl restart jupyterhub
 
 Note: When a user logs ouf of this remote desktop they will need to stop their server in Hub Control otherwise they won't be able to start a new desktop. If they just close the tab, the remote desktop will continue running and they can reconnect with the desktop button in JupyterHub. They also need to make sure they don't open a JupyterHub session inside this desktop and connect to the desktop because that will go into a recursive image. They should also not use this and another desktop session such as X2Go as there will be clashes in the files.
 
@@ -300,8 +309,16 @@ If you have SELinux enabled, it will fail to work with a bad gateway message so 
     sudo grep denied /var/log/audit/audit.log | audit2allow -M nginx-module
     sudo semodule -i nginx-module.pp
     sudo setenforce enforcing
+    sudo systemctl restart nginx
 
-It should now work and you won't get the warning from JupyterHub about it not being SSL. It should also be accessible from external machines.
+It should now work and you won't get the warning from JupyterHub about it not being SSL. It should also be accessible from external machines. If you still get the bad gateway message on the new HTTPS connection, redo the SELinux audit step and restart nginx. If it also happens with RStudio Server, do this again until it all works.
+
+If you still can't connect from outside and the firewall is running do the following:
+
+    sudo firewall-cmd --zone=public --permanent --add-service=https
+    sudo firewall-cmd --reload
+
+Now any machine on the local network should be able to access the server (assuming the various aliases have been registered in DNS of course.)
 
 ## RDP support (Rocky Linux 8)
 
