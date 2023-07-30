@@ -12,6 +12,7 @@ Start at the [Installation](Installation.md) page.
 ### [XFS User and Project Quotas](XFS-User-and-Project-Quotas.md)
 ### [NFS User and Group Quotas](NFS-User-and-Group-Quotas.md)
 ### [BioIT Repository](BioIT-repository.md)
+### [Services Setup](Services-Setup.md)
 ### [Applications](Applications.md)
 * [abyss](abyss.md)
 * [augustus](augustus.md)
