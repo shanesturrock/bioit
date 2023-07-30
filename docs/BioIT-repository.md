@@ -343,7 +343,7 @@ Having a nice banner about the machine can be done as follows:
 
     sudo dnf -y install neofetch figlet
     echo `hostname -s` | figlet > hostname-banner
-    echo -e "This server is the property of XXXX Ltd.\n\nAll access is monitored." >> hostname-banner
+    echo -e "This server is the property of\nXXXX Ltd.\n\nAll access is monitored." >> hostname-banner
     sudo mv hostname-banner /etc
 
 Edit the crontab as root:
