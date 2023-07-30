@@ -183,6 +183,199 @@ Or this for a gpu server:
 
 Now when you log in you'll see a nice banner and updated stats on the machine.
 
+## Nagios Install (Rocky 8 only currently)
+
+https://wiki.crowncloud.net/?how_to_install_nagios_on_rockylinux8
+https://www.tecmint.com/install-nagios-in-rocky-linux-and-almalinux/
+
+First of all switch SELinux into permissive mode otherwise things will fail:
+
+    sudo setenforce permissive
+
+We'll turn SELinux on again once things are working.
+
+Install dependencies for Nagios as root:
+
+    sudo -s
+    dnf clean all
+    dnf update
+    dnf install -y php perl @httpd wget unzip glibc automake glibc-common gettext autoconf php php-cli gcc gd gd-devel net-snmp openssl-devel unzip net-snmp postfix net-snmp-utils
+
+Before starting httpd remove the ssl.conf because we're going to put this behind NGINX.
+
+    cd /etc/httpd/conf.d
+    mv ssl.conf ssl.conf.bak
+
+Also, we need to modify the `/etc/httpd/conf/httpd.conf` file to get Apache to listen on a non standard port by commenting out `Listen 80` and adding `Listen localhost:8282` otherwise Apache won't start.
+
+Now start HTTPD and PHP
+
+    systemctl enable --now httpd php-fpm
+    systemctl start httpd
+    systemctl start php-fpm
+
+Verify the services are running correctly and if not you've probably forgotten to switch SELinux into permissive mode.
+
+    systemctl start httpd
+    systemctl start php-fpm
+
+You can also test that Apache is running via a browser in X2Go and going to `http://localhost:8282` and you should see the HTTP Server Test Page.
+
+If Apache and PHP are running correctly, move on to installing Nagios by first downloading and building the source code:
+
+    cd /root
+    wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.4.6.tar.gz
+    tar -xzf nagios-4.4.6.tar.gz
+    cd nagios-*/
+    ./configure
+
+This is going to do the install in `/usr/local` and is better than using the RPM packages as it will be more configurable and easy to debug. Next build the source (assuming the previous step looks to have found all the dependencies it needed:
+
+    make all
+
+If that compiles successfully (Check the `Compile finished` output) we next need to create the nagios user account:
+
+    make install-groups-users
+    usermod -aG nagios apache
+
+Next, install the software itself:
+
+    make install
+    make install-init
+    make install-daemoninit
+    make install-commandmode
+    make install-config
+    make install-webconf
+
+Create the Nagios Web user account `nagiosadmin`(which will be used to log into the interface) giving it a password you can remember:
+
+    htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+    chmod 640 /usr/local/nagios/etc/htpasswd.users
+    chown nagios:nagios /usr/local/nagios/etc/htpasswd.users
+    systemctl restart httpd
+
+Start Nagios:
+
+    systemctl enable nagios --now
+
+Check the service is running:
+
+    systemctl status nagios
+
+Note that it still won't work properly because there are no plugins but you should be able to get into the interface via a brwoser in X2Go at `http://localhost:8282/nagios` using the `nagiosadmin` account and the password you set for it. Once passed the login you'll get an error in services but that's because of the missing plugins so we'll fix that next.
+
+## Nagios plugins install
+
+https://kifarunix.com/install-nagios-plugins-on-rocky-linux-8/
+
+Install the dependencies for plugins (still as root):
+
+    dnf -y install gcc glibc glibc-common make gettext automake autoconf wget openssl-devel
+
+Download and unpack the plugins:
+
+    cd /root
+    wget http://www.nagios-plugins.org/download/nagios-plugins-2.3.3.tar.gz
+    tar xzf nagios-plugins-2.3.3.tar.gz
+
+Build the plugins:
+
+    cd nagios-plugins-2.3.3
+    ./configure --with-nagios-user=nagios --with-nagios-group=nagios
+    make
+    make install
+
+Restart Nagios and try the web interface again.
+
+    systemctl restart nagios
+
+Now you should be able to go into the services for localhost and get OKs for the default set of services. This can be customised later.
+
+# Nagios pnp4nagios install
+
+Download PNP4Nagios http://www.pnp4nagios.org/doku.php?id=start
+untar it
+dnf -y install rrdtool rrdtool-perl perl-Time-HiRes perl-GD php-xml php-gd
+./configure
+make all
+make fullinstall
+vi /usr/local/nagios/etc/nagios.cfg
+Append this:
+process_performance_data=1
+# service performance data
+service_perfdata_file=/usr/local/pnp4nagios/var/service-perfdata
+service_perfdata_file_template=DATATYPE::SERVICEPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tSERVICEDESC::$SERVICEDESC$\tSERVICEPERFDATA::$SERVICEPERFDATA$\tSERVICECHECKCOMMAND::$SERVICECHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$\tSERVICESTATE::$SERVICESTATE$\tSERVICESTATETYPE::$SERVICESTATETYPE$
+service_perfdata_file_mode=a
+service_perfdata_file_processing_interval=15
+service_perfdata_file_processing_command=process-service-perfdata-file
+
+# host performance data
+host_perfdata_file=/usr/local/pnp4nagios/var/host-perfdata
+host_perfdata_file_template=DATATYPE::HOSTPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tHOSTPERFDATA::$HOSTPERFDATA$\tHOSTCHECKCOMMAND::$HOSTCHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$
+host_perfdata_file_mode=a
+host_perfdata_file_processing_interval=15
+host_perfdata_file_processing_command=process-host-perfdata-file
+vi /usr/local/nagios/etc/objects/commands.cfg
+Append this:
+define command{
+       command_name    process-service-perfdata-file
+       command_line    /bin/mv /usr/local/pnp4nagios/var/service-perfdata /usr/local/pnp4nagios/var/spool/service-perfdata.$TIMET$
+}
+
+define command{
+       command_name    process-host-perfdata-file
+       command_line    /bin/mv /usr/local/pnp4nagios/var/host-perfdata /usr/local/pnp4nagios/var/spool/host-perfdata.$TIMET$
+}
+
+Enable npcd service
+/usr/local/pnp4nagios/bin/npcd -d -f /usr/local/pnp4nagios/etc/npcd.cfg
+systemctl enable npcd.service
+
+Restart Nagios and HTTPD
+systemctl restart nagios.service
+systemctl restart httpd.service
+
+If it starts again OK remove install.php file
+rm -f /usr/local/pnp4nagios/share/install.php
+
+It then fails, edit data.php file:
+vi /usr/local/pnp4nagios/share/application/models/data.php
+Go to line 979 and replace
+if (sizeof($pages) > 0){
+with:
+if (is_array($pages) && sizeof($pages) > 0) {
+
+Edit json.php
+vi /usr/local/pnp4nagios/share/application/lib/json.php
+Change line 133 to
+function Services_JSON_construct($use = 0)
+Change line 783 to
+function Services_JSON_Error_construct($message = 'unknown error', $code = null,
+Change line 797 to
+function Services_JSON_Error_construct($message = 'unknown error', $code = null,
+
+Save the file. At this point graphs should start appearing.
+
+This might help getting the graphs used by the services
+https://arkit.co.in/pnp4nagios-installation-configuration/
+
+Add the following to objects/template.cfg
+define host {
+        name host-pnp
+        action_url /pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=_HOST_' class='tips' rel=/pnp4nagios/index.php/popup?host=$HOSTNAME$&srv=_HOST_
+        register 0
+        }
+
+define service {
+        name srv-pnp
+        action_url /pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$' class='tips' rel=/pnp4nagios/index.php/popup?host=$HOSTNAME$&srv=$SERVICEDESC$
+        register 0
+        }
+
+Then for each thing you want the graph on change local-service to local-service,srv-pnp in objects/localhost.cfg
+
+Restart nagios and you should now be able to click on the graph next to each service to see the historical charts.
+
 ## Next Step
 
 Go to the [Applications](Applications.md) page.
