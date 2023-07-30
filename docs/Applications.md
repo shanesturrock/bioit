@@ -4,56 +4,7 @@ Each application is listed here with the necessary instructions to build it from
 
 Note that all tools go into the `/opt/bioit` directory followed by their name and then versions for each. This way we can keep all versions of tools available. By default RPMs are built that set the alternatives for each tool to the latest version so users will always have the best version but they can also use the environment modules to choose another version.
 
-## Notes on installing rstudio
-
-Install the latest Rstudio Server using the following:
-
-    wget https://download2.rstudio.org/server/centos7/x86_64/rstudio-server-rhel-2022.02.3-492-x86_64.rpm
-    sudo yum install rstudio-server-rhel-2022.02.3-492-x86_64.rpm
-
-Open firewall port to allow this to work:
-
-    sudo firewall-cmd --zone=public --add-port=8787/tcp --permanent
-    sudo firewall-cmd --reload
-
-## Notes on installing jupyterlab
-
-Ensure SE Linux is turned off by editing `/etc/selinux/config` and setting `SELINUX=disabled` then reboot the server.
-
-Create a self-signed certificate for the server to use as it runs on port 443. This command will create files for the server.
-
-    sudo mkdir /etc/ssl/private
-    sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/`hostname`.key -out /etc/ssl/certs/`hostname`.crt
-
-Answer the questions with sensible values.
-
-Run the `build_jupyterlab` script which will download everything it needs and use the cert you just created.
-
-Once that completes open port 443 on the firewall:
-
-    sudo firewall-cmd --zone=public --add-port=443/tcp --permanent
-    sudo firewall-cmd --reload
-
-Users can now go to <https://localhost> and they should see the login prompt.
-
-## Other useful tools
-
-Remote desktop via RDP client (good for Windows users) can be enabled by
-installing xrdp:
-
-    sudo yum -y install xrdp
-    sudo systemctl enable xrdp
-    sudo systemctl start xrdp
-    sudo firewall-cmd --permanent --add-port=3389/tcp
-    sudo firewall-cmd --reload
-
-For a user to connect they need to create the `.Xclients` file in their home directory:
-
-    echo "mate-session" > ~/.Xclients
-
-Then they can connect to the server using the default port an RDP client expects.
-
-Another couple of nice programs are `ncdu` and `baobab` both of which allow uers to see how much disc space they're using.
+A couple of nice programs are `ncdu` and `baobab` both of which allow uers to see how much disc space they're using.
 
     sudo yum -y install ncdu baobab
 
