@@ -124,6 +124,7 @@ A DNS entry needs to exist for the aliases used in the conf file so make sure th
 
 Lastly, you need to start nginx:
 
+    sudo systemctl enable nginx
     sudo systemctl start nginx
 
 If you have SELinux enabled, it will fail to work with a bad gateway message so set SELinux to permissive as we've already seen:
@@ -185,10 +186,13 @@ Now when you log in you'll see a nice banner and updated stats on the machine.
 
 ## Nagios Install (Rocky 8 only currently)
 
-https://wiki.crowncloud.net/?how_to_install_nagios_on_rockylinux8
-https://www.tecmint.com/install-nagios-in-rocky-linux-and-almalinux/
+Before doing anything, make sure crony is enabled otherwise logs will be funky:
 
-First of all switch SELinux into permissive mode otherwise things will fail:
+    systemctl enable --now chronyd
+
+Check you date, time and timezone are correct using `timedatectl`,
+
+To ease the install of nagios and plugins, switch SELinux into permissive mode otherwise things will fail:
 
     sudo setenforce permissive
 
