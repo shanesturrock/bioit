@@ -266,8 +266,6 @@ Note that it still won't work properly because there are no plugins but you shou
 
 ## Nagios plugins install
 
-https://kifarunix.com/install-nagios-plugins-on-rocky-linux-8/
-
 Install the dependencies for plugins (still as root):
 
     dnf -y install gcc glibc glibc-common make gettext automake autoconf wget openssl-devel
@@ -293,88 +291,125 @@ Now you should be able to go into the services for localhost and get OKs for the
 
 # Nagios pnp4nagios install
 
-Download PNP4Nagios http://www.pnp4nagios.org/doku.php?id=start
-untar it
-dnf -y install rrdtool rrdtool-perl perl-Time-HiRes perl-GD php-xml php-gd
-./configure
-make all
-make fullinstall
-vi /usr/local/nagios/etc/nagios.cfg
-Append this:
-process_performance_data=1
-# service performance data
-service_perfdata_file=/usr/local/pnp4nagios/var/service-perfdata
-service_perfdata_file_template=DATATYPE::SERVICEPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tSERVICEDESC::$SERVICEDESC$\tSERVICEPERFDATA::$SERVICEPERFDATA$\tSERVICECHECKCOMMAND::$SERVICECHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$\tSERVICESTATE::$SERVICESTATE$\tSERVICESTATETYPE::$SERVICESTATETYPE$
-service_perfdata_file_mode=a
-service_perfdata_file_processing_interval=15
-service_perfdata_file_processing_command=process-service-perfdata-file
+Install required dependencies for PNP4Nagios:
 
-# host performance data
-host_perfdata_file=/usr/local/pnp4nagios/var/host-perfdata
-host_perfdata_file_template=DATATYPE::HOSTPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tHOSTPERFDATA::$HOSTPERFDATA$\tHOSTCHECKCOMMAND::$HOSTCHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$
-host_perfdata_file_mode=a
-host_perfdata_file_processing_interval=15
-host_perfdata_file_processing_command=process-host-perfdata-file
-vi /usr/local/nagios/etc/objects/commands.cfg
-Append this:
-define command{
-       command_name    process-service-perfdata-file
-       command_line    /bin/mv /usr/local/pnp4nagios/var/service-perfdata /usr/local/pnp4nagios/var/spool/service-perfdata.$TIMET$
-}
+    dnf -y install rrdtool rrdtool-perl perl-Time-HiRes perl-GD php-xml php-gd
+    
+Download and install PNP4Nagios from http://www.pnp4nagios.org/doku.php?id=start via the sourceforge link https://sourceforge.net/projects/pnp4nagios/files/latest (unfortunately, this can't be done with wget)
+    tar xvf pnp4nagios-0.6.26.tar.gz
+    cd pnp4nagios-0.6.26
+    ./configure
+    make all
+    make fullinstall
 
-define command{
-       command_name    process-host-perfdata-file
-       command_line    /bin/mv /usr/local/pnp4nagios/var/host-perfdata /usr/local/pnp4nagios/var/spool/host-perfdata.$TIMET$
-}
+Now we need to modify the `/usr/local/nagios/etc/nagios.cfg` file adding the following:
 
-Enable npcd service
-/usr/local/pnp4nagios/bin/npcd -d -f /usr/local/pnp4nagios/etc/npcd.cfg
-systemctl enable npcd.service
+    process_performance_data=1
+    # service performance data
+    service_perfdata_file=/usr/local/pnp4nagios/var/service-perfdata
+    service_perfdata_file_template=DATATYPE::SERVICEPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tSERVICEDESC::$SERVICEDESC$\tSERVICEPERFDATA::$SERVICEPERFDATA$\tSERVICECHECKCOMMAND::$SERVICECHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$\tSERVICESTATE::$SERVICESTATE$\tSERVICESTATETYPE::$SERVICESTATETYPE$
+    service_perfdata_file_mode=a
+    service_perfdata_file_processing_interval=15
+    service_perfdata_file_processing_command=process-service-perfdata-file
+    
+    # host performance data
+    host_perfdata_file=/usr/local/pnp4nagios/var/host-perfdata
+    host_perfdata_file_template=DATATYPE::HOSTPERFDATA\tTIMET::$TIMET$\tHOSTNAME::$HOSTNAME$\tHOSTPERFDATA::$HOSTPERFDATA$\tHOSTCHECKCOMMAND::$HOSTCHECKCOMMAND$\tHOSTSTATE::$HOSTSTATE$\tHOSTSTATETYPE::$HOSTSTATETYPE$
+    host_perfdata_file_mode=a
+    host_perfdata_file_processing_interval=15
+    host_perfdata_file_processing_command=process-host-perfdata-file
 
-Restart Nagios and HTTPD
-systemctl restart nagios.service
-systemctl restart httpd.service
+Edit `/usr/local/nagios/etc/objects/commands.cfg` and comment out the process-host-perfdata and process-service-perfdata commands then append the following:
+:
+    define command{
+           command_name    process-service-perfdata-file
+           command_line    /bin/mv /usr/local/pnp4nagios/var/service-perfdata /usr/local/pnp4nagios/var/spool/service-perfdata.$TIMET$
+    }
+    
+    define command{
+           command_name    process-host-perfdata-file
+           command_line    /bin/mv /usr/local/pnp4nagios/var/host-perfdata /usr/local/pnp4nagios/var/spool/host-perfdata.$TIMET$
+    }
 
-If it starts again OK remove install.php file
-rm -f /usr/local/pnp4nagios/share/install.php
+Also edit `/usr/local/nagios/etc/objects/template.cfg` and append the following:
 
-It then fails, edit data.php file:
-vi /usr/local/pnp4nagios/share/application/models/data.php
-Go to line 979 and replace
-if (sizeof($pages) > 0){
-with:
-if (is_array($pages) && sizeof($pages) > 0) {
-
-Edit json.php
-vi /usr/local/pnp4nagios/share/application/lib/json.php
-Change line 133 to
-function Services_JSON_construct($use = 0)
-Change line 783 to
-function Services_JSON_Error_construct($message = 'unknown error', $code = null,
-Change line 797 to
-function Services_JSON_Error_construct($message = 'unknown error', $code = null,
-
-Save the file. At this point graphs should start appearing.
-
-This might help getting the graphs used by the services
-https://arkit.co.in/pnp4nagios-installation-configuration/
-
-Add the following to objects/template.cfg
-define host {
+    define host {
         name host-pnp
         action_url /pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=_HOST_' class='tips' rel=/pnp4nagios/index.php/popup?host=$HOSTNAME$&srv=_HOST_
         register 0
-        }
+    }
 
-define service {
+    define service {
         name srv-pnp
         action_url /pnp4nagios/index.php/graph?host=$HOSTNAME$&srv=$SERVICEDESC$' class='tips' rel=/pnp4nagios/index.php/popup?host=$HOSTNAME$&srv=$SERVICEDESC$
         register 0
-        }
+    }
 
-Then for each thing you want the graph on change local-service to local-service,srv-pnp in objects/localhost.cfg
+Lastly, edit `/usr/local/nagios/etc/objects/localhost.cfg` and for each service modify the `use local-service` line to be `use local-service,srv-pnp` and write out the file. Restart Nagios:
 
-Restart nagios and you should now be able to click on the graph next to each service to see the historical charts.
+Enable npcd service
+
+    /usr/local/pnp4nagios/bin/npcd -d -f /usr/local/pnp4nagios/etc/npcd.cfg
+    systemctl enable npcd.service
+
+Restart Nagios and HTTPD
+
+    systemctl restart nagios.service
+    systemctl restart httpd.service
+
+Open `http://localhost:8282/pnp4nagios/` in your browser via X2Go and check everything passes. If it starts again OK remove install.php file
+
+rm -f /usr/local/pnp4nagios/share/install.php
+
+It then fails, so edit `/usr/local/pnp4nagios/share/application/models/data.php` with the following change:
+Go to line 979 and replace
+ 
+    if (sizeof($pages) > 0){
+
+with:
+
+    if (is_array($pages) && sizeof($pages) > 0) {
+
+Edit `/usr/local/pnp4nagios/share/application/lib/json.php`
+
+Change line 133 to:
+
+    function Services_JSON_construct($use = 0)
+
+Change line 783 to:
+
+    function Services_JSON_Error_construct($message = 'unknown error', $code = null,
+
+Change line 797 to
+
+    function Services_JSON_Error_construct($message = 'unknown error', $code = null,
+
+Save the file. At this point graphs should start appearing but restart nagios and httpd anyway:
+
+    systemctl restart nagios
+    systemctl restart httpd
+
+Also need to re-enable SELinux now that everything is working so do the following:
+
+    cd /root
+    grep denied /var/log/audit/audit.log | audit2allow -M nagios-module
+    semodule -i nagios-module.pp
+    setenforce enforcing
+    systemctl restart nagios
+    systemctl restart httpd
+
+Check you can still interact with Nagios with SELinux enabled now.
+
+At this point, all the local services are running but now we need NGINX to provide SSL Nagios so edit `/etc/nginx/nginx.conf` and add a server entry for the nagios DNS alias just as for jupyterhub and rstudio. You'll again need to do the SELinux work for nginx too:
+
+    cd /root
+    sudo setenforce permissive
+    sudo grep denied /var/log/audit/audit.log | audit2allow -M nginx-module
+    sudo semodule -i nginx-module.pp
+    sudo setenforce enforcing
+    sudo systemctl restart nginx
+
+Now you should be able to go to the nagios alias from outside localhost. Check all the other services too and redo this process any time you hit an error until it all works. Reboot the machine to make sure it all comes back correctly too.
 
 ## Next Step
 
