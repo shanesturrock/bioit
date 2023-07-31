@@ -415,6 +415,26 @@ At this point, all the local services are running but now we need NGINX to provi
 
 Now you should be able to go to the nagios alias from outside localhost. Check all the other services too and redo this process any time you hit an error until it all works. Reboot the machine to make sure it all comes back correctly too.
 
+To avoid having to put in hostname/nagios you can add an index.html file to /var/www/html that looks like this:
+
+<!DOCTYPE html>
+<html>
+<head>
+   <title>HTML Redirect</title>
+   <meta http-equiv="refresh" content="0; url = http://HOSTNAME/nagios" />
+</head>
+</html>
+
+Where `HOSTNAME` is the alias you've set up for you nagios server. Once you've created that, restart apache (httpd) and you should now be able to go to your nagios alias and arrive at the home page directly.
+
+Also note that you'll need to open port 80 for this to work from outside the host:
+
+    sudo firewall-cmd --zone=public --permanent --add-service=http
+    sudo firewall-cmd --reload
+
+It isn't a security risk because the server immediately bounces the user over to the HTTPS port but it needs to be open for this redirect to work. Otherwise, just stick with appending `/nagios` if it is a worry.
+
+
 ## Next Step
 
 Go to the [Applications](Applications.md) page.
