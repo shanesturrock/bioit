@@ -184,7 +184,7 @@ Or this for a gpu server:
 
 Now when you log in you'll see a nice banner and updated stats on the machine.
 
-## Nagios Install (Rocky 8 only currently)
+## Nagios Install
 
 Before doing anything, make sure crony is enabled otherwise logs will be funky:
 
@@ -200,12 +200,21 @@ We'll turn SELinux on again once things are working.
 
 Install dependencies for Nagios as root:
 
+### CentOS 7
+
+    sudo -s
+    yum clean all
+    yum update
+    yum install -y php perl httpd php-fpm wget unzip glibc automake glibc-common gettext autoconf php php-cli gcc gd gd-devel net-snmp openssl-devel unzip net-snmp postfix net-snmp-utils
+
+### Rocky Linux 8
+
     sudo -s
     dnf clean all
     dnf update
     dnf install -y php perl @httpd wget unzip glibc automake glibc-common gettext autoconf php php-cli gcc gd gd-devel net-snmp openssl-devel unzip net-snmp postfix net-snmp-utils
 
-Before starting httpd remove the ssl.conf because we're going to put this behind NGINX.
+Before starting httpd remove the ssl.conf (nss.conf on CentOS 7) because we're going to put this behind NGINX.
 
     cd /etc/httpd/conf.d
     mv ssl.conf ssl.conf.bak
@@ -214,14 +223,15 @@ Also, we need to modify the `/etc/httpd/conf/httpd.conf` file to get Apache to l
 
 Now start HTTPD and PHP
 
-    systemctl enable --now httpd php-fpm
+    systemctl enable httpd php-fpm
+    systemctl enable php-fpm
     systemctl start httpd
     systemctl start php-fpm
 
 Verify the services are running correctly and if not you've probably forgotten to switch SELinux into permissive mode.
 
-    systemctl start httpd
-    systemctl start php-fpm
+    systemctl status httpd
+    systemctl status php-fpm
 
 You can also test that Apache is running via a browser in X2Go and going to `http://localhost:8282` and you should see the HTTP Server Test Page.
 
@@ -254,6 +264,9 @@ Next, install the software itself:
 Create the Nagios Web user account `nagiosadmin`(which will be used to log into the interface) giving it a password you can remember:
 
     htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
+
+Now set permissions for this file so Apache can use it:
+
     chmod 640 /usr/local/nagios/etc/htpasswd.users
     chown nagios:nagios /usr/local/nagios/etc/htpasswd.users
     systemctl restart httpd
@@ -270,7 +283,7 @@ Note that it still won't work properly because there are no plugins but you shou
 
 ## Nagios plugins install
 
-Install the dependencies for plugins (still as root):
+Install the dependencies for plugins (still as root) and use `yum` for CentOS 7:
 
     dnf -y install gcc glibc glibc-common make gettext automake autoconf wget openssl-devel
 
@@ -295,7 +308,7 @@ Now you should be able to go into the services for localhost and get OKs for the
 
 # Nagios pnp4nagios install
 
-Install required dependencies for PNP4Nagios:
+Install required dependencies for PNP4Nagios (use yum on CentOS 7):
 
     dnf -y install rrdtool rrdtool-perl perl-Time-HiRes perl-GD php-xml php-gd
     
@@ -335,7 +348,7 @@ Edit `/usr/local/nagios/etc/objects/commands.cfg` and comment out the process-ho
            command_line    /bin/mv /usr/local/pnp4nagios/var/host-perfdata /usr/local/pnp4nagios/var/spool/host-perfdata.$TIMET$
     }
 
-Also edit `/usr/local/nagios/etc/objects/template.cfg` and append the following:
+Also edit `/usr/local/nagios/etc/objects/templates.cfg` and append the following:
 
     define host {
         name host-pnp
