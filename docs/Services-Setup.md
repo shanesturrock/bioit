@@ -434,7 +434,6 @@ Also note that you'll need to open port 80 for this to work from outside the hos
 
 It isn't a security risk because the server immediately bounces the user over to the HTTPS port but it needs to be open for this redirect to work. Otherwise, just stick with appending `/nagios` if it is a worry.
 
-
 ## Next Step
 
 Go to the [Applications](Applications.md) page.
