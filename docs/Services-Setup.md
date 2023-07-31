@@ -415,9 +415,7 @@ At this point, all the local services are running but now we need NGINX to provi
 
 Now you should be able to go to the nagios alias from outside localhost. Check all the other services too and redo this process any time you hit an error until it all works. Reboot the machine to make sure it all comes back correctly too.
 
-To avoid having to put in `hostname/nagios` you can add an `index.html` file to `/var/www/html` that looks like this:
-
-Where `HOSTNAME` is the alias you've set up for you nagios server. Once you've created that, restart apache (httpd) and you should now be able to go to your nagios alias and arrive at the home page directly.
+To avoid having to put in `hostname/nagios` you can copy the example `index.html.example` file to `/var/www/html/index.html` making sure you change `HOSTNAME` to the actual nagios server hostname alias. Once you've done that, restart apache (httpd) and you should now be able to go to your nagios alias and arrive at the home page directly.
 
 Also note that you'll need to open port 80 for this to work from outside the host:
 
