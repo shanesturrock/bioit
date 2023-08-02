@@ -376,7 +376,7 @@ Restart Nagios and HTTPD
 
 Open `http://localhost:8282/pnp4nagios/` in your browser via X2Go and check everything passes. If it starts again OK remove install.php file
 
-rm -f /usr/local/pnp4nagios/share/install.php
+    rm -f /usr/local/pnp4nagios/share/install.php
 
 It then fails, so edit `/usr/local/pnp4nagios/share/application/models/data.php` with the following change:
 Go to line 979 and replace
