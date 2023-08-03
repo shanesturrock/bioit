@@ -191,7 +191,7 @@ If you're running Linux or Windows from your desktop you can easily transfer you
 
 Remember to replace `<IPADDR>` with the actual address or hostname (if it is registered in DNS)
 
-Once that user can log in and also sudo works for it, go ahead and make the following changes to the `/etc/ssh/sshd_config` file (be sure to comment out PermitRootLogin Yes from this file first so it doesn't override the new setting):
+Once that user can log in and also sudo works for it, go ahead and make the following changes to the `/etc/ssh/sshd_config` file (be sure to comment out `PermitRootLogin Yes` from this file first so it doesn't override the new setting):
 
     PermitRootLogin No
     MaxAuthTries 3
