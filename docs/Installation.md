@@ -185,6 +185,12 @@ The `buildrepo` alias will be used to add new packages and updates. The `cleanbu
 
 This user can now use sudo allowing us to disable root ssh logins but make sure you can ssh into this account before you do so. This means creating the `.ssh` directory and inside that the authorized_keys file which you'll paste the public key for the machine you're logging in from (make sure it is all on a single line) and `chmod 600 authorized_keys` otherwise ssh won't use it. Also `chmod 700 ~/.ssh` for the same reason.
 
+If you're running Linux or Windows from your desktop you can easily transfer your ssh public key into the new machine using the following command:
+
+    ssh-copy-id -i ~/.ssh/id_rsa.pub build@<IPADDR>
+
+Remember to replace `<IPADDR>` with the actual address or hostname (if it is registered in DNS)
+
 Once that user can log in and also sudo works for it, go ahead and make the following changes to the sshd_config:
 
     PermitRootLogin No
