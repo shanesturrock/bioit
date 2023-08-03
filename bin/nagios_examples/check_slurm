@@ -1,0 +1,22 @@
+#!/usr/bin/python
+import os,sys
+#PD_data ="squeue|tr -s " "|cut -f6 -d" "|grep PD|wc -l"
+#R_data ="squeue|tr -s " "|cut -f6 -d" "|grep R|wc -l"
+Pending_jobs = int(os.popen('squeue|tr -s " "|cut -f6 -d" "|grep PD|wc -l').read())
+Running_jobs = int(os.popen('squeue|tr -s " "|cut -f6 -d" "|grep R|wc -l').read())
+if Pending_jobs<=49 :
+	print "OK - Running Jobs:",Running_jobs
+	print "OK - Pending Jobs:",Pending_jobs
+	sys.exit(0)
+elif Pending_jobs==50 :
+	print "WARNING - Pending Jobs:",Pending_jobs
+	print "Running Jobs:",Running_jobs
+	sys.exit(1)
+elif Pending_jobs>=51 :
+	print "CRITICAL - Pending Jobs:",Pending_jobs
+	print "Running Jobs:",Running_jobs
+	sys.exit(2)
+else:
+	print "UNKNOWN - Pending Jobs:",Pending_jobs
+	print "Running Jobs:",Running_jobs
+	sys.exit(3)
