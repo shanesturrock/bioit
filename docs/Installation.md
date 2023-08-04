@@ -156,6 +156,12 @@ And paste the following in:
 
 Now when users log in they won't see the shutdown button and they won't be able to call the shutdown command from the shell either.
 
+## Other useful user programs
+
+A couple of nice programs are `ncdu` and `baobab` both of which allow uers to see how much disc space they're using. (You can use dnf or yum to install on Rocky Linux 8)
+
+    sudo yum -y install ncdu baobab
+
 ## Secure ssh but retain admin access
 
 Create a build user account with admin rights which will be used to do tool updates:
