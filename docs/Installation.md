@@ -230,7 +230,8 @@ edit `/etc/dnf/automatic.conf` adding the following:
 
 Start the service
 
-    systemctl start dnf-automatic
+    systemctl enable --now dnf-automatic.timer
+    systemctl status dnf-automatic.timer
 
 ## Install remote desktop
 
