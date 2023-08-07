@@ -1,11 +1,11 @@
-%define priority 30000
+%define priority 31000
 %define dir_exists() (if [ ! -d /opt/bioit/%{name}/%{version} ]; then \
   echo "/opt/bioit/%{name}/%{version} not found!"; exit 1 \
 fi )
 %define dist .el7.bioit
 
 Name:		picard
-Version:	3.0.0
+Version:	3.1.0
 Release:	1%{?dist}
 Summary:	Java utilities to manipulate SAM files
 
@@ -41,6 +41,36 @@ fi
 %files
 
 %changelog
+* Tue Aug 08 2023 Shane Sturrock <shane.sturrock@gmail.com> - 3.1.0-1
+- Remove unused method Fingerprint.filterSuspectSites() by @lbergelson in #1849
+- Fix crash on PF_READS == 0 for AlignmentSummaryMetricsCollector by @kockan in
+  #1871
+- More informative error messages when dictionaries don't match by @kachulis in
+  #1870
+- Enable IntelInflater by @lbergelson in #1885
+- Add .DS_STORE and .java-version to .gitignore by @lbergelson in #1886
+- Fix deprecated uses of newInstance() by @lbergelson in #1887
+- Add tests to verify sequence dictionary MD5s respect dos line endings. by
+  @cmnbroad in #1884
+- Mark GENOTYPING_ERROR_RATE as a DeprecatedFeature and remove code ref… by
+  @cmnbroad in #1878
+- Refactoring by @LadDeep in #1868
+- Fix #1081. Make --USE_SEQUENTIAL_FASTQS help message more user friendly by
+  @nrockweiler in #1891
+- DbSnpBitSetUtil should verify that the VCF dict should match the inpu… by
+  @nh13 in #1889
+- Fix the dependency issue causing dsp-appsec-trivy workflow to fail. by
+  @kockan in #1895
+- Lb add cloud tests by @lbergelson in #1860
+- make cloud jar mandatory by @lbergelson in #1900
+- Support cloud input/output for IntervalListTools by @takutosato in #1852
+- typo correction "Didn't recognized" -> "Didn't recognize" by @tomkinsc in
+  #1902
+- Update google-cloud-nio to support underscores in bucket names by @kshakir in
+  #1903
+- Fix gradle 8 publishing issue by @kshakir in #1904
+- Update all our dependencies to the latest version by @lbergelson in #1901
+
 * Thu Feb 23 2023 Shane Sturrock <shane.sturrock@gmail.com> - 3.0.0-1
 - Major changes
   - Upgrade to Java 17. by @cmnbroad in #1833
