@@ -167,8 +167,8 @@ A couple of nice programs are `ncdu` and `baobab` both of which allow uers to se
 Create a build user account with admin rights which will be used to do tool updates:
 
     adduser build
-    passwd build
     usermod -aG wheel build
+    passwd build
 
 For sudo without password (helps with the installations later) do the following:
 
