@@ -178,16 +178,20 @@ Paste this in at the end:
 
     %build  ALL=(ALL) NOPASSWD:ALL
 
-Add the following to the build user's `.bashrc` file to make building tools nicer:
+Add the following to the build user's `.bashrc` file to make building tools nicer if RPMs are going to be used (CentOS 7 only):
 
     alias buildrepo="cd /opt/bioit/repo ; createrepo . -g bioit.xml --database"
     alias cleanbuild="rm -rf /home/build/rpmbuild/SPECS/* \
       /home/build/rpmbuild/SRPMS/* /home/build/rpmbuild/SOURCES/* \
       /home/build/rpmbuild/RPMS/*"
+
+The `buildrepo` alias will be used to add new packages and updates. The `cleanbuild` alias is for emptying out the rpmbuild directory, and the `$PATH` variable has the bioit gitrepo `bin` directory added so you can use the various tools that are in there. This is only on CentOS 7 and we won't be doing this moving forward.
+
+The following should be added for all installations:
+
     alias check_updates="version_check_modules -av | egrep -v \"Up to date\""
     export PATH=/home/build/bioit/bin:$PATH
 
-The `buildrepo` alias will be used to add new packages and updates. The `cleanbuild` alias is for emptying out the rpmbuild directory, and the `$PATH` variable has the bioit gitrepo `bin` directory added so you can use the various tools that are in there. This is only on CentOS 7 and we won't be doing this moving forward.
 
 This user can now use sudo allowing us to disable root ssh logins but make sure you can ssh into this account before you do so. This means creating the `.ssh` directory and inside that the authorized_keys file which you'll paste the public key for the machine you're logging in from (make sure it is all on a single line) and `chmod 600 authorized_keys` otherwise ssh won't use it. Also `chmod 700 ~/.ssh` for the same reason.
 
