@@ -2,7 +2,7 @@
 
 ## Install a minimal CentOS 7 / Rocky Linux 8 environment
 
-After a minimal install you should install EPEL, compilers and a GUI since they will be needed for users.
+After a minimal install you should install EPEL, compilers and a GUI since they will be needed for users. It is easier to follow along with these instructions if you've enabled ssh for the root user so modify the `/etc/ssh/sshd_config` file changing `PermitRootLogin no` to `PermitRootLogin yes` and restart the sshd with `systemctl restart sshd`. You should now be able to ssh into the new install as the root user.
 
 ### CentOS 7
 
