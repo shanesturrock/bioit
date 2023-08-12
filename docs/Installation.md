@@ -172,9 +172,9 @@ Create a build user account with admin rights which will be used to do tool upda
 
 For sudo without password (helps with the installations later) do the following:
 
-    sudo visudo -f /etc/sudoers
+    sudo vi /etc/sudoers.d/build
 
-Paste this in at the end:
+Paste this into it:
 
     %build  ALL=(ALL) NOPASSWD:ALL
 
