@@ -169,6 +169,7 @@ Having a nice banner about the machine can be done as follows:
     echo `hostname -s` | figlet > hostname-banner
     echo -e "This server is the property of\nXXXX Ltd.\n\nAll access is monitored." >> hostname-banner
     sudo mv hostname-banner /etc
+    sudo chown root:root /etc/hostname-banner
 
 Edit the crontab as root:
 
@@ -337,7 +338,7 @@ Now we need to modify the `/usr/local/nagios/etc/nagios.cfg` file adding the fol
     host_perfdata_file_processing_command=process-host-perfdata-file
 
 Edit `/usr/local/nagios/etc/objects/commands.cfg` and comment out the process-host-perfdata and process-service-perfdata commands then append the following:
-:
+
     define command{
            command_name    process-service-perfdata-file
            command_line    /bin/mv /usr/local/pnp4nagios/var/service-perfdata /usr/local/pnp4nagios/var/spool/service-perfdata.$TIMET$
