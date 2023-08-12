@@ -313,7 +313,8 @@ Install required dependencies for PNP4Nagios (use yum on CentOS 7):
 
     dnf -y install rrdtool rrdtool-perl perl-Time-HiRes perl-GD php-xml php-gd
     
-Download and install PNP4Nagios from http://www.pnp4nagios.org/doku.php?id=start via the sourceforge link https://sourceforge.net/projects/pnp4nagios/files/latest (unfortunately, this can't be done with wget)
+Download and install PNP4Nagios from `http://www.pnp4nagios.org/doku.php?id=start` via the sourceforge link `https://sourceforge.net/projects/pnp4nagios/files/latest` (unfortunately, this can't be done with wget)
+
     tar xvf pnp4nagios-0.6.26.tar.gz
     cd pnp4nagios-0.6.26
     ./configure
