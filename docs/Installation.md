@@ -215,6 +215,12 @@ Then restart the ssh daemon.
 
 ## Setup automatic updates
 
+Now that you have the build user setup to do sudo, you can use that for the rest. From the build user run:
+
+    sudo -s
+
+This should get you a root shell.
+
 ### CentOS 7
 
     yum -y install yum-cron
