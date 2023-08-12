@@ -22,6 +22,7 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
 
     dnf -y install epel-release
     /usr/bin/crb enable
+    dnf -y groupinstall "Standard"
     dnf -y groupinstall "Development Tools"
     dnf -y install libreoffice
     systemctl set-default multi-user.target
@@ -31,6 +32,18 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
 X11 GUI won't start, but if you want it to run use this:
 
     systemctl set-default graphical.target
+
+To enable the login window you need gdm:
+
+### CentOS 7
+
+    yum -y install gdm
+
+### Rocky Linux 8
+
+    dnf -y install gdm
+
+Rebooting should bring up the chooser but do that later once the desktop is installed. You also need to choose the Mate desktop once that is installed.
 
 If the machine will mount NFS storage you need to install the following:
 
