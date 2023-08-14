@@ -881,3 +881,4 @@ echo \
 $BT intersect -a null_a.bed -b null_b.bed null_c.bed -wao -names b c > obs
 check exp obs
 rm exp obs
+rm dummy.txt
