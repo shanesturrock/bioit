@@ -58,9 +58,15 @@ In our case, the file system showed up as `/dev/mapper/mpatha` so we should crea
 
     mkfs.xfs -L RAID -f /dev/mapper/mpatha
 
-Now we can edit the /etc/fstab and add the following line:
+Now we can edit the `/etc/fstab` and add the following line:
 
     LABEL=RAID /raid xfs defaults,discard,prjquota 0 0
+
+### Rocky Linux 8
+
+You need to run the following to reload the fstab changes:
+
+    systemctl daemon-reload
 
 Finally, `mkdir` the mount point and then mount the file system
 
