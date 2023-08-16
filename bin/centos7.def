@@ -1,0 +1,38 @@
+Bootstrap: yum
+OSVersion: 7
+MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
+Include: yum
+
+%help
+    Container with bioit tools installed.
+
+%setup
+    # Copy everything except anaconda3 and R-core
+    #rsync -avr --progress --exclude="bioit-container.sif" --exclude="anaconda3" --exclude="R-core" --exclude="src" /opt/bioit ${SINGULARITY_ROOTFS}/opt/
+    # Make sure the R modulefiles are removed
+    #rm -rf ${SINGULARITY_ROOTFS}/opt/bioit/modulefiles/R
+
+%post
+    yum -y update
+    yum -y install epel-release
+    yum -y install environment-modules which man-db
+    yum -y install ncurses ncurses-libs ncurses-base zlib bzip2 bzip2-libs xz xz-lzma-compat xz-libs libcurl openssl openssl-libs boost readline libxml2-python libxml2 gsl mariadb java cairo libpng libjpeg perl-Test-Base openmpi python perl-GD perl-GDGraph perl-Env perl-Statistics-Descriptive perl-Perl4-CoreLibs lapack mpich zeromq ghc python34 perl-PerlIO-gzip hdf5 python-networkx gtk3 pigz tkinter python34-tkinter tcsh python34 python34-Cython libtiff tmux pyqt4 nano python36-libs python36-tkinter python36 python2-matplotlib libgfortran5
+
+%files
+
+%environment
+    export LC_ALL=C
+    action=`basename $0`
+    if [ "$action" = "shell" ]; then
+        export MODULEPATH=/opt/bioit/modulefiles
+        export SINGULARITY_SHELL=/bin/bash
+        set -- "--norc" "-l"
+    fi
+
+%runscript
+    export MODULEPATH=/opt/bioit/modulefiles
+    exec /bin/bash --norc -l
+
+%labels
+    Author Shane Sturrock
+    Version v1.0
