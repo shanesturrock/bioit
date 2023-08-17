@@ -37,7 +37,8 @@ apptainer build --fakeroot /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /o
 sed -e "s%APPVER%${APP}_${VERSION}%g" ${HOME}/bioit/bin/bin_template > ${APP}_bin_template
 sed -i "s%APPNAME%${APP}%g" ${APP}_bin_template
 sed -i "s%VERSION%${VERSION}%g" ${APP}_bin_template
-sed -i "s%BINDS%/raid,/active,/archive,/data,/databases,/deepgene,/dunninga,/gbs_pine,/scratch,/sequencing,/treestem%g" ${APP}_bin_template
+sed -i "s%BINDS%/raid%g" ${APP}_bin_template
+#sed -i "s%BINDS%/raid,/active,/archive,/data,/databases,/deepgene,/dunninga,/gbs_pine,/scratch,/sequencing,/treestem%g" ${APP}_bin_template
 sed -i "s%EXEC%micromamba run -p /opt/conda/envs/${APP}_${VERSION}_singularity%g" ${APP}_bin_template
 
 # Create scripts to run each Abyss binary in container
