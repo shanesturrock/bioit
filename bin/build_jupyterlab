@@ -17,7 +17,7 @@ if [ $# -lt 1 ]; then
  exit 1
 fi
 
-ROOT=/opt/bioit
+ROOT=/opt/jupyter
 PY3_VER=3.9
 PY2_VER=2.7
 JLAB_VER=$1
