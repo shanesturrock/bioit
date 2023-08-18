@@ -25,11 +25,11 @@ echo "Building ${APP} ${VERSION} on ${DATE}"
 # Create install directory
 mkdir -p /opt/bioit/${APP}/${VERSION}/bin
 # Generate Singularity def file (use micromamba option)
-export APPTAINER_TMPDIR=/opt/bioit/${APP}/${VERSION}/tmp
-export APPTAINER_CACHEDIR=/opt/bioit/${APP}/${VERSION}/cache
-mkdir -p $APPTAINER_TMPDIR
-mkdir -p $APPTAINER_CACHEDIR
-setfacl -b $APPTAINER_TMPDIR
+#export APPTAINER_TMPDIR=/opt/bioit/${APP}/${VERSION}/tmp
+#export APPTAINER_CACHEDIR=/opt/bioit/${APP}/${VERSION}/cache
+#mkdir -p $APPTAINER_TMPDIR
+#mkdir -p $APPTAINER_CACHEDIR
+#setfacl -b $APPTAINER_TMPDIR
 ${HOME}/bioit/bin/create_singularity_conda_env.py3 -u -a ${APP} -v ${VERSION} -l /opt/bioit/${APP}/${VERSION}
 # Build container
 singularity build --fakeroot /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /opt/bioit/${APP}/${VERSION}/Singularity
