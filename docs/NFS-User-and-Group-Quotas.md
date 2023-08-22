@@ -82,7 +82,7 @@ The client also needs the `quota` package installed so run the following there t
 
 ### Rocky Linux 8
 
-   sudo dnf -y install quota
+    sudo dnf -y install quota
 
 On the client add the following to the `/etc/fstab` file (where 10.0.2.4 in this case is the NFS server):
 
