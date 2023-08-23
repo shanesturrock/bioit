@@ -55,15 +55,15 @@ then
         exit 0
 fi
 # Total memory available
-total=`free -m | head -2 |tail -1 |gawk '{print $2}'`
+total=`free -g | head -2 |tail -1 |gawk '{print $2}'`
 # Total memory used
-used=`free -m | head -2 |tail -1 |gawk '{print $3}'`
+used=`free -g | head -2 |tail -1 |gawk '{print $3}'`
 # Calc total minus used
-free=`free -m | head -2 |tail -1 |gawk '{print $2-$3}'`
+free=`free -g | head -2 |tail -1 |gawk '{print $2-$3}'`
 # normal values
-#echo "$total"MB total
-#echo "$used"MB used
-#echo "$free"MB free
+#echo "$total"GB total
+#echo "$used"GB used
+#echo "$free"GB free
 # make it into % percent free = ((free mem / total mem) * 100)
 echo "5" > $calc # decimal accuracy
 echo "k" >> $calc # commit
@@ -77,12 +77,12 @@ percent=`/usr/bin/dc $calc|/bin/sed 's/^\./0./'|/usr/bin/tr "." " "|/usr/bin/gaw
 #percent1=`/usr/bin/dc $calc`
 #echo "$percent1"
 if [[ "$percent" -le $critical ]]; then
-  echo "CRITICAL - $free MB ($percent%) Free Memory | total=${total}MB used=${used}MB"
+  echo "CRITICAL - $free GB ($percent%) Free Memory | total=${total}GB used=${used}GB"
   exit $STATE_CRITICAL
 elif [[ "$percent" -le $warning ]]; then
-  echo "WARNING - $free MB ($percent%) Free Memory | total=${total}MB used=${used}MBº"
+  echo "WARNING - $free GB ($percent%) Free Memory | total=${total}GB used=${used}GBº"
   exit $STATE_WARNING
 elif [[ "$percent" -gt $warning ]]; then
-  echo "OK - $free MB ($percent%) Free Memory | total=${total}MB used=${used}MB"
+  echo "OK - $free GB ($percent%) Free Memory | total=${total}GB used=${used}GB"
   exit $STATE_OK
 fi
