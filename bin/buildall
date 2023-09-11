@@ -13,6 +13,7 @@ ${HOME}/bioit/apps/bismark/SPEC/build 0.24.1
 ${HOME}/bioit/apps/bowtie/SPEC/build 1.3.1
 ${HOME}/bioit/apps/bowtie2/SPEC/build 2.5.1
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
+${HOME}/bioit/apps/chopper/SPEC/build 0.6.0
 ${HOME}/bioit/apps/cutadapt/SPEC/build 4.4
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
 ${HOME}/bioit/apps/FastQC/SPEC/build 0.12.1
@@ -23,10 +24,16 @@ ${HOME}/bioit/apps/htslib/SPEC/build 1.18
 ${HOME}/bioit/apps/igv/SPEC/build 2.16.1
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.14.1+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
+${HOME}/bioit/apps/medaka/SPEC/build 1.9.1
+${HOME}/bioit/apps/minimap2/SPEC/build 2.26
+${HOME}/bioit/apps/nanoplot/SPEC/build 1.41.6
 ${HOME}/bioit/apps/picard/SPEC/build 3.1.0
+${HOME}/bioit/apps/prokka/SPEC/build 1.14.6
 ${HOME}/bioit/apps/R-core/SPEC/build 4.3.1
+${HOME}/bioit/apps/raven-assembler/SPEC/build 1.8.3
 ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.12.1
 ${HOME}/bioit/apps/samtools/SPEC/build 1.18
+${HOME}/bioit/apps/seqkit/SPEC/build 2.5.1
 ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 242
 ${HOME}/bioit/apps/SolexaQA++/SPEC/build 3.1.7.3
 ${HOME}/bioit/apps/stringtie/SPEC/build 2.2.1

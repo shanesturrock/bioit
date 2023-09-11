@@ -1,0 +1,63 @@
+#!/bin/bash
+
+# Script to auto build and install minimap2. Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+APP="minimap2"
+VERSION=$1
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building ${APP} ${VERSION} on ${DATE}"
+
+# Create install directory
+mkdir -p /opt/bioit/${APP}/${VERSION}/bin
+# Generate Singularity def file (use micromamba option)
+#export APPTAINER_TMPDIR=/opt/bioit/${APP}/${VERSION}/tmp
+#export APPTAINER_CACHEDIR=/opt/bioit/${APP}/${VERSION}/cache
+#mkdir -p $APPTAINER_TMPDIR
+#mkdir -p $APPTAINER_CACHEDIR
+#setfacl -b $APPTAINER_TMPDIR
+${HOME}/bioit/bin/create_singularity_conda_env.py3 -u -a ${APP} -v ${VERSION} -l /opt/bioit/${APP}/${VERSION}
+# Build container
+apptainer build --fakeroot /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /opt/bioit/${APP}/${VERSION}/Singularity
+# Create version specific template
+sed -e "s%APPVER%${APP}_${VERSION}%g" ${HOME}/bioit/bin/bin_template > ${APP}_bin_template
+sed -i "s%APPNAME%${APP}%g" ${APP}_bin_template
+sed -i "s%VERSION%${VERSION}%g" ${APP}_bin_template
+sed -i "s%BINDS%/raid%g" ${APP}_bin_template
+#sed -i "s%BINDS%/raid,/active,/archive,/data,/databases,/deepgene,/dunninga,/gbs_pine,/scratch,/sequencing,/treestem%g" ${APP}_bin_template
+sed -i "s%EXEC%micromamba run -p /opt/conda/envs/${APP}_${VERSION}_singularity%g" ${APP}_bin_template
+
+# Create scripts to run each binary in container
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/minimap2
+
+# Make all scripts executable
+chmod a+x /opt/bioit/${APP}/${VERSION}/bin/*
+# Remove the versioned template
+rm ${APP}_bin_template
+
+echo "Writing modulefile"
+echo "#%Module 1.0
+#
+#  ${APP} module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/${APP}/${VERSION}/bin" > /opt/bioit/modulefiles/${APP}/${VERSION}
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of ${APP}
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/${APP}/.version
