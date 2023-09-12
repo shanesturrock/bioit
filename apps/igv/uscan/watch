@@ -1,2 +1,2 @@
 version=3
-https://igv.org/download/html/download.html (?:.*/)?IGV\_Linux\_?(\d[\d\.]*)\_WithJava\.zip
+https://github.com/igvteam/igv/tags .*/v([0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2})\.tar\.gz
