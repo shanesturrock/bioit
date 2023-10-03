@@ -301,6 +301,7 @@ BiocManager::install("safe")
 BiocManager::install("org.Hs.eg.db")
 BiocManager::install(c("GO.db", "preprocessCore"))
 BiocManager::install("methylKit")
+BiocManager::install("DECIPHER")
 
 install.packages("WGCNA",repos="https://cloud.r-project.org/")
 
