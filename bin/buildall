@@ -6,15 +6,15 @@
 ${HOME}/bioit/apps/abyss/SPEC/build 2.3.7
 ${HOME}/bioit/apps/augustus/SPEC/build 3.4.0
 ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.2
-${HOME}/bioit/apps/bbmap/SPEC/build 39.01
+${HOME}/bioit/apps/bbmap/SPEC/build 39.03
 ${HOME}/bioit/apps/bcftools/SPEC/build 1.18
 ${HOME}/bioit/apps/bedtools2/SPEC/build 2.31.0
 ${HOME}/bioit/apps/bismark/SPEC/build 0.24.1
 ${HOME}/bioit/apps/bowtie/SPEC/build 1.3.1
-${HOME}/bioit/apps/bowtie2/SPEC/build 2.5.1
+${HOME}/bioit/apps/bowtie2/SPEC/build 2.5.2
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
 ${HOME}/bioit/apps/chopper/SPEC/build 0.6.0
-${HOME}/bioit/apps/cutadapt/SPEC/build 4.4
+${HOME}/bioit/apps/cutadapt/SPEC/build 4.5
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
 ${HOME}/bioit/apps/FastQC/SPEC/build 0.12.1
 ${HOME}/bioit/apps/gvcftools/SPEC/build 0.17.0
@@ -24,7 +24,7 @@ ${HOME}/bioit/apps/htslib/SPEC/build 1.18
 ${HOME}/bioit/apps/igv/SPEC/build 2.16.2
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.14.1+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
-${HOME}/bioit/apps/medaka/SPEC/build 1.9.1
+${HOME}/bioit/apps/medaka/SPEC/build 1.10.0
 ${HOME}/bioit/apps/minimap2/SPEC/build 2.26
 ${HOME}/bioit/apps/nanoplot/SPEC/build 1.41.6
 ${HOME}/bioit/apps/picard/SPEC/build 3.1.0
