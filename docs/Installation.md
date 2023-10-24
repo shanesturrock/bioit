@@ -26,6 +26,7 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
     dnf -y groupinstall "Development Tools"
     dnf -y install libreoffice
     systemctl set-default multi-user.target
+    dnf -y install gcc-toolset-9
     dnf -y update
     reboot
 
