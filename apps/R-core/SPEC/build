@@ -19,7 +19,8 @@ if [ $# -lt 1 ]; then
  exit 1
 fi
 
-export PATH=/opt/rh/devtoolset-9/root/usr/bin:$PATH
+# Old devtoolset export for CentOS 7
+#export PATH=/opt/rh/devtoolset-9/root/usr/bin:$PATH
 VERSION=$1
 RELEASE=${VERSION%%.*}
 DATE=`date +"%d/%m/%Y %r"`
@@ -34,8 +35,11 @@ make clean
 make -j8
 make install
 
+
+# Make sure bin directory is added by appending location to PATH in Renviron
+echo PATH=$\{PATH\}:/opt/bioit/R-core/${VERSION}/lib64/R/bin >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
 # Make sure devtoolset is used by default by appending location to PATH
-echo PATH=/opt/rh/devtoolset-9/root/usr/bin:$\{PATH\}:/opt/bioit/R-core/${VERSION}/lib64/R/bin >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
+#echo PATH=/opt/rh/devtoolset-9/root/usr/bin:$\{PATH\}:/opt/bioit/R-core/${VERSION}/lib64/R/bin >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
 
 # Make sure pkg_config is set
 echo PKG_CONFIG_PATH=/opt/bioit/R-core/${VERSION}/lib64/R/lib/pkgconfig >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
