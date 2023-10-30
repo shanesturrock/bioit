@@ -9,7 +9,7 @@ ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.2
 ${HOME}/bioit/apps/bbmap/SPEC/build 39.03
 ${HOME}/bioit/apps/bcftools/SPEC/build 1.18
 ${HOME}/bioit/apps/bedtools2/SPEC/build 2.31.0
-${HOME}/bioit/apps/bismark/SPEC/build 0.24.1
+${HOME}/bioit/apps/bismark/SPEC/build 0.24.2
 ${HOME}/bioit/apps/bowtie/SPEC/build 1.3.1
 ${HOME}/bioit/apps/bowtie2/SPEC/build 2.5.2
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
@@ -26,7 +26,7 @@ ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.14.1+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
 ${HOME}/bioit/apps/medaka/SPEC/build 1.11.1
 ${HOME}/bioit/apps/minimap2/SPEC/build 2.26
-${HOME}/bioit/apps/nanoplot/SPEC/build 1.41.6
+${HOME}/bioit/apps/nanoplot/SPEC/build 1.42.0
 ${HOME}/bioit/apps/picard/SPEC/build 3.1.0
 ${HOME}/bioit/apps/prokka/SPEC/build 1.14.6
 ${HOME}/bioit/apps/R-core/SPEC/build 4.3.1
@@ -40,4 +40,4 @@ ${HOME}/bioit/apps/stringtie/SPEC/build 2.2.1
 ${HOME}/bioit/apps/tophat/SPEC/build 2.1.1
 ${HOME}/bioit/apps/vcftools/SPEC/build 0.1.16
 ${HOME}/bioit/apps/velvet/SPEC/build 1.2.10
-${HOME}/bioit/apps/vsearch/SPEC/build 2.23.0
+${HOME}/bioit/apps/vsearch/SPEC/build 2.24.0
