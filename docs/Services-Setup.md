@@ -403,6 +403,15 @@ Change line 797 to
 
     function Services_JSON_Error_construct($message = 'unknown error', $code = null,
 
+Save the file.
+
+Edit `/usr/local/pnp4nagios/libexec/process_perfdata.pl`
+
+Change line 177 to:
+
+    my @t1=();
+    my $t1=\@t1;
+
 Save the file. At this point graphs should start appearing but restart nagios and httpd anyway:
 
     systemctl restart nagios
