@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOT=/opt/bioit/jupyterlab/
+ROOT=/opt/jupyter/jupyterlab/
 if [ ! -d ${ROOT} ]; then
   echo "No jupyterhub installed, exiting"
   exit
