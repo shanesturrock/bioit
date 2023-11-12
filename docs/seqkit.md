@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/seqkit/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/seqkit/SPEC/build 2.5.1
+    ${HOME}/bioit/apps/seqkit/SPEC/build 2.6.0
 
 When that completes check that the new version is available using:
 
@@ -14,6 +14,6 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load seqkit/2.5.1
+    module load seqkit/2.6.0
     which seqkit
     seqkit --help
