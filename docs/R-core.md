@@ -85,13 +85,11 @@ This will create an installable RPM file which you can find in `${HOME}/rpmbuild
 
 Check weekly for updates for the R packages already installed by starting the correct version of R as root and running the following which list updates (using BioConductor rather than just `update.packages()` because often new packages come out which are not compatible with BioConductor):
 
-    source("http://www.bioconductor.org/biocLite.R")
-    biocValid()
+    BiocManager::valid()$out_of_date
 
 To update, just run:
 
-    source("http://www.bioconductor.org/biocLite.R")
-    biocLite()
+    BiocManager::install()
 
 Sometimes you'll get a failure like this:
 
