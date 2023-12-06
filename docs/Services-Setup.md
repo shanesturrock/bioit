@@ -49,7 +49,7 @@ You should now be able to open the RStudio Server interface by going to `http://
 
 Make sure password free sudo is enabled as per the installation page. JupyterLab is installed by running the script in `~/bioit/bin`
 
-    build_jupyterlab 3.6.5
+    build_jupyterlab 4.0.9
 
 If it fails, you can remove it using:
 
