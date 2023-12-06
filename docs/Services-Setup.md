@@ -178,7 +178,7 @@ or for a gpu server:
 
     sudo cp /home/build/bioit/bin/neofetch_gpu.conf /etc/neofetch/neofetch.conf
 
-Finally create the motd.sh script in /etc/profile.d:
+Finally create the motd.sh script in `/etc/profile.d`:
 
      sudo echo '#!/bin/bash' > /etc/profile.d/motd.sh; sudo echo 'printf "\n"' >> /etc/profile.d/motd.sh ; sudo echo 'neofetch --config /etc/neofetch/neofetch.conf --ascii /etc/hostname-banner' >> /etc/profile.d/motd.sh
 
