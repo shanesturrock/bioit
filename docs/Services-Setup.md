@@ -166,22 +166,21 @@ It should now be possible to use MS Remote Desktop to connect to the IP address.
 Having a nice banner about the machine can be done as follows:
 
     sudo dnf -y install neofetch figlet
-    echo `hostname -s` | figlet > hostname-banner
-    echo -e "This server is the property of\nXXXX Ltd.\n\nAll access is monitored." >> hostname-banner
-    sudo mv hostname-banner /etc
-    sudo chown root:root /etc/hostname-banner
+    echo `hostname -s` | figlet > /etc/hostname-banner
+    sudo echo -e "This server is the property of\nXXXX Ltd.\n\nAll access is monitored." >> /etc/hostname-banner
+    sudo mkdir /etc/neofetch
 
-Edit the crontab as root:
+Now set up neofetch for a non-gpu server:
 
-    sudo crontab -e
+    sudo cp /home/build/bioit/bin/neofetch.conf /etc/neofetch/neofetch.conf
 
-Paste in this for a non-gpu server:
+or for a gpu server:
 
-    */2 * * * * neofetch --config /home/build/bioit/bin/neofetch.conf --ascii /etc/hostname-banner > /etc/motd
+    sudo cp /home/build/bioit/bin/neofetch_gpu.conf /etc/neofetch/neofetch.conf
 
-Or this for a gpu server:
+Finally create the motd.sh script in /etc/profile.d:
 
-    */2 * * * * neofetch --config /home/build/bioit/bin/neofetch_gpu.conf --ascii /etc/hostname-banner > /etc/motd
+     sudo echo '#!/bin/bash' > /etc/profile.d/motd.sh; sudo echo 'printf "\n"' >> /etc/profile.d/motd.sh ; sudo echo 'neofetch --config /etc/neofetch/neofetch.conf --ascii /etc/hostname-banner' >> /etc/profile.d/motd.sh
 
 Now when you log in you'll see a nice banner and updated stats on the machine.
 
