@@ -1,0 +1,6 @@
+#%Module 1.0
+#
+#  htslib module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/htslib/1.19/bin
+prepend-path  MANPATH           /opt/bioit/htslib/1.19/share/man
