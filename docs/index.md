@@ -23,6 +23,7 @@ Start at the [Installation](Installation.md) page.
 * [bismark](bismark.md)
 * [bowtie](bowtie.md)
 * [bowtie2](bowtie2.md)
+* [busco](busco.md)
 * [bwa](bwa.md)
 * [chopper](chopper.md)
 * [cutadapt](cutadapt.md)

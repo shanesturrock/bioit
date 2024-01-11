@@ -15,6 +15,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [bismark](bismark.md)
 * [bowtie](bowtie.md)
 * [bowtie2](bowtie2.md)
+* [busco](busco.md)
 * [bwa](bwa.md)
 * [chopper](chopper.md)
 * [cutadapt](cutadapt.md)
