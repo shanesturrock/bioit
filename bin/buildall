@@ -42,4 +42,4 @@ ${HOME}/bioit/apps/stringtie/SPEC/build 2.2.1
 ${HOME}/bioit/apps/tophat/SPEC/build 2.1.1
 ${HOME}/bioit/apps/vcftools/SPEC/build 0.1.16
 ${HOME}/bioit/apps/velvet/SPEC/build 1.2.10
-${HOME}/bioit/apps/vsearch/SPEC/build 2.26.1
+${HOME}/bioit/apps/vsearch/SPEC/build 2.27.0
