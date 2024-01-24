@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/samtools/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/samtools/SPEC/build 1.19.1
+    ${HOME}/bioit/apps/samtools/SPEC/build 1.19.2
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load samtools/1.19.1
+    module load samtools/1.19.2
     which samtools
     samtools --version
 
@@ -24,9 +24,9 @@ If all is good, you can move to the RPM building step.
 
 Download the version to be built into `/opt/bioit/samtools/src` and untar
 
-Inside the source run the following where 1.19.1 is the current one being built:
+Inside the source run the following where 1.19.2 is the current one being built:
 
-    ./configure --prefix=/opt/bioit/samtools/1.19.1
+    ./configure --prefix=/opt/bioit/samtools/1.19.2
     make
     make install
 
@@ -39,8 +39,8 @@ Add a module file in `/opt/bioit/modulefiles/samtools/` for this version by copy
     #  samtools module for use with 'environment-modules' package:
     #
     module load bcftools/1.19
-    prepend-path  PATH         /opt/bioit/samtools/1.19.1/bin
-    prepend-path  MANPATH      /opt/bioit/samtools/1.19.1/share/man
+    prepend-path  PATH         /opt/bioit/samtools/1.19.2/bin
+    prepend-path  MANPATH      /opt/bioit/samtools/1.19.2/share/man
 
 ## RPM
 
