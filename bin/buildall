@@ -35,7 +35,7 @@ ${HOME}/bioit/apps/ragtag/SPEC/build 2.1.0
 ${HOME}/bioit/apps/raven-assembler/SPEC/build 1.8.3
 ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.12.1
 ${HOME}/bioit/apps/samtools/SPEC/build 1.19.2
-${HOME}/bioit/apps/seqkit/SPEC/build 2.6.1
+${HOME}/bioit/apps/seqkit/SPEC/build 2.7.0
 ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 242
 ${HOME}/bioit/apps/SolexaQA++/SPEC/build 3.1.7.3
 ${HOME}/bioit/apps/stringtie/SPEC/build 2.2.1
