@@ -8,7 +8,7 @@ The following guide sets up various web services with SSL via NGINX and some oth
 
 Download the installer:
 
-    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2023.06.1-524-x86_64.rpm
+    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2023.12.1-402-x86_64.rpm
 
 If you're using meta-RPMs ignore the next bit but if only using environment modules you need to specify where R is by doing the following before installing the rstudio server package:
 
@@ -18,9 +18,9 @@ If you're using meta-RPMs ignore the next bit but if only using environment modu
 Paste the following into the rserver.conf file you're creating (changing the version of R as necessary):
 
     # Location of R
-    rsession-which-r=/opt/bioit/R-core/4.3.1/bin/R
+    rsession-which-r=/opt/bioit/R-core/4.3.3/bin/R
     # R library path
-    rsession-ld-library-path=/opt/bioit/R-core/4.3.1/lib64/R/lib
+    rsession-ld-library-path=/opt/bioit/R-core/4.3.3/lib64/R/lib
     # Only listen localhost
     www-address=localhost
     # Connection port
@@ -32,13 +32,13 @@ Install the server:
 
 ### CentOS 7
 
-    sudo yum -y install rstudio-server-rhel-2023.06.1-524-x86_64.rpm    
+    sudo yum -y install ./rstudio-server-rhel-2023.12.1-402-x86_64.rpm
 
 ### Rocky Linux 8
 
-    sudo dnf -y install rstudio-server-rhel-2023.06.1-524-x86_64.rpm
+    sudo dnf -y install ./rstudio-server-rhel-2023.12.1-402-x86_64.rpm
 
-If SELinux is enabled, do the following to allow the server to actually work:
+If SELinux is enabled, do the following to allow the server to actually work and any time you upgrade versions:
 
     sudo chcon -R -t bin_t /usr/lib/rstudio-server/bin/
     sudo systemctl restart rstudio-server
