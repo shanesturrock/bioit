@@ -1,4 +1,4 @@
-options(Ncpus = 8)
+options(Ncpus = 16)
 install.packages("devtools",repos="https://cloud.r-project.org/")
 install.packages("abind",repos="https://cloud.r-project.org/")
 install.packages("ade4",repos="https://cloud.r-project.org/")

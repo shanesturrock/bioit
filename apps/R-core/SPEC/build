@@ -22,6 +22,7 @@ fi
 # Old devtoolset export for CentOS 7
 #export PATH=/opt/rh/devtoolset-9/root/usr/bin:$PATH
 VERSION=$1
+CPUS=16
 RELEASE=${VERSION%%.*}
 DATE=`date +"%d/%m/%Y %r"`
 echo "Building R-core ${VERSION} R-${RELEASE} on ${DATE}"
@@ -32,7 +33,7 @@ cd R-${VERSION}
 ./configure --prefix=/opt/bioit/R-core/${VERSION} --enable-R-shlib --with-x --with-libpng --with-jpeglib --with-cairo --with-libtiff --with-blas --with-lapack --enable-memory-profiling --with-pcre1
  
 make clean
-make -j8
+make -j${CPUS}
 make install
 
 
@@ -59,7 +60,7 @@ wget http://download.osgeo.org/geos/geos-3.9.1.tar.bz2
 tar xvf geos-3.9.1.tar.bz2
 cd geos-3.9.1
 ./configure --prefix=/opt/bioit/R-core/${VERSION}/lib64/R
-make -j8
+make -j${CPUS}
 make install
 
 echo "Install sqlite3"
@@ -71,7 +72,7 @@ export CPPFLAGS="-fPIC"
 export CFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1"
 #export CXXFLAGS="-fPIC"
 ./configure --disable-dynamic-extensions --enable-static --disable-shared --prefix=/opt/bioit/R-core/${VERSION}/lib64/R
-make -j8
+make -j${CPUS}
 make install
 
 echo "Install proj"
@@ -83,7 +84,7 @@ export SQLITE3_CFLAGS="-I/opt/bioit/R-core/${VERSION}/lib64/R/include"
 export SQLITE3_LIBS=/opt/bioit/R-core/${VERSION}/lib64/R/lib/libsqlite*
 export PATH=/opt/bioit/R-core/${VERSION}/lib64/R/bin:$PATH
 ./configure --prefix=/opt/bioit/R-core/${VERSION}/lib64/R
-make -j8
+make -j${CPUS}
 make install
 # Ensure proj4 package will build by defining this macro
 sed -e '36i#define ACCEPT_USE_OF_DEPRECATED_PROJ_API_H' --in-place /opt/bioit/R-core/${VERSION}/lib64/R/include/proj_api.h
@@ -96,7 +97,7 @@ wget https://github.com/OSGeo/gdal/releases/download/v3.3.2/gdal-3.3.2.tar.gz
 tar xvf gdal-3.3.2.tar.gz
 cd gdal-3.3.2
 ./configure --prefix=/opt/bioit/R-core/${VERSION}/lib64/R --with-geos=/opt/bioit/R-core/${VERSION}/lib64/R/bin/geos-config --with-proj=/opt/bioit/R-core/${VERSION}/lib64/R
-make -j8
+make -j${CPUS}
 make install
 
 echo "Install nlopt"
