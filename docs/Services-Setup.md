@@ -449,4 +449,4 @@ It isn't a security risk because the server immediately bounces the user over to
 
 ## Next Step
 
-Go to the [Applications](Applications.md) page.
+Go to the [Updating](Updating.md) page.
