@@ -1,3 +1,2 @@
 version=4
 https://gitlab.com/ezlab/busco/tags?sort=updated_desc archive/v?\d[\d.]+/busco-v?([\d.]+)@ARCHIVE_EXT@
-
