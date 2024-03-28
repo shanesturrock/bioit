@@ -46,14 +46,14 @@ All the packages are compiled as versions in `/opt/bioit` but by default they're
 
 ## Checking for new packages (Rocky Linux 8 only)
 
-The `check_updates` alias added to the `.bashrc` during installation won't work until `uscan` is available. Unfortunately, the package including this that works on CentOS 7 isn't available for Rocky Linux 8 so the solution is to build a CentOS 7 container which will be used instead.
+The `check_updates` alias added to the `.bashrc` during installation won't work until `uscan` is available. Unfortunately, the package including this that works on CentOS 7 isn't available for Rocky Linux 8 so the solution is to build an Ubuntu container which will be used instead.
 
 Build the container with this command:
 
     cd ~/bioit/bin
     export APPTAINER_TMPDIR=`pwd`/tmp
     mkdir $APPTAINER_TMPDIR
-    apptainer build --fakeroot centos7_uscan.sif centos7_uscan.def
+    apptainer build --fakeroot ubuntu_uscan.sif ubuntu_uscan.def
 
 The TMPDIR is required on systems with high security such as CIS, regular Linux installs can omit it.
 
