@@ -1,0 +1,22 @@
+Bootstrap: docker
+From: ubuntu:22.04
+
+%help
+    Container with uscan installed.
+
+%setup
+
+%post
+    apt-get -y update
+    apt-get -y upgrade
+    apt-get -y install devscripts locales
+
+%environment
+    export LC_ALL=C
+
+%runscript
+    exec /usr/bin/uscan "$@"
+
+%labels
+    Author Shane Sturrock
+    Version v1.0

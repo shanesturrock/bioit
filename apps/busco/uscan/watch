@@ -1,2 +1,3 @@
 version=4
-https://gitlab.com/ezlab/busco/tags?sort=updated_desc archive/v?\d[\d.]+/busco-v?([\d.]+)@ARCHIVE_EXT@
+opts="searchmode=plain" \
+ https://gitlab.com/ezlab/@PACKAGE@/tags?sort=updated_desc -/archive/v?\d[\d.]+/@PACKAGE@-@ANY_VERSION@@ARCHIVE_EXT@ debian uupdate

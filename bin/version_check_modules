@@ -12,7 +12,8 @@ application_dir="/home/build/bioit/apps"	# Default application directory
 # Handle differences between Rocky and CentOS
 if [ $(cat /etc/redhat-release | grep -ci "rocky") -eq 1 ]; then
   # Rocky Linux
-  uscan='/home/build/bioit/bin/centos7_uscan.sif'
+  uscan='/home/build/bioit/bin/ubuntu_uscan.sif'
+  #uscan='/home/build/bioit/bin/centos7_uscan.sif'
 else
   # CentOS Linux
   uscan='/bin/uscan'
