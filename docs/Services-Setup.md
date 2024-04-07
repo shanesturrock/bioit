@@ -49,7 +49,7 @@ You should now be able to open the RStudio Server interface by going to `http://
 
 Make sure password free sudo is enabled as per the installation page. JupyterLab is installed by running the script in `~/bioit/bin`
 
-    build_jupyterlab 4.0.9
+    build_jupyterlab 4.1.5
 
 If it fails, you can remove it using:
 
@@ -75,14 +75,14 @@ At this point, SELinux should allow JupyterHub access to authentication and will
 It might be useful to have a remote desktop solution inside JupyterLab. Assuming the Mate Desktop is already installed as per the installation page and X2Go config, you can do the following to add a launcher inside JupyterHub as the build user:
 
     sudo dnf -y install tigervnc
-    cd /opt/jupyter/jupyterlab/4.0.9/jupyterlab_4.0.9/bin/
+    cd /opt/jupyter/jupyterlab/4.1.5/jupyterlab_4.1.5/bin/
     ./pip install jupyter-remote-desktop-proxy
     cd /opt/jupyter/jupyterlab/anaconda3/2023.09-0/bin
-    ./conda install --channel conda-forge --prefix /opt/jupyter/jupyterlab/4.0.9/jupyterlab_4.0.9 websockify
+    ./conda install --channel conda-forge --prefix /opt/jupyter/jupyterlab/4.1.5/jupyterlab_4.1.5 websockify
 
 Set mate-session instead of xfce-session in this file:
 
-    vi /opt/jupyter/jupyterlab/4.0.9/jupyterlab_4.0.9/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
+    vi /opt/jupyter/jupyterlab/4.1.5/jupyterlab_4.1.5/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
 
 Restart the JupyterHub service
 
