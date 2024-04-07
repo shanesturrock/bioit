@@ -77,7 +77,7 @@ It might be useful to have a remote desktop solution inside JupyterLab. Assuming
     sudo dnf -y install tigervnc
     cd /opt/jupyter/jupyterlab/4.1.5/jupyterlab_4.1.5/bin/
     ./pip install jupyter-remote-desktop-proxy
-    cd /opt/jupyter/jupyterlab/anaconda3/2023.09-0/bin
+    cd /opt/jupyter/jupyterlab/anaconda3/2024.02-1/bin
     ./conda install --channel conda-forge --prefix /opt/jupyter/jupyterlab/4.1.5/jupyterlab_4.1.5 websockify
 
 Set mate-session instead of xfce-session in this file:
