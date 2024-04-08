@@ -67,10 +67,13 @@ Now try and log in and it will let you but audit.log will contain the informatio
     sudo semodule -i jupyter-module.pp
     sudo setenforce enforcing
     sudo systemctl restart jupyterhub
+    sudo systemctl restart nginx
 
 At this point, SELinux should allow JupyterHub access to authentication and will continue to work.
 
 ## NoVNC inside JupyterLab
+
+NOTE - Currently broken, no desktop icon shows up. Probably an issue with extensions.
 
 It might be useful to have a remote desktop solution inside JupyterLab. Assuming the Mate Desktop is already installed as per the installation page and X2Go config, you can do the following to add a launcher inside JupyterHub as the build user:
 
@@ -84,9 +87,10 @@ Set mate-session instead of xfce-session in this file:
 
     vi /opt/jupyter/jupyterlab/4.1.5/jupyterlab_4.1.5/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
 
-Restart the JupyterHub service
+Restart the JupyterHub and nginx services
 
     sudo systemctl restart jupyterhub
+    sudo systemctl restart nginx
 
 Log in again and there will be a new desktop launcher. Clicking that will open a new tab with a Mate desktop session for the user. 
 
