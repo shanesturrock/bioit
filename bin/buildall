@@ -38,7 +38,7 @@ ${HOME}/bioit/apps/samtools/SPEC/build 1.20
 ${HOME}/bioit/apps/seqkit/SPEC/build 2.8.1
 ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 242
 ${HOME}/bioit/apps/SolexaQA++/SPEC/build 3.1.7.3
-${HOME}/bioit/apps/stringtie/SPEC/build 2.2.2
+${HOME}/bioit/apps/stringtie/SPEC/build 2.2.3
 ${HOME}/bioit/apps/tophat/SPEC/build 2.1.1
 ${HOME}/bioit/apps/vcftools/SPEC/build 0.1.16
 ${HOME}/bioit/apps/velvet/SPEC/build 1.2.10
