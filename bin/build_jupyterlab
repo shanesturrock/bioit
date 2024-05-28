@@ -125,6 +125,7 @@ c.Spawner.default_url = '/lab'
 c.Authenticator.admin_users = {'build','sss'}
 c.LocalAuthenticator.create_system_users = False
 c.PAMAuthenticator.check_account = True
+c.PAMAuthenticator.allow_existing_users = True
 c.PAMAuthenticator.encoding = 'utf8'
 c.PAMAuthenticator.open_sessions = True
 c.PAMAuthenticator.service = 'login'
