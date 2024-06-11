@@ -25,7 +25,7 @@ ${HOME}/bioit/apps/htslib/SPEC/build 1.20
 ${HOME}/bioit/apps/igv/SPEC/build 2.17.4
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.15.0+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
-${HOME}/bioit/apps/medaka/SPEC/build 1.11.3
+${HOME}/bioit/apps/medaka/SPEC/build 1.12.0
 ${HOME}/bioit/apps/minimap2/SPEC/build 2.28
 ${HOME}/bioit/apps/nanoplot/SPEC/build 1.42.0
 ${HOME}/bioit/apps/picard/SPEC/build 3.1.1

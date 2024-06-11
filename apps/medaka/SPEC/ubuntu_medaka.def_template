@@ -1,0 +1,27 @@
+BootStrap: docker
+From: ubuntu:22.04
+
+%help
+    Container with medaka and additional libs
+
+%setup
+
+%post
+    apt-get update -y
+    apt-get install wget -y
+    export DEBIAN_FRONTEND=noninteractive
+#    apt-get install dpkg-dev cmake g++ gcc binutils libx11-dev libxpm-dev \
+#    libxft-dev libxext-dev python3.10 libssl-dev libgsl0-dev libtiff-dev \
+#    python3-pip -y
+    apt-get install -y python3-pip
+    pip3 install pyabpoa medaka==VERSION
+
+%environment
+    export LC_ALL=C
+
+%runscript
+    exec /usr/local/bin/medaka "$@"
+
+%labels
+    Author Shane Sturrock
+    Version v1.0
