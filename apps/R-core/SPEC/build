@@ -65,9 +65,12 @@ make install
 
 echo "Install sqlite3"
 cd /opt/bioit/R-core/src/R-${VERSION}
-wget https://www.sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
-tar xvf sqlite-autoconf-3360000.tar.gz
-cd sqlite-autoconf-3360000
+#wget https://www.sqlite.org/2021/sqlite-autoconf-3360000.tar.gz
+wget https://sqlite.org/2024/sqlite-autoconf-3460000.tar.gz
+#tar xvf sqlite-autoconf-3360000.tar.gz
+tar xvf sqlite-autoconf-3460000.tar.gz
+#cd sqlite-autoconf-3360000
+cd sqlite-autoconf-3460000
 export CPPFLAGS="-fPIC"
 export CFLAGS="-DSQLITE_ENABLE_COLUMN_METADATA=1"
 #export CXXFLAGS="-fPIC"
