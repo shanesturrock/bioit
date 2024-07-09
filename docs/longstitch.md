@@ -1,6 +1,6 @@
 # LongStitch
 
-[https://github.com/bcgcs/LongStitch](https://github.com/bcgcs/LongStitch)
+[https://github.com/bcgsc/LongStitch](https://github.com/bcgsc/LongStitch)
 
 ## Automatic Build
 
