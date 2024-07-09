@@ -35,6 +35,7 @@ Start at the [Installation](Installation.md) page.
 * [hmmer](hmmer.md)
 * [htslib](htslib.md)
 * [igv](igv.md)
+* [longstitch](longstitch.md)
 * [medaka](medaka.md)
 * [minimap2](minimap2.md)
 * [nanoplot](nanoplot.md)
