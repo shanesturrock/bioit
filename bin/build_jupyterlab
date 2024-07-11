@@ -122,8 +122,9 @@ c.Spawner.args = ['--log-level=ERROR']
 c.Spawner.cmd = ['jupyter-labhub']
 c.Spawner.cpu_limit = 8
 c.Spawner.default_url = '/lab'
-c.Authenticator.admin_users = {'build','sss'}
+c.Authenticator.admin_users = {'build'}
 c.LocalAuthenticator.create_system_users = False
+c.OAuthenticator.allow_all = True
 c.PAMAuthenticator.check_account = True
 c.PAMAuthenticator.allow_existing_users = True
 c.PAMAuthenticator.encoding = 'utf8'
