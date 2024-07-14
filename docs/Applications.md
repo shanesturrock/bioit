@@ -33,6 +33,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [ncbi-blast](ncbi-blast.md)
 * [nxtrim](nxtrim.md)
 * [picard](picard.md)
+* [picrust2](picrust2.md)
 * [prokka](prokka.md)
 * [R-core](R-core.md)
 * [ragtag](ragtag.md)
