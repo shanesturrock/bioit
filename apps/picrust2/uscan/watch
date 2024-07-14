@@ -1,2 +1,2 @@
 version=3
-https://github.com/bcgsc/LongStitch/tags .*/v([0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2})\.tar\.gz
+https://github.com/picrust/picrust2/tags .*/v([0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2})\.tar\.gz
