@@ -43,6 +43,13 @@ sed -i "s%EXEC%micromamba run -p /opt/conda/envs/${APP}_${VERSION}_singularity%g
 
 # Create scripts to run each binary in container
 cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/picrust2_pipeline.py
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/add_descriptions.py
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/biom
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/convert_table.py
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/hsp.py
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/metagenome_pipeline.py
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/pathway_pipeline.py
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/place_seqs.py
 
 # Make all scripts executable
 chmod a+x /opt/bioit/${APP}/${VERSION}/bin/*
