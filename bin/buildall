@@ -6,7 +6,7 @@
 ${HOME}/bioit/apps/abyss/SPEC/build 2.3.7
 ${HOME}/bioit/apps/augustus/SPEC/build 3.4.0
 ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.2
-${HOME}/bioit/apps/bbmap/SPEC/build 39.06
+${HOME}/bioit/apps/bbmap/SPEC/build 39.08
 ${HOME}/bioit/apps/bcftools/SPEC/build 1.20
 ${HOME}/bioit/apps/bedtools2/SPEC/build 2.31.1
 ${HOME}/bioit/apps/bismark/SPEC/build 0.24.2
@@ -24,7 +24,7 @@ ${HOME}/bioit/apps/hmmer/SPEC/build 3.4
 ${HOME}/bioit/apps/htslib/SPEC/build 1.20
 ${HOME}/bioit/apps/igv/SPEC/build 2.17.4
 ${HOME}/bioit/apps/longstitch/SPEC/build 1.0.5
-${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.15.0+
+${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.16.0+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
 ${HOME}/bioit/apps/medaka/SPEC/build 1.12.1
 ${HOME}/bioit/apps/minimap2/SPEC/build 2.28
