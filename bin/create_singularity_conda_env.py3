@@ -62,7 +62,7 @@ From: mambaorg/micromamba:focal
     export PYTHONWARNINGS=ignore
 
 %post
-    micromamba create --yes --quiet --name {APP}_{VER}_singularity -c conda-forge -c anaconda -c bioconda {APP}={VER}
+    micromamba create --yes --quiet --name {APP}_{VER}_singularity -c base -c conda-forge -c bioconda {APP}={VER}
     micromamba clean -afy
 
 %runscript
@@ -88,7 +88,7 @@ From: continuumio/miniconda3
     apt update && apt install -y man-db
 
     conda install -c conda-forge mamba
-    mamba create  --quiet --yes --name {APP}_{VER}_singularity -c conda-forge -c anaconda -c bioconda  {APP}={VER}
+    mamba create  --quiet --yes --name {APP}_{VER}_singularity -c base -c conda-forge -c bioconda  {APP}={VER}
 
     # activate the conda env and do stuff if required
 #    . /opt/conda/etc/profile.d/conda.sh
