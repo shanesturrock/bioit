@@ -43,12 +43,12 @@ If SELinux is enabled, do the following to allow the server to actually work and
     sudo chcon -R -t bin_t /usr/lib/rstudio-server/bin/
     sudo systemctl restart rstudio-server
 
-If you want to store the R session data on a local drive such as in `/usr/local/rstudio/$USER` you should create that directory and directories for each user inside here. Then `sudo systemctl edit rstudio-server` and add the following:
+If you want to store the R session data on a local drive such as in `/usr/local/rstudio/$USER` you should create that directory and directories for each user inside here. Then shut down the rstudio-server and run this `sudo systemctl edit rstudio-server` and add the following:
 
     [Service]
     Environment="RSTUDIO_DATA_HOME=/usr/local/rstudio/$USER/rstudio"
 
-If you add new users, don't forget to create this directory because the new user won't be able to log in. Set the ownership to their account and permissions to 700 like their regular home directory is.
+If you add new users, don't forget to create this directory because the new user won't be able to log in. Set the ownership to their account and permissions to 700 like their regular home directory is. If you're migrating from having the rstudio directory in user's home directories, you can move the file from `/home/$USER/.local/share/rstudio` into `/usr/local/rstudio/$USER/rstudio` and then start the rstudio-server again.
 
 You should now be able to open the RStudio Server interface by going to `http://localhost:8787` using Firefox inside the X2Go remote desktop.
 
