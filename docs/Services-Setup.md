@@ -32,16 +32,23 @@ Install the server:
 
 ### CentOS 7
 
-    sudo yum -y install ./rstudio-server-rhel-2023.12.1-402-x86_64.rpm
+No longer supported.
 
 ### Rocky Linux 8
 
-    sudo dnf -y install ./rstudio-server-rhel-2023.12.1-402-x86_64.rpm
+    sudo dnf -y install ./rstudio-server-rhel-2024.04.2-764-x86_64.rpm
 
 If SELinux is enabled, do the following to allow the server to actually work and any time you upgrade versions:
 
     sudo chcon -R -t bin_t /usr/lib/rstudio-server/bin/
     sudo systemctl restart rstudio-server
+
+If you want to store the R session data on a local drive such as in `/usr/local/rstudio/$USER` you should create that directory and directories for each user inside here. Then `sudo systemctl edit rstudio-server` and add the following:
+
+    [Service]
+    Environment="RSTUDIO_DATA_HOME=/usr/local/rstudio/$USER/rstudio"
+
+If you add new users, don't forget to create this directory because the new user won't be able to log in. Set the ownership to their account and permissions to 700 like their regular home directory is.
 
 You should now be able to open the RStudio Server interface by going to `http://localhost:8787` using Firefox inside the X2Go remote desktop.
 
