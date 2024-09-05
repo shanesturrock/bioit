@@ -22,8 +22,8 @@ PY3_VER=3.10
 JLAB_VER=$1
 ENV_NAME=jupyterlab_${JLAB_VER}
 JLAB_PATH=${ROOT}/jupyterlab/${JLAB_VER}
-CONDA_VER=2024.02-1
-CONDA_BIN=${ROOT}/jupyterlab/anaconda3/${CONDA_VER}/bin
+CONDA_VER=24.7.1-0
+CONDA_BIN=${ROOT}/jupyterlab/miniconda3/${CONDA_VER}/bin
 JLAB_CONFIG_DIR=${JLAB_PATH}/${ENV_NAME}/etc/jupyter
 JHUB_PORT=8080
 JHUB_PROTO=http
@@ -32,9 +32,9 @@ JHUB_PROTO=http
 mkdir ${ROOT}/jupyterlab
 cd ${ROOT}/jupyterlab
 
-# Download and install Anaconda
-wget -N https://repo.anaconda.com/archive/Anaconda3-${CONDA_VER}-Linux-x86_64.sh
-bash ./Anaconda3-${CONDA_VER}-Linux-x86_64.sh -b -p ${ROOT}/jupyterlab/anaconda3/${CONDA_VER}
+# Download and install miniforge
+wget -N https://github.com/conda-forge/miniforge/releases/download/${CONDA_VER}/Miniforge3-${CONDA_VER}-Linux-x86_64.sh
+bash ./Miniforge3-${CONDA_VER}-Linux-x86_64.sh -b -p ${ROOT}/jupyterlab/miniconda3/${CONDA_VER}
 
 # don't rebuild the env if it already exists
 CHECK_ENV=$( ${CONDA_BIN}/conda list -n ${ENV_NAME} 2>&1 )
