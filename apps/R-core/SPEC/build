@@ -96,10 +96,10 @@ sed 's/; network = on/network = on/g' --in-place /opt/bioit/R-core/${VERSION}/li
 
 echo "Install gdal"
 cd /opt/bioit/R-core/src/R-${VERSION}
-wget https://github.com/OSGeo/gdal/releases/download/v3.3.2/gdal-3.3.2.tar.gz
-tar xvf gdal-3.3.2.tar.gz
-cd gdal-3.3.2
-./configure --prefix=/opt/bioit/R-core/${VERSION}/lib64/R --with-geos=/opt/bioit/R-core/${VERSION}/lib64/R/bin/geos-config --with-proj=/opt/bioit/R-core/${VERSION}/lib64/R
+wget https://github.com/OSGeo/gdal/releases/download/v3.5.3/gdal-3.5.3.tar.gz
+tar xvf gdal-3.5.3.tar.gz
+cd gdal-3.5.3
+./configure --prefix=/opt/bioit/R-core/${VERSION}/lib64/R --with-geos=/opt/bioit/R-core/${VERSION}/lib64/R/bin/geos-config --with-proj=/opt/bioit/R-core/${VERSION}/lib64/R --with-sqlite3=no
 make -j${CPUS}
 make install
 
