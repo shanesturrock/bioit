@@ -410,8 +410,8 @@ Rscript -e 'BiocManager::install("derfinder")'
 Rscript -e 'install.packages("aroma.core",repos="https://cloud.r-project.org/")'
 Rscript -e 'install.packages("aroma.apd",repos="https://cloud.r-project.org/")'
 Rscript -e 'install.packages("aroma.affymetrix",repos="https://cloud.r-project.org/")'
-Rscript -e 'install.packages("sf",repos="https://cloud.r-project.org/")'
 Rscript -e 'install.packages("terra",repos="https://cloud.r-project.org/")'
+Rscript -e 'install.packages("sf",repos="https://cloud.r-project.org/")'
 echo "Writing module .version to set default"
 echo "#%Module1.0
 ##
