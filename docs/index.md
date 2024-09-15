@@ -30,6 +30,7 @@ Start at the [Installation](Installation.md) page.
 * [cutadapt](cutadapt.md)
 * [ea-utils](ea-utils.md)
 * [FastQC](FastQC.md)
+* [fasttree](fasttree.md)
 * [gvcftools](gvcftools.md)
 * [hisat2](hisat2.md)
 * [hmmer](hmmer.md)
