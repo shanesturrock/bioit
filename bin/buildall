@@ -27,6 +27,7 @@ ${HOME}/bioit/apps/igv/SPEC/build 2.18.1
 ${HOME}/bioit/apps/longstitch/SPEC/build 1.0.5
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.16.0+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
+${HOME}/bioit/apps/mafft/SPEC/build 7.525
 ${HOME}/bioit/apps/medaka/SPEC/build 2.0.0
 ${HOME}/bioit/apps/minimap2/SPEC/build 2.28
 ${HOME}/bioit/apps/nanoplot/SPEC/build 1.42.0

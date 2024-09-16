@@ -28,6 +28,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [htslib](htslib.md)
 * [igv](igv.md)
 * [longstitch](longstitch.md)
+* [mafft](mafft.md)
 * [medaka](medaka.md)
 * [minimap2](minimap2.md)
 * [nanoplot](nanoplot.md)
