@@ -1,2 +1,2 @@
 version=3
-https://mafft.cbrc.jp/alignment/software .*/mafft-([0-9]{1,2}.[0-9]{1,2})-gcc\_fc6\.x86\_64\.rpm
+https://github.com/nanoporetech/medaka/tags .*/v([0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2})\.tar\.gz
