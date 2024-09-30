@@ -23,7 +23,7 @@ ${HOME}/bioit/apps/gvcftools/SPEC/build 0.17.0
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.2.1
 ${HOME}/bioit/apps/hmmer/SPEC/build 3.4
 ${HOME}/bioit/apps/htslib/SPEC/build 1.21
-${HOME}/bioit/apps/igv/SPEC/build 2.18.1
+${HOME}/bioit/apps/igv/SPEC/build 2.18.4
 ${HOME}/bioit/apps/longstitch/SPEC/build 1.0.5
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.16.0+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
@@ -46,4 +46,4 @@ ${HOME}/bioit/apps/stringtie/SPEC/build 2.2.3
 ${HOME}/bioit/apps/tophat/SPEC/build 2.1.1
 ${HOME}/bioit/apps/vcftools/SPEC/build 0.1.16
 ${HOME}/bioit/apps/velvet/SPEC/build 1.2.10
-${HOME}/bioit/apps/vsearch/SPEC/build 2.28.1
+${HOME}/bioit/apps/vsearch/SPEC/build 2.29.0
