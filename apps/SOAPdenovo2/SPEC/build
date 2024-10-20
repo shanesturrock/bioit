@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Script to auto build and install SOAPdenovo2. Just provide the version
 

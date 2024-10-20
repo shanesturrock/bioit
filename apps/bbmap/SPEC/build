@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Script to auto build and install bbmap. Just provide the version
 

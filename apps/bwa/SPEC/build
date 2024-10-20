@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Script to auto build and install bwa. Just provide the version
 

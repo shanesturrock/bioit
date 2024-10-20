@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Script to auto build and install abyss Just provide the version
 

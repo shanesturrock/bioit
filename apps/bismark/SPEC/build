@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Script to auto build and install bismark Just provide the version
 

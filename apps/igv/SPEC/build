@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Script to auto download and install igv. Just provide the version
 
