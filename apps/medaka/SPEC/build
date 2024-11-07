@@ -55,9 +55,9 @@ echo "#%Module 1.0
 #
 #  ${APP} module for use with 'environment-modules' package:
 #
-module load samtools/1.18
-module load minimap2/2.26
-module load htslib/1.18
+module load samtools/1.11
+module load minimap2/2.11
+module load htslib/1.11
 prepend-path  PATH              /opt/bioit/${APP}/${VERSION}/bin" > /opt/bioit/modulefiles/${APP}/${VERSION}
 echo "Writing module .version to set default"
 echo "#%Module1.0

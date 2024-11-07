@@ -138,7 +138,7 @@ echo "install.packages('https://cran.r-project.org/src/contrib/Archive/maptools/
 # Write the version file making this the default
 echo "Writing module .version to set default"
 echo "#%Module1.0
-##
-##  The desired version of R
-##
+#
+#  The desired version of R
+#
 set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/R/.version
