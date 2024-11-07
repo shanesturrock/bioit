@@ -46,6 +46,7 @@ sed -i "s%EXEC%micromamba run -p /opt/conda/envs/${APP}_${VERSION}_singularity%g
 cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/medaka
 cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/medaka_consensus
 cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/medaka_haploid_variant
+cat ${APP}_bin_template > /opt/bioit/${APP}/${VERSION}/bin/mini_align
 
 # Make all scripts executable
 chmod a+x /opt/bioit/${APP}/${VERSION}/bin/*
