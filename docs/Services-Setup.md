@@ -18,9 +18,9 @@ If you're using meta-RPMs ignore the next bit but if only using environment modu
 Paste the following into the rserver.conf file you're creating (changing the version of R as necessary):
 
     # Location of R
-    rsession-which-r=/opt/bioit/R-core/4.3.3/bin/R
+    rsession-which-r=/opt/bioit/R-core/4.4.2/bin/R
     # R library path
-    rsession-ld-library-path=/opt/bioit/R-core/4.3.3/lib64/R/lib
+    rsession-ld-library-path=/opt/bioit/R-core/4.4.2/lib64/R/lib
     # Only listen localhost
     www-address=localhost
     # Connection port
@@ -47,6 +47,10 @@ If you want to store the R session data on a local drive such as in `/usr/local/
 
     [Service]
     Environment="RSTUDIO_DATA_HOME=/usr/local/rstudio/$USER/rstudio"
+
+You can create a full set of directories based on your `/home/` directory using the following:
+
+    ( cd /home && find . -maxdepth 1 -type d -not -name . -exec sh -c 'for d do mkdir -p "/usr/local/rstudio/$d/rstudio" ; user="${d:2}" ; chown $user:$user -R /usr/local/rstudio/$d ; chmod 700 /usr/local/rstudio/$d ; done ' sh {} + )
 
 If you add new users, don't forget to create this directory because the new user won't be able to log in. Set the ownership to their account and permissions to 700 like their regular home directory is. If you're migrating from having the rstudio directory in user's home directories, you can move the file from `/home/$USER/.local/share/rstudio` into `/usr/local/rstudio/$USER/rstudio` and then start the rstudio-server again.
 
