@@ -31,7 +31,7 @@ mkdir -p /opt/bioit/cutadapt/${VERSION}
 # Handle differences between Rocky and CentOS
 if [ $(cat /etc/redhat-release | grep -ci "rocky") -eq 1 ]; then
   # Rocky Linux
-  /usr/bin/python3.8 -m venv /opt/bioit/cutadapt/${VERSION}/venv
+  /usr/bin/python3.9 -m venv /opt/bioit/cutadapt/${VERSION}/venv
 else
   # CentOS Linux
   /opt/rh/rh-python38/root/usr/bin/python -m venv /opt/bioit/cutadapt/${VERSION}/venv
