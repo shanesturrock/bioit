@@ -1,2 +1,2 @@
 version=3
-http://www.microbesonline.org/fasttree .*/FastTree-([0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}).c
+https://github.com/morgannprice/fasttree/tree/main/old .*/FastTree-([0-9]{1,2}.[0-9]{1,2}.[0-9]{1,2}).c
