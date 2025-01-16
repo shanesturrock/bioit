@@ -38,10 +38,16 @@ No longer supported.
 
     sudo yum install rstudio-server-rhel-2024.12.0-467-x86_64.rpm
 
+For better performance you should edit the `/etc/rstudio/rsession.conf` file and add the following:
+
+    # R Session Configuration File
+
+    session-save-action-default=no
+    session-timeout-minutes=0
+
 If SELinux is enabled, do the following to allow the server to actually work and any time you upgrade versions:
 
     sudo chcon -R -t bin_t /usr/lib/rstudio-server/bin/
-    sudo systemctl restart rstudio-server
 
 If you want to store the R session data on a local drive such as in `/usr/local/rstudio/$USER` you should create that directory and directories for each user inside here. Then shut down the rstudio-server and run this `sudo systemctl edit rstudio-server` and add the following:
 
@@ -53,6 +59,10 @@ You can create a full set of directories based on your `/home/` directory using 
     ( cd /home && find . -maxdepth 1 -type d -not -name . -exec sh -c 'for d do mkdir -p "/usr/local/rstudio/$d/rstudio" ; user="${d:2}" ; chown $user:$user -R /usr/local/rstudio/$d ; chmod 700 /usr/local/rstudio/$d ; done ' sh {} + )
 
 If you add new users, don't forget to create this directory because the new user won't be able to log in. Set the ownership to their account and permissions to 700 like their regular home directory is. If you're migrating from having the rstudio directory in user's home directories, you can move the file from `/home/$USER/.local/share/rstudio` into `/usr/local/rstudio/$USER/rstudio` and then start the rstudio-server again.
+
+Restart the service to make config channges take effect:
+
+    sudo systemctl restart rstudio-server
 
 You should now be able to open the RStudio Server interface by going to `http://localhost:8787` using Firefox inside the X2Go remote desktop.
 
