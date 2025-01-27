@@ -40,6 +40,7 @@ Start at the [Installation](Installation.md) page.
 * [mafft](mafft.md)
 * [medaka](medaka.md)
 * [minimap2](minimap2.md)
+* [multiqc](multiqc.md)
 * [nanoplot](nanoplot.md)
 * [ncbi-blast](ncbi-blast.md)
 * [nxtrim](nxtrim.md)

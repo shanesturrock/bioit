@@ -31,6 +31,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [mafft](mafft.md)
 * [medaka](medaka.md)
 * [minimap2](minimap2.md)
+* [multiqc](multiqc.md)
 * [nanoplot](nanoplot.md)
 * [ncbi-blast](ncbi-blast.md)
 * [nxtrim](nxtrim.md)
