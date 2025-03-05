@@ -2,7 +2,6 @@
 set -e
 
 # Script to auto build and install R-core. Just provide the version
-# Need to use scl enable devtoolset-9 'bash' though.
 
 function usage() {
  cat << EOF
@@ -19,12 +18,13 @@ if [ $# -lt 1 ]; then
  exit 1
 fi
 
-# Old devtoolset export for CentOS 7
-#export PATH=/opt/rh/devtoolset-9/root/usr/bin:$PATH
+# Use newer compiler than default for Rocky Linux 8
 VERSION=$1
 CPUS=16
 RELEASE=${VERSION%%.*}
 DATE=`date +"%d/%m/%Y %r"`
+GCC="gcc-toolset-11"
+export PATH=/opt/rh/$GCC/root/usr/bin:$PATH
 echo "Building R-core ${VERSION} R-${RELEASE} on ${DATE}"
 cd /opt/bioit/R-core/src
 wget https://cloud.r-project.org/src/base/R-${RELEASE}/R-${VERSION}.tar.gz
@@ -38,9 +38,9 @@ make install
 
 
 # Make sure bin directory is added by appending location to PATH in Renviron
-echo PATH=$\{PATH\}:/opt/bioit/R-core/${VERSION}/lib64/R/bin >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
-# Make sure devtoolset is used by default by appending location to PATH
-#echo PATH=/opt/rh/devtoolset-9/root/usr/bin:$\{PATH\}:/opt/bioit/R-core/${VERSION}/lib64/R/bin >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
+#echo PATH=$\{PATH\}:/opt/bioit/R-core/${VERSION}/lib64/R/bin >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
+# Make sure specified GCC is used by default by appending location to PATH
+echo PATH=/opt/rh/${GCC}/root/usr/bin:$\{PATH\}:/opt/bioit/R-core/${VERSION}/lib64/R/bin >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
 
 # Make sure pkg_config is set
 echo PKG_CONFIG_PATH=/opt/bioit/R-core/${VERSION}/lib64/R/lib/pkgconfig >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
@@ -108,7 +108,7 @@ cd /opt/bioit/R-core/src/R-${VERSION}
 wget https://github.com/stevengj/nlopt/archive/refs/tags/v2.7.1.tar.gz
 tar xvf v2.7.1.tar.gz
 cd nlopt-2.7.1
-mkdir build
+mkdir -p build
 cd build
 cmake3 ..
 # Change destination directory for install
