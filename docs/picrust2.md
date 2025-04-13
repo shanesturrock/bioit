@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/picrust2/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/picrust2/SPEC/build 2.6.1
+    ${HOME}/bioit/apps/picrust2/SPEC/build 2.6.2
 
 When that completes check that the new version is available using:
 
@@ -14,6 +14,6 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load picrust2/2.6.1
+    module load picrust2/2.6.2
     which picrust2_pipeline.py
     picrust2_pipeline.py --version
