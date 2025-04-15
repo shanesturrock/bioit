@@ -1,2 +1,2 @@
 version=3
-http://www.bioinformatics.babraham.ac.uk/projects/download.html fastqc/fastqc_v(0.[0-9]{2}.[0-9])\.zip
+https://www.bioinformatics.babraham.ac.uk/projects/download.html fastqc/fastqc_v(0.[0-9]{2}.[0-9])\.zip
