@@ -28,6 +28,7 @@ tar xvf ea-utils-${VERSION}.tar.gz
 cd ea-utils-${VERSION}/clipper
 export PERL5LIB=`pwd`
 sed "s+PREFIX?=/usr+PREFIX?=/opt/bioit/ea-utils/${VERSION}+g" --in-place Makefile
+sed "s*CFLAGS?=-O3 -I.*CFLAGS?=-O3 -I. -std=gnu++14*g" --in-place Makefile
 make
 make install
 echo "Writing modulefile"
