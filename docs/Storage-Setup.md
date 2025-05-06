@@ -1,14 +1,10 @@
 # Storage Setup
 
-The storage array needs to be configured for CentOS 7.
+The storage array needs to be configured.
 
 Install the `sg3_utils` and `multipath` packages:
 
-### CentOS 7
-
-    yum -y install sg3_utils device-mapper-multipath
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     dnf -y install sg3_utils device-mapper-multipath
 
@@ -62,7 +58,7 @@ Now we can edit the `/etc/fstab` and add the following line:
 
     LABEL=RAID /raid xfs defaults,discard,prjquota 0 0
 
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
 You need to run the following to reload the fstab changes:
 

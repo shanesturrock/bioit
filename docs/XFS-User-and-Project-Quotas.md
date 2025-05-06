@@ -8,11 +8,7 @@ Example setting user quotas on home:
 
 Edit entry in `/etc/fstab`:
 
-### CentOS 7
-
-    /dev/mapper/cl-home     /home                   xfs     defaults,usrquota,grpquota,prjquota        1 2
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     /dev/mapper/rl-home     /home                   xfs     defaults,usrquota,grpquota,prjquota        0 0
 
@@ -29,26 +25,7 @@ Future reboots will mount the storage correctly, this is just to avoid having to
 
 Test that the quotas are applied, if you're not seeing this reboot the machine:
 
-### CentOS 7
-
-    xfs_quota -x -c "state" /home
-    User quota state on /home (/dev/mapper/cl-home)
-      Accounting: ON
-      Enforcement: ON
-      Inode: #10305 (2 blocks, 2 extents)
-    Group quota state on /home (/dev/mapper/cl-home)
-      Accounting: ON
-      Enforcement: ON
-      Inode: #10306 (2 blocks, 2 extents)
-    Project quota state on /home (/dev/mapper/cl-home)
-      Accounting: ON
-      Enforcement: ON
-      Inode: #10306 (2 blocks, 2 extents)
-    Blocks grace time: [7 days]
-    Inodes grace time: [7 days]
-    Realtime Blocks grace time: [7 days]
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     xfs_quota -x -c "state" /home
     User quota state on /home (/dev/mapper/rl-home)
@@ -83,30 +60,7 @@ This shows that the quotas are enabled for users, groups and projects.
 
 Report quota for users, groups and projects:
 
-### CentOS 7
-
-     xfs_quota -x -c "report -h -ugp" /home
-     User quota on /home (/dev/mapper/cl-home)
-                            Blocks              
-     User ID      Used   Soft   Hard Warn/Grace   
-     ---------- --------------------------------- 
-     root            0      0      0  00 [------]
-     shane       98.3M      0      0  00 [------]
-
-     Group quota on /home (/dev/mapper/cl-home)
-                            Blocks              
-     Group ID     Used   Soft   Hard Warn/Grace   
-     ---------- --------------------------------- 
-     root            0      0      0  00 [------]
-     shane       98.3M      0      0  00 [------]
-
-     Project quota on /home (/dev/mapper/cl-home)
-                            Blocks              
-     Project ID   Used   Soft   Hard Warn/Grace   
-     ---------- --------------------------------- 
-     #0          98.3M      0      0  00 [------]
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     xfs_quota -x -c "report -h -ugp" /home
     User quota on /home (/dev/mapper/rl-home)
@@ -137,17 +91,7 @@ Set a user quota:
 
 Rerun quota report and note that there is now a soft quota of 9GB and a hard limit of 10GB:
 
-### CentOS 7
-
-    xfs_quota -x -c "report -h -u" /home
-    User quota on /home (/dev/mapper/cl-home)
-                           Blocks              
-    User ID      Used   Soft   Hard Warn/Grace   
-    ---------- --------------------------------- 
-    root            0      0      0  00 [------]
-    build      998.3M     9G    10G  00 [------]
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     xfs_quota -x -c "report -h -u" /home
     User quota on /home (/dev/mapper/rl-home)

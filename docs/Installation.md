@@ -1,22 +1,8 @@
 # Installation
 
-## Install a minimal CentOS 7 / Rocky Linux 8 environment
+## Install a minimal Rocky Linux 8 / Rocky Linux 9 environment
 
 After a minimal install you should install EPEL, compilers and a GUI since they will be needed for users. It is easier to follow along with these instructions if you ssh into the shell from a terminal on your local machine. By default, a minimal install will have the root login enabled but we'll disable this later.
-
-### CentOS 7
-
-    yum -y install epel-release
-    yum -y groupinstall "Development Tools"
-    yum -y groupinstall "X Window System"
-    yum -y groupinstall "Mate Desktop"
-    yum -y install libreoffice
-    systemctl set-default multi-user.target
-    yum -y install centos-release-scl
-    yum -y install devtoolset-9 sysstat figlet rh-python38-python
-    yum -y install devscripts perl-LWP-Protocol-https
-    yum -y update
-    reboot
 
 ### Rocky Linux 8
 
@@ -30,17 +16,24 @@ After a minimal install you should install EPEL, compilers and a GUI since they 
     dnf -y update
     reboot
 
+### Rocky Linux 9
+
+    dnf -y install epel-release
+    /usr/bin/crb enable
+    dnf -y groupinstall "Standard"
+    dnf -y groupinstall "Development Tools"
+    dnf -y install libreoffice
+    systemctl set-default multi-user.target
+    dnf -y update
+    reboot
+
 X11 GUI won't start, but if you want it to run use this:
 
     systemctl set-default graphical.target
 
 To enable the login window you need gdm:
 
-### CentOS 7
-
-    yum -y install gdm
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     dnf -y install gdm
 
@@ -48,11 +41,7 @@ Rebooting should bring up the chooser but do that later once the desktop is inst
 
 If the machine will mount NFS storage you need to install the following:
 
-### CentOS 7
-
-    yum -y install nfs-utils
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     dnf -y install nfs-utils
 
@@ -62,21 +51,13 @@ Also, if you're using NFS mounted home directories and you've got selinux enable
 
 Install `wget` as this makes it much easier to download packages:
 
-### CentOS 7
-
-    yum -y install wget
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     dnf -y install wget
 
 You should not install EPEL `R-core or bowtie` on this system so do the following to remove it if it is already installed:
 
-### CentOS 7
-
-    yum remove R-core
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     dnf remove R-core
 
@@ -92,7 +73,7 @@ This will mean the `R-core` package from the BioIT repo will be installed once t
 
 ## Prevent kernel updates
 
-The machine will need a reboot any time a kernel update is applied. To avoid this add the following line to each section of the `CentOS-Base.repo` or `Rocky-BaseOS.repo` file in `/etc/yum.repos.d`:
+The machine will need a reboot any time a kernel update is applied. To avoid this add the following line to each section of the `Rocky-BaseOS.repo` file in `/etc/yum.repos.d`:
 
     exclude=kernel*
 
@@ -102,21 +83,17 @@ If there's a bad kernel issue comment this line out, update the kernel and reboo
 
 The rpmfusion repo is also good to have as many packages not included in the base or EPEL are there. Install it with:
 
-### CentOS 7
-
-    yum localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-7.noarch.rpm
-
 ### Rocky Linux 8
 
     dnf -y localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
 
+### Rocky Linux 9
+
+    dnf -y localinstall --nogpgcheck https://download1.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm
+
 An example package would be ffmpeg which can be used to encode mp4 videos for some workflows. Install that with:
 
-### CentOS 7
-
-    yum -y install ffmpeg
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     dnf -y install ffmpeg
 
@@ -124,32 +101,27 @@ An example package would be ffmpeg which can be used to encode mp4 videos for so
 
 The following packages are required for building the suite of applications on a fresh BioIT server:
 
-### CentOS 7
+### Rocky Linux 8
 
-    yum -y install ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build git git-lfs screen htop root root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel python-devel python-nose python-pip perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env perl-Statistics-Descriptive cmake3 emacs-nox perl-Perl4-CoreLibs lapack-devel mpich-devel java-1.6.0-openjdk-devel zeromq-devel ghc cifs-utils python34-pip python34-devel perl-Archive-Tar perl-PerlIO-gzip hdf5-devel python-networkx gtk3-devel pigz tkinter python34-tkinter tcsh python-devel python34-devel python36-Cython libtiff-devel tmux pyqt4-devel nano python36-libs python36-devel python36-tkinter python36 python36-setuptools python36-pip python2-matplotlib NLopt-devel libsodium-devel libgit2-devel mysql++-devel lpsolve-devel suitesparse-devel mariadb-devel libsqlite3x-devel motif-devel motif-static motif ImageMagick-devel ImageMagick-c++-devel udunits2-devel proj-devel proj-epsg incron unixODBC-devel v8-devel librsvg2-devel xemacs libzstd-devel
+    dnf -y install git git-lfs ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build screen htop btop root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env perl-Statistics-Descriptive cmake3 emacs-nox perl-Perl4-CoreLibs lapack-devel mpich-devel python3-devel python3-nose python3-pip zeromq-devel ghc cifs-utils perl-Archive-Tar perl-PerlIO-gzip hdf5-devel python3-networkx gtk3-devel pigz python3-tkinter tcsh python3-Cython tmux nano python3-libs python3-setuptools libsodium-devel libgit2-devel lpsolve-devel suitesparse-devel mariadb-devel libsqlite3x-devel motif-devel motif-static motif ImageMagick-devel ImageMagick-c++-devel udunits2-devel proj-devel incron unixODBC-devel librsvg2-devel xemacs apptainer libtiff-devel python2 python38 perl-Test-Harness rsync jasper-devel selinux-policy-devel xterm python39 netcdf-devel setools-console glpk-devel yum-utils python39-devel lftp mpfr-devel cargo pandoc
+
+### Rocky Linux 9
+
+    dnf -y install git git-lfs ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build screen htop btop root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env cmake3 emacs-nox perl-Perl4-CoreLibs lapack-devel mpich-devel python3-devel python3-pip zeromq-devel ghc cifs-utils perl-Archive-Tar perl-PerlIO-gzip hdf5-devel python3-networkx gtk3-devel pigz python3-tkinter tcsh python3-Cython tmux nano python3-libs python3-setuptools libsodium-devel libgit2-devel suitesparse-devel mariadb-devel libsqlite3x-devel motif-devel motif ImageMagick-devel ImageMagick-c++-devel udunits2-devel proj-devel incron unixODBC-devel librsvg2-devel apptainer libtiff-devel perl-Test-Harness rsync jasper-devel selinux-policy-devel xterm python39 netcdf-devel setools-console glpk-devel yum-utils lftp mpfr-devel cargo pandoc
+
+Packages necessary to run most old CentOS 7 binaries:
 
 ### Rocky Linux 8
 
-    dnf -y install git git-lfs ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build screen htop btop root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env perl-Statistics-Descriptive cmake3 emacs-nox perl-Perl4-CoreLibs lapack-devel mpich-devel python3-devel python3-nose python3-pip zeromq-devel ghc cifs-utils perl-Archive-Tar perl-PerlIO-gzip hdf5-devel python3-networkx gtk3-devel pigz python3-tkinter tcsh python3-Cython tmux  nano python3-libs python3-setuptools libsodium-devel libgit2-devel lpsolve-devel suitesparse-devel mariadb-devel libsqlite3x-devel motif-devel motif-static motif ImageMagick-devel ImageMagick-c++-devel udunits2-devel proj-devel incron unixODBC-devel librsvg2-devel xemacs apptainer libtiff-devel python2 python38 perl-Test-Harness rsync jasper-devel selinux-policy-devel xterm python39 netcdf-devel setools-console glpk-devel yum-utils python39-devel lftp mpfr-devel cargo pandoc
-
-Packages necessary to run most old CentOS 7 binaries on Rocky Linux 8
-
     dnf -y install compat-openssl10 ncurses-compat-libs compat-libgfortran-48
 
-Fix an issue building augustus with this (no longer needed because Augustus has mysql turned off in the build):
+### Rocky Linux 9
 
-    ln -s /usr/lib64/mysql/libmysqlclient.so /usr/lib64/libmysqlclient.so
+    dnf -y install compat-openssl11 ncurses-compat-libs compat-libgfortran-48
 
-Fix problems building openmpi based tools (also not needed any more as openmpi isn't included in builds):
+For containerised tools to work the following directory needs to exist in the root of the file system. If not you need to create it but only those that aren't already present.
 
-    echo "/usr/lib64/openmpi/lib/" > /etc/ld.so.conf.d/openmpi.conf
-    ldconfig
-
-On CentOS 7 default tools and changelogs are provided by the meta-RPMS that are built to set alternatives with symlinks into `/usr/bin` so they'll see them as usual. To set this up go to the [BioIT repository](BioIT-repository.md) page, but not just yet. On Rocky Linux 8 we're not doing these meta-RPMS any more, just environment modules.
-
-For containerised tools to work the following directories need to exist in the root of the file system. If they don't you need to create them but only those that aren't already present. Here's the full set, edit as necessary
-
-    mkdir /raid /active /archive /data /databases /deepgene /dunninga /gbs_pine /scratch /sequencing /treestem
+    mkdir /raid 
 
 ## Disable shutdown by normal users
 
@@ -172,9 +144,9 @@ Now when users log in they won't see the shutdown button and they won't be able 
 
 ## Other useful user programs
 
-A couple of nice programs are `ncdu` and `baobab` both of which allow uers to see how much disc space they're using. (You can use dnf or yum to install on Rocky Linux 8)
+A couple of nice programs are `ncdu` and `baobab` both of which allow uers to see how much disc space they're using.
 
-    sudo yum -y install ncdu baobab
+    dnf -y install ncdu baobab
 
 ## Secure ssh but retain admin access
 
@@ -186,20 +158,11 @@ Create a build user account with admin rights which will be used to do tool upda
 
 For sudo without password (helps with the installations later) do the following:
 
-    sudo vi /etc/sudoers.d/build
+    vi /etc/sudoers.d/build
 
 Paste this into it:
 
     %build  ALL=(ALL) NOPASSWD:ALL
-
-Add the following to the build user's `.bashrc` file to make building tools nicer if RPMs are going to be used (CentOS 7 only):
-
-    alias buildrepo="cd /opt/bioit/repo ; createrepo . -g bioit.xml --database"
-    alias cleanbuild="rm -rf /home/build/rpmbuild/SPECS/* \
-      /home/build/rpmbuild/SRPMS/* /home/build/rpmbuild/SOURCES/* \
-      /home/build/rpmbuild/RPMS/*"
-
-The `buildrepo` alias will be used to add new packages and updates. The `cleanbuild` alias is for emptying out the rpmbuild directory, and the `$PATH` variable has the bioit gitrepo `bin` directory added so you can use the various tools that are in there. This is only on CentOS 7 and we won't be doing this moving forward.
 
 The following should be added for all installations:
 
@@ -235,21 +198,7 @@ Now that you have the build user setup to do sudo, you can use that for the rest
 
 This should get you a root shell.
 
-### CentOS 7
-
-    yum -y install yum-cron
-
-edit `/etc/yum/yum-cron.conf` adding the following:
-
-    update_cmd = security
-    apply_updates = yes
-
-Enable and start the service
-
-    systemctl enable yum-cron.service
-    systemctl start yum-cron.service
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     dnf -y install dnf-automatic
 
@@ -265,35 +214,29 @@ Start the service
 
 ## Install remote desktop
 
-### CentOS 7
-
-    yum -y install x2goserver-xsession
-
-This should now allow you to install the latest x2go client for your platform and connect to the server via the GUI MATE Desktop environment.
+Since Rocky Linux doesn't have the groupinstall "Mate Desktop" you need to install all the following:
 
 ### Rocky Linux 8
-
-Since Rocky Linux doesn't have the groupinstall "Mate Desktop" you need to install all the following:
 
     dnf -y install x2goserver mate-desktop mate-session-manager NetworkManager-adsl NetworkManager-bluetooth NetworkManager-libreswan-gnome NetworkManager-openvpn-gnome NetworkManager-ovs NetworkManager-ppp NetworkManager-team NetworkManager-wifi NetworkManager-wwan abrt-desktop abrt-java-connector adwaita-gtk2-theme alsa-plugins-pulseaudio atril atril-caja atril-thumbnailer caja caja-actions caja-image-converter caja-open-terminal caja-sendto caja-wallpaper caja-xattr-tags dconf-editor engrampa eom firewall-config gnome-disk-utility gnome-epub-thumbnailer gstreamer1-plugins-ugly-free gtk2-engines gucharmap gvfs-afc gvfs-afp gvfs-archive gvfs-fuse gvfs-gphoto2 gvfs-mtp gvfs-smb initial-setup-gui libmatekbd libmatemixer libmateweather libsecret lm_sensors marco mate-applets mate-backgrounds mate-calc mate-control-center mate-desktop mate-dictionary mate-disk-usage-analyzer mate-icon-theme mate-media mate-menus mate-menus-preferences-category-menu mate-notification-daemon mate-panel mate-polkit mate-power-manager mate-screensaver mate-screenshot mate-search-tool mate-session-manager mate-settings-daemon mate-system-log mate-system-monitor mate-terminal mate-themes mate-user-admin mate-user-guide mozo network-manager-applet nm-connection-editor p7zip p7zip-plugins pluma seahorse seahorse-caja xdg-user-dirs-gtk firefox
 
+You can replace `x2goserver` with `xrdp` to use Microsoft Remote Desktop.
+
+### Rocky Linux 9
+
+    dnf -y install xrdp mate-desktop mate-session-manager NetworkManager-adsl NetworkManager-bluetooth NetworkManager-libreswan-gnome NetworkManager-openvpn-gnome NetworkManager-ovs NetworkManager-ppp NetworkManager-team NetworkManager-wifi NetworkManager-wwan   adwaita-gtk2-theme alsa-plugins-pulseaudio atril atril-caja atril-thumbnailer caja caja-actions caja-image-converter caja-open-terminal caja-sendto caja-wallpaper caja-xattr-tags dconf-editor engrampa eom firewall-config gnome-disk-utility gnome-epub-thumbnailer gstreamer1-plugins-ugly-free gtk2-engines gucharmap    gvfs-fuse gvfs-gphoto2 gvfs-mtp gvfs-smb initial-setup-gui libmatekbd libmatemixer libmateweather libsecret lm_sensors marco mate-applets mate-backgrounds mate-calc mate-control-center mate-desktop mate-dictionary mate-disk-usage-analyzer mate-icon-theme mate-media mate-menus mate-menus-preferences-category-menu mate-notification-daemon mate-panel mate-polkit mate-power-manager mate-screensaver mate-screenshot mate-search-tool mate-session-manager mate-settings-daemon mate-system-log mate-system-monitor mate-terminal mate-themes mate-user-admin mate-user-guide mozo network-manager-applet nm-connection-editor p7zip p7zip-plugins pluma seahorse seahorse-caja xdg-user-dirs-gtk firefox
+
+You can replace `x2goserver` with `xrdp` to use Microsoft Remote Desktop.
+
 Since users are connecting remotely and assuming there are no local connections, the screensaver should be removed as this gets rid of the lock screen menu item which has caught some users out as we have no passwords:
 
-### CentOS 7
-
-    yum -y remove mate-screensaver
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     dnf -y remove mate-screensaver
 
 Also remove the pulseaudio tools to stop logs being filled with errors as users try and start it from x2go:
 
-### CentOS 7
-
-    yum -y remove pulseaudio-gdm-hooks pulseaudio-utils pulseaudio-module-bluetooth pulseaudio
-
-### Rocky Linux 8
+### Rocky Linux 8 and 9
 
     dnf -y remove pulseaudio-gdm-hooks pulseaudio-utils pulseaudio-module-bluetooth pulseaudio
 
@@ -301,21 +244,30 @@ Also remove the pulseaudio tools to stop logs being filled with errors as users 
 
 Users can't see the crash reports anyway so remove it using:
 
-### CentOS 7
-
-    yum -y remove abrt
-
-### Rocky Linux 8
+### Rocky Linux 8 (9 doesn't have this)
 
     dnf -y remove abrt
 
 ## Test the remote desktop
+
+### X2go solution
 
 On your client you should install the X2Go client for your own desktop from here:
 
     https://wiki.x2go.org/doku.php/download:start
 
 Once that is installed, create a config pointing at your new BioIT server and choose Mate as the session type and use the build user. It should connect and bring up a Mate Desktop session. No need to modify the firewall settings because X2Go runs over the ssh daemon.
+
+### XRDP solution
+
+Run the following as super user in a terminal:
+
+    systemctl start xrdp
+    systemctl enable xrdp
+    firewall-cmd --permanent --add-port=3389/tcp
+    firewall-cmd --reload
+
+Then, each user needs a file called `.Xclients` in their home directory which contains `mate-session` and is executable for the RDP session to launch.
 
 ## Proxy SSL certificate
 
