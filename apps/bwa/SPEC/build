@@ -26,7 +26,7 @@ cd /opt/bioit/bwa/src
 wget https://github.com/lh3/bwa/releases/download/v${NUMBERS}/bwa-${VERSION}.tar.bz2
 tar xvf bwa-${VERSION}.tar.bz2
 cd bwa-${VERSION}
-make
+make CC='gcc -fcommon'
 mkdir -p /opt/bioit/bwa/${VERSION}/bin
 mkdir -p /opt/bioit/bwa/${VERSION}/man/man1
 mv bwa /opt/bioit/bwa/${VERSION}/bin/
