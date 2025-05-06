@@ -24,7 +24,7 @@ def read_assembly(fname,minlen):
         for c in [val for val in tmp.split("N") if len(val)>0]:
             contigs.append(c)
     infile = open(fname)
-    line = infile.next()
+    line = infile.__next__()
     for linenum,line in enumerate(infile):
         if line[0]==">":
             if linenum>0:
@@ -46,6 +46,6 @@ if __name__ == "__main__":
     contigs,scaffs = read_assembly(sys.argv[1],MINLEN)
     contig_lengths = [len(val) for val in contigs]
     scaff_lengths = [len(val) for val in scaffs]
-    print "Assembly length\t%d"%sum(contig_lengths)
-    print "#contigs\t%d"%len(contigs)
-    print "Contig N50\t%d"%N50(contigs)
+    print("Assembly length\t%d"%sum(contig_lengths))
+    print("#contigs\t%d"%len(contigs))
+    print("Contig N50\t%d"%N50(contigs))
