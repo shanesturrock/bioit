@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+# set -e
 
 # Script to auto build and install ncbi-blast. Just provide the version
 
