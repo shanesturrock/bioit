@@ -22,7 +22,7 @@ VERSION=$1
 DATE=`date +"%d/%m/%Y %r"`
 echo "Building FastQC ${VERSION} on ${DATE}"
 cd /opt/bioit/FastQC/src
-wget http://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v${VERSION}.zip
+wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v${VERSION}.zip
 unzip fastqc_v${VERSION}.zip
 mv FastQC /opt/bioit/FastQC/${VERSION}
 cd /opt/bioit/FastQC/${VERSION}
