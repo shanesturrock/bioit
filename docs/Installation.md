@@ -107,7 +107,14 @@ The following packages are required for building the suite of applications on a 
 
 ### Rocky Linux 9
 
-    dnf -y install git git-lfs ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build screen htop btop root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env cmake3 emacs-nox perl-Perl4-CoreLibs lapack-devel mpich-devel python3-devel python3-pip zeromq-devel ghc cifs-utils perl-Archive-Tar perl-PerlIO-gzip hdf5-devel python3-networkx gtk3-devel pigz python3-tkinter tcsh python3-Cython tmux nano python3-libs python3-setuptools libsodium-devel libgit2-devel suitesparse-devel mariadb-devel libsqlite3x-devel motif-devel motif ImageMagick-devel ImageMagick-c++-devel udunits2-devel proj-devel incron unixODBC-devel librsvg2-devel apptainer libtiff-devel perl-Test-Harness rsync jasper-devel selinux-policy-devel xterm python39 netcdf-devel setools-console glpk-devel yum-utils lftp mpfr-devel cargo pandoc perl-Sys-Hostname perl-FindBin
+For this command to work you need to enable the rocky-devel repo found in `/etc/yum.repos.d/rocky-devel.repo` with these two lines:
+
+    includepkgs=lpsolve-devel
+    enabled=1
+
+Do a `dnf clean all` and then do the following:
+
+    dnf -y install git git-lfs ncurses-devel zlib-devel bzip2-devel xz-devel libcurl-devel openssl-devel environment-modules boost-devel cmake yum-plugin-changelog rpm-build screen htop btop root-tree-viewer root-physics libX11-devel libXt-devel postgresql-devel readline-devel libxml2-devel gsl-devel mariadb-devel java-devel cairo-devel libpng-devel libjpeg-devel mlocate texinfo texinfo-tex tex texlive-* ant boost-devel perl-Test-Base sparsehash-devel openmpi-devel sqlite-devel perl-GD perl-GDGraph parallel gnuplot tcl-devel tk-devel perl-Env cmake3 emacs-nox perl-Perl4-CoreLibs lapack-devel mpich-devel python3-devel python3-pip zeromq-devel ghc cifs-utils perl-Archive-Tar perl-PerlIO-gzip hdf5-devel python3-networkx gtk3-devel pigz python3-tkinter tcsh python3-Cython tmux nano python3-libs python3-setuptools libsodium-devel libgit2-devel lpsolve-devel suitesparse-devel mariadb-devel libsqlite3x-devel motif-devel motif ImageMagick-devel ImageMagick-c++-devel udunits2-devel proj-devel incron unixODBC-devel librsvg2-devel apptainer libtiff-devel perl-Test-Harness rsync jasper-devel selinux-policy-devel xterm python39 netcdf-devel setools-console glpk-devel yum-utils lftp mpfr-devel cargo pandoc perl-Sys-Hostname perl-FindBin
 
 Packages necessary to run most old CentOS 7 binaries:
 
