@@ -29,13 +29,13 @@ cd augustus-${VERSION}
 make clean
 # Grab bamtools dependency
 echo "Getting and installing bamtools dependency"
-wget https://github.com/pezmaster31/bamtools/archive/v2.5.1.tar.gz
-tar xvf v2.5.1.tar.gz
-cd bamtools-2.5.1
+wget https://github.com/pezmaster31/bamtools/archive/v2.5.2.tar.gz
+tar xvf v2.5.2.tar.gz
+cd bamtools-2.5.2
 mkdir build
 cd build
 cmake3 -DCMAKE_INSTALL_PREFIX:PATH=/opt/bioit/augustus/src/augustus-${VERSION}/bamtools ..
-make all
+make all -j8
 make install
 cd /opt/bioit/augustus/src/augustus-${VERSION}
 # patch bam2hints Makefile
