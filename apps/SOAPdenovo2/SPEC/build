@@ -28,8 +28,10 @@ wget https://github.com/aquaskyline/SOAPdenovo2/archive/r${VERSION}.tar.gz
 mv r${VERSION}.tar.gz SOAPdenovo2-r${VERSION}.tar.gz
 tar xvf SOAPdenovo2-r${VERSION}.tar.gz
 cd SOAPdenovo2-r${VERSION}
-# Apply patch to fix the build with gcc11
-patch -p1 -i ../patch_r242
+# Apply patch to fix the build with gcc11 on Rocky Linux 9
+if grep -q "Rocky-Linux-9" "/etc/os-release"; then
+  patch -p1 -i ../patch_r242
+fi
 make
 mkdir /opt/bioit/SOAPdenovo2/${VERSION}/
 mv SOAPdenovo-* /opt/bioit/SOAPdenovo2/${VERSION}/
