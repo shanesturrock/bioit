@@ -1,0 +1,60 @@
+diff -Naru SOAPdenovo2-r242/fusion/inc/def.h SOAPdenovo2-r242-patched/fusion/inc/def.h
+--- SOAPdenovo2-r242/fusion/inc/def.h	2018-05-14 13:58:24.000000000 +1200
++++ SOAPdenovo2-r242-patched/fusion/inc/def.h	2025-05-07 12:30:25.720570496 +1200
+@@ -18,7 +18,7 @@
+ #define int2compbase(seq)       "TGAC"[seq]
+ #define int_comp(seq)   (char)(seq^0x02) //(char)((0x4E>>((seq)<<1))&0x03)
+ 
+-int b_ban;
++extern int b_ban;
+ 
+ typedef unsigned long long Kmer;
+ 
+diff -Naru SOAPdenovo2-r242/Makefile SOAPdenovo2-r242-patched/Makefile
+--- SOAPdenovo2-r242/Makefile	2018-05-14 13:58:24.000000000 +1200
++++ SOAPdenovo2-r242-patched/Makefile	2025-05-07 12:29:44.787721293 +1200
+@@ -10,7 +10,7 @@
+ PROG=       SOAPdenovo-63mer SOAPdenovo-127mer SOAPdenovo-fusion
+ INCLUDES=   -I./sparsePregraph/inc -I./standardPregraph/inc
+ 
+-LIBPATH=    -L./sparsePregraph/inc -L./standardPregraph/inc -L/lib64 -L/usr/lib64
++LIBPATH=    -L./sparsePregraph/inc -L./standardPregraph/inc -L/usr/lib
+ LIBS=       -pthread -lz -lm
+ EXTRA_FLAGS= 
+ 
+diff -Naru SOAPdenovo2-r242/standardPregraph/contig.c SOAPdenovo2-r242-patched/standardPregraph/contig.c
+--- SOAPdenovo2-r242/standardPregraph/contig.c	2018-05-14 13:58:24.000000000 +1200
++++ SOAPdenovo2-r242-patched/standardPregraph/contig.c	2025-05-07 12:31:37.892309427 +1200
+@@ -27,7 +27,7 @@
+ #include "extvab.h"
+ static void initenv ( int argc, char **argv );
+ static void display_contig_usage ();
+-char shortrdsfile[256], graphfile[256];
++extern char shortrdsfile[256], graphfile[256];
+ static boolean repeatSolve;     //whether solve repeat or not
+ //static boolean keepReadFile = 0;  //whether keep tmp selected reads file or not
+ static boolean iter = 0;                //whether use multikmer or not
+diff -Naru SOAPdenovo2-r242/standardPregraph/inc/def.h SOAPdenovo2-r242-patched/standardPregraph/inc/def.h
+--- SOAPdenovo2-r242/standardPregraph/inc/def.h	2018-05-14 13:58:24.000000000 +1200
++++ SOAPdenovo2-r242-patched/standardPregraph/inc/def.h	2025-05-07 12:32:01.801229674 +1200
+@@ -41,7 +41,7 @@
+ #define int2compbase(seq)       "TGAC"[seq]         //int 0123 => base TGAC complement of ACTG
+ #define int_comp(seq)   (char)(seq^0x02)         //(char)((0x4E>>((seq)<<1))&0x03)
+ 
+-int b_ban;
++extern int b_ban;
+ 
+ #ifdef MER127
+ typedef struct kmer
+diff -Naru SOAPdenovo2-r242/standardPregraph/read2edge.c SOAPdenovo2-r242-patched/standardPregraph/read2edge.c
+--- SOAPdenovo2-r242/standardPregraph/read2edge.c	2018-05-14 13:58:24.000000000 +1200
++++ SOAPdenovo2-r242-patched/standardPregraph/read2edge.c	2025-05-07 12:32:55.941049091 +1200
+@@ -110,7 +110,7 @@
+ //arc array
+ 
+ struct preArc_array_t arc_arr;
+-pthread_mutex_t *locks;
++extern pthread_mutex_t *locks;
+ 
+ /*************************************************
+ Function:
