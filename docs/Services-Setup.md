@@ -106,8 +106,6 @@ It might be useful to have a remote desktop solution inside Jupyterhub. Assuming
     sudo dnf -y install tigervnc tigervnc-server tigervnc-selinux
     cd /opt/jupyter/jupyterlab/4.4.2/jupyterlab_4.4.2/bin/
     ./pip install jupyter-remote-desktop-proxy
-    cd /opt/jupyter/jupyterlab/miniconda3/25.3.0-2/bin
-    ./conda install --channel conda-forge --prefix /opt/jupyter/jupyterlab/4.4.2/jupyterlab_4.4.2 websockify
 
 Set mate-session instead of xfce-session in this file:
 
