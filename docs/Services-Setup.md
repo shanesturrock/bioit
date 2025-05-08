@@ -107,7 +107,7 @@ It might be useful to have a remote desktop solution inside Jupyterhub. Assuming
     cd /opt/jupyter/jupyterlab/4.4.2/jupyterlab_4.4.2/bin/
     ./pip install jupyter-remote-desktop-proxy
 
-Set mate-session instead of xfce-session in this file:
+Set mate-session instead of xfce4-session in this file:
 
     sed -i -e 's/xfce4/mate/g' /opt/jupyter/jupyterlab/4.4.2/jupyterlab_4.4.2/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
 
