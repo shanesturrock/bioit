@@ -109,7 +109,7 @@ It might be useful to have a remote desktop solution inside Jupyterhub. Assuming
 
 Set mate-session instead of xfce-session in this file:
 
-    sed -i -e 's/xfce/mate/g' /opt/jupyter/jupyterlab/4.4.2/jupyterlab_4.4.2/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
+    sed -i -e 's/xfce4/mate/g' /opt/jupyter/jupyterlab/4.4.2/jupyterlab_4.4.2/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
 
 Restart the JupyterHub and nginx services
 
