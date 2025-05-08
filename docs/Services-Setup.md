@@ -8,9 +8,17 @@ The following guide sets up various web services with SSL via NGINX and some oth
 
 Download the installer:
 
-    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2024.12.0-467-x86_64.rpm
+### Rocky Linux 8
 
-If you're using meta-RPMs ignore the next bit but if only using environment modules you need to specify where R is by doing the following before installing the rstudio server package:
+    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2025.05.0-496-x86_64.rpm
+
+### Rocky Linux 9
+
+    wget https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-2025.05.0-496-x86_64.rpm
+
+### Rocky Linux 8 and 9
+
+You need to specify where R is by doing the following before installing the rstudio server package:
 
     sudo mkdir /etc/rstudio
     sudo vi /etc/rstudio/rserver.conf
@@ -18,9 +26,9 @@ If you're using meta-RPMs ignore the next bit but if only using environment modu
 Paste the following into the rserver.conf file you're creating (changing the version of R as necessary):
 
     # Location of R
-    rsession-which-r=/opt/bioit/R-core/4.4.2/bin/R
+    rsession-which-r=/opt/bioit/R-core/4.5.0/bin/R
     # R library path
-    rsession-ld-library-path=/opt/bioit/R-core/4.4.2/lib64/R/lib
+    rsession-ld-library-path=/opt/bioit/R-core/4.5.0/lib64/R/lib
     # Only listen localhost
     www-address=localhost
     # Connection port
@@ -30,9 +38,7 @@ Note that this will cause the server to only listen to localhost and port 8787. 
 
 Install the server:
 
-### Rocky Linux 8
-
-    sudo yum install rstudio-server-rhel-2024.12.0-467-x86_64.rpm
+    sudo yum install rstudio-server-rhel-2025.05.0-496-x86_64.rpm
 
 For better performance you should edit the `/etc/rstudio/rsession.conf` file and add the following:
 
@@ -64,9 +70,14 @@ You should now be able to open the RStudio Server interface by going to `http://
 
 ## JupyterLab Install
 
+Create the directory for the install:
+
+    sudo mkdir /opt/jupyter
+    sudo chown build:build jupyter
+
 Make sure password free sudo is enabled as per the installation page. JupyterLab is installed by running the script in `~/bioit/bin`
 
-    build_jupyterlab 4.3.1
+    build_jupyterlab 4.4.2
 
 If it fails, you can remove it using:
 
@@ -88,21 +99,19 @@ Now try and log in and it will let you but audit.log will contain the informatio
 
 At this point, SELinux should allow JupyterHub access to authentication and will continue to work.
 
-## NoVNC inside JupyterLab
+## Jupyter Remote Desktop
 
-NOTE - Currently broken, no desktop icon shows up. Probably an issue with extensions.
+It might be useful to have a remote desktop solution inside Jupyterhub. Assuming the Mate Desktop is already installed as per the installation page and X2Go config, you can do the following to add a launcher inside JupyterHub as the build user:
 
-It might be useful to have a remote desktop solution inside JupyterLab. Assuming the Mate Desktop is already installed as per the installation page and X2Go config, you can do the following to add a launcher inside JupyterHub as the build user:
-
-    sudo dnf -y install tigervnc
-    cd /opt/jupyter/jupyterlab/4.3.1/jupyterlab_4.3.1/bin/
+    sudo dnf -y install tigervnc tigervnc-server tigervnc-selinux
+    cd /opt/jupyter/jupyterlab/4.4.2/jupyterlab_4.4.2/bin/
     ./pip install jupyter-remote-desktop-proxy
-    cd /opt/jupyter/jupyterlab/miniconda3/24.7.1-0/bin
-    ./conda install --channel conda-forge --prefix /opt/jupyter/jupyterlab/4.3.1/jupyterlab_4.3.1 websockify
+    cd /opt/jupyter/jupyterlab/miniconda3/25.3.0-2/bin
+    ./conda install --channel conda-forge --prefix /opt/jupyter/jupyterlab/4.4.2/jupyterlab_4.4.2 websockify
 
 Set mate-session instead of xfce-session in this file:
 
-    vi /opt/jupyter/jupyterlab/4.3.1/jupyterlab_4.3.1/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
+    sed -i -e 's/xfce/mate/g' /opt/jupyter/jupyterlab/4.4.2/jupyterlab_4.4.2/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
 
 Restart the JupyterHub and nginx services
 
@@ -164,23 +173,6 @@ If you still can't connect from outside and the firewall is running do the follo
     sudo firewall-cmd --reload
 
 Now any machine on the local network should be able to access the server (assuming the various aliases have been registered in DNS of course.)
-
-## RDP support (Rocky Linux 8)
-
-This is pretty simple, just do the following:
-
-    sudo dnf -y install xrdp
-    sudo systemctl enable xrdp
-    sudo systemctl start xrdp
-
-To connect, each user needs to have a `.Xclients` file with `mate-session` and `chmod+x` the file.
-
-Allow access through the firewall:
-
-    sudo firewall-cmd --permanent --add-port=3389/tcp
-    sudo firewall-cmd --reload
-
-It should now be possible to use MS Remote Desktop to connect to the IP address.
 
 ## Nice login banner
 
