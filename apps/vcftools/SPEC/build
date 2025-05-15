@@ -30,8 +30,10 @@ make
 make install
 cd /opt/bioit/vcftools/${VERSION}/bin
 sed "s+use strict;+use lib '/opt/bioit/vcftools/${VERSION}/share/perl5'; use strict;+" --in-place *
-# Fix for not finding perl modules
-mv /opt/bioit/vcftools/${VERSION}/share/perl5/*/*.pm /opt/bioit/vcftools/${VERSION}/share/perl5
+# Fix for not finding perl modules on Rocky Linux 9
+if grep -q "Rocky-Linux-9" "/etc/os-release"; then
+  mv /opt/bioit/vcftools/${VERSION}/share/perl5/*/*.pm /opt/bioit/vcftools/${VERSION}/share/perl5
+fi
 echo "Writing modulefile"
 echo "#%Module 1.0
 #
