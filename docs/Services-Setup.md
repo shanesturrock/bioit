@@ -318,6 +318,7 @@ Install required dependencies for PNP4Nagios:
     
 Download and install PNP4Nagios:
 
+    cd /root
     wget https://github.com/pnp4nagios/pnp4nagios/archive/refs/tags/v0.6.27-5.tar.gz
     tar xvf v0.6.27-5.tar.gz
     cd pnp4nagios-0.6.27-5
