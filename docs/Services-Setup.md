@@ -244,7 +244,7 @@ If Apache and PHP are running correctly, move on to installing Nagios by first d
     cd /root
     wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.5.9.tar.gz
     tar -xzf nagios-4.5.9.tar.gz
-    cd nagios-*/
+    cd nagios-4.5.9
     ./configure
 
 This is going to do the install in `/usr/local` and is better than using the RPM packages as it will be more configurable and easy to debug. Next build the source (assuming the previous step looks to have found all the dependencies it needed:
