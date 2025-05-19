@@ -242,8 +242,8 @@ You can also test that Apache is running via a browser in X2Go and going to `htt
 If Apache and PHP are running correctly, move on to installing Nagios by first downloading and building the source code:
 
     cd /root
-    wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.4.6.tar.gz
-    tar -xzf nagios-4.4.6.tar.gz
+    wget https://assets.nagios.com/downloads/nagioscore/releases/nagios-4.5.9.tar.gz
+    tar -xzf nagios-4.5.9.tar.gz
     cd nagios-*/
     ./configure
 
@@ -294,12 +294,12 @@ Install the dependencies for plugins (still as root):
 Download and unpack the plugins:
 
     cd /root
-    wget http://www.nagios-plugins.org/download/nagios-plugins-2.3.3.tar.gz
-    tar xzf nagios-plugins-2.3.3.tar.gz
+    wget http://www.nagios-plugins.org/download/nagios-plugins-2.4.11.tar.gz
+    tar xzf nagios-plugins-2.4.11.tar.gz
 
 Build the plugins:
 
-    cd nagios-plugins-2.3.3
+    cd nagios-plugins-2.4.11
     ./configure --with-nagios-user=nagios --with-nagios-group=nagios
     make
     make install
@@ -308,7 +308,7 @@ Restart Nagios and try the web interface again.
 
     systemctl restart nagios
 
-Now you should be able to go into the services for localhost and get OKs for the default set of services. This can be customised later.
+Now you should be able to go into the services for localhost and get OKs for the default set of services as they refresh. Services can be customised later.
 
 # Nagios pnp4nagios install
 
@@ -316,10 +316,11 @@ Install required dependencies for PNP4Nagios:
 
     dnf -y install rrdtool rrdtool-perl perl-Time-HiRes perl-GD php-xml php-gd
     
-Download and install PNP4Nagios from `http://www.pnp4nagios.org/doku.php?id=start` via the sourceforge link `https://sourceforge.net/projects/pnp4nagios/files/latest` (unfortunately, this can't be done with wget)
+Download and install PNP4Nagios:
 
-    tar xvf pnp4nagios-0.6.26.tar.gz
-    cd pnp4nagios-0.6.26
+    wget https://github.com/pnp4nagios/pnp4nagios/archive/refs/tags/v0.6.27-5.tar.gz
+    tar xvf v0.6.27-5.tar.gz
+    cd pnp4nagios-0.6.27-5
     ./configure
     make all
     make fullinstall
@@ -369,10 +370,14 @@ Also edit `/usr/local/nagios/etc/objects/templates.cfg` and append the following
 
 Lastly, edit `/usr/local/nagios/etc/objects/localhost.cfg` and for each service modify the `use local-service` line to be `use local-service,srv-pnp` and write out the file. Restart Nagios:
 
+Edit `/usr/local/pnp4nagios/etc/npcd.cfg` and change the `perfdata_spool_dir =` definition to:
+
+    perfdata_spool_dir = /usr/local/pnp4nagios/var/spool
+
 Enable npcd service
 
     /usr/local/pnp4nagios/bin/npcd -d -f /usr/local/pnp4nagios/etc/npcd.cfg
-    systemctl enable npcd.service
+    systemctl enable npcd.service --now
 
 Restart Nagios and HTTPD
 
@@ -383,42 +388,17 @@ Open `http://localhost:8282/pnp4nagios/` in your browser via X2Go and check ever
 
     rm -f /usr/local/pnp4nagios/share/install.php
 
-It then fails, so edit `/usr/local/pnp4nagios/share/application/models/data.php` with the following change:
-Go to line 979 and replace
- 
-    if (sizeof($pages) > 0){
+Create missing directory to store the data for localhost and set ownerships for nagios and pnp4nagios to avoid permissions issues:
 
-with:
+    mkdir /usr/local/pnp4nagios/var/log/pnp4nagios/rrd/localhost
+    chown -R nagios:nagios /usr/local/nagios /usr/local/pnp4nagios
 
-    if (is_array($pages) && sizeof($pages) > 0) {
+Restart Nagios and HTTPD again:
 
-Edit `/usr/local/pnp4nagios/share/application/lib/json.php`
+    systemctl restart nagios.service
+    systemctl restart httpd.service
 
-Change line 133 to:
-
-    function Services_JSON_construct($use = 0)
-
-Change line 783 to:
-
-    function Services_JSON_Error_construct($message = 'unknown error', $code = null,
-
-Change line 797 to
-
-    function Services_JSON_Error_construct($message = 'unknown error', $code = null,
-
-Save the file.
-
-Edit `/usr/local/pnp4nagios/libexec/process_perfdata.pl`
-
-Change line 177 to:
-
-    my @t1=();
-    my $t1=\@t1;
-
-Save the file. At this point graphs should start appearing but restart nagios and httpd anyway:
-
-    systemctl restart nagios
-    systemctl restart httpd
+As usual, it will take a while for the charts to show up as Nagios cycles through refreshes so be patient.
 
 Also need to re-enable SELinux now that everything is working so do the following:
 
