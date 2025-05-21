@@ -314,7 +314,7 @@ Now you should be able to go into the services for localhost and get OKs for the
 
 Install required dependencies for PNP4Nagios:
 
-    dnf -y install rrdtool rrdtool-perl perl-Time-HiRes perl-GD php-xml php-gd
+    dnf -y install rrdtool rrdtool-perl perl-Time-HiRes perl-GD php-xml php-gd php-json php-mbstring
     
 Download and install PNP4Nagios:
 
