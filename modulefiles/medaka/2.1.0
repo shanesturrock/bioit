@@ -1,0 +1,5 @@
+#%Module 1.0
+#
+#  medaka module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/medaka/2.1.0/bin

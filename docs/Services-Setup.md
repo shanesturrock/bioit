@@ -45,7 +45,9 @@ For better performance you should edit the `/etc/rstudio/rsession.conf` file and
     # R Session Configuration File
 
     session-save-action-default=no
-    session-timeout-minutes=0
+
+    # overrides the user/project restore workspace setting
+    r-restore-workspace=0
 
 If SELinux is enabled, do the following to allow the server to actually work and any time you upgrade versions:
 
