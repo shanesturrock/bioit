@@ -1,0 +1,5 @@
+#%Module 1.0
+#
+#  rtg-tools module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/rtg-tools/3.13

@@ -15,7 +15,7 @@ ${HOME}/bioit/apps/bowtie2/SPEC/build 2.5.4
 ${HOME}/bioit/apps/busco/SPEC/build 5.8.3
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
 ${HOME}/bioit/apps/chopper/SPEC/build 0.10.0
-${HOME}/bioit/apps/cutadapt/SPEC/build 5.0
+${HOME}/bioit/apps/cutadapt/SPEC/build 5.1
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
 ${HOME}/bioit/apps/FastQC/SPEC/build 0.12.1
 ${HOME}/bioit/apps/fasttree/SPEC/build 2.1.11
@@ -23,7 +23,7 @@ ${HOME}/bioit/apps/gvcftools/SPEC/build 0.17.0
 ${HOME}/bioit/apps/hisat2/SPEC/build 2.2.1
 ${HOME}/bioit/apps/hmmer/SPEC/build 3.4
 ${HOME}/bioit/apps/htslib/SPEC/build 1.21
-${HOME}/bioit/apps/igv/SPEC/build 2.19.3
+${HOME}/bioit/apps/igv/SPEC/build 2.19.4
 ${HOME}/bioit/apps/longstitch/SPEC/build 1.0.5
 ${HOME}/bioit/apps/ncbi-blast/SPEC/build 2.16.0+
 ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
@@ -38,7 +38,7 @@ ${HOME}/bioit/apps/prokka/SPEC/build 1.14.6
 ${HOME}/bioit/apps/R-core/SPEC/build 4.5.0
 ${HOME}/bioit/apps/ragtag/SPEC/build 2.1.0
 ${HOME}/bioit/apps/raven-assembler/SPEC/build 1.8.3
-${HOME}/bioit/apps/rtg-tools/SPEC/build 3.12.1
+${HOME}/bioit/apps/rtg-tools/SPEC/build 3.13
 ${HOME}/bioit/apps/samtools/SPEC/build 1.21
 ${HOME}/bioit/apps/seqkit/SPEC/build 2.10.0
 ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 242
