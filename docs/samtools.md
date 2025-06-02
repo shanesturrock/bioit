@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/samtools/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/samtools/SPEC/build 1.21
+    ${HOME}/bioit/apps/samtools/SPEC/build 1.22
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load samtools/1.21
+    module load samtools/1.22
     which samtools
     samtools --version
 
@@ -24,23 +24,23 @@ If all is good, you can move to the RPM building step.
 
 Download the version to be built into `/opt/bioit/samtools/src` and untar
 
-Inside the source run the following where 1.21 is the current one being built:
+Inside the source run the following where 1.22 is the current one being built:
 
-    ./configure --prefix=/opt/bioit/samtools/1.21
+    ./configure --prefix=/opt/bioit/samtools/1.22
     make
     make install
 
 ## Module setup
 
-Add a module file in `/opt/bioit/modulefiles/samtools/` for this version by copying previous ones and modifying the paths. Note that this file loads `bcftools/1.21` as a dependency since `samtools` and `bcftools` should be used together.
+Add a module file in `/opt/bioit/modulefiles/samtools/` for this version by copying previous ones and modifying the paths. Note that this file loads `bcftools/1.22` as a dependency since `samtools` and `bcftools` should be used together.
 
     #%Module 1.0
     #
     #  samtools module for use with 'environment-modules' package:
     #
-    module load bcftools/1.21
-    prepend-path  PATH         /opt/bioit/samtools/1.21/bin
-    prepend-path  MANPATH      /opt/bioit/samtools/1.21/share/man
+    module load bcftools/1.22
+    prepend-path  PATH         /opt/bioit/samtools/1.22/bin
+    prepend-path  MANPATH      /opt/bioit/samtools/1.22/share/man
 
 ## RPM
 
