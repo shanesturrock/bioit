@@ -59,16 +59,11 @@ fi
 export PATH=${JLAB_PATH}/${ENV_NAME}/bin:${PATH}
 
 # install a load of common libs
-${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install BeautifulSoup4 biopython bokeh conversion chart-studio cython folium holoviews ipywidgets ipyleaflet keras matplotlib numba numpy pandas plotly polars psycopg2-binary pyodbc pysmb pylint pymysql reportlab rsconnect-jupyter scikit-image scikit-learn scipy snowflake-connector-python tensorflow virtualenv
-	#${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scikit-learn-intelex scipy ipywidgets jupyterlab-system-monitor
-	# ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install conversion keras matplotlib numba numpy pandas plotly psycopg2 pyodbc reportlab scikit-image scikit-learn scipy ipywidgets tensorflow jupyterlab-system-monitor
+${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install BeautifulSoup4 biopython bokeh conversion chart-studio cython folium holoviews ipywidgets ipyleaflet keras matplotlib numba numpy pandas plotly polars psycopg2-binary pyodbc pysmb pylint pymysql reportlab rsconnect-jupyter scikit-image scikit-learn scipy snowflake-connector-python tensorflow virtualenv
 # install some useful extensions
-${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -mpip install jupyterlab-lsp jupyterlab_widgets sidecar jupyterlab-geojson
-#${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyter-lsp 'python-language-server[all]'
-#${JLAB_PATH}/${ENV_NAME}/bin/jupyter labextension install @krassowski/jupyterlab-lsp
-#${JLAB_PATH}/${ENV_NAME}/bin/jupyter serverextension enable --py jupyterlab --sys-prefix
-#${JLAB_PATH}/${ENV_NAME}/bin/jupyter serverextension enable --py jupyter_lsp --sys-prefix
-#${JLAB_PATH}/${ENV_NAME}/bin/jupyter nbextension enable --py widgetsnbextension
+${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyterlab-lsp jupyterlab_widgets sidecar jupyterlab-geojson
+# Enable jupyter-ai if wanted (commented out by default)
+#${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyter-ai[all]
 
 # set the config paths
 CONFIG_FILE=${JLAB_CONFIG_DIR}/jupyterhub_config.py
