@@ -32,9 +32,9 @@ Paste the following into the rserver.conf file you're creating (changing the ver
     # Only listen localhost
     www-address=localhost
     # Connection port
-    www-port=8787
+    www-port=9797
 
-Note that this will cause the server to only listen to localhost and port 8787.  You should add the localhost option even if using a vanilla install as the free RStudio Server package doesn't support SSL and we need to use NGINX to provide that.
+Note that this will cause the server to only listen to localhost and port 9797.  You should add the localhost option even if using a vanilla install as the free RStudio Server package doesn't support SSL and we need to use NGINX to provide that.
 
 Install the server:
 
@@ -68,7 +68,7 @@ Restart the service to make config channges take effect:
 
     sudo systemctl restart rstudio-server
 
-You should now be able to open the RStudio Server interface by going to `http://localhost:8787` using Firefox inside the X2Go remote desktop.
+You should now be able to open the RStudio Server interface by going to `http://localhost:9797` using Firefox inside the X2Go remote desktop.
 
 ## JupyterLab Install
 
