@@ -19,6 +19,7 @@ Note that all tools go into the `/opt/bioit` directory followed by their name an
 * [bwa](bwa.md)
 * [chopper](chopper.md)
 * [cutadapt](cutadapt.md)
+* [dorado](dorado.md)
 * [ea-utils](ea-utils.md)
 * [FastQC](FastQC.md)
 * [fasttree](fasttree.md)

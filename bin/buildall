@@ -16,6 +16,7 @@ ${HOME}/bioit/apps/busco/SPEC/build 5.8.3
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
 ${HOME}/bioit/apps/chopper/SPEC/build 0.10.0
 ${HOME}/bioit/apps/cutadapt/SPEC/build 5.1
+${HOME}/bioit/apps/dorado/SPEC/build 1.0.2
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
 ${HOME}/bioit/apps/FastQC/SPEC/build 0.12.1
 ${HOME}/bioit/apps/fasttree/SPEC/build 2.1.11

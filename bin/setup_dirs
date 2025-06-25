@@ -10,7 +10,7 @@ sudo chown build:build /opt/bioit
 #ln -s ~/bioit/modulefiles /opt/bioit
 mkdir /opt/bioit/modulefiles
 cd /opt/bioit/modulefiles
-mkdir abyss augustus bamtools bbmap bcftools bedtools2 bismark bowtie bowtie2 busco bwa chopper cutadapt ea-utils FastQC fasttree gvcftools hisat2 hmmer htslib igv longstitch mafft medaka minimap2 multiqc nanoplot ncbi-blast nxtrim picard picrust2 prokka R ragtag raven-assembler rtg-tools samtools seqkit SOAPdenovo2 SolexaQA++ stringtie tophat vcftools velvet vsearch
+mkdir abyss augustus bamtools bbmap bcftools bedtools2 bismark bowtie bowtie2 busco bwa chopper cutadapt dorado ea-utils FastQC fasttree gvcftools hisat2 hmmer htslib igv longstitch mafft medaka minimap2 multiqc nanoplot ncbi-blast nxtrim picard picrust2 prokka R ragtag raven-assembler rtg-tools samtools seqkit SOAPdenovo2 SolexaQA++ stringtie tophat vcftools velvet vsearch
 mkdir -p /opt/bioit/repo/RPMS
 cp ~/bioit/repo/bioit.xml /opt/bioit/repo/bioit.xml
 # Create all directories for packages

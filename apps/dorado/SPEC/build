@@ -1,0 +1,56 @@
+#!/bin/bash
+set -e
+
+# Script to auto build and install dorado. Just provide the version
+
+function usage() {
+ cat << EOF
+Usage: ${0} <VERSION>
+
+ <VERSION> is the specific version number you're building
+
+EOF
+}
+
+# Quit the script if it doesn't have enough flags set
+if [ $# -lt 1 ]; then
+ usage
+ exit 1
+fi
+
+APP="dorado"
+VERSION=$1
+DATE=`date +"%d/%m/%Y %r"`
+echo "Building ${APP} ${VERSION} on ${DATE}"
+
+mkdir -p /opt/bioit/${APP}/${VERSION}
+cd /opt/bioit/${APP}/${VERSION}
+
+wget https://cdn.oxfordnanoportal.com/software/analysis/${APP}-${VERSION}-linux-x64.tar.gz
+tar xvzf ${APP}-${VERSION}-linux-x64.tar.gz
+rm ${APP}-${VERSION}-linux-x64.tar.gz
+
+# download the models
+echo "#!/bin/bash
+/opt/bioit/${APP}/${VERSION}/${APP}-${VERSION}-linux-x64/bin/${APP} download --list 2> >(grep ' - ' | awk -F ' - ' '{printf\"https://cdn.oxfordnanoportal.com/software/analysis/${APP}/%s.zip\n\", \$2}')" > ${APP}-${VERSION}-linux-x64/bin/${APP}_list_models
+chmod a+x ${APP}-${VERSION}-linux-x64/bin/${APP}_list_models
+./${APP}-${VERSION}-linux-x64/bin/${APP}_list_models > models.list
+mkdir models
+cd models
+wget -i ../models.list
+find . -type f -iname "*.zip" -exec unzip "{}" \;
+find . -type f -iname "*.zip" -delete
+
+# add the modulefile
+echo "#%Module 1.0
+#
+#  ${APP} module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/${APP}/${VERSION}/${APP}-${VERSION}-linux-x64/bin
+prepend-path  LD_LIBRARY_PATH   /opt/bioit/${APP}/${VERSION}/${APP}-${VERSION}-linux-x64/lib" > /opt/bioit/modulefiles/${APP}/${VERSION}
+echo "Writing module .version to set default"
+echo "#%Module1.0
+##
+##  The desired version of ${APP}
+##
+set ModulesVersion ${VERSION}" > /opt/bioit/modulefiles/${APP}/.version
