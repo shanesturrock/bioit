@@ -46,6 +46,7 @@ echo "#%Module 1.0
 #
 #  ${APP} module for use with 'environment-modules' package:
 #
+setenv DORADO_MODELS_DIRECTORY  /opt/bioit/${APP}/${VERSION}/models
 prepend-path  PATH              /opt/bioit/${APP}/${VERSION}/${APP}-${VERSION}-linux-x64/bin
 prepend-path  LD_LIBRARY_PATH   /opt/bioit/${APP}/${VERSION}/${APP}-${VERSION}-linux-x64/lib" > /opt/bioit/modulefiles/${APP}/${VERSION}
 echo "Writing module .version to set default"
