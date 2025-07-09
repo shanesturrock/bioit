@@ -31,7 +31,7 @@ ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
 ${HOME}/bioit/apps/mafft/SPEC/build 7.525
 ${HOME}/bioit/apps/medaka/SPEC/build 2.1.0
 ${HOME}/bioit/apps/minimap2/SPEC/build 2.30
-${HOME}/bioit/apps/multiqc/SPEC/build 1.29
+${HOME}/bioit/apps/multiqc/SPEC/build 1.30
 ${HOME}/bioit/apps/nanoplot/SPEC/build 1.42.0
 ${HOME}/bioit/apps/picard/SPEC/build 3.4.0
 ${HOME}/bioit/apps/picrust2/SPEC/build 2.6.2
