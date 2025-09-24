@@ -79,7 +79,7 @@ Create the directory for the install:
 
 Make sure password free sudo is enabled as per the installation page. JupyterLab is installed by running the script in `~/bioit/bin`
 
-    build_jupyterlab 4.4.3
+    build_jupyterlab 4.4.7
 
 If you want to include jupyter-ai, uncomment that line in this script before running it. You'll also need ollama.service installed and set up some LLMs for it to use.
 
@@ -87,7 +87,7 @@ If it fails, you can remove it using:
 
     destroy_jupyterlab
 
-Once running you can test it from Firefox in X2Go by going to `http://localhost:8080` and you will get an SSL warning but we'll deal with that via NGINX.
+Once running you can test it from Firefox in X2Go by going to `http://localhost:8181` and you will get an SSL warning but we'll deal with that via NGINX.
 
 If you have SELinux enabled you'll find that you can't log in, or if you can you should log out and log back in again when you should get a failure. Once you've had this, you need to do the following to allow authentication to work:
 
@@ -108,12 +108,12 @@ At this point, SELinux should allow JupyterHub access to authentication and will
 It might be useful to have a remote desktop solution inside Jupyterhub. Assuming the Mate Desktop is already installed as per the installation page and X2Go config, you can do the following to add a launcher inside JupyterHub as the build user:
 
     sudo dnf -y install tigervnc tigervnc-server tigervnc-selinux
-    cd /opt/jupyter/jupyterlab/4.4.3/jupyterlab_4.4.3/bin/
+    cd /opt/jupyter/jupyterlab/4.4.7/jupyterlab_4.4.7/bin/
     ./pip install jupyter-remote-desktop-proxy
 
 Set mate-session instead of xfce4-session in this file:
 
-    sed -i -e 's/xfce4/mate/g' /opt/jupyter/jupyterlab/4.4.3/jupyterlab_4.4.3/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
+    sed -i -e 's/xfce4/mate/g' /opt/jupyter/jupyterlab/4.4.7/jupyterlab_4.4.7/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
 
 Restart the JupyterHub and nginx services
 

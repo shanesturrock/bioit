@@ -25,7 +25,7 @@ JLAB_PATH=${ROOT}/jupyterlab/${JLAB_VER}
 CONDA_VER=25.3.0-2
 CONDA_BIN=${ROOT}/jupyterlab/miniconda3/${CONDA_VER}/bin
 JLAB_CONFIG_DIR=${JLAB_PATH}/${ENV_NAME}/etc/jupyter
-JHUB_PORT=8080
+JHUB_PORT=8181
 JHUB_PROTO=http
 
 # Set up directory for this and go into it
