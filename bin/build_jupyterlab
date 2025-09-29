@@ -63,7 +63,7 @@ ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install BeautifulSoup4 biop
 # install some useful extensions
 ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyterlab-lsp jupyterlab_widgets sidecar jupyterlab-geojson
 # Enable jupyter-ai if wanted (commented out by default)
-#${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyter-ai[all]
+# ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyter-ai[all]
 
 # set the config paths
 CONFIG_FILE=${JLAB_CONFIG_DIR}/jupyterhub_config.py
