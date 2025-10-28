@@ -15,7 +15,7 @@ ${HOME}/bioit/apps/bowtie2/SPEC/build 2.5.4
 ${HOME}/bioit/apps/busco/SPEC/build 6.0.0
 ${HOME}/bioit/apps/bwa/SPEC/build 0.7.17
 ${HOME}/bioit/apps/chopper/SPEC/build 0.11.0
-${HOME}/bioit/apps/cutadapt/SPEC/build 5.1
+${HOME}/bioit/apps/cutadapt/SPEC/build 5.2
 ${HOME}/bioit/apps/dorado/SPEC/build 1.2.0
 ${HOME}/bioit/apps/ea-utils/SPEC/build 1.04.807
 ${HOME}/bioit/apps/FastQC/SPEC/build 0.12.1
@@ -31,7 +31,7 @@ ${HOME}/bioit/apps/nxtrim/SPEC/build 0.4.3
 ${HOME}/bioit/apps/mafft/SPEC/build 7.525
 ${HOME}/bioit/apps/medaka/SPEC/build 2.1.1
 ${HOME}/bioit/apps/minimap2/SPEC/build 2.30
-${HOME}/bioit/apps/multiqc/SPEC/build 1.31
+${HOME}/bioit/apps/multiqc/SPEC/build 1.32
 ${HOME}/bioit/apps/nanoplot/SPEC/build 1.42.0
 ${HOME}/bioit/apps/picard/SPEC/build 3.4.0
 ${HOME}/bioit/apps/picrust2/SPEC/build 2.6.2
