@@ -36,7 +36,7 @@ ${HOME}/bioit/apps/nanoplot/SPEC/build 1.42.0
 ${HOME}/bioit/apps/picard/SPEC/build 3.4.0
 ${HOME}/bioit/apps/picrust2/SPEC/build 2.6.2
 ${HOME}/bioit/apps/prokka/SPEC/build 1.14.6
-${HOME}/bioit/apps/R-core/SPEC/build 4.5.1
+${HOME}/bioit/apps/R-core/SPEC/build 4.5.2
 ${HOME}/bioit/apps/ragtag/SPEC/build 2.1.0
 ${HOME}/bioit/apps/raven-assembler/SPEC/build 1.8.3
 ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.13
