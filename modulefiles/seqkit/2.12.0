@@ -1,0 +1,5 @@
+#%Module 1.0
+#
+#  seqkit module for use with 'environment-modules' package:
+#
+prepend-path  PATH              /opt/bioit/seqkit/2.12.0/bin

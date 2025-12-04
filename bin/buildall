@@ -6,7 +6,7 @@
 ${HOME}/bioit/apps/abyss/SPEC/build 2.3.10
 ${HOME}/bioit/apps/augustus/SPEC/build 3.4.0
 ${HOME}/bioit/apps/bamtools/SPEC/build 2.5.3
-${HOME}/bioit/apps/bbmap/SPEC/build 39.49
+${HOME}/bioit/apps/bbmap/SPEC/build 39.55
 ${HOME}/bioit/apps/bcftools/SPEC/build 1.22
 ${HOME}/bioit/apps/bedtools2/SPEC/build 2.31.1
 ${HOME}/bioit/apps/bismark/SPEC/build 0.25.1
@@ -34,14 +34,14 @@ ${HOME}/bioit/apps/minimap2/SPEC/build 2.30
 ${HOME}/bioit/apps/multiqc/SPEC/build 1.32
 ${HOME}/bioit/apps/nanoplot/SPEC/build 1.42.0
 ${HOME}/bioit/apps/picard/SPEC/build 3.4.0
-${HOME}/bioit/apps/picrust2/SPEC/build 2.6.2
+${HOME}/bioit/apps/picrust2/SPEC/build 2.6.3
 ${HOME}/bioit/apps/prokka/SPEC/build 1.14.6
 ${HOME}/bioit/apps/R-core/SPEC/build 4.5.2
 ${HOME}/bioit/apps/ragtag/SPEC/build 2.1.0
 ${HOME}/bioit/apps/raven-assembler/SPEC/build 1.8.3
 ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.13
 ${HOME}/bioit/apps/samtools/SPEC/build 1.22.1
-${HOME}/bioit/apps/seqkit/SPEC/build 2.10.1
+${HOME}/bioit/apps/seqkit/SPEC/build 2.12.0
 ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 242
 ${HOME}/bioit/apps/SolexaQA++/SPEC/build 3.1.7.3
 ${HOME}/bioit/apps/stringtie/SPEC/build 3.0.3
