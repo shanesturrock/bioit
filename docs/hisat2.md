@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/hisat2/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the modulefile for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/hisat2/SPEC/build 2.2.1
+    ${HOME}/bioit/apps/hisat2/SPEC/build 2.2.2
 
 When that completes check that the new version is available using:
 
@@ -14,13 +14,13 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load hisat2/2.2.1
+    module load hisat2/2.2.2
     which hisat2
     hisat2 --version
 
 ## Manual Build
 
-Download the version to be built into `/opt/bioit/hisat2/src` and unzip. Here we'll use version 2.2.1.
+Download the version to be built into `/opt/bioit/hisat2/src` and unzip. Here we'll use version 2.2.2.
 
 Inside the source run the following:
 
@@ -28,16 +28,16 @@ Inside the source run the following:
 
 This just builds in the current location. Since it isn't good to have the binaries in the same location as the source, you first need to move docs, examples and scripts:
 
-    mv scripts /opt/bioit/hisat2/2.2.1/
-    mv docs /opt/bioit/hisat2/2.2.1/
-    mv example /opt/bioit/hisat2/2.2.1/
+    mv scripts /opt/bioit/hisat2/2.2.2/
+    mv docs /opt/bioit/hisat2/2.2.2/
+    mv example /opt/bioit/hisat2/2.2.2/
 
-Now you need to move all the binaries and python packages into `/opt/bioit/hisat2/2.2.1/bin` as follows:
+Now you need to move all the binaries and python packages into `/opt/bioit/hisat2/2.2.2/bin` as follows:
 
-    mkdir /opt/bioit/hisat2/2.2.1/bin
-    mv hisat2 /opt/bioit/hisat2/2.2.1/bin/
-    mv hisat2-* /opt/bioit/hisat2/2.2.1/bin/
-    mv *.py /opt/bioit/hisat2/2.2.1/bin/
+    mkdir /opt/bioit/hisat2/2.2.2/bin
+    mv hisat2 /opt/bioit/hisat2/2.2.2/bin/
+    mv hisat2-* /opt/bioit/hisat2/2.2.2/bin/
+    mv *.py /opt/bioit/hisat2/2.2.2/bin/
 
 Note that you need to change the version number to match what you're building.
 
@@ -49,7 +49,7 @@ Add a module file in `/opt/bioit/modulefiles/hisat2/` for this version by copyin
     #
     #  hisat2 module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/hisat2/2.2.1/bin
+    prepend-path  PATH         /opt/bioit/hisat2/2.2.2/bin
 
 ## RPM
 
