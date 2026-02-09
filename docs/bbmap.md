@@ -6,7 +6,7 @@
 
 Inside `${HOME}/bioit/apps/bbmap/SPEC` there is a script called `build`. This just requires the version number and will download, compile, install and create the module file for you. Execute it as follows:
 
-    ${HOME}/bioit/apps/bbmap/SPEC/build 39.68
+    ${HOME}/bioit/apps/bbmap/SPEC/build 39.70
 
 When that completes check that the new version is available using:
 
@@ -14,7 +14,7 @@ When that completes check that the new version is available using:
 
 If that shows as being there you can test it works with:
 
-    module load bbmap/39.68
+    module load bbmap/39.70
     which bbduk.sh
     bbduk.sh --version
 
@@ -28,9 +28,9 @@ Download the version to be built into `/opt/bioit/bbmap/src` and untar
 
 There's nothing to actually build so just run the following to move the files and correct the permissions:
 
-    mv bbmap ../39.68
-    chmod 755 ../39.68
-    cd ../39.68
+    mv bbmap ../39.70
+    chmod 755 ../39.70
+    cd ../39.70
     chmod -R 755 *
 
 ## Module setup
@@ -41,11 +41,11 @@ Add a module file in `/opt/bioit/modulefiles/bbmap/` for this version by copying
     #
     #  bbmap module for use with 'environment-modules' package:
     #
-    prepend-path  PATH         /opt/bioit/bbmap/39.68
+    prepend-path  PATH         /opt/bioit/bbmap/39.70
 
 ## RPM
 
-There's a SPEC file for this package in `${HOME}/bioit/apps/bbmap/SPEC` so modify that with the new version details. The `/opt/bioit/bbmap/39.68/doc/changelog.txt` will give you the details for the `%changelog` section of the SPEC file.
+There's a SPEC file for this package in `${HOME}/bioit/apps/bbmap/SPEC` so modify that with the new version details. The `/opt/bioit/bbmap/39.70/doc/changelog.txt` will give you the details for the `%changelog` section of the SPEC file.
 
 Once changed, build it with the following command:
 
@@ -58,11 +58,11 @@ ere.
 Before you install this, you need to sign it using:
 
     rpm --addsign \
-    ${HOME}/rpmbuild/RPMS/x86_64/bbmap-39.68-1.el7.bioit.x86_64.rpm
+    ${HOME}/rpmbuild/RPMS/x86_64/bbmap-39.70-1.el7.bioit.x86_64.rpm
 
 Now you can move it to `/opt/bioit/repo/RPMS`
 
-    mv ${HOME}/rpmbuild/RPMS/x86_64/bbmap-39.68-1.el7.bioit.x86_64.rpm \
+    mv ${HOME}/rpmbuild/RPMS/x86_64/bbmap-39.70-1.el7.bioit.x86_64.rpm \
     /opt/bioit/repo/RPMS
 
 Lastly, run the `buildrepo` command:
