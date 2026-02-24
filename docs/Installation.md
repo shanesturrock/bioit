@@ -278,6 +278,8 @@ Run the following as super user in a terminal:
 
 Then, each user needs a file called `.Xclients` in their home directory which contains `mate-session` and is executable for the RDP session to launch.
 
+    chmod +x .Xclients
+
 ## Proxy SSL certificate
 
 If the system is behind a firewall that strips SSL certificates a number of things won't work unless the root cert is imported as follows:
