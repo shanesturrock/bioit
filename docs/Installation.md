@@ -173,7 +173,7 @@ Paste this into it:
 
     %build  ALL=(ALL) NOPASSWD:ALL
 
-The following should be added for all installations:
+The following should be added to `/home/build/.bashrc`for all installations:
 
     alias check_updates="version_check_modules -av | egrep -v \"Up to date\""
     export PATH=/home/build/bioit/bin:$PATH
