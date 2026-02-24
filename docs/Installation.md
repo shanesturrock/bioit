@@ -181,7 +181,7 @@ The following should be added to `/home/build/.bashrc`for all installations:
 
 This user can now use sudo allowing us to disable root ssh logins but make sure you can ssh into this account before you do so. This means creating the `.ssh` directory and inside that the authorized_keys file which you'll paste the public key for the machine you're logging in from (make sure it is all on a single line) and `chmod 600 authorized_keys` otherwise ssh won't use it. Also `chmod 700 ~/.ssh` for the same reason.
 
-If you're running Linux or Windows from your desktop you can easily transfer your ssh public key into the new machine using the following command:
+If you're running Linux, MacOS or Windows from your desktop you can easily transfer your ssh public key into the new machine using the following command:
 
     ssh-copy-id -i ~/.ssh/id_rsa.pub build@<IPADDR>
 
