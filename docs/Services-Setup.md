@@ -38,7 +38,7 @@ Note that this will cause the server to only listen to localhost and port 9797. 
 
 Install the server:
 
-    sudo yum install rstudio-server-rhel-2026.01.0-392-x86_64.rpm
+    sudo yum install rstudio-server-rhel-2026.01.1-403-x86_64.rpm
 
 For better performance you should edit the `/etc/rstudio/rsession.conf` file and add the following:
 
