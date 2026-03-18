@@ -10,11 +10,11 @@ Download the installer:
 
 ### Rocky Linux 8
 
-    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2026.01.0-392-x86_64.rpm
+    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2026.01.1-403-x86_64.rpm
 
 ### Rocky Linux 9
 
-    wget https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-2026.01.0-392-x86_64.rpm
+    wget https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-2026.01.1-403-x86_64.rpm
 
 ### Rocky Linux 8 and 9
 
