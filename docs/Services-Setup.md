@@ -26,9 +26,9 @@ You need to specify where R is by doing the following before installing the rstu
 Paste the following into the rserver.conf file you're creating (changing the version of R as necessary):
 
     # Location of R
-    rsession-which-r=/opt/bioit/R-core/4.5.2/bin/R
+    rsession-which-r=/opt/bioit/R-core/4.5.3/bin/R
     # R library path
-    rsession-ld-library-path=/opt/bioit/R-core/4.5.2/lib64/R/lib
+    rsession-ld-library-path=/opt/bioit/R-core/4.5.3/lib64/R/lib
     # Only listen localhost
     www-address=localhost
     # Connection port
@@ -79,7 +79,7 @@ Create the directory for the install:
 
 Make sure password free sudo is enabled as per the installation page. JupyterLab is installed by running the script in `~/bioit/bin`
 
-    build_jupyterlab 4.5.2
+    build_jupyterlab 4.5.4
 
 If you want to include jupyter-ai, uncomment that line in this script before running it. You'll also need ollama.service installed and set up some LLMs for it to use.
 
@@ -108,12 +108,12 @@ At this point, SELinux should allow JupyterHub access to authentication and will
 It might be useful to have a remote desktop solution inside Jupyterhub. Assuming the Mate Desktop is already installed as per the installation page and X2Go config, you can do the following to add a launcher inside JupyterHub as the build user:
 
     sudo dnf -y install tigervnc tigervnc-server tigervnc-selinux
-    cd /opt/jupyter/jupyterlab/4.5.2/jupyterlab_4.5.2/bin/
+    cd /opt/jupyter/jupyterlab/4.5.4/jupyterlab_4.5.4/bin/
     ./pip install jupyter-remote-desktop-proxy
 
 Set mate-session instead of xfce4-session in this file:
 
-    sed -i -e 's/xfce4/mate/g' /opt/jupyter/jupyterlab/4.5.2/jupyterlab_4.5.2/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
+    sed -i -e 's/xfce4/mate/g' /opt/jupyter/jupyterlab/4.5.4/jupyterlab_4.5.4/lib/python3.10/site-packages/jupyter_remote_desktop_proxy/share/xstartup
 
 Restart the JupyterHub and nginx services
 
