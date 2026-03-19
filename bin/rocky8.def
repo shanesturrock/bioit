@@ -1,0 +1,32 @@
+Bootstrap: docker
+From: rockylinux:8
+
+%help
+    Container with rockylinux8 installed.
+
+%setup
+
+%post
+    dnf -y update
+    dnf -y install epel-release
+    /usr/bin/crb enable
+    dnf -y install environment-modules which man-db
+    dnf -y install libgomp blas libicu perl ncurses ncurses-libs ncurses-base zlib bzip2 bzip2-libs xz xz-libs openssl openssl-libs boost readline libxml2 gsl mariadb java cairo libpng libjpeg openmpi python2 perl-GD perl-GDGraph perl-Env perl-Perl4-CoreLibs lapack mpich zeromq ghc python36 perl-PerlIO-gzip gtk3 pigz tcsh libtiff tmux nano python36
+    mkdir -p /opt/bioit
+   
+%environment
+    export LC_ALL=C
+    action=`basename $0`
+    if [ "$action" = "shell" ]; then
+        export MODULEPATH=/opt/bioit/modulefiles
+        export SINGULARITY_SHELL=/bin/bash
+        set -- "--norc" "-l"
+    fi
+
+%runscript
+    export MODULEPATH=/opt/bioit/modulefiles
+    exec /bin/bash --norc -l
+
+%labels
+    Author Shane Sturrock
+    Version v1.0
