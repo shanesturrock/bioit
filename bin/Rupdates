@@ -37,7 +37,7 @@ if [[ $num_packages -gt "0" ]] ; then
       exit
     else
       # User didn't select Y
-      printf "\nNo updates applied\n"
+      printf "No updates applied\n"
       exit
     fi
   done
