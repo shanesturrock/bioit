@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Script to check for R updates
+# v1.0
+
+# Provide a version number
+
+VERSION=$1
+
+module load R/$VERSION
+Rscript -e "BiocManager::valid()$out_of_date"
+
+echo -e "Do you want to update these packages? \033[1mY/N\033[0m"
+while : ; do
+read -n 1 k <&1
+if [[ $k = y ]] ; then
+Rscript -e "BiocManager::install(ask = FALSE)"
+printf "\nUpdates complete\n"
+else
+printf "\nNo updates applied\n"
+exit
+fi
+done
