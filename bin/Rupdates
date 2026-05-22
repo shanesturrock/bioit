@@ -8,16 +8,39 @@
 VERSION=$1
 
 module load R/$VERSION
-Rscript -e "v <- BiocManager::valid(); print(v[['out_of_date']][, c('Installed', 'ReposVer')])"
+# Report version being updated
+rversion=$(Rscript -e "R.version.string")
+echo ${rversion%\"*} | cut -d'"' -f2-
 
-echo -e "Do you want to update these packages? \033[1mY/N\033[0m"
-while : ; do
-read -n 1 k <&1
-if [[ $k = y ]] ; then
-Rscript -e "BiocManager::install(ask = FALSE)"
-printf "\nUpdates complete\n"
+# Check for updates and capture into variable, don't need to see errors
+output=$(Rscript -e "v <- BiocManager::valid(); print(v[['out_of_date']][, c('Installed', 'ReposVer')])" 2>/dev/null)
+
+# Count lines in output
+num_packages=$(printf "%s" "$output" | grep -c '^')
+# Correct for extra line in output by default
+(( num_packages-- ))
+
+# Only do the rest if there are 1 or more package updates
+if [[ $num_packages -gt "0" ]] ; then
+  echo -e "\n$num_packages package updates"
+  printf "%s" "$output"
+  # Offer to update
+  echo -e "\n\nDo you want to update these packages? \033[1mY/N\033[0m"
+  while : ; do
+    read -n 1 k <&1
+    if [[ $k = y ]] ; then
+      # Update Java just in case
+      R CMD javareconf
+      # Now update without confirmation
+      Rscript -e "BiocManager::install(ask = FALSE)"
+      printf "\nUpdates complete\n"
+      exit
+    else
+      # User didn't select Y
+      printf "\nNo updates applied\n"
+      exit
+    fi
+  done
 else
-printf "\nNo updates applied\n"
-exit
+  echo "No packages to update"
 fi
-done
