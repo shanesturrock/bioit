@@ -57,7 +57,7 @@ Now you have an installation of this build, you need to install the bioconductor
 
 Once R starts type the following:
 
-    source("/root/bioit/apps/R-core/SPEC/bioC_install.R") 
+    source("/home/build/bioit/apps/R-core/SPEC/bioC_install.R") 
 
 It will automatically go through and install all the packages the team requires. Some of the packages require X support to install so you must use -Y to the build machine.
 
@@ -83,7 +83,17 @@ This will create an installable RPM file which you can find in `${HOME}/rpmbuild
 
 ## Updates
 
-Check weekly for updates for the R packages already installed by starting the correct version of R as root and running the following which list updates (using BioConductor rather than just `update.packages()` because often new packages come out which are not compatible with BioConductor):
+Check weekly for updates for the R packages already installed by starting the correct version of R as build and running the following which list updates (using BioConductor rather than just `update.packages()` because often new packages come out which are not compatible with BioConductor):
+
+    Rupdates
+
+This will respond with how many updates there are and list the current and new versions. It will ask if you want to update them and will then do the javareconf followed up updating thew packages. When it completes you can rerun `Rupdates` and it should respond that there are no new updates if all went well. If some updates fail you'll need to debug this or possibly just remove the LOCK file (see below)
+
+Optionally, `Rupdates` can take a version to check (useful when maintaining multiple R installs) for example:
+
+    Rupdates 4.6.0
+
+To do updates manually start R as build and then run this to get the current required updates:
 
     BiocManager::valid()$out_of_date
 
