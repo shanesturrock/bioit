@@ -33,8 +33,20 @@ if [[ $num_packages -gt "0" ]] ; then
       R CMD javareconf
       # Now update without confirmation
       Rscript -e "BiocManager::install(ask = FALSE)"
-      printf "\nUpdates complete\n"
-      exit
+      # Check no updates failed
+      output=$(Rscript -e "v <- BiocManager::valid(); print(v[['out_of_date']][, c('Installed', 'ReposVer')])" 2>/dev/null)
+      # Count lines in output
+      num_packages=$(printf "%s" "$output" | grep -c '^')
+      # Correct for extra line in output by default
+      (( num_packages-- ))
+      if [[ $num_packages -gt "0" ]] ; then
+        echo -e "\n$num_packages packages failed to update, manually fix the issue."
+        printf "%s" "$output"
+	exit
+      else 
+        printf "\nUpdates complete\n"
+        exit
+      fi
     else
       # User didn't select Y
       printf "No updates applied\n"
