@@ -34,6 +34,7 @@ if [[ $num_packages -gt "0" ]] ; then
       # Now update without confirmation
       Rscript -e "BiocManager::install(ask = FALSE)"
       # Check no updates failed
+      printf "\nCheck for failed updates\n"
       output=$(Rscript -e "v <- BiocManager::valid(); print(v[['out_of_date']][, c('Installed', 'ReposVer')])" 2>/dev/null)
       # Count lines in output
       num_packages=$(printf "%s" "$output" | grep -c '^')
@@ -44,7 +45,7 @@ if [[ $num_packages -gt "0" ]] ; then
         printf "%s" "$output"
 	exit
       else 
-        printf "\nUpdates complete\n"
+        printf "\nUpdates completed successfully\n"
         exit
       fi
     else
