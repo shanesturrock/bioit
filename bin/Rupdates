@@ -13,8 +13,9 @@ rversion=$(Rscript -e "R.version.string")
 echo ${rversion%\"*} | cut -d'"' -f2-
 
 # Check for updates and capture into variable, don't need to see errors
-temp_output=$(Rscript -e "v <- BiocManager::valid(); print(v[['out_of_date']][, c('Installed', 'ReposVer')])" 2>/dev/null | tr -d '"')
-output=$(echo "${temp_output//"ReposVer"/}" | awk '{middle=int((NF+1)/2); $middle=""; print $0}' | tr -s ' ')
+output=$(Rscript -e "v <- BiocManager::valid(); print(v[['out_of_date']][, c('Installed', 'ReposVer')])" 2>/dev/null | tr -d '"')
+# Modify output variable to remove middle column
+output=$(echo "${output//"ReposVer"/}" | awk '{middle=int((NF+1)/2); $middle=""; print $0}' | tr -s ' ')
 
 # Count lines in output
 num_packages=$(printf "%s" "$output" | grep -c '^')
