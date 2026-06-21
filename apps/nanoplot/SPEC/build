@@ -33,7 +33,14 @@ mkdir -p /opt/bioit/${APP}/${VERSION}/bin
 #setfacl -b $APPTAINER_TMPDIR
 ${HOME}/bioit/bin/create_singularity_conda_env.py3 -u -a ${APP} -v ${VERSION} -l /opt/bioit/${APP}/${VERSION}
 # Build container
-apptainer build --fakeroot /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /opt/bioit/${APP}/${VERSION}/Singularity
+# Handle differences between Rocky 8 and 9
+if [ $(cat /etc/redhat-release | grep -ci "release 8") -eq 1 ]; then
+  # Rocky Linux 8 needs fakeroot
+  apptainer build --fakeroot /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /opt/bioit/${APP}/${VERSION}/Singularity
+else
+  # Rocky Linux 9 doesn't need fakeroot
+  apptainer build /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /opt/bioit/${APP}/${VERSION}/Singularity
+fi
 # Create version specific template
 sed -e "s%APPVER%${APP}_${VERSION}%g" ${HOME}/bioit/bin/bin_template > ${APP}_bin_template
 sed -i "s%APPNAME%${APP}%g" ${APP}_bin_template
