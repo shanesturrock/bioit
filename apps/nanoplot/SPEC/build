@@ -35,11 +35,11 @@ ${HOME}/bioit/bin/create_singularity_conda_env.py3 -u -a ${APP} -v ${VERSION} -l
 # Build container
 # Handle differences between Rocky 8 and 9
 if [ $(cat /etc/redhat-release | grep -ci "release 8") -eq 1 ]; then
-  # Rocky Linux 8 needs fakeroot
+  # Rocky Linux 8 only needs fakeroot
   apptainer build --fakeroot /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /opt/bioit/${APP}/${VERSION}/Singularity
 else
-  # Rocky Linux 9 doesn't need fakeroot
-  apptainer build /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /opt/bioit/${APP}/${VERSION}/Singularity
+  # Rocky Linux 9 has a race condition in mksquashfs so use 1 processor
+  apptainer build --fakeroot --mksquashfs-args="-processors 1" /opt/bioit/${APP}/${VERSION}/${APP}_${VERSION}.sif /opt/bioit/${APP}/${VERSION}/Singularity
 fi
 # Create version specific template
 sed -e "s%APPVER%${APP}_${VERSION}%g" ${HOME}/bioit/bin/bin_template > ${APP}_bin_template
