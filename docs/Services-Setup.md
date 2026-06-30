@@ -79,9 +79,9 @@ Create the directory for the install:
 
 Make sure password free sudo is enabled as per the installation page. JupyterLab is installed by running the script in `~/bioit/bin`
 
-    build_jupyterlab 4.5.4
+    build_jupyterlab 4.5.8
 
-If you want to include jupyter-ai, uncomment that line in this script before running it. You'll also need ollama.service installed and set up some LLMs for it to use.
+If you want to include jupyter-ai or marimo, uncomment th lines in this script before running it. You'll also need ollama.service installed and set up some LLMs for it to use chat.
 
 If it fails, you can remove it using:
 

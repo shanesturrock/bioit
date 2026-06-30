@@ -22,7 +22,7 @@ PY3_VER=3.10
 JLAB_VER=$1
 ENV_NAME=jupyterlab_${JLAB_VER}
 JLAB_PATH=${ROOT}/jupyterlab/${JLAB_VER}
-CONDA_VER=26.1.0-0
+CONDA_VER=26.3.2-3
 CONDA_BIN=${ROOT}/jupyterlab/miniconda3/${CONDA_VER}/bin
 JLAB_CONFIG_DIR=${JLAB_PATH}/${ENV_NAME}/etc/jupyter
 JHUB_PORT=8181
@@ -46,7 +46,7 @@ then
    # can't use both --name and --prefix
    # by default you can't have names in envs that are outside the default
    #${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/${ENV_NAME} python=${PY3_VER} ipykernel jupyterhub jupyterlab=${JLAB_VER} notebook nodejs jedi python-language-server unixodbc
-   ${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/${ENV_NAME} python=${PY3_VER} ipykernel jupyterlab=${JLAB_VER} jupyterhub nodejs jedi python-language-server configurable-http-proxy unixodbc
+   ${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/${ENV_NAME} python=${PY3_VER} ipykernel jupyterlab=${JLAB_VER} jupyterhub nodejs jedi-language-server configurable-http-proxy unixodbc
  
    # add the env path to the default path so the name becomes visible :-)
    ${CONDA_BIN}/conda config --append envs_dirs ${JLAB_PATH}/${ENV_NAME}
@@ -62,8 +62,13 @@ export PATH=${JLAB_PATH}/${ENV_NAME}/bin:${PATH}
 ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install BeautifulSoup4 biopython bokeh conversion chart-studio cython folium holoviews ipywidgets ipyleaflet keras matplotlib numba numpy pandas plotly polars psycopg2-binary pyodbc pysmb pylint pymysql reportlab rsconnect-jupyter scikit-image scikit-learn scipy snowflake-connector-python tensorflow virtualenv
 # install some useful extensions
 ${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyterlab-lsp jupyterlab_widgets sidecar jupyterlab-geojson
+
+# Optional extensions
+#
 # Enable jupyter-ai if wanted (commented out by default)
 #${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyter-ai[all]
+# Enable marimo if wanted (commented out by default)
+#${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install marimo[sandbox] marimo-jupyter-extension
 
 # set the config paths
 CONFIG_FILE=${JLAB_CONFIG_DIR}/jupyterhub_config.py
