@@ -10,11 +10,11 @@ Download the installer:
 
 ### Rocky Linux 8
 
-    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2026.01.1-403-x86_64.rpm
+    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2026.07.0-139-x86_64.rpm
 
 ### Rocky Linux 9
 
-    wget https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-2026.01.1-403-x86_64.rpm
+    wget https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-2026.07.0-139-x86_64.rpm
 
 ### Rocky Linux 8 and 9
 
@@ -38,7 +38,7 @@ Note that this will cause the server to only listen to localhost and port 9797. 
 
 Install the server:
 
-    sudo yum install rstudio-server-rhel-2026.01.1-403-x86_64.rpm
+    sudo yum install rstudio-server-rhel-2026.07.0-139-x86_64.rpm
 
 For better performance you should edit the `/etc/rstudio/rsession.conf` file and add the following:
 
