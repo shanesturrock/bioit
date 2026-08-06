@@ -10,11 +10,11 @@ Download the installer:
 
 ### Rocky Linux 8
 
-    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2026.07.0-139-x86_64.rpm
+    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2026.07.1-147-x86_64.rpm
 
 ### Rocky Linux 9
 
-    wget https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-2026.07.0-139-x86_64.rpm
+    wget https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-2026.07.1-147-x86_64.rpm
 
 ### Rocky Linux 8 and 9
 
@@ -26,9 +26,9 @@ You need to specify where R is by doing the following before installing the rstu
 Paste the following into the rserver.conf file you're creating (changing the version of R as necessary):
 
     # Location of R
-    rsession-which-r=/opt/bioit/R-core/4.5.3/bin/R
+    rsession-which-r=/opt/bioit/R-core/4.6.1/bin/R
     # R library path
-    rsession-ld-library-path=/opt/bioit/R-core/4.5.3/lib64/R/lib
+    rsession-ld-library-path=/opt/bioit/R-core/4.6.1/lib64/R/lib
     # Only listen localhost
     www-address=localhost
     # Connection port
@@ -38,7 +38,7 @@ Note that this will cause the server to only listen to localhost and port 9797. 
 
 Install the server:
 
-    sudo yum install rstudio-server-rhel-2026.07.0-139-x86_64.rpm
+    sudo yum install rstudio-server-rhel-2026.07.1-147-x86_64.rpm
 
 For better performance you should edit the `/etc/rstudio/rsession.conf` file and add the following:
 
