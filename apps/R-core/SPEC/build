@@ -25,7 +25,7 @@ RELEASE=${VERSION%%.*}
 DATE=`date +"%d/%m/%Y %r"`
 GCC="gcc-toolset-11"
 PROJ=7.2.1
-GEOS=3.9.1
+GEOS=3.14.1
 GDAL=3.5.3
 NLOPT=2.7.1
 export PATH=/opt/rh/$GCC/root/usr/bin:$PATH
@@ -58,14 +58,25 @@ prepend-path  MANPATH		/opt/bioit/R-core/${VERSION}/share/man
 prepend-path  LD_LIBRARY_PATH   /opt/bioit/R-core/${VERSION}/lib64/R/lib" > /opt/bioit/modulefiles/R/${VERSION}
 
 export LD_LIBRARY_PATH=/opt/bioit/R-core/${VERSION}/lib64/R/lib:$LD_LIBRARY_PATH
+
 echo "Install geos"
 cd /opt/bioit/R-core/src/R-${VERSION}
 wget http://download.osgeo.org/geos/geos-${GEOS}.tar.bz2
 tar xvf geos-${GEOS}.tar.bz2
 cd geos-${GEOS}
-./configure --prefix=/opt/bioit/R-core/${VERSION}/lib64/R
-make -j${CPUS}
-make install
+mkdir -p build
+cd build
+# Change destination directory for install
+cmake3 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/opt/bioit/R-core/${VERSION}/lib64/R" ..
+# Delete swig line since it isn't used by R
+sed "/swig/d" --in-place cmake_install.cmake
+# Create symlink lib64 if absent back to lib so ldconfig works
+if [ ! -L /opt/bioit/R-core/${VERSION}/lib64/R/lib64 ]; then
+  ln -s /opt/bioit/R-core/${VERSION}/lib64/R/lib /opt/bioit/R-core/${VERSION}/lib64/R/lib64
+fi
+# build and install
+cmake3 --build . -j ${CPUS}
+cmake3 --build . --target install
 
 echo "Install sqlite3"
 cd /opt/bioit/R-core/src/R-${VERSION}
@@ -110,9 +121,8 @@ tar xvf v${NLOPT}.tar.gz
 cd nlopt-${NLOPT}
 mkdir -p build
 cd build
-cmake3 ..
 # Change destination directory for install
-sed "s+set(CMAKE_INSTALL_PREFIX \"/usr/local\")+set(CMAKE_INSTALL_PREFIX \"/opt/bioit/R-core/${VERSION}/lib64/R\")+g" --in-place cmake_install.cmake
+cmake3 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/opt/bioit/R-core/${VERSION}/lib64/R" ..
 # Delete swig line since it isn't used by R
 sed "/swig/d" --in-place cmake_install.cmake
 # Create symlink lib64 if absent back to lib so ldconfig works
@@ -120,7 +130,8 @@ if [ ! -L /opt/bioit/R-core/${VERSION}/lib64/R/lib64 ]; then
   ln -s /opt/bioit/R-core/${VERSION}/lib64/R/lib /opt/bioit/R-core/${VERSION}/lib64/R/lib64
 fi
 # build and install
-make install
+cmake3 --build . -j ${CPUS}
+cmake3 --build . --target install
 
 # Install standard packages
 PREFIX_DIR=/opt/bioit/R-core/${VERSION}
