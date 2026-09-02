@@ -1,0 +1,33 @@
+Bootstrap: docker
+From: rockylinux/rockylinux:9
+
+%help
+    Container with rockylinux9 installed.
+
+%setup
+
+%post
+    dnf -y update
+    dnf -y install epel-release
+    /usr/bin/crb enable
+    dnf -y install environment-modules which man-db
+    dnf -y install git git-lfs ncurses-devel zlib bzip2 xz openssl boost cmake yum-plugin-changelog rpm-build screen htop btop root-tree-viewer root-physics libX11 libXt postgresql readline libxml2 gsl mariadb java cairo libpng libjpeg mlocate texinfo texinfo-tex tex texlive-* ant perl-Test-Base openmpi sqlite perl-GD perl-GDGraph parallel gnuplot tcl tk perl-Env cmake3 emacs-nox perl-Perl4-CoreLibs lapack mpich python3 python3-pip zeromq ghc cifs-utils perl-Archive-Tar perl-PerlIO-gzip hdf5 python3-networkx gtk3 pigz python3-tkinter tcsh python3-Cython tmux nano python3-libs python3-setuptools libsodium libgit2 lpsolve suitesparse mariadb libsqlite3x motif motif ImageMagick ImageMagick-c++ udunits2 proj incron unixODBC librsvg2 libtiff perl-Test-Harness rsync jasper selinux-policy xterm python39 netcdf setools-console glpk yum-utils lftp mpfr cargo pandoc perl-Sys-Hostname perl-FindBin s-nail python3.11 python3.11-pip aria2 libwebp
+
+    mkdir -p /opt/bioit
+   
+%environment
+    export LC_ALL=C
+    action=`basename $0`
+    if [ "$action" = "shell" ]; then
+        export MODULEPATH=/opt/bioit/modulefiles
+        export SINGULARITY_SHELL=/bin/bash
+        set -- "--norc" "-l"
+    fi
+
+%runscript
+    export MODULEPATH=/opt/bioit/modulefiles
+    exec /bin/bash --norc -l
+
+%labels
+    Author Shane Sturrock
+    Version v1.0
