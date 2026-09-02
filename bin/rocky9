@@ -1,4 +1,6 @@
 #!/bin/bash
 
+# Clear any currently loaded modules
+module purge
 export APPTAINERENV_PS1="[Rocky9> `pwd`]$ "
 apptainer shell -B /raid -B /raid/bioit9:/opt/bioit /raid/rocky9.sif
