@@ -10,11 +10,11 @@ Download the installer:
 
 ### Rocky Linux 8
 
-    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2026.08.2-200-x86_64.rpm
+    wget https://download2.rstudio.org/server/rhel8/x86_64/rstudio-server-rhel-2026.09.0-174-x86_64.rpm
 
 ### Rocky Linux 9
 
-    wget https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-2026.08.2-200-x86_64.rpm
+    wget https://download2.rstudio.org/server/rhel9/x86_64/rstudio-server-rhel-2026.09.0-174-x86_64.rpm
 
 ### Rocky Linux 8 and 9
 
@@ -38,7 +38,7 @@ Note that this will cause the server to only listen to localhost and port 9797. 
 
 Install the server:
 
-    sudo yum install rstudio-server-rhel-2026.08.2-200-x86_64.rpm
+    sudo yum install rstudio-server-rhel-2026.09.0-174-x86_64.rpm
 
 For better performance you should edit the `/etc/rstudio/rsession.conf` file and add the following:
 
@@ -53,10 +53,11 @@ If SELinux is enabled, do the following to allow the server to actually work and
 
     sudo chcon -R -t bin_t /usr/lib/rstudio-server/bin/
 
-If you want to store the R session data on a local drive such as in `/usr/local/rstudio/$USER` you should create that directory and directories for each user inside here. Then shut down the rstudio-server and run this `sudo systemctl edit rstudio-server` and add the following:
+If you want to store the R session data on a local drive such as in `/usr/local/rstudio/$USER` you should create that directory and directories for each user inside here. Then shut down the rstudio-server and run this `sudo systemctl edit rstudio-server` and add the following (which will also disable the POSIT_AI stuff):
 
     [Service]
     Environment="RSTUDIO_DATA_HOME=/usr/local/rstudio/$USER/rstudio"
+    Environment="RSTUDIO_DISABLE_POSIT_AI=1"
 
 You can create a full set of directories based on your `/home/` directory using the following:
 
