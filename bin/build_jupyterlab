@@ -1,4 +1,5 @@
 #!/bin/bash
+# set -e
 
 # Script to auto build and install jupyterhub Just provide the version
 
@@ -18,11 +19,12 @@ if [ $# -lt 1 ]; then
 fi
 
 ROOT=/opt/jupyter
-PY3_VER=3.10
+DEFAULT_PY=3.12
+PY_VERSIONS=" 3.11 3.10 3.9 "
 JLAB_VER=$1
 ENV_NAME=jupyterlab_${JLAB_VER}
 JLAB_PATH=${ROOT}/jupyterlab/${JLAB_VER}
-CONDA_VER=26.3.2-3
+CONDA_VER=26.7.2-0
 CONDA_BIN=${ROOT}/jupyterlab/miniconda3/${CONDA_VER}/bin
 JLAB_CONFIG_DIR=${JLAB_PATH}/${ENV_NAME}/etc/jupyter
 JHUB_PORT=8181
@@ -45,8 +47,8 @@ then
 
    # can't use both --name and --prefix
    # by default you can't have names in envs that are outside the default
-   #${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/${ENV_NAME} python=${PY3_VER} ipykernel jupyterhub jupyterlab=${JLAB_VER} notebook nodejs jedi python-language-server unixodbc
-   ${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/${ENV_NAME} python=${PY3_VER} ipykernel jupyterlab=${JLAB_VER} jupyterhub nodejs jedi-language-server configurable-http-proxy unixodbc
+   #${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/${ENV_NAME} python=${DEFAULT_PY} ipykernel jupyterhub jupyterlab=${JLAB_VER} notebook nodejs jedi python-language-server unixodbc
+   ${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/${ENV_NAME} python=${DEFAULT_PY} ipykernel jupyterlab=${JLAB_VER} jupyterhub nodejs jedi-language-server configurable-http-proxy unixodbc
  
    # add the env path to the default path so the name becomes visible :-)
    ${CONDA_BIN}/conda config --append envs_dirs ${JLAB_PATH}/${ENV_NAME}
@@ -59,16 +61,41 @@ fi
 export PATH=${JLAB_PATH}/${ENV_NAME}/bin:${PATH}
 
 # install a load of common libs
-${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install BeautifulSoup4 biopython bokeh conversion chart-studio cython folium holoviews ipywidgets ipyleaflet keras matplotlib numba numpy pandas plotly polars psycopg2-binary pyodbc pysmb pylint pymysql reportlab rsconnect-jupyter scikit-image scikit-learn scipy snowflake-connector-python tensorflow virtualenv
+${JLAB_PATH}/${ENV_NAME}/bin/python3 -m pip install BeautifulSoup4 biopython bokeh conversion chart-studio cython folium holoviews ipywidgets ipyleaflet keras matplotlib numba numpy pandas plotly polars psycopg2-binary pyodbc pysmb pylint pymysql reportlab rsconnect-jupyter scikit-image scikit-learn scipy snowflake-connector-python tensorflow virtualenv
 # install some useful extensions
-${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyterlab-lsp jupyterlab_widgets sidecar jupyterlab-geojson
+${JLAB_PATH}/${ENV_NAME}/bin/python3 -m pip install jupyterlab-lsp jupyterlab_widgets sidecar jupyterlab-geojson
+
+# Now build extra Python envs
+# don't rebuild the env if it already exists
+for PY_VER in $PY_VERSIONS; do
+  CHECK_ENV=$( ${CONDA_BIN}/conda list -n python${PY_VER} 2>&1 )
+
+  if [[ ${CHECK_ENV} =~ EnvironmentLocationNotFound ]] ;
+  then
+     echo "env python${PY_VER} not found, creating it now"
+
+     # can't use both --name and --prefix
+     # by default you can't have names in envs that are outside the default
+     ${CONDA_BIN}/conda create --yes --no-default-packages  --channel conda-forge --prefix ${JLAB_PATH}/python${PY_VER} python=${PY_VER} ipykernel unixodbc
+
+     # add the env path to the default path so the name becomes visible :-)
+     ${CONDA_BIN}/conda config --append envs_dirs ${JLAB_PATH}/python${PY_VER}
+
+  else
+     echo "env python${PY_VER} already exists, exiting."
+     exit 0
+  fi
+  # Install common libs 
+  ${JLAB_PATH}/python${PY_VER}/bin/python3 -m pip install BeautifulSoup4 biopython bokeh conversion chart-studio cython folium holoviews ipywidgets ipyleaflet keras matplotlib numba numpy pandas plotly polars psycopg2-binary pyodbc pysmb pylint pymysql reportlab rsconnect-jupyter scikit-image scikit-learn scipy snowflake-connector-python tensorflow virtualenv
+
+done
 
 # Optional extensions
 #
 # Enable jupyter-ai if wanted (commented out by default)
-#${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install jupyter-ai[all]
+#${JLAB_PATH}/${ENV_NAME}/bin/python3 -m pip install jupyter-ai[all]
 # Enable marimo if wanted (commented out by default)
-#${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} -m pip install marimo[sandbox] marimo-jupyter-extension
+#${JLAB_PATH}/${ENV_NAME}/bin/python3 -m pip install marimo[sandbox] marimo-jupyter-extension
 
 # set the config paths
 CONFIG_FILE=${JLAB_CONFIG_DIR}/jupyterhub_config.py
@@ -181,13 +208,51 @@ ${JLAB_PATH}/${ENV_NAME}/bin/jupyterhub upgrade-db
 
 # Tweak the Python kernel file to display the correct Python version
 # I think it's easier to overwrite the existing one than edit the old via script
-PY3_VER_STRING=$(${JLAB_PATH}/${ENV_NAME}/bin/python${PY3_VER} --version 2>&1)
-${JLAB_PATH}/${ENV_NAME}/bin/python3 -m ipykernel install --name python3 --display-name "${PY3_VER_STRING}" --prefix="${JLAB_PATH}/${ENV_NAME}"
+KCOUNT=1
+DEFAULT_VER_STRING=$(${JLAB_PATH}/${ENV_NAME}/bin/python3 --version 2>&1)
+${JLAB_PATH}/${ENV_NAME}/bin/python3 -m ipykernel install --name python3 --display-name "${KCOUNT}) ${DEFAULT_VER_STRING}" --prefix="${JLAB_PATH}/${ENV_NAME}"
 
+# Create additional kernel.json files
+for PY_VER in $PY_VERSIONS; do
+let "KCOUNT++"
+VERSION_STRING=$(${JLAB_PATH}/python${PY_VER}/bin/python3 --version 2>&1)
+KERNEL_FILE=$(mktemp /tmp/pykernel.XXXXXX)
+(
+cat <<KERNEL
+{
+ "display_name": "${KCOUNT}) ${VERSION_STRING}",
+ "language": "python",
+ "argv": [
+  "${JLAB_PATH}/python${PY_VER}/bin/python3",
+  "-m",
+  "ipykernel_launcher",
+  "-f",
+  "{connection_file}"
+ ]
+}
+KERNEL
+) > ${KERNEL_FILE}
+
+# Make the python env available as a kernel
+# Copy the default python3 kernel and overwrite the kernel.json file
+cp -rf ${JLAB_PATH}/${ENV_NAME}/share/jupyter/kernels/python3 ${JLAB_PATH}/${ENV_NAME}/share/jupyter/kernels/python${PY_VER}
+cp -f $KERNEL_FILE ${JLAB_PATH}/${ENV_NAME}/share/jupyter/kernels/python${PY_VER}/kernel.json
+rm -f $KERNEL_FILE
+done
+
+# extensionmanager doesn't work so disable it by default
+# https://discourse.jupyter.org/t/extension-manager-now-default-in-jupyterlab-2-1/4057/5
+EXT_SETTINGS_FILE=${JLAB_PATH}/${ENV_NAME}/share/jupyter/lab/settings/page_config.json
+(
+cat <<EXT_SETTINGS
+{
+  "disabledExtensions": [ "@jupyterlab/extensionmanager-extension" ]
+}
+EXT_SETTINGS
+) > ${EXT_SETTINGS_FILE}
 export SYSTEMD_PAGER=
 
 sudo systemctl daemon-reload
 sudo systemctl enable jupyterhub.service
 sudo systemctl start  jupyterhub.service
 sudo systemctl status jupyterhub.service
-
