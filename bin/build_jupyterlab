@@ -19,8 +19,8 @@ if [ $# -lt 1 ]; then
 fi
 
 ROOT=/opt/jupyter
-DEFAULT_PY=3.13
-PY_VERSIONS=" 3.12 3.11 3.10 3.9 "
+DEFAULT_PY=3.14
+PY_VERSIONS=" 3.13 3.12 3.11 3.10 3.9 "
 JLAB_VER=$1
 ENV_NAME=jupyterlab_${JLAB_VER}
 JLAB_PATH=${ROOT}/jupyterlab/${JLAB_VER}
