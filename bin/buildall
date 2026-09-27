@@ -34,7 +34,7 @@ ${HOME}/bioit/apps/minimap2/SPEC/build 2.31
 ${HOME}/bioit/apps/multiqc/SPEC/build 1.35
 ${HOME}/bioit/apps/nanoplot/SPEC/build 1.48.0
 ${HOME}/bioit/apps/samtools/SPEC/build 1.24
-${HOME}/bioit/apps/seqkit/SPEC/build 2.13.0
+${HOME}/bioit/apps/seqkit/SPEC/build 2.14.0
 ${HOME}/bioit/apps/SOAPdenovo2/SPEC/build 242
 ${HOME}/bioit/apps/SolexaQA++/SPEC/build 3.1.7.3
 ${HOME}/bioit/apps/stringtie/SPEC/build 3.0.3
