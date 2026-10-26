@@ -1,2 +1,3 @@
 version=3
-http://hmmer.org/download.html .*/hmmer-(.+)\.tar\.gz
+https://github.com/EddyRivasLab/hmmer/tags .*/hmmer-(.+)\.tar\.gz
+# http://hmmer.org/download.html .*/hmmer-(.+)\.tar\.gz
