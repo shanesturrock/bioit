@@ -38,7 +38,7 @@ ${HOME}/bioit/apps/picrust2/SPEC/build 2.6.4
 ${HOME}/bioit/apps/prokka/SPEC/build 1.15.6
 ${HOME}/bioit/apps/ragtag/SPEC/build 2.1.1
 ${HOME}/bioit/apps/raven-assembler/SPEC/build 1.8.3
-${HOME}/bioit/apps/R-core/SPEC/build 4.6.1
+${HOME}/bioit/apps/R-core/SPEC/build 4.6.2
 ${HOME}/bioit/apps/rtg-tools/SPEC/build 3.13
 ${HOME}/bioit/apps/samtools/SPEC/build 1.25
 ${HOME}/bioit/apps/seqkit/SPEC/build 2.14.0
