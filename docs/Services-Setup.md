@@ -155,10 +155,11 @@ If you created the key with a passphrase, create `global.pass` inside `/etc/ngin
 
 A DNS entry needs to exist for the aliases used in the conf file so make sure that's done.
 
-Also edit the `/lib/systemd/system/nginx.service` file and change the following:
+Also edit the service with `sudo systemctl edit nginx` and add the following:
 
     [Unit]
     After=multi-user.target
+    Wants=network-online.target
 
 This ensures nginx doesn't start until the system is ready for login. You'll need to run `sudo systemctl daemon-reload` after this edit.
 
