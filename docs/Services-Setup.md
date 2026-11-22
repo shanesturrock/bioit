@@ -155,14 +155,6 @@ If you created the key with a passphrase, create `global.pass` inside `/etc/ngin
 
 A DNS entry needs to exist for the aliases used in the conf file so make sure that's done.
 
-Also edit the service with `sudo systemctl edit nginx` and add the following:
-
-    [Unit]
-    After=multi-user.target
-    Wants=network-online.target
-
-This ensures nginx doesn't start until the system is ready for login. You'll need to run `sudo systemctl daemon-reload` after this edit.
-
 Lastly, you need to start nginx:
 
     sudo systemctl enable nginx
@@ -444,6 +436,14 @@ Also note that you'll need to open port 80 for this to work from outside the hos
     sudo firewall-cmd --reload
 
 It isn't a security risk because the server immediately bounces the user over to the HTTPS port but it needs to be open for this redirect to work. Otherwise, just stick with appending `/nagios` if it is a worry.
+
+Finally, add the following to your crontab for the root account which ensures nginx will restart 60 seconds after host reboots to ensure it proxies all services correctly:
+
+    sudo crontab -e
+
+Paste the following in:
+
+    @reboot sleep 60 && /usr/bin/systemctl restart nginx
 
 ## Next Step
 
