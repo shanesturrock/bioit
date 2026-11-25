@@ -28,6 +28,7 @@ PROJ=7.2.1
 GEOS=3.14.1
 GDAL=3.5.3
 NLOPT=2.7.1
+HARFBUZZ=2.7.4
 export PATH=/opt/rh/$GCC/root/usr/bin:$PATH
 echo "Building R-core ${VERSION} R-${RELEASE} on ${DATE}"
 cd /opt/bioit/R-core/src
@@ -39,7 +40,6 @@ cd R-${VERSION}
 make clean
 make -j${CPUS}
 make install
-
 
 # Make sure bin directory is added by appending location to PATH in Renviron
 #echo PATH=$\{PATH\}:/opt/bioit/R-core/${VERSION}/lib64/R/bin >> /opt/bioit/R-core/${VERSION}/lib64/R/etc/Renviron
@@ -58,6 +58,15 @@ prepend-path  MANPATH		/opt/bioit/R-core/${VERSION}/share/man
 prepend-path  LD_LIBRARY_PATH   /opt/bioit/R-core/${VERSION}/lib64/R/lib" > /opt/bioit/modulefiles/R/${VERSION}
 
 export LD_LIBRARY_PATH=/opt/bioit/R-core/${VERSION}/lib64/R/lib:$LD_LIBRARY_PATH
+
+echo "Install harfbuzz"
+cd /opt/bioit/R-core/src/R-${VERSION}
+wget https://github.com/harfbuzz/harfbuzz/releases/download/${HARFBUZZ}/harfbuzz-${HARFBUZZ}.tar.xz
+tar xvf harfbuzz-${HARFBUZZ}.tar.xz
+cd harfbuzz-${HARFBUZZ}
+./configure --prefix=/opt/bioit/R-core/${VERSION}/lib64/R
+# Build and install
+make install
 
 echo "Install geos"
 cd /opt/bioit/R-core/src/R-${VERSION}
